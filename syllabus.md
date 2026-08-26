@@ -343,6 +343,10 @@ runs from there.
 No message before the deadline means no conversation after it. The 10% per day
 runs from the original date.
 
+Some assignments are delivered in person at a fixed time. Everything above
+applies to them, and the meeting time is the deadline. If this syllabus says an
+event can't be rescheduled, missing it scores zero.
+
 Emergencies sit outside this one too. Tell me when you're able and we'll make a
 plan.
 
@@ -357,18 +361,35 @@ When you can't make a scheduled commitment, send me a Teams message. Before the
 commitment is best, and as soon as you can if something happens that morning.
 Late still beats silent.
 
-Three notified absences cost you nothing. You don't owe me a reason and I won't
-ask for documentation. What matters is that I know.
+Your first three absences cost you nothing if you told me. You don't owe me a
+reason and I won't ask for documentation. What matters is that I know.
 
-After three, each absence costs 2% of your total grade, whether you told me or
-not. An absence you never tell me about costs 2% from the first one.
+An absence you never tell me about costs 2% of your total grade from the first
+one, and it still uses up one of the three. From the fourth absence on, each
+absence costs 2% whether you told me or not.
+
+That 2% comes off your final course grade after everything else is totaled.
+Attendance is not a line in the grading table.
+
+If you reach four absences I'll reach out. At six we'll sit down and talk
+honestly about whether finishing the term is realistic, and whether withdrawing
+is the better call. I would rather have that conversation in October than write
+it into your grade in December.
+
+Some of your scheduled commitments are also graded work. Missing one of those
+costs you twice. The absence counts here like any other, and what happens to the
+grade is in the assignment submission policy, because those points are for the
+work rather than for showing up.
 
 Emergencies sit outside all of this. Serious illness, hospitalization, a death in
 the family: the three-absence count doesn't apply. Tell me when you're able and
 we'll work out a plan for the rest of the term.
 
 The midterm interview, Demo Day, and the final interview are not reschedulable
-except in genuine emergencies.
+except in genuine emergencies. Missing one scores zero on it. These are the
+three points in the semester where the whole course is being assessed at once,
+and there is no second sitting to move you to. If something genuine happens,
+tell me and we will work it out.
 
 ## Use of technology
 
