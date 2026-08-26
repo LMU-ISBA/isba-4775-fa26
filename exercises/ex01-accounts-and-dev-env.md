@@ -40,7 +40,7 @@ instead of working as root.
 | GitHub | Your portfolio repository lives here |
 | Railway | Start the 30-day trial |
 | AWS | Turn on MFA for the root user, then create an IAM user for daily work |
-| Google Cloud | Create a project, attach billing; you enable the Places API later |
+| Google Cloud | Create a project and attach billing. You enable the Places API later |
 | Claude Pro | Subscribe |
 | Zoho Mail | Free plan |
 | Resend | Free tier |
@@ -77,7 +77,7 @@ Include:
 - Your GitHub profile URL
 
 `README.md` is your evidence README: what broke while you were doing this and
-how you fixed it. Something will break; account verification and billing setup
+how you fixed it. Something will break. Account verification and billing setup
 fail in ordinary, annoying ways, and writing down what you did about it is the
 beginning of the troubleshooting practice this course grades. If genuinely
 nothing broke, say what you expected to break and did not.

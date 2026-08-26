@@ -11,7 +11,7 @@ Your work goes in your own public portfolio repository, one folder per exercise,
 | # | Exercise | Type | Due | Brief |
 |---|---|---|---|---|
 | 01 | Accounts and development environment | Config | Thu 9/3 | [published](ex01-accounts-and-dev-env.md) |
-| 02 | The AI-assisted workflow: PRD, plan, ship | Build | Thu 9/10 | |
+| 02 | The AI-assisted workflow: PRD, plan, ship | Build | Thu 9/10 | [published](ex02-ai-assisted-workflow.md) |
 | 03 | Personal site deployed on Railway, GA4 installed | Build | Tue 9/15 | |
 | 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 | |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/1 | |
