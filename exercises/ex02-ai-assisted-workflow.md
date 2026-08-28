@@ -30,10 +30,10 @@ and none of the guide works without them.
 Granola and Wispr Flow appear in the tutorial's setup. They are capstone tools.
 You do not need them for this course, and skipping them costs you nothing here.
 
-**The tutorial's Section 7 does not apply to you.** It gives a July due date and
-tells you to submit to Brightspace, because it is written for a different course.
-Your due date is above and your submission is your portfolio repository. Do
-everything else in the guide exactly as written.
+The tutorial's Section 7 asks where your finished work goes and leaves the
+answer to your course. Here that is your portfolio repository, under `ex02/`,
+by the due date at the top of this brief. Nothing in this course is submitted
+through Brightspace.
 
 ## The work
 
