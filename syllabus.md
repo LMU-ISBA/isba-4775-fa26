@@ -9,7 +9,7 @@
 | Meets | Tuesday and Thursday, 1:45 PM to 3:25 PM |
 | Location | Hilton 115 |
 | Instruction | September 1 to December 10, 2026 |
-| Final exam | Thursday, December 17, 11:00 AM |
+| Final interview | Thursday, December 17, 11:00 AM, in the scheduled exam slot |
 
 ## Instructor
 
@@ -23,19 +23,17 @@
 
 ## Course description
 
-From the LMU Bulletin:
-
-> This course will introduce students to the fundamentals of networking and cloud
-> computing. Students will configure networks and cloud computing services to
-> address common information systems and business analytics needs through
-> hands-on exercises. The course will start with networking fundamentals covering
-> topics such as networking hardware, the OSI Model, TCP/IP, and various network
-> protocols, while addressing each topic's security considerations. The second
-> half of the course will leverage the student's networking foundation to explore
-> and deploy the most commonly used cloud services, including compute, storage,
-> databases, and serverless. Students will be able to host cloud-based
-> applications and know the difference between the various cloud services
-> available. This course may not be repeated for degree credit.
+This course will introduce students to the fundamentals of networking and cloud
+computing. Students will configure networks and cloud computing services to
+address common information systems and business analytics needs through
+hands-on exercises. The course will start with networking fundamentals covering
+topics such as networking hardware, the OSI Model, TCP/IP, and various network
+protocols, while addressing each topic's security considerations. The second
+half of the course will leverage the student's networking foundation to explore
+and deploy the most commonly used cloud services, including compute, storage,
+databases, and serverless. Students will be able to host cloud-based
+applications and know the difference between the various cloud services
+available. This course may not be repeated for degree credit.
 
 ## Prerequisites
 
@@ -96,7 +94,7 @@ A 1000-point scheme. Every point is a tenth of a percent.
 | Component | Points | % |
 |---|---:|---:|
 | Exercises (10 × 15) | 150 | 15.0 |
-| Project 1, personal platform | 125 | 12.5 |
+| Project 1, Own Your Corner of the Internet | 125 | 12.5 |
 | Midterm whiteboard interview | 125 | 12.5 |
 | Project 2, the JD-driven build | 300 | 30.0 |
 | Final whiteboard interview | 300 | 30.0 |
@@ -172,9 +170,9 @@ system.
 Every exercise README ends with one constraint that shifts, answered in two or
 three sentences: what breaks, what you would do about it, what it costs.
 
-By the midterm you will have answered nine of these in writing. The interview
-asks for the tenth out loud, about your own system, with someone watching. That
-is the only difference.
+By the midterm you will have answered eight of these in writing. The interview
+asks for one more out loud, about your own system, with someone watching. That is
+the only difference.
 
 ## Project 1: Own Your Corner of the Internet, 125 points
 
@@ -288,8 +286,9 @@ you chose, so this is a simulated interview for that job.
 | 15 | Demo Day | Thu 12/10 |
 | Finals | Final whiteboard interview | Thu 12/17, 11:00 AM |
 
-No class on Labor Day (Mon Sep 7), Autumn Day (Fri Oct 9), or Thanksgiving
-(Wed Nov 25 to Fri Nov 27).
+One class meeting is cancelled all semester: Thursday, November 26, during
+Thanksgiving break. Labor Day and Autumn Day fall on days this course doesn't
+meet.
 
 ### Key dates
 
@@ -338,7 +337,8 @@ throughout. Two one-on-one whiteboard interviews. A public Demo Day.
 
 Exercises are submitted in your public portfolio repository and are due before
 the class that uses them. Projects are submitted the same way, as live systems
-plus their repositories.
+plus their repositories. The one exception is the self-discovery interview in
+Exercise 01, which goes to Brightspace.
 
 Due dates are announced in Brightspace and stated in this syllabus.
 
