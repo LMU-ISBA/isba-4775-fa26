@@ -49,22 +49,19 @@ By the end you should be able to walk into an unfamiliar system and make sense o
 it. Not because you have memorized this one, but because you know the questions
 to ask of any of them.
 
-It differentiates a student who can code from a student who can code and actually
-host and deploy that code.
-
 ## What you own
 
 You will use AI throughout this course, heavily, and that is expected.
 
 What stays yours is the system. You know how it works, how it talks to other
-systems, what its purpose is, how to build it, and how to deliver value
-appropriate to the stakeholder's needs. The system has to be fit for purpose: not
-only that you can build one, but that it caters to the right environment and
-constraints.
+systems, what it is for, and how it delivers value to the stakeholder. It has to
+be fit for purpose: not only that you can build one, but that it suits the
+environment and constraints it has to live in.
 
-Two whiteboard interviews, together worth 42.5 percent of your grade, are where
-that gets observed. You diagram your own system from memory, with no notes and no
-repository open, and then answer for it.
+Two whiteboard interviews, together worth 42.5% of your grade, are where that
+gets observed. You diagram your own system from memory, with no notes and no
+repository open, and then answer for it. "Working with AI" below is the full
+policy.
 
 ## Learning outcomes
 
@@ -91,17 +88,17 @@ By the end of this course you can:
 
 A 1000-point scheme. Every point is a tenth of a percent.
 
-| Component | Points | % |
-|---|---:|---:|
-| Exercises (10 × 15) | 150 | 15.0 |
-| Project 1, Own Your Corner of the Internet | 125 | 12.5 |
-| Midterm whiteboard interview | 125 | 12.5 |
-| Project 2, the JD-driven build | 300 | 30.0 |
-| Final whiteboard interview | 300 | 30.0 |
-| **Total** | **1000** | **100** |
+| Component | Points |
+|---|---:|
+| Exercises (10 × 15) | 150 |
+| Project 1, Own Your Corner of the Internet | 125 |
+| Midterm whiteboard interview | 125 |
+| Project 2, the JD-driven build | 300 |
+| Final whiteboard interview | 300 |
+| **Total** | **1000** |
 
-Projects are 42.5 percent and interviews are 42.5 percent. This course grades
-whether you can explain what you built about as heavily as the artifact itself.
+Projects are 42.5% and interviews are 42.5%. This course grades whether you can
+explain what you built about as heavily as the artifact itself.
 
 ### Letter grades
 
@@ -125,8 +122,8 @@ class through their work.
 **Credit requires all three:**
 
 1. **A working system**, verified live rather than by screenshot.
-2. **A specification and implementation plan**, scaled to the exercise, written
-   before the work. This is the same PRD-driven workflow as ISBA 4796.
+2. **A PRD and implementation plan**, scaled to the exercise, written before the
+   work. This is the same PRD-driven workflow as ISBA 4796.
 3. **An evidence README** recording what broke, how you fixed it, and your answer
    to that exercise's "The change" prompt.
 
@@ -181,7 +178,7 @@ Weeks 1 to 8. **Due Thu 10/22.**
 The exercises build the pieces. Project 1 is the integrated, documented,
 portfolio-grade assembly of them.
 
-| Deliverable | |
+| Deliverable | Requirement |
 |---|---|
 | Domain | Purchased, delegated to Route 53, hosted zone under your control |
 | Site | Personal site on Railway, live at your domain with valid TLS |
@@ -194,8 +191,7 @@ portfolio-grade assembly of them.
 | README | Configuration guide, an FAQ of at least five questions drawn from real failures, and a retrospective |
 
 **Grading is against a portfolio bar.** The question is not whether you completed
-the steps but whether you would show this repository to an employer. Every
-deliverable is publicly verifiable, so the rubric checks live systems.
+the steps but whether you would show this repository to an employer.
 
 **The handoff.** Your Job Scout must surface at least five real postings you would
 actually want. You pick one, and it becomes Project 2's brief. If your scout
@@ -225,7 +221,7 @@ Weeks 10 to 15. You pick one posting your Job Scout surfaced, read the system
 that job implies, and build it. Fixed architecture, problem domain chosen by the
 job description.
 
-| Deliverable | |
+| Deliverable | Requirement |
 |---|---|
 | Web app | On a subdomain of the domain you already own |
 | Agent | Custom-built: tools, memory, structured outputs, guardrails, embedded as an endpoint |
@@ -254,7 +250,7 @@ curveball: your API costs tripled, what moves out of the agent?
 
 Gates inside the Project 2 grade, not separate line items.
 
-| | Bar | Due |
+| Milestone | Bar | Due |
 |---|---|---|
 | M1 | Posting selected, PRD written, architecture diagram approved | Tue 11/10 |
 | M2 | App scaffolded and deployed to production on your subdomain | Tue 11/17 |
@@ -278,13 +274,13 @@ you chose, so this is a simulated interview for that job.
 
 ## Semester at a glance
 
-| Weeks | | |
-|---|---|---|
-| 1-8 | Networking foundations, then the cloud arc | Exercises 01-08, Project 1 due Thu 10/22 |
-| 9 | Midterm whiteboard interviews | Tue 10/27 to Thu 10/29 |
-| 10-15 | Project 2, the JD-driven build | Exercises 09-10, milestones M1-M4 |
-| 15 | Demo Day | Thu 12/10 |
-| Finals | Final whiteboard interview | Thu 12/17, 11:00 AM |
+| Weeks | What happens |
+|---|---|
+| 1-8 | Networking foundations, then the cloud arc. Exercises 01-08, Project 1 |
+| 9 | Midterm whiteboard interviews |
+| 10-15 | Project 2, the JD-driven build. Exercises 09-10, milestones M1-M4 |
+| 15 | Demo Day |
+| Finals | Final whiteboard interview |
 
 One class meeting is cancelled all semester: Thursday, November 26, during
 Thanksgiving break. Labor Day and Autumn Day fall on days this course doesn't
@@ -292,7 +288,7 @@ meet.
 
 ### Key dates
 
-| | |
+| Event | Date |
 |---|---|
 | Add/drop without a W | Fri Sep 4 |
 | Project 1 due | Thu 10/22 |
@@ -316,16 +312,12 @@ a Project 2 milestone run heavier than the middle of a build.
 
 ## Required materials
 
-There is no textbook.
+There is no textbook and there are no lab fees.
 
 This course uses real infrastructure, which costs real money. You will buy a
 domain and use cloud services, most of which have free tiers sufficient for this
 course. A cost guide is published in week 1 with expected spend and how to stay
 inside free tiers. Bring cost questions early rather than discovering a bill.
-
-## Required lab fees
-
-None.
 
 ## Instructional methods
 
@@ -338,32 +330,27 @@ throughout. Two one-on-one whiteboard interviews. A public Demo Day.
 Exercises are submitted in your public portfolio repository and are due before
 the class that uses them. Projects are submitted the same way, as live systems
 plus their repositories. The one exception is the self-discovery interview in
-Exercise 01, which goes to Brightspace.
-
-Due dates are announced in Brightspace and stated in this syllabus.
+Exercise 01, which goes to Brightspace. Due dates are announced in Brightspace
+and stated in this syllabus.
 
 Feedback on exercises is given in class and in the repository. Interview feedback
 is given verbally at the end of the interview and in writing within one week.
 
-Assignments are submitted through your portfolio repository by the posted
-deadline. Deadlines are hard.
-
-Late work loses 10% per day, down to a floor of 50%. A late assignment is worth
-less, but it's never worth nothing, so finish it and turn it in.
+Deadlines are hard. Late work loses 10% per day, down to a floor of 50%. A late
+assignment is worth less, but it's never worth nothing, so finish it and turn it
+in.
 
 If you know you're going to miss a deadline, send me a Teams message before it
 passes. I may move it. That's case by case, and there's no bank of late days to
 spend. If I move a deadline, the new date is the deadline, and the 10% per day
-runs from there.
+runs from there. No message before the deadline means no conversation after it,
+and the 10% per day runs from the original date.
 
-No message before the deadline means no conversation after it. The 10% per day
-runs from the original date.
+Some assignments are delivered in person at a fixed time, and the meeting time is
+the deadline. The midterm interview, Demo Day, and the final interview can't be
+rescheduled, so missing one scores zero on it.
 
-Some assignments are delivered in person at a fixed time. Everything above
-applies to them, and the meeting time is the deadline. If this syllabus says an
-event can't be rescheduled, missing it scores zero.
-
-Emergencies sit outside this one too. Tell me when you're able and we'll make a
+Emergencies sit outside all of this. Tell me when you're able and we'll make a
 plan.
 
 ## Attendance and participation
@@ -375,14 +362,14 @@ If you feel ill, stay home. Rest, and keep everyone else healthy.
 
 When you can't make a scheduled commitment, send me a Teams message. Before the
 commitment is best, and as soon as you can if something happens that morning.
-Late still beats silent.
+Late still beats silent. You don't owe me a reason and I won't ask for
+documentation. What matters is that I know.
 
-Your first three absences cost you nothing if you told me. You don't owe me a
-reason and I won't ask for documentation. What matters is that I know.
-
-An absence you never tell me about costs 2% of your total grade from the first
-one, and it still uses up one of the three. From the fourth absence on, each
-absence costs 2% whether you told me or not.
+| Absence | Cost |
+|---|---|
+| First three, and you told me | Nothing |
+| Any absence you never tell me about | 2%, and it still uses up one of the three |
+| Fourth and beyond | 2% each, whether you told me or not |
 
 That 2% comes off your final course grade after everything else is totaled.
 Attendance is not a line in the grading table.
@@ -392,20 +379,16 @@ honestly about whether finishing the term is realistic, and whether withdrawing
 is the better call. I would rather have that conversation in October than write
 it into your grade in December.
 
-Some of your scheduled commitments are also graded work. Missing one of those
-costs you twice. The absence counts here like any other, and what happens to the
-grade is in the assignment submission policy, because those points are for the
-work rather than for showing up.
+Missing a scheduled commitment that is also graded work costs you twice. The
+absence counts here like any other, and the grade consequence is in the
+assignment policy above, because those points are for the work rather than for
+showing up. The midterm interview, Demo Day, and the final interview are the
+three moments where the whole course is assessed at once, and there is no second
+sitting to move you to.
 
 Emergencies sit outside all of this. Serious illness, hospitalization, a death in
-the family: the three-absence count doesn't apply. Tell me when you're able and
-we'll work out a plan for the rest of the term.
-
-The midterm interview, Demo Day, and the final interview are not reschedulable
-except in genuine emergencies. Missing one scores zero on it. These are the
-three points in the semester where the whole course is being assessed at once,
-and there is no second sitting to move you to. If something genuine happens,
-tell me and we will work it out.
+the family: the three-absence count doesn't apply, and neither does the zero.
+Tell me when you're able and we'll work out a plan for the rest of the term.
 
 ## Use of technology
 
@@ -424,15 +407,14 @@ For technology assistance, contact the ITS Service Desk:
 ## Working with AI
 
 Use AI. Use it for everything it is good at: planning, writing code, debugging,
-reading unfamiliar documentation, explaining errors, and drafting your specs.
+reading unfamiliar documentation, explaining errors, and drafting your PRDs.
 
 There is no restriction on how much you use it and no requirement to log prompts.
 
 What matters is what remains yours:
 
-**You defend the system.** Twice, from memory, with no notes and no repository
-open, for 42.5 percent of your grade. An AI can build a system you cannot
-explain. This course finds that out.
+**You defend the system.** An AI can build a system you cannot explain. The
+whiteboard interviews find that out.
 
 **You validate your own work.** Live systems, evals, traces, and an honest
 account of what you have not verified.
@@ -487,15 +469,12 @@ https://bulletin.lmu.edu/content.php?catoid=1&navoid=18#LMU_Honor_Code_and_Proce
 
 #### What this means in this course
 
-AI use is expected and encouraged here. Honesty means something specific: the
-system you submit must be a system you can explain, justify, validate, and adapt.
-Submitting something you cannot account for is a violation regardless of what
-produced it, and the whiteboard interviews will find it.
+AI use is expected and encouraged here, on the terms in "Working with AI" above.
+Submitting a system you cannot account for is a violation regardless of what
+produced it. Two more violations are specific to this course:
 
-Two things specific to this course are serious violations:
-
-**Presenting a system as working when it is not.** Every deliverable in this
-course is publicly verifiable and checked live rather than by screenshot.
+**Presenting a system as working when it is not.** Every deliverable is publicly
+verifiable and gets checked live.
 
 **Presenting someone else's system as your own.** Your portfolio repository is
 public and permanent, and it carries your name.
