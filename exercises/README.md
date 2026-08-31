@@ -4,13 +4,18 @@ Ten exercises, 15 points each, 150 points total. Each brief is published here
 ahead of its due date. Clone this repository in week 1 and pull before class.
 
 Your work goes in your own public portfolio repository, one folder per exercise,
-`ex01` through `ex10`. Nothing is submitted through Brightspace.
+`ex01` through `ex10`.
+
+One thing, and only one, is submitted through Brightspace instead: the
+[self-discovery interview](../self-discovery-interview.md), which is part of
+Exercise 01. It goes there because your portfolio repository is public and that
+file is about you rather than about a system.
 
 ## Sequence
 
 | # | Exercise | Type | Due | Brief |
 |---|---|---|---|---|
-| 01 | Accounts and development environment | Config | Thu 9/3 | [published](ex01-accounts-and-dev-env.md) |
+| 01 | Accounts and development environment, and the self-discovery interview | Config | Thu 9/3 | [published](ex01-accounts-and-dev-env.md) |
 | 02 | The AI-assisted workflow: PRD, plan, ship | Build | Thu 9/10 | [published](ex02-ai-assisted-workflow.md) |
 | 03 | Personal site deployed on Railway, GA4 installed | Build | Tue 9/15 | |
 | 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 | |

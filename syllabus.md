@@ -136,11 +136,27 @@ Three exercises are troubleshooting exercises. You get a broken system and a
 hypothesis log is required *before* the fix: what you think is wrong, how you
 will test it, what you expect.
 
+**Exercise 01 carries one extra piece: the self-discovery interview.** You run it
+with Claude, it takes about twenty minutes, and it writes a file at the end. The
+instrument is in the course repository as `self-discovery-interview.md`.
+
+Nothing in it is graded. Exercise 01 gives credit for having done it, not for what
+is in it, and there is no bar to clear. The variance in this course is enormous:
+two people with the same prerequisite arrive having deployed nothing and having
+run a side project on AWS for a year. Both are normal. This is how I find out
+where you are actually starting from, so that pairing, support, and the interview
+study guides are built around the room rather than around an average.
+
+**It is submitted on Brightspace, and it is the only thing in this course that
+is.** Everything else goes in your public portfolio repository. This one does not,
+because that repository is public and this file is about you rather than about a
+system.
+
 ### Schedule
 
 | # | Exercise | Type | Due |
 |---|---|---|---|
-| 01 | Accounts and development environment | Config | Thu 9/3 |
+| 01 | Accounts and development environment, and the self-discovery interview | Config | Thu 9/3 |
 | 02 | The AI-assisted workflow: PRD, plan, ship | Build | Thu 9/10 |
 | 03 | Personal site deployed on Railway, GA4 installed | Build | Tue 9/15 |
 | 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 |

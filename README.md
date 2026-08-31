@@ -18,9 +18,10 @@ Tue/Thu 1:45-3:25 PM, Hilton 115. Instruction Sep 1 - Dec 10, 2026.
 
 ## Repository structure
 
-    syllabus.md    Course syllabus
-    exercises/     Exercise briefs, published ahead of each due date
-    README.md      This file
+    syllabus.md                  Course syllabus
+    exercises/                   Exercise briefs, published ahead of each due date
+    self-discovery-interview.md  Run this with Claude; part of Exercise 01
+    README.md                    This file
 
 Exercises are published here as the semester progresses. Clone this repository in
 week 1 and pull before class. It is read-only: you never edit it. Your own work

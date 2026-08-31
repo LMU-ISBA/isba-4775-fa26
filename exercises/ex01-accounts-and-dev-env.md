@@ -1,7 +1,7 @@
 # Exercise 01: Accounts and development environment
 
 **Due** Thu 9/3, before class · **15 points** · **Type:** Config ·
-**Submit** as `ex01/` in your public portfolio repository
+**Submit** as `ex01/` in your public portfolio repository, plus one file on Brightspace
 
 ## Why this one is first
 
@@ -56,6 +56,21 @@ authenticating Claude Code.
 
 Not that it installed. That it runs, on your machine, from your terminal.
 
+**5. Run the self-discovery interview.**
+
+[`self-discovery-interview.md`](../self-discovery-interview.md) in this repository is a
+prompt you paste into Claude. It interviews you, one question at a time, for about twenty
+minutes, and writes a Markdown file at the end. Answer honestly rather than impressively;
+nothing in it is graded and nothing in it is compared against anyone else.
+
+Two people with the same prerequisite walk into this course having deployed nothing and
+having run a side project on AWS for a year. Both are normal. This is how I find out which
+one you are, so I can teach you rather than the room's average.
+
+**The file goes on Brightspace, not in your portfolio repository.** Your portfolio
+repository is public. This file has your career plans in it. Those two facts do not belong
+together, and noticing that is itself the kind of judgment this course is about.
+
 ## What to commit
 
 Three files in `ex01/`, matching the three things every exercise needs for
@@ -99,6 +114,7 @@ it costs.
 - [ ] Tutorial Part 1 complete, every tool running on your machine
 - [ ] `ex01/verify.txt` with real terminal output and your account identifiers
 - [ ] `ex01/README.md` with what broke, how you fixed it, and "The change" answered
+- [ ] Self-discovery interview completed and the Markdown file submitted **on Brightspace**
 - [ ] Pushed to your public portfolio repository before class Thu 9/3
 
 ## If you get stuck
