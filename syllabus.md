@@ -8,8 +8,6 @@
 | Credit hours | 4 |
 | Meets | Tuesday and Thursday, 1:45 PM to 3:25 PM |
 | Location | Hilton 115 |
-| Instruction | September 1 to December 10, 2026 |
-| Final interview | Thursday, December 17, 11:00 AM, in the scheduled exam slot |
 
 ## Instructor
 
@@ -46,8 +44,7 @@ something you built to run somewhere other than your laptop, keeping it running,
 and being able to explain how it works to someone who asks hard questions.
 
 By the end you should be able to walk into an unfamiliar system and make sense of
-it. Not because you have memorized this one, but because you know the questions
-to ask of any of them.
+it.
 
 ## What you own
 
@@ -282,9 +279,11 @@ you chose, so this is a simulated interview for that job.
 | 15 | Demo Day |
 | Finals | Final whiteboard interview |
 
-One class meeting is cancelled all semester: Thursday, November 26, during
-Thanksgiving break. Labor Day and Autumn Day fall on days this course doesn't
-meet.
+Thanksgiving week meets once, on Zoom. Tuesday, November 24 is at
+https://lmula.zoom.us/my/lontok instead of Hilton 115. Thursday, November 26 is
+Thanksgiving Day, and it is the only cancelled meeting all semester.
+
+Labor Day and Autumn Day fall on days this course doesn't meet.
 
 ### Key dates
 
