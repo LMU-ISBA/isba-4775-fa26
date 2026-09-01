@@ -312,7 +312,8 @@ money, and most of the spending starts in Exercise 01.
 | Railway | Free for 30 days, then $5 a month | Exercise 03, and the trial runs out in mid-October |
 | Domain name | Free for a year through the GitHub Student Developer Pack, otherwise $10 to $15 | Exercise 04, and it stays yours after the course |
 | Route 53 hosted zone | $0.50 a month | Exercise 04 |
-| GitHub and AWS | Free tier | Exercise 01 |
+| GitHub | Free tier | Exercise 01 |
+| AWS | Free tier | Exercise 04 |
 | Zoho and Resend | Free tier | Exercise 06 |
 | Google Cloud and Firecrawl | Free tier | Exercise 07 |
 
