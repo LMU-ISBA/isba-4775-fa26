@@ -1,6 +1,6 @@
 # Self-discovery interview, ISBA 4775
 
-Part of [Exercise 01](exercises/ex01-accounts-and-dev-env.md), due with the rest of it on
+Part of [Exercise 01](ex01-accounts-and-dev-env.md), due with the rest of it on
 **Tue 9/8, before class**.
 
 This one goes on Brightspace rather than in your portfolio repository, and it's the only

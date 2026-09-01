@@ -5,10 +5,10 @@ ahead of its due date. Clone this repository in week 1 and pull before class.
 
 Your work goes in your own public portfolio repository, one folder per exercise,
 `ex01` through `ex10`. Set it up in week 1 following
-[portfolio-repository.md](../portfolio-repository.md).
+[portfolio-repository.md](../guides/portfolio-repository.md).
 
 One thing, and only one, is submitted through Brightspace instead: the
-[self-discovery interview](../self-discovery-interview.md), which is part of
+[self-discovery interview](self-discovery-interview.md), which is part of
 Exercise 01. It goes there because your portfolio repository is public and that
 file is about you rather than about a system.
 

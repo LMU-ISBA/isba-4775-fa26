@@ -25,9 +25,11 @@ so know what's coming before you subscribe to anything.
 Set up your portfolio repository first if you haven't already. One public
 repository named `isba-4775-portfolio`, one folder per exercise, `ex01` through
 `ex10`. Step-by-step instructions are in
-[portfolio-repository.md](../portfolio-repository.md).
+[portfolio-repository.md](../guides/portfolio-repository.md).
 
 ## The work
+
+
 
 ### 1. Install a password manager before you create anything.
 
@@ -49,27 +51,35 @@ You'll name the one you chose in your README.
 
 ### 2. Create or verify these accounts now.
 
-| Account | Notes |
-|---|---|
-| GitHub | Your portfolio repository lives here |
+
+| Account                       | Notes                                                                                                         |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| GitHub                        | Your portfolio repository lives here                                                                          |
 | GitHub Student Developer Pack | Apply on day one. Verification takes a few days, and it covers a .me domain for a year and credits on Railway |
-| Claude Pro | Subscribe. You need it for the interview below and for Exercise 02 |
-| Granola | Part of the tutorial in step 4, and it connects to Claude Code over MCP |
-| Wispr Flow | Part of the tutorial in step 4. Dictation, and you configure it during setup |
+| Claude Pro                    | Subscribe. You need it for the interview below and for Exercise 02                                            |
+| Granola                       | Part of the tutorial in step 4, and it connects to Claude Code over MCP                                       |
+| Wispr Flow                    | Part of the tutorial in step 4. Dictation, and you configure it during setup                                  |
+
+
+
 
 ### 3. Leave these for the exercise that uses them.
 
 Creating an account starts its clock, and a trial you burn in September is
 gone by the time you need it. Note these in your plan, then create them later.
 
-| Account | When | Notes |
-|---|---|---|
-| Railway | Exercise 03 | The 30-day trial starts on signup, so starting it now wastes two weeks of it |
-| AWS | Exercise 04 | Choose the Free plan, which runs six months and then closes the account. Note the closing date when you create it. Start the account a few days before you start Exercise 04, because identity verification can lag |
-| Zoho Mail | Exercise 06 | Free plan, and it needs a domain you don't own until Exercise 04 |
-| Resend | Exercise 06 | Free tier, and it also needs your domain verified |
-| Google Cloud | Exercise 07 | Create a project and attach billing. Use a personal Google account, because school and corporate accounts often cannot attach billing. Places API runs on its own free cap rather than the 90-day trial credit |
-| Firecrawl | Exercise 07 | Free tier, 1,000 credits a month |
+
+| Account      | When        | Notes                                                                                                                                                                                                               |
+| ------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Railway      | Exercise 03 | The 30-day trial starts on signup, so starting it now wastes two weeks of it                                                                                                                                        |
+| AWS          | Exercise 04 | Choose the Free plan, which runs six months and then closes the account. Note the closing date when you create it. Start the account a few days before you start Exercise 04, because identity verification can lag |
+| Zoho Mail    | Exercise 06 | Free plan, and it needs a domain you don't own until Exercise 04                                                                                                                                                    |
+| Resend       | Exercise 06 | Free tier, and it also needs your domain verified                                                                                                                                                                   |
+| Google Cloud | Exercise 07 | Create a project and attach billing. Use a personal Google account, because school and corporate accounts often cannot attach billing. Places API runs on its own free cap rather than the 90-day trial credit      |
+| Firecrawl    | Exercise 07 | Free tier, 1,000 credits a month                                                                                                                                                                                    |
+
+
+
 
 ### 4. Complete Tutorial Part 1.
 
@@ -85,7 +95,7 @@ one actually runs on your machine.
 
 ### 6. Run the self-discovery interview.
 
-[`self-discovery-interview.md`](../self-discovery-interview.md) in this repository is a
+[`self-discovery-interview.md`](self-discovery-interview.md) in this repository is a
 prompt you paste into Claude. It interviews you, one question at a time, for about fifteen
 minutes, and writes a Markdown file at the end. Answer honestly rather than impressively.
 Nothing in it is graded and nothing in it is compared against anyone else.
@@ -108,7 +118,7 @@ this course is verified by screenshot, because you cannot diff a screenshot.
 Include:
 
 - `git --version`, `claude --version`, and `python3 --version` on macOS or
-  `python --version` on Windows
+`python --version` on Windows
 - `git config --list`, showing your name and email
 - `claude mcp list`, showing granola
 - Your fork, at `github.com/your-username/ai-dev-workflow-tutorial`
@@ -141,6 +151,8 @@ Here is the one for Exercise 01.
 > your student ID is unreadable, and reapplying takes another four days.
 > Exercise 03 needs the Railway credits in two weeks.
 
+
+
 ## Done means
 
 - [ ] A password manager installed, holding your GitHub password and two-factor recovery codes
@@ -152,7 +164,8 @@ Here is the one for Exercise 01.
 - [ ] Your repository URL submitted **on Brightspace**
 - [ ] Pushed to your public portfolio repository before class Tue 9/8
 
+
+
 ## If you get stuck
 
-Post in the course Teams channel. Being stuck is normal, and being stuck quietly
-until the due date is the problem.
+Post in the course Teams channel or send me a Teams DM. Being stuck is normal, and many may have similar issues.
