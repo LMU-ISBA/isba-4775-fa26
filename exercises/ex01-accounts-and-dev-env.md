@@ -33,14 +33,22 @@ repository named `isba-4775-portfolio`, one folder per exercise, `ex01` through
 A Config plan is short. List every account you are about to create, what each
 one is for later in the course, and which of them costs money. Two or three
 sentences on the AWS decision specifically: why you are creating an IAM user
-instead of working as root.
+instead of working as root, and the date your AWS Free plan window closes.
 
 One thing to know before you sign up for AWS. Accounts created since July 2025
-choose between a Free plan and a Paid plan. The Free plan gives you credits for
-six months and then closes the account, which would take your hosted zone and
-your domain's DNS with it. Choose the Paid plan. You still get the signup
-credits, and the free tier limits still apply, so the practical difference is
-that the account survives past March and stays on your resume.
+choose between a Free plan and a Paid plan. Choose the Free plan. You get
+credits at signup, the free tier limits apply on top of them, and nothing this
+course asks you to build will cost you AWS money.
+
+The catch is a clock. The Free plan runs six months and then the account closes,
+which takes your hosted zone and your domain's DNS with it. Sign up in early
+September and that lands in early March, months after this course ends and right
+when you're using the site to get hired. Upgrading to the Paid plan any time
+before then keeps the account and everything in it.
+
+So write the closing date in your `plan.md` now, and set a calendar reminder for
+two weeks before it. Not in March, when you won't be thinking about this course.
+Today.
 
 **2. Create or verify these accounts now.**
 
@@ -49,7 +57,7 @@ that the account survives past March and stays on your resume.
 | GitHub | Your portfolio repository lives here |
 | GitHub Student Developer Pack | Apply on day one. Verification takes a few days, and it covers a .me domain for a year and credits on Railway |
 | Claude Pro | Subscribe. You need it for the interview below and for Exercise 02 |
-| AWS | Choose the Paid plan, not the Free plan. Turn on MFA for the root user, then create an IAM user for daily work |
+| AWS | Choose the Free plan, and note the date it closes. Turn on MFA for the root user, then create an IAM user for daily work |
 
 **3. Leave these for the exercise that uses them.**
 
