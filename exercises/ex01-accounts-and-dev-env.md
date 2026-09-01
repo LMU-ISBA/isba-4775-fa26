@@ -47,8 +47,8 @@ when you're using the site to get hired. Upgrading to the Paid plan any time
 before then keeps the account and everything in it.
 
 So write the closing date in your `plan.md` now, and set a calendar reminder for
-two weeks before it. Not in March, when you won't be thinking about this course.
-Today.
+two weeks before it. Do that today rather than in March, when you won't be
+thinking about this course.
 
 **2. Create or verify these accounts now.**
 
