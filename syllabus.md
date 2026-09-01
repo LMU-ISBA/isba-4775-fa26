@@ -65,20 +65,20 @@ policy.
 
 By the end of this course you can:
 
-1. **Read an unfamiliar system.** Identify its components, dependencies, and
+1. Read an unfamiliar system. Identify its components, dependencies, and
    boundaries, and ask the questions that reveal purpose, alternatives, cost, and
    where the pieces are isolated or coupled.
-2. **Design a system fit for purpose.** Select and justify infrastructure against
+2. Design a system fit for purpose. Select and justify infrastructure against
    a stakeholder's real environment, constraints, and budget, and defend why that
    choice differs for a hobby project, a startup, and an enterprise.
-3. **Build and deploy an application on cloud infrastructure,** moving it
+3. Build and deploy an application on cloud infrastructure, moving it
    deliberately through local development, staging, and production.
-4. **Troubleshoot a system under failure.** Form and test hypotheses, isolate the
+4. Troubleshoot a system under failure. Form and test hypotheses, isolate the
    fault along the dependency chain, and describe what went wrong in the language
    practitioners use.
-5. **Operate a deployed system responsibly** for access, security, performance,
+5. Operate a deployed system responsibly for access, security, performance,
    and cost, and produce evidence it is working as intended.
-6. **Explain and defend the system to a stakeholder.** What it does, why it was
+6. Explain and defend the system to a stakeholder. What it does, why it was
    built this way, which alternatives were rejected, where its limits are, and
    what should happen next.
 
@@ -145,24 +145,24 @@ portfolio-grade assembly of them.
 | Architecture diagram | One page, labeled, every service and the data flow between them |
 | README | Configuration guide, an FAQ of at least five questions drawn from real failures, and a retrospective |
 
-**Grading is against a portfolio bar.** The question is not whether you completed
-the steps but whether you would show this repository to an employer.
+The question is not whether you completed the steps but whether you would show
+this repository to an employer.
 
-**The handoff.** Your Job Scout must surface at least five real postings you would
-actually want. You pick one, and it becomes Project 2's brief. If your scout
-underperforms, there is a vetted feed of postings so you are not blocked.
+Your Job Scout must surface at least five real postings you would actually want.
+You pick one, and it becomes Project 2's brief. If your scout underperforms,
+there is a vetted feed of postings so you are not blocked.
 
 ## Midterm whiteboard interview, 125 points
 
 Twenty minutes, in person, one-on-one, scheduled through Calendly. Slots run
 **Tue 10/27 through Thu 10/29**. A study guide is published in advance.
 
-**Fifteen minutes on your own system.** You diagram it from memory, with no notes
+Fifteen minutes on your own system. You diagram it from memory, with no notes
 and no repository open. Then it is interrogated: why this service, what did you
 reject, what does it cost, how do you know it works, what breaks first under
 load, what would you do differently.
 
-**Five minutes of curveball.** One constraint changes, drawn from a deck whose
+Five minutes of curveball. One constraint changes, drawn from a deck whose
 categories you have seen but whose specifics you have not. Traffic increases
 tenfold. The budget is cut by eighty percent. A vendor sunsets. You redesign live.
 
@@ -193,10 +193,10 @@ Same skeleton, different problem. A logistics posting yields a shipment-status
 copilot. A marketing posting yields a campaign analyzer. A healthcare-operations
 posting yields an intake triage assistant.
 
-**The orchestration requirement is a capability, not a tool.** n8n, Make, Zapier,
+The orchestration requirement is a capability, not a tool. n8n, Make, Zapier,
 Power Automate, and code all count.
 
-**Deterministic and agentic.** Your system must include both, and you must defend
+Deterministic and agentic. Your system must include both, and you must defend
 where the line falls. Knowing which parts of a system should be a fixed workflow
 and which should be agentic is a design judgment, and it is the obvious
 curveball: your API costs tripled, what moves out of the agent?
@@ -216,7 +216,7 @@ Gates inside the Project 2 grade, not separate line items.
 M4 fails without a working staging environment. The application runs fine without
 one, which makes it the first thing skipped under deadline pressure.
 
-**Demo Day Thu 12/10.** Public demos, guest judges, and a live look at the
+Demo Day Thu 12/10. Public demos, guest judges, and a live look at the
 analytics.
 
 ## Final whiteboard interview, 300 points
@@ -270,12 +270,25 @@ a Project 2 milestone run heavier than the middle of a build.
 
 ## Required materials
 
-There is no textbook and there are no lab fees.
+There is no textbook and there are no lab fees. This course runs on real
+infrastructure, which costs real money, and most of the spending starts in
+Exercise 01.
 
-This course uses real infrastructure, which costs real money. You will buy a
-domain and use cloud services, most of which have free tiers sufficient for this
-course. A cost guide is published in week 1 with expected spend and how to stay
-inside free tiers. Bring cost questions early rather than discovering a bill.
+| What | Cost | When |
+|---|---|---|
+| Claude Pro | $20 a month | Exercise 01, and you keep it all semester |
+| Railway | Free for 30 days, then $5 a month | Exercise 01, and the trial runs out in early October |
+| Domain name | Free for a year through the GitHub Student Developer Pack, otherwise $10 to $15 | Exercise 04, and it stays yours after the course |
+| Route 53 hosted zone | $0.50 a month | Exercise 04 |
+| GitHub, AWS, Google Cloud, Zoho, Resend, Firecrawl | Free tier | Exercise 01 |
+
+Budget roughly $100 for the semester, and most of that is Claude Pro.
+
+Apply for the GitHub Student Developer Pack in week 1. It's free, verification
+takes a few days, and it covers a .me domain for a year plus credits on Railway.
+Anthropic doesn't offer a student rate, so Claude Pro is full price either way.
+
+Bring cost questions to me early rather than discovering a bill.
 
 ## Instructional methods
 
@@ -356,17 +369,14 @@ There is no restriction on how much you use it and no requirement to log prompts
 
 What matters is what remains yours:
 
-**You defend the system.** An AI can build a system you cannot explain. The
-whiteboard interviews find that out.
-
-**You validate your own work.** Live systems, evals, traces, and an honest
-account of what you have not verified.
-
-**You own the decisions.** Which service, which alternative you rejected, where
-the deterministic/agentic line falls, and why. If AI recommended something and
-you took it, you should be able to say why it was right.
-
-**You own what you ship,** including its limits and what you would do next.
+- You defend the system. An AI can build a system you cannot explain. The
+  whiteboard interviews find that out.
+- You validate your own work. Live systems, evals, traces, and an honest account
+  of what you have not verified.
+- You own the decisions. Which service, which alternative you rejected, where the
+  deterministic/agentic line falls, and why. If AI recommended something and you
+  took it, you should be able to say why it was right.
+- You own what you ship, including its limits and what you would do next.
 
 Independent work is not the same as independent thinking. You can use AI heavily
 and demonstrate excellent ownership. You can also work entirely alone and
@@ -414,13 +424,12 @@ https://bulletin.lmu.edu/content.php?catoid=1&navoid=18#LMU_Honor_Code_and_Proce
 
 AI use is expected and encouraged here, on the terms in "Working with AI" above.
 Submitting a system you cannot account for is a violation regardless of what
-produced it. Two more violations are specific to this course:
+produced it.
 
-**Presenting a system as working when it is not.** Every deliverable is publicly
-verifiable and gets checked live.
-
-**Presenting someone else's system as your own.** Your portfolio repository is
-public and permanent, and it carries your name.
+Two more violations are specific to this course. The first is presenting a system
+as working when it is not. Every deliverable is publicly verifiable and gets
+checked live. The second is presenting someone else's system as your own. Your
+portfolio repository is public and permanent, and it carries your name.
 
 ### Special accommodations
 

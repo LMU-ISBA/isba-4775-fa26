@@ -17,9 +17,9 @@ console. That habit is the whole point of the type.
 
 ## Before you start
 
-Read the budget table in section 5 of the [syllabus](../syllabus.md). This is
-the week most of the semester's costs land, so know what is coming before you
-subscribe to anything.
+Read the budget table under Required materials in the
+[syllabus](../syllabus.md). This is the week most of the semester's costs land,
+so know what is coming before you subscribe to anything.
 
 Set up your portfolio repository first if you have not already. One public
 repository, one folder per exercise, named `ex01` through `ex10`.
@@ -33,13 +33,21 @@ one is for later in the course, and which of them costs money. Two or three
 sentences on the AWS decision specifically: why you are creating an IAM user
 instead of working as root.
 
+One thing to know before you sign up for AWS. Accounts created since July 2025
+choose between a Free plan and a Paid plan. The Free plan gives you credits for
+six months and then closes the account, which would take your hosted zone and
+your domain's DNS with it. Choose the Paid plan. You still get the signup
+credits, and the free tier limits still apply, so the practical difference is
+that the account survives past March and stays on your resume.
+
 **2. Create or verify these accounts.**
 
 | Account | Notes |
 |---|---|
 | GitHub | Your portfolio repository lives here |
+| GitHub Student Developer Pack | Apply on day one. Verification takes a few days, and it covers a .me domain for a year and credits on Railway |
 | Railway | Start the 30-day trial |
-| AWS | Turn on MFA for the root user, then create an IAM user for daily work |
+| AWS | Choose the Paid plan, not the Free plan. Turn on MFA for the root user, then create an IAM user for daily work |
 | Google Cloud | Create a project and attach billing. You enable the Places API later |
 | Claude Pro | Subscribe |
 | Zoho Mail | Free plan |
