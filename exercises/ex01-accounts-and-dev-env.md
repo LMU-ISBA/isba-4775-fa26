@@ -11,9 +11,11 @@ Exercise 07, the agent in Exercise 09, and both projects all assume this
 exercise worked. A step you skip now is a step you debug in week five, in the
 middle of something else.
 
-This is also a Config exercise, which means the plan matters as much as the
-result. You write down what you are going to set up and why before you open a
-console. That habit is the whole point of the type.
+Config exercises normally open with a written plan, and this one doesn't. Steps
+2 and 3 already list every account and what it's for, so a plan here would copy
+the brief back to me. Planning starts in Exercise 02 with a PRD, and the first
+real Config plan is Exercise 04, where delegating a domain has actual choices in
+it.
 
 ## Before you start
 
@@ -28,12 +30,26 @@ repository named `isba-4775-portfolio`, one folder per exercise, `ex01` through
 
 ## The work
 
-**1. Write the plan before you touch a console.**
+**1. Install a password manager before you create anything.**
 
-A Config plan is short. List every account you are about to create, what each
-one is for later in the course, and which of them costs money. Two or three
-sentences on the AWS decision specifically: why you are creating an IAM user
-instead of working as root, and the date your AWS Free plan window closes.
+You are about to make eight accounts in one week. Reusing a password across them
+turns one breach into eight, and this is exactly the week it would happen,
+because inventing a strong password eight times in a row is miserable and nobody
+does it.
+
+Bitwarden's free tier covers everything this course needs. 1Password is also
+good, and it's worth checking whether it's included in your GitHub Student
+Developer Pack. The one built into your browser or operating system counts, as
+long as you actually use it.
+
+Three things go into it as you work through the rest of this exercise: your AWS
+root password, your IAM user credentials, and your AWS MFA recovery codes.
+Losing any of those in November is a real problem, because Exercise 08 is a
+troubleshoot exercise and it doesn't care that you can't log in.
+
+You'll name the one you chose in your README.
+
+**2. Create or verify these accounts now.**
 
 One thing to know before you sign up for AWS. Accounts created since July 2025
 choose between a Free plan and a Paid plan. Choose the Free plan. You get
@@ -46,11 +62,9 @@ September and that lands in early March, months after this course ends and right
 when you're using the site to get hired. Upgrading to the Paid plan any time
 before then keeps the account and everything in it.
 
-So write the closing date in your `plan.md` now, and set a calendar reminder for
+So write the closing date in your `README.md`, and set a calendar reminder for
 two weeks before it. Do that today rather than in March, when you won't be
 thinking about this course.
-
-**2. Create or verify these accounts now.**
 
 | Account | Notes |
 |---|---|
@@ -99,12 +113,8 @@ together, and noticing that is itself the kind of judgment this course is about.
 
 ## What to commit
 
-Three files in `ex01/`, matching the three things every exercise needs for
-credit.
-
-`plan.md` holds the plan from step 1, committed before the work. Push it as its
-own commit so the timestamps show it came first. This is the part people skip,
-and it is the part the course is actually teaching.
+Two files in `ex01/`. Most exercises want three, and the missing one is
+`plan.md`, for the reason at the top of this brief.
 
 `verify.txt` holds pasted terminal output, as text, not screenshots. Nothing in
 this course is verified by screenshot, because you cannot diff a screenshot.
@@ -117,7 +127,11 @@ Include:
 - Your Railway project URL
 - Your GitHub profile URL
 
-`README.md` is your evidence README: what broke while you were doing this and
+`README.md` opens with two lines. Name the password manager you installed, and
+confirm that your AWS root password, your IAM user credentials, and your MFA
+recovery codes are in it. Then give the date your AWS Free plan closes.
+
+The rest of it is your evidence README: what broke while you were doing this and
 how you fixed it. Something will break. Account verification and billing setup
 fail in ordinary, annoying ways, and writing down what you did about it is the
 beginning of the troubleshooting practice this course grades. If genuinely
@@ -135,11 +149,11 @@ it costs.
 
 ## Done means
 
-- [ ] `ex01/plan.md` committed before the account work, in its own commit
+- [ ] A password manager installed, holding your AWS root password, IAM credentials, and MFA recovery codes
 - [ ] All eight accounts created, MFA on the AWS root user, an IAM user for daily work
 - [ ] Tutorial Part 1 complete, every tool running on your machine
 - [ ] `ex01/verify.txt` with real terminal output and your account identifiers
-- [ ] `ex01/README.md` with what broke, how you fixed it, and "The change" answered
+- [ ] `ex01/README.md` naming your password manager, the AWS closing date, what broke, and "The change" answered
 - [ ] Self-discovery interview completed and the Markdown file submitted **on Brightspace**
 - [ ] Your repository URL submitted **on Brightspace**
 - [ ] Pushed to your public portfolio repository before class Tue 9/8
