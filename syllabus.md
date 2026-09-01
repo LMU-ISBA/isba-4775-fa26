@@ -170,13 +170,13 @@ sunset a service you depend on. You redesign on the spot.
 
 Most students have never done a whiteboard interview. The October one is where
 you find out what that is like while it still costs 125 points instead of 300,
-and it sits before the November 13 withdrawal deadline for that reason.
+and that is why it sits before the November 13 withdrawal deadline.
 
 ## Project 2: the JD-driven build, 300 points
 
 Project 2 runs from week 10 through week 15. You pick one posting your Job Scout
-surfaced, read the system that job implies, and build it. Fixed architecture, problem domain chosen by the
-job description.
+surfaced, read the system that job implies, and build it. The architecture is
+fixed, and the job description chooses the problem domain.
 
 | Deliverable | Requirement |
 |---|---|
@@ -191,21 +191,21 @@ job description.
 | Decision record | Your most important decision, the evidence, how AI contributed, what you accepted or rejected or changed, how you validated it, your biggest remaining uncertainty, and what is next |
 | Blog post | The writeup |
 
-Same skeleton, different problem. A logistics posting yields a shipment-status
-copilot. A marketing posting yields a campaign analyzer. A healthcare-operations
-posting yields an intake triage assistant.
+Everyone builds the same skeleton onto a different problem. A logistics posting
+might yield a shipment-status copilot, a marketing posting a campaign analyzer,
+and a healthcare-operations posting an intake triage assistant.
 
 The orchestration requirement is a capability, not a tool. n8n, Make, Zapier,
 Power Automate, and code all count.
 
-Deterministic and agentic. Your system must include both, and you must defend
-where the line falls. Knowing which parts of a system should be a fixed workflow
+Your system has to be both deterministic and agentic, and you have to defend
+where the line between them falls. Knowing which parts should be a fixed workflow
 and which should be agentic is a design judgment, and it is the obvious
-curveball: your API costs tripled, what moves out of the agent?
+curveball: your API costs tripled, so what moves out of the agent?
 
 ### Milestones
 
-Gates inside the Project 2 grade, not separate line items.
+These are gates inside the Project 2 grade rather than separate line items.
 
 | Milestone | Bar | Due |
 |---|---|---|
@@ -218,7 +218,7 @@ Gates inside the Project 2 grade, not separate line items.
 M4 fails without a working staging environment. The application runs fine without
 one, which makes it the first thing skipped under deadline pressure.
 
-Demo Day Thu 12/10. Public demos, guest judges, and a live look at the
+Demo Day is Thu 12/10, with public demos, guest judges, and a live look at the
 analytics.
 
 ## Final whiteboard interview, 300 points
@@ -294,9 +294,10 @@ Bring cost questions to me early rather than discovering a bill.
 
 ## Instructional methods
 
-In-person meetings twice a week combining instruction, live work, and student
-walkthroughs of their own exercises. Hands-on configuration and build work
-throughout. Two one-on-one whiteboard interviews. A public Demo Day.
+We meet in person twice a week, and each session combines instruction, live work,
+and student walkthroughs of their own exercises. Configuration and build work
+runs throughout the semester. There are also two one-on-one whiteboard interviews
+and a public Demo Day.
 
 ## Assignments and feedback
 
