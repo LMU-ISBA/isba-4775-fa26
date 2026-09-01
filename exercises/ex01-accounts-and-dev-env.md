@@ -31,9 +31,9 @@ repository named `isba-4775-portfolio`, one folder per exercise, `ex01` through
 
 ### 1. Install a password manager before you create anything.
 
-You'll create nine accounts across this course, starting with three today.
-Reusing one password across them turns a single breach into nine. This is the
-week it would happen, because inventing a strong password nine times over is
+You'll create eleven accounts across this course, starting with five today.
+Reusing one password across them turns a single breach into eleven. This is the
+week it would happen, because inventing a strong password eleven times over is
 miserable and nobody does it.
 
 Bitwarden's free tier covers everything this course needs. 1Password is also
@@ -54,6 +54,8 @@ You'll name the one you chose in your README.
 | GitHub | Your portfolio repository lives here |
 | GitHub Student Developer Pack | Apply on day one. Verification takes a few days, and it covers a .me domain for a year and credits on Railway |
 | Claude Pro | Subscribe. You need it for the interview below and for Exercise 02 |
+| Granola | Part of the tutorial in step 4, and it connects to Claude Code over MCP |
+| Wispr Flow | Part of the tutorial in step 4. Dictation, and you configure it during setup |
 
 ### 3. Leave these for the exercise that uses them.
 
@@ -72,8 +74,9 @@ gone by the time you need it. Note these in your plan, then create them later.
 ### 4. Complete Tutorial Part 1.
 
 [LMU-ISBA/ai-dev-workflow-tutorial](https://github.com/LMU-ISBA/ai-dev-workflow-tutorial)
-installs Python 3.11+, Git, VS Code, uv, and Claude Code, and walks you through
-authenticating Claude Code.
+installs Git, Python 3.11+, Claude Code, and Cursor. It also sets up the
+Superpowers plugin and the Granola connection, and it has you fork and clone the
+tutorial repository.
 
 ### 5. Verify every tool actually runs.
 
@@ -104,13 +107,17 @@ Two files in `ex01/`. Most exercises want three, and the missing one is
 this course is verified by screenshot, because you cannot diff a screenshot.
 Include:
 
-- `python --version`, `git --version`, `uv --version`, `claude --version`
-- `git config user.name` and `git config user.email`
-- Your GitHub profile URL
+- `git --version`, `claude --version`, and `python3 --version` on macOS or
+  `python --version` on Windows
+- `git config --list`, showing your name and email
+- `claude mcp list`, showing granola
+- Your fork, at `github.com/your-username/ai-dev-workflow-tutorial`
 
-`README.md` opens with one line naming the password manager you installed, and
-confirming that your GitHub password and your two-factor recovery codes are in
-it.
+`README.md` opens with two lines. The first names the password manager you
+installed and confirms that your GitHub password and your two-factor recovery
+codes are in it. The second confirms that Cursor, Granola, Wispr Flow, and the
+Superpowers plugin are all installed and working, because none of those four
+leave terminal output you can paste.
 
 The rest of it is your evidence README: what broke while you were doing this and
 how you fixed it. Something will break. Account verification and billing setup
@@ -132,10 +139,10 @@ it costs.
 ## Done means
 
 - [ ] A password manager installed, holding your GitHub password and two-factor recovery codes
-- [ ] All three accounts in step 2 created, with two-factor turned on for GitHub
+- [ ] All five accounts in step 2 created, with two-factor turned on for GitHub
 - [ ] Tutorial Part 1 complete, every tool running on your machine
-- [ ] `ex01/verify.txt` with real terminal output and your account identifiers
-- [ ] `ex01/README.md` naming your password manager, what broke, how you fixed it, and "The change" answered
+- [ ] `ex01/verify.txt` with real terminal output and your fork URL
+- [ ] `ex01/README.md` naming your password manager, confirming the four tools, what broke, and "The change" answered
 - [ ] Self-discovery interview completed and the Markdown file submitted **on Brightspace**
 - [ ] Your repository URL submitted **on Brightspace**
 - [ ] Pushed to your public portfolio repository before class Tue 9/8
