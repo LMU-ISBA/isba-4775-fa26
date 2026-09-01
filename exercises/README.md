@@ -38,5 +38,13 @@ against this table rather than waiting for the file.
 3. An evidence README recording what broke, how you fixed it, and your answer to
    that exercise's "The change" prompt.
 
-Missing any one of the three means no credit. Section "Exercises, 150 points" of
-the [syllabus](../syllabus.md) has the full rules.
+"The change" is a scenario handed to you after your work is done. You answer it
+in two or three sentences rather than build for it: what breaks, what you would
+do about it, and what that costs.
+
+Missing any one of the three means no credit. Exercise 01 is the single
+exception, and it has no plan. Steps 2 and 3 of that brief already list every
+account, so a plan there would only copy the brief back.
+
+Section "Exercises, 150 points" of the [syllabus](../syllabus.md) has the full
+rules.

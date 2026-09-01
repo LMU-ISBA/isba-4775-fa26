@@ -125,12 +125,17 @@ fail in ordinary, annoying ways, and writing down what you did about it is the
 beginning of the troubleshooting practice this course grades. If genuinely
 nothing broke, say what you expected to break and did not.
 
-End the README with "The change," below.
+Finish the README by answering "The change," which is the last section of this
+brief.
 
 ## The change
 
-Answer in two or three sentences: what breaks, what you would do about it, what
-it costs.
+Every exercise ends with a change I hand you after your work is done. You don't
+build for it and you don't fix it. You answer it in two or three sentences at
+the end of your README: what breaks, what you would do about it, and what that
+costs you in time or money.
+
+Here is the one for Exercise 01.
 
 > Your GitHub Student Developer Pack application is rejected because the photo of
 > your student ID is unreadable, and reapplying takes another four days.
