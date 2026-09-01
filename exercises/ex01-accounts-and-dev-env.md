@@ -22,7 +22,9 @@ Read the budget table under Required materials in the
 so know what is coming before you subscribe to anything.
 
 Set up your portfolio repository first if you have not already. One public
-repository, one folder per exercise, named `ex01` through `ex10`.
+repository named `isba-4775-portfolio`, one folder per exercise, `ex01` through
+`ex10`. Step-by-step instructions are in
+[portfolio-repository.md](../portfolio-repository.md).
 
 ## The work
 
@@ -131,6 +133,7 @@ it costs.
 - [ ] `ex01/verify.txt` with real terminal output and your account identifiers
 - [ ] `ex01/README.md` with what broke, how you fixed it, and "The change" answered
 - [ ] Self-discovery interview completed and the Markdown file submitted **on Brightspace**
+- [ ] Your repository URL submitted **on Brightspace**
 - [ ] Pushed to your public portfolio repository before class Tue 9/8
 
 ## If you get stuck
