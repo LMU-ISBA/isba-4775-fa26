@@ -1,6 +1,6 @@
 # Exercise 01: Accounts and development environment
 
-**Due** Thu 9/3, before class · **15 points** · **Type:** Config ·
+**Due** Tue 9/8, before class · **15 points** · **Type:** Config ·
 **Submit** as `ex01/` in your public portfolio repository, plus one file on Brightspace
 
 ## Why this one is first
@@ -115,7 +115,7 @@ it costs.
 - [ ] `ex01/verify.txt` with real terminal output and your account identifiers
 - [ ] `ex01/README.md` with what broke, how you fixed it, and "The change" answered
 - [ ] Self-discovery interview completed and the Markdown file submitted **on Brightspace**
-- [ ] Pushed to your public portfolio repository before class Thu 9/3
+- [ ] Pushed to your public portfolio repository before class Tue 9/8
 
 ## If you get stuck
 

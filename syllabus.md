@@ -39,9 +39,10 @@ ISBA 3710 with a minimum grade of C-.
 
 ## What this course is for
 
-You can already code. This course is about what happens after that: getting
-something you built to run somewhere other than your laptop, keeping it running,
-and being able to explain how it works to someone who asks hard questions.
+You already know how to code, and this course is about what happens after that:
+getting something you built to run somewhere other than your laptop, keeping it
+running, and being able to explain how it works to someone who asks hard
+questions.
 
 By the end you should be able to walk into an unfamiliar system and make sense of
 it.
@@ -83,8 +84,6 @@ By the end of this course you can:
 
 ## Grading
 
-A 1000-point scheme. Every point is a tenth of a percent.
-
 | Component | Points |
 |---|---:|
 | Exercises (10 × 15) | 150 |
@@ -109,48 +108,16 @@ explain what you built about as heavily as the artifact itself.
 
 ## Exercises, 150 points
 
-Ten exercises, 15 points each. You keep one public portfolio repository with one
-folder per exercise. The course repository is separate and read-only: you clone
-it in week 1 and pull before class, and never edit it.
-
-Due before the class that uses them. Any student may be called on to walk the
-class through their work.
-
-**Credit requires all three:**
-
-1. **A working system**, verified live rather than by screenshot.
-2. **A PRD and implementation plan**, scaled to the exercise, written before the
-   work. This is the same PRD-driven workflow as ISBA 4796.
-3. **An evidence README** recording what broke, how you fixed it, and your answer
-   to that exercise's "The change" prompt.
-
-Three exercises are troubleshooting exercises. You get a broken system and a
-hypothesis log is required *before* the fix: what you think is wrong, how you
-will test it, what you expect.
-
-**Exercise 01 carries one extra piece: the self-discovery interview.** You run it
-with Claude, it takes about twenty minutes, and it writes a file at the end. The
-instrument is in the course repository as `self-discovery-interview.md`.
-
-Nothing in it is graded. Exercise 01 gives credit for having done it, not for what
-is in it, and there is no bar to clear. The variance in this course is enormous:
-two people with the same prerequisite arrive having deployed nothing and having
-run a side project on AWS for a year. Both are normal. This is how I find out
-where you are actually starting from, so that pairing, support, and the interview
-study guides are built around the room rather than around an average.
-
-**It is submitted on Brightspace, and it is the only thing in this course that
-is.** Everything else goes in your public portfolio repository. This one does not,
-because that repository is public and this file is about you rather than about a
-system.
+There are ten exercises, worth 15 points each. You keep one public portfolio
+repository with one folder per exercise.
 
 ### Schedule
 
 | # | Exercise | Type | Due |
 |---|---|---|---|
-| 01 | Accounts and development environment, and the self-discovery interview | Config | Thu 9/3 |
-| 02 | The AI-assisted workflow: PRD, plan, ship | Build | Thu 9/10 |
-| 03 | Personal site deployed on Railway, GA4 installed | Build | Tue 9/15 |
+| 01 | Accounts and development environment, and the self-discovery interview | Config | Tue 9/8 |
+| 02 | The AI-assisted workflow: PRD, plan, ship | Build | Tue 9/15 |
+| 03 | Personal site deployed on Railway, GA4 installed | Build | Thu 9/17 |
 | 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/1 |
 | 06 | Mailbox email with SPF, DKIM, DMARC; Resend verified | Config | Thu 10/8 |
@@ -159,18 +126,9 @@ system.
 | 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/5 |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 |
 
-### "The change"
-
-Every exercise README ends with one constraint that shifts, answered in two or
-three sentences: what breaks, what you would do about it, what it costs.
-
-By the midterm you will have answered eight of these in writing. The interview
-asks for one more out loud, about your own system, with someone watching. That is
-the only difference.
-
 ## Project 1: Own Your Corner of the Internet, 125 points
 
-Weeks 1 to 8. **Due Thu 10/22.**
+Project 1 runs from week 1 through week 8, and it is **due Thu 10/22.**
 
 The exercises build the pieces. Project 1 is the integrated, documented,
 portfolio-grade assembly of them.
@@ -214,8 +172,8 @@ offers. It lands before the November 13 withdrawal deadline for that reason.
 
 ## Project 2: the JD-driven build, 300 points
 
-Weeks 10 to 15. You pick one posting your Job Scout surfaced, read the system
-that job implies, and build it. Fixed architecture, problem domain chosen by the
+Project 2 runs from week 10 through week 15. You pick one posting your Job Scout
+surfaced, read the system that job implies, and build it. Fixed architecture, problem domain chosen by the
 job description.
 
 | Deliverable | Requirement |
@@ -263,7 +221,8 @@ analytics.
 
 ## Final whiteboard interview, 300 points
 
-**Thursday, December 17, 11:00 AM**, in the scheduled exam slot. Thirty minutes.
+**Thursday, December 17, 11:00 AM**, in the scheduled exam slot, for thirty
+minutes.
 
 Same format as the midterm: twenty-five minutes on your own system from memory,
 five minutes of curveball. The system you defend is the one you built for a job
@@ -333,7 +292,7 @@ Exercise 01, which goes to Brightspace. Due dates are announced in Brightspace
 and stated in this syllabus.
 
 Feedback on exercises is given in class and in the repository. Interview feedback
-is given verbally at the end of the interview and in writing within one week.
+is given verbally at the end of the interview.
 
 Deadlines are hard. Late work loses 10% per day, down to a floor of 50%. A late
 assignment is worth less, but it's never worth nothing, so finish it and turn it
@@ -352,42 +311,27 @@ rescheduled, so missing one scores zero on it.
 Emergencies sit outside all of this. Tell me when you're able and we'll make a
 plan.
 
-## Attendance and participation
+## Attendance
 
 Your scheduled commitments are class sessions, your midterm interview slot, Demo
 Day, and the final interview.
 
 If you feel ill, stay home. Rest, and keep everyone else healthy.
 
-When you can't make a scheduled commitment, send me a Teams message. Before the
-commitment is best, and as soon as you can if something happens that morning.
-Late still beats silent. You don't owe me a reason and I won't ask for
-documentation. What matters is that I know.
+When you can't make one, send me a Teams message. Beforehand is best, and as soon
+as you can if something happens that morning. Late still beats silent.
 
-| Absence | Cost |
-|---|---|
-| First three, and you told me | Nothing |
-| Any absence you never tell me about | 2%, and it still uses up one of the three |
-| Fourth and beyond | 2% each, whether you told me or not |
+Your first three absences cost you nothing if you told me. You don't owe me a
+reason and I won't ask for documentation.
 
-That 2% comes off your final course grade after everything else is totaled.
-Attendance is not a line in the grading table.
-
-If you reach four absences I'll reach out. At six we'll sit down and talk
-honestly about whether finishing the term is realistic, and whether withdrawing
-is the better call. I would rather have that conversation in October than write
-it into your grade in December.
-
-Missing a scheduled commitment that is also graded work costs you twice. The
-absence counts here like any other, and the grade consequence is in the
-assignment policy above, because those points are for the work rather than for
-showing up. The midterm interview, Demo Day, and the final interview are the
-three moments where the whole course is assessed at once, and there is no second
-sitting to move you to.
+An absence you never tell me about costs 2% of your total grade, and it still
+uses up one of the three. From the fourth on, each absence costs 2% whether you
+told me or not. That 2% comes off your final grade after everything else is
+totaled, so attendance is not a line in the grading table.
 
 Emergencies sit outside all of this. Serious illness, hospitalization, a death in
-the family: the three-absence count doesn't apply, and neither does the zero.
-Tell me when you're able and we'll work out a plan for the rest of the term.
+the family: the three-absence count doesn't apply. Tell me when you're able and
+we'll work out a plan for the rest of the term.
 
 ## Use of technology
 
@@ -405,8 +349,8 @@ For technology assistance, contact the ITS Service Desk:
 
 ## Working with AI
 
-Use AI. Use it for everything it is good at: planning, writing code, debugging,
-reading unfamiliar documentation, explaining errors, and drafting your PRDs.
+Use AI for everything it is good at: planning, writing code, debugging, reading
+unfamiliar documentation, explaining errors, and drafting your PRDs.
 
 There is no restriction on how much you use it and no requirement to log prompts.
 

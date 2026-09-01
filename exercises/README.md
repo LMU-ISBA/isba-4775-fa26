@@ -15,9 +15,9 @@ file is about you rather than about a system.
 
 | # | Exercise | Type | Due | Brief |
 |---|---|---|---|---|
-| 01 | Accounts and development environment, and the self-discovery interview | Config | Thu 9/3 | [published](ex01-accounts-and-dev-env.md) |
-| 02 | The AI-assisted workflow: PRD, plan, ship | Build | Thu 9/10 | [published](ex02-ai-assisted-workflow.md) |
-| 03 | Personal site deployed on Railway, GA4 installed | Build | Tue 9/15 | |
+| 01 | Accounts and development environment, and the self-discovery interview | Config | Tue 9/8 | [published](ex01-accounts-and-dev-env.md) |
+| 02 | The AI-assisted workflow: PRD, plan, ship | Build | Tue 9/15 | [published](ex02-ai-assisted-workflow.md) |
+| 03 | Personal site deployed on Railway, GA4 installed | Build | Thu 9/17 | |
 | 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 | |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/1 | |
 | 06 | Mailbox email with SPF, DKIM, DMARC; Resend verified | Config | Thu 10/8 | |

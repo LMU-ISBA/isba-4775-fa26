@@ -1,6 +1,6 @@
 # Exercise 02: The AI-assisted workflow
 
-**Due** Thu 9/10, before class · **15 points** · **Type:** Build ·
+**Due** Tue 9/15, before class · **15 points** · **Type:** Build ·
 **Submit** as `ex02/` in your public portfolio repository
 
 ## Why this one matters
@@ -123,7 +123,7 @@ it costs.
 - [ ] Dashboard live and publicly reachable on Streamlit Cloud
 - [ ] `ex02/README.md` in your portfolio repository with four permalinks, what
       broke, where the plan was wrong, and "The change" answered
-- [ ] Pushed before class Thu 9/10
+- [ ] Pushed before class Tue 9/15
 
 ## If you get stuck
 
