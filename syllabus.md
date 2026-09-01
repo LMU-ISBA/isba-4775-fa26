@@ -236,9 +236,10 @@ you chose, so this is a simulated interview for that job.
 | 10-15 | Project 2, the job-description-driven build. Exercises 09-10, milestones M1-M4 |
 | Finals | Final whiteboard interview |
 
-Thanksgiving week meets once, on Zoom. Tuesday, November 24 is at
-https://lmula.zoom.us/my/lontok instead of Hilton 115. Thursday, November 26 is
-Thanksgiving Day, and it is the only cancelled meeting all semester.
+Thanksgiving week meets once, on Zoom. Tuesday, November 24 is remote, and you
+join from the Zoom tool in Brightspace rather than coming to Hilton 115.
+Thursday, November 26 is Thanksgiving Day, and it is the only cancelled meeting
+all semester.
 
 Labor Day and Autumn Day fall on days this course doesn't meet.
 
