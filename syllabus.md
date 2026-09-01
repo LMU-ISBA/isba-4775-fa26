@@ -89,7 +89,7 @@ By the end of this course you can:
 | Exercises (10 × 15) | 150 |
 | Project 1, Own Your Corner of the Internet | 125 |
 | Midterm whiteboard interview | 125 |
-| Project 2, the JD-driven build | 300 |
+| Project 2, the job-description-driven build | 300 |
 | Final whiteboard interview | 300 |
 | **Total** | **1000** |
 
@@ -111,7 +111,7 @@ explain what you built about as heavily as the artifact itself.
 There are ten exercises, worth 15 points each. You keep one public portfolio
 repository with one folder per exercise.
 
-### Schedule
+### Exercise schedule
 
 | # | Exercise | Type | Due |
 |---|---|---|---|
@@ -172,7 +172,7 @@ Most students have never done a whiteboard interview. The October one is where
 you find out what that is like while it still costs 125 points instead of 300,
 and that is why it sits before the November 13 withdrawal deadline.
 
-## Project 2: the JD-driven build, 300 points
+## Project 2: the job-description-driven build, 300 points
 
 Project 2 runs from week 10 through week 15. You pick one posting your Job Scout
 surfaced, read the system that job implies, and build it. The architecture is
@@ -218,9 +218,6 @@ These are gates inside the Project 2 grade rather than separate line items.
 M4 fails without a working staging environment. The application runs fine without
 one, which makes it the first thing skipped under deadline pressure.
 
-Demo Day is Thu 12/10, with public demos, guest judges, and a live look at the
-analytics.
-
 ## Final whiteboard interview, 300 points
 
 **Thursday, December 17, 11:00 AM**, in the scheduled exam slot, for thirty
@@ -236,8 +233,7 @@ you chose, so this is a simulated interview for that job.
 |---|---|
 | 1-8 | Networking foundations, then the cloud arc. Exercises 01-08, Project 1 |
 | 9 | Midterm whiteboard interviews |
-| 10-15 | Project 2, the JD-driven build. Exercises 09-10, milestones M1-M4 |
-| 15 | Demo Day |
+| 10-15 | Project 2, the job-description-driven build. Exercises 09-10, milestones M1-M4 |
 | Finals | Final whiteboard interview |
 
 Thanksgiving week meets once, on Zoom. Tuesday, November 24 is at
@@ -254,9 +250,43 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Project 1 due | Thu 10/22 |
 | Midterm interviews | Tue 10/27 to Thu 10/29 |
 | Last day to withdraw | Fri Nov 13 |
-| Demo Day | Thu 12/10 |
 | Instruction ends | Fri Dec 11 |
 | Final interview | Thu Dec 17, 11:00 AM |
+
+## Class schedule
+
+| Date | Session | Due |
+|---|---|---|
+| Tue 9/1 | What is a network | |
+| Thu 9/3 | One request, end to end | |
+| Tue 9/8 | Layers and protocols: OSI, TCP/IP, and where each piece of the request lives | Ex01 |
+| Thu 9/10 | Specs before code: the PRD, the implementation plan, and why AI amplifies a bad plan | |
+| Tue 9/15 | What deploying means: containers, build versus runtime, environment variables, and installing GA4 | Ex02 |
+| Thu 9/17 | DNS from the root down: zones, records, TTL, delegation, and nameservers | Ex03 |
+| Tue 9/22 | TLS and certificates: the handshake, certificate authorities, ACME, and what "valid" means | |
+| Thu 9/24 | Reading a system when it breaks: dig, curl, openssl, and the hypothesis log | Ex04 |
+| Tue 9/29 | DNS and TLS failure modes: propagation, caching, chain order, and name mismatch | |
+| Thu 10/1 | Diagnosis walkthroughs, then how mail routes: MX records and the envelope | Ex05 |
+| Tue 10/6 | Email authentication: SPF, DKIM, DMARC, and deliverability as a DNS problem | |
+| Thu 10/8 | APIs: REST, JSON, status codes, authentication, rate limits, and idempotency | Ex06 |
+| Tue 10/13 | Orchestration: triggers, webhooks, polling, and joining two systems | |
+| Thu 10/15 | How integrations break: expired credentials, changed schemas, and reading 401, 403, 429, and 5xx | Ex07 |
+| Tue 10/20 | CI/CD with GitHub Actions, secrets, deploy on merge, and architecture diagrams | Ex08 |
+| Thu 10/22 | Project 1 walkthroughs, the midterm study guide, and what a whiteboard interview is | Project 1 |
+| Tue 10/27 | Midterm whiteboard interviews, no class session | |
+| Thu 10/29 | LLM calls: tokens, context windows, cost, and structured outputs | |
+| Tue 11/3 | The agent loop: tools, schemas, memory, and reading a trace | |
+| Thu 11/5 | Evals: what to measure, building a small eval set, and finding why a run failed | Ex09 |
+| Tue 11/10 | Reading a job description as a system spec, and architecture review one by one | M1 |
+| Thu 11/12 | Guardrails: loop limits, schema validation, token budgets, and cost controls | Ex10 |
+| Tue 11/17 | Environments: local, staging, production, and promotion through CI/CD | M2 |
+| Thu 11/19 | Cloud storage and databases: object versus relational, S3, and least-privilege IAM | |
+| Tue 11/24 | Grounding review, retrieval, chunking, and what the agent must not see. On Zoom | M3 |
+| Thu 11/26 | No class, Thanksgiving | |
+| Tue 12/1 | Operating a deployed system: auth, rate limiting, monitoring, and cost controls | |
+| Thu 12/3 | Staging in practice, then the decision record | M4 |
+| Tue 12/8 | Blog post workshop and final interview prep | Project 2 |
+| Thu 12/10 | Cloud services compared: IaaS, PaaS, serverless, and managed databases | |
 
 ## Work load expectations
 
@@ -301,8 +331,8 @@ None.
 
 We meet in person twice a week, and each session combines instruction, live work,
 and student walkthroughs of their own exercises. Configuration and build work
-runs throughout the semester. There are also two one-on-one whiteboard interviews
-and a public Demo Day.
+runs throughout the semester. There are also two one-on-one whiteboard
+interviews.
 
 ## Assignments and feedback
 
@@ -326,16 +356,16 @@ runs from there. No message before the deadline means no conversation after it,
 and the 10% per day runs from the original date.
 
 Some assignments are delivered in person at a fixed time, and the meeting time is
-the deadline. The midterm interview, Demo Day, and the final interview can't be
-rescheduled, so missing one scores zero on it.
+the deadline. The two whiteboard interviews can't be rescheduled, so missing one
+scores zero on it.
 
 Emergencies sit outside all of this. Tell me when you're able and we'll make a
 plan.
 
 ## Attendance
 
-Your scheduled commitments are class sessions, your midterm interview slot, Demo
-Day, and the final interview.
+Your scheduled commitments are class sessions, your midterm interview slot, and
+the final interview.
 
 If you feel ill, stay home. Rest, and keep everyone else healthy.
 

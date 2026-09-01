@@ -13,7 +13,6 @@ Tue/Thu 1:45-3:25 PM, Hilton 115. Instruction Sep 1 - Dec 10, 2026.
 | 1-8 | Networking foundations, then the cloud arc | Exercises 01-08; Project 1 due Thu 10/22 |
 | 9 | Midterm whiteboard interviews | Tue 10/27 - Thu 10/29 |
 | 10-15 | Project 2, the JD-driven build | Exercises 09-10; milestones M1-M4 |
-| 15 | Demo Day | Thu 12/10 |
 | Finals | Final whiteboard interview | Thu 12/17, 11:00 AM |
 
 ## Repository structure
