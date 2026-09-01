@@ -154,12 +154,5 @@ Here is the one for Exercise 01.
 
 ## If you get stuck
 
-Student Developer Pack verification takes several days, and applications get
-rejected for an unreadable photo of a student ID. That is the reason to apply on
-day one rather than on the due date.
-
-If Claude Code lands in an authentication loop, run `claude logout`, then
-`claude login`.
-
-If you're still stuck, post in the course Teams channel. Being stuck is normal,
-and being stuck quietly until the due date is the problem.
+Post in the course Teams channel. Being stuck is normal, and being stuck quietly
+until the due date is the problem.
