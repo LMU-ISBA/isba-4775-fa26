@@ -272,7 +272,7 @@ a Project 2 milestone run heavier than the middle of a build.
 
 ## Required materials
 
-There is no textbook and there are no lab fees. This course runs on real
+There is no textbook. This course runs on real
 infrastructure, which costs real money, and most of the spending starts in
 Exercise 01.
 
@@ -292,6 +292,17 @@ it covers a .me domain for a year plus credits on Railway. Anthropic doesn't
 offer a student rate, so Claude Pro is full price either way.
 
 Bring cost questions to me early rather than discovering a bill.
+
+## Required lab fees
+
+None.
+
+## Instructional methods
+
+We meet in person twice a week, and each session combines instruction, live work,
+and student walkthroughs of their own exercises. Configuration and build work
+runs throughout the semester. There are also two one-on-one whiteboard interviews
+and a public Demo Day.
 
 ## Assignments and feedback
 
