@@ -154,21 +154,23 @@ there is a vetted feed of postings so you are not blocked.
 
 ## Midterm whiteboard interview, 125 points
 
-Twenty minutes, in person, one-on-one, scheduled through Calendly. Slots run
-**Tue 10/27 through Thu 10/29**. A study guide is published in advance.
+The midterm is twenty minutes, in person and one-on-one, scheduled through
+Calendly. Slots run **Tue 10/27 through Thu 10/29**, and a study guide is
+published in advance.
 
-Fifteen minutes on your own system. You diagram it from memory, with no notes
-and no repository open. Then it is interrogated: why this service, what did you
-reject, what does it cost, how do you know it works, what breaks first under
-load, what would you do differently.
+You spend the first fifteen minutes on your own system. You diagram it from
+memory, with no notes and no repository open, and then you answer for it: why
+this service, what you rejected, what it costs, how you know it works, what
+breaks first under load, and what you would do differently.
 
-Five minutes of curveball. One constraint changes, drawn from a deck whose
-categories you have seen but whose specifics you have not. Traffic increases
-tenfold. The budget is cut by eighty percent. A vendor sunsets. You redesign live.
+The last five minutes are a curveball. I change one constraint, drawn from a deck
+whose categories you have seen but whose specifics you have not. Traffic might
+increase tenfold, the budget might be cut by eighty percent, or a vendor might
+sunset a service you depend on. You redesign on the spot.
 
-Most students have never done a whiteboard interview. Failing one in October,
-when there is a 300-point version coming, is the most useful feedback this course
-offers. It lands before the November 13 withdrawal deadline for that reason.
+Most students have never done a whiteboard interview. The October one is where
+you find out what that is like while it still costs 125 points instead of 300,
+and it sits before the November 13 withdrawal deadline for that reason.
 
 ## Project 2: the JD-driven build, 300 points
 
