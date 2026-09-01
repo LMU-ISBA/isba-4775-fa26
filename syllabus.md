@@ -303,17 +303,18 @@ a Project 2 milestone run heavier than the middle of a build.
 
 ## Required materials
 
-There is no textbook. This course runs on real
-infrastructure, which costs real money, and most of the spending starts in
-Exercise 01.
+There is no textbook. This course runs on real infrastructure, which costs real
+money, and most of the spending starts in Exercise 01.
 
 | What | Cost | When |
 |---|---|---|
 | Claude Pro | $20 a month | Exercise 01, and you keep it all semester |
-| Railway | Free for 30 days, then $5 a month | Exercise 01, and the trial runs out in early October |
+| Railway | Free for 30 days, then $5 a month | Exercise 03, and the trial runs out in mid-October |
 | Domain name | Free for a year through the GitHub Student Developer Pack, otherwise $10 to $15 | Exercise 04, and it stays yours after the course |
 | Route 53 hosted zone | $0.50 a month | Exercise 04 |
-| GitHub, AWS, Google Cloud, Zoho, Resend, Firecrawl | Free tier | Exercise 01 |
+| GitHub and AWS | Free tier | Exercise 01 |
+| Zoho and Resend | Free tier | Exercise 06 |
+| Google Cloud and Firecrawl | Free tier | Exercise 07 |
 
 Budget roughly $100 for the semester, and most of that is Claude Pro.
 

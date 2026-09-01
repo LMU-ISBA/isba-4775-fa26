@@ -40,31 +40,39 @@ your domain's DNS with it. Choose the Paid plan. You still get the signup
 credits, and the free tier limits still apply, so the practical difference is
 that the account survives past March and stays on your resume.
 
-**2. Create or verify these accounts.**
+**2. Create or verify these accounts now.**
 
 | Account | Notes |
 |---|---|
 | GitHub | Your portfolio repository lives here |
 | GitHub Student Developer Pack | Apply on day one. Verification takes a few days, and it covers a .me domain for a year and credits on Railway |
-| Railway | Start the 30-day trial |
+| Claude Pro | Subscribe. You need it for the interview below and for Exercise 02 |
 | AWS | Choose the Paid plan, not the Free plan. Turn on MFA for the root user, then create an IAM user for daily work |
-| Google Cloud | Create a project and attach billing. You enable the Places API later |
-| Claude Pro | Subscribe |
-| Zoho Mail | Free plan |
-| Resend | Free tier |
-| Firecrawl | Free tier, 500 credits |
 
-**3. Complete Tutorial Part 1.**
+**3. Leave these for the exercise that uses them.**
+
+Creating an account starts its clock, and a trial you burn in September is
+gone by the time you need it. Note these in your plan, then create them later.
+
+| Account | When | Notes |
+|---|---|---|
+| Railway | Exercise 03 | The 30-day trial starts on signup, so starting it now wastes two weeks of it |
+| Zoho Mail | Exercise 06 | Free plan, and it needs a domain you don't own until Exercise 04 |
+| Resend | Exercise 06 | Free tier, and it also needs your domain verified |
+| Google Cloud | Exercise 07 | Create a project and attach billing. Places API runs on its own free cap rather than the 90-day trial credit |
+| Firecrawl | Exercise 07 | Free tier, 1,000 credits a month |
+
+**4. Complete Tutorial Part 1.**
 
 [LMU-ISBA/ai-dev-workflow-tutorial](https://github.com/LMU-ISBA/ai-dev-workflow-tutorial)
 installs Python 3.11+, Git, VS Code, uv, and Claude Code, and walks you through
 authenticating Claude Code.
 
-**4. Verify every tool actually runs.**
+**5. Verify every tool actually runs.**
 
 Not that it installed. That it runs, on your machine, from your terminal.
 
-**5. Run the self-discovery interview.**
+**6. Run the self-discovery interview.**
 
 [`self-discovery-interview.md`](../self-discovery-interview.md) in this repository is a
 prompt you paste into Claude. It interviews you, one question at a time, for about fifteen
