@@ -67,7 +67,7 @@ Not that it installed. That it runs, on your machine, from your terminal.
 **5. Run the self-discovery interview.**
 
 [`self-discovery-interview.md`](../self-discovery-interview.md) in this repository is a
-prompt you paste into Claude. It interviews you, one question at a time, for about twenty
+prompt you paste into Claude. It interviews you, one question at a time, for about fifteen
 minutes, and writes a Markdown file at the end. Answer honestly rather than impressively;
 nothing in it is graded and nothing in it is compared against anyone else.
 

@@ -1,40 +1,40 @@
-# Self-Discovery Interview — ISBA 4775
+# Self-discovery interview, ISBA 4775
 
-Part of [Exercise 01](exercises/ex01-accounts-and-dev-env.md). Due **Tue 9/8, before
-class**, along with the rest of Exercise 01.
+Part of [Exercise 01](exercises/ex01-accounts-and-dev-env.md), due with the rest of it on
+**Tue 9/8, before class**.
 
-**Where this one goes: Brightspace.** Not your portfolio repository. This is the only
-thing in the entire course that is not submitted through GitHub, and the reason is that
-your portfolio repository is public. This file has your career plans in it, and possibly
-your uncertainty about them. That is not going on the open internet with your name on it.
+This one goes on Brightspace rather than in your portfolio repository, and it's the only
+thing in the course that does. Your portfolio repository is public, and this file has your
+career plans in it and possibly your uncertainty about them. That's not going on the open
+internet with your name on it.
 
-**How to use this.** Open Claude Code in a folder on your computer, copy everything in the
-box below (from `You are conducting` down to the end), and paste it as your first message.
-Claude will interview you one question at a time. Answer honestly. When you are done,
-Claude saves a Markdown file. Submit that file on Brightspace.
+To run it, open Claude Code in a folder on your computer, copy everything in the box below
+starting at `You are conducting`, and paste it as your first message. Claude interviews you
+one question at a time. Answer honestly. When you're done, Claude saves a Markdown file,
+and you submit that file on Brightspace.
 
-**No Claude Code yet?** Run the same prompt in the Claude web app at
-[claude.ai](https://claude.ai). It will show you the finished Markdown to copy into a file
-named `self-discovery-lastname-firstname.md`, which you then submit.
+If you don't have Claude Code working yet, run the same prompt in the Claude web app at
+https://claude.ai. It will show you the finished Markdown to copy into a file named
+`self-discovery-lastname-firstname.md`, which you then submit.
 
-**Why you are doing this.** Two reasons, and the first one is yours. The variance in this
-course is enormous: two people with the same prerequisite walk in here having deployed
+There are two reasons you're doing this, and the first one is yours. The variance in this
+course is enormous, and two people with the same prerequisite walk in here having deployed
 nothing and having run a side project on AWS for a year. Both are normal. Getting a clear
-read on where you are actually starting from, and what you are actually aiming at, is
-worth twenty minutes of your time regardless of what I do with it.
+read on where you are actually starting from, and what you are actually aiming at, is worth
+fifteen minutes of your time regardless of what I do with it.
 
-The second reason is mine. I use these to decide who needs the terminal handled before
-week three rather than assumed, which job descriptions the interview study guides get
-built against, and who I should check on before the midterm interview rather than after
-it. Being honest here is what makes that work.
+The second reason is mine. I use these to decide who needs the terminal handled before week
+three rather than assumed, which job descriptions the interview study guides get built
+against, and who I should check on before the midterm interview rather than after it. Being
+honest here is what makes that work.
 
-**There is no bar to clear.** Nothing you say in this interview is graded. Exercise 01
-gives credit for having done it, not for what is in it.
+Nothing you say in this interview is graded. Exercise 01 gives credit for having done it,
+not for what is in it, and there is no bar to clear.
 
-**Tip: answer out loud with speech-to-text.** Talking is faster than typing, and it tends
-to surface more detail than you would bother to type, which makes the result far more
-useful to you. If you do not already have a dictation tool,
-[Wispr Flow](https://wisprflow.ai/students) has a free student plan.
+Answering out loud with speech-to-text is faster than typing, and it tends to surface more
+detail than you would bother to type, which makes the result more useful to you. If you
+don't already have a dictation tool, Wispr Flow has a free student plan at
+https://wisprflow.ai/students.
 
 ---
 
@@ -55,7 +55,7 @@ diagrams a system they built from memory and then defends it under questioning.
 Ask ONE question at a time, then stop and wait for the answer. Never send a list of
 questions or a wall of text. This is a conversation, not a form.
 
-Open by introducing yourself in a couple of sentences: this will take about 20 minutes,
+Open by introducing yourself in a couple of sentences: this will take about 15 minutes,
 you'll go one question at a time, there are no wrong answers, and honest beats polished.
 Invite the student to answer out loud with a speech-to-text tool if they have one, since
 talking usually gives fuller, more useful answers than typing. Then ask your first
