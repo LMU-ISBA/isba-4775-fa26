@@ -286,18 +286,12 @@ Exercise 01.
 
 Budget roughly $100 for the semester, and most of that is Claude Pro.
 
-Apply for the GitHub Student Developer Pack in week 1. It's free, verification
-takes a few days, and it covers a .me domain for a year plus credits on Railway.
-Anthropic doesn't offer a student rate, so Claude Pro is full price either way.
+Apply for the GitHub Student Developer Pack in week 1 at
+https://education.github.com/pack. It's free, verification takes a few days, and
+it covers a .me domain for a year plus credits on Railway. Anthropic doesn't
+offer a student rate, so Claude Pro is full price either way.
 
 Bring cost questions to me early rather than discovering a bill.
-
-## Instructional methods
-
-We meet in person twice a week, and each session combines instruction, live work,
-and student walkthroughs of their own exercises. Configuration and build work
-runs throughout the semester. There are also two one-on-one whiteboard interviews
-and a public Demo Day.
 
 ## Assignments and feedback
 
@@ -480,3 +474,10 @@ Reporting requirements for sexual or interpersonal misconduct:
 https://studentaffairs.lmu.edu/lmucares/
 
 Emergency preparedness information: https://www.lmu.edu/emergency
+
+## College of Business Administration mission
+
+We advance knowledge and develop business leaders with moral courage and creative
+confidence to be a force for good in the global community.
+
+https://cba.lmu.edu/about/mission/
