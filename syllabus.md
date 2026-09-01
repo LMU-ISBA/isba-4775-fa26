@@ -258,15 +258,15 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 
 | Date | Session | Due |
 |---|---|---|
-| Tue 9/1 | What is a network | |
-| Thu 9/3 | One request, end to end | |
-| Tue 9/8 | Layers and protocols: OSI, TCP/IP, and where each piece of the request lives | Ex01 |
+| Tue 9/1 | The map: where a request goes, and the devices it passes through | |
+| Thu 9/3 | Finding things: host names, IP and MAC addresses, the default gateway, DNS, and what your own machine will tell you | |
+| Tue 9/8 | Moving data: packets, frames, switches, routers, and then OSI and TCP/IP as the framework that organizes all of it | Ex01 |
 | Thu 9/10 | Specs before code: the PRD, the implementation plan, and why AI amplifies a bad plan | |
 | Tue 9/15 | Where code runs: IaaS, PaaS, serverless, and managed databases. Containers, build versus runtime, and why this course uses Railway | Ex02 |
 | Thu 9/17 | DNS from the root down: zones, records, TTL, delegation, and nameservers | Ex03 |
-| Tue 9/22 | TLS and certificates: the handshake, certificate authorities, ACME, and what "valid" means | |
+| Tue 9/22 | TLS: what a certificate claims, how a browser decides it is valid, the four ways it goes invalid, and how ACME gets you one | |
 | Thu 9/24 | Reading a system when it breaks: dig, curl, openssl, and the hypothesis log | Ex04 |
-| Tue 9/29 | DNS and TLS failure modes: propagation, caching, chain order, and name mismatch | |
+| Tue 9/29 | Failures that depend on who is asking: DNS propagation and TTL, cached answers, and why an incomplete chain passes in a browser but fails in curl | |
 | Thu 10/1 | Diagnosis walkthroughs, then how mail routes: MX records and the envelope | Ex05 |
 | Tue 10/6 | Email authentication: SPF, DKIM, DMARC, and deliverability as a DNS problem | |
 | Thu 10/8 | APIs: REST, JSON, status codes, authentication, rate limits, and idempotency | Ex06 |
