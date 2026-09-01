@@ -261,7 +261,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 9/3 | One request, end to end | |
 | Tue 9/8 | Layers and protocols: OSI, TCP/IP, and where each piece of the request lives | Ex01 |
 | Thu 9/10 | Specs before code: the PRD, the implementation plan, and why AI amplifies a bad plan | |
-| Tue 9/15 | What deploying means: containers, build versus runtime, environment variables, and installing GA4 | Ex02 |
+| Tue 9/15 | Where code runs: IaaS, PaaS, serverless, and managed databases. Containers, build versus runtime, and why this course uses Railway | Ex02 |
 | Thu 9/17 | DNS from the root down: zones, records, TTL, delegation, and nameservers | Ex03 |
 | Tue 9/22 | TLS and certificates: the handshake, certificate authorities, ACME, and what "valid" means | |
 | Thu 9/24 | Reading a system when it breaks: dig, curl, openssl, and the hypothesis log | Ex04 |
@@ -286,7 +286,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 12/1 | Operating a deployed system: auth, rate limiting, monitoring, and cost controls | |
 | Thu 12/3 | Staging in practice, then the decision record | M4 |
 | Tue 12/8 | Blog post workshop and final interview prep | Project 2 |
-| Thu 12/10 | Cloud services compared: IaaS, PaaS, serverless, and managed databases | |
+| Thu 12/10 | Final interview practice in pairs, and a course retrospective | |
 
 ## Work load expectations
 
