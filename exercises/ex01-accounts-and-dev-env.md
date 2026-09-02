@@ -5,22 +5,17 @@
 
 ## Why this one is first
 
-Everything you build this semester sits on the accounts and tools you set up
-here. The site in Exercise 03, the domain in Exercise 04, the orchestration in
-Exercise 07, the agent in Exercise 09, and both projects all assume this
-exercise worked. A step you skip now is a step you debug in week five, in the
-middle of something else.
-
-Config exercises normally open with a written plan, and this one doesn't. Steps
-2 and 3 already list every account and what it's for, so a plan here would copy
-the brief back to me. Planning starts in Exercise 02 with a PRD. The first real Config plan is
-Exercise 04, where delegating a domain has actual choices in it.
+Everything you build this semester sits on the accounts and tools you set up  
+here. The site in Exercise 03, the domain in Exercise 04, the orchestration in  
+Exercise 07, the agent in Exercise 09, and both projects all assume this  
+exercise worked. Anything skipped here comes back as a problem during a later  
+exercise.
 
 ## Before you start
 
 Read the budget table under Required materials in the
-[syllabus](../syllabus.md). This is the week most of the semester's costs land,
-so know what's coming before you subscribe to anything.
+[syllabus](../syllabus.md). Most of the semester's costs come due this week, so
+know what's coming before you subscribe to anything.
 
 Set up your portfolio repository first if you haven't already. One public
 repository named `isba-4775-portfolio`, one folder per exercise, `ex01` through
@@ -33,10 +28,7 @@ repository named `isba-4775-portfolio`, one folder per exercise, `ex01` through
 
 ### 1. Install a password manager before you create anything.
 
-You'll create eleven accounts across this course, starting with five today.
-Reusing one password across them turns a single breach into eleven. This is the
-week it would happen, because inventing a strong password eleven times over is
-miserable and nobody does it.
+You'll create about eleven accounts across this course, starting with five today. Reusing one password across them turns a single breach into eleven. Inventing eleven strong passwords by hand is tedious, so this is the week people start reusing one.
 
 Bitwarden's free tier covers everything this course needs. 1Password is also
 good, and it's worth checking whether it's included in your GitHub Student
@@ -44,96 +36,114 @@ Developer Pack. The one built into your browser or operating system counts, as
 long as you actually use it.
 
 Put your GitHub password in it today, along with your GitHub two-factor
-recovery codes. Those codes are the thing people lose. Losing them locks you out
-of the repository holding every exercise you have submitted.
+recovery codes. Those codes are easy to lose, and losing them locks you out of
+the repository holding every exercise you've submitted.
 
-You'll name the one you chose in your README.
+You'll name the password manager you chose in your README.
 
 ### 2. Create or verify these accounts now.
 
 
-| Account                       | Notes                                                                                                         |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| GitHub                        | Your portfolio repository lives here                                                                          |
-| GitHub Student Developer Pack | Apply on day one. Verification takes a few days, and it covers a .me domain for a year and credits on Railway |
-| Claude Pro                    | Subscribe. You need it for the interview below and for Exercise 02                                            |
-| Granola                       | Part of the tutorial in step 4, and it connects to Claude Code over MCP                                       |
-| Wispr Flow                    | Part of the tutorial in step 4. Dictation, and you configure it during setup                                  |
+| Account                                                            | Notes                                                                                                                                                       |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [GitHub](https://github.com/signup)                                | Your portfolio repository lives here                                                                                                                        |
+| [GitHub Student Developer Pack](https://education.github.com/pack) | Apply on day one. Verification takes a few days, and it covers a .me domain for a year and credits on Railway                                               |
+| [Claude Pro](https://claude.ai/login?plan=pro)                     | Subscribe at full price, because there's no student rate. You need it for the interview below and for Exercise 02                                           |
+| [Granola](https://www.granola.ai/students)                         | Apply with your lion.lmu.edu address, and it's free for twelve months. Part of the tutorial in step 3, and it connects to Claude Code over MCP              |
+| [Wispr Flow](https://wisprflow.ai/students)                        | Sign in with your lion.lmu.edu address for three months free, then half price. Part of the tutorial in step 3. Dictation, and you configure it during setup |
 
 
 
 
-### 3. Leave these for the exercise that uses them.
-
-Creating an account starts its clock, and a trial you burn in September is
-gone by the time you need it. Note these in your plan, then create them later.
-
-
-| Account      | When        | Notes                                                                                                                                                                                                               |
-| ------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Railway      | Exercise 03 | The 30-day trial starts on signup, so starting it now wastes two weeks of it                                                                                                                                        |
-| AWS          | Exercise 04 | Choose the Free plan, which runs six months and then closes the account. Note the closing date when you create it. Start the account a few days before you start Exercise 04, because identity verification can lag |
-| Zoho Mail    | Exercise 06 | Free plan, and it needs a domain you don't own until Exercise 04                                                                                                                                                    |
-| Resend       | Exercise 06 | Free tier, and it also needs your domain verified                                                                                                                                                                   |
-| Google Cloud | Exercise 07 | Create a project and attach billing. Use a personal Google account, because school and corporate accounts often cannot attach billing. Places API runs on its own free cap rather than the 90-day trial credit      |
-| Firecrawl    | Exercise 07 | Free tier, 1,000 credits a month                                                                                                                                                                                    |
-
-
-
-
-### 4. Complete Tutorial Part 1.
+### 3. Complete Tutorial Part 1.
 
 [LMU-ISBA/ai-dev-workflow-tutorial](https://github.com/LMU-ISBA/ai-dev-workflow-tutorial)
 installs Git, Python 3.11+, Claude Code, and Cursor. It also sets up the
 Superpowers plugin and the Granola connection, and it has you fork and clone the
-tutorial repository.
+tutorial repository. Part 1 ends with its own verification checklist. Fix
+anything that fails there before moving on.
 
-### 5. Verify every tool actually runs.
+### 4. Run the self-discovery interview.
 
-Installed is not the same as running. Open your terminal and confirm that each
-one actually runs on your machine.
-
-### 6. Run the self-discovery interview.
-
-[`self-discovery-interview.md`](self-discovery-interview.md) in this repository is a
+`[self-discovery-interview.md](self-discovery-interview.md)` in this repository is a
 prompt you paste into Claude. It interviews you, one question at a time, for about fifteen
 minutes, and writes a Markdown file at the end. Answer honestly rather than impressively.
 Nothing in it is graded and nothing in it is compared against anyone else.
 
 Two people with the same prerequisite walk into this course having deployed nothing and
 having run a side project on AWS for a year. Both are normal. This is how I find out which
-one you are, so I can teach you rather than the room's average.
+one you are, so I can teach you rather than an average of the room.
 
 Your portfolio repository is public, and this file has your career plans in it. So it
-goes on Brightspace rather than into your repository. Noticing that those two don't belong
-together is itself the kind of judgment this course is about.
+goes on Brightspace rather than into your repository.
+
+### 5. Draw the network you live on.
+
+Thursday you found six numbers on the campus network. Now find the same six
+where you live and draw the network they belong to. Both whiteboard
+interviews are you drawing your own system by hand, from memory, and this step
+is the first practice for them.
+
+Use pen and paper, or a tablet with a stylus, and not a diagramming tool, because the interviews are hand-drawn. Start at your laptop and end at the internet, and put every box you believe is in between: the access point, the switch, the router, the firewall, and the modem or ONT, in whatever form they take where you live. At home, most of those are one box on a shelf. In a dorm there's no box on a shelf.
+
+Then run Thursday's commands on that network and write the numbers on the
+drawing beside the boxes they belong to: your host name, your IP address, the
+mask, the default gateway, the DNS server, the address the rest of the
+internet sees, and the first three lines of the trace.
+
+```
+Mac                                    Windows
+hostname                               hostname
+ifconfig en0                           ipconfig /all
+ipconfig getpacket en0                 (same output, further down)
+nslookup chatgpt.com                   nslookup chatgpt.com
+curl -4 ifconfig.me                    curl.exe -4 ifconfig.me
+traceroute -n -q 1 -w 2 chatgpt.com    tracert -4 -d -w 1000 chatgpt.com
+```
+
+If the gateway and the DNS server are the same address,
+the box on the shelf is doing both jobs. If they aren't, something else is
+answering names, and your drawing needs a box for it.
+
+Two numbers stay off the drawing and out of the README, because the
+repository is public. Leave the MAC address off entirely. Write the public
+address with its last two numbers replaced by x, like 76.94.x.x, because
+those two numbers identify your household.
+
+Photograph the drawing and commit it as `ex01/home-network.jpg`. It's the one
+photo this course asks for, because the thing being checked is a drawing.
+Take it in daylight and check that every number is readable before you
+commit it.
 
 ## What to commit
 
-Two files in `ex01/`. Most exercises want three, and the missing one is
-`plan.md`, for the reason at the top of this brief.
-
-`verify.txt` holds pasted terminal output, as text, not screenshots. Nothing in
-this course is verified by screenshot, because you cannot diff a screenshot.
-Include:
-
-- `git --version`, `claude --version`, and `python3 --version` on macOS or
-`python --version` on Windows
-- `git config --list`, showing your name and email
-- `claude mcp list`, showing granola
-- Your fork, at `github.com/your-username/ai-dev-workflow-tutorial`
+Two files in `ex01/`: `README.md` and `home-network.jpg`. Most exercises also
+want a `plan.md`, and this one doesn't, because step 2 already lists every
+account and a plan would copy it back.
 
 `README.md` opens with two lines. The first names the password manager you
 installed and confirms that your GitHub password and your two-factor recovery
-codes are in it. The second confirms that Cursor, Granola, Wispr Flow, and the
-Superpowers plugin are all installed and working, because none of those four
-leave terminal output you can paste.
+codes are in it. The second is the URL of your fork of the tutorial
+repository.
 
 The rest of it is your evidence README: what broke while you were doing this and
-how you fixed it. Something will break. Account verification and billing setup
-fail in ordinary, annoying ways, and writing down what you did about it is the
-beginning of the troubleshooting practice this course grades. If genuinely
-nothing broke, say what you expected to break and did not.
+how you fixed it. Account verification and billing setup fail in ordinary ways,
+and writing down what you did about it is the beginning of the troubleshooting
+practice this course grades. If genuinely nothing broke, say what you expected
+to break and did not.
+
+Then a section headed "Where I live." Six short lines, then two sentences:
+
+- home or dorm
+- what the box on the shelf is: a rented gateway, your own router and modem,
+or nothing, because it's a dorm
+- your IP address and the mask
+- the default gateway
+- the DNS server
+- the public address, with its last two numbers as x
+
+The two sentences are what was different from Hilton 115 on Thursday, and
+why.
 
 Finish the README by answering "The change," which is the last section of this
 brief.
@@ -158,8 +168,8 @@ Here is the one for Exercise 01.
 - [ ] A password manager installed, holding your GitHub password and two-factor recovery codes
 - [ ] All five accounts in step 2 created, with two-factor turned on for GitHub
 - [ ] Tutorial Part 1 complete, every tool running on your machine
-- [ ] `ex01/verify.txt` with real terminal output and your fork URL
-- [ ] `ex01/README.md` naming your password manager, confirming the four tools, what broke, and "The change" answered
+- [ ] `ex01/home-network.jpg`, drawn by hand, with your numbers on it and the MAC address left off
+- [ ] `ex01/README.md` naming your password manager, linking your fork, what broke, "Where I live," and "The change" answered
 - [ ] Self-discovery interview completed and the Markdown file submitted **on Brightspace**
 - [ ] Your repository URL submitted **on Brightspace**
 - [ ] Pushed to your public portfolio repository before class Tue 9/8
