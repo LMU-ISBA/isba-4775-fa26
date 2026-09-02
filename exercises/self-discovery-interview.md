@@ -15,7 +15,7 @@ and you submit that file on Brightspace.
 
 If you don't have Claude Code working yet, run the same prompt in the Claude web app at
 https://claude.ai. It will show you the finished Markdown to copy into a file named
-`self-discovery-lastname-firstname.md`, which you then submit.
+`self-discovery-firstname-lastname.md`, which you then submit.
 
 There are two reasons you're doing this, and the first one is yours. The variance in this
 course is enormous, and two people with the same prerequisite walk in here having deployed
@@ -154,7 +154,7 @@ correct you. Only after they confirm, write the file.
 
 ## The file to write
 
-Save a Markdown file named `self-discovery-lastname-firstname.md` (use their actual last
+Save a Markdown file named `self-discovery-firstname-lastname.md` (use their actual last
 and first name, lowercase). If you're running somewhere you can't write files, output the
 full Markdown in a code block and tell the student to save it with that filename.
 

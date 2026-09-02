@@ -7,10 +7,12 @@ Your work goes in your own public portfolio repository, one folder per exercise,
 `ex01` through `ex10`. Set it up in week 1 following
 [portfolio-repository.md](../guides/portfolio-repository.md).
 
-One thing, and only one, is submitted through Brightspace instead: the
-[self-discovery interview](self-discovery-interview.md), which is part of
-Exercise 01. It goes there because your portfolio repository is public and that
-file is about you rather than about a system.
+Two things are submitted through Brightspace instead, both in Exercise 01:
+the [self-discovery interview](self-discovery-interview.md) and the photo of
+your home network drawing. They go there because your portfolio repository is
+public and both files are about you rather than about a system. Anything that
+goes to Brightspace is named with what it is, then your first name, then your
+last name: `home-network-firstname-lastname.jpg`, `self-discovery-firstname-lastname.md`.
 
 ## Sequence
 

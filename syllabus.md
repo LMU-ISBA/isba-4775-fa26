@@ -342,8 +342,9 @@ interviews.
 
 Exercises are submitted in your public portfolio repository and are due before
 the class that uses them. Projects are submitted the same way, as live systems
-plus their repositories. The one exception is the self-discovery interview in
-Exercise 01, which goes to Brightspace. Due dates are announced in Brightspace
+plus their repositories. The exceptions are two files in Exercise 01, the
+self-discovery interview and the photo of your home network drawing, which go
+to Brightspace because both identify you. Due dates are announced in Brightspace
 and stated in this syllabus.
 
 Feedback on exercises is given in class and in the repository. Interview feedback

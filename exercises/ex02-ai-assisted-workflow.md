@@ -33,8 +33,8 @@ You do not need them for this course, and skipping them costs you nothing here.
 The tutorial's Section 7 asks where your finished work goes and leaves the
 answer to your course. Here that is your portfolio repository, under `ex02/`,
 by the due date at the top of this brief. Nothing in this exercise is submitted
-through Brightspace. The self-discovery interview in Exercise 01 is the only
-thing in this course that is.
+through Brightspace. The two files in Exercise 01 are the only things in this
+course that are.
 
 ## The work
 

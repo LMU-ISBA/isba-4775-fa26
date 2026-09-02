@@ -1,7 +1,7 @@
 # Exercise 01: Accounts and development environment
 
 **Due** Tue 9/8, before class · **15 points** · **Type:** Config ·
-**Submit** as `ex01/` in your public portfolio repository, plus one file on Brightspace
+**Submit** as `ex01/` in your public portfolio repository, plus two files on Brightspace
 
 ## Why this one is first
 
@@ -79,17 +79,19 @@ goes on Brightspace rather than into your repository.
 
 ### 5. Draw the network you live on.
 
-Thursday you found six numbers on the campus network. Now find the same six
-where you live and draw the network they belong to. Both whiteboard
-interviews are you drawing your own system by hand, from memory, and this step
-is the first practice for them.
+Thursday your laptop told you six things about the campus network: its name,
+its address, the mask, the gateway, the DNS server, and the address the rest
+of the internet sees. Now find out the same six where you live, find the
+boxes they belong to, and draw the network.
 
-Use pen and paper, or a tablet with a stylus, and not a diagramming tool, because the interviews are hand-drawn. Start at your laptop and end at the internet, and put every box you believe is in between: the access point, the switch, the router, the firewall, and the modem or ONT, in whatever form they take where you live. At home, most of those are one box on a shelf. In a dorm there's no box on a shelf.
+Start with the boxes. Go look at what the wire from the street plugs into,
+and at what's plugged into that. Read the labels: the maker, the model, and
+whether it's one box or two. If you rent the equipment, the ISP's app or
+account page says what the box is. Note which devices are wired and which are
+on Wi-Fi. In a dorm there's no box to find. The network you live on is
+Tuesday's building drawing, and the parts you can't see get a question mark.
 
-Then run Thursday's commands on that network and write the numbers on the
-drawing beside the boxes they belong to: your host name, your IP address, the
-mask, the default gateway, the DNS server, the address the rest of the
-internet sees, and the first three lines of the trace.
+Then run Thursday's commands on that network.
 
 ```
 Mac                                    Windows
@@ -101,25 +103,27 @@ curl -4 ifconfig.me                    curl.exe -4 ifconfig.me
 traceroute -n -q 1 -w 2 chatgpt.com    tracert -4 -d -w 1000 chatgpt.com
 ```
 
-If the gateway and the DNS server are the same address,
-the box on the shelf is doing both jobs. If they aren't, something else is
-answering names, and your drawing needs a box for it.
+Now draw it, by hand, on paper or on a tablet with a stylus rather than in a
+diagramming tool, because both whiteboard interviews are hand drawings and
+this is the first one. Start at your laptop and end at the internet. Every box
+you found goes in, with what it is written beside it, and everything your
+laptop told you goes beside the box it belongs to. If the gateway, the DHCP
+server, and the DNS server are all one address, that's one box doing three
+jobs, and the drawing should say so. If the DNS server is an address outside
+your house, its box goes in the cloud.
 
-Two numbers stay off the drawing and out of the README, because the
-repository is public. Leave the MAC address off entirely. Write the public
-address with its last two numbers replaced by x, like 76.94.x.x, because
-those two numbers identify your household.
-
-Photograph the drawing and commit it as `ex01/home-network.jpg`. It's the one
-photo this course asks for, because the thing being checked is a drawing.
-Take it in daylight and check that every number is readable before you
-commit it.
+Photograph the drawing, name the file `home-network-firstname-lastname.jpg`
+with your own names in it, and submit it on Brightspace. It doesn't go into
+your repository. The drawing has every number on it, and some of them
+identify your household, so it stays between you and me the same way the
+interview does. Take the photo in daylight and check that every number is
+readable before you submit it.
 
 ## What to commit
 
-Two files in `ex01/`: `README.md` and `home-network.jpg`. Most exercises also
-want a `plan.md`, and this one doesn't, because step 2 already lists every
-account and a plan would copy it back.
+One file in `ex01/`, `README.md`. Most exercises also want a `plan.md`, and
+this one doesn't, because step 2 already lists every account and a plan would
+copy it back. The drawing and the interview go to Brightspace.
 
 `README.md` opens with two lines. The first names the password manager you
 installed and confirms that your GitHub password and your two-factor recovery
@@ -132,18 +136,15 @@ and writing down what you did about it is the beginning of the troubleshooting
 practice this course grades. If genuinely nothing broke, say what you expected
 to break and did not.
 
-Then a section headed "Where I live." Six short lines, then two sentences:
+Then a section headed "Where I live." Two short lines, then two sentences:
 
 - home or dorm
 - what the box on the shelf is: a rented gateway, your own router and modem,
-or nothing, because it's a dorm
-- your IP address and the mask
-- the default gateway
-- the DNS server
-- the public address, with its last two numbers as x
+  or nothing, because it's a dorm
 
 The two sentences are what was different from Hilton 115 on Thursday, and
-why.
+why. The numbers themselves stay on the drawing, which is on Brightspace,
+and none of them go in the README.
 
 Finish the README by answering "The change," which is the last section of this
 brief.
@@ -168,7 +169,7 @@ Here is the one for Exercise 01.
 - [ ] A password manager installed, holding your GitHub password and two-factor recovery codes
 - [ ] All five accounts in step 2 created, with two-factor turned on for GitHub
 - [ ] Tutorial Part 1 complete, every tool running on your machine
-- [ ] `ex01/home-network.jpg`, drawn by hand, with your numbers on it and the MAC address left off
+- [ ] Home network drawn by hand with what you found on it, photographed, named `home-network-firstname-lastname.jpg`, and submitted **on Brightspace**
 - [ ] `ex01/README.md` naming your password manager, linking your fork, what broke, "Where I live," and "The change" answered
 - [ ] Self-discovery interview completed and the Markdown file submitted **on Brightspace**
 - [ ] Your repository URL submitted **on Brightspace**
