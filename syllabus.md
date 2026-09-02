@@ -16,7 +16,7 @@
 | Instructor | Greg Lontok, Clinical Associate Professor |
 | Office | Hilton 114 |
 | Preferred contact | Microsoft Teams message, for the fastest response |
-| Course Teams channel | https://teams.microsoft.com/l/team/19%3ApEeVgCLxtNG8uKcA7SuMm3lBPHwpeCtOAG1ZX5vS3tg1%40thread.tacv2/conversations?groupId=d8535d7e-e92d-474f-930d-8fa16ab371af&tenantId=0376eb4b-c206-4056-9061-e342dc2ecda8 |
+| Course Teams channel | https://r.isba.co/networking-cloud-teams-fa26 |
 | Email | gregory.lontok@lmu.edu |
 | Office hours | By appointment. Book at https://calendly.com/greg-lontok |
 
@@ -500,8 +500,9 @@ LMU's course management system.
 
 Exercise scope and dates may shift as the semester develops. Any revision will be
 announced in class and through Brightspace, the same channels through which this
-syllabus was distributed. The version in this repository is always current, and
-its revision history is visible in git.
+syllabus was distributed. The version at
+https://r.isba.co/networking-cloud-syllabus-fa26 is always current, and its
+revision history is visible in git.
 
 ## Classroom conduct and communication
 
