@@ -1,6 +1,6 @@
 # Your portfolio repository
 
-Set this up in week 1. It's where every exercise and both projects are submitted,
+Set this up at the start of Exercise 02. It's where every exercise and both projects are submitted,
 and it's the first thing Exercise 01 assumes you already have.
 
 Name it `isba-4775-portfolio` and make it public. Everyone in the course uses the
@@ -31,16 +31,17 @@ this once and then stays handled.
 
 ## How it's organized
 
-One folder per exercise, named `ex01` through `ex10`, created as you go. You
-don't need to make all ten now.
+One folder per exercise, named `ex02` through `ex10`, created as you go.
+Exercise 01 goes to Brightspace and has no folder. You don't need to make all
+nine now.
 
     isba-4775-portfolio/
       README.md
-      ex01/
-        plan.md
-        verify.txt
-        README.md
       ex02/
+        README.md
+      ex03/
+        plan.md
+        README.md
       ...
 
 Each exercise brief tells you what goes in its folder. The pattern is a plan
@@ -49,9 +50,8 @@ explaining what broke and how you fixed it.
 
 ## Submit the URL
 
-Post your repository URL on Brightspace as part of Exercise 01, in the same place
-you submit the self-discovery interview file. That's how I get the list of 19
-repositories to grade against.
+Post your repository URL on Brightspace as part of Exercise 02, in the Exercise
+02 drop box. That's how I get the list of 19 repositories to grade against.
 
 Do that even though the name is fixed, because I still need your GitHub username.
 

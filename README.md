@@ -20,7 +20,7 @@ Tue/Thu 1:45-3:25 PM, Hilton 115. Instruction Sep 1 - Dec 10, 2026.
     syllabus.md    Course syllabus
     exercises/     Exercise briefs, published ahead of each due date, plus the
                    self-discovery interview you run with Claude for Exercise 01
-    guides/        Set up your portfolio repository here, in week 1
+    guides/        Set up your portfolio repository here, for Exercise 02
     README.md      This file
 
 Exercises are published here as the semester progresses. Clone this repository in

@@ -4,14 +4,13 @@ Ten exercises, 15 points each, 150 points total. Each brief is published here
 ahead of its due date. Clone this repository in week 1 and pull before class.
 
 Your work goes in your own public portfolio repository, one folder per exercise,
-`ex01` through `ex10`. Set it up in week 1 following
+`ex02` through `ex10`. Set it up at the start of Exercise 02 following
 [portfolio-repository.md](../guides/portfolio-repository.md).
 
 Exercise 01 is submitted entirely through Brightspace: the
-[self-discovery interview](self-discovery-interview.md), the photo of your home
-network drawing, and your repository URL. The first two go there because your
-portfolio repository is public and both files are about you rather than about
-a system. Anything that
+[self-discovery interview](self-discovery-interview.md) and the photo of your
+home network drawing. They go there because your portfolio repository is
+public and both files are about you rather than about a system. Anything that
 goes to Brightspace is named with what it is, then your first name, then your
 last name: `home-network-firstname-lastname.jpg`, `self-discovery-firstname-lastname.md`.
 
@@ -47,7 +46,7 @@ do about it, and what that costs.
 
 Missing any one of the three means no credit. Exercise 01 is the exception. It
 has no plan, no system, and no README, because nothing gets built yet, and its
-three items go to Brightspace.
+two files go to Brightspace.
 
 Section "Exercises, 150 points" of the [syllabus](../syllabus.md) has the full
 rules.

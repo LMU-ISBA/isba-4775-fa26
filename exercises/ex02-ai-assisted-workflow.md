@@ -23,6 +23,12 @@ method, not three.
 
 Exercise 01 has to be done, and Claude Pro has to be active.
 
+Set up your portfolio repository before anything else. One public repository
+named `isba-4775-portfolio`, one folder per exercise, `ex02` through `ex10`,
+following [portfolio-repository.md](../guides/portfolio-repository.md). This
+exercise is the first thing that goes in it, and its drop box on Brightspace
+is where you post the repository URL.
+
 Part 1 of the tutorial is the first step of this exercise, and it's the setup:
 Git, Python, Claude Code, Cursor, the Superpowers plugin, and a fork of the
 tutorial repository. Budget 70 to 100 minutes and do it first, on the weekend,

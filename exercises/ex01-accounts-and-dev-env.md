@@ -1,7 +1,7 @@
 # Exercise 01: Accounts, your home network, and the self-discovery interview
 
 **Due** Tue 9/8, before class · **15 points** · **Type:** Config ·
-**Submit** on Brightspace: the interview, the drawing, and your repository URL
+**Submit** on Brightspace: the interview and the drawing
 
 ## The work
 
@@ -88,8 +88,5 @@ readable before you submit it.
 
 ## What to submit
 
-Nothing goes in your repository for this exercise. Three things go on
-Brightspace: the interview file, the photo of your drawing, and the URL of
-your portfolio repository, set up following
-[portfolio-repository.md](../guides/portfolio-repository.md), which shows me
-it exists and is public.
+Nothing goes in a repository for this exercise. Two files go on Brightspace:
+the interview and the photo of your drawing.
