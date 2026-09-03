@@ -42,7 +42,7 @@ the repository holding every exercise you've submitted.
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [GitHub](https://github.com/signup)                                | Your portfolio repository lives here                                                                                                                        |
 | [GitHub Student Developer Pack](https://education.github.com/pack) | Apply on day one. Verification takes a few days, and it covers a .me domain for a year and credits on Railway                                               |
-| [Claude Pro](https://claude.ai/login?plan=pro)                     | Subscribe at full price, because there's no student rate. You need it for the interview below and for Exercise 02                                           |
+| [Claude Pro](https://claude.ai/login?plan=pro)                     | Subscribe at full price, because there's no student rate. [OpenAI's Codex](https://openai.com/codex/), on a ChatGPT subscription, is an accepted alternative. You need one of the two for the interview below and for Exercise 02 |
 
 ### 3. Run the self-discovery interview.
 
