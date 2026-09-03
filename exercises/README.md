@@ -7,10 +7,11 @@ Your work goes in your own public portfolio repository, one folder per exercise,
 `ex01` through `ex10`. Set it up in week 1 following
 [portfolio-repository.md](../guides/portfolio-repository.md).
 
-Two things are submitted through Brightspace instead, both in Exercise 01:
-the [self-discovery interview](self-discovery-interview.md) and the photo of
-your home network drawing. They go there because your portfolio repository is
-public and both files are about you rather than about a system. Anything that
+Exercise 01 is submitted entirely through Brightspace: the
+[self-discovery interview](self-discovery-interview.md), the photo of your home
+network drawing, and your repository URL. The first two go there because your
+portfolio repository is public and both files are about you rather than about
+a system. Anything that
 goes to Brightspace is named with what it is, then your first name, then your
 last name: `home-network-firstname-lastname.jpg`, `self-discovery-firstname-lastname.md`.
 
@@ -18,8 +19,8 @@ last name: `home-network-firstname-lastname.jpg`, `self-discovery-firstname-last
 
 | # | Exercise | Type | Due | Brief |
 |---|---|---|---|---|
-| 01 | Accounts and development environment, and the self-discovery interview | Config | Tue 9/8 | [published](ex01-accounts-and-dev-env.md) |
-| 02 | The AI-assisted workflow: PRD, plan, ship | Build | Tue 9/15 | [published](ex02-ai-assisted-workflow.md) |
+| 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 | [published](ex01-accounts-and-dev-env.md) |
+| 02 | Setup, then the AI-assisted workflow: PRD, plan, ship | Build | Tue 9/15 | [published](ex02-ai-assisted-workflow.md) |
 | 03 | Personal site deployed on Railway, GA4 installed | Build | Thu 9/17 | |
 | 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 | |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/1 | |
@@ -44,9 +45,9 @@ against this table rather than waiting for the file.
 in two or three sentences rather than build for it: what breaks, what you would
 do about it, and what that costs.
 
-Missing any one of the three means no credit. Exercise 01 is the single
-exception, and it has no plan. Steps 2 and 3 of that brief already list every
-account, so a plan there would only copy the brief back.
+Missing any one of the three means no credit. Exercise 01 is the exception. It
+has no plan, no system, and no README, because nothing gets built yet, and its
+three items go to Brightspace.
 
 Section "Exercises, 150 points" of the [syllabus](../syllabus.md) has the full
 rules.

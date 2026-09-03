@@ -116,8 +116,8 @@ repository with one folder per exercise.
 
 | # | Exercise | Type | Due |
 |---|---|---|---|
-| 01 | Accounts and development environment, and the self-discovery interview | Config | Tue 9/8 |
-| 02 | The AI-assisted workflow: PRD, plan, ship | Build | Tue 9/15 |
+| 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 |
+| 02 | Setup, then the AI-assisted workflow: PRD, plan, ship | Build | Tue 9/15 |
 | 03 | Personal site deployed on Railway, GA4 installed | Build | Thu 9/17 |
 | 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/1 |
@@ -342,9 +342,9 @@ interviews.
 
 Exercises are submitted in your public portfolio repository and are due before
 the class that uses them. Projects are submitted the same way, as live systems
-plus their repositories. The exceptions are two files in Exercise 01, the
-self-discovery interview and the photo of your home network drawing, which go
-to Brightspace because both identify you. Due dates are announced in Brightspace
+plus their repositories. The exception is Exercise 01, which goes
+to Brightspace in full, because the interview and the home network drawing
+both identify you. Due dates are announced in Brightspace
 and stated in this syllabus.
 
 Feedback on exercises is given in class and in the repository. Interview feedback
@@ -392,8 +392,7 @@ we'll work out a plan for the rest of the term.
 ## Use of technology
 
 You will use a code editor, Git and GitHub, an AI coding assistant, a terminal,
-AWS, Railway, and an orchestration tool of your choice. These are set up in
-exercise 01.
+AWS, Railway, and an orchestration tool of your choice. These are set up in Exercises 01 and 02.
 
 See "Working with AI" below for how AI use is expected and assessed here.
 

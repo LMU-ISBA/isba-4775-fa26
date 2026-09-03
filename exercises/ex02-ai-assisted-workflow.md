@@ -21,25 +21,35 @@ method, not three.
 
 ## Before you start
 
-Exercise 01 has to be done. You need Claude Code authenticated and running.
+Exercise 01 has to be done, and Claude Pro has to be active.
 
-Install the Superpowers plugin if Part 1 did not leave you with it. Part 2 runs
-on three of its skills, `brainstorming`, `writing-plans`, and `executing-plans`,
-and none of the guide works without them.
+Part 1 of the tutorial is the first step of this exercise, and it's the setup:
+Git, Python, Claude Code, Cursor, the Superpowers plugin, and a fork of the
+tutorial repository. Budget 70 to 100 minutes and do it first, on the weekend,
+because Part 2 can't start until it's done. If a step fails, post in the
+course Teams channel on Saturday rather than Monday.
 
-Granola and Wispr Flow appear in the tutorial's setup. They are capstone tools.
-You do not need them for this course, and skipping them costs you nothing here.
+Part 2 runs on three Superpowers skills, `brainstorming`, `writing-plans`, and
+`executing-plans`, and none of the guide works without them, so check Part 1's
+final checklist before moving on.
+
+Part 1 also sets up Granola and Wispr Flow. They're capstone tools, and you
+don't need them for this course, so skipping them costs you nothing here. If
+you do set them up, both have student offers: apply to
+[Granola](https://www.granola.ai/students) and sign in to
+[Wispr Flow](https://wisprflow.ai/students) with your lion.lmu.edu address.
 
 The tutorial's Section 7 asks where your finished work goes and leaves the
 answer to your course. Here that is your portfolio repository, under `ex02/`,
 by the due date at the top of this brief. Nothing in this exercise is submitted
-through Brightspace. The two files in Exercise 01 are the only things in this
-course that are.
+through Brightspace. Exercise 01 was the only one that is.
 
 ## The work
 
-Work through [Part 2: Build and Deploy](https://github.com/LMU-ISBA/ai-dev-workflow-tutorial/blob/main/workshop-build-deploy.md).
-Budget about three hours and do not do it in one sitting the night before.
+Finish [Part 1: Setup](https://github.com/LMU-ISBA/ai-dev-workflow-tutorial/blob/main/pre-work-setup.md)
+first, then work through [Part 2: Build and Deploy](https://github.com/LMU-ISBA/ai-dev-workflow-tutorial/blob/main/workshop-build-deploy.md).
+Budget about three hours for Part 2 and do not do it in one sitting the night
+before.
 
 The guide walks you through the whole loop:
 
@@ -113,6 +123,7 @@ it costs.
 
 ## Done means
 
+- [ ] Tutorial Part 1 complete, with every tool on its final checklist running
 - [ ] `TASKS.md` on `main` in your fork, every milestone in Done, criteria
       checked, commit hash recorded on each
 - [ ] Design document and implementation plan committed **before** the code that
