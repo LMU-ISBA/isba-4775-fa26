@@ -50,8 +50,25 @@ account page says what the box is. Note which devices are wired and which are
 on Wi-Fi. In a dorm there's no box to find. The network you live on is
 Tuesday's building drawing, and the parts you can't see get a question mark.
 
-Then run Thursday's commands on that network. They're in the two Teams
-messages from Thursday's class, one for Mac and one for Windows.
+Then run Thursday's commands on that network. Mac on the left, Windows on the
+right, and GATEWAY is the default gateway address the second command gave you.
+
+```
+MAC                              WINDOWS
+
+ifconfig                         ipconfig
+ifconfig en0
+
+ipconfig getpacket en0           ipconfig /all
+
+ping GATEWAY                     ping GATEWAY
+
+nslookup chatgpt.com             nslookup chatgpt.com
+
+traceroute chatgpt.com           tracert chatgpt.com
+```
+
+For the public IP address, open https://ifconfig.me in your browser.
 
 Now draw it, by hand, on paper or on a tablet with a stylus rather than in a
 diagramming tool, because both whiteboard interviews are hand drawings and
