@@ -3,19 +3,26 @@
 Part of [Exercise 01](ex01-accounts-and-dev-env.md), due with the rest of it on
 **Tue 9/8, before class**.
 
-This one goes on Brightspace rather than in your portfolio repository, and it's the only
-thing in the course that does. Your portfolio repository is public, and this file has your
-career plans in it and possibly your uncertainty about them. That's not going on the open
-internet with your name on it.
+This one goes on Brightspace rather than in your portfolio repository, and
+it's the reason all of Exercise 01 does. Your portfolio repository is public,
+and this file has your career plans in it and possibly your uncertainty about
+them. That's not going on the open internet with your name on it.
 
-To run it, open Claude Code in a folder on your computer, copy everything in the box below
-starting at `You are conducting`, and paste it as your first message. Claude interviews you
-one question at a time. Answer honestly. When you're done, Claude saves a Markdown file,
-and you submit that file on Brightspace.
+To run it, open the Claude web app at https://claude.ai, or ChatGPT if that's
+the subscription you chose, copy everything in the box below starting at `You
+are conducting`, and paste it as your first message. It interviews you one
+question at a time. Answer honestly. At the end it shows you the finished
+Markdown. Copy that into a file named `self-discovery-firstname-lastname.md`,
+with your own names in it, and submit the file on Brightspace.
 
-If you don't have Claude Code working yet, run the same prompt in the Claude web app at
-https://claude.ai. It will show you the finished Markdown to copy into a file named
-`self-discovery-firstname-lastname.md`, which you then submit.
+Answering out loud with speech-to-text is faster than typing, and it tends to
+surface more detail than you'd bother to type, which makes the result more
+useful to you. Claude Code, the Claude web app, ChatGPT, and Gemini all have
+dictation built in. Click the microphone next to the message box, talk, and
+click it again when you're done.
+
+If you already have Claude Code installed, the same prompt runs there from a
+folder on your computer, and it saves the file for you.
 
 There are two reasons you're doing this, and the first one is yours. The variance in this
 course is enormous, and two people with the same prerequisite walk in here having deployed

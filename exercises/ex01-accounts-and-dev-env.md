@@ -28,17 +28,13 @@ the repository holding every exercise you've submitted.
 
 ### 3. Run the self-discovery interview.
 
-[self-discovery-interview.md](self-discovery-interview.md) in this repository is a
-prompt you paste into Claude. It interviews you, one question at a time, for about fifteen
-minutes, and writes a Markdown file at the end. Answer honestly rather than impressively.
-Nothing in it is graded and nothing in it is compared against anyone else.
-
-Two people with the same prerequisite walk into this course having deployed nothing and
-having run a side project on AWS for a year. Both are normal. This is how I find out which
-one you are, so I can teach you rather than an average of the room.
-
-Your portfolio repository is public, and this file has your career plans in it. So it
-goes on Brightspace rather than into your repository.
+[self-discovery-interview.md](self-discovery-interview.md) in this repository
+is a prompt you paste into Claude, or into ChatGPT if that's the subscription
+you chose. It interviews you, one question at a time, for about fifteen
+minutes, and gives you a Markdown file at the end. Answer honestly rather
+than impressively, and dictate if you can, because you'll say more than you'd
+type. The file says how. Nothing in it is graded and nothing in it is
+compared against anyone else.
 
 ### 4. Draw the network you live on.
 
@@ -79,6 +75,4 @@ Nothing goes in your repository for this exercise. Three things go on
 Brightspace: the interview file, the photo of your drawing, and the URL of
 your portfolio repository, set up following
 [portfolio-repository.md](../guides/portfolio-repository.md), which shows me
-it exists and is public. Most
-exercises want a plan, a working system, and an evidence README, and this one
-has none of them, because nothing gets built yet. That starts in Exercise 02.
+it exists and is public.
