@@ -9,8 +9,8 @@
 
 You'll create about eleven accounts across this course, starting with three today. Reusing one password across them turns a single breach into eleven. Inventing eleven strong passwords by hand is tedious, so this is the week people start reusing one.
 
-Bitwarden's free tier covers everything this course needs. 1Password is also
-good, and it's worth checking whether it's included in your GitHub Student
+[Bitwarden](https://bitwarden.com/)'s free tier covers everything this course needs.
+[1Password](https://1password.com/) is also good, and it's worth checking whether it's included in your GitHub Student
 Developer Pack. The one built into your browser or operating system counts, as
 long as you actually use it.
 
