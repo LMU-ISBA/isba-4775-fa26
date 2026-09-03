@@ -38,10 +38,10 @@ compared against anyone else.
 
 ### 4. Draw the network you live on.
 
-Thursday your laptop told you six things about the campus network: its name,
-its address, the mask, the gateway, the DNS server, and the address the rest
-of the internet sees. Now find out the same six where you live, find the
-boxes they belong to, and draw the network.
+Thursday your laptop told you four things about the campus network: its
+private IP address, its public IP address, the address of the router, which
+is the default gateway, and its DNS servers. Now find out the same four where
+you live, find the boxes they belong to, and draw the network.
 
 Start with the boxes. Go look at what the wire from the street plugs into,
 and at what's plugged into that. Read the labels: the maker, the model, and
