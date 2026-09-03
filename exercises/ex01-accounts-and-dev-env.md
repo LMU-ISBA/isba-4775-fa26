@@ -3,24 +3,6 @@
 **Due** Tue 9/8, before class · **15 points** · **Type:** Config ·
 **Submit** on Brightspace: the interview, the drawing, and your repository URL
 
-## Why this one is first
-
-Everything you build this semester sits on the accounts you set up here. The site in Exercise 03, the domain in Exercise 04, the orchestration in  
-Exercise 07, the agent in Exercise 09, and both projects all assume this  
-exercise worked. Anything skipped here comes back as a problem during a later  
-exercise.
-
-## Before you start
-
-Read the budget table under Required materials in the
-[syllabus](../syllabus.md). Most of the semester's costs come due this week, so
-know what's coming before you subscribe to anything.
-
-Set up your portfolio repository first if you haven't already. One public
-repository named `isba-4775-portfolio`, one folder per exercise, `ex01` through
-`ex10`. Step-by-step instructions are in
-[portfolio-repository.md](../guides/portfolio-repository.md).
-
 ## The work
 
 ### 1. Install a password manager before you create anything.
@@ -95,6 +77,8 @@ readable before you submit it.
 
 Nothing goes in your repository for this exercise. Three things go on
 Brightspace: the interview file, the photo of your drawing, and the URL of
-your portfolio repository, which shows me it exists and is public. Most
+your portfolio repository, set up following
+[portfolio-repository.md](../guides/portfolio-repository.md), which shows me
+it exists and is public. Most
 exercises want a plan, a working system, and an evidence README, and this one
 has none of them, because nothing gets built yet. That starts in Exercise 02.
