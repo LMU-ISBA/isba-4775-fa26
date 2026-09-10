@@ -249,8 +249,8 @@ ps -C nginx
 ```
 
 Compare this focused view with the full list. If you see only the column
-headings, no matching process was found. If Nginx is already running, record
-that instead of assuming everyone has the same starting state. A `?` in its
+headings, no matching process was found. If Nginx is already running, tell
+the instructor; everyone may not have the same starting state. A `?` in its
 TTY column explains why it was absent from plain `ps`.
 
 Start Nginx:
@@ -435,18 +435,8 @@ mean Nginx is listening on port 443. Pause here.
 
 ## 05 · Stop, investigate, and repair Nginx
 
-Open a notes document outside the Codespace, such as a document on your laptop.
-Use this structure for each incident:
-
-
-| Record        | What to write                                                     |
-| ------------- | ----------------------------------------------------------------- |
-| Prediction    | What you expect to change and what should remain                  |
-| Failed test   | The command and selected actual output                            |
-| Investigation | A process or listener check and what it tells you                 |
-| Repair        | The action supported by your evidence                             |
-| Retest        | The identical failed command, its new output, and your conclusion |
-
+Discuss your predictions and observations as you work through the failure,
+investigation, repair, and retest.
 
 **Predict:** If you stop Nginx, will its installed package and web file disappear?
 
@@ -457,8 +447,18 @@ sudo service nginx stop
 curl -I http://127.0.0.1
 ```
 
-Expect a connection failure, typically curl error `7`. A stopped web service
-cannot return an HTTP status such as `500`.
+Expect a connection failure, typically curl error `7`. This request goes
+directly to Nginx inside the Codespace. With Nginx stopped, it cannot return
+an HTTP response.
+
+Now reload the same **HTTPS forwarded URL** in your browser, using the
+GitHub-authenticated session from Section 04. You may see **HTTP ERROR 502
+(Bad Gateway)**, as observed during our lab test.
+
+The browser reaches GitHub's forwarding service, which cannot connect to
+Nginx on port 80. In this stopped-service test, the 502 comes from the
+forwarding layer. Compare the two paths: the direct request fails to connect;
+the browser receives an HTTP error from the intermediary.
 
 Investigate before repairing:
 
@@ -476,10 +476,12 @@ sudo service nginx start
 curl -I http://127.0.0.1
 ```
 
-Expect HTTP `200` again. Reload the private forwarded web page too. Record the
-failure, your investigation, repair, and identical retest in your notes.
+Expect HTTP `200` again. Reload the same HTTPS forwarded URL in your browser
+and confirm that **Welcome to nginx!** returns. Check recovery through both
+the direct request and the browser.
 
-**Checkpoint:** Explain how you know the web service recovered. Pause here.
+**Checkpoint — pause and discuss:** What evidence pointed to a stopped service?
+Explain why you chose this repair and how the identical retest shows recovery.
 
 ## 06 · Start MySQL and query two sales
 
@@ -514,8 +516,10 @@ sudo mysql
 ```
 
 The client program is also named `mysql`. This command connects through a
-local Unix socket. Your prompt should now say **`mysql>`**. The commands in
-the next steps go at that prompt, inside the database client.
+local Unix socket. This lets the client communicate with the MySQL server
+inside the same Codespace without using a network port. Your prompt should
+now say **`mysql>`**. The commands in the next steps go at that prompt,
+inside the database client.
 
 ### Run once at the MySQL prompt
 
@@ -540,6 +544,26 @@ CREATE TABLE session04.sales (id INT PRIMARY KEY, amount DECIMAL(10,2));
 
 `session04.sales` means the `sales` table inside the `session04` database.
 `PRIMARY KEY` makes each ID unique. Expect `Query OK`; the table is empty.
+
+**Select the database.** Set the default database for this connection:
+
+```sql
+USE session04;
+```
+
+Expect `Database changed`. You can now refer to the table as `sales` without
+the `session04.` prefix. This selection lasts until you switch databases or
+close the connection.
+
+**Inspect the table's structure.** See its columns and their data types:
+
+```sql
+DESCRIBE sales;
+```
+
+Look for `id` with type `int` and `amount` with type `decimal(10,2)`.
+`PRI` identifies the primary key. The two rows here describe the two columns;
+they are not sales records.
 
 **Insert two fictional sales.** Each pair contains an ID and an amount:
 
@@ -656,8 +680,8 @@ mysql -h 127.0.0.1 -P 3306 -u lab_reader -p
 
 Enter the lab password when prompted. Expect MySQL connection error `2003`
 and a return to the **Bash prompt**. You cannot run the SQL query because
-the connection failed before you reached `mysql>`. Record the failed
-connection command and actual error, along with the successful web response.
+the connection failed before you reached `mysql>`. Compare the database
+connection error with the successful web response. What does each tell you?
 
 Investigate:
 
@@ -696,13 +720,10 @@ Expect `200.00`, then return to Bash:
 exit
 ```
 
-Record both pieces of recovery evidence: the connection succeeded and the
-query returned the expected total. Complete the second incident in your
-notes using the same structure as Section 05.
-
-**Checkpoint:** Both services work again. Explain why this welcome page
-survived the database failure, and what application code would have to do to
-make a page depend on MySQL. Pause here.
+**Checkpoint — pause and discuss:** Explain both pieces of recovery evidence:
+the connection succeeded and the query returned the expected total. Why did
+the welcome page survive the database failure? What would application code
+have to do to make a page depend on MySQL?
 
 ## 08 · Keep the work and prepare for Ex02
 
@@ -734,18 +755,13 @@ the whole Codespace. Leave both services working until Section 09.
 
 ## 09 · Explain the system and stop your Codespace
 
-Write your own explanation using your actual observations:
+**Individual exit check:** Be ready to briefly explain one failure you observed,
+the evidence you used to investigate it, and how you verified recovery.
 
-1. Draw your laptop browser, GitHub's private forwarding, Nginx, the MySQL
-  client, and MySQL. Label ports 443, 80, and 3306 and where commands run.
-2. Explain how an installed package can exist without a running service.
-3. Describe one failure, the evidence that narrowed it, your repair, and the
-  identical retest.
-4. Explain why the welcome page survived the MySQL failure and what an
-  application connecting the two services would change.
+You will independently collect evidence and create the detailed incident
+report and system drawing in Ex02. Follow its brief for submission requirements.
 
-Save your notes and drawing outside the Codespace. These class notes will
-help you with Ex02; use its brief for the required submission files.
+Then stop your Codespace:
 
 1. Open [Your Codespaces](https://github.com/codespaces).
 2. Find your course environment and open its **…** menu.
@@ -755,7 +771,7 @@ Closing the browser tab does not immediately stop the Codespace. Stopping it
 ends active compute use, but retained storage still counts toward usage. Keep
 the environment for Ex02 and follow the instructor's later cleanup directions.
 
-**Final checkpoint:** Your notes are saved outside the Codespace and your
+**Final checkpoint:** You can explain your troubleshooting evidence, and your
 course environment is stopped.
 
 ## If you get stuck
@@ -764,12 +780,12 @@ course environment is stopped.
 | What you see                                           | What to do                                                                                                                |
 | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
 | Repository or Codespace access blocked                 | Raise your hand; keep the message visible. Do not create extra environments or change billing to bypass it.               |
-| Codespace still loading                                | Keep its tab open and tell the instructor. If temporarily paired, record what you observed on your partner's environment. |
+| Codespace still loading                                | Keep its tab open and tell the instructor. If temporarily paired, discuss what you observe on your partner's environment. |
 | Package installation still running                     | Wait for the prompt. Do not run another package manager or delete lock files.                                             |
 | `mysql>` when you need Bash                            | Type `exit` and press Enter. Confirm the Bash prompt before running shell commands.                                       |
 | MySQL shows a continuation prompt after incomplete SQL | Type `\c` and press Enter to cancel the unfinished statement, then ask for help.                                          |
 | Database, table, or account already exists             | Stop and ask the instructor to check what already succeeded. Do not delete it or rerun the seed block repeatedly.         |
-| A result differs from the guide                        | Save the exact command and output and ask for help. Expected output is a comparison, not a substitute for your evidence.  |
+| A result differs from the guide                        | Keep the exact command and output visible and ask for help. Expected output is a comparison, not a substitute for your evidence.  |
 
 
 
