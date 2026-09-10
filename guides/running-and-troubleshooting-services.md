@@ -1,17 +1,16 @@
 # Running and Troubleshooting Services: in-class lab
 
-**Session 04 · September 10, 2026 · 100 minutes**
+**Session 04 · September 10, 2026**
 
 **What makes a computer serve an application?** By the end of class, you will
 start a web server and a database, inspect their processes and ports, and use
 evidence to explain a failure and repair.
 
-We will do all setup together during class. Bring your laptop and sign into
-the GitHub account you set up for Exercise 01 when instructed. You do not need
-to install VS Code, Nginx, MySQL, or a coding agent on your laptop for this lab.
+We will do all setup together during class. Sign into the GitHub account you set up for Exercise 01. You do not need to install VS Code, Nginx, MySQL, or a coding agent on your laptop for this lab.
 
-Keep this guide in one browser tab and your Codespace in another. Follow the
-instructor one section at a time. **Pause at each checkpoint.**
+GitHub Codespaces gives you a development environment in the cloud where you can edit code and run terminal commands from your browser.
+
+Keep this guide in one browser tab and your Codespace in another.
 
 ## Where our lab runs
 
@@ -71,6 +70,8 @@ Jump to a section:
 8. [Build a sales page with the coding agent](#08--build-a-sales-page-with-the-coding-agent)
 9. [Keep the work and prepare for Ex02](#09--keep-the-work-and-prepare-for-ex02)
 10. [Explain the system and stop your Codespace](#10--explain-the-system-and-stop-your-codespace)
+
+
 
 ## 01 · Open your Linux environment
 
@@ -237,6 +238,8 @@ another installation while one is running or delete package-manager lock files.
 has returned. Does that prove a service can answer a request? Pause here.
 
 ## 03 · Start the web service and test it
+
+
 
 ### Check the installed packages and process
 
@@ -850,15 +853,15 @@ focused on the same data and failure checks, even if the agent chooses
 different tools or ports:
 
 
-| Topic                | Our lab setup                                                                                                                                                                    |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Existing data        | MySQL at `127.0.0.1:3306`, database `session04`, table `sales`, columns `id` and `amount`. Read the actual rows on every request.                                                |
-| Database account     | `lab_reader`, with the password read from environment variable `DB_PASSWORD`. Keep passwords out of source files and browser errors.                                             |
-| Application | Let the agent explain its chosen tools and port. Keep Nginx separate on port **80**. |
-| Files and startup | Keep the app in `/workspaces/session04-demo`, separate from the course repository. Have the agent explain the files, start the app, and report its port and the local URL that reads sales from MySQL. |
-| Healthy page         | Show sale IDs, amounts, and total with two decimal places; return HTTP **200**.                                                                                                  |
-| Database unavailable | Keep the app running, show **Database unavailable**, and return HTTP **503** for the request that reads sales. Use a short database connection timeout and close connections after use. |
-| Recovery             | Try the database again on each request so refreshing works after MySQL restarts. Do not substitute sample or cached sales, recreate data, or restart services automatically.     |
+| Topic                | Our lab setup                                                                                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Existing data        | MySQL at `127.0.0.1:3306`, database `session04`, table `sales`, columns `id` and `amount`. Read the actual rows on every request.                                                                      |
+| Database account     | `lab_reader`, with the password read from environment variable `DB_PASSWORD`. Keep passwords out of source files and browser errors.                                                                   |
+| Application          | Let the agent explain its chosen tools and port. Keep Nginx separate on port **80**.                                                                                                                   |
+| Files and startup    | Keep the app in `/workspaces/session04-demo`, separate from the course repository. Have the agent explain the files, start the app, and report its port and the local URL that reads sales from MySQL. |
+| Healthy page         | Show sale IDs, amounts, and total with two decimal places; return HTTP **200**.                                                                                                                        |
+| Database unavailable | Keep the app running, show **Database unavailable**, and return HTTP **503** for the request that reads sales. Use a short database connection timeout and close connections after use.                |
+| Recovery             | Try the database again on each request so refreshing works after MySQL restarts. Do not substitute sample or cached sales, recreate data, or restart services automatically.                           |
 
 
 When the design seems clear, ask:
@@ -919,7 +922,6 @@ SALES_URL=http://127.0.0.1:4173/
 
 Then check both responses. Lowercase `-i` shows the headers and body of the
 sales request, so we can inspect its status and data:
-
 
 ```bash
 curl -I http://127.0.0.1
@@ -1053,6 +1055,8 @@ course environment is stopped.
 | MySQL shows a continuation prompt after incomplete SQL | Type `\c` and press Enter to cancel the unfinished statement, then ask for help.                                                 |
 | Database, table, or account already exists             | Stop and ask the instructor to check what already succeeded. Do not delete it or rerun the seed block repeatedly.                |
 | A result differs from the guide                        | Keep the exact command and output visible and ask for help. Expected output is a comparison, not a substitute for your evidence. |
+
+
 
 
 ## Reference
