@@ -3,8 +3,8 @@
 Ten exercises, 15 points each, 150 points total. Each brief is published here
 ahead of its due date. Clone this repository in week 1 and pull before class.
 
-Your work goes in your own public portfolio repository, one folder per exercise,
-`ex02` through `ex10`. Set it up at the start of Exercise 02 following
+Starting with Exercise 03, your work goes in your own public portfolio repository,
+one folder per exercise, `ex03` through `ex10`. Set it up following
 [portfolio-repository.md](../guides/portfolio-repository.md).
 
 Exercise 01 is submitted entirely through Brightspace: the
@@ -14,12 +14,18 @@ public and both files are about you rather than about a system. Anything that
 goes to Brightspace is named with what it is, then your first name, then your
 last name: `home-network-firstname-lastname.jpg`, `self-discovery-firstname-lastname.md`.
 
+Exercise 02 is also submitted through Brightspace as two separate files:
+`service-diagram-firstname-lastname.jpg` and
+`service-investigation-firstname-lastname.pdf`. Write the report in Google Docs
+and download it as a PDF. Follow the [Exercise 02 brief](ex02-troubleshoot-a-cloud-service.md)
+for the full instructions.
+
 ## Sequence
 
 | # | Exercise | Type | Due | Brief |
 |---|---|---|---|---|
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 | [published](ex01-accounts-and-dev-env.md) |
-| 02 | Setup, then the AI-assisted workflow: PRD, plan, ship | Build | Tue 9/15 | [published](ex02-ai-assisted-workflow.md) |
+| 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | See Brightspace | [published](ex02-troubleshoot-a-cloud-service.md) |
 | 03 | Personal site deployed on Railway, GA4 installed | Build | Thu 9/17 | |
 | 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 | |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/1 | |
