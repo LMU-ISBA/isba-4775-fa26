@@ -23,7 +23,7 @@ These are controlled practice failures. You already know which service you stopp
 
 ## Before you start
 
-Use your own course Codespace from the [Session 04 lab guide](../guides/inside-a-server.md). It should already have Nginx, MySQL, the `session04.sales` table, and the read-only `lab_reader` account. Resume that same environment from [Your Codespaces](https://github.com/codespaces), rather than creating another one.
+Use your own course Codespace from the [Session 04 lab guide](../guides/running-and-troubleshooting-services.md). It should already have Nginx, MySQL, the `session04.sales` table, and the read-only `lab_reader` account. Resume that same environment from [Your Codespaces](https://github.com/codespaces), rather than creating another one.
 
 You do not need AWS access, a local database, an installed coding agent, or a portfolio repository. The lab commands run in the Codespace's Linux terminal on both Mac and Windows. They do not run in your laptop's Terminal or PowerShell.
 

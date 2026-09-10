@@ -4,6 +4,9 @@ Course materials for ISBA 4775 at Loyola Marymount University, Fall 2026.
 
 **Syllabus:** [syllabus.md](syllabus.md)
 
+**Session 04 in-class lab:** [Running and Troubleshooting Services](guides/running-and-troubleshooting-services.md).
+We will create the Codespace and work through the guide together during class.
+
 Tue/Thu 1:45-3:25 PM, Hilton 115. Instruction Sep 1 - Dec 10, 2026.
 
 ## Semester at a glance

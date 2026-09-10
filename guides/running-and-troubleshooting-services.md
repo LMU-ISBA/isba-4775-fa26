@@ -1,4 +1,4 @@
-# Inside a server: in-class lab
+# Running and Troubleshooting Services: in-class lab
 
 **Session 04 · September 10, 2026 · 100 minutes**
 
