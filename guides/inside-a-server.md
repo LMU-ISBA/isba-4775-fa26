@@ -644,7 +644,7 @@ Expect these five rows; their display order may vary:
 We will query these rows again and calculate their total after connecting
 as a reader.
 
-**Create a reader account.** Our Python application will use this account to
+**Create a reader account.** Our application will use this account to
 read sales data and display it on a web page. We’ll give it permission to read
 the data, but not change or delete it. First, we’ll test the account ourselves
 using the MySQL client; then we’ll use it in the application in Section 08.
@@ -808,7 +808,7 @@ have to do to make a page depend on MySQL?
 ## 08 · Build a sales page with the coding agent
 
 So far, Nginx's welcome page has worked independently of MySQL. Now we will
-use the coding agent built into Codespaces to create a Python application
+use the coding agent built into Codespaces to create an application
 that reads our sales table and displays it on a web page. This is a preview
 of the AI-assisted workflow in Ex03.
 
@@ -846,17 +846,18 @@ want to see our five sales and their total, then observe an error when MySQL
 stops. Tell the agent that our database and reader account already exist.
 
 Share the relevant setup details as they come up. These keep everyone's app
-compatible with the startup commands and checks below:
+focused on the same data and failure checks, even if the agent chooses
+different tools or ports:
 
 
 | Topic                | Our lab setup                                                                                                                                                                    |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Existing data        | MySQL at `127.0.0.1:3306`, database `session04`, table `sales`, columns `id` and `amount`. Read the actual rows on every request.                                                |
 | Database account     | `lab_reader`, with the password read from environment variable `DB_PASSWORD`. Keep passwords out of source files and browser errors.                                             |
-| Application          | Python Flask with MySQL Connector/Python, serving `/` on port **8080**. Keep Nginx separate on port **80**.                                                                      |
-| Files and startup    | `/workspaces/session04-demo/app.py` and `requirements.txt`. `python app.py` starts the server on `0.0.0.0:8080`, with debug mode and the reloader off.                           |
+| Application | Let the agent explain its chosen tools and port. Keep Nginx separate on port **80**. |
+| Files and startup | Keep the app in `/workspaces/session04-demo`, separate from the course repository. Have the agent explain the files, start the app, and report its port and the local URL that reads sales from MySQL. |
 | Healthy page         | Show sale IDs, amounts, and total with two decimal places; return HTTP **200**.                                                                                                  |
-| Database unavailable | Keep Python running, show **Database unavailable**, and return HTTP **503**, including for HEAD checks. Use a short database connection timeout and close connections after use. |
+| Database unavailable | Keep the app running, show **Database unavailable**, and return HTTP **503** for the request that reads sales. Use a short database connection timeout and close connections after use. |
 | Recovery             | Try the database again on each request so refreshing works after MySQL restarts. Do not substitute sample or cached sales, recreate data, or restart services automatically.     |
 
 
@@ -876,84 +877,64 @@ anything missing or misunderstood before moving on.
 When the instructor says the class is ready, tell the agent:
 
 ```text
-I'm ready. Build the design we agreed on. Create the files and explain
-what each does.
+I'm ready. Build the design we agreed on, install the required packages,
+and start the application. Explain what you created and how to stop it.
+Leave Nginx and MySQL running so we can test the application ourselves.
 ```
 
 Read the agent's proposed file changes and any tool requests with the
-instructor. Confirm it created `app.py` and `requirements.txt` in the demo
-folder. The generated code still needs testing.
+instructor. Have it explain the files it created in the demo folder. The
+generated code still needs testing.
 
-**Checkpoint:** Everyone has both files. Wait for the instructor before
-starting the application.
+The agent handles the application environment, package installation, and startup.
+If it needs the database password, use the disposable lab password from
+Section 06.
 
-### Start the Python application
-
-At a **Bash prompt**, enter the demo folder:
-
-```bash
-cd /workspaces/session04-demo
-```
-
-Create a Python environment for this application's packages, then activate it:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-Install the packages listed by the agent. Flask serves the page;
-MySQL Connector/Python lets Python read the database:
-
-```bash
-pip install -r requirements.txt
-```
-
-Set the disposable lab password for the application in this terminal:
-
-```bash
-export DB_PASSWORD='Session04-local-only'
-```
-
-The app reads this environment variable when connecting as `lab_reader`.
-Use only this lab password here.
-
-Start the app and leave this terminal running:
-
-```bash
-python app.py
-```
-
-Wait for the startup message showing port **8080**. Use a **second Bash
-terminal** for the checks below. If startup fails, show the instructor the
-error before continuing.
+**Checkpoint:** The application is running and the agent has identified its
+port. The instructor’s app used **4173**; yours may differ. Open a separate
+**Bash terminal** for your checks and leave the app running. If startup fails,
+review the error with the instructor and agent before continuing.
 
 ### Open the sales page and check the baseline
 
-In **Ports**, add **8080**, keep its visibility **Private**, and open that
-row's **HTTPS forwarded address** in your GitHub-authenticated browser
-session. Keep the Nginx page on port **80** open in a separate tab. Leave
+In **Ports**, find the port reported by your agent, or add it if it is
+missing. Keep its visibility **Private** and open that row's **HTTPS forwarded
+address** in your GitHub-authenticated browser session. Keep the Nginx page on port **80** open in a separate tab. Leave
 MySQL ports **3306** and **33060** unforwarded.
 
 The sales page should show all five sales, with IDs **1–5** and total
 **500.00**. Compare each row and the total with your SQL results.
 
-In the second terminal, check both web responses:
+Ask the agent for the **local URL that reads the sales from MySQL**. Some
+apps read the data when loading the page; others make a separate API request.
+Use the sales request for our database test.
+
+In the second Bash terminal, save that URL as `SALES_URL`. This example uses
+port **4173** and `/`; replace the URL with the one your agent identified,
+including any API path or different port:
+
+```bash
+SALES_URL=http://127.0.0.1:4173/
+```
+
+Then check both responses. Lowercase `-i` shows the headers and body of the
+sales request, so we can inspect its status and data:
+
 
 ```bash
 curl -I http://127.0.0.1
-curl -I http://127.0.0.1:8080
+curl -i "$SALES_URL"
 ```
 
-Expect HTTP **200** from each. The browser reaches the Python application
-through GitHub's forwarding, and Python reads MySQL on port 3306. Nginx
-still serves its separate welcome page on port 80; it does not serve or
-forward the Python page in this setup.
+Expect HTTP **200** from each, with actual sales in the sales response. The
+browser reaches the application through GitHub’s forwarding, and the app’s
+server code reads MySQL on port 3306. Nginx still serves its separate welcome
+page on port 80; it does not serve or forward the sales page in this setup.
 
 **Checkpoint:** Both pages work and the sales match your SQL results. Pause
 here until the class is ready.
 
-**Predict:** If MySQL stops, will Python still be able to respond to a web
+**Predict:** If MySQL stops, will the application still be able to respond to a web
 request? Will it be able to display the sales?
 
 ### Stop the database and observe the application error
@@ -969,13 +950,15 @@ while the sales page displays **Database unavailable**. Repeat both checks:
 
 ```bash
 curl -I http://127.0.0.1
-curl -I http://127.0.0.1:8080
+curl -i "$SALES_URL"
 ```
 
-Expect Nginx to return **200** and the Python application to return **503**.
-The Python web server is still responding, but it cannot complete the sales
+Expect Nginx to return **200** and the sales request to return **503**.
+The application’s web server is still responding, but it cannot complete the sales
 request because its database is unavailable. The application code produces
 this 503; it differs from the forwarding layer's 502 when Nginx was stopped.
+If the page loads data through a separate API request, the page itself may
+still return 200; inspect the sales request to see the database failure.
 
 Check the listeners:
 
@@ -983,9 +966,9 @@ Check the listeners:
 ss -lnt
 ```
 
-Expect ports **80** and **8080** to remain, with **3306** absent. The app's
-terminal should still be running. If the sales page keeps showing data or
-returns 200 with an error message, compare the generated code with the
+Expect port **80** and your application’s port or ports to remain, with
+**3306** absent. The application should still be running. If the sales request
+keeps returning data or returns 200 with an error message, compare the code with the
 agreed design; that is not the intended behavior.
 
 ### Restore the database and repeat the request
@@ -993,20 +976,20 @@ agreed design; that is not the intended behavior.
 ```bash
 sudo service mysql start
 curl -I http://127.0.0.1
-curl -I http://127.0.0.1:8080
+curl -i "$SALES_URL"
 ```
 
 Expect both responses to return **200**. Refresh the sales page and confirm
-the actual rows and total **500.00** return without restarting Python.
+the actual rows and total **500.00** return without restarting the application.
 
-**Checkpoint — pause and discuss:** What evidence shows that the Python web
+**Checkpoint — pause and discuss:** What evidence shows that the application’s web
 server stayed up while its database was down? Why was a running web server
 not enough to display the sales?
 
-Press **Ctrl+C in the application's terminal** to stop Python after the
-checks. Nginx and MySQL should remain running. Keep the demo files; to run it
-again after resuming the Codespace, start MySQL, enter the demo folder,
-activate `.venv`, set `DB_PASSWORD`, and run `python app.py` again.
+Use the agent's instructions to stop the application after the checks,
+or ask it to stop only that application. Leave Nginx and MySQL running. Keep
+the demo files; after resuming the Codespace and starting MySQL, you can ask
+the agent to start the existing application again.
 
 ## 09 · Keep the work and prepare for Ex02
 
@@ -1079,5 +1062,4 @@ course environment is stopped.
 - [View Codespaces usage](https://docs.github.com/en/billing/how-tos/products/view-productlicense-use)
 - [Forward ports](https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace)
 - [Use chat in VS Code](https://code.visualstudio.com/docs/chat/chat-overview)
-- [Flask quickstart](https://flask.palletsprojects.com/en/stable/quickstart/)
 - [MySQL client basics](https://dev.mysql.com/doc/mysql-getting-started/en/)
