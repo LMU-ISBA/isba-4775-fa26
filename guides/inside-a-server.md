@@ -13,6 +13,52 @@ to install VS Code, Nginx, MySQL, or a coding agent on your laptop for this lab.
 Keep this guide in one browser tab and your Codespace in another. Follow the
 instructor one section at a time. **Pause at each checkpoint.**
 
+## Where our lab runs
+
+Your laptop's browser connects to a development environment running in the
+cloud. GitHub Codespaces provides a virtual machine and a Docker container
+inside it. This diagram shows where the tools and services we use in this
+lab fit. ([How Codespaces works](https://docs.github.com/en/codespaces/about-codespaces/deep-dive))
+
+```text
+┌──────────────────────────────────────────────┐
+│               PHYSICAL SERVER                │
+│                                              │
+│   Real CPU • RAM • SSD • Network Card        │
+│                                              │
+│   ┌──────────────────────────────────────┐   │
+│   │         VIRTUAL MACHINE (VM)         │   │
+│   │                                      │   │
+│   │ Virtual CPU • RAM • Disk • Network   │   │
+│   │ Linux OS                             │   │
+│   │                                      │   │
+│   │   ┌──────────────────────────────┐   │   │
+│   │   │       DOCKER CONTAINER       │   │   │
+│   │   │                              │   │   │
+│   │   │  Nginx                       │   │   │
+│   │   │  MySQL                       │   │   │
+│   │   │  Python                      │   │   │
+│   │   │  Git                         │   │   │
+│   │   │  Your code                   │   │   │
+│   │   │                              │   │   │
+│   │   └──────────────────────────────┘   │   │
+│   │                                      │   │
+│   └──────────────────────────────────────┘   │
+│                                              │
+└──────────────────────────────────────────────┘
+```
+
+- **Physical server:** the real computer that supplies the hardware.
+- **Virtual machine:** a computer created in software, with allocated
+  resources and its own Linux operating system.
+- **Container:** the isolated environment where our terminal commands,
+  services, and code run. It shares the VM's Linux kernel, the core of the
+  operating system.
+
+Python and Git are already available in our Codespace. We will install
+Nginx and MySQL during the lab. Your laptop displays the editor and pages;
+the server programs run inside the container.
+
 Jump to a section:
 
 1. [Open your Linux environment](#01--open-your-linux-environment)
@@ -22,8 +68,9 @@ Jump to a section:
 5. [Stop, investigate, and repair Nginx](#05--stop-investigate-and-repair-nginx)
 6. [Start MySQL and query two sales](#06--start-mysql-and-query-two-sales)
 7. [Stop MySQL while the web page still works](#07--stop-mysql-while-the-web-page-still-works)
-8. [Keep the work and prepare for Ex02](#08--keep-the-work-and-prepare-for-ex02)
-9. [Explain the system and stop your Codespace](#09--explain-the-system-and-stop-your-codespace)
+8. [Build a sales page with the coding agent](#08--build-a-sales-page-with-the-coding-agent)
+9. [Keep the work and prepare for Ex02](#09--keep-the-work-and-prepare-for-ex02)
+10. [Explain the system and stop your Codespace](#10--explain-the-system-and-stop-your-codespace)
 
 
 
@@ -290,8 +337,8 @@ ss -l -t -n
 ```
 
 Look for `:80` in the local address column. That is the HTTP port Nginx uses
-in this lab. We will reuse `ss -l -t -n` for the remaining checks. You may see
-these same options combined as `ss -lnt` elsewhere; they mean the same thing.
+in this lab. These options can also be combined as `ss -lnt`; it means the
+same thing. We will use this shorter form for the remaining checks.
 
 ### Make a web request
 
@@ -465,7 +512,7 @@ Investigate before repairing:
 ```bash
 dpkg-query -W nginx
 ps -C nginx
-ss -l -t -n
+ss -lnt
 ```
 
 Expect the package to remain while the Nginx process and port 80 listener are
@@ -504,7 +551,7 @@ The service is named `mysql`, while the server process is named `mysqld`.
 Check its listening port using the command we built earlier:
 
 ```bash
-ss -l -t -n
+ss -lnt
 ```
 
 Look for port 3306; port 33060 may also appear. Leave both unforwarded.
@@ -515,11 +562,10 @@ Open the MySQL client for local administration:
 sudo mysql
 ```
 
-The client program is also named `mysql`. This command connects through a
-local Unix socket. This lets the client communicate with the MySQL server
-inside the same Codespace without using a network port. Your prompt should
-now say **`mysql>`**. The commands in the next steps go at that prompt,
-inside the database client.
+The client program is named `mysql`. This command connects to the MySQL
+server inside your Codespace as an administrator so you can set up the
+database. Your prompt should now say **`mysql>`**. The commands in the next
+steps go at that prompt, inside the database client.
 
 ### Run once at the MySQL prompt
 
@@ -571,11 +617,32 @@ they are not sales records.
 INSERT INTO session04.sales VALUES (1,120.00),(2,80.00);
 ```
 
-Expect two rows affected. We will view the rows and calculate their total
-after connecting as a reader.
+Expect two rows affected.
 
-**Create a reader account.** This account will connect from the Codespace's
-loopback address, `127.0.0.1`:
+**View the sales you inserted.** `SELECT` reads data, and `*` requests all columns:
+
+```sql
+SELECT * FROM sales;
+```
+
+Because you ran `USE session04;`, `sales` refers to the table in that database.
+Expect these two rows; their display order may vary:
+
+| id | amount |
+| --- | --- |
+| 1 | 120.00 |
+| 2 | 80.00 |
+
+We will query these rows again and calculate their total after connecting
+as a reader.
+
+**Create a reader account.** Our Python application will use this account to
+read sales data and display it on a web page. We’ll give it permission to read
+the data, but not change or delete it. First, we’ll test the account ourselves
+using the MySQL client; then we’ll use it in the application in Section 08.
+This follows a useful rule: give an application only the permissions it needs.
+
+This account will connect from inside the same Codespace, using `127.0.0.1`:
 
 ```sql
 CREATE USER 'lab_reader'@'127.0.0.1' IDENTIFIED BY 'Session04-local-only';
@@ -602,7 +669,7 @@ exit
 `exit` closes the client; it does not stop MySQL. Confirm that the `mysql>`
 prompt has been replaced by your Bash prompt before continuing.
 
-### Return to Bash and test TCP
+### Return to Bash and test the reader account
 
 At the **Bash prompt**, connect as the reader:
 
@@ -612,8 +679,8 @@ mysql -h 127.0.0.1 -P 3306 -u lab_reader -p
 
 Read the connection options one at a time:
 
-- `-h 127.0.0.1` selects the host. This address makes the connection use TCP
-  in this lab; keep it instead of substituting `localhost`.
+- `-h 127.0.0.1` selects the database server inside this Codespace. Use this
+  address to match the reader account we created.
 - Uppercase `-P 3306` selects the database port.
 - `-u lab_reader` selects the database account.
 - Lowercase `-p` asks for the password.
@@ -687,7 +754,7 @@ Investigate:
 
 ```bash
 ps -C mysqld
-ss -l -t -n
+ss -lnt
 sudo tail /var/log/mysql/error.log
 ```
 
@@ -725,11 +792,184 @@ the connection succeeded and the query returned the expected total. Why did
 the welcome page survive the database failure? What would application code
 have to do to make a page depend on MySQL?
 
-## 08 · Keep the work and prepare for Ex02
+## 08 · Build a sales page with the coding agent
+
+So far, Nginx's welcome page has worked independently of MySQL. Now we will
+use the coding agent built into Codespaces to create a Python application
+that reads our sales table and displays it on a web page. This is a preview
+of the AI-assisted workflow in Ex03.
+
+Build along with the instructor in your own Codespace. Everyone uses the
+same prompt and pauses at each check. If chat is unavailable or reports a
+usage limit, tell the instructor and follow the demonstration while access
+is resolved.
+
+### Ask the agent to create the application
+
+Open **Chat** in your Codespace and select **Agent** from the mode selector
+beside the message box. Use the built-in agent shown by the instructor;
+you do not need to install another coding tool. Paste this prompt:
+
+```text
+Create a minimal Python Flask sales-page application in
+/workspaces/session04-demo, separate from the course repository.
+
+Create app.py and requirements.txt using Flask and mysql-connector-python.
+The existing MySQL server is at 127.0.0.1:3306. Use database session04,
+username lab_reader, and the password from environment variable DB_PASSWORD.
+The sales table already has columns id and amount.
+
+For each request to /, open a fresh database connection, SELECT the actual
+sales rows, and display their IDs, amounts, and total on a plain HTML page.
+Show money with two decimal places. Return HTTP 200 on success. If the
+database connection or query fails, display "Database unavailable" and
+return HTTP 503. Close database connections after each request. Use a short
+database connection timeout and do not cache the sales results.
+
+Make python app.py start the web server on 0.0.0.0, port 8080, with debug
+mode and the reloader off. GET and HEAD requests to / must reflect the same
+database availability. Keep the app running when MySQL is unavailable.
+
+Do not use sample-data fallbacks, create or change database objects, restart
+services, change Nginx, or change port visibility. Do not put the password in
+source files or browser error messages. Create the files and explain them;
+we will install dependencies, start the app, and test it ourselves.
+```
+
+Read the agent's proposed file changes and any tool requests with the
+instructor. Confirm it created `app.py` and `requirements.txt` in the demo
+folder. The generated code still needs testing.
+
+**Checkpoint:** Everyone has both files. Wait for the instructor before
+starting the application.
+
+### Start the Python application
+
+At a **Bash prompt**, enter the demo folder:
+
+```bash
+cd /workspaces/session04-demo
+```
+
+Create a Python environment for this application's packages, then activate it:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Install the packages listed by the agent. Flask serves the page;
+MySQL Connector/Python lets Python read the database:
+
+```bash
+pip install -r requirements.txt
+```
+
+Set the disposable lab password for the application in this terminal:
+
+```bash
+export DB_PASSWORD='Session04-local-only'
+```
+
+The app reads this environment variable when connecting as `lab_reader`.
+Use only this lab password here.
+
+Start the app and leave this terminal running:
+
+```bash
+python app.py
+```
+
+Wait for the startup message showing port **8080**. Use a **second Bash
+terminal** for the checks below. If startup fails, show the instructor the
+error before continuing.
+
+### Open the sales page and check the baseline
+
+In **Ports**, add **8080**, keep its visibility **Private**, and open that
+row's **HTTPS forwarded address** in your GitHub-authenticated browser
+session. Keep the Nginx page on port **80** open in a separate tab. Leave
+MySQL ports **3306** and **33060** unforwarded.
+
+The sales page should show IDs **1** and **2**, amounts **120.00** and
+**80.00**, and total **200.00**. Compare them with your SQL results.
+
+In the second terminal, check both web responses:
+
+```bash
+curl -I http://127.0.0.1
+curl -I http://127.0.0.1:8080
+```
+
+Expect HTTP **200** from each. The browser reaches the Python application
+through GitHub's forwarding, and Python reads MySQL on port 3306. Nginx
+still serves its separate welcome page on port 80; it does not serve or
+forward the Python page in this setup.
+
+**Checkpoint:** Both pages work and the sales match your SQL results. Pause
+here until the class is ready.
+
+**Predict:** If MySQL stops, will Python still be able to respond to a web
+request? Will it be able to display the sales?
+
+### Stop the database and observe the application error
+
+At the second terminal's **Bash prompt**, stop only MySQL:
+
+```bash
+sudo service mysql stop
+```
+
+Refresh both browser tabs. Expect the Nginx welcome page to keep loading,
+while the sales page displays **Database unavailable**. Repeat both checks:
+
+```bash
+curl -I http://127.0.0.1
+curl -I http://127.0.0.1:8080
+```
+
+Expect Nginx to return **200** and the Python application to return **503**.
+The Python web server is still responding, but it cannot complete the sales
+request because its database is unavailable. The application code produces
+this 503; it differs from the forwarding layer's 502 when Nginx was stopped.
+
+Check the listeners:
+
+```bash
+ss -lnt
+```
+
+Expect ports **80** and **8080** to remain, with **3306** absent. The app's
+terminal should still be running. If the sales page keeps showing data or
+returns 200 with an error message, compare the generated code with the
+prompt; that is not the intended behavior.
+
+### Restore the database and repeat the request
+
+```bash
+sudo service mysql start
+curl -I http://127.0.0.1
+curl -I http://127.0.0.1:8080
+```
+
+Expect both responses to return **200**. Refresh the sales page and confirm
+the actual rows and total **200.00** return without restarting Python.
+
+**Checkpoint — pause and discuss:** What evidence shows that the Python web
+server stayed up while its database was down? Why was a running web server
+not enough to display the sales?
+
+Press **Ctrl+C in the application's terminal** to stop Python after the
+checks. Nginx and MySQL should remain running. Keep the demo files; to run it
+again after resuming the Codespace, start MySQL, enter the demo folder,
+activate `.venv`, set `DB_PASSWORD`, and run `python app.py` again.
+
+## 09 · Keep the work and prepare for Ex02
 
 We will use this environment again for **Ex02: Troubleshoot a cloud service**.
 Follow the Ex02 brief provided by the instructor for graded submission
-requirements. **The AI-assisted workflow moves to Ex03.**
+requirements. Collect your report evidence independently at home. The sales
+page is a preview; **the full AI-assisted workflow is in Ex03**.
 
 Stopping and resuming the same Codespace preserved the installed packages and
 database rows in the instructor's rehearsal. Both services needed to be
@@ -751,9 +991,9 @@ and sum query to check the baseline. Use `exit` to return to Bash after the
 query. Do not repeat the database, table, or account creation steps.
 
 **Checkpoint:** Explain the difference between stopping a service and stopping
-the whole Codespace. Leave both services working until Section 09.
+the whole Codespace. Leave Nginx and MySQL working until Section 10.
 
-## 09 · Explain the system and stop your Codespace
+## 10 · Explain the system and stop your Codespace
 
 **Individual exit check:** Be ready to briefly explain one failure you observed,
 the evidence you used to investigate it, and how you verified recovery.
@@ -796,4 +1036,6 @@ course environment is stopped.
 - [Reopen a Codespace](https://docs.github.com/en/codespaces/developing-in-a-codespace/opening-an-existing-codespace?tool=webui)
 - [View Codespaces usage](https://docs.github.com/en/billing/how-tos/products/view-productlicense-use)
 - [Forward ports](https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace)
+- [Use chat in VS Code](https://code.visualstudio.com/docs/chat/chat-overview)
+- [Flask quickstart](https://flask.palletsprojects.com/en/stable/quickstart/)
 - [MySQL client basics](https://dev.mysql.com/doc/mysql-getting-started/en/)
