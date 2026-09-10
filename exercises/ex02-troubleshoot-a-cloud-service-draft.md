@@ -42,7 +42,7 @@ Open your report before changing anything; the [report-writing instructions](#ho
 Use the [command reference](#command-reference) to start the services if needed. Confirm that:
 
 - Your local HTTP request receives HTTP 200, and your private browser preview displays the Nginx welcome page.
-- The reader account connects successfully, and the SQL sum query returns the fictional sales total `200.00`.
+- The reader account connects successfully, and the SQL sum query returns the fictional sales total `500.00`.
 
 Save the web response, successful database connection and query output, and a brief note about the browser result. A successful service-start message alone is not the baseline. If these checks do not work, resolve that starting problem before introducing either deliberate failure.
 
@@ -65,7 +65,7 @@ If you inspect several things, keep the useful evidence rather than pasting the 
 
 Exit the MySQL client to return to Bash. Predict what will happen to a new database connection and the Nginx welcome page when you stop only MySQL. Introduce that failure using the service controls.
 
-Choose your checks again. Include the failed reader connection, a process or listener check, and the web request while the database is unavailable. Expect a connection error such as MySQL error `2003`; without a `mysql>` prompt, you cannot submit the SQL query. Explain the results before repairing the service. Repeat the identical connection command after your repair, then run the same sum query. Show both the restored connection and the expected total `200.00`.
+Choose your checks again. Include the failed reader connection, a process or listener check, and the web request while the database is unavailable. Expect a connection error such as MySQL error `2003`; without a `mysql>` prompt, you cannot submit the SQL query. Explain the results before repairing the service. Repeat the identical connection command after your repair, then run the same sum query. Show both the restored connection and the expected total `500.00`.
 
 Use the same incident-record structure as above. Compare the two incidents: what changed, what continued to work, and what does that tell you about the connections in this lab? Distinguish an HTTP response status from a database client's error message.
 
@@ -203,7 +203,7 @@ Once you reach **`mysql>`**, run:
 SELECT SUM(amount) FROM session04.sales;
 ```
 
-`SUM(amount)` adds the sales amounts. Expect `200.00`, a sales amount rather
+`SUM(amount)` adds the sales amounts. Expect `500.00`, a sales amount rather
 than an HTTP status. If the connection failed and you are still at Bash,
 record that error; do not type SQL into Bash.
 

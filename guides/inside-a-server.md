@@ -66,13 +66,11 @@ Jump to a section:
 3. [Start the web service and test it](#03--start-the-web-service-and-test-it)
 4. [Open the web page and read its evidence](#04--open-the-web-page-and-read-its-evidence)
 5. [Stop, investigate, and repair Nginx](#05--stop-investigate-and-repair-nginx)
-6. [Start MySQL and query two sales](#06--start-mysql-and-query-two-sales)
+6. [Start MySQL and query five sales](#06--start-mysql-and-query-five-sales)
 7. [Stop MySQL while the web page still works](#07--stop-mysql-while-the-web-page-still-works)
 8. [Build a sales page with the coding agent](#08--build-a-sales-page-with-the-coding-agent)
 9. [Keep the work and prepare for Ex02](#09--keep-the-work-and-prepare-for-ex02)
 10. [Explain the system and stop your Codespace](#10--explain-the-system-and-stop-your-codespace)
-
-
 
 ## 01 · Open your Linux environment
 
@@ -191,7 +189,7 @@ stores data:
 content, such as HTML pages. We will use its welcome page to test whether
 the web service is answering requests.
 - `mysql-server` **provides a database server.** It stores data in tables and
-answers SQL queries. We will store two fictional sales and query their total.
+answers SQL queries. We will store five fictional sales and query their total.
 
 These services work independently in this lab. Application code would be
 needed to connect a web page to the database.
@@ -239,8 +237,6 @@ another installation while one is running or delete package-manager lock files.
 has returned. Does that prove a service can answer a request? Pause here.
 
 ## 03 · Start the web service and test it
-
-
 
 ### Check the installed packages and process
 
@@ -532,7 +528,7 @@ the direct request and the browser.
 **Checkpoint — pause and discuss:** What evidence pointed to a stopped service?
 Explain why you chose this repair and how the identical retest shows recovery.
 
-## 06 · Start MySQL and query two sales
+## 06 · Start MySQL and query five sales
 
 MySQL is a second service with its own client and protocol. Predict whether
 an HTTP request would be the right way to ask it for database rows.
@@ -613,13 +609,18 @@ Look for `id` with type `int` and `amount` with type `decimal(10,2)`.
 `PRI` identifies the primary key. The two rows here describe the two columns;
 they are not sales records.
 
-**Insert two fictional sales.** Each pair contains an ID and an amount:
+**Insert five fictional sales.** Each pair contains an ID and an amount:
 
 ```sql
-INSERT INTO session04.sales VALUES (1,120.00),(2,80.00);
+INSERT INTO session04.sales VALUES
+(1,120.00),
+(2,80.00),
+(3,150.00),
+(4,50.00),
+(5,100.00);
 ```
 
-Expect two rows affected.
+Expect five rows affected.
 
 **View the sales you inserted.** `SELECT` reads data, and `*` requests all columns:
 
@@ -628,13 +629,16 @@ SELECT * FROM sales;
 ```
 
 Because you ran `USE session04;`, `sales` refers to the table in that database.
-Expect these two rows; their display order may vary:
+Expect these five rows; their display order may vary:
 
 
 | id  | amount |
 | --- | ------ |
 | 1   | 120.00 |
 | 2   | 80.00  |
+| 3   | 150.00 |
+| 4   | 50.00  |
+| 5   | 100.00 |
 
 
 We will query these rows again and calculate their total after connecting
@@ -698,7 +702,7 @@ At `mysql>`, view the rows first:
 SELECT * FROM session04.sales;
 ```
 
-`SELECT` reads data, and `*` requests all columns. Expect these two sales;
+`SELECT` reads data, and `*` requests all columns. Expect these five sales;
 their display order may vary:
 
 
@@ -706,6 +710,9 @@ their display order may vary:
 | --- | ------ |
 | 1   | 120.00 |
 | 2   | 80.00  |
+| 3   | 150.00 |
+| 4   | 50.00  |
+| 5   | 100.00 |
 
 
 Now ask MySQL to add the amounts:
@@ -714,7 +721,7 @@ Now ask MySQL to add the amounts:
 SELECT SUM(amount) FROM session04.sales;
 ```
 
-Expect a column labeled `SUM(amount)` with the value `200.00`. This is a
+Expect a column labeled `SUM(amount)` with the value `500.00`. This is a
 sales amount; the earlier HTTP `200` was a response status.
 
 Leave the client before the next service-control command:
@@ -787,7 +794,7 @@ Repeat the same sum query from Section 06:
 SELECT SUM(amount) FROM session04.sales;
 ```
 
-Expect `200.00`, then return to Bash:
+Expect `500.00`, then return to Bash:
 
 ```sql
 exit
@@ -818,7 +825,7 @@ beside the message box. Use the built-in agent shown by the instructor;
 you do not need to install another coding tool. Start with:
 
 ```text
-Help me design a sales reporting page. Ask me one question at a time.
+Help me design a sales reporting page based on the data in my database. Ask me one question at a time.
 Give me multiple-choice options. Do not build until I'm ready.
 ```
 
@@ -835,7 +842,7 @@ it: “One question at a time. We are still designing.”
 
 As the interview develops, explain who the page is for, what they need to
 see, and what should happen when the data is unavailable. For this lab, we
-want to see our two sales and their total, then observe an error when MySQL
+want to see our five sales and their total, then observe an error when MySQL
 stops. Tell the agent that our database and reader account already exist.
 
 Share the relevant setup details as they come up. These keep everyone's app
@@ -928,8 +935,8 @@ row's **HTTPS forwarded address** in your GitHub-authenticated browser
 session. Keep the Nginx page on port **80** open in a separate tab. Leave
 MySQL ports **3306** and **33060** unforwarded.
 
-The sales page should show IDs **1** and **2**, amounts **120.00** and
-**80.00**, and total **200.00**. Compare them with your SQL results.
+The sales page should show all five sales, with IDs **1–5** and total
+**500.00**. Compare each row and the total with your SQL results.
 
 In the second terminal, check both web responses:
 
@@ -990,7 +997,7 @@ curl -I http://127.0.0.1:8080
 ```
 
 Expect both responses to return **200**. Refresh the sales page and confirm
-the actual rows and total **200.00** return without restarting Python.
+the actual rows and total **500.00** return without restarting Python.
 
 **Checkpoint — pause and discuss:** What evidence shows that the Python web
 server stayed up while its database was down? Why was a running web server
@@ -1063,8 +1070,6 @@ course environment is stopped.
 | MySQL shows a continuation prompt after incomplete SQL | Type `\c` and press Enter to cancel the unfinished statement, then ask for help.                                                 |
 | Database, table, or account already exists             | Stop and ask the instructor to check what already succeeded. Do not delete it or rerun the seed block repeatedly.                |
 | A result differs from the guide                        | Keep the exact command and output visible and ask for help. Expected output is a comparison, not a substitute for your evidence. |
-
-
 
 
 ## Reference
