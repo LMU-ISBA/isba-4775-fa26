@@ -50,10 +50,10 @@ lab fit. ([How Codespaces works](https://docs.github.com/en/codespaces/about-cod
 
 - **Physical server:** the real computer that supplies the hardware.
 - **Virtual machine:** a computer created in software, with allocated
-  resources and its own Linux operating system.
+resources and its own Linux operating system.
 - **Container:** the isolated environment where our terminal commands,
-  services, and code run. It shares the VM's Linux kernel, the core of the
-  operating system.
+services, and code run. It shares the VM's Linux kernel, the core of the
+operating system.
 
 Python and Git are already available in our Codespace. We will install
 Nginx and MySQL during the lab. Your laptop displays the editor and pages;
@@ -187,11 +187,11 @@ here too.
 We are installing two services to see how a server delivers web content and
 stores data:
 
-- **`nginx` provides a web server.** It receives HTTP requests and serves web
-  content, such as HTML pages. We will use its welcome page to test whether
-  the web service is answering requests.
-- **`mysql-server` provides a database server.** It stores data in tables and
-  answers SQL queries. We will store two fictional sales and query their total.
+- `nginx` **provides a web server.** It receives HTTP requests and serves web
+content, such as HTML pages. We will use its welcome page to test whether
+the web service is answering requests.
+- `mysql-server` **provides a database server.** It stores data in tables and
+answers SQL queries. We will store two fictional sales and query their total.
 
 These services work independently in this lab. Application code would be
 needed to connect a web page to the database.
@@ -239,6 +239,8 @@ another installation while one is running or delete package-manager lock files.
 has returned. Does that prove a service can answer a request? Pause here.
 
 ## 03 · Start the web service and test it
+
+
 
 ### Check the installed packages and process
 
@@ -378,7 +380,7 @@ running, port listening, request successful. Pause here.
 3. Verify **Port Visibility** is **Private**. You can inspect or change it
   from the port row's context menu.
 4. On the **port 80 row**, open the **HTTPS link** in the **Forwarded Address**
-   column using **Open in Browser**. Use a browser session already signed into
+  column using **Open in Browser**. Use a browser session already signed into
    the **same GitHub account that owns your Codespace**.
 
 Because the port is **Private**, the link requires your GitHub authentication.
@@ -564,7 +566,7 @@ sudo mysql
 
 The client program is named `mysql`. This command connects to the MySQL
 server inside your Codespace as an administrator so you can set up the
-database. Your prompt should now say **`mysql>`**. The commands in the next
+database. Your prompt should now say `mysql>`. The commands in the next
 steps go at that prompt, inside the database client.
 
 ### Run once at the MySQL prompt
@@ -628,10 +630,12 @@ SELECT * FROM sales;
 Because you ran `USE session04;`, `sales` refers to the table in that database.
 Expect these two rows; their display order may vary:
 
-| id | amount |
-| --- | --- |
-| 1 | 120.00 |
-| 2 | 80.00 |
+
+| id  | amount |
+| --- | ------ |
+| 1   | 120.00 |
+| 2   | 80.00  |
+
 
 We will query these rows again and calculate their total after connecting
 as a reader.
@@ -680,15 +684,15 @@ mysql -h 127.0.0.1 -P 3306 -u lab_reader -p
 Read the connection options one at a time:
 
 - `-h 127.0.0.1` selects the database server inside this Codespace. Use this
-  address to match the reader account we created.
+address to match the reader account we created.
 - Uppercase `-P 3306` selects the database port.
 - `-u lab_reader` selects the database account.
 - Lowercase `-p` asks for the password.
 
 At **Enter password:** type `Session04-local-only` and press Enter. Your
-typing will not appear onscreen. Expect a **`mysql>`** prompt when connected.
+typing will not appear onscreen. Expect a `mysql>` prompt when connected.
 
-At **`mysql>`**, view the rows first:
+At `mysql>`, view the rows first:
 
 ```sql
 SELECT * FROM session04.sales;
@@ -697,10 +701,12 @@ SELECT * FROM session04.sales;
 `SELECT` reads data, and `*` requests all columns. Expect these two sales;
 their display order may vary:
 
-| id | amount |
-| --- | --- |
-| 1 | 120.00 |
-| 2 | 80.00 |
+
+| id  | amount |
+| --- | ------ |
+| 1   | 120.00 |
+| 2   | 80.00  |
+
 
 Now ask MySQL to add the amounts:
 
@@ -774,7 +780,7 @@ Repeat the identical failed connection command:
 mysql -h 127.0.0.1 -P 3306 -u lab_reader -p
 ```
 
-Enter the lab password again. This time, expect the **`mysql>`** prompt.
+Enter the lab password again. This time, expect the `mysql>` prompt.
 Repeat the same sum query from Section 06:
 
 ```sql
@@ -799,41 +805,72 @@ use the coding agent built into Codespaces to create a Python application
 that reads our sales table and displays it on a web page. This is a preview
 of the AI-assisted workflow in Ex03.
 
-Build along with the instructor in your own Codespace. Everyone uses the
-same prompt and pauses at each check. If chat is unavailable or reports a
+Build along with the instructor in your own Codespace. Everyone starts with
+the same interview prompt and pauses at each check. The follow-up questions
+may differ between conversations. If chat is unavailable or reports a
 usage limit, tell the instructor and follow the demonstration while access
 is resolved.
 
-### Ask the agent to create the application
+### Start with an interview
 
 Open **Chat** in your Codespace and select **Agent** from the mode selector
 beside the message box. Use the built-in agent shown by the instructor;
-you do not need to install another coding tool. Paste this prompt:
+you do not need to install another coding tool. Start with:
 
 ```text
-Create a minimal Python Flask sales-page application in
-/workspaces/session04-demo, separate from the course repository.
+Help me design a sales reporting page. Ask me one question at a time.
+Give me multiple-choice options. Do not build until I'm ready.
+```
 
-Create app.py and requirements.txt using Flask and mysql-connector-python.
-The existing MySQL server is at 127.0.0.1:3306. Use database session04,
-username lab_reader, and the password from environment variable DB_PASSWORD.
-The sales table already has columns id and amount.
+This prompt gives AI a goal, tells it how to ask for information, and sets a
+boundary on when it can start building. You do not need to know every
+requirement before starting the conversation.
 
-For each request to /, open a fresh database connection, SELECT the actual
-sales rows, and display their IDs, amounts, and total on a plain HTML page.
-Show money with two decimal places. Return HTTP 200 on success. If the
-database connection or query fails, display "Database unavailable" and
-return HTTP 503. Close database connections after each request. Use a short
-database connection timeout and do not cache the sales results.
+### Answer and refine the design together
 
-Make python app.py start the web server on 0.0.0.0, port 8080, with debug
-mode and the reloader off. GET and HEAD requests to / must reflect the same
-database availability. Keep the app running when MySQL is unavailable.
+Read each question with the instructor. Choose an option or write your own
+answer if none fits. Ask the agent to explain an unfamiliar term before you
+decide. If it asks several questions at once or starts writing code, remind
+it: “One question at a time. We are still designing.”
 
-Do not use sample-data fallbacks, create or change database objects, restart
-services, change Nginx, or change port visibility. Do not put the password in
-source files or browser error messages. Create the files and explain them;
-we will install dependencies, start the app, and test it ourselves.
+As the interview develops, explain who the page is for, what they need to
+see, and what should happen when the data is unavailable. For this lab, we
+want to see our two sales and their total, then observe an error when MySQL
+stops. Tell the agent that our database and reader account already exist.
+
+Share the relevant setup details as they come up. These keep everyone's app
+compatible with the startup commands and checks below:
+
+
+| Topic                | Our lab setup                                                                                                                                                                    |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Existing data        | MySQL at `127.0.0.1:3306`, database `session04`, table `sales`, columns `id` and `amount`. Read the actual rows on every request.                                                |
+| Database account     | `lab_reader`, with the password read from environment variable `DB_PASSWORD`. Keep passwords out of source files and browser errors.                                             |
+| Application          | Python Flask with MySQL Connector/Python, serving `/` on port **8080**. Keep Nginx separate on port **80**.                                                                      |
+| Files and startup    | `/workspaces/session04-demo/app.py` and `requirements.txt`. `python app.py` starts the server on `0.0.0.0:8080`, with debug mode and the reloader off.                           |
+| Healthy page         | Show sale IDs, amounts, and total with two decimal places; return HTTP **200**.                                                                                                  |
+| Database unavailable | Keep Python running, show **Database unavailable**, and return HTTP **503**, including for HEAD checks. Use a short database connection timeout and close connections after use. |
+| Recovery             | Try the database again on each request so refreshing works after MySQL restarts. Do not substitute sample or cached sales, recreate data, or restart services automatically.     |
+
+
+When the design seems clear, ask:
+
+```text
+Summarize the design we agreed on and how we will test it.
+Do not build yet.
+```
+
+**Checkpoint:** Compare the summary with our lab setup. Can you explain what
+the page will show while MySQL is working, stopped, and restarted? Correct
+anything missing or misunderstood before moving on.
+
+### Give the agent permission to build
+
+When the instructor says the class is ready, tell the agent:
+
+```text
+I'm ready. Build the design we agreed on. Create the files and explain
+what each does.
 ```
 
 Read the agent's proposed file changes and any tool requests with the
@@ -942,7 +979,7 @@ ss -lnt
 Expect ports **80** and **8080** to remain, with **3306** absent. The app's
 terminal should still be running. If the sales page keeps showing data or
 returns 200 with an error message, compare the generated code with the
-prompt; that is not the intended behavior.
+agreed design; that is not the intended behavior.
 
 ### Restore the database and repeat the request
 
@@ -1017,15 +1054,15 @@ course environment is stopped.
 ## If you get stuck
 
 
-| What you see                                           | What to do                                                                                                                |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| Repository or Codespace access blocked                 | Raise your hand; keep the message visible. Do not create extra environments or change billing to bypass it.               |
-| Codespace still loading                                | Keep its tab open and tell the instructor. If temporarily paired, discuss what you observe on your partner's environment. |
-| Package installation still running                     | Wait for the prompt. Do not run another package manager or delete lock files.                                             |
-| `mysql>` when you need Bash                            | Type `exit` and press Enter. Confirm the Bash prompt before running shell commands.                                       |
-| MySQL shows a continuation prompt after incomplete SQL | Type `\c` and press Enter to cancel the unfinished statement, then ask for help.                                          |
-| Database, table, or account already exists             | Stop and ask the instructor to check what already succeeded. Do not delete it or rerun the seed block repeatedly.         |
-| A result differs from the guide                        | Keep the exact command and output visible and ask for help. Expected output is a comparison, not a substitute for your evidence.  |
+| What you see                                           | What to do                                                                                                                       |
+| ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| Repository or Codespace access blocked                 | Raise your hand; keep the message visible. Do not create extra environments or change billing to bypass it.                      |
+| Codespace still loading                                | Keep its tab open and tell the instructor. If temporarily paired, discuss what you observe on your partner's environment.        |
+| Package installation still running                     | Wait for the prompt. Do not run another package manager or delete lock files.                                                    |
+| `mysql>` when you need Bash                            | Type `exit` and press Enter. Confirm the Bash prompt before running shell commands.                                              |
+| MySQL shows a continuation prompt after incomplete SQL | Type `\c` and press Enter to cancel the unfinished statement, then ask for help.                                                 |
+| Database, table, or account already exists             | Stop and ask the instructor to check what already succeeded. Do not delete it or rerun the seed block repeatedly.                |
+| A result differs from the guide                        | Keep the exact command and output visible and ask for help. Expected output is a comparison, not a substitute for your evidence. |
 
 
 
