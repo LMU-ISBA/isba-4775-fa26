@@ -1,0 +1,14 @@
+# Local credentials stay out of the public portfolio.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Generated Python environments and files can be recreated.
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.log
+.DS_Store

@@ -1,7 +1,8 @@
 # Exercises
 
 Ten exercises, 15 points each, 150 points total. Each brief is published here
-ahead of its due date. Clone this repository in week 1 and pull before class.
+ahead of its due date. Read course materials on GitHub, and use the relevant
+class guide to open the course Codespace or your portfolio Codespace.
 
 Starting with Exercise 03, your work goes in your own public portfolio repository,
 one folder per exercise, `ex03` through `ex10`. Set it up following
@@ -26,7 +27,7 @@ for the full instructions.
 |---|---|---|---|---|
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 | [published](ex01-accounts-and-dev-env.md) |
 | 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | See Brightspace | [published](ex02-troubleshoot-a-cloud-service.md) |
-| 03 | Personal site deployed on Railway, GA4 installed | Build | Thu 9/17 | |
+| 03 | The AI-assisted workflow: scope being revised | Build | To be announced | [earlier draft](ex03-ai-assisted-workflow-draft.md) |
 | 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 | |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/1 | |
 | 06 | Mailbox email with SPF, DKIM, DMARC; Resend verified | Config | Thu 10/8 | |
@@ -35,8 +36,11 @@ for the full instructions.
 | 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/5 | |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 | |
 
-Dates are fixed. Briefs appear about a week before each due date, so plan
-against this table rather than waiting for the file.
+Ex03's final scope and deadline are being revised. Session 5 uses `ex03/` for
+the [Python build-along](../guides/database-to-application.md), with setup in the
+[portfolio guide](../guides/portfolio-repository.md). This doesn't assign the
+earlier dashboard tutorial. The personal site, Railway deployment, and GA4
+remain Project 1 requirements. Confirm deadlines in Brightspace.
 
 ## What every exercise needs
 

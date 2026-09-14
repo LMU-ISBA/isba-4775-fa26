@@ -19,6 +19,8 @@ cloud. GitHub Codespaces provides a virtual machine and a Docker container
 inside it. This diagram shows where the tools and services we use in this
 lab fit. ([How Codespaces works](https://docs.github.com/en/codespaces/about-codespaces/deep-dive))
 
+Linux is an open-source operating system that manages a computer's hardware and runs programs, including the services in this lab.
+
 ```text
 ┌──────────────────────────────────────────────┐
 │               PHYSICAL SERVER                │
@@ -75,9 +77,7 @@ Jump to a section:
 
 ## 01 · Open your Linux environment
 
-First, observe the instructor's failed web page. What would you check inside
-the server? The failed page is in the instructor's prepared environment; your
-new environment will get its services later in this lesson.
+
 
 ### Create your Codespace together
 
@@ -86,26 +86,13 @@ new environment will get its services later in this lesson.
   will pay for this environment. Check it with the instructor before creating.
 3. Open the **…** menu in the Codespaces tab and choose **New with options**.
 4. Confirm repository `LMU-ISBA/isba-4775-fa26`, branch **main**, and machine
-  type **2-core**. Follow the instructor's demonstration to check your
-   remaining included usage in GitHub's **Settings → Billing & licensing**.
-   Return to the creation tab after checking.
+  type **2-core**.
 5. Click **Create codespace** once and wait for the browser editor to load.
   If it is still loading, leave that tab open and tell the instructor.
 6. If prompted to trust the folder, confirm it is the course repository, then
   choose **Trust Folder & Continue**. Wording may vary.
 7. In the browser editor, choose **Terminal → New Terminal**. The menu may be
   inside the **☰** button at the upper left. You should see a terminal prompt.
-
-If you already have a Codespace for this course, open
-[Your Codespaces](https://github.com/codespaces), find the entry labeled
-`LMU-ISBA/isba-4775-fa26`, and choose **… → Open in Browser**. Resume that
-environment instead of creating another. Tell the instructor if you have
-already installed the lab services or created its database.
-
-If the repository is unavailable, Codespaces is missing, or GitHub blocks
-creation because of access or usage, raise your hand. Do not add a payment
-method or enable paid usage to get past the screen. The instructor will help
-you or arrange temporary pairing and record the access problem.
 
 **Checkpoint:** You have the course folder and a terminal open in the browser
 editor. Where will commands run: your laptop or the remote Linux environment?
@@ -128,8 +115,7 @@ cd /workspaces/isba-4775-fa26
 
 `whoami` identifies your Linux user, `pwd` prints your current directory, `ls`
 lists its contents, and `cd` changes directories. Expect user `codespace` and
-an initial directory of `/workspaces/isba-4775-fa26`. Tell the instructor if
-your output differs. `/etc` contains system configuration files.
+an initial directory of `/workspaces/isba-4775-fa26`. `/etc` contains system configuration files.
 
 ### Try updating the package catalog
 
@@ -205,8 +191,7 @@ sudo apt-get install nginx
 to install, the download size, and the additional disk space it will use.
 Additional packages are dependencies: software Nginx needs to work.
 
-When you see `Do you want to continue? [Y/n]`, read it with the instructor,
-then type `Y` and press Enter to approve the installation. `n` would cancel
+When you see `Do you want to continue? [Y/n]`, type `Y` and press Enter to approve the installation. `n` would cancel
 before installation begins. If Nginx is already installed and no changes are
 needed, APT may finish without asking; read its output before continuing.
 
@@ -223,11 +208,6 @@ prompted, type `Y` and press Enter, then wait for installation to finish.
 
 `mysql-server` is the package name; later, we will control its service using
 the name `mysql`.
-
-If a package configuration screen or another unfamiliar question appears,
-pause and read it with the instructor before answering. Prompts can vary with
-the package version and what is already installed; you may not see any extra
-configuration questions.
 
 Each installation can take several minutes. If you see
 `policy-rc.d denied execution of start`, wait for the installation to finish;

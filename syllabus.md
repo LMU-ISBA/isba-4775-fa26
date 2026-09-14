@@ -109,16 +109,25 @@ explain what you built about as heavily as the artifact itself.
 
 ## Exercises, 150 points
 
-There are ten exercises, worth 15 points each. You keep one public portfolio
-repository with one folder per exercise.
+There are ten exercises, worth 15 points each. Exercise 01 and Exercise 02
+are submitted as files through Brightspace. Later build exercises use a public
+portfolio repository as specified in their briefs. Each brief defines its
+required evidence and grading.
+
+Exercise 02 extends the in-class server lab: independently investigate a
+stopped Nginx service and a stopped MySQL service, explain your evidence,
+repair each service, and repeat the failed test. Submit a hand-drawn system
+diagram as a JPG and a short investigation report as Markdown. The rubric is
+8 points for the two investigations, 4 for the diagram and explanation, and
+3 for the healthy baseline and verified Codespace shutdown.
 
 ### Exercise schedule
 
 | # | Exercise | Type | Due |
 |---|---|---|---|
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 |
-| 02 | Setup, then the AI-assisted workflow: PRD, plan, ship | Build | Tue 9/15 |
-| 03 | Personal site deployed on Railway, GA4 installed | Build | Thu 9/17 |
+| 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | To be announced |
+| 03 | The AI-assisted workflow: clarify, plan, build, verify | Build | To be announced |
 | 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/1 |
 | 06 | Mailbox email with SPF, DKIM, DMARC; Resend verified | Config | Thu 10/8 |
@@ -126,6 +135,11 @@ repository with one folder per exercise.
 | 08 | **Broken integration: expired credential, changed schema** | Troubleshoot | Tue 10/20 |
 | 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/5 |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 |
+
+Ex02's proposed date is September 15; confirm the final deadline in
+Brightspace. Ex03's final scope and deadline are being revised. The personal
+site, Railway deployment, and GA4 remain Project 1 requirements; their place
+in the exercise sequence will be announced with the revised Ex03 brief.
 
 ## Project 1: Own Your Corner of the Internet, 125 points
 
@@ -261,10 +275,10 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 |---|---|---|
 | Tue 9/1 | The map: where a request goes, and the devices it passes through | |
 | Thu 9/3 | Finding things: host names, IP and MAC addresses, the default gateway, DNS, and what your own machine will tell you | |
-| Tue 9/8 | Moving data: packets, frames, switches, routers, and then OSI and TCP/IP as the framework that organizes all of it | Ex01 |
-| Thu 9/10 | Specs before code: the PRD, the implementation plan, and why AI amplifies a bad plan | |
-| Tue 9/15 | Where code runs: IaaS, PaaS, serverless, and managed databases. Containers, build versus runtime, and why this course uses Railway | Ex02 |
-| Thu 9/17 | DNS from the root down: zones, records, TTL, delegation, and nameservers | Ex03 |
+| Tue 9/8 | Ports and web services: requests, responses, HTTP status codes, and investigating a service failure | Ex01 |
+| Thu 9/10 | Running and Troubleshooting Services: physical server, VM, container; Nginx and MySQL; processes, ports, logs; database creation, tables, and sample data | |
+| Tue 9/15 | Database to application: portfolio from a template, repeatable setup, Python build-along, environment variables and Codespaces secrets, failure/recovery, commit/push and a small change; optional instructor PaaS demo | Ex02 proposed; confirm in Brightspace |
+| Thu 9/17 | DNS from the root down: zones, records, TTL, delegation, and nameservers | |
 | Tue 9/22 | TLS: what a certificate claims, how a browser decides it is valid, the four ways it goes invalid, and how ACME gets you one | |
 | Thu 9/24 | Reading a system when it breaks: dig, curl, openssl, and the hypothesis log | Ex04 |
 | Tue 9/29 | Failures that depend on who is asking: DNS propagation and TTL, cached answers, and why an incomplete chain passes in a browser but fails in curl | |
@@ -290,6 +304,11 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 12/8 | Blog post workshop and final interview prep | Project 2 |
 | Thu 12/10 | Final interview practice in pairs, and a course retrospective | |
 
+September 15 continues the unfinished application build from September 10.
+Topics from September 17 onward remain the planned sequence. Ex03 and the
+personal-site build are being rescheduled; any affected lesson or deadline
+changes will be announced in class and Brightspace.
+
 ## Work load expectations
 
 LMU follows the Carnegie Unit standard: one semester credit hour represents at
@@ -309,23 +328,30 @@ money, and most of the spending starts in Exercise 01.
 
 | What | Cost | When |
 |---|---|---|
-| Claude Pro | $20 a month | Exercise 01, and you keep it all semester |
-| Railway | Free for 30 days, then $5 a month | Exercise 03, and the trial runs out in mid-October |
+| Claude Pro or an accepted ChatGPT subscription | Claude Pro is $20/month on monthly billing; alternative plan pricing varies | Choose one in Ex01; follow the relevant assignment for coding-agent setup |
+| Railway | Trial credit is limited; Hobby has a $5/month minimum with usage-based billing | Personal-site deployment for Project 1; setup timing to be announced |
 | Domain name | Free for a year through the GitHub Student Developer Pack, otherwise $10 to $15 | Exercise 04, and it stays yours after the course |
 | Route 53 hosted zone | $0.50 a month | Exercise 04 |
 | GitHub | Free tier | Exercise 01 |
+| GitHub Codespaces | Personal-account compute/storage allowance; additional usage can cost money | Course Codespace in Session 04 for Ex02; new portfolio Codespace in Session 05 |
 | AWS | Free tier | Exercise 04 |
 | Zoho and Resend | Free tier | Exercise 06 |
 | Google Cloud and Firecrawl | Free tier | Exercise 07 |
 
-Budget roughly $100 for the semester, and most of that is Claude Pro.
+Plan your budget around the AI subscription you choose, domain registration,
+and the services you actually run. Prices, credits, and eligibility can
+change. Check [Claude pricing](https://support.claude.com/en/articles/11049762-choose-a-claude-plan),
+[Railway plans](https://docs.railway.com/pricing/plans), and
+[Codespaces billing](https://docs.github.com/en/billing/concepts/product-billing/github-codespaces)
+before enabling paid usage. A free tier does not mean all usage is free.
 
-Apply for the GitHub Student Developer Pack in week 1 at
-https://education.github.com/pack. It's free, verification takes a few days, and
-it covers a .me domain for a year plus credits on Railway. Anthropic doesn't
-offer a student rate, so Claude Pro is full price either way.
+Apply for the [GitHub Student Developer Pack](https://education.github.com/pack)
+in week 1 and check the current offers and verification status in your account.
+Do not plan on a particular benefit until you have confirmed eligibility.
 
-Bring cost questions to me early rather than discovering a bill.
+For the Codespaces lab, check your allowance with the instructor, keep forwarded
+ports private, and stop the environment when finished. Contact me if access is
+blocked or a billing change is requested. Bring cost questions to me early.
 
 ## Required lab fees
 
@@ -334,21 +360,26 @@ None.
 ## Instructional methods
 
 We meet in person twice a week, and each session combines instruction, live work,
-and student walkthroughs of their own exercises. Configuration and build work
-runs throughout the semester. There are also two one-on-one whiteboard
-interviews.
+and student walkthroughs of their own exercises. Guided setup and build-alongs
+include predictions, live troubleshooting, and brief discussion. Detailed
+incident reports and diagrams are completed independently in the assigned
+homework. There are also two one-on-one whiteboard interviews.
 
 ## Assignments and feedback
 
-Exercises are submitted in your public portfolio repository and are due before
-the class that uses them. Projects are submitted the same way, as live systems
-plus their repositories. The exception is Exercise 01, which goes
-to Brightspace in full, because the interview and the home network drawing
-both identify you. Due dates are announced in Brightspace
-and stated in this syllabus.
+Follow each assignment's submission instructions. Ex01 and Ex02 go to
+Brightspace as separate files. Later builds use repositories and live systems
+as specified in their briefs; projects include their repositories and deployed
+systems. Due dates are announced in Brightspace and reflected in this syllabus.
+A date marked proposed or to be announced is not a confirmed deadline.
 
-Feedback on exercises is given in class and in the repository. Interview feedback
-is given verbally at the end of the interview.
+For Ex02, Google Docs saves your report automatically. Confirm it is saved to
+Drive, stop the Codespace, add your shutdown note, and download the report as
+Markdown for submission. Your diagram is a separate JPG. The Codespace should
+be stopped after testing; it does not need to remain running for grading.
+
+Feedback is given in class, in Brightspace, or in the repository, depending on
+the assignment. Interview feedback is given verbally at the end of the interview.
 
 Deadlines are hard. Late work loses 10% per day, down to a floor of 50%. A late
 assignment is worth less, but it's never worth nothing, so finish it and turn it
@@ -391,8 +422,26 @@ we'll work out a plan for the rest of the term.
 
 ## Use of technology
 
-You will use a code editor, Git and GitHub, an AI coding assistant, a terminal,
-AWS, Railway, and an orchestration tool of your choice. These are set up in Exercises 01 and 02.
+We introduce tools when the relevant lesson or assignment needs them. In
+Session 04, students create a Codespace directly from the course repository.
+They install services and create a MySQL database with sample data.
+
+In Session 05, students create their own public portfolio from the
+[instructor template](https://github.com/LMU-ISBA/isba-4775-portfolio-template).
+They add a Codespaces secret and open a new Codespace from their portfolio.
+GitHub clones that repository automatically. Setup scripts and SQL recreate
+the services and data inside its Linux container.
+
+The coding agent interviews students, then helps build a Python application
+after plan approval. Students verify database reads, failure, and recovery.
+They commit and push a working version, then make and verify a small change
+before committing and pushing again. An optional instructor Railway demo
+connects this workflow to deployment. Student deployment instructions follow
+with the personal-site work.
+
+The early server lab does not require a local editor, database, or coding-agent
+installation. The Ex03 brief will specify any local workflow setup. AWS,
+Railway, and orchestration tools are introduced with their later assignments.
 
 See "Working with AI" below for how AI use is expected and assessed here.
 
@@ -469,9 +518,11 @@ Submitting a system you cannot account for is a violation regardless of what
 produced it.
 
 Two more violations are specific to this course. The first is presenting a system
-as working when it is not. Every deliverable is publicly verifiable and gets
-checked live. The second is presenting someone else's system as your own. Your
-portfolio repository is public and permanent, and it carries your name.
+as working without evidence that it works. Report actual observations,
+including failed checks and unresolved problems; do not fabricate output.
+Evidence may be a private report, a repository, or a live demonstration, as
+specified in the assignment. The second is presenting someone else's system,
+drawing, or evidence as your own. You must be able to explain what you submit.
 
 ### Special accommodations
 
