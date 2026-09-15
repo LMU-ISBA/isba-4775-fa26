@@ -7,10 +7,22 @@ Course materials for ISBA 4775 at Loyola Marymount University, Fall 2026.
 **Session 04 in-class lab:** [Running and Troubleshooting Services](guides/running-and-troubleshooting-services.md).
 We will create the Codespace and work through the guide together during class.
 
-**Session 05:** [Your portfolio repository](guides/portfolio-repository.md)
-and [From a database to a working application](guides/database-to-application.md).
-Start from the [portfolio template](https://github.com/LMU-ISBA/isba-4775-portfolio-template)
-to create your own repository, then open a Codespace from your repository.
+## Project and lessons
+
+The revised course sequence begins with a resume website in Codespaces, moves
+it to Azure, and later migrates it to Heroku. Students use one repository named
+`career-platform` throughout the semester. The project requirements are below;
+the two lesson guides are drafts pending classroom rehearsal:
+
+- [Project 1: Own Your Corner of the Internet](projects/own-your-corner-of-the-internet.md), including the 125-point rubric.
+- [Session 05: Build your resume site in Codespaces](guides/resume-site-in-codespaces.md).
+- [Before Thursday: Prepare for the Azure VM lesson](guides/azure-vm-preparation.md).
+- [Session 06: Migrate your site to an Azure VM](guides/azure-vm-migration.md).
+
+The syllabus, exercise deadlines, and published portfolio template still need
+alignment with these requirements. The earlier [portfolio setup](guides/portfolio-repository.md)
+and [sales application guide](guides/database-to-application.md) remain available
+as references. Their sales-specific steps are not the new resume-site lesson.
 
 Tue/Thu 1:45-3:25 PM, Hilton 115. Instruction Sep 1 - Dec 10, 2026.
 
@@ -29,6 +41,7 @@ Tue/Thu 1:45-3:25 PM, Hilton 115. Instruction Sep 1 - Dec 10, 2026.
     exercises/     Exercise briefs, published ahead of each due date, plus the
                    self-discovery interview you run with Claude for Exercise 01
     guides/        In-class lab instructions and portfolio repository setup
+    projects/      Project requirements and grading rubrics
     starters/      Source files for student starter repositories
     README.md      This file
 
@@ -36,8 +49,8 @@ Exercises are published here as the semester progresses. Read course materials
 on GitHub. For Session 04, create a Codespace directly from this repository;
 GitHub clones it automatically. Keep course materials unchanged. Ex01 and Ex02
 are submitted as files in Brightspace; later builds use your portfolio
-repository as specified in each brief. Session 05 creates a fresh
-Codespace from your own portfolio using the guide above. See the [exercise index](exercises/README.md)
+repository as specified in each brief. The revised Session 05 draft creates a
+Codespace from your own portfolio. See the [exercise index](exercises/README.md)
 for the current sequence and draft status.
 
 ## Regenerating the syllabus PDF
