@@ -25,7 +25,7 @@ SET SESSION sql_mode = 'NO_BACKSLASH_ESCAPES';
 CREATE USER IF NOT EXISTS 'lab_reader'@'127.0.0.1' IDENTIFIED BY {quoted_password};
 ALTER USER 'lab_reader'@'127.0.0.1' IDENTIFIED BY {quoted_password};
 REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'lab_reader'@'127.0.0.1';
-GRANT SELECT ON session04.sales TO 'lab_reader'@'127.0.0.1';
+GRANT SELECT ON portfolio.resume_entries TO 'lab_reader'@'127.0.0.1';
 """
     command = mysql_command or [
         "sudo", "mysql", "--no-defaults", "--batch", "--binary-mode",
@@ -59,7 +59,7 @@ def main():
     except (ValueError, RuntimeError) as error:
         print(str(error), file=sys.stderr)
         return 1
-    print("Reader configured. Test a new lab_reader connection and query the sales.")
+    print("Reader configured. Test a new lab_reader connection and query the resume entries.")
     return 0
 
 

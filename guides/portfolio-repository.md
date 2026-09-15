@@ -2,9 +2,10 @@
 
 Session 05 · September 15, 2026
 
-Your portfolio holds your application code, setup files, and explanations.
-You'll create it during class and run it in a new Codespace. The repository
-will be public, so keep passwords and personal interview material out of it.
+Your portfolio holds your Project 1 site, its setup files, and your
+explanations. You'll create it during class and run it in a new Codespace.
+The repository is public. Your resume belongs on it. Passwords, your phone
+number, your street address, and your interview material don't.
 
 Use the same name as everyone else: `isba-4775-portfolio`. Your address will be
 `https://github.com/YOUR-USERNAME/isba-4775-portfolio`.
@@ -26,7 +27,7 @@ a template. The instructor has already configured the starting repository.
 3. Choose your personal account as the owner.
 4. Name the repository `isba-4775-portfolio` and make it **Public**.
 5. Leave **Include all branches** unchecked, if shown. Create the repository.
-6. Confirm the address begins with your username. Open its README and `ex03/` folder.
+6. Confirm the address begins with your username. Open its README and `site/` folder.
 
 If you already have a portfolio with this name, keep it. Ask the instructor
 to help add only the missing starter files without replacing your work.
@@ -40,7 +41,7 @@ isba-4775-portfolio/
   guides/
     portfolio-repository.md
     database-to-application.md
-  ex03/
+  site/
     README.md
     plan.md
     database/
@@ -50,8 +51,9 @@ isba-4775-portfolio/
       configure-reader.py
 ```
 
-The setup files will recreate the services and fictional sales. You'll add
-the Python application during the [Session 5 lab](database-to-application.md).
+The setup files recreate the services and a placeholder resume. You'll add
+the Python site during the [Session 5 build-along](database-to-application.md),
+and `site/` grows into your Project 1 personal site.
 
 Pause here. Confirm that you own this repository and can open its settings.
 The course repository remains the place to read course materials.
@@ -66,9 +68,11 @@ Some configuration is public, and some is sensitive:
 | --- | --- | --- |
 | `DB_HOST` | Address of the database server | `127.0.0.1` |
 | `DB_PORT` | Database listening port | `3306` |
-| `DB_NAME` | Database to query | `session04` |
+| `DB_NAME` | Database to query | `portfolio` |
 | `DB_USER` | Application's database account | `lab_reader` |
 | `DB_PASSWORD` | Password for that account | Your own lab password |
+| `SITE_NAME` | Name shown at the top of the site | Your name |
+| `SITE_HEADLINE` | One line under the name | Your headline |
 
 A Codespaces secret stores a sensitive value and supplies it as an environment
 variable in an authorized Codespace. The program can read that value, so an
@@ -108,10 +112,10 @@ Codespace terminal:
 
 ```bash
 pwd
-ls ex03
+ls site
 ```
 
-The directory should be `/workspaces/isba-4775-portfolio`, and `ex03` should
+The directory should be `/workspaces/isba-4775-portfolio`, and `site` should
 contain the starter files.
 
 This is a fresh environment. Thursday's installed services and MySQL data
@@ -138,7 +142,7 @@ the instructor first. Wait for one command to finish before running the next.
 ### Install and start the services
 
 ```bash
-bash ex03/scripts/install-services.sh
+bash site/scripts/install-services.sh
 ```
 
 The script updates the package catalog, installs Nginx, MySQL, and Python's
@@ -149,19 +153,20 @@ These are the commands we practiced in Session 4, saved in a file. The `-y`
 option accepts the package installation prompt after we've reviewed the script.
 Stop and read any error with the instructor before proceeding.
 
-### Load the five sales
+### Load the placeholder resume
 
 ```bash
-sudo mysql < ex03/database/seed.sql
+sudo mysql < site/database/seed.sql
 ```
 
 The `<` symbol gives the SQL file to the MySQL client as input. The file
-creates `session04.sales` and inserts the five fictional sales from Thursday.
-Its final query should show a count of **5** and total of **500.00**.
+creates `portfolio.resume_entries` and inserts eight placeholder entries in
+four sections. Its final query should show **experience 2, education 1,
+projects 2, skills 3**.
 
 Rerunning this file fills missing sample IDs without duplicating or replacing
-existing rows. Student edits and additional rows remain, so changed data can
-produce a different total. The file doesn't reset the database.
+existing rows. Your own entries remain, so the counts will change once you
+replace the placeholders. The file doesn't reset the database.
 
 We have recreated sample data. A backup would preserve the current contents
 of a database, including changes made after the sample was loaded.
@@ -169,11 +174,11 @@ of a database, including changes made after the sample was loaded.
 ### Configure the reader account
 
 ```bash
-python3 ex03/scripts/configure-reader.py
+python3 site/scripts/configure-reader.py
 ```
 
 This script reads `DB_PASSWORD`, configures MySQL's `lab_reader` account, and
-grants it permission to read the sales table. It doesn't print the password.
+grants it permission to read the resume table. It doesn't print the password.
 Rerunning it also removes extra privileges granted directly to this lab account.
 Run it as your regular Codespace user. It handles the administrator command
 internally, so don't put `sudo` before `python3`.
@@ -194,13 +199,13 @@ Enter your new lab password when prompted. It won't appear as you type.
 At the `mysql>` prompt, run:
 
 ```sql
-SELECT * FROM session04.sales ORDER BY id;
-SELECT COUNT(*), SUM(amount), AVG(amount) FROM session04.sales;
+SELECT id, section, title FROM portfolio.resume_entries ORDER BY id;
+SELECT section, COUNT(*) FROM portfolio.resume_entries GROUP BY section ORDER BY section;
 exit
 ```
 
-Expect IDs 1 through 5, count **5**, total **500.00**, and average **100.00**.
-MySQL may display additional decimal places for the average.
+Expect IDs 1 through 8, and counts of **2, 1, 2, 3** for education,
+experience, projects, and skills in that alphabetical order.
 
 Pause here. Explain what each setup file contributed. Then continue with the
 [Session 5 build-along](database-to-application.md).
@@ -227,14 +232,14 @@ From the repository root (`/workspaces/isba-4775-portfolio`), run three commands
 
 ```bash
 git add .
-git commit -m "Build and verify the Python sales page"
+git commit -m "Build and verify the resume site"
 git push
 ```
 
 `git add .` stages the changes in this folder and its subfolders. `git commit`
 records that version. `git push` sends it to your GitHub repository.
 
-Open your portfolio on GitHub. Find the new commit and open `ex03/` to confirm
+Open your portfolio on GitHub. Find the new commit and open `site/` to confirm
 the files arrived. If a command fails or asks for identity information, stop
 and show the instructor the message.
 
@@ -243,7 +248,7 @@ Run the same three commands from the repository root, changing the message:
 
 ```bash
 git add .
-git commit -m "Add sale count and average"
+git commit -m "Add the skills section"
 git push
 ```
 
@@ -252,9 +257,9 @@ initial commit will also appear in your history.
 
 ## 6. Finish and return later
 
-Record the startup command and your checks in `ex03/README.md`. Submit the
-portfolio URL through Brightspace when the instructor opens the Ex03 drop box.
-The final Ex03 brief sets the assignment requirements and deadline.
+Record the startup command and your checks in `site/README.md`. Submit the
+portfolio URL through Brightspace when the instructor opens the drop box.
+The Ex03 brief sets the assignment requirements and deadline.
 
 Stop the portfolio Codespace from https://github.com/codespaces and verify its
 status. Check that Thursday's Codespace is stopped too. Closing a browser tab

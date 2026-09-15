@@ -19,4 +19,4 @@ echo "Checking installed packages and the web response."
 dpkg-query -W nginx mysql-server python3-venv
 curl --fail --head http://127.0.0.1
 
-echo "Next: load ex03/database/seed.sql, then configure the reader account."
+echo "Next: load site/database/seed.sql, then configure the reader account."

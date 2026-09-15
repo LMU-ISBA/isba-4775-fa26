@@ -17,10 +17,11 @@ continue with the setup guide below.
 
 ## Work
 
-- [Exercise 03 workspace](ex03/README.md): Session 5 setup and Python application.
+- [Personal site](site/README.md): your resume site, started in Session 5.
+  It becomes the Project 1 personal site.
 
-Ex01 and Ex02 are submitted through Brightspace. Later exercise folders are
-added when their briefs are published.
+Ex01 and Ex02 are submitted through Brightspace. Exercise folders are added
+when their briefs are published.
 
 ## Start here
 
@@ -32,14 +33,14 @@ The scripts run inside the new Linux Codespace. Open each file and read it
 with the instructor before running these commands from the repository root:
 
 ```bash
-bash ex03/scripts/install-services.sh
-sudo mysql < ex03/database/seed.sql
-python3 ex03/scripts/configure-reader.py
+bash site/scripts/install-services.sh
+sudo mysql < site/database/seed.sql
+python3 site/scripts/configure-reader.py
 ```
 
-The seed recreates the five fictional sales from Session 4. Rerunning it
-fills missing sample IDs without replacing existing rows. This is sample-data
-setup, not a backup of a database you have changed.
+The seed creates a placeholder resume. Rerunning it fills missing sample IDs
+without replacing existing rows, so your own entries survive. This is
+sample-data setup, not a backup of a database you have changed.
 
 After stopping and reopening this Codespace, start the services again:
 
@@ -48,7 +49,7 @@ sudo service nginx start
 sudo service mysql start
 ```
 
-Restart your Python application separately using the command in `ex03/README.md`
+Restart your Python application separately using the command in `site/README.md`
 after you have built it. Don't rerun the seed just to restart services.
 
 ## What belongs in Git
@@ -60,3 +61,6 @@ anything that was already committed.
 
 Database files and installed software aren't saved by a Git commit. The setup
 files describe how to recreate the lab in another environment.
+
+This repository is public. Your resume belongs on it. Your phone number and
+street address don't.

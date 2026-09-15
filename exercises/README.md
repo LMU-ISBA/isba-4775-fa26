@@ -36,11 +36,13 @@ for the full instructions.
 | 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/5 | |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 | |
 
-Ex03's final scope and deadline are being revised. Session 5 uses `ex03/` for
-the [Python build-along](../guides/database-to-application.md), with setup in the
+Ex03's final scope and deadline are being revised. Session 5 builds the first
+version of your Project 1 personal site, a resume page read from MySQL, in
+`site/` of your portfolio. Follow the
+[build-along](../guides/database-to-application.md), with setup in the
 [portfolio guide](../guides/portfolio-repository.md). This doesn't assign the
-earlier dashboard tutorial. The personal site, Railway deployment, and GA4
-remain Project 1 requirements. Confirm deadlines in Brightspace.
+earlier dashboard tutorial. Railway deployment and GA4 remain Project 1
+requirements. Confirm deadlines in Brightspace.
 
 ## What every exercise needs
 

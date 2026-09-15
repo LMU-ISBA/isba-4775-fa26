@@ -277,7 +277,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 9/3 | Finding things: host names, IP and MAC addresses, the default gateway, DNS, and what your own machine will tell you | |
 | Tue 9/8 | Ports and web services: requests, responses, HTTP status codes, and investigating a service failure | Ex01 |
 | Thu 9/10 | Running and Troubleshooting Services: physical server, VM, container; Nginx and MySQL; processes, ports, logs; database creation, tables, and sample data | |
-| Tue 9/15 | Database to application: portfolio from a template, repeatable setup, Python build-along, environment variables and Codespaces secrets, failure/recovery, commit/push and a small change; optional instructor PaaS demo | Ex02 proposed; confirm in Brightspace |
+| Tue 9/15 | Your resume site from a database: portfolio from a template, repeatable setup, Claude Code in the Codespace, a Flask page that reads your resume from MySQL, environment variables and Codespaces secrets, failure/recovery, commit/push and a small change | Ex02 proposed; confirm in Brightspace |
 | Thu 9/17 | DNS from the root down: zones, records, TTL, delegation, and nameservers | |
 | Tue 9/22 | TLS: what a certificate claims, how a browser decides it is valid, the four ways it goes invalid, and how ACME gets you one | |
 | Thu 9/24 | Reading a system when it breaks: dig, curl, openssl, and the hypothesis log | Ex04 |
@@ -304,8 +304,8 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 12/8 | Blog post workshop and final interview prep | Project 2 |
 | Thu 12/10 | Final interview practice in pairs, and a course retrospective | |
 
-September 15 continues the unfinished application build from September 10.
-Topics from September 17 onward remain the planned sequence. Ex03 and the
+September 15 starts the Project 1 personal site as a resume page read from
+MySQL. Topics from September 17 onward remain the planned sequence. Ex03 and the
 personal-site build are being rescheduled; any affected lesson or deadline
 changes will be announced in class and Brightspace.
 
@@ -432,12 +432,12 @@ They add a Codespaces secret and open a new Codespace from their portfolio.
 GitHub clones that repository automatically. Setup scripts and SQL recreate
 the services and data inside its Linux container.
 
-The coding agent interviews students, then helps build a Python application
-after plan approval. Students verify database reads, failure, and recovery.
-They commit and push a working version, then make and verify a small change
-before committing and pushing again. An optional instructor Railway demo
-connects this workflow to deployment. Student deployment instructions follow
-with the personal-site work.
+Students install Claude Code in the Codespace terminal. It interviews them,
+then helps build the first version of their Project 1 personal site, a Python
+page that reads their resume from MySQL, after plan approval. Students verify
+database reads, failure, and recovery. They commit and push a working version,
+then make and verify a small change before committing and pushing again.
+Deployment to Railway follows in the next session.
 
 The early server lab does not require a local editor, database, or coding-agent
 installation. The Ex03 brief will specify any local workflow setup. AWS,

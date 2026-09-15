@@ -1,10 +1,11 @@
-# Sales application plan
+# Resume site plan
 
-Complete this plan during the AI interview, before building the application.
+Complete this plan with your coding agent, before building the site.
 
 ## Purpose
 
-Identify who will use the page and what they need from the sales data.
+Identify who will read this page and what they need to learn about you in
+thirty seconds. This is the start of your Project 1 personal site.
 
 ## Request path
 
@@ -14,7 +15,8 @@ Label where each runs and which ports connect them. Show Nginx separately.
 ## Requirements and checks
 
 Write the agreed behavior for a healthy database, an unavailable database,
-and recovery. Include the expected rows and total and the checks you will run.
+and recovery. Include the expected sections and entry counts and the checks
+you will run.
 
 ## Implementation steps
 
@@ -23,5 +25,5 @@ it will create and the configuration it will read.
 
 ## Follow-up change
 
-Before adding count and average, record the new requirements and predicted
-results. Explain what should happen if the table contains no sales.
+Before adding the skills section, record the new requirement and the
+predicted result. Explain what should happen if a section has no entries.

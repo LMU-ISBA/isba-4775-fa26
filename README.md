@@ -8,9 +8,10 @@ Course materials for ISBA 4775 at Loyola Marymount University, Fall 2026.
 We will create the Codespace and work through the guide together during class.
 
 **Session 05:** [Your portfolio repository](guides/portfolio-repository.md)
-and [From a database to a working application](guides/database-to-application.md).
+and [From a database to your resume site](guides/database-to-application.md).
 Start from the [portfolio template](https://github.com/LMU-ISBA/isba-4775-portfolio-template)
 to create your own repository, then open a Codespace from your repository.
+Today's build is the first version of your Project 1 personal site.
 
 Tue/Thu 1:45-3:25 PM, Hilton 115. Instruction Sep 1 - Dec 10, 2026.
 
