@@ -1,5 +1,8 @@
 # Student repository starters
 
+The [resume site starter](resume-site/README.md) holds the PRD and SQLite seed
+for running the AI dev workflow tutorial against a personal resume site.
+
 The [portfolio starter](portfolio/README.md) supplies the files used in the
 Session 5 portfolio setup. Its contents become the root of a student's
 `isba-4775-portfolio` repository.
