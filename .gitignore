@@ -222,3 +222,6 @@ custom-gpt/
 # Class exercises and slides (private)
 class-exercises/
 slides/
+
+# Student submissions downloaded from Brightspace (private, never commit)
+grading/

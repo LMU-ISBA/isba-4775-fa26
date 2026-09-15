@@ -152,9 +152,7 @@ The Codespace was stopped after Tuesday's lesson. Restart its services before
 the read-only checks, then verify the source baseline:
 
 ```bash
-sudo service nginx start
 sudo service mysql start
-curl -I http://127.0.0.1/
 curl -i http://127.0.0.1:5000/
 ```
 

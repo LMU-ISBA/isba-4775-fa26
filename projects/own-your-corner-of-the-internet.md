@@ -23,6 +23,8 @@ follow the instructor's cleanup directions for Azure resources.
 
 ## What the system must do
 
+
+
 ### 1. Present your profile and read project data
 
 Include your name, a short introduction, education, and professional links.
@@ -148,20 +150,24 @@ milestones, configuration changes, and repairs.
 These are progress targets during the lessons, not additional point categories.
 Exercise briefs and their Brightspace deadlines remain separate.
 
-| Target | Evidence to have ready |
-| --- | --- |
-| September 15 | Working Codespaces site, database reads, failure/recovery, and first application commit |
+
+| Target       | Evidence to have ready                                                                         |
+| ------------ | ---------------------------------------------------------------------------------------------- |
+| September 15 | Working Codespaces site, database reads, failure/recovery, and first application commit        |
 | September 17 | Application migrated and checked on the Azure VM, with incomplete public-service work recorded |
-| September 22 | Public Azure HTTP service and restart verification |
-| September 24 | Custom domain and HTTPS on Azure |
-| September 29 | Networking/TLS investigation with verified repair |
-| October 1 | PostgreSQL-compatible application, validated data, and migration plan |
-| October 6 | Heroku deployment, custom-domain cutover, HTTPS, and responsibility comparison |
-| October 8 | Verified transactional test email and sender DNS |
-| October 13 | Job Scout end-to-end run and relevant postings |
-| October 15 | GitHub Actions deployment and integration-failure evidence |
-| October 20 | Submission audit and practice explanation |
-| October 22 | Final project submission |
+| September 22 | Public Azure HTTP service and restart verification                                             |
+| September 24 | Custom domain and HTTPS on Azure                                                               |
+| September 29 | Networking/TLS investigation with verified repair                                              |
+| October 1    | PostgreSQL-compatible application, validated data, and migration plan                          |
+| October 6    | Heroku deployment, custom-domain cutover, HTTPS, and responsibility comparison                 |
+| October 8    | Verified transactional test email and sender DNS                                               |
+| October 13   | Job Scout end-to-end run and relevant postings                                                 |
+| October 15   | GitHub Actions deployment and integration-failure evidence                                     |
+| October 20   | Submission audit and practice explanation                                                      |
+| October 22   | Final project submission                                                                       |
+
+
+
 
 ## Organize your repository
 
@@ -224,16 +230,18 @@ can demonstrate. Missing or unverified portions earn no credit for that part.
 Documentation points assess explanation and reproducibility, separately from
 the technical behavior scored in the other rows.
 
-| Area | Points | Scored parts |
-| --- | ---: | --- |
-| Personal application | 15 | Profile and clear content (3); actual database reads and rendered projects (6); empty, failure, and recovery behavior (6) |
-| Azure deployment | 20 | Running application/database and public Nginx path (8); explained SSH/network rules and private dependency listeners (6); service management and restart evidence (6) |
-| Domain and HTTPS | 15 | Domain control, delegation, and accurate record explanation (5); working final DNS and HTTPS with hostname/validity checks (7); renewal explanation (3) |
-| Migration to Heroku | 25 | Dependency inventory and plan (5); PostgreSQL compatibility and current-data comparison (8); working target and cutover validation (6); rollback and responsibility comparison (6) |
-| GitHub Actions deployment | 10 | Workflow and protected credentials with a meaningful failing check (4); traceable successful deployment (4); recovery explanation (2) |
-| Job Scout and email | 20 | Five real relevant postings and explainable matching (8); verified sender, DNS authentication, and delivered digest (7); inspectable run and controlled failure evidence (5) |
-| Engineering record | 20 | Spec, plan, agent rules, and meaningful Git history (4); diagrams and reproducible setup (5); three incident records and five-question FAQ (5); decisions, retrospective, cost inventory, and submission index (6) |
-| Total | 125 | |
+
+| Area                      | Points | Scored parts                                                                                                                                                                                                       |
+| ------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Personal application      | 15     | Profile and clear content (3); actual database reads and rendered projects (6); empty, failure, and recovery behavior (6)                                                                                          |
+| Azure deployment          | 20     | Running application/database and public Nginx path (8); explained SSH/network rules and private dependency listeners (6); service management and restart evidence (6)                                              |
+| Domain and HTTPS          | 15     | Domain control, delegation, and accurate record explanation (5); working final DNS and HTTPS with hostname/validity checks (7); renewal explanation (3)                                                            |
+| Migration to Heroku       | 25     | Dependency inventory and plan (5); PostgreSQL compatibility and current-data comparison (8); working target and cutover validation (6); rollback and responsibility comparison (6)                                 |
+| GitHub Actions deployment | 10     | Workflow and protected credentials with a meaningful failing check (4); traceable successful deployment (4); recovery explanation (2)                                                                              |
+| Job Scout and email       | 20     | Five real relevant postings and explainable matching (8); verified sender, DNS authentication, and delivered digest (7); inspectable run and controlled failure evidence (5)                                       |
+| Engineering record        | 20     | Spec, plan, agent rules, and meaningful Git history (4); diagrams and reproducible setup (5); three incident records and five-question FAQ (5); decisions, retrospective, cost inventory, and submission index (6) |
+| Total                     | 125    |                                                                                                                                                                                                                    |
+
 
 A separate domain mailbox and GA4 are optional extensions, with no extra points
 in this rubric. Prioritize the required system and evidence before extensions.
@@ -259,7 +267,7 @@ limits, and expiration before relying on any benefit.
 Heroku's student offer currently provides eligible students $13/month for 24
 months. It includes Heroku products such as Postgres, excludes paid third-party
 add-ons, requires a payment card, and charges usage beyond the monthly credit.
-Check the current terms before provisioning: https://www.heroku.com/github-students/
+Check the current terms before provisioning: [https://www.heroku.com/github-students/](https://www.heroku.com/github-students/)
 
 Keep a service inventory and distinguish compute from retained storage and
 other billable resources. Bring blocked access or unexpected costs to the
