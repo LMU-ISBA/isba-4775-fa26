@@ -12,7 +12,7 @@ It will manage Azure through the Azure CLI and SSH from that Codespace.
 Complete [Build your resume site in Codespaces](resume-site-in-codespaces.md).
 Check the following before moving on:
 
-- Your page shows your profile and a project read from MySQL.
+- Your page shows your profile and a project read from your database.
 - You verified the 200 → 503 → 200 database failure and recovery sequence.
 - Your README explains how to start the services and application.
 - Your reviewed code, `AGENTS.md`, spec, plan, and evidence are on GitHub.
@@ -114,7 +114,7 @@ Do not change files, display secrets, or deploy anything.
 ```
 
 Compare its explanation with your files and Tuesday's checks. It should
-identify the application, Python dependencies, MySQL schema and data, and
+identify the application, runtime dependencies, database schema and data, and
 environment variables. Correct any misunderstanding before the migration lesson.
 Use this prompt again when starting a new session so both agents receive the
 same project rules.
@@ -153,7 +153,7 @@ and select your subscription. They do not create cloud resources.
 ## 7. Bring your readiness check to class
 
 - [ ] My application and reviewed evidence are on GitHub.
-- [ ] I kept the Codespace containing my application and live MySQL data.
+- [ ] I kept the Codespace containing my application and live database data.
 - [ ] My Azure for Students subscription is active with credit available.
 - [ ] Claude Code or Codex opens, signs in, and answers the project question.
 - [ ] Superpowers is installed in that agent.

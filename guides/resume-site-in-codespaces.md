@@ -2,17 +2,17 @@
 
 Session 05 · September 15, 2026
 
-Today you will turn a small request into a working Flask application. Your page
-will show profile basics and read projects from MySQL. You will also prove that
+Today you will turn a small request into a working web application. Your page
+will show profile basics and read projects from a database. You will also prove that
 you can explain a database failure, recover from it, and preserve your work.
 
 The coding agent can propose and write files. You remain responsible for the
 requirements, the decisions, the review, the commands you run, and the evidence.
-Do not give the agent a password or accept a change you cannot explain.
+Ask the agent to explain any change you do not understand.
 
 ## The application we are building
 
-Your resume page combines profile basics with projects read from MySQL.
+Your resume page combines profile basics with projects read from a database.
 The browser reaches the application through a private Codespaces forwarded URL.
 
 ```mermaid
@@ -21,12 +21,12 @@ flowchart LR
     forwarding["GitHub HTTPS forwarding<br/>Private web URLs"]
 
     subgraph codespace["Your career-platform Codespace"]
-        app["Flask application<br/>HTTP port 5000"]
+        app["Web application<br/>Builds the resume page"]
         profile["HTML template<br/>Name, education, and professional links"]
-        database[("MySQL · port 3306<br/>Project entries")]
+        database[("Database<br/>Project entries")]
         nginx["Nginx · HTTP port 80<br/>Separate welcome page"]
         profile -->|Profile content| app
-        app -->|SELECT projects| database
+        app -->|Read projects| database
         database -->|Project rows| app
     end
 
@@ -38,22 +38,26 @@ flowchart LR
     nginx -->|Welcome page response| forwarding
 ```
 
-Nginx serves its own welcome page today. MySQL accepts the application's database
-connection, and port 3306 stays unforwarded. When MySQL stops, the resume page
-keeps the profile visible and reports that projects are temporarily unavailable.
+
+
+Nginx serves its own welcome page today. The application reads project entries
+from the database, which stays private. You will choose the database engine
+during the design interview.
 
 ## Our route through class
 
-| Minutes | Work | Checkpoint |
-| --- | --- | --- |
-| 0–10 | Create the repository, secret, and first Codespace | Correct repository and secret status |
-| 10–17 | Check and open GitHub Copilot CLI | Agent opens in the repository |
-| 17–20 | Install Superpowers in your chosen agent | Plugin is installed and enabled |
-| 20–25 | Describe your idea and prepare your profile facts | You can explain who the site is for |
-| 25–40 | Brainstorm, approve the design, inspect the spec, and review the plan | Saved spec and plan are approved before code |
-| 40–70 | Execute inline, review each task, and merge locally | Working application in the main checkout |
-| 70–85 | Test the page, stop MySQL, and verify recovery | Page changes 200 → 503 → 200 |
-| 85–100 | Document evidence, review, push, and stop the Codespace | Actual spec, plan, code, and evidence are on GitHub |
+
+| Minutes | Work                                                                   | Checkpoint                                          |
+| ------- | ---------------------------------------------------------------------- | --------------------------------------------------- |
+| 0–10    | Create the repository and first Codespace                              | Correct repository is open                          |
+| 10–17   | Check and open GitHub Copilot CLI                                      | Agent opens in the repository                       |
+| 17–20   | Install Superpowers in your chosen agent                               | Plugin is installed and enabled                     |
+| 20–25   | Describe your idea and prepare your profile facts                      | You can explain who the site is for                 |
+| 25–40   | Brainstorm, approve the design, inspect the spec, and review the plan  | Saved spec and plan are approved before code        |
+| 40–70   | Build one task at a time, configure database access, and merge locally | Working application in the main checkout            |
+| 70–85   | Test the page, stop the database, and verify recovery                  | Page changes 200 → 503 → 200                        |
+| 85–100  | Document evidence, review, push, and stop the Codespace                | Actual spec, plan, code, and evidence are on GitHub |
+
 
 The failure and recovery work from minutes 70–85 is protected. The final 15
 minutes are also protected for documentation and Git.
@@ -65,25 +69,16 @@ Everyone starts by creating a new `career-platform` repository on GitHub:
 1. Select **New repository** from your GitHub account.
 2. Name it `career-platform` and set it to **Public**.
 3. Add a README and choose the **Python** `.gitignore` template.
-4. Create the repository, then add the Codespaces secret described below.
-5. Create a Codespace on `main`.
+4. Create the repository, then create a Codespace on `main`.
 
-Before creating your first Codespace, create a Codespaces secret named `DB_PASSWORD`
-for this repository. Use a new lab password and keep it in your password
-manager. Keep it out of chat, screenshots, command output, and Git.
-
-In the Codespace terminal, check the repository and secret without printing
-the value:
+In the Codespace terminal, check which repository is open:
 
 ```bash
 pwd
 git remote -v
-python3 -c 'import os; print("DB_PASSWORD is set" if os.environ.get("DB_PASSWORD") else "DB_PASSWORD is missing")'
 ```
 
-Expect `/workspaces/career-platform`. If the check reports a missing secret,
-correct the secret's name and repository access, then restart this Codespace
-before continuing.
+Expect `/workspaces/career-platform` and your own repository URL.
 
 Checkpoint: explain which work GitHub stores and which state exists only inside
 the Codespace.
@@ -97,24 +92,11 @@ editor and Copilot CLI are separate interfaces. Check the terminal tool first:
 copilot --version
 ```
 
-If it reports a version, continue. If the command is missing, install the CLI
-using GitHub's Linux installer, then open a new terminal and repeat the check:
-
-```bash
-curl -fsSL https://gh.io/copilot-install | bash
-```
-
 Start the agent from `/workspaces/career-platform`:
 
 ```bash
 copilot
 ```
-
-If prompted, enter `/login` inside Copilot and complete the GitHub sign-in.
-Confirm you are using your own account and trust the repository you just created.
-Verified students can activate free Copilot access through GitHub Education.
-Check your account's activation and usage allowance before continuing. Tell the
-instructor if access is blocked.
 
 Sources: [CLI installation](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)
 and [student access](https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-students).
@@ -133,11 +115,21 @@ copilot plugin install superpowers@superpowers-marketplace
 copilot plugin list
 ```
 
-Confirm Superpowers is listed and enabled. End the earlier Copilot session,
+Confirm Superpowers is listed.
+
+End the earlier Copilot session by running
+
+```
+/exit
+```
+
 then run `copilot` from the repository again so the new session loads it.
 
-These are Bash commands. The design and approval prompts below go inside the
-Copilot conversation.
+Confirm Superpowers is installed:
+
+```
+Is Superpowers installed?
+```
 
 Sources: [Superpowers for Copilot CLI](https://github.com/obra/superpowers/blob/main/README.md#github-copilot-cli)
 and [GitHub's plugin instructions](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing).
@@ -163,6 +155,8 @@ At every gate, ask yourself:
 1. What am I asking the agent to do?
 2. How will I check its work?
 3. What will I accept, change, or reject, and why?
+
+
 
 ### Our workflow with Copilot CLI and Superpowers
 
@@ -199,13 +193,15 @@ flowchart TD
     verify -->|Results verified and documented| publish
 ```
 
+
+
 At each approval gate, ask for revisions until the saved work matches your
 decisions. A failed check returns to debugging and verification before continuing.
 
 ## 5. Brainstorm the design
 
 ```text
-Help me design a personal resume website that can grow into a career platform.
+Help me design a database-driven personal resume website that can grow into a career platform.
 Interview me one question at a time with multiple-choice options to gather enough context to write a spec. Do not build anything until I approve the spec.
 ```
 
@@ -213,28 +209,28 @@ Answer from your own background and goals. Explain who should visit the site,
 what they should learn, and what content you have today. Tell the agent when
 you need a placeholder, and ask it to explain unfamiliar choices.
 
-As technical questions arise, bring in today's lab context: you are working in
-Codespaces, using Python/Flask and MySQL. Projects should come from the database.
-Nginx will keep its separate welcome page today. Tell the agent about the
-`DB_PASSWORD` environment variable without sharing its value.
+As technical questions arise, explain that you are working in Codespaces and
+have practiced running MySQL. Ask the agent to explain database options before
+choosing one. For this lab, use a local database server you can stop and restart.
+Nginx will keep its separate welcome page today.
 
 Before approving the design, discuss any of these questions the interview missed:
 
 - What should visitors see, and which unfinished sections need labeled placeholders?
-- What project information belongs in MySQL, and how will the page read it?
-- What should remain visible when MySQL stops, and how will we verify recovery?
-- How will the application read data without permission to change it or expose secrets?
+- Which database engine fits the site, and what project information will it store?
+- What should remain visible when the database stops, and how will we verify recovery?
+- How will the application connect to the database and read its projects?
 
 For our failure exercise, agree that the page keeps the profile visible, returns
-HTTP 503 when projects are unavailable, and recovers to HTTP 200 when MySQL restarts.
+HTTP 503 when projects are unavailable, and recovers to HTTP 200 when the database restarts.
 Ask the agent to explain those status codes before approving that behavior.
-The design should also keep web forwarding private and MySQL unforwarded.
+The design should also keep web forwarding private and the database unforwarded.
 
 The agent should propose two or three approaches and explain their tradeoffs.
 Choose one, then review the design section by section. Say "yes" or explain
 what should change and why. All sections need your approval before the spec.
 
-Checkpoint: explain what the page shows and which part depends on MySQL.
+Checkpoint: explain your database choice and which part of the page depends on it.
 No setup scripts or application code should exist yet.
 
 ## 6. Approve the design and write the spec
@@ -286,7 +282,8 @@ Open the saved plan and check these three things:
 
 The plan should create the project instructions, install services, create the
 database and reader, build the page, and verify the result. Project instructions
-belong in `AGENTS.md`, which Copilot CLI reads.
+belong in `AGENTS.md`, which Copilot CLI reads. Include the password setup in
+Step 11 before the agent creates the database account or connects the application.
 
 Ask for corrections, then inspect the saved plan before approving execution.
 
@@ -308,12 +305,36 @@ Ask for corrections before moving on.
 
 ## 11. Complete the remaining tasks
 
-Repeat this prompt after reviewing the previous task:
+Before the database task, complete the password setup below. For each task,
+review the previous changes, then say:
 
 ```text
 Do the next task in the plan.
 Show me the changed files and stop.
 ```
+
+
+
+### Set up database access
+
+Now that you have chosen a database, ask the agent to explain the application's
+account, permissions, and password setting. Use a read-only account for project
+queries and keep its password in a Codespaces secret, separate from your code.
+
+1. In your GitHub account settings, open **Codespaces**, then **New secret**.
+2. Use the environment variable name agreed in your plan, such as `DB_PASSWORD`.
+3. Enter a new lab password, save it in your password manager, and grant access
+  to `career-platform`. Keep the value out of chat, screenshots, and Git.
+4. Stop and restart this Codespace to load the secret. Reopen the agent in its
+  worktree and ask it to continue the saved plan one task at a time.
+
+Have the agent check that the variable is present without displaying its value.
+Creating a secret stores the password. The database task must still create the
+account with that password and give it the reviewed permissions.
+
+Source: [GitHub Codespaces secrets](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-your-account-specific-secrets-for-github-codespaces).
+
+### Review the database and application tasks
 
 At the database task, locate `CREATE TABLE`, `INSERT`, `SELECT`, and `GRANT` in
 the generated files. Explain what each does, then inspect the reader's query
@@ -326,7 +347,7 @@ request recovers after a database failure.
 
 Read the project instructions, setup files, and verification results. Compare
 them with your approved spec, including the read-only database account, secrets
-from the environment, and HTTP 503 when MySQL is down. Ask for fixes if they differ.
+from the environment, and HTTP 503 when the database is down. Ask for fixes if they differ.
 
 ## 12. Finish the plan and merge locally
 
@@ -343,7 +364,7 @@ Then ask:
 ```text
 Start the application from main using the reviewed setup.
 Give me its URL, startup command, and how to stop it.
-Leave MySQL and Nginx running for my checks.
+Leave the database and Nginx running for my checks.
 ```
 
 Have the agent prepare the virtual environment in `main` and show you the
@@ -352,10 +373,10 @@ running application and its logs. Git does not transfer the worktree's `.venv`.
 ## 13. Check the page, fail the database, and recover
 
 Leave the application running. Use a separate Bash terminal for your checks.
-These commands run inside the Codespace. Database, table, column, and account
-names below are examples. Compare them with your approved spec and actual setup.
-If yours differ, ask the agent to adapt the commands and explain each change
-before you run them. Use your application's actual port if it differs from 5000.
+The commands below illustrate a Flask application with MySQL. Have the agent
+adapt them to your chosen database engine, application port, and account and
+table names before running them. Review the changes together. The checks remain
+the same: read the data, stop the database, observe the failure, and recover.
 
 At the Bash prompt, connect as the application's reader:
 
@@ -449,15 +470,16 @@ Your next step is to complete the preparation checklist and report any blockers.
 
 ## What to type at each gate
 
-| Gate | What you say after reviewing |
-| --- | --- |
-| Start | Use the idea and interview prompt in Step 5. |
-| Design sections | "Yes" or "No, because..." |
-| Write the spec | "I approve the design. Write the spec." |
-| Revise the spec | "Change A to B." |
-| Write the plan | "I approve the spec. Write the implementation plan." |
-| Revise the plan | "Fix task 3." |
-| Begin today's build | "I approve the plan. Execute inline. Do only the first task." |
-| Continue | "Do the next task. Show me the changed files and stop." |
-| Finish | "Merge locally. Do not push yet." |
-| Publish the reviewed work | "Commit the reviewed work and push main to GitHub." |
+
+| Gate                      | What you say after reviewing                                  |
+| ------------------------- | ------------------------------------------------------------- |
+| Start                     | Use the idea and interview prompt in Step 5.                  |
+| Design sections           | "Yes" or "No, because..."                                     |
+| Write the spec            | "I approve the design. Write the spec."                       |
+| Revise the spec           | "Change A to B."                                              |
+| Write the plan            | "I approve the spec. Write the implementation plan."          |
+| Revise the plan           | "Fix task 3."                                                 |
+| Begin today's build       | "I approve the plan. Execute inline. Do only the first task." |
+| Continue                  | "Do the next task. Show me the changed files and stop."       |
+| Finish                    | "Merge locally. Do not push yet."                             |
+| Publish the reviewed work | "Commit the reviewed work and push main to GitHub."           |

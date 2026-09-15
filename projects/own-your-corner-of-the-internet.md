@@ -31,8 +31,9 @@ may contain clearly labeled placeholders while you develop real content.
 Do not invent qualifications or experience.
 
 Store project entries in a database and read them when the page is requested.
-Begin with MySQL and migrate the data to PostgreSQL for Heroku. A useful initial
-entry is a clearly labeled description of this website as a project in progress.
+Choose the initial database engine during design and explain your choice. Use
+managed PostgreSQL for the later Heroku deployment. A useful initial entry is
+a clearly labeled description of this website as a project in progress.
 
 Handle an empty table and a failed database connection deliberately. For our
 initial page, database failure leaves the profile visible, shows "Projects
@@ -42,8 +43,8 @@ application restart. Do not substitute sample content to hide a failed query.
 
 ### 2. Deploy and operate the application on Azure
 
-Use an Ubuntu VM, an application server, Nginx, and MySQL. By the completed Azure
-milestone, Nginx forwards public web requests to the application, and the
+Use an Ubuntu VM, an application server, Nginx, and your chosen database. Keep
+the same database engine for this first migration. By the completed Azure milestone, Nginx forwards public web requests to the application, and the
 application accesses its database locally. Use a production application server
 such as Gunicorn, with service management that survives a VM restart.
 
@@ -71,8 +72,8 @@ Write the migration plan before changing the working deployment. Identify the
 code, runtime, packages, configuration, secrets, schema, and current data that
 the target needs. Explain what Git moves and what requires another method.
 
-Convert the MySQL-dependent parts to PostgreSQL and validate the result before
-cutover. Include at least one real change you made to the original project data
+Validate PostgreSQL compatibility before cutover, converting engine-specific
+code and data where needed. Include at least one real change you made to the original project data
 so that restoring seed data cannot pass as transferring the current database.
 Compare source and target records, their content, and the rendered page.
 
@@ -228,7 +229,7 @@ the technical behavior scored in the other rows.
 | Personal application | 15 | Profile and clear content (3); actual database reads and rendered projects (6); empty, failure, and recovery behavior (6) |
 | Azure deployment | 20 | Running application/database and public Nginx path (8); explained SSH/network rules and private dependency listeners (6); service management and restart evidence (6) |
 | Domain and HTTPS | 15 | Domain control, delegation, and accurate record explanation (5); working final DNS and HTTPS with hostname/validity checks (7); renewal explanation (3) |
-| Migration to Heroku | 25 | Dependency inventory and plan (5); PostgreSQL conversion and current-data comparison (8); working target and cutover validation (6); rollback and responsibility comparison (6) |
+| Migration to Heroku | 25 | Dependency inventory and plan (5); PostgreSQL compatibility and current-data comparison (8); working target and cutover validation (6); rollback and responsibility comparison (6) |
 | GitHub Actions deployment | 10 | Workflow and protected credentials with a meaningful failing check (4); traceable successful deployment (4); recovery explanation (2) |
 | Job Scout and email | 20 | Five real relevant postings and explainable matching (8); verified sender, DNS authentication, and delivered digest (7); inspectable run and controlled failure evidence (5) |
 | Engineering record | 20 | Spec, plan, agent rules, and meaningful Git history (4); diagrams and reproducible setup (5); three incident records and five-question FAQ (5); decisions, retrospective, cost inventory, and submission index (6) |

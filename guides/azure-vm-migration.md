@@ -117,7 +117,8 @@ Start Claude Code or Codex from the repository. Ask it to read `AGENTS.md` and
 the saved spec and plan in `docs/superpowers/` before continuing. Keep the same
 design, spec, and plan review gates when changing agents.
 
-Tuesday's interview may have produced different database names or file paths.
+This guide uses MySQL as its worked example. Tuesday's interview may have
+produced a different database engine, database names, or file paths.
 This guide uses `portfolio.projects`, `portfolio_reader`, and `application/app.py`
 as examples. Have the agent adapt SQL, setup scripts, and startup commands to
 your actual implementation, and explain each change before you run it.
@@ -295,8 +296,9 @@ shell. Keep the SSH session open.
 
 Ask your agent to prepare a reviewed target setup sequence. It should install the
 required Ubuntu packages, start local MySQL, clone the repository, create
-`application/.venv/`, and install `application/requirements.txt`. Do not install
-PostgreSQL or change the application's database engine during this migration.
+`application/.venv/`, and install `application/requirements.txt` for the Flask
+example. Adapt the packages to your application and chosen database engine.
+Keep the same database engine during this migration.
 
 Run the reviewed commands in the VM shell. The sequence should use the actual
 repository URL and a directory owned by the Azure user. Confirm the checked-out
