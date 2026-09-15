@@ -44,18 +44,18 @@ engine during the design interview.
 ## Our route through class
 
 
-| Minutes | Work                                                                   | Checkpoint                                          |
-| ------- | ---------------------------------------------------------------------- | --------------------------------------------------- |
-| 0–10    | Create the repository and first Codespace                              | Correct repository is open                          |
-| 10–17   | Activate Copilot, check credits, and open the CLI                                      | Agent opens in the repository                       |
-| 17–20   | Install Superpowers in your chosen agent                               | Plugin is installed and enabled                     |
-| 20–25   | Describe your idea and prepare your profile facts                      | You can explain who the site is for                 |
-| 25–40   | Brainstorm, approve the design, inspect the spec, and review the plan  | Saved spec and plan are approved before code        |
-| 40–85   | Build one task at a time and test the application in the browser | You can see and use the application |
-| 85–100  | Commit and push to GitHub | GitHub links to the repository, spec, and plan |
+| Minutes | Work                                                                  | Checkpoint                                     |
+| ------- | --------------------------------------------------------------------- | ---------------------------------------------- |
+| 0–10    | Create the repository and first Codespace                             | Correct repository is open                     |
+| 10–17   | Activate Copilot, check credits, and open the CLI                     | Agent opens in the repository                  |
+| 17–20   | Install Superpowers in your chosen agent                              | Plugin is installed and enabled                |
+| 20–25   | Describe your idea and prepare your profile facts                     | You can explain who the site is for            |
+| 25–40   | Brainstorm, approve the design, inspect the spec, and review the plan | Saved spec and plan are approved before code   |
+| 40–85   | Build one task at a time and test the application in the browser      | You can see and use the application            |
+| 85–100  | Merge to main, commit, and push to GitHub                              | GitHub links to the repository, spec, and plan |
 
 
-Keep the final 15 minutes for committing and pushing the work to GitHub.
+Keep the final 15 minutes for merging to `main` and publishing the work to GitHub.
 
 ## 1. Create one portfolio repository
 
@@ -83,14 +83,14 @@ the Codespace.
 Check your free education benefit before opening the agent:
 
 1. Open [Education benefits](https://github.com/settings/education/benefits) and
-   follow the prompts to activate Copilot. You can also check the
+  follow the prompts to activate Copilot. You can also check the
    [free activation page](https://github.com/github-copilot/free_signup).
    Complete activation if it confirms free access. If it only offers a paid
    plan or trial, tell the instructor.
 2. Open [Copilot settings](https://github.com/settings/copilot) and note your
-   active plan name.
+  active plan name.
 3. Open [AI usage](https://github.com/settings/billing/ai_usage) and record your
-   included credit allowance and credits used. Tell the instructor if your
+  included credit allowance and credits used. Tell the instructor if your
    allowance is higher than 200 so we can compare accounts.
 
 Education approval and Copilot activation are separate steps. Your benefit can
@@ -205,6 +205,7 @@ flowchart TD
     remaining{"More tasks?"}
     checks["Agent runs final checks<br/>You review results and decisions"]
     preview["Agent runs the application<br/>You test it in the browser and request fixes"]
+    merge["Bring the reviewed work into main"]
     publish["Commit and push to GitHub<br/>Get links to the repository, spec, and plan"]
 
     idea --> design
@@ -219,7 +220,8 @@ flowchart TD
     remaining -->|Yes, authorize the next task| task
     remaining -->|No| checks
     checks -->|Checks pass| preview
-    preview -->|You approve the result| publish
+    preview -->|You approve the result| merge
+    merge --> publish
 ```
 
 
@@ -342,6 +344,8 @@ Do the next task in the plan.
 Show me the changed files and stop.
 ```
 
+
+
 ## 12. Run and test the application
 
 After all tasks are done, review the agent's final checks. Resolve any failures,
@@ -362,30 +366,45 @@ Open the link and compare the website with your approved spec:
 
 Tell the agent what needs changing, then refresh and check again.
 
-## 13. Commit and push to GitHub
+## 13. Merge the reviewed work into main
 
-Once you approve the browser result, have the agent merge the reviewed work
-into `main` if it used a separate branch. Then:
+The agent may have built the application on a separate branch, possibly in a
+worktree. Merging brings those changes into `main`, the version we will publish
+and use for Thursday's Azure migration. Testing the application does not merge it.
+
+Once you approve the browser result, ask:
 
 ```text
-Commit the reviewed work and push main to GitHub.
+Merge the reviewed work into main. Do not push yet.
+```
+
+If the work is already on `main`, no merge is needed. Have the agent confirm
+that `main` contains the version you reviewed.
+
+## 14. Commit and push to GitHub
+
+```text
+Commit the reviewed work and push the main branch to GitHub.
 Give me the GitHub links to the repository, spec, and plan.
 ```
+
+
 
 ## What to type at each gate
 
 
-| Gate                      | What you say after reviewing                                  |
-| ------------------------- | ------------------------------------------------------------- |
-| Start                     | Use the idea and interview prompt in Step 5.                  |
-| Design sections           | "Yes" or "No, because..."                                     |
-| Write the spec            | "I approve the design. Write the spec."                       |
-| Revise the spec           | "Change A to B."                                              |
-| Write the plan            | "I approve the spec. Write the implementation plan."          |
-| Revise the plan           | "Fix task 3."                                                 |
-| Approve the plan          | "I approve the implementation plan."                         |
-| Choose how to execute     | Read and respond to the agent's execution choices.           |
-| Begin today's build       | "Do only the first task in the plan. Show me the changed files and stop." |
-| Continue                  | "Do the next task. Show me the changed files and stop."       |
+| Gate                      | What you say after reviewing                                                     |
+| ------------------------- | -------------------------------------------------------------------------------- |
+| Start                     | Use the idea and interview prompt in Step 5.                                     |
+| Design sections           | "Yes" or "No, because..."                                                        |
+| Write the spec            | "I approve the design. Write the spec."                                          |
+| Revise the spec           | "Change A to B."                                                                 |
+| Write the plan            | "I approve the spec. Write the implementation plan."                             |
+| Revise the plan           | "Fix task 3."                                                                    |
+| Approve the plan          | "I approve the implementation plan."                                             |
+| Choose how to execute     | Read and respond to the agent's execution choices.                               |
+| Begin today's build       | "Do only the first task in the plan. Show me the changed files and stop."        |
+| Continue                  | "Do the next task. Show me the changed files and stop."                          |
 | Preview                   | "Run the application for me and give me the URL so I can test it in my browser." |
-| Publish the reviewed work | "Commit the reviewed work and push main to GitHub."           |
+| Merge                     | "Merge the reviewed work into main. Do not push yet."                           |
+| Publish the reviewed work | "Commit the reviewed work and push main to GitHub."                              |
