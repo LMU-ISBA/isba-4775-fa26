@@ -52,7 +52,7 @@ engine during the design interview.
 | 20–25   | Describe your idea and prepare your profile facts                     | You can explain who the site is for            |
 | 25–40   | Brainstorm, approve the design, inspect the spec, and review the plan | Saved spec and plan are approved before code   |
 | 40–85   | Build one task at a time and test the application in the browser      | You can see and use the application            |
-| 85–100  | Merge to main, commit, and push to GitHub                              | GitHub links to the repository, spec, and plan |
+| 85–100  | Commit, merge to main, and push to GitHub                              | GitHub links to the repository, spec, and plan |
 
 
 Keep the final 15 minutes for merging to `main` and publishing the work to GitHub.
@@ -205,8 +205,8 @@ flowchart TD
     remaining{"More tasks?"}
     checks["Agent runs final checks<br/>You review results and decisions"]
     preview["Agent runs the application<br/>You test it in the browser and request fixes"]
-    merge["Bring the reviewed work into main"]
-    publish["Commit and push to GitHub<br/>Get links to the repository, spec, and plan"]
+    merge["Commit the reviewed changes<br/>Merge into main"]
+    publish["Push main to GitHub<br/>Get links to the repository, spec, and plan"]
 
     idea --> design
     design -->|You approve the design| spec
@@ -366,25 +366,26 @@ Open the link and compare the website with your approved spec:
 
 Tell the agent what needs changing, then refresh and check again.
 
-## 13. Merge the reviewed work into main
+## 13. Commit and merge the reviewed work into main
 
 The agent may have built the application on a separate branch, possibly in a
 worktree. Merging brings those changes into `main`, the version we will publish
-and use for Thursday's Azure migration. Testing the application does not merge it.
+and use for Thursday's Azure migration. Commit any remaining reviewed changes
+on the working branch first, because a merge brings together committed work.
 
 Once you approve the browser result, ask:
 
 ```text
-Merge the reviewed work into main. Do not push yet.
+Commit any remaining reviewed changes, then merge into main. Do not push yet.
 ```
 
 If the work is already on `main`, no merge is needed. Have the agent confirm
 that `main` contains the version you reviewed.
 
-## 14. Commit and push to GitHub
+## 14. Push to GitHub
 
 ```text
-Commit the reviewed work and push the main branch to GitHub.
+Push the main branch to GitHub.
 Give me the GitHub links to the repository, spec, and plan.
 ```
 
@@ -406,5 +407,5 @@ Give me the GitHub links to the repository, spec, and plan.
 | Begin today's build       | "Do only the first task in the plan. Show me the changed files and stop."        |
 | Continue                  | "Do the next task. Show me the changed files and stop."                          |
 | Preview                   | "Run the application for me and give me the URL so I can test it in my browser." |
-| Merge                     | "Merge the reviewed work into main. Do not push yet."                           |
-| Publish the reviewed work | "Commit the reviewed work and push main to GitHub."                              |
+| Commit and merge          | "Commit any remaining reviewed changes, then merge into main. Do not push yet." |
+| Publish the reviewed work | "Push the main branch to GitHub."                                               |
