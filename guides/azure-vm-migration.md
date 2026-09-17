@@ -5,40 +5,43 @@ Session 06 · September 17, 2026
 Draft status: student-facing draft. The Azure procedure, subscription checks,
 region, VM size, image, prices, quotas, and timing require instructor rehearsal.
 
-Today you will make the first migration of your resume application. You will
-discover and map the source, then review a target plan. You will create one
-Azure VM, move code and live data, and compare the two systems. On September
-22, we will finish the public Nginx and systemd operations.
+Today we'll set up our tools and migrate the resume application in one session.
+We'll activate Azure for Students, introduce Claude Code, and connect the Azure
+CLI. Then we'll inventory the source, review a target plan, create an Azure VM,
+and move the code and live data. On September 22, we'll finish the public Nginx
+and systemd operations.
 
-Use Claude Code (preferred) or Codex CLI with Superpowers in your existing
-`career-platform` Codespace. The agent uses the Azure CLI and SSH from there. Keep the source Codespace available as the
-rollback system until the migration evidence is complete.
+Use your existing `career-platform` repository and Codespace. Start the Codespace
+when class begins and keep it running through setup and migration. It holds your
+installed services and live database. Keep it available as the rollback system
+until the migration evidence is complete.
 
-## Before class
+So far, we've used GitHub Copilot CLI. Today introduces Claude Code, our preferred
+agent for this lesson. Codex CLI is an allowed alternative. Run your chosen agent
+with Superpowers in the Codespace, where it can use Azure CLI and SSH.
 
-Complete [Prepare for the Azure VM lesson](azure-vm-preparation.md) before
-Thursday. It covers your saved application, Azure for Students activation,
-agent sign-in, Superpowers installation, and Azure CLI authentication.
+## Our route through class
+
+| Work | Checkpoint |
+| --- | --- |
+| Check Tuesday's application and activate the Azure benefit | Source application is saved and student credit is available |
+| Introduce the coding agent and install Superpowers | Agent signs in and explains the existing project |
+| Sign in with Azure CLI and select the student subscription | Correct account and subscription are visible |
+| Discover the source and map the request path | Source inventory records code, runtime, data, and secrets |
+| Discover Azure choices and review the target plan | Actual region, SKU, image, cost, and network rules are approved |
+| Build the target and connect by SSH | VM identity and restricted SSH access are verified |
+| Install dependencies and transfer the application | Target has runtime files but no secret in Git |
+| Export, transfer, restore, and compare live data | Source and target SQL content match |
+| Run locally on the VM and compare HTTP responses | SSH curl works and browser uses a private tunnel |
+| Record evidence, deallocate the VM, and stop Codespace | VM shows deallocated and retained costs are noted |
+
+Setup is part of today's session. The instructor will adjust the pace for account
+and installation issues, and reserve time for shutdown and recording unfinished
+work. The combined sequence needs a timing rehearsal.
 
 The instructor must rehearse the available regions, sizes, quotas, images,
 estimated costs, and source-IP behavior on the class subscription. No guide can
 promise that a particular region or SKU will be available to every account.
-
-Bring your working `career-platform` repository and its stopped Codespace.
-Start the Codespace when class begins.
-
-## Our route through class
-
-| Minutes | Work | Checkpoint |
-| --- | --- | --- |
-| 0–10 | Sign in with Azure CLI and select the student subscription | Correct account and subscription are visible |
-| 10–25 | Discover the source and map the request path | Source inventory records code, runtime, data, and secrets |
-| 25–40 | Discover Azure choices and review the target plan | Actual region, SKU, image, cost, and network rules are approved |
-| 40–55 | Build the target and connect by SSH | VM identity and restricted SSH access are verified |
-| 55–70 | Install dependencies and transfer the application | Target has runtime files but no secret in Git |
-| 70–85 | Export, transfer, restore, and compare live data | Source and target SQL content match |
-| 85–95 | Run locally on the VM and compare HTTP responses | SSH curl works and browser uses a private tunnel |
-| 95–100 | Record evidence, deallocate the VM, and stop Codespace | VM shows deallocated and retained costs are noted |
 
 If provisioning is blocked, record the failed check honestly and continue with
 the plan and documentation. Do not claim that a target check passed.
@@ -77,7 +80,142 @@ The intended network rules are:
 | MySQL 3306 | Loopback or private only | Always |
 | Application 5000 | Loopback only | Always |
 
-## 1. Sign in and select the subscription
+## 1. Finish and save Tuesday's application
+
+Complete [Build your resume site in Codespaces](resume-site-in-codespaces.md).
+Check the following before moving on:
+
+- Your page shows your profile and a project read from your database.
+- You verified the 200 → 503 → 200 database failure and recovery sequence.
+- Your README explains how to start the services and application.
+- Your reviewed code, `AGENTS.md`, spec, plan, and evidence are on GitHub.
+- You can retrieve your lab database password from your password manager.
+
+Open your repository on GitHub and check the actual files. Keep the same
+Codespace because Git does not preserve its installed services or live database.
+An unfinished resume is fine if its placeholders are clearly labeled.
+
+## 2. Activate Azure for Students through the GitHub Student Developer Pack
+
+Use your existing GitHub Student Developer Pack access to redeem the Microsoft
+Azure benefit:
+
+1. Sign in to the GitHub account approved for the
+   [Student Developer Pack](https://education.github.com/pack).
+2. Find **Microsoft Azure**, the offer for students aged 18+, and follow its
+   redemption instructions.
+3. Complete Microsoft's account and eligibility verification steps to activate
+   **Azure for Students**.
+
+The offer requires eligible full-time university students who are at least 18.
+It includes $100 in credit to use within 12 months without a credit card.
+Use Azure for Students, rather than the different Azure for Students Starter offer.
+See Microsoft's [Azure for Students offer details](https://azure.microsoft.com/en-us/free/students/).
+
+If you already have an active Azure for Students subscription, use it and check
+its remaining credit. You do not need to activate another subscription.
+
+Sign in at https://portal.azure.com and open **Subscriptions**. Confirm your
+Azure for Students subscription is active and check its remaining credit.
+Keep track of which Microsoft account owns it, and have your MFA method available.
+
+If verification fails or you only see a paid offer, tell the instructor.
+Do not upgrade to pay-as-you-go. Wait to create a VM until we review the region,
+VM size, cost, and network rules together later in this guide.
+
+### Compare Azure credit offers
+
+Azure has two different credit offers:
+
+| Signup offer | Credit | Time to use the credit |
+| --- | --- | --- |
+| Azure for Students | $100 | 12 months |
+| Azure free account for new customers | $200 | First 30 days |
+
+Use Azure for Students for this lesson. The standard free account's larger credit
+expires sooner.
+
+## 3. Install and sign in to one coding agent
+
+Open your existing `career-platform` Codespace. Run the installation commands
+below in its Bash terminal, not on your laptop or inside an agent conversation.
+Choose one option and confirm you have access to use it.
+
+### Claude Code, preferred
+
+Install Claude Code, then open a new terminal and check its version:
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+```bash
+claude --version
+claude
+```
+
+Follow the browser sign-in instructions. Claude Code requires an eligible
+subscription or another supported access method. Tell the instructor if access
+is blocked before purchasing anything just to complete this check.
+
+Source: https://code.claude.com/docs/en/quickstart
+
+### Codex CLI, allowed alternative
+
+If you choose Codex and are prepared to cover its access costs, install it:
+
+```bash
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
+
+Open a new terminal, run `codex --version`, then run `codex` from the repository.
+Choose **Sign in with ChatGPT** and verify that your account can use the agent.
+
+Source: https://learn.chatgpt.com/docs/codex/cli
+
+## 4. Install Superpowers in your chosen agent
+
+Tuesday's Copilot plugin installation does not install Superpowers for another
+agent. Complete the matching option below inside the agent conversation.
+
+### In Claude Code
+
+```text
+/plugin install superpowers@claude-plugins-official
+```
+
+Open `/plugin` and check that Superpowers is installed and enabled.
+Exit Claude Code and start a fresh session in `career-platform`.
+
+### In Codex CLI
+
+```text
+/plugins
+```
+
+Search for `superpowers`, open its details, and select **Install Plugin**.
+Confirm installation, then start a fresh Codex session in `career-platform`.
+
+Sources: https://github.com/obra/superpowers#installation
+and https://learn.chatgpt.com/docs/plugins
+
+## 5. Check that the new agent understands your project
+
+Use this prompt in your chosen agent:
+
+```text
+Read AGENTS.md and the saved spec and plan in docs/superpowers/.
+Explain how my application works and what would need to move to another server.
+Do not change files, display secrets, or deploy anything.
+```
+
+Compare its explanation with your files and Tuesday's checks. It should
+identify the application, runtime dependencies, database schema and data, and
+environment variables. Correct any misunderstanding before moving on to migration.
+Use this prompt again when starting a new session so both agents receive the
+same project rules.
+
+## 6. Sign in and select the subscription
 
 First check whether the Azure CLI is already available:
 
@@ -102,8 +240,11 @@ Select the Azure for Students subscription by its actual ID, then verify it:
 
 ```bash
 az account set --subscription "ACTUAL-SUBSCRIPTION-ID"
-az account show --output table
+az account show --query '{Name:name, State:state}' --output table
 ```
+
+Confirm the state is `Enabled`. Replace the placeholder with your subscription ID.
+These commands authenticate and select your subscription without creating resources.
 
 Do not save a subscription ID copied from another student. It is an identifier,
 but it still belongs in your local migration notes rather than source code.
@@ -111,7 +252,20 @@ but it still belongs in your local migration notes rather than source code.
 Checkpoint: show the instructor the subscription name and state. Do not create
 resources until the target plan has been reviewed.
 
-## 2. Discover the source before planning the target
+### Check readiness before creating resources
+
+- [ ] My application and reviewed evidence are on GitHub.
+- [ ] I kept the Codespace containing my application and live database data.
+- [ ] My Azure for Students subscription is active with credit available.
+- [ ] Claude Code or Codex opens, signs in, and answers the project question.
+- [ ] Superpowers is installed in that agent.
+- [ ] Azure CLI signs in and shows the correct student subscription.
+
+Report any blocker to the instructor now. Include the failed step and error text,
+without passwords, login codes, tokens, or private keys. Keep your Codespace
+running as you continue below.
+
+## 7. Discover the source before planning the target
 
 Start Claude Code or Codex from the repository. Ask it to read `AGENTS.md` and
 the saved spec and plan in `docs/superpowers/` before continuing. Keep the same
@@ -148,8 +302,8 @@ Review each proposed command. The discovery should answer these questions:
 - Which secrets must be entered privately on the target?
 - Which content exists in live MySQL but not in Git?
 
-The Codespace was stopped after Tuesday's lesson. Restart its services before
-the read-only checks, then verify the source baseline:
+If the source services aren't running, restart them before the read-only checks.
+Then verify the source baseline:
 
 ```bash
 sudo service mysql start
@@ -191,7 +345,28 @@ prove migration of the current data.
 Checkpoint: explain the difference among `git clone`, package installation,
 secret configuration, schema creation, and live data migration.
 
-## 3. Discover Azure choices and approve a concrete plan
+## 8. Discover Azure choices and approve a concrete plan
+
+For this demonstration, use one small Ubuntu VM that can run the application
+and serve a page to your browser. Start with a size covered by your subscription's
+free allowance, if available, or a low-cost size that meets the app's needs.
+
+In the portal's **Basics** tab, choose **No infrastructure redundancy required**
+for this single-VM exercise. Open **See all sizes** to compare the available
+sizes and their estimates. A default size can show `NotAvailableForSubscription`.
+If it does, try another size or region and check the result again.
+
+Passing validation does not reserve compute capacity. If deployment fails with
+`AllocationFailed`, open **Error details**: Azure may lack capacity for that size
+in that region. Retry or compare another compatible small size or region before
+deploying. An active subscription and available credit do not guarantee capacity.
+See [Microsoft's allocation troubleshooting guidance](https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/allocation-failure).
+
+A failed deployment can still create disks and networking resources. Check the
+resource group and include those resources in your eventual cleanup.
+
+The size estimate alone isn't the total deployment cost. Review the disk and
+public IP as well, and confirm your subscription's credit or free allowance.
 
 Use read-only Azure CLI commands before choosing a target. Ask your agent:
 
@@ -255,7 +430,7 @@ so a later connection may require a reviewed SSH rule update.
 Checkpoint: read the entire create script. Approve only when resource names,
 region, SKU, image, cost, tags, SSH key, and every network rule are explicit.
 
-## 4. Build the target and connect
+## 9. Build the target and connect
 
 Run the reviewed create script from the Codespace:
 
@@ -290,7 +465,7 @@ cat /etc/os-release
 Checkpoint: your notes connect the approved Azure resource identity to the VM
 shell. Keep the SSH session open.
 
-## 5. Install the target runtime and clone the code
+## 10. Install the target runtime and clone the code
 
 Ask your agent to prepare a reviewed target setup sequence. It should install the
 required Ubuntu packages, start local MySQL, clone the repository, create
@@ -333,7 +508,7 @@ and access before creating it. Do not use a world-readable file or add it to Git
 Checkpoint: the target has code and dependencies, but its project data should
 still differ until the export is restored.
 
-## 6. Export and restore live MySQL data
+## 11. Export and restore live MySQL data
 
 Back up from the source Codespace after the deliberate project edit. Use an
 instructor-reviewed `mysqldump` command that prompts for a password or uses
@@ -381,7 +556,7 @@ They may contain private resume content and are not course deliverables.
 Checkpoint: the deliberate source edit appears on the target. Explain why this
 proves movement of live data rather than recreation from `schema.sql`.
 
-## 7. Validate the application without public port 5000
+## 12. Validate the application without public port 5000
 
 Set the ordinary environment variables in the VM shell. Enter `DB_PASSWORD`
 privately without displaying it, or load the reviewed permission-restricted
@@ -426,7 +601,7 @@ migration appear complete. The source remains available for rollback.
 Checkpoint: state which target checks passed and which public path remains for
 September 22. Nginx and Gunicorn can be completed then.
 
-## 8. Document, deallocate, and stop
+## 13. Document, deallocate, and stop
 
 Update `docs/migration.md` with the source inventory and approved target plan.
 Include the selected resources, cost estimate, network rules, commands, and
@@ -469,4 +644,5 @@ No Azure resource was created while drafting this guide. The instructor must
 rehearse CLI installation, authentication, discovery, and pricing evidence. The
 rehearsal must cover resource creation, exact NSG construction, Codespace egress,
 and SSH host verification. It must finish with packages, dump and restore,
-tunneling, deallocation, retained costs, and the full 100-minute route.
+tunneling, deallocation, retained costs, and the combined setup and migration
+sequence within the 100-minute session.

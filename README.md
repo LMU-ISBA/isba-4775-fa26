@@ -16,7 +16,6 @@ the two lesson guides are drafts pending classroom rehearsal:
 
 - [Project 1: Own Your Corner of the Internet](projects/own-your-corner-of-the-internet.md), including the 125-point rubric.
 - [Session 05: Build your resume site in Codespaces](guides/resume-site-in-codespaces.md).
-- [Before Thursday: Prepare for the Azure VM lesson](guides/azure-vm-preparation.md).
 - [Session 06: Migrate your site to an Azure VM](guides/azure-vm-migration.md).
 
 The syllabus, exercise deadlines, and published portfolio template still need
