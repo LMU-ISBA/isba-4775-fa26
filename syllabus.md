@@ -128,8 +128,8 @@ diagram as a JPG and a short investigation report as Markdown. The rubric is
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 |
 | 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | To be announced |
 | 03 | The AI-assisted workflow: clarify, plan, build, verify | Build | To be announced |
-| 04 | Domain delegated to Route 53, live with TLS | Config | Thu 9/24 |
-| 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/1 |
+| 04 | Domain delegated to Route 53, live with TLS | Config | To be announced |
+| 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | To be announced |
 | 06 | Mailbox email with SPF, DKIM, DMARC; Resend verified | Config | Thu 10/8 |
 | 07 | First orchestration: trigger, API call, notification | Build | Thu 10/15 |
 | 08 | **Broken integration: expired credential, changed schema** | Troubleshoot | Tue 10/20 |
@@ -278,11 +278,11 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 9/8 | Ports and web services: requests, responses, HTTP status codes, and investigating a service failure | Ex01 |
 | Thu 9/10 | Running and Troubleshooting Services: physical server, VM, container; Nginx and MySQL; processes, ports, logs; database creation, tables, and sample data | |
 | Tue 9/15 | Database to application: portfolio from a template, repeatable setup, Python build-along, environment variables and Codespaces secrets, failure/recovery, commit/push and a small change; optional instructor PaaS demo | Ex02 proposed; confirm in Brightspace |
-| Thu 9/17 | DNS from the root down: zones, records, TTL, delegation, and nameservers | |
-| Tue 9/22 | TLS: what a certificate claims, how a browser decides it is valid, the four ways it goes invalid, and how ACME gets you one | |
-| Thu 9/24 | Reading a system when it breaks: dig, curl, openssl, and the hypothesis log | Ex04 |
-| Tue 9/29 | Failures that depend on who is asking: DNS propagation and TTL, cached answers, and why an incomplete chain passes in a browser but fails in curl | |
-| Thu 10/1 | Diagnosis walkthroughs, then how mail routes: MX records and the envelope | Ex05 |
+| Thu 9/17 | Building with an agent and Git: executing the implementation plan, the request path through Nginx, the app server, and SQLite, and clone, add, commit, push, and pull | |
+| Tue 9/22 | Migrating to a VM: Azure, SSH, cloud firewall rules, what Git moves and what it doesn't, and moving live SQLite data | |
+| Thu 9/24 | Operating the VM: Nginx as a reverse proxy, Uvicorn, systemd, logs, and recovering after a restart | |
+| Tue 9/29 | A domain and HTTPS: registrar and DNS host, delegation, records, TTL, and certificates | |
+| Thu 10/1 | Diagnosing the request path: DNS caches, certificate failures, ports, processes, and the hypothesis log | |
 | Tue 10/6 | Email authentication: SPF, DKIM, DMARC, and deliverability as a DNS problem | |
 | Thu 10/8 | APIs: REST, JSON, status codes, authentication, rate limits, and idempotency | Ex06 |
 | Tue 10/13 | Orchestration: triggers, webhooks, polling, and joining two systems | |
@@ -304,10 +304,12 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 12/8 | Blog post workshop and final interview prep | Project 2 |
 | Thu 12/10 | Final interview practice in pairs, and a course retrospective | |
 
-September 15 continues the unfinished application build from September 10.
-Topics from September 17 onward remain the planned sequence. Ex03 and the
-personal-site build are being rescheduled; any affected lesson or deadline
-changes will be announced in class and Brightspace.
+September 15 continued the unfinished application build from September 10.
+September 17 went to building the application and to Git, so the Azure
+migration moved to September 22 and the sessions after it moved back one
+meeting. The Ex04 and Ex05 deadlines will be announced in Brightspace. Dates
+after October 1 are still being revised, and changes will be announced in
+class and Brightspace.
 
 ## Work load expectations
 

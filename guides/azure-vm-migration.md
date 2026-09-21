@@ -1,648 +1,520 @@
 # Migrate your resume site to an Azure VM
 
-Session 06 · September 17, 2026
+Session 06 · September 22, 2026
 
-Draft status: student-facing draft. The Azure procedure, subscription checks,
-region, VM size, image, prices, quotas, and timing require instructor rehearsal.
+This guide is a draft. If a screen or an output doesn't match what you see,
+write down what you saw and tell the instructor.
 
-Today we'll set up our tools and migrate the resume application in one session.
-We'll activate Azure for Students, introduce Claude Code, and connect the Azure
-CLI. Then we'll inventory the source, review a target plan, create an Azure VM,
-and move the code and live data. On September 22, we'll finish the public Nginx
-and systemd operations.
+On Thursday, your resume site ran inside your Codespace. Today we'll move it to
+a virtual machine in Azure. A working copy isn't the whole goal. You should be
+able to explain what has to move when an application changes computers, and
+prove that it moved.
 
-Use your existing `career-platform` repository and Codespace. Start the Codespace
-when class begins and keep it running through setup and migration. It holds your
-installed services and live database. Keep it available as the rollback system
-until the migration evidence is complete.
+You won't type the commands today. Your coding agent will propose them, and
+you'll review each one before it runs. You don't need to memorize syntax, but
+you do need the vocabulary: clone, branch, merge, SSH, port, backup. Those
+words are how you tell the agent what you want and how you check that its
+command does that. Each step below gives you a prompt and a short list of
+what to look for before you approve.
 
-So far, we've used GitHub Copilot CLI. Today introduces Claude Code, our preferred
-agent for this lesson. Codex CLI is an allowed alternative. Run your chosen agent
-with Superpowers in the Codespace, where it can use Azure CLI and SSH.
+Our worked example is the FastAPI, Uvicorn, and SQLite app our class built.
+Your file names may differ a little, and the agent will adapt.
 
-## Our route through class
+## Before we start
 
-| Work | Checkpoint |
-| --- | --- |
-| Check Tuesday's application and activate the Azure benefit | Source application is saved and student credit is available |
-| Introduce the coding agent and install Superpowers | Agent signs in and explains the existing project |
-| Sign in with Azure CLI and select the student subscription | Correct account and subscription are visible |
-| Discover the source and map the request path | Source inventory records code, runtime, data, and secrets |
-| Discover Azure choices and review the target plan | Actual region, SKU, image, cost, and network rules are approved |
-| Build the target and connect by SSH | VM identity and restricted SSH access are verified |
-| Install dependencies and transfer the application | Target has runtime files but no secret in Git |
-| Export, transfer, restore, and compare live data | Source and target SQL content match |
-| Run locally on the VM and compare HTTP responses | SSH curl works and browser uses a private tunnel |
-| Record evidence, deallocate the VM, and stop Codespace | VM shows deallocated and retained costs are noted |
+### Set up your agent
 
-Setup is part of today's session. The instructor will adjust the pace for account
-and installation issues, and reserve time for shutdown and recording unfinished
-work. The combined sequence needs a timing rehearsal.
-
-The instructor must rehearse the available regions, sizes, quotas, images,
-estimated costs, and source-IP behavior on the class subscription. No guide can
-promise that a particular region or SKU will be available to every account.
-
-If provisioning is blocked, record the failed check honestly and continue with
-the plan and documentation. Do not claim that a target check passed.
-
-## Know the two systems
-
-Keep the shell location visible in your notes:
-
-| Prompt in this guide | Where commands run | Main purpose |
-| --- | --- | --- |
-| `[codespace]$` | Portfolio Codespace | Coding agent, Git, Azure CLI, source MySQL, and SSH client |
-| `[vm]$` | Azure Ubuntu VM through SSH | Target packages, target MySQL, and target application |
-| `mysql>` | MySQL client on the named host | SQL inspection or a deliberate data change |
-
-The bracketed prompts are location labels. Do not type `[codespace]$`, `[vm]$`,
-or `mysql>` as part of a command. Each command block below contains only the
-text you type.
-
-The preliminary public request path will eventually be:
-
-```text
-Browser → Azure public IP and NSG → Nginx :80 → Gunicorn → app → MySQL
-```
-
-Thursday's minimum is smaller. The application may run locally on the VM and
-answer `curl` through SSH. For browser viewing, use an SSH tunnel. Do not expose
-Flask's development server on public port 5000.
-
-The intended network rules are:
-
-| Port | Exposure | When |
-| --- | --- | --- |
-| SSH 22 | Only the actual public source address used by the Codespace | Today |
-| HTTP 80 | Public only when Nginx is ready | Today if completed, otherwise September 22 |
-| HTTPS 443 | Public later, with TLS configuration | Later |
-| MySQL 3306 | Loopback or private only | Always |
-| Application 5000 | Loopback only | Always |
-
-## 1. Finish and save Tuesday's application
-
-Complete [Build your resume site in Codespaces](resume-site-in-codespaces.md).
-Check the following before moving on:
-
-- Your page shows your profile and a project read from your database.
-- You verified the 200 → 503 → 200 database failure and recovery sequence.
-- Your README explains how to start the services and application.
-- Your reviewed code, `AGENTS.md`, spec, plan, and evidence are on GitHub.
-- You can retrieve your lab database password from your password manager.
-
-Open your repository on GitHub and check the actual files. Keep the same
-Codespace because Git does not preserve its installed services or live database.
-An unfinished resume is fine if its placeholders are clearly labeled.
-
-## 2. Activate Azure for Students through the GitHub Student Developer Pack
-
-Use your existing GitHub Student Developer Pack access to redeem the Microsoft
-Azure benefit:
-
-1. Sign in to the GitHub account approved for the
-   [Student Developer Pack](https://education.github.com/pack).
-2. Find **Microsoft Azure**, the offer for students aged 18+, and follow its
-   redemption instructions.
-3. Complete Microsoft's account and eligibility verification steps to activate
-   **Azure for Students**.
-
-The offer requires eligible full-time university students who are at least 18.
-It includes $100 in credit to use within 12 months without a credit card.
-Use Azure for Students, rather than the different Azure for Students Starter offer.
-See Microsoft's [Azure for Students offer details](https://azure.microsoft.com/en-us/free/students/).
-
-If you already have an active Azure for Students subscription, use it and check
-its remaining credit. You do not need to activate another subscription.
-
-Sign in at https://portal.azure.com and open **Subscriptions**. Confirm your
-Azure for Students subscription is active and check its remaining credit.
-Keep track of which Microsoft account owns it, and have your MFA method available.
-
-If verification fails or you only see a paid offer, tell the instructor.
-Do not upgrade to pay-as-you-go. Wait to create a VM until we review the region,
-VM size, cost, and network rules together later in this guide.
-
-### Compare Azure credit offers
-
-Azure has two different credit offers:
-
-| Signup offer | Credit | Time to use the credit |
-| --- | --- | --- |
-| Azure for Students | $100 | 12 months |
-| Azure free account for new customers | $200 | First 30 days |
-
-Use Azure for Students for this lesson. The standard free account's larger credit
-expires sooner.
-
-## 3. Install and sign in to one coding agent
-
-Open your existing `career-platform` Codespace. Run the installation commands
-below in its Bash terminal, not on your laptop or inside an agent conversation.
-Choose one option and confirm you have access to use it.
-
-### Claude Code, preferred
-
-Install Claude Code, then open a new terminal and check its version:
+We'll use Claude Code. Installing it is the one command you'll type yourself,
+since an agent can't install itself. In your Codespace terminal:
 
 ```bash
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-```bash
-claude --version
-claude
-```
-
-Follow the browser sign-in instructions. Claude Code requires an eligible
-subscription or another supported access method. Tell the instructor if access
-is blocked before purchasing anything just to complete this check.
+Open a new terminal, run `claude` from your `career-platform` folder, and
+follow the sign-in steps. Claude Code needs an eligible plan. Tell the
+instructor if access is blocked before buying anything. Copilot CLI works for
+every prompt below too.
 
 Source: https://code.claude.com/docs/en/quickstart
 
-### Codex CLI, allowed alternative
-
-If you choose Codex and are prepared to cover its access costs, install it:
-
-```bash
-curl -fsSL https://chatgpt.com/codex/install.sh | sh
-```
-
-Open a new terminal, run `codex --version`, then run `codex` from the repository.
-Choose **Sign in with ChatGPT** and verify that your account can use the agent.
-
-Source: https://learn.chatgpt.com/docs/codex/cli
-
-## 4. Install Superpowers in your chosen agent
-
-Tuesday's Copilot plugin installation does not install Superpowers for another
-agent. Complete the matching option below inside the agent conversation.
-
-### In Claude Code
+### Use the same loop for every step
 
 ```text
-/plugin install superpowers@claude-plugins-official
+ASK → UNDERSTAND → REVIEW → EXECUTE → VERIFY
 ```
 
-Open `/plugin` and check that Superpowers is installed and enabled.
-Exit Claude Code and start a fresh session in `career-platform`.
+Every prompt in this guide ends by asking the agent to wait for your review.
+When it proposes a command, ask about any part you can't explain. Approve it
+only when you can say what it will change and where it will run. Then check
+the result yourself.
 
-### In Codex CLI
+Don't prompt "deploy my application." Your agent may have written a
+`deploy/README.md` that sets up Nginx, HTTPS, and systemd and opens public
+ports. That's a later lesson. Today every port stays closed except SSH from
+one address.
+
+### Merge Thursday's work
+
+The VM will copy your code from the `main` branch on GitHub, and Thursday's
+work is still on a feature branch.
 
 ```text
-/plugins
+My work is on a feature branch that was pushed to GitHub but never merged.
+Open a pull request into main, show me the changed files, and merge it after
+I approve. Then switch this Codespace to main and pull the latest changes.
+Also find my SQLite database file and tell me its full path.
+Propose each command and wait for my review.
 ```
 
-Search for `superpowers`, open its details, and select **Install Plugin**.
-Confirm installation, then start a fresh Codex session in `career-platform`.
+Look for these before you approve:
 
-Sources: https://github.com/obra/superpowers#installation
-and https://learn.chatgpt.com/docs/plugins
+| Term | What it means | What the command looks like |
+| --- | --- | --- |
+| Pull request | A request to review a branch and merge it | `gh pr create` |
+| Merge | Bring a branch's commits into `main` | `gh pr merge` |
+| Switch | Move this folder to another branch | `git switch main` |
+| Pull | Download commits from GitHub into this folder | `git pull` |
 
-## 5. Check that the new agent understands your project
+The database probably lives inside `.worktrees/`, since the agent built the
+app in a separate worktree. Write down the path, because this file is your
+live data. If the agent can't reach GitHub, merge the pull request on
+github.com with Compare & pull request instead.
 
-Use this prompt in your chosen agent:
+If your page looked unstyled on Thursday or its links pointed to
+`localhost:8000`, fix that before merging:
 
 ```text
-Read AGENTS.md and the saved spec and plan in docs/superpowers/.
-Explain how my application works and what would need to move to another server.
-Do not change files, display secrets, or deploy anything.
+My page links and stylesheet use absolute URLs built from the request host,
+so they break behind a forwarded port. Change them to relative paths.
+Show me the diff before committing.
 ```
 
-Compare its explanation with your files and Tuesday's checks. It should
-identify the application, runtime dependencies, database schema and data, and
-environment variables. Correct any misunderstanding before moving on to migration.
-Use this prompt again when starting a new session so both agents receive the
-same project rules.
-
-## 6. Sign in and select the subscription
-
-First check whether the Azure CLI is already available:
-
-```bash
-az --version
-```
-
-If it is missing, use the current Ubuntu instructions at:
-https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux
-
-Use Microsoft's Ubuntu/Debian installation steps, then repeat the version
-check. If installation is blocked, show the instructor the failed step.
-
-Sign in from the Codespace and complete browser authentication:
-
-```bash
-az login --use-device-code
-az account list --output table
-```
-
-Select the Azure for Students subscription by its actual ID, then verify it:
-
-```bash
-az account set --subscription "ACTUAL-SUBSCRIPTION-ID"
-az account show --query '{Name:name, State:state}' --output table
-```
-
-Confirm the state is `Enabled`. Replace the placeholder with your subscription ID.
-These commands authenticate and select your subscription without creating resources.
-
-Do not save a subscription ID copied from another student. It is an identifier,
-but it still belongs in your local migration notes rather than source code.
-
-Checkpoint: show the instructor the subscription name and state. Do not create
-resources until the target plan has been reviewed.
-
-### Check readiness before creating resources
-
-- [ ] My application and reviewed evidence are on GitHub.
-- [ ] I kept the Codespace containing my application and live database data.
-- [ ] My Azure for Students subscription is active with credit available.
-- [ ] Claude Code or Codex opens, signs in, and answers the project question.
-- [ ] Superpowers is installed in that agent.
-- [ ] Azure CLI signs in and shows the correct student subscription.
-
-Report any blocker to the instructor now. Include the failed step and error text,
-without passwords, login codes, tokens, or private keys. Keep your Codespace
-running as you continue below.
-
-## 7. Discover the source before planning the target
-
-Start Claude Code or Codex from the repository. Ask it to read `AGENTS.md` and
-the saved spec and plan in `docs/superpowers/` before continuing. Keep the same
-design, spec, and plan review gates when changing agents.
-
-This guide uses MySQL as its worked example. Tuesday's interview may have
-produced a different database engine, database names, or file paths.
-This guide uses `portfolio.projects`, `portfolio_reader`, and `application/app.py`
-as examples. Have the agent adapt SQL, setup scripts, and startup commands to
-your actual implementation, and explain each change before you run it.
-
-Ask your agent to perform read-only discovery:
+## 1. Understand the migration
 
 ```text
-Use Superpowers to help me migrate this resume application from its Codespace to
-one Azure Ubuntu VM. Begin with read-only discovery. Do not install packages,
-edit files, stop services, create Azure resources, or expose ports.
+SOURCE                              TARGET
 
-Inspect the repository, git status, docs, application requirements, startup
-command, environment variable names, listening ports, service status, schema,
-and safe row counts. Never display DB_PASSWORD or other credentials. Do not read
-private keys. Save a proposed source inventory in docs/migration.md only after I
-review it. Separate repository files from runtime state and live MySQL data.
-Mark every command with [codespace], [vm], or mysql>.
+GitHub Codespace                    Azure VM (Ubuntu Linux)
+├── Uvicorn :8000 running FastAPI   ├── Uvicorn :8000   (not yet)
+└── data/resume.db (SQLite file)    └── data/resume.db  (not yet)
 ```
 
-Review each proposed command. The discovery should answer these questions:
+Before touching Azure, answer this: what actually has to move?
 
-- Which commit will be cloned on the target?
-- Which Python and package versions does the application need?
-- Which services are installed, running, and listening?
-- Which database, table, and reader grants must be recreated?
-- Which ordinary configuration can be documented?
-- Which secrets must be entered privately on the target?
-- Which content exists in live MySQL but not in Git?
+| Part of the system | Example in our project | How it gets to the VM |
+| --- | --- | --- |
+| Application code | `app/`, templates, `pyproject.toml`, `uv.lock` | Clone from GitHub |
+| Operating system packages | `git`, `sqlite3` | Install with Ubuntu's package manager |
+| Python and its packages | The `.venv` folder built from `uv.lock` | Rebuild with `uv` |
+| Configuration | `.env` with `DATABASE_URL` | Recreate from `.env.example` |
+| Secrets | None yet, but API keys come later | Enter privately on the VM, never in Git |
+| Live data | `data/resume.db` | Back up, copy over SSH, and check |
+| Running process | Uvicorn | Start it on the VM |
 
-If the source services aren't running, restart them before the read-only checks.
-Then verify the source baseline:
+Git moves one row of that table. Everything else gets rebuilt, recreated, or
+copied another way, which is why migrating an application isn't the same as
+cloning its repository.
 
-```bash
-sudo service mysql start
-curl -i http://127.0.0.1:5000/
-```
+There's no database server to install. SQLite isn't a service listening on a
+port. It's a library inside Python that reads and writes one file, so the
+whole database travels as that file. Your repository ignores `*.db` on
+purpose. The file changes whenever content changes, and it can hold private
+information.
 
-Start the Flask application first if port 5000 is not listening. Record actual
-output without credentials. Do not migrate until the source page returns HTTP
-200 with the expected MySQL project data.
-
-Before the backup, make one deliberate project edit in source MySQL. Use an
-honest project description you wrote, or label it clearly as a migration test
-record. Do not present a test record as experience. For example, connect with
-the application reader to inspect data, then use the local administrator for the
-reviewed `UPDATE` or `INSERT` statement:
-
-```bash
-mysql -h 127.0.0.1 -P 3306 -u portfolio_reader -p
-```
-
-At `mysql>`, inspect the current rows, then leave the reader session:
-
-```sql
-SELECT id, title, description FROM portfolio.projects ORDER BY id;
-exit
-```
-
-Now open the local administrator client:
-
-```bash
-sudo mysql
-```
-
-At `mysql>`, run the reviewed `UPDATE` or `INSERT`, select the changed row, and
-then run `exit`. Save the chosen title and description in your private evidence.
-Do not rerun the seed file. Reseeding would recreate starting data rather than
-prove migration of the current data.
-
-Checkpoint: explain the difference among `git clone`, package installation,
-secret configuration, schema creation, and live data migration.
-
-## 8. Discover Azure choices and approve a concrete plan
-
-For this demonstration, use one small Ubuntu VM that can run the application
-and serve a page to your browser. Start with a size covered by your subscription's
-free allowance, if available, or a low-cost size that meets the app's needs.
-
-In the portal's **Basics** tab, choose **No infrastructure redundancy required**
-for this single-VM exercise. Open **See all sizes** to compare the available
-sizes and their estimates. A default size can show `NotAvailableForSubscription`.
-If it does, try another size or region and check the result again.
-
-Passing validation does not reserve compute capacity. If deployment fails with
-`AllocationFailed`, open **Error details**: Azure may lack capacity for that size
-in that region. Retry or compare another compatible small size or region before
-deploying. An active subscription and available credit do not guarantee capacity.
-See [Microsoft's allocation troubleshooting guidance](https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/allocation-failure).
-
-A failed deployment can still create disks and networking resources. Check the
-resource group and include those resources in your eventual cleanup.
-
-The size estimate alone isn't the total deployment cost. Review the disk and
-public IP as well, and confirm your subscription's credit or free allowance.
-
-Use read-only Azure CLI commands before choosing a target. Ask your agent:
+Ask your agent to check your understanding against your actual project:
 
 ```text
-Propose read-only Azure CLI discovery commands for my selected subscription.
-Show the regions available to the subscription, relevant VM SKUs and their
-restrictions or quota, and current Canonical Ubuntu images. Do not assume a
-region, SKU, image alias, quota, or price. Do not create resources.
-
-After I run the commands, compare only the actual results I provide. Help me
-select one region, one small VM SKU, and one exact image URN. Include the current
-estimated hourly cost and its source or pricing-calculator evidence. State what
-is and is not covered by my student credit. Mark unknowns as unknown.
+Read my repository and explain what would have to move for this app to run
+on a new Ubuntu server. Separate what Git carries from what it doesn't.
+Don't change anything.
 ```
 
-Typical discovery starts with commands such as these. The agent must adjust the
-queries to the current CLI output and your subscription:
+Checkpoint: in your own words, what does Git move, and what doesn't it move?
+Where did the agent's answer differ from the table?
 
-```bash
-az account list-locations --output table
-az vm list-skus --location "CANDIDATE-REGION" --resource-type virtualMachines --all --output table
-az vm image list --location "CANDIDATE-REGION" --publisher Canonical --all --output table
-az vm list-usage --location "CANDIDATE-REGION" --output table
-```
-
-The Azure for Students page may list free service quantities, but availability,
-quota, and your remaining credit still need account-specific checks.
-
-Ask your agent to produce two reviewed scripts, without running them:
+## 2. Create the destination
 
 ```text
-Using my selected values, create scripts/azure-create-target.sh and
-scripts/azure-deallocate-target.sh. Use explicit variables for the exact resource
-group, VM name, region, SKU, image URN, administrator username, tags, network
-names, and SSH public-key path. Do not repurpose HOME.
-
-The create script must stop on error. It must create one tagged resource group
-and the reviewed VM and networking resources. It must not use a default rule
-that opens SSH to the world. Create SSH access for only the /32 public egress
-address actually used by this Codespace. Do not open ports 80 or 443 unless the
-plan says Nginx is ready. Never open 3306 or 5000 publicly.
-
-Generate or reference an SSH key outside the repository. Never commit private or
-public keys. Show the exact az commands, selected values, estimated cost, and
-network rules for my review. Include read-only verification commands. Do not run
-either script.
-
-The deallocate script must use az vm deallocate and then query instance view to
-show the power state. It must not delete the resource group.
+Azure subscription (your student credit)
+└── Resource group: rg-career-platform
+    └── Virtual machine: vm-career-platform
+        ├── Ubuntu Linux disk
+        ├── Network interface with a private IP
+        ├── Public IP
+        └── Network security group (the firewall rules)
 ```
 
-Use a dedicated SSH key stored outside the repository, for example
-`~/.ssh/isba4775_azure` in the Codespace. Confirm `.ssh` is not inside
-`/workspaces/career-platform`.
+Every cloud provider has these pieces under different names:
 
-Find the Codespace's current public egress address with an instructor-approved
-public IP check. Use that address with a `/32` suffix in the SSH rule. Your home
-IP is wrong when SSH originates in the Codespace. Codespace egress can change,
-so a later connection may require a reviewed SSH rule update.
+| Azure name | General idea | Elsewhere |
+| --- | --- | --- |
+| Virtual machine | A computer made from a slice of a physical server | AWS EC2, Google Compute Engine |
+| Resource group | A folder for related resources, useful for cleanup | AWS tags, Google Cloud projects |
+| Public IP | An address reachable from the Internet | Any cloud or home router |
+| Network security group | A cloud firewall with allow and deny rules | AWS security groups |
+| SSH | Remote administration of a Linux server | Every Linux server |
 
-Checkpoint: read the entire create script. Approve only when resource names,
-region, SKU, image, cost, tags, SSH key, and every network rule are explicit.
+### Activate your student credit
 
-## 9. Build the target and connect
+Redeem Microsoft Azure in the
+[GitHub Student Developer Pack](https://education.github.com/pack). Azure for
+Students includes $100 of credit for 12 months with no credit card. Sign in at
+https://portal.azure.com, open Subscriptions, and confirm yours is Active. If
+you only see a paid offer, tell the instructor and don't upgrade.
 
-Run the reviewed create script from the Codespace:
+### Make an SSH key and find your address
 
-```bash
-bash scripts/azure-create-target.sh
+An SSH key has two halves. The public half goes to the server, and the private
+half stays with you to prove who you are. The agent will run SSH from the
+Codespace, so the key belongs there.
+
+```text
+Create an SSH key pair for my Azure VM at ~/.ssh/isba4775_azure, outside
+this repository, with no passphrase for today. Show me only the public key.
+Then tell me this Codespace's public IPv4 address. Wait for my review.
 ```
 
-Use its read-only verification commands to record the VM identity, image, size,
-public IP, tags, provisioning state, power state, and NSG rules. Compare the
-results with the approved plan.
+Look for these before you approve:
 
-Connect with your named key. Do not disable host-key checking. On the first
-connection, compare the displayed fingerprint with Azure's host information or
-the instructor's reviewed evidence before accepting it:
+| Term | What it means | What the command looks like |
+| --- | --- | --- |
+| Key pair | A private file and a matching `.pub` file | `ssh-keygen -t rsa -b 4096 -f ~/.ssh/isba4775_azure` |
+| Public IP check | Ask an outside service what address you came from | `curl -4 -s https://api.ipify.org` |
 
-```bash
-ssh -i ~/.ssh/isba4775_azure AZURE-USER@ACTUAL-PUBLIC-IP
+The agent should never display the private key, only the `.pub` line. Copy
+that line and the address for the portal. Don't use the portal's My IP
+address option. It reports your laptop's address, because the browser runs
+on your laptop, but SSH will come from the Codespace.
+
+### Create the VM in the portal
+
+This part happens in the browser, so you'll click through it yourself.
+Choosing a size and region is real work in a job. The instructor has picked
+a combination that deployed on a student subscription, so today we can focus
+on the migration.
+
+| Portal field | Value |
+| --- | --- |
+| Resource group | Create new: `rg-career-platform` |
+| Virtual machine name | `vm-career-platform` |
+| Region | (US) West US 2 |
+| Availability options | No infrastructure redundancy required |
+| Image | Ubuntu Server 24.04 LTS, x64 Gen2 |
+| Size | `Standard_B2ts_v2`, 2 vCPUs, 1 GiB memory |
+| Authentication type | SSH public key, username `azureuser` |
+| SSH public key source | Use existing public key, and paste your `.pub` line |
+| Public inbound ports | None |
+| OS disk type, on the Disks tab | Standard HDD |
+| Delete public IP and NIC when VM is deleted, on the Networking tab | Checked |
+
+Leave the other tabs alone, then select Review + create and Create. If the
+size is unavailable or deployment fails with `AllocationFailed`, tell the
+instructor rather than trying other sizes. While Azure works, ask your agent
+what each resource in the diagram does, and check its answer against the table.
+
+### Open SSH for one address
+
+We chose None for inbound ports so Azure wouldn't create a rule allowing SSH
+from anywhere. Now add the one rule we want. Open the VM, select Networking,
+and add an inbound port rule:
+
+| Field | Value |
+| --- | --- |
+| Source | IP Addresses, with your Codespace address followed by `/32` |
+| Source port ranges | `*` |
+| Destination port ranges | `22` |
+| Protocol and action | TCP, Allow |
+| Priority and name | `300`, `Allow-SSH-Codespace` |
+
+`/32` means exactly one address. The source port is `*` because the SSH
+client picks a random port each time, and 22 is the service you're reaching.
+
+| Port | Service | Reachable from | When |
+| --- | --- | --- | --- |
+| 22 | SSH | Your Codespace address only | Today |
+| 8000 | Uvicorn | Only the VM itself, at `127.0.0.1` | Always |
+| None | SQLite | Nothing, since it's a file | Always |
+| 80 and 443 | HTTP and HTTPS through Nginx | The Internet | Later |
+
+Checkpoint: why isn't a resource group a network boundary? Does allowing port
+22 start an SSH server?
+
+## 3. Connect to the VM
+
+```text
+Agent in the Codespace
+      │  SSH, TCP port 22
+      ▼
+Public IP ─▶ network security group: is this source allowed?
+      │
+      ▼
+Azure VM ─▶ sshd ─▶ runs the command as azureuser
 ```
 
-If SSH times out, check the current Codespace egress address and the NSG rule.
-Do not replace the rule with `0.0.0.0/0`.
+Copy the public IP from the VM's Overview page, then:
 
-On the VM, identify the target before making changes:
-
-```bash
-whoami
-hostname
-pwd
-cat /etc/os-release
+```text
+My Azure VM's public IP is PUBLIC-IP and the user is azureuser. Using the key
+at ~/.ssh/isba4775_azure, connect over SSH and run whoami, hostname, pwd, and
+show the operating system version. Explain which parts of your command run in
+the Codespace and which run on the VM. Wait for my review.
 ```
 
-Checkpoint: your notes connect the approved Azure resource identity to the VM
-shell. Keep the SSH session open.
+Look for these before you approve:
 
-## 10. Install the target runtime and clone the code
+| Term | What it means | What the command looks like |
+| --- | --- | --- |
+| SSH | Run commands on a remote computer over port 22 | `ssh -i ~/.ssh/isba4775_azure azureuser@PUBLIC-IP` |
+| Remote command | The part in quotes runs on the VM, not here | `'whoami; hostname'` |
+| Host key | The server's identity, saved on first connection | `-o StrictHostKeyChecking=accept-new` |
 
-Ask your agent to prepare a reviewed target setup sequence. It should install the
-required Ubuntu packages, start local MySQL, clone the repository, create
-`application/.venv/`, and install `application/requirements.txt` for the Flask
-example. Adapt the packages to your application and chosen database engine.
-Keep the same database engine during this migration.
+The host-key option is the agent's way of answering "yes, trust this server"
+the first time. If SSH ever warns that a known server's key changed, stop and
+ask the instructor.
 
-Run the reviewed commands in the VM shell. The sequence should use the actual
-repository URL and a directory owned by the Azure user. Confirm the checked-out
-commit matches the source:
+The hostname should be `vm-career-platform`. From here on, three computers are
+involved:
 
-```bash
-git clone ACTUAL-PUBLIC-REPOSITORY-URL
-cd career-platform
-git rev-parse HEAD
+| Location | What runs there today |
+| --- | --- |
+| Your laptop | Only the browser |
+| Your Codespace | The source app, your agent, Git, and the SSH client |
+| The Azure VM | The target app and its copy of the data |
+
+Checkpoint: the agent ran `hostname` and got `vm-career-platform`. Where did
+that command actually run, and how do you know?
+
+If SSH times out, the firewall is probably dropping the connection. Check that
+the VM is running, that the agent used its current public IP, and that your
+Codespace address still matches the `/32` rule. A restarted Codespace can get
+a new address, so update the rule to the new `/32`. Never widen it to Any. If
+SSH says `Permission denied`, the connection reached the server, so the
+username or key is wrong instead.
+
+## 4. Rebuild the application environment
+
+```text
+install Linux packages ─▶ clone ─▶ install uv and packages ─▶ recreate .env
 ```
 
-A clone transfers committed files. It does not transfer the source virtual
-environment, installed services, environment variables, secrets, or MySQL data.
+Why can't we just clone the repository and be finished? Look back at the
+phase 1 table before you continue.
 
-Create the target schema and read-only account with reviewed copies of the
-repository setup files. In the VM's Bash shell, read and export the password
-without displaying it, then run the reviewed account script:
-
-```bash
-read -rsp 'DB password: ' DB_PASSWORD
-printf '\n'
-export DB_PASSWORD
-python3 scripts/configure-reader.py
+```text
+On the VM, over SSH: install git and sqlite3, clone my career-platform
+repository from GitHub, install uv, and build the Python environment from the
+lock file without dev dependencies. Create .env from .env.example and create
+the data folder. Don't run alembic or the seed script, since the real data is
+coming from the Codespace. Then show me the commit ID on the VM and on main in
+this Codespace. Propose the commands and wait for my review.
 ```
 
-Do not transmit the value through agent chat or place it in shell history, a
-command argument, or a repository file.
+Look for these before you approve:
 
-For repeated starts, you may use a private runtime configuration outside the
-repository. Ask your agent to propose its exact path, owner, `chmod 600` permissions,
-and safe loading command without showing the value. Review its Git separation
-and access before creating it. Do not use a world-readable file or add it to Git.
+| Term | What it means | What the command looks like |
+| --- | --- | --- |
+| Package manager | Ubuntu's app store for the command line | `sudo apt-get install -y git sqlite3` |
+| `sudo` | Run as administrator, needed to install software | `sudo ...` |
+| Clone | Copy a repository and its history from GitHub | `git clone https://github.com/...` |
+| Lock file | The exact package versions the Codespace tested | `uv sync --locked --no-dev` |
+| Commit ID | A fingerprint for one exact version of the code | `git rev-parse HEAD` |
 
-Checkpoint: the target has code and dependencies, but its project data should
-still differ until the export is restored.
+Check that the two commit IDs match. Matching IDs prove the code is the same.
 
-## 11. Export and restore live MySQL data
+Checkpoint: what arrived with the clone, and what's still missing? Did your
+database come with it? Why wasn't the `.venv` folder stored in Git? Its files
+were built for one specific machine.
 
-Back up from the source Codespace after the deliberate project edit. Use an
-instructor-reviewed `mysqldump` command that prompts for a password or uses
-local administrator access. Never put a password after `-p` or in an argument.
-Write the dump outside the repository:
+`.env` is ignored by Git, so it never left the Codespace. Today it only holds
+the database path. Later, secrets like API keys go in the same kind of file,
+entered on the server by hand.
 
-```bash
-umask 077
-mkdir -p /tmp/isba4775-migration
-sudo mysqldump --no-tablespaces --skip-triggers portfolio projects > /tmp/isba4775-migration/portfolio-projects.sql
-ls -l /tmp/isba4775-migration/portfolio-projects.sql
+The prompt tells the agent to skip `alembic` and the seed script because they
+would build a fresh database from the seed content in your code. We want the
+real one, including anything that changed after seeding. If the agent tries
+to run them anyway, stop it.
+
+## 5. Move application state
+
+```text
+Codespace: data/resume.db
+      │  backup makes a consistent copy
+      ▼
+/tmp/migration/resume.db
+      │  scp copies it over SSH
+      ▼
+VM: ~/career-platform/data/resume.db
+      │  integrity check and a query
+      ▼
+Same data, new computer
 ```
 
-Inspect the dump without publishing private content. Confirm that it names the
-expected database objects and contains the deliberate edit. Do not add the dump
-to Git.
+### Change something first
 
-Create a private transfer directory on the VM before copying the file:
+If we copy the database unchanged, a real migration and a fresh seed look the
+same. So change one row in the source first:
 
-```bash
-mkdir -p ~/migration-private
-chmod 700 ~/migration-private
+```text
+In my SQLite database in this Codespace, show me my projects. Then change one
+project's summary to "Migration test, September 22" so I can prove the data
+moved. Show me the SQL before running it.
 ```
 
-In a Codespace terminal, transfer it over the restricted SSH connection:
+The agent should propose a `SELECT` to read rows and an `UPDATE` to change one.
+Check that the `UPDATE` has a `WHERE` clause naming a single project. Without
+one, it changes every row. Reload your Codespace site and confirm the change
+shows. The label makes clear it's a test, not experience.
 
-```bash
-scp -i ~/.ssh/isba4775_azure /tmp/isba4775-migration/portfolio-projects.sql AZURE-USER@ACTUAL-PUBLIC-IP:~/migration-private/
+### Back up, copy, and check
+
+```text
+Make a consistent backup of my SQLite database in /tmp/migration, outside the
+repository, and check its integrity. Copy it over SSH to
+~/career-platform/data/resume.db on the VM, restrict it to my user, check its
+integrity there, and show my projects from the VM's copy. Then delete the
+Codespace copy. Wait for my review.
 ```
 
-On the VM, restore into the fresh target and inspect the rows:
+Look for these before you approve:
 
-```bash
-sudo mysql portfolio < ~/migration-private/portfolio-projects.sql
-sudo mysql -e 'SELECT id, title, description FROM portfolio.projects ORDER BY id;'
+| Term | What it means | What the command looks like |
+| --- | --- | --- |
+| Backup | A complete copy, even if the app is writing | `sqlite3 data/resume.db ".backup '/tmp/migration/resume.db'"` |
+| Integrity check | SQLite verifies the file isn't damaged | `PRAGMA integrity_check`, which prints `ok` |
+| `scp` | Copy a file over SSH | `scp -i ~/.ssh/isba4775_azure ... azureuser@PUBLIC-IP:...` |
+| Permissions | Only your user can read the file | `chmod 600` |
+
+A plain `cp` could catch the file halfway through a write. `.backup` can't.
+Your test summary should appear in the VM's copy.
+
+Checkpoint: give two reasons Git couldn't move this data.
+
+## 6. Verify the migration
+
+```text
+On the VM, start Uvicorn for my app on 127.0.0.1 port 8000 so it keeps
+running after your command returns. Then, over SSH, check /health, search
+the projects page for "Migration test", and show which address port 8000 is
+listening on. Wait for my review.
 ```
 
-The target reader grant remains `SELECT` only on `portfolio.projects`. Recheck
-it after restore. Compare source and target row count, IDs, titles, and
-descriptions. A matching count alone is not enough.
+Look for these before you approve:
 
-After evidence is recorded, remove the source dump and target private copy.
-They may contain private resume content and are not course deliverables.
+| Term | What it means | What the command looks like |
+| --- | --- | --- |
+| Loopback | `127.0.0.1`, reachable only from the VM itself | `--host 127.0.0.1 --port 8000` |
+| Background process | Keeps running after SSH disconnects | `nohup ... &` |
+| Listening sockets | Which ports are open, and on which address | `ss -lnt` |
 
-Checkpoint: the deliberate source edit appears on the target. Explain why this
-proves movement of live data rather than recreation from `schema.sql`.
+On Thursday the app used `--host 0.0.0.0` so Codespaces could forward the
+port. Here, `127.0.0.1` means only programs on the VM can connect. The
+listening address should show `127.0.0.1:8000`, not `0.0.0.0:8000`. Running
+the app in the background with `nohup` is a stopgap. On Thursday, systemd
+takes over that job.
 
-## 12. Validate the application without public port 5000
+Now test from outside the VM:
 
-Set the ordinary environment variables in the VM shell. Enter `DB_PASSWORD`
-privately without displaying it, or load the reviewed permission-restricted
-runtime configuration. A new SSH session does not inherit the earlier export,
-so repeat the private `read` and `export` sequence when needed. Then run the
-reviewed application command with debug and reloader off, bound only to loopback:
-
-```bash
-cd ~/career-platform/application
-.venv/bin/python -m flask --app app run --host=127.0.0.1 --port=5000 --no-debugger --no-reload
+```text
+From this Codespace, not over SSH, try to reach port 8000 on the VM's public
+IP with a 5-second timeout. Tell me what happened and why.
 ```
 
-From a second SSH session, test on the VM:
+It should time out.
 
-```bash
-curl -i http://127.0.0.1:5000/
-ss -lnt
+```text
+Internet
+   │
+Public IP
+   │
+Network security group: port 22 only, from your Codespace only
+   │
+Ubuntu VM
+   ├── sshd :22
+   └── Uvicorn on 127.0.0.1:8000 ─▶ data/resume.db
 ```
 
-Expect HTTP 200 with the migrated project content. Port 5000 must listen on
-`127.0.0.1`, not `0.0.0.0` or the public address.
+Checkpoint: why does the request work from inside the VM and fail from the
+Codespace? Name both things blocking it.
 
-For browser viewing, create a tunnel from the Codespace to the VM:
+### See it in the browser
 
-```bash
-ssh -i ~/.ssh/isba4775_azure -N -L 5001:127.0.0.1:5000 AZURE-USER@ACTUAL-PUBLIC-IP
+```text
+Open an SSH tunnel in the background from Codespace port 8001 to port 8000
+on the VM, so I can view the app without opening a public port.
+Wait for my review.
 ```
 
-Forward Codespace port 5001 as **Private**, then open its forwarded URL. This
-does not create a public Azure rule for port 5000.
+The agent should propose `ssh -f -N -L 8001:127.0.0.1:8000 ...`. The `-L`
+connects a port here to a port there, inside the SSH connection. Open the
+Ports tab, forward `8001` if it isn't listed, keep it Private, and open it.
+You're looking at the VM's app.
 
-Compare these four pieces of evidence:
+### Prove it
 
-1. Source SQL rows and target SQL rows.
-2. Source HTTP status and target HTTP status.
-3. Source page content and target page content.
-4. The deliberate project edit on both pages.
-
-Record blocked checks as blocked. Do not rewrite the notes to make a partial
-migration appear complete. The source remains available for rollback.
-
-Checkpoint: state which target checks passed and which public path remains for
-September 22. Nginx and Gunicorn can be completed then.
-
-## 13. Document, deallocate, and stop
-
-Update `docs/migration.md` with the source inventory and approved target plan.
-Include the selected resources, cost estimate, network rules, commands, and
-evidence. Record failures, the rollback source, and September 22 work. Keep
-secrets, SSH keys, dumps, and private resume content out of Git.
-
-Commit and push the reviewed documentation and scripts from the Codespace. Do
-not commit generated credentials, SSH material, or a database dump.
-
-Run the reviewed deallocation script:
-
-```bash
-bash scripts/azure-deallocate-target.sh
+```text
+Start my app in this Codespace from the folder that holds the source
+database. Then compare source and target: commit ID, database integrity,
+the migration test row, the /health response, and the projects page content.
+Show the results as a table.
 ```
 
-It must run `az vm deallocate`, then query the VM's instance view. Confirm the
-power state is `VM deallocated`, not merely `VM stopped`. A stopped, allocated
-VM still incurs compute charges. A deallocated VM releases compute allocation,
-but retained disks and some networking resources can still cost money:
-https://learn.microsoft.com/en-us/azure/virtual-machines/states-billing
+| Check | Source (Codespace) | Target (VM) |
+| --- | --- | --- |
+| Commit ID | Recorded | Same ID |
+| Database integrity | `ok` | `ok` |
+| Test row | The migration test summary | Same summary |
+| Health check | `{"status":"ok"}` | Same |
+| Page content | Projects page | Same content on port 8001 |
 
-Do not delete the resource group at the end of class. The deallocated VM will
-not serve the site until you start it again. Final public availability follows
-the later Nginx, Gunicorn, systemd, and TLS work.
+Compare the agent's table with what you see in the browser. If any row doesn't
+match, the migration isn't done. Record the difference rather than guessing
+why.
 
-Stop the portfolio Codespace after recording and pushing the work. Your next
-step is to bring `docs/migration.md` to the September 22 operations lab and
-start the VM only when you are ready to continue.
+### Record your evidence and shut down
 
-## Draft sources and rehearsal note
+```text
+Write docs/migration.md with the resource names, region, and size, my "what
+moves" table, the comparison results, and anything that failed. Leave out my
+IP address, keys, and database contents. Show it to me before committing,
+then commit and push.
+```
 
-These sources were checked on September 15, 2026:
+Read the file before you approve the commit. Then:
 
-- https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
-- https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux
-- https://azure.microsoft.com/en-us/free/students/
+```text
+Stop Uvicorn on the VM and close the SSH tunnel.
+```
+
+Closing SSH doesn't stop the VM. In the portal, select Stop and wait for
+Stopped (deallocated). That means Azure released the CPU and memory, so
+compute billing stops. The disk and public IP still cost a little each month.
+Keep the resource group, since we'll use this VM on Thursday. Then stop your
+Codespace. It stays saved as the rollback copy of your site.
+
+## If something goes wrong
+
+Give the agent the exact error and ask it to explain before it fixes anything.
+
+| Symptom | What it tells you | Check first |
+| --- | --- | --- |
+| SSH hangs, then times out | Traffic isn't reaching sshd | VM running, current public IP, `/32` source rule |
+| `Permission denied (publickey)` | You reached sshd, and the login failed | Username `azureuser` and the key path |
+| `uv: command not found` | The installer's PATH change isn't loaded | Open a new SSH session or load `~/.local/bin/env` |
+| `no such table: projects` | The app is reading an empty or wrong file | `DATABASE_URL` in `.env`, and the file you copied |
+| `curl` to 127.0.0.1:8000 is refused | Nothing is listening | Is Uvicorn still running on the VM? |
+| Tunnel page doesn't load | The tunnel or port forward is down | The background tunnel and the Ports tab |
+
+If the agent suggests opening port 8000, allowing SSH from Any, or turning off
+the firewall to test a guess, say no. Write down the symptom, the evidence,
+and your next check instead.
+
+## Sources
+
+- https://code.claude.com/docs/en/quickstart
+- https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal
+- https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview
 - https://learn.microsoft.com/en-us/azure/virtual-machines/states-billing
-
-No Azure resource was created while drafting this guide. The instructor must
-rehearse CLI installation, authentication, discovery, and pricing evidence. The
-rehearsal must cover resource creation, exact NSG construction, Codespace egress,
-and SSH host verification. It must finish with packages, dump and restore,
-tunneling, deallocation, retained costs, and the combined setup and migration
-sequence within the 100-minute session.
+- https://azure.microsoft.com/en-us/free/students/
+- https://docs.astral.sh/uv/getting-started/installation/
+- https://sqlite.org/cli.html
