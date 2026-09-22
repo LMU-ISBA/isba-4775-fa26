@@ -11,8 +11,9 @@ Today you also move off Codespaces. Your laptop becomes the machine you work
 from, with Claude Code installed on it. The Codespace stays as the source
 system we're migrating away from, and as your rollback copy.
 
-You won't type the commands today. Your agent will propose them, and you'll
-review each one before it runs. You don't
+You'll type a few commands today, in the one place it matters: connecting to
+the VM and looking around it yourself. Everything else your agent proposes,
+and you review before it runs. You don't
 need to memorize syntax, but you do need the vocabulary: clone, branch, merge,
 SSH, port, backup. Those words are how you tell the agent what you want and
 how you check that its command does that. Each step below gives you a prompt
@@ -263,7 +264,16 @@ public IPv4 address. Wait for my review.
 | Public IP check | Ask an outside service what address you came from | `curl -4 -s https://api.ipify.org` |
 
 The agent should never display the private key, only the `.pub` line. Copy
-that line for the portal. The address it reports is the campus network's
+that line for the portal.
+
+On Windows, `~/.ssh/` means `C:\Users\YOUR-NAME\.ssh\`, which is where
+Windows keeps SSH keys too. Claude Code runs commands through Git Bash there,
+so the `~` path in these examples works as written. If you type a command into
+PowerShell yourself, spell the path out instead, since PowerShell doesn't
+always expand `~` for other programs.
+
+Whatever the path, the private key file stays out of your repository. A key
+committed to GitHub is a key you have to replace. The address it reports is the campus network's
 public address, and it should match what the portal's My IP address option
 shows, since your browser and your terminal are now on the same machine.
 
@@ -395,27 +405,52 @@ Azure VM ─▶ sshd ─▶ runs the command as azureuser
 The VM's Overview page, the first item in its left menu, lists its public IP
 address on the right. Copy it, then:
 
-```text
-My Azure VM's public IP is PUBLIC-IP and the user is azureuser. Using the key
-at ~/.ssh/isba4775_azure, connect over SSH and run whoami, hostname, pwd, and
-show the operating system version. Explain which parts of your command run on
-my laptop and which run on the VM. Wait for my review.
+Type this one yourself, in your own terminal, with your VM's address in place
+of `PUBLIC-IP`:
+
+```bash
+ssh -i ~/.ssh/isba4775_azure azureuser@PUBLIC-IP
 ```
 
-| Term | What it means | What the command looks like |
-| --- | --- | --- |
-| SSH | Run commands on a remote computer over port 22 | `ssh -i ~/.ssh/isba4775_azure azureuser@PUBLIC-IP` |
-| Remote command | The part in quotes runs on the VM, not here | `'whoami; hostname'` |
-| Host key | The server's identity, saved on first connection | `-o StrictHostKeyChecking=accept-new` |
+| Part | What it means |
+| --- | --- |
+| `ssh` | Open a session on a remote computer, over port 22 |
+| `-i ~/.ssh/isba4775_azure` | Prove who you are with this private key |
+| `azureuser@` | The account to log in as |
+| `PUBLIC-IP` | Which machine to reach |
 
-The host-key option is the agent's way of answering "yes, trust this server"
-the first time. Your key proves who you are to the server. The host key is the
-reverse: the server's proof of who it is. SSH records it on first connection,
-so if something later answers at that address with a different key, you find
-out instead of handing your session to an impostor. If SSH ever warns that a
-known server's key changed, stop and ask the instructor.
+The first time, SSH asks whether you trust this server, showing a fingerprint.
+Type `yes`. Your key proves who you are to the server. The host key is the
+reverse: the server's proof of who it is. SSH records it now, so if something
+later answers at that address with a different key, you find out instead of
+handing your session to an impostor. If SSH ever warns that a known server's
+key changed, stop and ask the instructor.
 
-The hostname should be `vm-career-platform`. Three computers are now involved:
+Look at your prompt. It changed, and it now reads something like
+`azureuser@vm-career-platform`. You're typing into a computer in a Microsoft
+datacenter. Ask it where you are:
+
+```bash
+whoami
+hostname
+pwd
+cat /etc/os-release
+```
+
+Four answers, all about the VM and none about your laptop. Then leave:
+
+```bash
+exit
+```
+
+Watch the prompt change back. That's the whole idea: the same terminal window
+can be two different computers, and the prompt is how you tell.
+
+Connect once more before you continue, since your agent will run its own SSH
+commands in a minute. Now that your laptop has recorded the host key, those
+commands won't stop to ask about it.
+
+Three computers are now involved:
 
 | Location | What runs there today |
 | --- | --- |
@@ -423,8 +458,13 @@ The hostname should be `vm-career-platform`. Three computers are now involved:
 | Your Codespace | The source app and the original database |
 | The Azure VM | The target app and its copy of the data |
 
-Checkpoint: the agent ran `hostname` and got `vm-career-platform`. Where did
-that command actually run, and how do you know?
+Checkpoint: you ran `hostname` and got `vm-career-platform`, then ran it again
+after `exit` and got your laptop's name. Explain what changed, and what stayed
+the same.
+
+From here on, the agent does the work, because phase 4 is a long sequence of
+installs where one typo costs you the afternoon. You can keep a terminal
+logged into the VM alongside it, to look at what the agent just changed.
 
 If SSH times out, the firewall is probably dropping the connection. Check that
 the VM is running, that the agent used its current public IP, and that your
@@ -443,21 +483,39 @@ Why can't we just clone the repository and be finished? Look back at the
 phase 1 table before you continue.
 
 ```text
-On the VM, over SSH: install git and sqlite3, clone my career-platform
-repository from GitHub, install uv, and build the Python environment from the
-lock file without dev dependencies. Create .env from .env.example and create
-the data folder. Don't run alembic or the seed script, since the real data is
-coming from my laptop. Then show me the commit ID on the VM and the one in my
-local clone. Propose the commands and wait for my review.
+Set up my app on the Azure VM over SSH, using the key ~/.ssh/isba4775_azure.
+Clone it from GitHub, not from this folder. Don't create or seed a database,
+because my real one is coming in the next step. List the steps with a one-line
+reason for each, then wait for my review.
 ```
 
-| Term | What it means | What the command looks like |
-| --- | --- | --- |
-| Package manager | Ubuntu's app store for the command line | `sudo apt-get install -y git sqlite3` |
-| `sudo` | Run as administrator, needed to install software | `sudo ...` |
-| Lock file | The exact package versions we tested | `uv sync --locked --no-dev` |
+Notice how little that prompt says. It names two constraints and leaves the
+rest to the agent, which can read your project and work out what it needs.
+Your job is the list that comes back.
 
-Check that the two commit IDs match. Matching IDs prove the code is the same.
+Read it against the table in phase 1. You should see a step for each category
+except the data, which is next. Roughly:
+
+| Category | What you should see | Roughly |
+| --- | --- | --- |
+| Packages | Ubuntu software the project needs | `sudo apt-get install -y git sqlite3` |
+| Code | A clone from your GitHub repository | `git clone https://github.com/...` |
+| Python | The tool, then the exact versions from the lock file | `uv sync --locked --no-dev` |
+| Configuration | A `.env` made from the example | `cp .env.example .env` |
+
+If a category is missing, or a step is there that nobody can explain, stop and
+ask before approving. `sudo` appears on the install lines because changing
+system software needs administrator rights, and that's a good reason to read
+them.
+
+Then verify it yourself:
+
+```text
+Show me the commit ID on the VM and the one here.
+```
+
+The two should match. That's how you know the VM has your code, and not
+whatever was on `main` last week.
 
 Checkpoint: what arrived with the clone, and what's still missing? Did your
 database come with it? Why wasn't the `.venv` folder stored in Git? Its files
@@ -467,10 +525,12 @@ were built for one specific machine.
 the database path. Later, secrets like API keys go in the same kind of file,
 entered on the server by hand.
 
-The prompt tells the agent to skip `alembic` and the seed script because they
-would build a fresh database from the seed content in your code. We want the
-real one, including anything that changed after seeding. If the agent tries
-to run them anyway, stop it.
+The prompt's second constraint matters more than it looks. Your project can
+build its own database from the migration files and the seed script in your
+code, and if the agent does that, the VM ends up with a working site full of
+starter content. It would look like success. It would prove nothing, because
+none of your real data would have moved. If you see `alembic` or a seed step
+in the list, take it out before approving.
 
 ## 5. Move application state
 
@@ -720,6 +780,7 @@ Give the agent the exact error and ask it to explain before it fixes anything.
 | `git` or `ssh` not found | Your laptop is missing the tools | Git for Windows, or Apple's command line tools |
 | SSH hangs, then times out | Traffic isn't reaching sshd | VM running, current public IP, `/32` source rule |
 | `Permission denied (publickey)` | You reached sshd, and the login failed | Username `azureuser` and the key path |
+| `UNPROTECTED PRIVATE KEY FILE` | Other accounts can read your key | On macOS, `chmod 600`. On Windows, ask the agent to fix it with `icacls`. |
 | `uv: command not found` on the VM | The installer's PATH change isn't loaded | Open a new SSH session or load `~/.local/bin/env` |
 | `no such table: projects` | The app is reading an empty or wrong file | Does the copied filename match `DATABASE_URL` in `.env`? |
 | `curl` to 127.0.0.1:8000 is refused | Nothing is listening | Is Uvicorn still running on the VM? |
