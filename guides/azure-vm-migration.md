@@ -502,6 +502,16 @@ Notice how little that prompt says. It names two constraints and leaves the
 rest to the agent, which can read your project and work out what it needs.
 Your job is the list that comes back.
 
+You might expect the Superpowers flow here, with a brainstorm, a spec, and a
+plan. We're not using it, and the reason is worth more than the habit would
+be. That flow resolves unknowns before you build something new, and there are
+no unknowns here. Your lock file already names the packages, and every project
+in the room installs the same way. What's left is asking for a plan, reading
+it, and checking the result, which is the same discipline at the size this job
+deserves. Picking the right weight of process is part of the work. It comes
+back in full when we rebuild this VM from a script, because that one has real
+decisions in it.
+
 Read it against the table in phase 1. You should see a step for each category
 except the data, which is next. Roughly:
 
