@@ -295,9 +295,32 @@ To get to the form, from https://portal.azure.com:
 | OS disk type, on the Disks tab | Standard SSD |
 | Delete public IP and NIC when VM is deleted, on the Networking tab | Checked |
 
-Leave the other tabs alone, then select Review + create and Create. If the
-size is unavailable or deployment fails with `AllocationFailed`, tell the
-instructor rather than trying other sizes.
+Three more tabs are worth a stop before you create anything. Each one is a
+default that either costs money or protects you from a mistake:
+
+| Tab | Setting | Value |
+| --- | --- | --- |
+| Management | Enable auto-shutdown | On, 6:00 PM, and check the time zone |
+| Management | Notification before shutdown | Off |
+| Monitoring | Boot diagnostics | Disable |
+| Tags | Name and value | `course` = `isba-4775`, and `purpose` = `class` |
+
+Auto-shutdown deallocates the VM on a schedule. It's your safety net for the
+night you forget, and forgetting is what drains a student credit. The time
+zone box defaults to UTC, which is seven hours ahead of us, so set it to
+Pacific or your VM will stop mid-afternoon.
+
+Boot diagnostics stores console screenshots in a storage account, which
+carries a small charge. We don't need it today, and turning it off is a
+reminder that a default you never chose can still bill you.
+
+Tags don't change how anything runs. They label resources so you can find
+them, group them, and see what a project costs. On a real subscription with
+hundreds of resources, untagged ones are the ones nobody can account for.
+
+Then select Review + create and Create. If the size is unavailable or
+deployment fails with `AllocationFailed`, tell the instructor rather than
+trying other sizes.
 
 A few of those choices are worth understanding, because you'll make them
 yourself later:
@@ -311,6 +334,8 @@ yourself later:
   built for workloads far busier than ours.
 - A username that isn't root. Day-to-day work happens as `azureuser`, and
   anything dangerous needs `sudo`, so a mistake has to be deliberate.
+- Auto-shutdown on and boot diagnostics off. Both are about money: one stops
+  a VM you forgot, and the other declines a service you won't read.
 
 While Azure works, ask your agent what each resource in the diagram does, and
 check its answer against the table.
@@ -662,6 +687,9 @@ until you notice.
 Closing SSH doesn't stop the VM. Open the VM's Overview page, select Stop at
 the top, and wait for the status to read Stopped (deallocated). That means Azure released the CPU and memory, so
 compute billing stops. The disk and public IP still cost a little each month.
+Auto-shutdown would have caught this tonight, but don't rely on it. Stopping
+it yourself is the habit worth having.
+
 Keep the resource group, since we'll use this VM on Thursday. Then stop your
 Codespace. It stays saved as the rollback copy of your site.
 
