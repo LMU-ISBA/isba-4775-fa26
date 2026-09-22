@@ -446,9 +446,10 @@ exit
 Watch the prompt change back. That's the whole idea: the same terminal window
 can be two different computers, and the prompt is how you tell.
 
-Connect once more before you continue, since your agent will run its own SSH
-commands in a minute. Now that your laptop has recorded the host key, those
-commands won't stop to ask about it.
+Two things carry forward from this. Your laptop has recorded the host key, so
+your agent's SSH commands won't stop to ask about it. And the address, user,
+and key file are things you now know and your agent doesn't, so phase 4 starts
+by telling it.
 
 Three computers are now involved:
 
@@ -482,12 +483,20 @@ install Linux packages ─▶ clone ─▶ install uv and packages ─▶ recrea
 Why can't we just clone the repository and be finished? Look back at the
 phase 1 table before you continue.
 
+You connected by hand a minute ago, in your own terminal. Your agent wasn't
+watching, so it doesn't know the address, the user, or which key to use. Tell
+it once, and it has what it needs for the rest of the afternoon:
+
 ```text
-Set up my app on the Azure VM over SSH, using the key ~/.ssh/isba4775_azure.
-Clone it from GitHub, not from this folder. Don't create or seed a database,
-because my real one is coming in the next step. List the steps with a one-line
-reason for each, then wait for my review.
+My Azure VM is azureuser@PUBLIC-IP and the SSH key is ~/.ssh/isba4775_azure.
+Use those whenever you connect to it today.
+
+Set up my app on that VM. Clone it from GitHub, not from this folder. Don't
+create or seed a database, because my real one is coming in the next step.
+List the steps with a one-line reason for each, then wait for my review.
 ```
+
+Replace `PUBLIC-IP` with your VM's actual address from its Overview page.
 
 Notice how little that prompt says. It names two constraints and leaves the
 rest to the agent, which can read your project and work out what it needs.
@@ -502,6 +511,20 @@ except the data, which is next. Roughly:
 | Code | A clone from your GitHub repository | `git clone https://github.com/...` |
 | Python | The tool, then the exact versions from the lock file | `uv sync --locked --no-dev` |
 | Configuration | A `.env` made from the example | `cp .env.example .env` |
+
+One thing that should look odd: the VM clones from your GitHub account without
+logging in anywhere. It works because your repository is public, so reading it
+needs no account, the same as a stranger opening it in a browser. That was a
+deliberate choice, since employers should be able to see your work.
+
+If it were private, the VM would need its own credential, and you'd give it a
+deploy key or a token scoped to that one repository. You'd never put your
+personal GitHub password or a full-access token on a server. Servers get
+compromised, and a credential on one should open as little as possible.
+
+Note also what the VM can't do. Anonymous access is read-only, so nothing on
+that machine can push to your repository. Today's only commit, the migration
+notes, gets made from your laptop.
 
 If a category is missing, or a step is there that nobody can explain, stop and
 ask before approving. `sudo` appears on the install lines because changing
@@ -778,6 +801,7 @@ Give the agent the exact error and ask it to explain before it fixes anything.
 | --- | --- | --- |
 | Claude Code won't start on Windows | It needs a shell | Install Git for Windows, then open a new terminal |
 | `git` or `ssh` not found | Your laptop is missing the tools | Git for Windows, or Apple's command line tools |
+| The clone asks for a username and password | The repository isn't public, or the URL is the SSH form | Check the repository's visibility, and use the `https://` URL |
 | SSH hangs, then times out | Traffic isn't reaching sshd | VM running, current public IP, `/32` source rule |
 | `Permission denied (publickey)` | You reached sshd, and the login failed | Username `azureuser` and the key path |
 | `UNPROTECTED PRIVATE KEY FILE` | Other accounts can read your key | On macOS, `chmod 600`. On Windows, ask the agent to fix it with `icacls`. |
