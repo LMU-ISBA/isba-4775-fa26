@@ -273,9 +273,11 @@ PowerShell yourself, spell the path out instead, since PowerShell doesn't
 always expand `~` for other programs.
 
 Whatever the path, the private key file stays out of your repository. A key
-committed to GitHub is a key you have to replace. The address it reports is the campus network's
-public address, and it should match what the portal's My IP address option
-shows, since your browser and your terminal are now on the same machine.
+committed to GitHub is a key you have to replace.
+
+The address the agent reports is the campus network's public address. It
+should match what the portal's My IP address option shows, since your browser
+and your terminal are now on the same machine.
 
 ### Create the VM in the portal
 
@@ -529,9 +531,10 @@ Use those whenever you connect to it today.
 Here is my migration plan:
 [paste your five lines]
 
-Use your writing-plans skill to turn it into docs/migration.md. For every
-step, give where it runs (laptop, VM, or portal), the command or click, why
-it's needed, how we'll verify it, and how we'd undo it. Cover setup, moving
+Use your writing-plans skill to turn it into a plan saved as
+docs/superpowers/plans/2026-09-24-azure-vm-migration.md. For every step, give
+where it runs (laptop, VM, or portal), the command or click, why it's needed,
+how we'll verify it, and how we'd undo it. Cover setup, moving
 the database, and verification, including a step that opens port 8000 to the
 Internet temporarily and a later step that closes it. Two rules: clone from
 GitHub, not from this folder, and don't create or seed a database, because my
@@ -542,8 +545,13 @@ Replace `PUBLIC-IP` with your VM's address from its Overview page.
 
 ### Review the document against your list
 
-Open `docs/migration.md`. Read it with your paper plan beside it, and work
-through these:
+Open `docs/superpowers/plans/2026-09-24-azure-vm-migration.md`. It sits beside
+the plan the agent wrote last week for the app itself, with the same date
+prefix, so the folder reads as a history of what was built and when. In
+October you'll migrate again, to a different kind of host, and the two plans
+won't collide.
+
+Read it with your paper plan beside it, and work through these:
 
 | Look for | Why |
 | --- | --- |
@@ -594,8 +602,8 @@ addition is for, in your own words, before you go on.
 ### Execute the environment steps
 
 ```text
-Use your executing-plans skill on docs/migration.md. Run the environment
-setup steps only, up to but not including the database. After each step,
+Use your executing-plans skill on the migration plan you just wrote. Run the
+environment setup steps only, up to but not including the database. After each step,
 write what actually happened into the plan, under that step. Stop when the
 setup is done and show me the commit ID on the VM and the one here.
 ```
@@ -760,7 +768,7 @@ Open your Codespace site in another tab, then:
 Finish the plan's verification: compare the commit ID in my local clone
 against the VM's, confirm the migration test row on the VM, check /health on
 both, and compare the projects page content. Put the results in a table at
-the end of docs/migration.md and show it to me.
+the end of the migration plan and show it to me.
 ```
 
 | Check | Source | Target (VM) |
@@ -784,7 +792,7 @@ Your plan is now also your evidence: every step, what it was for, what
 happened, and the comparison at the end. Read through it once. Then:
 
 ```text
-Check docs/migration.md for anything that shouldn't be public, such as my IP
+Check the migration plan for anything that shouldn't be public, such as my IP
 address, key paths, or database contents, and remove it. Then commit it and
 push. Stop Uvicorn on the VM and close the SSH tunnel.
 ```
