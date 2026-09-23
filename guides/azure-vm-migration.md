@@ -474,46 +474,88 @@ turning on a VPN changes that address. Never widen the rule to Any. If SSH
 says `Permission denied`, the connection reached the server, so the username
 or key is wrong instead.
 
-## 4. Rebuild the application environment
+## 4. Plan the migration, then rebuild the environment
 
 ```text
-install Linux packages ─▶ clone ─▶ install uv and packages ─▶ recreate .env
+your plan ─▶ the agent's plan document ─▶ your review ─▶ execute ─▶ record
 ```
 
-Why can't we just clone the repository and be finished? Look back at the
-phase 1 table before you continue.
+### Write your plan first
+
+Before you ask the agent for anything, take ninety seconds and write your own
+plan on paper. Use the five categories from the board, and for each one, say
+how you think it gets to the VM:
+
+```text
+Code            clone from GitHub
+Packages        ?
+Python          ?
+Configuration   ?
+Data            copy my .db file
+Running process start it
+```
+
+Question marks are fine. The point is to commit to a guess before you see the
+agent's answer, because that's what turns reading its plan into checking it.
+Without a guess of your own, you'll approve whatever comes back.
+
+### Why a plan, and why not the whole flow
+
+Last week you used Superpowers to build the app: brainstorm, then a spec, then
+a plan, then execution. Today we use one part of that, the plan. Brainstorming
+and specs resolve unknowns before you build something new, and there are none
+here. Your lock file already names the packages, and every project in the
+room installs the same way.
+
+A written plan still matters, for three reasons. A deployment is the thing you
+don't improvise. A plan with a check and a rollback per step is what a real
+change request looks like, and someone else could run it. And the same file
+becomes your evidence, since the results get written into it as you go.
+
+Picking the right weight of process is part of the work. The full flow comes
+back when we rebuild this VM from a script, because that one has real
+decisions in it.
+
+### Ask for the plan
 
 You connected by hand a minute ago, in your own terminal. Your agent wasn't
 watching, so it doesn't know the address, the user, or which key to use. Tell
-it once, and it has what it needs for the rest of the afternoon:
+it once, and hand it your plan:
 
 ```text
 My Azure VM is azureuser@PUBLIC-IP and the SSH key is ~/.ssh/isba4775_azure.
 Use those whenever you connect to it today.
 
-Set up my app on that VM. Clone it from GitHub, not from this folder. Don't
-create or seed a database, because my real one is coming in the next step.
-List the steps with a one-line reason for each, then wait for my review.
+Here is my migration plan:
+[paste your five lines]
+
+Use your writing-plans skill to turn it into docs/migration.md. For every
+step, give where it runs (laptop, VM, or portal), the command or click, why
+it's needed, how we'll verify it, and how we'd undo it. Cover setup, moving
+the database, and verification, including a step that opens port 8000 to the
+Internet temporarily and a later step that closes it. Two rules: clone from
+GitHub, not from this folder, and don't create or seed a database, because my
+real one is coming from my laptop. Don't run anything yet.
 ```
 
-Replace `PUBLIC-IP` with your VM's actual address from its Overview page.
+Replace `PUBLIC-IP` with your VM's address from its Overview page.
 
-Notice how little that prompt says. It names two constraints and leaves the
-rest to the agent, which can read your project and work out what it needs.
-Your job is the list that comes back.
+### Review the document against your list
 
-You might expect the Superpowers flow here, with a brainstorm, a spec, and a
-plan. We're not using it, and the reason is worth more than the habit would
-be. That flow resolves unknowns before you build something new, and there are
-no unknowns here. Your lock file already names the packages, and every project
-in the room installs the same way. What's left is asking for a plan, reading
-it, and checking the result, which is the same discipline at the size this job
-deserves. Picking the right weight of process is part of the work. It comes
-back in full when we rebuild this VM from a script, because that one has real
-decisions in it.
+Open `docs/migration.md`. Read it with your paper plan beside it, and work
+through these:
 
-Read it against the table in phase 1. You should see a step for each category
-except the data, which is next. Roughly:
+| Look for | Why |
+| --- | --- |
+| Every category from your list appears | A missing category is a missing piece of the app |
+| Steps you didn't predict | Each one is a question to ask before you approve |
+| A reason on every step | "Because the agent said so" isn't a reason |
+| A check on every step | Otherwise you'll never know whether it worked |
+| A rollback on every step | Yours is mostly "the Codespace still has the original" |
+| Nothing that builds a database | See below |
+| Portal steps marked as portal | The agent can't click for you, so the plan has to say so |
+
+Roughly, the environment steps should be:
 
 | Category | What you should see | Roughly |
 | --- | --- | --- |
@@ -521,6 +563,9 @@ except the data, which is next. Roughly:
 | Code | A clone from your GitHub repository | `git clone https://github.com/...` |
 | Python | The tool, then the exact versions from the lock file | `uv sync --locked --no-dev` |
 | Configuration | A `.env` made from the example | `cp .env.example .env` |
+
+`sudo` appears on the install lines because changing system software needs
+administrator rights, and that's a good reason to read them.
 
 One thing that should look odd: the VM clones from your GitHub account without
 logging in anywhere. It works because your repository is public, so reading it
@@ -533,22 +578,30 @@ personal GitHub password or a full-access token on a server. Servers get
 compromised, and a credential on one should open as little as possible.
 
 Note also what the VM can't do. Anonymous access is read-only, so nothing on
-that machine can push to your repository. Today's only commit, the migration
-notes, gets made from your laptop.
+that machine can push to your repository. Today's only commit, this plan with
+its results, gets made from your laptop.
 
-If a category is missing, or a step is there that nobody can explain, stop and
-ask before approving. `sudo` appears on the install lines because changing
-system software needs administrator rights, and that's a good reason to read
-them.
+The second rule in the prompt matters more than it looks. Your project can
+build its own database from the migration files and the seed script in your
+code, and if the agent does that, the VM ends up with a working site full of
+starter content. It would look like success. It would prove nothing, because
+none of your real data would have moved. If you see `alembic` or a seed step
+in the plan, take it out before approving.
 
-Then verify it yourself:
+Checkpoint: what did the agent add that you didn't predict? Say what each
+addition is for, in your own words, before you go on.
+
+### Execute the environment steps
 
 ```text
-Show me the commit ID on the VM and the one here.
+Use your executing-plans skill on docs/migration.md. Run the environment
+setup steps only, up to but not including the database. After each step,
+write what actually happened into the plan, under that step. Stop when the
+setup is done and show me the commit ID on the VM and the one here.
 ```
 
-The two should match. That's how you know the VM has your code, and not
-whatever was on `main` last week.
+The two commit IDs should match. That's how you know the VM has your code,
+and not whatever was on `main` last week.
 
 Checkpoint: what arrived with the clone, and what's still missing? Did your
 database come with it? Why wasn't the `.venv` folder stored in Git? Its files
@@ -557,13 +610,6 @@ were built for one specific machine.
 `.env` is ignored by Git, so it never left the Codespace. Today it only holds
 the database path. Later, secrets like API keys go in the same kind of file,
 entered on the server by hand.
-
-The prompt's second constraint matters more than it looks. Your project can
-build its own database from the migration files and the seed script in your
-code, and if the agent does that, the VM ends up with a working site full of
-starter content. It would look like success. It would prove nothing, because
-none of your real data would have moved. If you see `alembic` or a seed step
-in the list, take it out before approving.
 
 ## 5. Move application state
 
@@ -575,39 +621,29 @@ Codespace (source) ──browser download──▶ laptop: Downloads/<your>.db
                         VM: the path your .env's DATABASE_URL names
 ```
 
-### Change something first
+This is the part Git can't do. Your plan has steps for it, and before you run
+them, check two things in the document.
 
-If we copy the database unchanged, a real migration and a fresh seed look the
-same. So change one row before it travels:
+First, the test row. If we copy the database unchanged, a real migration and a
+fresh seed look the same. So the plan should change one row before the file
+travels, with a label that says what it is, such as "Migration test,
+September 24." Check that the `UPDATE` has a `WHERE` clause naming a single
+project. Without one, it changes every row. If the plan doesn't have this
+step, ask the agent to add it, using Python through `uv` rather than a
+`sqlite3` command your laptop may not have.
 
-```text
-Using the database I downloaded from my Codespace, show me my projects, then
-change one project's summary to "Migration test, September 22" so I can prove
-this file is what ends up on the VM. Use Python through uv, since I may not
-have a sqlite command, and install uv first if this laptop doesn't have it.
-Show me the SQL before running it.
-```
+Second, the copy target. The app opens only the path in `DATABASE_URL`, so a
+file that lands under a different name leaves the app reading an empty
+database. The plan's `scp` line should end in the exact path and filename
+your `.env` expects. This is the likeliest mistake of the afternoon.
 
-The agent should read the rows and then run one `UPDATE`. Check that the
-`UPDATE` has a `WHERE` clause naming a single project. Without one, it changes
-every row. The label makes clear it's a test, not experience.
-
-Your Codespace still holds the unedited original. That's deliberate. It stays
-your rollback copy.
-
-### Copy it to the VM and check
+Then:
 
 ```text
-Copy that database file over SSH to the VM, into the exact path and filename
-my .env's DATABASE_URL expects. Restrict it to my user there, check its
-integrity on the VM, and show my projects from the VM's copy.
-Wait for my review.
+Run the database steps of the plan: the test row, the copy, the permissions,
+and the checks on the VM. Record what happened under each step. Stop before
+starting the app.
 ```
-
-The name matters here. The app opens the path in `DATABASE_URL` and nothing
-else, so a file copied next to it under a different name leaves the app
-reading an empty database. Check the copy target against `.env` before you
-approve.
 
 | Term | What it means | What the command looks like |
 | --- | --- | --- |
@@ -615,53 +651,46 @@ approve.
 | Integrity check | SQLite verifies the file isn't damaged | `PRAGMA integrity_check`, which prints `ok` |
 | Permissions | Only your user can read the file | `chmod 600` |
 
-Your test summary should appear in the VM's copy, and the integrity check
-should print `ok`.
+Your test summary should appear when the agent reads the VM's copy, and the
+integrity check should print `ok`. Your Codespace still holds the unedited
+original. That's deliberate. It's the rollback in your plan.
 
 Checkpoint: give two reasons Git couldn't move this data.
 
 ## 6. Verify the migration
 
+The verification steps in your plan alternate between the agent and the
+portal, so run them one at a time. Tell the agent:
+
 ```text
-On the VM, start Uvicorn for my app on 0.0.0.0 port 8000 so it keeps running
-after your command returns. Then, over SSH, check /health, search the projects
-page for "Migration test", and show which address port 8000 is listening on.
-Wait for my review.
+Run the verification steps one at a time. Stop after each one, record what
+happened, and wait for me, because some of the steps in between are mine to
+do in the portal.
 ```
 
-| Term | What it means | What the command looks like |
-| --- | --- | --- |
-| Loopback | `127.0.0.1`, reachable only from the VM itself | `--host 127.0.0.1 --port 8000` |
-| Background process | Keeps running after SSH disconnects | `nohup ... &` |
-| Listening sockets | Which ports are open, and on which address | `ss -lnt` |
+### Start the app where anyone could reach it
 
+The first step starts Uvicorn on `0.0.0.0`, port 8000, in the background.
 `0.0.0.0` means the app accepts connections arriving on any of the VM's
-addresses, rather than only from the VM itself. The listening line should show
-`0.0.0.0:8000`.
+addresses, rather than only from the VM itself. The listening line should
+show `0.0.0.0:8000`.
 
 A program you start over SSH normally belongs to that SSH session and dies
 when the session ends. `nohup` and the trailing `&` detach it so it keeps
 running. That's a stopgap, and a weak one: it won't restart if the app crashes
-or the VM reboots. On Thursday, systemd takes over that job.
+or the VM reboots. Next week, systemd takes over that job.
 
 The app reads `DATABASE_URL` as a path relative to where it starts, so the
 agent should start it from the repository folder. If the page loads with no
 content, that's the first thing to check.
 
-Now try it from your laptop, which is outside the VM:
-
-```text
-From my laptop, not over SSH, try to reach port 8000 on the VM's public IP
-with a 5-second timeout. Tell me what happened and why.
-```
-
-It times out, even though the app is listening on every address. The firewall
-has no rule for 8000.
+The next step tries port 8000 from your laptop, and it times out, even though
+the app is listening on every address. The firewall has no rule for 8000.
 
 ### Open port 8000, on purpose, briefly
 
-Go back to the VM's Networking, then Network settings, and add a second
-inbound port rule, exactly like the SSH one except:
+This step is yours. Go back to the VM's Networking, then Network settings, and
+add a second inbound port rule, exactly like the SSH one except:
 
 | Field | Value |
 | --- | --- |
@@ -684,20 +713,14 @@ real site asks visitors to type.
 
 ### Close it again
 
-In Network settings, find `Temp-HTTP-8000` in the inbound rules list, open it,
-and select Delete. Then reload the page. It hangs and times
+Also yours. In Network settings, find `Temp-HTTP-8000` in the inbound rules
+list, open it, and select Delete. Then reload the page. It hangs and times
 out. Nothing about the app changed, and the firewall is the only difference.
 
-Then have the agent restart the app on loopback:
-
-```text
-Restart Uvicorn on the VM, this time on 127.0.0.1 port 8000, still in the
-background. Show me the listening address afterward. Wait for my review.
-```
-
-Now there are two independent reasons the public path fails: no rule for
-8000, and an app that only answers to the VM itself. Either one alone would
-be enough.
+Let the agent take the next step, which restarts the app on `127.0.0.1`. Now
+there are two independent reasons the public path fails: no rule for 8000,
+and an app that only answers to the VM itself. Either one alone would be
+enough.
 
 ```text
 Internet
@@ -716,15 +739,11 @@ remove first, and why not the other?
 
 ### See it in the browser, privately
 
-```text
-Open an SSH tunnel in the background from port 8001 on my laptop to port 8000
-on the VM, so I can view the app without opening a public port.
-Wait for my review.
-```
-
-The agent should propose `ssh -f -N -L 8001:127.0.0.1:8000 ...`. The `-L`
-connects a port here to a port there, inside the SSH connection. Open
-http://localhost:8001 in your browser. You're looking at the VM's app.
+The agent's next step opens an SSH tunnel in the background from port 8001 on
+your laptop to port 8000 on the VM. It should look like
+`ssh -f -N -L 8001:127.0.0.1:8000 ...`. The `-L` connects a port here to a
+port there, inside the SSH connection. Open http://localhost:8001 in your
+browser. You're looking at the VM's app.
 
 The tunnel isn't getting around the firewall. It travels through port 22, the
 one door your `/32` rule opened, and SSH carries the page requests inside that
@@ -738,9 +757,10 @@ Checkpoint: if you deleted the port 22 rule, would the tunnel still work?
 Open your Codespace site in another tab, then:
 
 ```text
-Compare the source and the target for me: the commit ID in my local clone
-against the VM's, the migration test row on the VM, the /health response from
-both, and the projects page content. Show the results as a table.
+Finish the plan's verification: compare the commit ID in my local clone
+against the VM's, confirm the migration test row on the VM, check /health on
+both, and compare the projects page content. Put the results in a table at
+the end of docs/migration.md and show it to me.
 ```
 
 | Check | Source | Target (VM) |
@@ -758,32 +778,33 @@ database came from that file rather than from a fresh seed.
 If any other row doesn't match, the migration isn't done. Record the
 difference rather than guessing why.
 
-### Record your evidence and shut down
+### Save the record and shut down
+
+Your plan is now also your evidence: every step, what it was for, what
+happened, and the comparison at the end. Read through it once. Then:
 
 ```text
-Write docs/migration.md with the resource names, region, and size, my "what
-moves" table, the comparison results, and anything that failed. Leave out my
-IP address, keys, and database contents. Show it to me before committing,
-then commit and push.
+Check docs/migration.md for anything that shouldn't be public, such as my IP
+address, key paths, or database contents, and remove it. Then commit it and
+push. Stop Uvicorn on the VM and close the SSH tunnel.
 ```
 
-Read the file before you approve the commit. Then:
-
-```text
-Stop Uvicorn on the VM and close the SSH tunnel.
-```
+Read the diff before you approve the commit. This file is the thing you'd hand
+to someone else so they could do what you did.
 
 In Network settings, check the inbound rules once more and confirm
 `Temp-HTTP-8000` is gone. Leaving it there leaves your site open on plain HTTP
 until you notice.
 
 Closing SSH doesn't stop the VM. Open the VM's Overview page, select Stop at
-the top, and wait for the status to read Stopped (deallocated). That means Azure released the CPU and memory, so
-compute billing stops. The disk and public IP still cost a little each month.
+the top, and wait for the status to read Stopped (deallocated). That means
+Azure released the CPU and memory, so compute billing stops. The disk and
+public IP still cost a little each month.
+
 Auto-shutdown would have caught this tonight, but don't rely on it. Stopping
 it yourself is the habit worth having.
 
-Keep the resource group, since we'll use this VM on Thursday. Then stop your
+Keep the resource group, since we'll use this VM next week. Then stop your
 Codespace. It stays saved as the rollback copy of your site.
 
 ## What you should be able to explain now
@@ -798,6 +819,8 @@ worth having:
 - Why the app listens on `127.0.0.1`, and what changed when it didn't.
 - Why one firewall rule was the whole difference between private and public.
 - How you proved the migration worked, rather than assuming it.
+- Why the plan was written before anything ran, and what someone else could
+  do with it.
 
 On Thursday we make it public and durable: Nginx in front on port 80, systemd
 so the app restarts by itself, and logs when it doesn't. Check your Azure
