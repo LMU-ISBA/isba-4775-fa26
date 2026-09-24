@@ -342,6 +342,13 @@ anything real depends on it. `delete-after` says when it can go, the day
 after your final interview. Nearly every abandoned cloud resource is one that
 never had an expiry.
 
+Before you leave the Tags tab, open the Resource dropdown on one of the rows.
+It lists everything this form is about to create, and it's longer than one
+virtual machine: a disk, a network interface, a security group, a public
+address, a virtual network, your SSH key, and the shutdown schedule you set
+two tabs ago. Leave Select All checked. Each of those bills on its own, and a
+tag that's only on the VM undercounts what your project costs.
+
 Tags describe a role, and roles change. When this VM gets a domain and a
 certificate, `environment` becomes `production` for as long as it serves your
 site. Changing a tag is ordinary work, not a sign you got it wrong.
