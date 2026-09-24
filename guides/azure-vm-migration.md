@@ -315,7 +315,7 @@ default that either costs money or protects you from a mistake:
 | Management | Enable auto-shutdown | On, 6:00 PM, and check the time zone |
 | Management | Notification before shutdown | On, with your email address |
 | Monitoring | Boot diagnostics | Disable |
-| Tags | Three name and value pairs | `course` = `isba-4775`, `environment` = `staging`, and `delete-after` = `2026-12-18` |
+| Tags | Two name and value pairs | `course` = `isba-4775`, and `environment` = `staging` |
 
 Auto-shutdown deallocates the VM on a schedule. It's your safety net for the
 night you forget, and forgetting is what drains a student credit. The time
@@ -334,13 +334,11 @@ Tags don't change how anything runs. They label resources so you can find
 them, group them, and see what a project costs. On a real subscription with
 hundreds of resources, untagged ones are the ones nobody can account for.
 
-Each of these three answers a question someone will ask later. `course` says
+Each of these answers a question someone will ask later. `course` says
 whose this is and what it's for, which is how a shared bill gets split.
 `environment` says what role the machine plays. Your laptop is development,
 and this VM is staging: it exists to prove the deployment works before
-anything real depends on it. `delete-after` says when it can go, the day
-after your final interview. Nearly every abandoned cloud resource is one that
-never had an expiry.
+anything real depends on it.
 
 Before you leave the Tags tab, open the Resource dropdown on one of the rows.
 It lists everything this form is about to create, and it's longer than one
