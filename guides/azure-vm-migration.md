@@ -585,12 +585,19 @@ Python          ?
 Configuration   ?
 Data            ?
 Running process ?
+Verify          ?
+Shutdown        ?
 ```
 
 The first line is the one you've already done: a machine exists, and you can
 reach it. It goes in the plan anyway, because a plan someone else could follow
 can't assume the server is there, and your evidence should record how it was
 made and how it's reached.
+
+The last two lines are the ones people leave off. Verify is how you'll know
+it worked, and "the page loads" isn't enough, since a page can load with the
+wrong data. Shutdown is what stops the bill, and you learned two tabs ago
+that stopping isn't the same as deallocating.
 
 Question marks are fine where you're stuck. The point is to commit to a guess
 before you see the agent's answer, because that's what turns reading its plan
@@ -636,21 +643,14 @@ Python     uv, then uv sync from the lock file
 Config     copy .env from .env.example
 Data       scp my SQLite .db file from my laptop
 Processes  start uvicorn
+Verify     the site answers on the VM and shows my data
+Shutdown   deallocate the VM
 
 Use your writing-plans skill to turn this into
-docs/superpowers/plans/2026-09-24-azure-vm-migration.md. Keep my seven
-categories as the sections, in this order. Under each one, list the steps
-with: where it runs (laptop, VM, or portal), the command or click, why it's
-needed, how we verify it, and how we undo it. Mark the Server steps as
-already done. Add a Verify section at the end that starts the app on 0.0.0.0,
-opens port 8000 in the portal, checks it from the Internet, closes the port,
-restarts on 127.0.0.1, and opens an SSH tunnel. End with a Shutdown section
-that uses the Azure CLI to confirm the temporary rule is gone, deallocate the
-VM, and show its power state.
-
-Two rules: clone from GitHub, not from this folder, and don't create or seed
-a database, because my real one is coming from my laptop. Don't run anything
-yet.
+docs/superpowers/plans/2026-09-24-azure-vm-migration.md. Keep my categories
+as the sections, in this order. Under each one, list the steps with: where it
+runs (laptop, VM, or portal), what to run or click, why, how we check it
+worked, and how we undo it. Don't run anything yet.
 ```
 
 Replace `PUBLIC-IP` with your VM's address from its Overview page, and change
@@ -660,6 +660,14 @@ Why the plan goes in as your lines and not just a request: the agent has to
 build on your categories, in your order, so that when its document comes back
 each of your lines is one section you can check. If it were free to
 reorganize, you'd be reviewing its plan instead of checking yours.
+
+Why the format request: where, what, why, check, and undo is the shape of a
+change request at any company that runs servers. You're learning it once,
+here, and you'll write the same five columns for every deployment after this.
+
+Notice what the prompt doesn't say. It doesn't tell the agent what not to do,
+and it doesn't spell out how to verify or shut down. Those are yours to catch
+in the review, and the next section tells you what to look for.
 
 ### Review the document against your list
 
@@ -673,13 +681,15 @@ Read it with your paper plan beside it, and work through these:
 
 | Look for | Why |
 | --- | --- |
-| Your seven sections, in your order | If the agent reorganized, ask why before you read further |
+| Your nine sections, in your order | If the agent reorganized, ask why before you read further |
 | The server steps are marked as done | The plan should say what exists, not pretend to create it again |
 | Steps you didn't predict | Each one is a question to ask before you approve |
 | A reason on every step | "Because the agent said so" isn't a reason |
 | A check on every step | Otherwise you'll never know whether it worked |
 | A rollback on every step | Yours is mostly "the Codespace still has the original" |
-| Nothing that builds a database | See below |
+| Any step that creates or seeds a database | Remove it. See below for why. |
+| Verify compares your data, not just a health check | A page can load and be wrong |
+| Shutdown says deallocate, and checks the power state | Stopped still bills |
 | Portal steps marked as portal | The agent can't click for you, so the plan has to say so |
 
 Roughly, the environment steps should be:
@@ -729,12 +739,14 @@ Note also what the VM can't do. Anonymous access is read-only, so nothing on
 that machine can push to your repository. Today's only commit, this plan with
 its results, gets made from your laptop.
 
-The second rule in the prompt matters more than it looks. Your project can
+The database row is the one most likely to need your hand. Your project can
 build its own database from the migration files and the seed script in your
-code, and if the agent does that, the VM ends up with a working site full of
-starter content. It would look like success. It would prove nothing, because
-none of your real data would have moved. If you see `alembic` or a seed step
-in the plan, take it out before approving.
+code, and agents like to include that because it's what the README says to
+do. If it runs on the VM, the VM ends up with a working site full of starter
+content. It would look like success. It would prove nothing, because none of
+your real data would have moved. If you see `alembic upgrade` or a seed step
+anywhere in the plan, take it out before approving, and tell the agent why:
+the real database is coming from your laptop.
 
 Checkpoint: what did the agent add that you didn't predict? Say what each
 addition is for, in your own words, before you go on.
@@ -807,21 +819,20 @@ Checkpoint: give two reasons Git couldn't move this data.
 
 ## 6. Verify the migration
 
-The verification steps in your plan alternate between the agent and the
-portal, so run them one at a time. Tell the agent:
-
-```text
-Run the verification steps one at a time. Stop after each one, record what
-happened, and wait for me, because some of the steps in between are mine to
-do in the portal.
-```
+Before the plan's own Verify section, a detour that isn't in any migration
+plan and is the most useful ten minutes of the afternoon. We're going to put
+the site on the Internet, look at it, and take it back off.
 
 ### Start the app where anyone could reach it
 
-The first step starts Uvicorn on `0.0.0.0`, port 8000, in the background.
-`0.0.0.0` means the app accepts connections arriving on any of the VM's
-addresses, rather than only from the VM itself. The listening line should
-show `0.0.0.0:8000`.
+```text
+Start my app on the VM in the background so it listens on every address, on
+port 8000. Then show me what's listening on that port. Wait for my review.
+```
+
+The command should include `--host 0.0.0.0`. `0.0.0.0` means the app accepts
+connections arriving on any of the VM's addresses, rather than only from the
+VM itself. The listening line should show `0.0.0.0:8000`.
 
 A program you start over SSH normally belongs to that SSH session and dies
 when the session ends. `nohup` and the trailing `&` detach it so it keeps
@@ -832,8 +843,15 @@ The app reads `DATABASE_URL` as a path relative to where it starts, so the
 agent should start it from the repository folder. If the page loads with no
 content, that's the first thing to check.
 
-The next step tries port 8000 from your laptop, and it times out, even though
-the app is listening on every address. The firewall has no rule for 8000.
+Now try it from outside:
+
+```text
+From my laptop, try to reach port 8000 on the VM's public IP, with a
+5-second timeout. Tell me what happened and why.
+```
+
+It times out, even though the app is listening on every address. The firewall
+has no rule for 8000.
 
 ### Open port 8000, on purpose, briefly
 
@@ -865,10 +883,16 @@ Also yours. In Network settings, find `Temp-HTTP-8000` in the inbound rules
 list, open it, and select Delete. Then reload the page. It hangs and times
 out. Nothing about the app changed, and the firewall is the only difference.
 
-Let the agent take the next step, which restarts the app on `127.0.0.1`. Now
-there are two independent reasons the public path fails: no rule for 8000,
-and an app that only answers to the VM itself. Either one alone would be
-enough.
+Then:
+
+```text
+Restart the app on the VM so only the VM itself can reach it, still in the
+background. Show me what's listening afterward.
+```
+
+The command should now say `--host 127.0.0.1`. There are two independent
+reasons the public path fails: no rule for 8000, and an app that only answers
+to the VM itself. Either one alone would be enough.
 
 ```text
 Internet
@@ -887,9 +911,13 @@ remove first, and why not the other?
 
 ### See it in the browser, privately
 
-The agent's next step opens an SSH tunnel in the background from port 8001 on
-your laptop to port 8000 on the VM. It should look like
-`ssh -f -N -L 8001:127.0.0.1:8000 ...`. The `-L` connects a port here to a
+```text
+Open an SSH tunnel in the background from port 8001 on my laptop to port
+8000 on the VM, so I can view the app without opening a public port.
+Wait for my review.
+```
+
+It should look like `ssh -f -N -L 8001:127.0.0.1:8000 ...`. The `-L` connects a port here to a
 port there, inside the SSH connection. Open http://localhost:8001 in your
 browser. You're looking at the VM's app.
 
@@ -902,14 +930,16 @@ Checkpoint: if you deleted the port 22 rule, would the tunnel still work?
 
 ### Prove it
 
-Open your Codespace site in another tab, then:
+Now the plan's own Verify section. Open your Codespace site in another tab,
+then:
 
 ```text
-Finish the plan's verification: compare the commit ID in my local clone
-against the VM's, confirm the migration test row on the VM, check /health on
-both, and compare the projects page content. Put the results in a table at
-the end of the migration plan and show it to me.
+Run the Verify section of the plan. Record each result under its step, and
+put the comparison in a table at the end of the document. Show it to me.
 ```
+
+If your Verify section was thin, this is where it shows. It should be
+comparing at least these:
 
 | Check | Source | Target (VM) |
 | --- | --- | --- |
@@ -940,12 +970,12 @@ push. Stop Uvicorn on the VM and close the SSH tunnel.
 Read the diff before you approve the commit. This file is the thing you'd hand
 to someone else so they could do what you did.
 
-Then the plan's last section, which the agent runs through the Azure CLI:
+Then the plan's last section:
 
 ```text
-Run the Shutdown section: list the NSG's inbound rules and confirm
-Temp-HTTP-8000 is gone, then deallocate the VM and show me its power state.
-Record both results in the plan.
+Run the Shutdown section. Before you deallocate, list the NSG's inbound
+rules so I can confirm Temp-HTTP-8000 is gone, since that rule isn't in the
+plan. Record the results.
 ```
 
 | Term | What it means | What the command looks like |
