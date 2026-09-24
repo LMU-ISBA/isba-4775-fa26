@@ -812,11 +812,18 @@ addition is for, in your own words, before you go on.
 ### Execute the environment steps
 
 ```text
-Use your executing-plans skill on the migration plan. Run the Packages, Code,
-Python, and Config sections, one section at a time. After each section,
-record what its check showed under that step, then stop and wait for me
-before starting the next one.
+Use your executing-plans skill on the migration plan, inline in this session,
+not with subagents. Run the Packages, Code, Python, and Config sections, one
+section at a time. After each section, record what its check showed under
+that step, then stop and wait for me before starting the next one.
 ```
+
+Superpowers may ask whether to run the plan with subagents or inline. Choose
+inline. Subagents hand each task to a separate helper working out of sight,
+which suits a long build with review between tasks, the way the app was
+built. This plan is short, and the point today is to watch every command
+land on the VM and stop between sections. Inline is also faster, since it
+skips the review round each subagent triggers.
 
 One section at a time costs you four approvals instead of one. It buys you a
 pause after each, which is where the understanding happens. Use the pauses
