@@ -528,21 +528,25 @@ your plan ─▶ the agent's plan document ─▶ your review ─▶ execute ─
 ### Write your plan first
 
 Before you ask the agent for anything, take ninety seconds and write your own
-plan on paper. Use the five categories from the board, and for each one, say
-how you think it gets to the VM:
+plan on paper. Use the categories from the board, in the order they have to
+happen on the VM, and for each one, say how you think it gets there:
 
 ```text
-Code            clone from GitHub
 Packages        ?
+Code            ?
 Python          ?
 Configuration   ?
-Data            copy my .db file
-Running process start it
+Data            ?
+Running process ?
 ```
 
-Question marks are fine. The point is to commit to a guess before you see the
-agent's answer, because that's what turns reading its plan into checking it.
-Without a guess of your own, you'll approve whatever comes back.
+Question marks are fine where you're stuck. The point is to commit to a guess
+before you see the agent's answer, because that's what turns reading its plan
+into checking it. Without a guess of your own, you'll approve whatever comes
+back.
+
+The order is part of the answer. Ask yourself why code isn't first, and why
+the running process has to be last.
 
 ### Why a plan, and why not the whole flow
 
