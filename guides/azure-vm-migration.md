@@ -378,10 +378,19 @@ check its answer against the table.
 We chose None for inbound ports so Azure wouldn't create a rule allowing SSH
 from anywhere. Now add the one rule we want.
 
-When deployment finishes, select Go to resource. You can also reach the VM
-later by searching "Virtual machines" and selecting `vm-career-platform`. In
-the menu down the left side of the VM's page, open Networking, then Network
-settings. Select Create port rule, then Inbound port rule, and fill it in:
+When the page says "Your deployment is complete," stop there for a moment.
+Expand Deployment details. That list is everything the form just made, and
+it's the same eight resources you saw in the tags dropdown, now real and
+billing.
+
+Then get to the VM one of two ways. Expand Next steps and select the blue Go
+to resource button at the bottom of that section. Or type `vm-career-platform`
+into the search box at the top of the portal and select it from the results.
+The search box works from anywhere in the portal, so it's the one to remember.
+
+In the menu down the left side of the VM's page, open Networking, then
+Network settings. Select Create port rule, then Inbound port rule, and fill
+it in:
 
 | Field | Value |
 | --- | --- |
