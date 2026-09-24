@@ -813,10 +813,12 @@ addition is for, in your own words, before you go on.
 
 ```text
 Use your executing-plans skill on the migration plan, inline in this session,
-not with subagents. Run the Packages, Code, Python, and Config sections, one
-section at a time. After each section, record what its check showed under
-that step, then stop and wait for me before starting the next one.
+not with subagents. Do one section at a time, record what each check showed
+in the plan, and stop after each section so I can review.
 ```
+
+Say "continue" after each review. Stop when Config is done, since the Data
+section is next and section 5 below covers it.
 
 Superpowers may ask whether to run the plan with subagents or inline. Choose
 inline. Subagents hand each task to a separate helper working out of sight,
