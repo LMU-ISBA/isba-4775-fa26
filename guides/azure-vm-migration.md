@@ -852,39 +852,31 @@ Codespace (source) ──browser download──▶ laptop: Downloads/<your>.db
                         VM: the path your .env's DATABASE_URL names
 ```
 
-This is the part Git can't do. Your plan has steps for it, and before you run
-them, check two things in the document.
+This is the part Git can't do. The steps are already in your plan's Data
+section. Before you say "continue," check the plan for two things.
 
-First, the test row. If we copy the database unchanged, a real migration and a
-fresh seed look the same. So the plan should change one row before the file
-travels, with a label that says what it is, such as "Migration test,
-September 24." Check that the `UPDATE` has a `WHERE` clause naming a single
-project. Without one, it changes every row. If the plan doesn't have this
-step, ask the agent to add it, using Python through `uv` rather than a
-`sqlite3` command your laptop may not have.
+First, the test row. If you copy the database unchanged, a real migration and
+a fresh seed look exactly the same, and you can't prove which one happened.
+So one row has to change before the file travels. Your board plan didn't say
+that, so the agent's plan probably doesn't either. If it's missing:
+
+```text
+Add a step to the start of the Data section: change one project's summary
+in my downloaded database to "Migration test, September 24", using Python
+through uv. Show me the SQL before running it.
+```
+
+Check that the `UPDATE` has a `WHERE` clause naming a single project. Without
+one, it changes every row. The label makes clear it's a test, not experience.
 
 Second, the copy target. The app opens only the path in `DATABASE_URL`, so a
 file that lands under a different name leaves the app reading an empty
-database. The plan's `scp` line should end in the exact path and filename
-your `.env` expects. This is the likeliest mistake of the afternoon.
+database. The `scp` step should end in the exact path and filename your
+`.env` expects. This is the likeliest mistake of the afternoon.
 
-Then:
-
-```text
-Run the database steps of the plan: the test row, the copy, the permissions,
-and the checks on the VM. Record what happened under each step. Stop before
-starting the app.
-```
-
-| Term | What it means | What the command looks like |
-| --- | --- | --- |
-| `scp` | Copy a file over SSH | `scp -i ~/.ssh/isba4775_azure ... azureuser@PUBLIC-IP:...` |
-| Integrity check | SQLite verifies the file isn't damaged | `PRAGMA integrity_check`, which prints `ok` |
-| Permissions | Only your user can read the file | `chmod 600` |
-
-Your test summary should appear when the agent reads the VM's copy, and the
-integrity check should print `ok`. Your Codespace still holds the unedited
-original. That's deliberate. It's the rollback in your plan.
+Then say "continue." When the section finishes, the VM's copy should show
+your test summary and pass its integrity check with `ok`. Your Codespace
+still holds the unedited original. That's deliberate. It's your rollback.
 
 Checkpoint: give two reasons Git couldn't move this data.
 
