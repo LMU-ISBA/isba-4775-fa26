@@ -746,7 +746,6 @@ Read it with your paper plan beside it, and work through these:
 | Code's check compares commit IDs | Laptop and VM should show the same one. That's how you know it's your code, and not last week's `main`. |
 | A rollback on every step | Yours is mostly "the Codespace still has the original" |
 | Any step that creates or seeds a database | Remove it. See below for why. |
-| Data starts by changing one row | Without a test row, you can't prove the data moved. See below. |
 | Data's `scp` target matches `.env` | The app reads only that exact path and filename |
 | Verify compares your data, not just a health check | A page can load and be wrong |
 | Shutdown says deallocate, and checks the power state | Stopped still bills |
@@ -808,30 +807,14 @@ your real data would have moved. If you see `alembic upgrade` or a seed step
 anywhere in the plan, take it out before approving, and tell the agent why:
 the real database is coming from your laptop.
 
-The Data section probably needs something added. If you copy the database
-unchanged, a real migration and a fresh seed look exactly the same, and you
-can't prove which one happened. So one row has to change before the file
-travels. Your board plan didn't say that, so the agent's plan probably
-doesn't either:
-
-```text
-Add a step to the start of the Data section: change one project's summary
-in my downloaded database to "Migration test, September 24", using Python
-through uv. Show me the SQL in the plan, but don't run it yet.
-```
-
-Check that the `UPDATE` has a `WHERE` clause naming a single project. Without
-one, it changes every row. The label makes clear it's a test, not experience.
-
-While you're in the Data section, check the copy target. The app opens only
+In the Data section, check the copy target. The app opens only
 the path in `DATABASE_URL`, so a file that lands under a different name leaves
 the app reading an empty database. The `scp` step should end in the exact
 path and filename your `.env` expects. This is the likeliest mistake of the
 afternoon, and it's much cheaper to catch in the plan than on the VM.
 
-Checkpoint: what did the agent add that you didn't predict, and what did you
-have to add? Say what each change is for, in your own words, before you go
-on.
+Checkpoint: what did the agent add that you didn't predict? Say what each
+addition is for, in your own words, before you go on.
 
 ### Execute the environment steps
 
@@ -870,7 +853,6 @@ applies: it's the file that must never travel through Git.
 
 ```text
 Codespace (source) ──browser download──▶ laptop: Downloads/<your>.db
-                                              │  one row changed
                                               │  scp over SSH
                                               ▼
                         VM: the path your .env's DATABASE_URL names
@@ -880,16 +862,15 @@ This is the part Git can't do, and the reason the whole afternoon exists.
 Everything before this rebuilt the app from files anyone could download.
 This file exists nowhere but your Codespace and your laptop.
 
-You fixed the Data section during the review, so say "continue." When it
-finishes, the VM's copy should show your test summary and pass its integrity
-check with `ok`. Your Codespace still holds the unedited original. That's
-deliberate. It's your rollback.
+Say "continue," and watch how the agent moves the file. When the section
+finishes, the VM's copy should pass its integrity check with `ok`, and the
+agent should be able to read your projects from it. Your Codespace still
+holds the original. That's your rollback.
 
-If the Data section already ran without the test row, or the copy landed
-under the wrong name, nothing is lost. Add the missing step, fix the target,
-and run the section again. The Codespace original is untouched, and nothing
-on the VM is using the file yet, so replacing the VM's copy is safe. This is
-the rollback in your plan doing its job.
+If the copy landed under the wrong name, nothing is lost. Fix the target and
+run the section again. The Codespace original is untouched, and nothing on
+the VM is using the file yet, so replacing the VM's copy is safe. This is the
+rollback in your plan doing its job.
 
 Checkpoint: give two reasons Git couldn't move this data.
 
@@ -971,15 +952,15 @@ comparing at least these:
 | --- | --- | --- |
 | Commit ID | Your local clone, on `main` | Same ID |
 | Database integrity | The file you copied | `ok` on the VM |
-| Test row | The summary you changed | Same summary |
 | Health check | `{"status":"ok"}` in the Codespace | Same on the VM |
 | Page content | Codespace forwarded URL | Same content at `http://PUBLIC-IP:8000` |
 
-The test row is the one row that differs on purpose. Your Codespace holds the
-original, and the VM holds the edited copy, which is how you know the VM's
-database came from that file rather than from a fresh seed.
+Your projects on the VM should be your own content, the same as in the
+Codespace, not the starter content from the seed script. That, plus the
+missing seed step in your plan, is how you know the data moved rather than
+being recreated.
 
-If any other row doesn't match, the migration isn't done. Record the
+If any row doesn't match, the migration isn't done. Record the
 difference rather than guessing why.
 
 ### Close it again
