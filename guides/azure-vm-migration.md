@@ -220,6 +220,7 @@ Every cloud provider has these pieces under different names:
 | Public IP | An address reachable from the Internet | Any cloud or home router |
 | Network security group | A cloud firewall with allow and deny rules | AWS security groups |
 | SSH | Remote administration of a Linux server | Every Linux server |
+| Azure CLI, `az` | The portal as a command | AWS CLI, `gcloud` |
 
 ### Activate your student credit
 
@@ -373,10 +374,10 @@ yourself later:
 While Azure works, ask your agent what each resource in the diagram does, and
 check its answer against the table.
 
-### Open SSH for one address
+### After the deployment
 
 We chose None for inbound ports so Azure wouldn't create a rule allowing SSH
-from anywhere. Now add the one rule we want.
+from anywhere. We'll add the one rule we want in a minute.
 
 When the page says "Your deployment is complete," stop there for a moment.
 Expand Deployment details. That list is everything the form just made, and
@@ -388,9 +389,56 @@ to resource button at the bottom of that section. Or type `vm-career-platform`
 into the search box at the top of the portal and select it from the results.
 The search box works from anywhere in the portal, so it's the one to remember.
 
-In the menu down the left side of the VM's page, open Networking, then
-Network settings. Select Create port rule, then Inbound port rule, and fill
-it in:
+### Look at it from the command line
+
+The portal is one way to talk to Azure. The Azure CLI, `az`, is another, and
+it's the one your agent can use. Both go to the same place, Azure's
+management API, which is a different thing from SSH. The portal and `az`
+change what Azure has built. SSH runs commands inside the machine Azure
+built. Keep those two lanes separate in your head all afternoon.
+
+Sign in once, yourself, in your terminal:
+
+```bash
+az login
+```
+
+A browser window opens for your Microsoft account. When it finishes, the
+terminal lists your subscription. Then let the agent read what the portal
+made, without changing anything:
+
+```text
+Using the Azure CLI, show me my VM vm-career-platform in resource group
+rg-career-platform: its power state, size, region, public IP address, and
+the inbound rules on its network security group. Read only. Don't change
+anything.
+```
+
+| Term | What it means | What the command looks like |
+| --- | --- | --- |
+| Management API | The service the portal and `az` both talk to | `az vm show --show-details` |
+| Instance view | The VM's live state, such as running or deallocated | `az vm get-instance-view` |
+| NSG rules | The firewall's list, including Azure's defaults | `az network nsg rule list` |
+
+The agent now knows your public IP without you copying it. It will also show
+you six rules you didn't write, with priorities from 65000 up. Those are
+Azure's defaults, and they evaluate last. Inbound, everything is denied except
+traffic from inside your virtual network and from Azure's load balancer.
+Outbound, the VM can reach the Internet, which is why `apt-get` and `git
+clone` will work in phase 4 with no rule from you.
+
+Right now nobody can SSH in, including you. There's no allow rule for port
+22, so `DenyAllInBound` at 65500 catches it. The rule you add next sits at
+300 and wins.
+
+Checkpoint: the agent listed your VM. Which computer ran that command, and
+which computer did it ask?
+
+### Open SSH for one address
+
+In the portal, in the menu down the left side of the VM's page, open
+Networking, then Network settings. Select Create port rule, then Inbound port
+rule, and fill it in:
 
 | Field | Value |
 | --- | --- |
@@ -434,11 +482,9 @@ Public IP ─▶ network security group: is this source allowed?
 Azure VM ─▶ sshd ─▶ runs the command as azureuser
 ```
 
-The VM's Overview page, the first item in its left menu, lists its public IP
-address on the right. Copy it, then:
-
-Type this one yourself, in your own terminal, with your VM's address in place
-of `PUBLIC-IP`:
+You have the public IP from the agent's listing, and it's also on the VM's
+Overview page in the portal. Type this one yourself, in your own terminal,
+with that address in place of `PUBLIC-IP`:
 
 ```bash
 ssh -i ~/.ssh/isba4775_azure azureuser@PUBLIC-IP
@@ -598,7 +644,9 @@ with: where it runs (laptop, VM, or portal), the command or click, why it's
 needed, how we verify it, and how we undo it. Mark the Server steps as
 already done. Add a Verify section at the end that starts the app on 0.0.0.0,
 opens port 8000 in the portal, checks it from the Internet, closes the port,
-restarts on 127.0.0.1, and opens an SSH tunnel.
+restarts on 127.0.0.1, and opens an SSH tunnel. End with a Shutdown section
+that uses the Azure CLI to confirm the temporary rule is gone, deallocate the
+VM, and show its power state.
 
 Two rules: clone from GitHub, not from this folder, and don't create or seed
 a database, because my real one is coming from my laptop. Don't run anything
@@ -871,17 +919,32 @@ push. Stop Uvicorn on the VM and close the SSH tunnel.
 Read the diff before you approve the commit. This file is the thing you'd hand
 to someone else so they could do what you did.
 
-In Network settings, check the inbound rules once more and confirm
-`Temp-HTTP-8000` is gone. Leaving it there leaves your site open on plain HTTP
-until you notice.
+Then the plan's last section, which the agent runs through the Azure CLI:
 
-Closing SSH doesn't stop the VM. Open the VM's Overview page, select Stop at
-the top, and wait for the status to read Stopped (deallocated). That means
-Azure released the CPU and memory, so compute billing stops. The disk and
-public IP still cost a little each month.
+```text
+Run the Shutdown section: list the NSG's inbound rules and confirm
+Temp-HTTP-8000 is gone, then deallocate the VM and show me its power state.
+Record both results in the plan.
+```
+
+| Term | What it means | What the command looks like |
+| --- | --- | --- |
+| Deallocate | Stop the VM and release its CPU and memory | `az vm deallocate` |
+| Power state | What Azure says the VM is doing now | `az vm get-instance-view`, showing `VM deallocated` |
+
+The state must read `VM deallocated`, not `VM stopped`. Stopped means the
+operating system halted but Azure still holds the hardware, and it still
+bills. Deallocated means the compute charge ends. The disk and public IP
+still cost a little each month.
+
+Closing SSH doesn't stop the VM, and neither does closing your laptop. The
+portal's Stop button does the same thing as `az vm deallocate`, and you can
+check it there afterward: the Overview page should say Stopped (deallocated).
 
 Auto-shutdown would have caught this tonight, but don't rely on it. Stopping
-it yourself is the habit worth having.
+it yourself is the habit worth having. If the rule listing still shows
+`Temp-HTTP-8000`, delete it before you leave. Leaving it there leaves your
+site open on plain HTTP until someone notices.
 
 Keep the resource group, since we'll use this VM next week. Then stop your
 Codespace. It stays saved as the rollback copy of your site.
@@ -934,5 +997,6 @@ and your next check instead.
 - https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview
 - https://learn.microsoft.com/en-us/azure/virtual-machines/states-billing
 - https://azure.microsoft.com/en-us/free/students/
+- https://learn.microsoft.com/en-us/cli/azure/vm
 - https://docs.astral.sh/uv/getting-started/installation/
 - https://sqlite.org/cli.html
