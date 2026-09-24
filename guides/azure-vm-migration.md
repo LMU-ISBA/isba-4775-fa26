@@ -313,7 +313,7 @@ default that either costs money or protects you from a mistake:
 | Tab | Setting | Value |
 | --- | --- | --- |
 | Management | Enable auto-shutdown | On, 6:00 PM, and check the time zone |
-| Management | Notification before shutdown | Off |
+| Management | Notification before shutdown | On, with your email address |
 | Monitoring | Boot diagnostics | Disable |
 | Tags | Name and value | `course` = `isba-4775`, and `purpose` = `class` |
 
@@ -321,6 +321,10 @@ Auto-shutdown deallocates the VM on a schedule. It's your safety net for the
 night you forget, and forgetting is what drains a student credit. The time
 zone box defaults to UTC, which is seven hours ahead of us, so set it to
 Pacific or your VM will stop mid-afternoon.
+
+The notification emails you 30 minutes before the stop, with a link to skip
+or delay it. That's for the evening you're actually working at 5:45 and don't
+want to lose your session, and for the evening you forgot the VM was on.
 
 Boot diagnostics stores console screenshots in a storage account, which
 carries a small charge. We don't need it today, and turning it off is a
