@@ -437,9 +437,22 @@ whoami
 hostname
 pwd
 cat /etc/os-release
+cat ~/.ssh/authorized_keys
 ```
 
-Four answers, all about the VM and none about your laptop. Then leave:
+Four answers about the VM and none about your laptop, then one line you'll
+recognize. That last file is the list of public keys allowed to log in as
+`azureuser`, and the line in it is the one you pasted into the portal. It's
+sitting on a computer in a Microsoft datacenter now.
+
+Your private key isn't on this machine, and it never will be. When you
+connected, the server sent your laptop a random challenge, your laptop signed
+it with the private key, and the server checked the signature against this
+public key. The private key was used without ever leaving home. That's why
+the public half was safe to paste into a web form, and why the private half
+must never be copied anywhere.
+
+Then leave:
 
 ```bash
 exit
@@ -463,7 +476,7 @@ Three computers are now involved:
 
 Checkpoint: you ran `hostname` and got `vm-career-platform`, then ran it again
 after `exit` and got your laptop's name. Explain what changed, and what stayed
-the same.
+the same. Then answer this: is your private key anywhere on the VM?
 
 From here on, the agent does the work, because phase 4 is a long sequence of
 installs where one typo costs you the afternoon. You can keep a terminal
