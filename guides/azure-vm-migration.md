@@ -821,11 +821,17 @@ addition is for, in your own words, before you go on.
 ```text
 Use your executing-plans skill on the migration plan, inline in this session,
 not with subagents. Do one section at a time, record what each check showed
-in the plan, and stop after each section so I can review.
+in the plan, and stop after each section so I can review. Run the sections
+up through Data only. Don't run Processes, Verify, or Shutdown until I ask
+for each one by name.
 ```
 
 Say "continue" after each review. Stop when Config is done, since the Data
 section is next and section 5 below covers it.
+
+The last line of that prompt matters. Shutdown is a section in your plan, and
+"continue" doesn't care what comes next. Without that line, an agent working
+through the plan will deallocate your VM before you've seen the app run.
 
 Superpowers may ask whether to run the plan with subagents or inline. Choose
 inline. Subagents hand each task to a separate helper working out of sight,
@@ -862,7 +868,8 @@ This is the part Git can't do, and the reason the whole afternoon exists.
 Everything before this rebuilt the app from files anyone could download.
 This file exists nowhere but your Codespace and your laptop.
 
-Say "continue," and watch how the agent moves the file. When the section
+Say "continue" for the Data section only, and watch how the agent moves the
+file. When the section
 finishes, the VM's copy should pass its integrity check with `ok`, and the
 agent should be able to read your projects from it. Your Codespace still
 holds the original. That's your rollback.
@@ -877,7 +884,9 @@ Checkpoint: give two reasons Git couldn't move this data.
 ## 6. Verify the migration
 
 This phase wraps the plan's own Verify section inside a detour that isn't in
-any migration plan and is the most useful ten minutes of the afternoon. We're
+any migration plan and is the most useful ten minutes of the afternoon. The
+detour starts the app itself, so it takes the place of your plan's Processes
+section. Skip that one. We're
 going to put the site on the Internet, prove it's the same site, and take it
 back off.
 
@@ -941,8 +950,9 @@ While the port is open, run the plan's own Verify section. Open your
 Codespace site in another tab, then:
 
 ```text
-Run the Verify section of the plan. Record each result under its step, and
-put the comparison in a table at the end of the document. Show it to me.
+Run the Verify section of the plan, and only that section. Record each result
+under its step, and put the comparison in a table at the end of the document.
+Show it to me.
 ```
 
 If your Verify section was thin, this is where it shows. It should be
@@ -1018,7 +1028,7 @@ to someone else so they could do what you did.
 Then the plan's last section:
 
 ```text
-Run the Shutdown section. Before you deallocate, list the NSG's inbound
+Now run the Shutdown section. Before you deallocate, list the NSG's inbound
 rules so I can confirm Temp-HTTP-8000 is gone, since that rule isn't in the
 plan. Record the results.
 ```
@@ -1079,6 +1089,7 @@ Give the agent the exact error and ask it to explain before it fixes anything.
 | `uv: command not found` on the VM | The installer's PATH change isn't loaded | Open a new SSH session or load `~/.local/bin/env` |
 | `no such table: projects` | The app is reading an empty or wrong file | Does the copied filename match `DATABASE_URL` in `.env`? |
 | `curl` to 127.0.0.1:8000 is refused | Nothing is listening | Is Uvicorn still running on the VM? |
+| The VM is deallocated before you tested | The agent ran the Shutdown section early. Nothing is lost, since the disk keeps everything. | Start it from the Overview page, or ask the agent to `az vm start` it, then continue at section 6 |
 | `http://PUBLIC-IP:8000` hangs | The rule isn't there, or the app is on loopback | The `Temp-HTTP-8000` rule and the `--host` value |
 
 If the agent suggests opening port 8000, allowing SSH from Any, or turning off
