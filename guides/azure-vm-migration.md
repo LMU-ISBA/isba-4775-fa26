@@ -22,7 +22,7 @@ and a short list of what to look for before you approve.
 Our worked example is the FastAPI, Uvicorn, and SQLite app our class built.
 Your file names may differ a little, and the agent will adapt.
 
-## Before we start
+## 0. Before we start
 
 Start your Azure activation first, under "Activate your student credit" in
 phase 2, since Microsoft's student verification can take a while. Work through
@@ -626,9 +626,16 @@ decisions in it.
 
 ### Ask for the plan
 
-You connected by hand a minute ago, in your own terminal. Your agent wasn't
-watching, so it doesn't know the address, the user, or which key to use. Tell
-it once, then hand it the plan from the board, one line per category:
+This prompt and everything after it goes to Claude Code, not to the VM
+terminal you were just in. Open the built-in terminal in your project folder
+on your laptop, the one from section 0, and start `claude` there if it isn't
+running. The plan file has to land inside your repository, and the agent has
+to be able to read `pyproject.toml` and `.env.example`, so the folder matters.
+
+You connected by hand a minute ago, in a different terminal. Your agent
+wasn't watching, so it doesn't know the address, the user, or which key to
+use. Tell it once, then hand it the plan from the board, one line per
+category:
 
 ```text
 My Azure VM is azureuser@PUBLIC-IP and the SSH key is ~/.ssh/isba4775_azure.
@@ -993,7 +1000,7 @@ site open on plain HTTP until someone notices.
 Keep the resource group, since we'll use this VM next week. Then stop your
 Codespace. It stays saved as the rollback copy of your site.
 
-## What you should be able to explain now
+## 7. What you should be able to explain now
 
 If someone asks about this project in an interview, these are the answers
 worth having:
@@ -1012,7 +1019,7 @@ On Thursday we make it public and durable: Nginx in front on port 80, systemd
 so the app restarts by itself, and logs when it doesn't. Check your Azure
 credit in the portal before then, so you know what today cost.
 
-## If something goes wrong
+## 8. If something goes wrong
 
 Give the agent the exact error and ask it to explain before it fixes anything.
 
@@ -1033,7 +1040,7 @@ If the agent suggests opening port 8000, allowing SSH from Any, or turning off
 the firewall to test a guess, say no. Write down the symptom, the evidence,
 and your next check instead.
 
-## Sources
+## 9. Sources
 
 - https://code.claude.com/docs/en/overview
 - https://code.claude.com/docs/en/terminal-guide
