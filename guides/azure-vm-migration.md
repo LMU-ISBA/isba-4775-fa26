@@ -686,6 +686,7 @@ Read it with your paper plan beside it, and work through these:
 | Steps you didn't predict | Each one is a question to ask before you approve |
 | A reason on every step | "Because the agent said so" isn't a reason |
 | A check on every step | Otherwise you'll never know whether it worked |
+| Code's check compares commit IDs | Laptop and VM should show the same one. That's how you know it's your code, and not last week's `main`. |
 | A rollback on every step | Yours is mostly "the Codespace still has the original" |
 | Any step that creates or seeds a database | Remove it. See below for why. |
 | Verify compares your data, not just a health check | A page can load and be wrong |
@@ -754,22 +755,26 @@ addition is for, in your own words, before you go on.
 ### Execute the environment steps
 
 ```text
-Use your executing-plans skill on the migration plan you just wrote. Run the
-environment setup steps only, up to but not including the database. After each step,
-write what actually happened into the plan, under that step. Stop when the
-setup is done and show me the commit ID on the VM and the one here.
+Use your executing-plans skill on the migration plan. Run the Packages, Code,
+Python, and Config sections, one section at a time. After each section,
+record what its check showed under that step, then stop and wait for me
+before starting the next one.
 ```
 
-The two commit IDs should match. That's how you know the VM has your code,
-and not whatever was on `main` last week.
+One section at a time costs you four approvals instead of one. It buys you a
+pause after each, which is where the understanding happens. Use the pauses
+for these:
 
-Checkpoint: what arrived with the clone, and what's still missing? Did your
-database come with it? Why wasn't the `.venv` folder stored in Git? Its files
-were built for one specific machine.
+| After | Look at | Answer this |
+| --- | --- | --- |
+| Packages | The `sudo` lines | Why did installing need administrator rights when cloning won't? |
+| Code | The two commit IDs | What arrived with the clone, and what's still missing? Did your database come with it? |
+| Python | The `.venv` folder that now exists | Why wasn't it stored in Git? Its files were built for one specific machine. |
+| Config | The new `.env` | Why did this have to be recreated? It's ignored by Git, so it never left the Codespace. |
 
-`.env` is ignored by Git, so it never left the Codespace. Today it only holds
-the database path. Later, secrets like API keys go in the same kind of file,
-entered on the server by hand.
+`.env` today only holds the database path. Later, secrets like API keys go in
+the same kind of file, entered on the server by hand, and the same reasoning
+applies: it's the file that must never travel through Git.
 
 ## 5. Move application state
 
