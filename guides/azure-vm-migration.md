@@ -694,6 +694,27 @@ Roughly, the environment steps should be:
 `sudo` appears on the install lines because changing system software needs
 administrator rights, and that's a good reason to read them.
 
+The Python row depends on a file called `uv.lock` at the root of your
+repository. `pyproject.toml` is the shopping list, with lines like
+`fastapi>=0.141.1`. `uv.lock` is the receipt: the exact version of every
+package that request pulled in, including the ones you never named, with a
+hash of each download. `uv sync --locked` on the VM shops from the receipt,
+so the VM gets the same packages the Codespace tested.
+
+Look in your local clone now. If `uv.lock` isn't there, your agent built the
+app with `pip` instead of `uv`, and there's no receipt yet. Make one on your
+laptop, where the app was actually tested, before the VM sees the project:
+
+```text
+There's no uv.lock in this repository. Create one from pyproject.toml with
+uv lock, show me what it resolved, then commit and push it. Wait for my
+review before committing.
+```
+
+Then the VM's clone in the plan will bring it along. Don't let the plan
+generate the lock file on the VM instead. Resolving versions on the server
+means pinning whatever PyPI serves this afternoon, not what you tested.
+
 One thing that should look odd: the VM clones from your GitHub account without
 logging in anywhere. It works because your repository is public, so reading it
 needs no account, the same as a stranger opening it in a browser. That was a
