@@ -315,7 +315,7 @@ default that either costs money or protects you from a mistake:
 | Management | Enable auto-shutdown | On, 6:00 PM, and check the time zone |
 | Management | Notification before shutdown | On, with your email address |
 | Monitoring | Boot diagnostics | Disable |
-| Tags | Name and value | `course` = `isba-4775`, and `purpose` = `class` |
+| Tags | Three name and value pairs | `course` = `isba-4775`, `environment` = `staging`, and `delete-after` = `2026-12-18` |
 
 Auto-shutdown deallocates the VM on a schedule. It's your safety net for the
 night you forget, and forgetting is what drains a student credit. The time
@@ -333,6 +333,18 @@ reminder that a default you never chose can still bill you.
 Tags don't change how anything runs. They label resources so you can find
 them, group them, and see what a project costs. On a real subscription with
 hundreds of resources, untagged ones are the ones nobody can account for.
+
+Each of these three answers a question someone will ask later. `course` says
+whose this is and what it's for, which is how a shared bill gets split.
+`environment` says what role the machine plays. Your laptop is development,
+and this VM is staging: it exists to prove the deployment works before
+anything real depends on it. `delete-after` says when it can go, the day
+after your final interview. Nearly every abandoned cloud resource is one that
+never had an expiry.
+
+Tags describe a role, and roles change. When this VM gets a domain and a
+certificate, `environment` becomes `production` for as long as it serves your
+site. Changing a tag is ordinary work, not a sign you got it wrong.
 
 Then select Review + create and Create. If the size is unavailable or
 deployment fails with `AllocationFailed`, tell the instructor rather than
