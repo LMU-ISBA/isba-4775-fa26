@@ -220,7 +220,7 @@ Every cloud provider has these pieces under different names:
 | Public IP | An address reachable from the Internet | Any cloud or home router |
 | Network security group | A cloud firewall with allow and deny rules | AWS security groups |
 | SSH | Remote administration of a Linux server | Every Linux server |
-| Azure CLI, `az` | The portal as a command | AWS CLI, `gcloud` |
+| Azure CLI, `az` | The portal as a command, for managing resources from outside | AWS CLI, `gcloud` |
 
 ### Activate your student credit
 
@@ -389,13 +389,59 @@ to resource button at the bottom of that section. Or type `vm-career-platform`
 into the search box at the top of the portal and select it from the results.
 The search box works from anywhere in the portal, so it's the one to remember.
 
-### Look at it from the command line
+### What the Azure CLI is
 
-The portal is one way to talk to Azure. The Azure CLI, `az`, is another, and
-it's the one your agent can use. Both go to the same place, Azure's
-management API, which is a different thing from SSH. The portal and `az`
-change what Azure has built. SSH runs commands inside the machine Azure
-built. Keep those two lanes separate in your head all afternoon.
+You just built a VM by clicking through the portal. Every click became a
+request to Azure's management API, the service that creates, changes, and
+deletes Azure resources. The portal is a web page that sends those requests
+for you.
+
+The Azure CLI, `az`, sends the same requests from a terminal. `az vm create`
+does what the Create button did. `az vm deallocate` does what the Stop button
+does. Anything you can click in the portal, you can type as an `az` command,
+and anything you can type, an agent can run. That's why we installed it: your
+agent can't click, but it can use `az`.
+
+`az` runs on your laptop, never on the VM. It talks to Azure, not to your
+machine. It needs to know who you are, which is what `az login` is for, and
+it doesn't care whether the VM is running.
+
+### Two ways to reach your VM
+
+From here on, you'll use two tools that sound alike and do completely
+different jobs. Keep them separate in your head all afternoon.
+
+```text
+Managing the VM from outside          Working inside the VM
+───────────────────────────           ─────────────────────
+laptop                                laptop
+  │  az vm show, az vm deallocate       │  ssh azureuser@PUBLIC-IP
+  ▼                                     ▼
+Azure management API                  public IP and firewall, port 22
+  │                                     │
+  ▼                                     ▼
+the VM as a resource                  sshd, then a shell on Ubuntu
+```
+
+| | Azure CLI, `az` | SSH |
+| --- | --- | --- |
+| Talks to | Azure, the company running the datacenter | Your VM's operating system |
+| Proves who you are with | Your Microsoft account, from `az login` | Your private key |
+| Works when the VM is off | Yes. It can start it. | No. Nothing answers. |
+| Crosses the firewall rule you'll add | No. It never touches port 22. | Yes. That rule is its only way in. |
+| Can | Create, start, stop, resize, and delete the VM, and change its firewall | Install software, copy files, run the app, read logs |
+| Can't | See a single file inside the VM | Create or delete the VM, or change its firewall |
+| Today's jobs | Read the VM's details, check the rules, deallocate at the end | Everything in sections 3 through 6 that happens on the VM |
+
+A quick way to tell them apart: if the job is about the machine as a thing
+Azure rents you, it's `az`. If the job is about what's running on the
+machine, it's SSH.
+
+This also explains something you'll see in a minute. `az` can read your
+firewall rules and your VM's details before you've added any SSH rule at all,
+because it never goes through that firewall. It goes to Azure.
+
+### Look at it from the command line
 
 Sign in once, yourself, in your terminal:
 
@@ -431,8 +477,9 @@ Right now nobody can SSH in, including you. There's no allow rule for port
 22, so `DenyAllInBound` at 65500 catches it. The rule you add next sits at
 300 and wins.
 
-Checkpoint: the agent listed your VM. Which computer ran that command, and
-which computer did it ask?
+Checkpoint: the agent listed your VM and its firewall rules, and there's no
+rule yet allowing anyone in. How did `az` get that information? Which computer
+ran the command, and which one answered?
 
 ### Open SSH for one address
 
