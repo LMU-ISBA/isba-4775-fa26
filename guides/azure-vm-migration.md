@@ -638,8 +638,9 @@ use. Tell it once, then hand it the plan from the board, one line per
 category:
 
 ```text
-My Azure VM is azureuser@PUBLIC-IP and the SSH key is ~/.ssh/isba4775_azure.
-Use those whenever you connect to it today.
+My VM is vm-career-platform in resource group rg-career-platform. Its
+public IP is PUBLIC-IP, the user is azureuser, and the SSH key is
+~/.ssh/isba4775_azure. Use that user and key whenever you SSH to the VM.
 
 Here is my migration plan, in order:
 
@@ -660,8 +661,10 @@ runs (laptop, VM, or portal), what to run or click, why, how we check it
 worked, and how we undo it. Don't run anything yet.
 ```
 
-Replace `PUBLIC-IP` with your VM's address from its Overview page, and change
-any line to match what you wrote, such as your actual `.db` filename.
+Replace `PUBLIC-IP` with your VM's address, and change any line to match
+what you wrote, such as your actual `.db` filename. The first two lines give
+the agent everything it needs to find the VM in Azure and to get inside it,
+which are two different things, and it will need both before the day is out.
 
 Why the plan goes in as your lines and not just a request: the agent has to
 build on your categories, in your order, so that when its document comes back
