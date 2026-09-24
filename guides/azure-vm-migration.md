@@ -575,28 +575,43 @@ decisions in it.
 
 You connected by hand a minute ago, in your own terminal. Your agent wasn't
 watching, so it doesn't know the address, the user, or which key to use. Tell
-it once, and hand it your plan:
+it once, then hand it the plan from the board, one line per category:
 
 ```text
 My Azure VM is azureuser@PUBLIC-IP and the SSH key is ~/.ssh/isba4775_azure.
 Use those whenever you connect to it today.
 
-Here is my migration plan:
-[paste your five lines]
+Here is my migration plan, in order:
 
-Use your writing-plans skill to turn it into a plan saved as
-docs/superpowers/plans/2026-09-24-azure-vm-migration.md. For every step, give
-where it runs (laptop, VM, or portal), the command or click, why it's needed,
-how we'll verify it, and how we'd undo it. Start with the server itself,
-which already exists, and record how it was created and how I connect to it
-as steps already done. Then cover setup, moving the database, and
-verification, including a step that opens port 8000 to the Internet
-temporarily and a later step that closes it. Two rules: clone from
-GitHub, not from this folder, and don't create or seed a database, because my
-real one is coming from my laptop. Don't run anything yet.
+Server     Azure VM, already created, reached over SSH
+Packages   apt-get: git, sqlite3
+Code       git clone from GitHub
+Python     uv, then uv sync from the lock file
+Config     copy .env from .env.example
+Data       scp my SQLite .db file from my laptop
+Processes  start uvicorn
+
+Use your writing-plans skill to turn this into
+docs/superpowers/plans/2026-09-24-azure-vm-migration.md. Keep my seven
+categories as the sections, in this order. Under each one, list the steps
+with: where it runs (laptop, VM, or portal), the command or click, why it's
+needed, how we verify it, and how we undo it. Mark the Server steps as
+already done. Add a Verify section at the end that starts the app on 0.0.0.0,
+opens port 8000 in the portal, checks it from the Internet, closes the port,
+restarts on 127.0.0.1, and opens an SSH tunnel.
+
+Two rules: clone from GitHub, not from this folder, and don't create or seed
+a database, because my real one is coming from my laptop. Don't run anything
+yet.
 ```
 
-Replace `PUBLIC-IP` with your VM's address from its Overview page.
+Replace `PUBLIC-IP` with your VM's address from its Overview page, and change
+any line to match what you wrote, such as your actual `.db` filename.
+
+Why the plan goes in as your lines and not just a request: the agent has to
+build on your categories, in your order, so that when its document comes back
+each of your lines is one section you can check. If it were free to
+reorganize, you'd be reviewing its plan instead of checking yours.
 
 ### Review the document against your list
 
@@ -610,7 +625,7 @@ Read it with your paper plan beside it, and work through these:
 
 | Look for | Why |
 | --- | --- |
-| Every category from your list appears | A missing category is a missing piece of the app |
+| Your seven sections, in your order | If the agent reorganized, ask why before you read further |
 | The server steps are marked as done | The plan should say what exists, not pretend to create it again |
 | Steps you didn't predict | Each one is a question to ask before you approve |
 | A reason on every step | "Because the agent said so" isn't a reason |
