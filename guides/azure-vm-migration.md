@@ -532,6 +532,7 @@ plan on paper. Use the categories from the board, in the order they have to
 happen on the VM, and for each one, say how you think it gets there:
 
 ```text
+Server          ?
 Packages        ?
 Code            ?
 Python          ?
@@ -539,6 +540,11 @@ Configuration   ?
 Data            ?
 Running process ?
 ```
+
+The first line is the one you've already done: a machine exists, and you can
+reach it. It goes in the plan anyway, because a plan someone else could follow
+can't assume the server is there, and your evidence should record how it was
+made and how it's reached.
 
 Question marks are fine where you're stuck. The point is to commit to a guess
 before you see the agent's answer, because that's what turns reading its plan
@@ -581,9 +587,11 @@ Here is my migration plan:
 Use your writing-plans skill to turn it into a plan saved as
 docs/superpowers/plans/2026-09-24-azure-vm-migration.md. For every step, give
 where it runs (laptop, VM, or portal), the command or click, why it's needed,
-how we'll verify it, and how we'd undo it. Cover setup, moving
-the database, and verification, including a step that opens port 8000 to the
-Internet temporarily and a later step that closes it. Two rules: clone from
+how we'll verify it, and how we'd undo it. Start with the server itself,
+which already exists, and record how it was created and how I connect to it
+as steps already done. Then cover setup, moving the database, and
+verification, including a step that opens port 8000 to the Internet
+temporarily and a later step that closes it. Two rules: clone from
 GitHub, not from this folder, and don't create or seed a database, because my
 real one is coming from my laptop. Don't run anything yet.
 ```
@@ -603,6 +611,7 @@ Read it with your paper plan beside it, and work through these:
 | Look for | Why |
 | --- | --- |
 | Every category from your list appears | A missing category is a missing piece of the app |
+| The server steps are marked as done | The plan should say what exists, not pretend to create it again |
 | Steps you didn't predict | Each one is a question to ask before you approve |
 | A reason on every step | "Because the agent said so" isn't a reason |
 | A check on every step | Otherwise you'll never know whether it worked |
