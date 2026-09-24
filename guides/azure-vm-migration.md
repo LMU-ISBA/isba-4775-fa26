@@ -824,9 +824,10 @@ Checkpoint: give two reasons Git couldn't move this data.
 
 ## 6. Verify the migration
 
-Before the plan's own Verify section, a detour that isn't in any migration
-plan and is the most useful ten minutes of the afternoon. We're going to put
-the site on the Internet, look at it, and take it back off.
+This phase wraps the plan's own Verify section inside a detour that isn't in
+any migration plan and is the most useful ten minutes of the afternoon. We're
+going to put the site on the Internet, prove it's the same site, and take it
+back off.
 
 ### Start the app where anyone could reach it
 
@@ -882,61 +883,10 @@ warning near it. Everything on this connection travels as plain text, readable
 by anyone between your phone and Azure. The port number is there too, which no
 real site asks visitors to type.
 
-### Close it again
-
-Also yours. In Network settings, find `Temp-HTTP-8000` in the inbound rules
-list, open it, and select Delete. Then reload the page. It hangs and times
-out. Nothing about the app changed, and the firewall is the only difference.
-
-Then:
-
-```text
-Restart the app on the VM so only the VM itself can reach it, still in the
-background. Show me what's listening afterward.
-```
-
-The command should now say `--host 127.0.0.1`. There are two independent
-reasons the public path fails: no rule for 8000, and an app that only answers
-to the VM itself. Either one alone would be enough.
-
-```text
-Internet
-   │
-Public IP
-   │
-Network security group: port 22 only, from your laptop only
-   │
-Ubuntu VM
-   ├── sshd :22
-   └── Uvicorn on 127.0.0.1:8000 ─▶ the .db file
-```
-
-Checkpoint: name both things blocking the public request. Which one would you
-remove first, and why not the other?
-
-### See it in the browser, privately
-
-```text
-Open an SSH tunnel in the background from port 8001 on my laptop to port
-8000 on the VM, so I can view the app without opening a public port.
-Wait for my review.
-```
-
-It should look like `ssh -f -N -L 8001:127.0.0.1:8000 ...`. The `-L` connects a port here to a
-port there, inside the SSH connection. Open http://localhost:8001 in your
-browser. You're looking at the VM's app.
-
-The tunnel isn't getting around the firewall. It travels through port 22, the
-one door your `/32` rule opened, and SSH carries the page requests inside that
-connection. This is how people reach internal dashboards and admin pages that
-should never be public.
-
-Checkpoint: if you deleted the port 22 rule, would the tunnel still work?
-
 ### Prove it
 
-Now the plan's own Verify section. Open your Codespace site in another tab,
-then:
+While the port is open, run the plan's own Verify section. Open your
+Codespace site in another tab, then:
 
 ```text
 Run the Verify section of the plan. Record each result under its step, and
@@ -952,7 +902,7 @@ comparing at least these:
 | Database integrity | The file you copied | `ok` on the VM |
 | Test row | The summary you changed | Same summary |
 | Health check | `{"status":"ok"}` in the Codespace | Same on the VM |
-| Page content | Codespace forwarded URL | Same content at `localhost:8001` |
+| Page content | Codespace forwarded URL | Same content at `http://PUBLIC-IP:8000` |
 
 The test row is the one row that differs on purpose. Your Codespace holds the
 original, and the VM holds the edited copy, which is how you know the VM's
@@ -960,6 +910,44 @@ database came from that file rather than from a fresh seed.
 
 If any other row doesn't match, the migration isn't done. Record the
 difference rather than guessing why.
+
+### Close it again
+
+Also yours. In Network settings, find `Temp-HTTP-8000` in the inbound rules
+list, open it, and select Delete. Then reload the page. It hangs and times
+out. Nothing about the app changed, and the firewall is the only difference.
+
+Then:
+
+```text
+Restart the app on the VM so only the VM itself can reach it, still in the
+background. Show me what's listening afterward, and check /health from
+inside the VM.
+```
+
+The command should now say `--host 127.0.0.1`, and the health check over SSH
+still answers. There are now two independent reasons the public path fails:
+no rule for 8000, and an app that only answers to the VM itself. Either one
+alone would be enough.
+
+```text
+Internet
+   │
+Public IP
+   │
+Network security group: port 22 only, from your laptop only
+   │
+Ubuntu VM
+   ├── sshd :22
+   └── Uvicorn on 127.0.0.1:8000 ─▶ the .db file
+```
+
+This is how the app stays from now on. Next week, Nginx goes in front of it
+on port 80 and becomes the one door for visitors, and the app never has to
+face the Internet directly again.
+
+Checkpoint: name both things blocking the public request. Which one would you
+remove first, and why not the other?
 
 ### Save the record and shut down
 
@@ -969,7 +957,7 @@ happened, and the comparison at the end. Read through it once. Then:
 ```text
 Check the migration plan for anything that shouldn't be public, such as my IP
 address, key paths, or database contents, and remove it. Then commit it and
-push. Stop Uvicorn on the VM and close the SSH tunnel.
+push. Then stop Uvicorn on the VM.
 ```
 
 Read the diff before you approve the commit. This file is the thing you'd hand
@@ -1039,7 +1027,7 @@ Give the agent the exact error and ask it to explain before it fixes anything.
 | `uv: command not found` on the VM | The installer's PATH change isn't loaded | Open a new SSH session or load `~/.local/bin/env` |
 | `no such table: projects` | The app is reading an empty or wrong file | Does the copied filename match `DATABASE_URL` in `.env`? |
 | `curl` to 127.0.0.1:8000 is refused | Nothing is listening | Is Uvicorn still running on the VM? |
-| `localhost:8001` doesn't load | The tunnel is down | The background tunnel process |
+| `http://PUBLIC-IP:8000` hangs | The rule isn't there, or the app is on loopback | The `Temp-HTTP-8000` rule and the `--host` value |
 
 If the agent suggests opening port 8000, allowing SSH from Any, or turning off
 the firewall to test a guess, say no. Write down the symptom, the evidence,
