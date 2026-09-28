@@ -889,7 +889,9 @@ so you can't tell whether your data moved or got recreated. With your own
 name and projects in the file, the page on the VM proves it.
 
 Give the agent your resume. Paste the text, or drag in a PDF. A LinkedIn
-profile works too: on your profile page, select More, then Save to PDF.
+profile works too: on your profile page, select Resources, then Save to PDF.
+Some accounts show More instead of Resources, in the row of buttons under
+your name.
 
 ```text
 Here's my resume. The database my plan's Data section copies still has
