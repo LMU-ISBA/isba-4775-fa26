@@ -279,10 +279,10 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 9/10 | Running and Troubleshooting Services: physical server, VM, container; Nginx and MySQL; processes, ports, logs; database creation, tables, and sample data | |
 | Tue 9/15 | Database to application: portfolio from a template, repeatable setup, Python build-along, environment variables and Codespaces secrets, failure/recovery, commit/push and a small change; optional instructor PaaS demo | Ex02 proposed; confirm in Brightspace |
 | Thu 9/17 | Building with an agent and Git: executing the implementation plan, the request path through Nginx, the app server, and SQLite, and clone, add, commit, push, and pull | |
-| Tue 9/22 | Migrating to a VM: Azure, SSH, cloud firewall rules, what Git moves and what it doesn't, and moving live SQLite data | |
-| Thu 9/24 | Operating the VM: Nginx as a reverse proxy, Uvicorn, systemd, logs, and recovering after a restart | |
-| Tue 9/29 | A domain and HTTPS: registrar and DNS host, delegation, records, TTL, and certificates | |
-| Thu 10/1 | Diagnosing the request path: DNS caches, certificate failures, ports, processes, and the hypothesis log | |
+| Tue 9/22 | Migrating to a VM: feature branches and pull requests, what Git moves and what it doesn't, IaaS, PaaS, and SaaS, and Azure resource groups | |
+| Thu 9/24 | Creating the VM: SSH keys, an Azure VM, a cloud firewall rule for SSH, and a written migration plan | |
+| Tue 9/29 | Finishing the migration: rebuilding the environment, moving live SQLite data, and verifying the app on the VM | |
+| Thu 10/1 | Operating the VM: Nginx as a reverse proxy, Uvicorn, systemd, logs, and recovering after a restart | |
 | Tue 10/6 | Email authentication: SPF, DKIM, DMARC, and deliverability as a DNS problem | |
 | Thu 10/8 | APIs: REST, JSON, status codes, authentication, rate limits, and idempotency | Ex06 |
 | Tue 10/13 | Orchestration: triggers, webhooks, polling, and joining two systems | |
@@ -307,9 +307,12 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 September 15 continued the unfinished application build from September 10.
 September 17 went to building the application and to Git, so the Azure
 migration moved to September 22 and the sessions after it moved back one
-meeting. The Ex04 and Ex05 deadlines will be announced in Brightspace. Dates
-after October 1 are still being revised, and changes will be announced in
-class and Brightspace.
+meeting. The migration then took two meetings, September 22 and 24, so
+finishing it moved to September 29 and Operating the VM moved to October 1.
+A domain and HTTPS and Diagnosing the request path now come after October 1.
+The Ex04 and Ex05 deadlines will be announced in Brightspace. The October
+schedule is being re-sequenced around these moves, and changes will be
+announced in class and Brightspace.
 
 ## Work load expectations
 
