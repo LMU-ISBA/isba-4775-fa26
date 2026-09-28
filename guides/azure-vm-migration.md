@@ -845,6 +845,11 @@ This is the rhythm from the build-and-deploy tutorial: approve the plan,
 choose inline, and work one piece at a time. Naming one section is what makes
 the agent stop, the same way naming TASK-1 did.
 
+Stay in manual mode for the first three sections, so you approve each command
+and can compare it with the plan's step as it runs. After Code, press
+Shift+Tab to switch to auto mode for the rest. The agent stops asking before
+each command, but it still stops at the end of the section you named.
+
 Inline means the agent does every step itself, in this conversation, so each
 command scrolls past as it lands on the VM. Subagents hand each task to a
 separate helper working out of sight, which suits a long build, the way the
@@ -902,13 +907,18 @@ change before writing it.
 
 This site becomes a public resume, so leave out your phone number and home
 address. Read the proposed changes before you approve them, the same way you
-read the plan.
+read the plan. The agent may ask for things your resume doesn't have, such as
+a summary or projects. Answer, or leave them blank for now.
 
 ### Copy it to the VM
 
 Say "Let's work on the next section" for Data, and watch how the agent moves
 the file. When the section finishes, the VM's copy should pass its integrity
 check with `ok`, and its row counts should match your laptop's.
+
+Then keep going the same way through Processes and Verify. Processes starts
+the app so that only the VM itself can reach it, and Verify checks it from
+inside the VM.
 
 The laptop copy is now the original, since it's the only one with your
 profile. The Data section's backup snapshot is a second copy. The Codespace's
@@ -923,118 +933,91 @@ Checkpoint: give two reasons Git couldn't move this data.
 
 ## 6. Verify the migration
 
-This phase wraps the plan's own Verify section inside a detour that isn't in
-any migration plan and is the most useful ten minutes of the afternoon. The
-detour starts the app itself, so it takes the place of your plan's Processes
-section. Skip that one. We're going to put the site on the Internet, prove
-it's the same site, and take it back off.
+Your plan's Verify section checked the app from inside the VM. This section
+checks it from outside, the way a visitor would, and shows what keeps it
+private.
 
-### Start the app where anyone could reach it
+### Ask what was tested
 
 ```text
-Start my app on the VM in the background so it listens on every address, on
-port 8000. Then show me what's listening on that port. Wait for my review.
+What did the Verify section test, and what did each check show? Put it
+in a table at the end of the plan.
 ```
 
-If your agent already ran the Processes section, the app is running and only
-the VM can reach it. This prompt restarts it.
+Read the table, then answer this: does it prove your data moved? The agent
+is grading its own work here. A good answer says which checks are strong,
+such as matching row counts or file hashes, and which are weak, such as a
+page returning 200. Your own name on the page is strong evidence, since the
+seed script only knows the demo profile. The next part is the check you do
+yourself.
 
-The command should include `--host 0.0.0.0`. `0.0.0.0` means the app accepts
-connections arriving on any of the VM's addresses, rather than only from the
-VM itself. The listening line should show `0.0.0.0:8000`.
+### Two locks
 
-A program you start over SSH normally belongs to that SSH session and dies
-when the session ends. `nohup` and the trailing `&` detach it so it keeps
-running. That's a stopgap, and a weak one: it won't restart if the app crashes
-or the VM reboots. Next week, systemd takes over that job.
+Press Shift+Tab to go back to manual mode. Your agent can reach Azure, because
+you gave it your VM's resource group and your laptop is signed in to the
+Azure CLI. It could open a firewall port by itself. The firewall is your job,
+so every prompt in this part says so, and manual mode lets you deny anything
+that touches Azure.
 
-The app reads `DATABASE_URL` as a path relative to where it starts, so the
-agent should start it from the repository folder. If the page loads with no
-content, that's the first thing to check.
+Before each reload below, predict what the browser will show. Use a new tab
+each time, because a tab still waiting on the last try can mislead you.
 
-Now try it from outside:
+1. Open `http://PUBLIC-IP:8000`. It hangs, then times out.
+2. In the portal, open your VM's Networking, then Network settings, and add
+   an inbound port rule exactly like the SSH one except:
 
-```text
-From my laptop, try to reach port 8000 on the VM's public IP, with a
-5-second timeout. Tell me what happened and why.
-```
+   | Field | Value |
+   | --- | --- |
+   | Source | Any |
+   | Destination port ranges | `8000` |
+   | Priority and name | `310`, `Temp-HTTP-8000` |
 
-It times out, even though the app is listening on every address. The firewall
-has no rule for 8000.
+   Reload. It still fails, but differently. The browser says the site refused
+   to connect, and it says so right away.
+3. Ask the agent:
 
-### Open port 8000, on purpose, briefly
+   ```text
+   Restart my app on the VM so it listens on every address, on port 8000.
+   Don't change anything in Azure. Show me what's listening afterward.
+   ```
 
-This step is yours. Go back to the VM's Networking, then Network settings, and
-add a second inbound port rule, exactly like the SSH one except:
+   The listening line should show `0.0.0.0:8000`. Reload. Your site is on
+   the Internet. Try it on your phone with Wi-Fi off, and it works there too.
+4. In the portal, delete `Temp-HTTP-8000`. Reload. It hangs again.
+5. Ask the agent:
 
-| Field | Value |
-| --- | --- |
-| Source | Any |
-| Destination port ranges | `8000` |
-| Priority and name | `310`, `Temp-HTTP-8000` |
+   ```text
+   Restart my app on the VM so only the VM itself can reach it. Don't change
+   anything in Azure. Show me what's listening afterward.
+   ```
 
-Now open `http://PUBLIC-IP:8000` in your browser. Your site is on the
-Internet. Try it on your phone with Wi-Fi off, and it works there too, from
-any network in the world.
+   The listening line should show `127.0.0.1:8000`.
 
-Stop and look at what that took. The app was already running and already
-listening. One firewall rule was the whole difference between private and
-public. That's the lesson: reachable and running are two separate facts.
+| Rule for 8000 | App listens on | Browser shows | Why |
+| --- | --- | --- | --- |
+| No | `127.0.0.1` | Hangs, then times out | The firewall drops the request |
+| Yes | `127.0.0.1` | Refused, right away | The request reaches the VM, and nothing answers on that address |
+| Yes | `0.0.0.0` | Your site | Both locks are open |
+| No | `0.0.0.0` | Hangs again | The firewall alone is enough |
 
-Now look at the address bar. It says `http://`, not `https://`, and there's a
-warning near it. Everything on this connection travels as plain text, readable
-by anyone between your phone and Azure. The port number is there too, which no
-real site asks visitors to type.
+The two failures tell you different things. A timeout means something along
+the way dropped your request without a word. Refused means you got all the
+way there and nothing was listening. That's the same difference as SSH
+hanging versus `Permission denied` in section 8, and it tells you which half
+of the system to check first.
 
-### Prove it
+`127.0.0.1` means the app answers only the VM itself. `0.0.0.0` means it
+answers on any of the VM's addresses, including the public one. Running and
+reachable are two separate facts, and it took one firewall rule and one
+setting to turn a private app into a public one.
 
-While the port is open, run the plan's own Verify section:
+While your site was up, the address bar said `http://`, with a "Not secure"
+warning and a port number no real visitor types. Everything on that
+connection traveled as plain text. That's what Nginx and HTTPS fix next.
 
-```text
-Run the Verify section of the plan, and only that section. Record each result
-under its step, and put the comparison in a table at the end of the document.
-Show it to me.
-```
-
-If your Verify section was thin, this is where it shows. It should be
-comparing at least these:
-
-| Check | Compare | Should show |
-| --- | --- | --- |
-| Commit ID | Your laptop clone and the VM | The same ID |
-| Database | Your laptop copy and the VM's copy | The same row counts, and `ok` from the integrity check on the VM |
-| Health check | The VM | `{"status":"ok"}` |
-| Page content | Your resume and `http://PUBLIC-IP:8000` | Your own name, experience, and projects |
-
-Your name on the page is the proof. The seed script only knows the demo
-profile, so your own content on the VM means the file moved rather than being
-recreated.
-
-If your plan's Verify opens an SSH tunnel, that's another way to see the same
-pages without an open port. It's fine to let it run, but ask the agent to
-close the tunnel when Verify is done.
-
-If any row doesn't match, the migration isn't done. Record the
-difference rather than guessing why.
-
-### Close it again
-
-Also yours. In Network settings, find `Temp-HTTP-8000` in the inbound rules
-list, open it, and select Delete. Then reload the page. It hangs and times
-out. Nothing about the app changed, and the firewall is the only difference.
-
-Then:
-
-```text
-Restart the app on the VM so only the VM itself can reach it, still in the
-background. Show me what's listening afterward, and check /health from
-inside the VM.
-```
-
-The command should now say `--host 127.0.0.1`, and the health check over SSH
-still answers. There are now two independent reasons the public path fails:
-no rule for 8000, and an app that only answers to the VM itself. Either one
-alone would be enough.
+The app keeps running after the agent's SSH command ends because it was
+started with `nohup` and `&`. That's a stopgap. It won't come back if the app
+crashes or the VM reboots. On Thursday, systemd takes over that job.
 
 ```text
 Internet
@@ -1048,7 +1031,7 @@ Ubuntu VM
    └── Uvicorn on 127.0.0.1:8000 ─▶ the .db file
 ```
 
-This is how the app stays from now on. Next week, Nginx goes in front of it
+This is how the app stays from now on. On Thursday, Nginx goes in front of it
 on port 80 and becomes the one door for visitors, and the app never has to
 face the Internet directly again.
 
@@ -1095,7 +1078,7 @@ Closing SSH doesn't stop the VM, and neither does closing your laptop.
 Auto-shutdown would have caught this tonight, but don't rely on it. Stopping
 it yourself is the habit worth having.
 
-Keep the resource group, since we'll use this VM next week. If your Codespace
+Keep the resource group, since we'll use this VM on Thursday. If your Codespace
 is still running, stop it too. You won't need it for this project again.
 
 ## 7. What you should be able to explain now
@@ -1134,7 +1117,9 @@ Give the agent the exact error and ask it to explain before it fixes anything.
 | `no such table: projects` | The app is reading an empty or wrong file | Does the copied filename match `DATABASE_URL` in `.env`? |
 | `curl` to 127.0.0.1:8000 is refused | Nothing is listening | Is Uvicorn still running on the VM? |
 | The VM is deallocated before you tested | The agent ran the Shutdown section early. Nothing is lost, since the disk keeps everything. | Start it from the Overview page, or ask the agent to `az vm start` it, then continue at section 6 |
-| `http://PUBLIC-IP:8000` hangs | The rule isn't there, or the app is on loopback | The `Temp-HTTP-8000` rule and the `--host` value |
+| `http://PUBLIC-IP:8000` hangs | The firewall is dropping the request | The `Temp-HTTP-8000` rule |
+| `http://PUBLIC-IP:8000` is refused | The request reached the VM, and the app only answers the VM itself | The `--host` value. It should be `0.0.0.0` while you test from outside |
+| The page shows the demo name, but the database has yours | The app can't read the database and is showing its built-in fallback profile | Is the app started from the repository folder, and does the file match `DATABASE_URL`? |
 
 If the agent suggests opening port 8000, allowing SSH from Any, or turning off
 the firewall to test a guess, say no. Write down the symptom, the evidence,
