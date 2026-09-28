@@ -1044,13 +1044,17 @@ Your plan is now also your evidence: every step, what it was for, what
 happened, and the comparison at the end. Read through it once. Then:
 
 ```text
-Check the migration plan for anything that shouldn't be public, such as my IP
-address, key paths, or database contents, and remove it. Then commit it and
-push. Then stop Uvicorn on the VM.
+Remove anything from the migration plan that shouldn't be public, like my
+laptop's IP address or my Azure subscription ID. Show me the changes, then
+commit only the plan and push it.
 ```
 
-Read the diff before you approve the commit. This file is the thing you'd hand
-to someone else so they could do what you did.
+Read the changes before you approve the commit. Your laptop's address says
+where you are, and the subscription ID points at your Azure account, so both
+come out. Your key's path can stay, since the key itself never leaves your
+laptop. So can the VM's IP, which belongs to a public server. This file is the
+thing you'd hand to someone else so they could do what you did, so keep
+everything they'd need.
 
 Then shut the VM down yourself. Your plan has no Shutdown section, because
 we took it out on Thursday so an agent couldn't deallocate the VM before you'd
