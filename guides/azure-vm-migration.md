@@ -140,10 +140,9 @@ Find the SQLite database file this app uses. Tell me its full path and the
 DATABASE_URL value the app reads. Don't change anything.
 ```
 
-Leave the Codespace running for now. It's the source system we compare
-against at the end, and it's your rollback if today goes wrong. If it stopped
-overnight, start it again and start the app there, so you have a source page
-to compare with.
+Leave the Codespace alone for now. It holds the original of your database
+until section 5, where you put your own profile into the laptop copy and that
+copy becomes the original.
 
 If you can't find a database file, your app may never have created one on
 Thursday. Say so to the instructor and keep going. You'll build a fresh one on
@@ -818,31 +817,44 @@ addition is for, in your own words, before you go on.
 
 ### Execute the environment steps
 
+Pick up the conversation that wrote your plan. In the terminal in your
+project folder, start `claude`, type `/resume`, and choose the session from
+September 24 that ends with the plan being written. The agent then remembers
+the plan, your VM, and your key, so you don't have to tell it again.
+
 ```text
-Use your executing-plans skill on the migration plan, inline in this session,
-not with subagents. Do one section at a time, record what each check showed
-in the plan, and stop after each section so I can review. Run the sections
-up through Data only. Don't run Processes, Verify, or Shutdown until I ask
-for each one by name.
+The implementation plan looks good. Let's work on the first section using
+inline execution in this session.
 ```
 
-Say "continue" after each review. Stop when Config is done, since the Data
-section is next and section 5 below covers it.
+If that session isn't in the list, start a new one and name the plan
+instead: "The implementation plan in @docs/superpowers/plans/2026-09-24-azure-vm-migration.md
+looks good." Type `@docs/` and let autocomplete finish the path.
 
-The last line of that prompt matters. Shutdown is a section in your plan, and
-"continue" doesn't care what comes next. Without that line, an agent working
-through the plan will deallocate your VM before you've seen the app run.
+When the section is done, the agent stops and reports what its checks
+showed. Read that, then:
 
-Superpowers may ask whether to run the plan with subagents or inline. Choose
-inline. Subagents hand each task to a separate helper working out of sight,
-which suits a long build with review between tasks, the way the app was
-built. This plan is short, and the point today is to watch every command
-land on the VM and stop between sections. Inline is also faster, since it
-skips the review round each subagent triggers.
+```text
+Let's work on the next section.
+```
 
-One section at a time costs you four approvals instead of one. It buys you a
-pause after each, which is where the understanding happens. Use the pauses
-for these:
+Work through Packages, Code, Python, and Config this way, then stop. Data is
+next, and section 5 below covers it.
+
+This is the rhythm from the build-and-deploy tutorial: approve the plan,
+choose inline, and work one piece at a time. Naming one section is what makes
+the agent stop, the same way naming TASK-1 did.
+
+Inline means the agent does every step itself, in this conversation, so each
+command scrolls past as it lands on the VM. Subagents hand each task to a
+separate helper working out of sight, which suits a long build, the way the
+app was built. This plan is short, and the point today is to watch every
+command. If the agent says subagents work better, that's true for speed, but
+not for today.
+
+One section at a time costs you a prompt per section instead of one. It buys
+you a pause after each, which is where the understanding happens. Use the
+pauses for these:
 
 | After | Look at | Answer this |
 | --- | --- | --- |
@@ -858,25 +870,51 @@ applies: it's the file that must never travel through Git.
 ## 5. Move application state
 
 ```text
-Codespace (source) ──browser download──▶ laptop: Downloads/<your>.db
-                                              │  scp over SSH
-                                              ▼
-                        VM: the path your .env's DATABASE_URL names
+Codespace ──browser download──▶ laptop: your .db, now with your profile
+                                     │  scp over SSH
+                                     ▼
+               VM: the path your .env's DATABASE_URL names
 ```
 
 This is the part Git can't do, and the reason the whole afternoon exists.
 Everything before this rebuilt the app from files anyone could download.
 This file exists nowhere but your Codespace and your laptop.
 
-Say "continue" for the Data section only, and watch how the agent moves the
-file. When the section
-finishes, the VM's copy should pass its integrity check with `ok`, and the
-agent should be able to read your projects from it. Your Codespace still
-holds the original. That's your rollback.
+### Put your own profile in first
+
+Your database probably still holds the demo profile the seed script created,
+with a made-up name like Alex Parker. Replace it before you move anything.
+If you migrate starter data, the VM shows exactly what a fresh seed would,
+so you can't tell whether your data moved or got recreated. With your own
+name and projects in the file, the page on the VM proves it.
+
+Give the agent your resume. Paste the text, or drag in a PDF. A LinkedIn
+profile works too: on your profile page, select More, then Save to PDF.
+
+```text
+Here's my resume. The database my plan's Data section copies still has
+the demo profile the seed created. Replace it with my information:
+profile, experience, projects, skills, and education. Show me what you'll
+change before writing it.
+```
+
+This site becomes a public resume, so leave out your phone number and home
+address. Read the proposed changes before you approve them, the same way you
+read the plan.
+
+### Copy it to the VM
+
+Say "Let's work on the next section" for Data, and watch how the agent moves
+the file. When the section finishes, the VM's copy should pass its integrity
+check with `ok`, and its row counts should match your laptop's.
+
+The laptop copy is now the original, since it's the only one with your
+profile. The Data section's backup snapshot is a second copy. The Codespace's
+file is out of date, so it's no longer your rollback.
 
 If the copy landed under the wrong name, nothing is lost. Fix the target and
-run the section again. The Codespace original is untouched, and nothing on
-the VM is using the file yet, so replacing the VM's copy is safe. This is the
+run the section again. The laptop original is untouched, and nothing on the
+VM is using the file yet, so replacing the VM's copy is safe. This is the
 rollback in your plan doing its job.
 
 Checkpoint: give two reasons Git couldn't move this data.
@@ -886,9 +924,8 @@ Checkpoint: give two reasons Git couldn't move this data.
 This phase wraps the plan's own Verify section inside a detour that isn't in
 any migration plan and is the most useful ten minutes of the afternoon. The
 detour starts the app itself, so it takes the place of your plan's Processes
-section. Skip that one. We're
-going to put the site on the Internet, prove it's the same site, and take it
-back off.
+section. Skip that one. We're going to put the site on the Internet, prove
+it's the same site, and take it back off.
 
 ### Start the app where anyone could reach it
 
@@ -896,6 +933,9 @@ back off.
 Start my app on the VM in the background so it listens on every address, on
 port 8000. Then show me what's listening on that port. Wait for my review.
 ```
+
+If your agent already ran the Processes section, the app is running and only
+the VM can reach it. This prompt restarts it.
 
 The command should include `--host 0.0.0.0`. `0.0.0.0` means the app accepts
 connections arriving on any of the VM's addresses, rather than only from the
@@ -946,8 +986,7 @@ real site asks visitors to type.
 
 ### Prove it
 
-While the port is open, run the plan's own Verify section. Open your
-Codespace site in another tab, then:
+While the port is open, run the plan's own Verify section:
 
 ```text
 Run the Verify section of the plan, and only that section. Record each result
@@ -958,17 +997,20 @@ Show it to me.
 If your Verify section was thin, this is where it shows. It should be
 comparing at least these:
 
-| Check | Source | Target (VM) |
+| Check | Compare | Should show |
 | --- | --- | --- |
-| Commit ID | Your local clone, on `main` | Same ID |
-| Database integrity | The file you copied | `ok` on the VM |
-| Health check | `{"status":"ok"}` in the Codespace | Same on the VM |
-| Page content | Codespace forwarded URL | Same content at `http://PUBLIC-IP:8000` |
+| Commit ID | Your laptop clone and the VM | The same ID |
+| Database | Your laptop copy and the VM's copy | The same row counts, and `ok` from the integrity check on the VM |
+| Health check | The VM | `{"status":"ok"}` |
+| Page content | Your resume and `http://PUBLIC-IP:8000` | Your own name, experience, and projects |
 
-Your projects on the VM should be your own content, the same as in the
-Codespace, not the starter content from the seed script. That, plus the
-missing seed step in your plan, is how you know the data moved rather than
-being recreated.
+Your name on the page is the proof. The seed script only knows the demo
+profile, so your own content on the VM means the file moved rather than being
+recreated.
+
+If your plan's Verify opens an SSH tunnel, that's another way to see the same
+pages without an open port. It's fine to let it run, but ask the agent to
+close the tunnel when Verify is done.
 
 If any row doesn't match, the migration isn't done. Record the
 difference rather than guessing why.
@@ -1025,35 +1067,34 @@ push. Then stop Uvicorn on the VM.
 Read the diff before you approve the commit. This file is the thing you'd hand
 to someone else so they could do what you did.
 
-Then the plan's last section:
+Then shut the VM down yourself. Your plan has no Shutdown section, because
+we took it out on Thursday so an agent couldn't deallocate the VM before you'd
+seen the app run.
 
-```text
-Now run the Shutdown section. Before you deallocate, list the NSG's inbound
-rules so I can confirm Temp-HTTP-8000 is gone, since that rule isn't in the
-plan. Record the results.
-```
+1. In the portal, open your VM's Networking, then Network settings, and check
+   that `Temp-HTTP-8000` is gone from the inbound rules. If it's still there,
+   delete it. Leaving it leaves your site open on plain HTTP until someone
+   notices.
+2. On the VM's Overview page, select Stop.
+3. Wait for the status to read Stopped (deallocated).
 
 | Term | What it means | What the command looks like |
 | --- | --- | --- |
 | Deallocate | Stop the VM and release its CPU and memory | `az vm deallocate` |
 | Power state | What Azure says the VM is doing now | `az vm get-instance-view`, showing `VM deallocated` |
 
-The state must read `VM deallocated`, not `VM stopped`. Stopped means the
-operating system halted but Azure still holds the hardware, and it still
-bills. Deallocated means the compute charge ends. The disk and public IP
-still cost a little each month.
+The portal's Stop button deallocates. That's different from shutting down
+Ubuntu from inside the VM, or `az vm stop`, which halt the operating system
+while Azure still holds the hardware, and it still bills. Deallocated means
+the compute charge ends. The disk and public IP still cost a little each
+month.
 
-Closing SSH doesn't stop the VM, and neither does closing your laptop. The
-portal's Stop button does the same thing as `az vm deallocate`, and you can
-check it there afterward: the Overview page should say Stopped (deallocated).
-
+Closing SSH doesn't stop the VM, and neither does closing your laptop.
 Auto-shutdown would have caught this tonight, but don't rely on it. Stopping
-it yourself is the habit worth having. If the rule listing still shows
-`Temp-HTTP-8000`, delete it before you leave. Leaving it there leaves your
-site open on plain HTTP until someone notices.
+it yourself is the habit worth having.
 
-Keep the resource group, since we'll use this VM next week. Then stop your
-Codespace. It stays saved as the rollback copy of your site.
+Keep the resource group, since we'll use this VM next week. If your Codespace
+is still running, stop it too. You won't need it for this project again.
 
 ## 7. What you should be able to explain now
 
@@ -1087,6 +1128,7 @@ Give the agent the exact error and ask it to explain before it fixes anything.
 | `Permission denied (publickey)` | You reached sshd, and the login failed | Username `azureuser` and the key path |
 | `UNPROTECTED PRIVATE KEY FILE` | Other accounts can read your key | On macOS, `chmod 600`. On Windows, ask the agent to fix it with `icacls`. |
 | `uv: command not found` on the VM | The installer's PATH change isn't loaded | Open a new SSH session or load `~/.local/bin/env` |
+| pytest and ruff reappear on the VM | Plain `uv run` puts the dev packages back after `uv sync --no-dev` | Use `uv run --no-dev` for commands on the VM |
 | `no such table: projects` | The app is reading an empty or wrong file | Does the copied filename match `DATABASE_URL` in `.env`? |
 | `curl` to 127.0.0.1:8000 is refused | Nothing is listening | Is Uvicorn still running on the VM? |
 | The VM is deallocated before you tested | The agent ran the Shutdown section early. Nothing is lost, since the disk keeps everything. | Start it from the Overview page, or ask the agent to `az vm start` it, then continue at section 6 |
