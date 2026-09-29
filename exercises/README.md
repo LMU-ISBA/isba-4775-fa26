@@ -29,17 +29,18 @@ for the full instructions.
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 | [published](ex01-accounts-and-dev-env.md) |
 | 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | See Brightspace | [published](ex02-troubleshoot-a-cloud-service.md) |
 | 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1, 1:45 PM | [published](ex03-build-and-migrate.md) |
-| 04 | Domain delegated to Route 53, live with TLS | Config | To be announced | |
-| 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | To be announced | |
-| 06 | Mailbox email with SPF, DKIM, DMARC; Resend verified | Config | Thu 10/8 | |
-| 07 | First orchestration: trigger, API call, notification | Build | Thu 10/15 | |
-| 08 | **Broken integration: expired credential, changed schema** | Troubleshoot | Tue 10/20 | |
+| 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8 | |
+| 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/15 | |
+| 06 | Email DNS: Email Routing MX, and SPF, DKIM, and DMARC for Resend | Config | Tue 10/13 | |
+| 07 | Job Scout's first loop: tools, state, stop conditions, and a real run | Build | Tue 10/20 | |
+| 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Tue 10/20 | |
 | 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/5 | |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 | |
 
 Exercise 03 collects the spec, implementation plan, and migration plan from
-the resume-site build and the Azure migration. The Railway deployment and GA4
-remain Project 1 requirements. Confirm deadlines in Brightspace.
+the resume-site build and the Azure migration. The Railway migration is a
+Project 1 requirement, and GA4 is an optional extension. Confirm deadlines in
+Brightspace.
 
 ## What every exercise needs
 

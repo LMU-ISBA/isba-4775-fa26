@@ -128,11 +128,11 @@ diagram as a JPG and a short investigation report as Markdown. The rubric is
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 |
 | 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | To be announced |
 | 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1 |
-| 04 | Domain delegated to Cloudflare DNS, live with TLS | Config | To be announced |
-| 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | To be announced |
-| 06 | Email DNS: MX through Email Routing, and SPF, DKIM, and DMARC for a verified Resend sender | Config | Thu 10/8 |
-| 07 | First orchestration: trigger, API call, notification | Build | Thu 10/15 |
-| 08 | **Broken integration: expired credential, changed schema** | Troubleshoot | Tue 10/20 |
+| 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8 |
+| 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/15 |
+| 06 | Email DNS: Email Routing MX, and SPF, DKIM, and DMARC for Resend | Config | Tue 10/13 |
+| 07 | Job Scout's first loop: tools, state, stop conditions, and a real run | Build | Tue 10/20 |
+| 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Tue 10/20 |
 | 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/5 |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 |
 
@@ -281,10 +281,10 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 9/29 | Finishing the migration: rebuilding the environment, moving live SQLite data, and verifying the app on the VM | | |
 | Thu 10/1 | Operating the VM: Gunicorn and systemd, Nginx as a reverse proxy, recovering after a restart, and delegating your domain to Cloudflare DNS | Register your domain, using the Student Pack's .me offer or another registrar. Create a free Cloudflare account. | Ex03 |
 | Tue 10/6 | DNS for the web and for email: HTTPS for your domain, inbound mail through Email Routing and MX, and SPF, DKIM, and DMARC for a Resend sender | Run `dig NS yourdomain` and confirm that Cloudflare's name servers come back. Create a Resend account. | |
-| Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | Between 10/3 and 10/7, sign in to Railway with GitHub and check your trial at railway.com/verify. Create nothing yet. The 30-day trial starts when you sign in. | Ex06 |
-| Tue 10/13 | Designing an agent: model, tools, state, and loop, drawing Job Scout's graph, and calling a job-posting API | Set up model API access as described in Brightspace. Find your Ex01 self-discovery interview, and list ten companies near you that you'd like to work for. | |
-| Thu 10/15 | Building the agent: stop conditions, a human checkpoint on the top three postings, the email digest, and a controlled failure | Confirm that Resend shows your domain as verified. | Ex07 |
-| Tue 10/20 | CI/CD with GitHub Actions, a submission audit, and practice interviews in pairs | Draw your whole system from memory once, on paper. | Ex08 |
+| Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | Between 10/3 and 10/7, sign in to Railway with GitHub and check your trial at railway.com/verify. Create nothing yet. The 30-day trial starts when you sign in. | Ex04 |
+| Tue 10/13 | Designing an agent: model, tools, state, and loop, drawing Job Scout's graph, and calling a job-posting API | Set up model API access as described in Brightspace. Find your Ex01 self-discovery interview, and list ten companies near you that you'd like to work for. | Ex06 |
+| Thu 10/15 | Building the agent: stop conditions, a human checkpoint on the top three postings, the email digest, and a controlled failure | Confirm that Resend shows your domain as verified. | Ex05 |
+| Tue 10/20 | CI/CD with GitHub Actions, a submission audit, and practice interviews in pairs | Draw your whole system from memory once, on paper. | Ex07, Ex08 |
 | Thu 10/22 | Project 1 walkthroughs, the midterm study guide, and what a whiteboard interview is | | Project 1 |
 | Tue 10/27 | Midterm whiteboard interviews, no class session | | |
 | Thu 10/29 | LLM calls: tokens, context windows, cost, and structured outputs | | |
@@ -312,8 +312,8 @@ migration moved from Heroku to Railway, because neither needs a card or an
 approval wait to start. Diagnosing the request path now happens inside the
 HTTPS lesson, and Job Scout is built as an agent across two meetings. The
 Before class column lists what to set up ahead of each meeting, so class time
-goes to the work rather than to account sign-ups. The Ex04 and Ex05 deadlines
-will be announced in Brightspace.
+goes to the work rather than to account sign-ups. Ex04 through Ex08 moved
+with the lessons, so Ex06 is now due 10/13 and Ex07 is due 10/20.
 
 ## Work load expectations
 
