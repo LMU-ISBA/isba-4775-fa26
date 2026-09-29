@@ -110,8 +110,8 @@ explain what you built about as heavily as the artifact itself.
 ## Exercises, 150 points
 
 There are ten exercises, worth 15 points each. Exercise 01 and Exercise 02
-are submitted as files through Brightspace. Later build exercises use a public
-portfolio repository as specified in their briefs. Each brief defines its
+are submitted as files through Brightspace. From Exercise 03 on, exercises go
+in your public `career-platform` repository, as specified in their briefs. Each brief defines its
 required evidence and grading.
 
 Exercise 02 extends the in-class server lab: independently investigate a
@@ -127,7 +127,7 @@ diagram as a JPG and a short investigation report as Markdown. The rubric is
 |---|---|---|---|
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 |
 | 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | To be announced |
-| 03 | The AI-assisted workflow: clarify, plan, build, verify | Build | To be announced |
+| 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1 |
 | 04 | Domain delegated to Route 53, live with TLS | Config | To be announced |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | To be announced |
 | 06 | Mailbox email with SPF, DKIM, DMARC; Resend verified | Config | Thu 10/8 |
@@ -137,9 +137,9 @@ diagram as a JPG and a short investigation report as Markdown. The rubric is
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 |
 
 Ex02's proposed date is September 15; confirm the final deadline in
-Brightspace. Ex03's final scope and deadline are being revised. The personal
-site, Railway deployment, and GA4 remain Project 1 requirements; their place
-in the exercise sequence will be announced with the revised Ex03 brief.
+Brightspace. Ex03 is due at 1:45 PM, before class. The Railway deployment and
+GA4 remain Project 1 requirements, and their place in the exercise sequence
+will be announced in Brightspace.
 
 ## Project 1: Own Your Corner of the Internet, 125 points
 
@@ -282,7 +282,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 9/22 | Migrating to a VM: feature branches and pull requests, what Git moves and what it doesn't, IaaS, PaaS, and SaaS, and Azure resource groups | |
 | Thu 9/24 | Creating the VM: SSH keys, an Azure VM, a cloud firewall rule for SSH, and a written migration plan | |
 | Tue 9/29 | Finishing the migration: rebuilding the environment, moving live SQLite data, and verifying the app on the VM | |
-| Thu 10/1 | Operating the VM: Nginx as a reverse proxy, Uvicorn, systemd, logs, and recovering after a restart | |
+| Thu 10/1 | Operating the VM: Nginx as a reverse proxy, Uvicorn, systemd, logs, and recovering after a restart | Ex03 |
 | Tue 10/6 | Email authentication: SPF, DKIM, DMARC, and deliverability as a DNS problem | |
 | Thu 10/8 | APIs: REST, JSON, status codes, authentication, rate limits, and idempotency | Ex06 |
 | Tue 10/13 | Orchestration: triggers, webhooks, polling, and joining two systems | |
