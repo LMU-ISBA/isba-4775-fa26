@@ -27,7 +27,7 @@ for the full instructions.
 | # | Exercise | Type | Due | Brief |
 |---|---|---|---|---|
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 | [published](ex01-accounts-and-dev-env.md) |
-| 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | See Brightspace | [published](ex02-troubleshoot-a-cloud-service.md) |
+| 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | Tue 9/15 | [published](ex02-troubleshoot-a-cloud-service.md) |
 | 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1, 1:45 PM | [published](ex03-build-and-migrate.md) |
 | 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8 | |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/15 | |

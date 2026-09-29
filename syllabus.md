@@ -126,7 +126,7 @@ diagram as a JPG and a short investigation report as Markdown. The rubric is
 | # | Exercise | Type | Due |
 |---|---|---|---|
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 |
-| 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | To be announced |
+| 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | Tue 9/15 |
 | 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1 |
 | 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8 |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/15 |
@@ -136,9 +136,9 @@ diagram as a JPG and a short investigation report as Markdown. The rubric is
 | 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/5 |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 |
 
-Ex02's proposed date is September 15; confirm the final deadline in
-Brightspace. Ex03 is due at 1:45 PM, before class. The Railway migration is a
-Project 1 requirement, taught on Thu 10/8. GA4 is an optional extension.
+Ex01 and Ex02 were due at 1:45 PM, before class, and Ex03 is due at the same
+time on Thu 10/1. The Railway migration is a Project 1 requirement, taught on
+Thu 10/8. GA4 is an optional extension.
 
 ## Project 1: Own Your Corner of the Internet, 125 points
 
@@ -274,7 +274,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 9/3 | Finding things: host names, IP and MAC addresses, the default gateway, DNS, and what your own machine will tell you | | |
 | Tue 9/8 | Ports and web services: requests, responses, HTTP status codes, and investigating a service failure | | Ex01 |
 | Thu 9/10 | Running and Troubleshooting Services: physical server, VM, container; Nginx and MySQL; processes, ports, logs; database creation, tables, and sample data | | |
-| Tue 9/15 | Database to application: portfolio from a template, repeatable setup, Python build-along, environment variables and Codespaces secrets, failure/recovery, commit/push and a small change; optional instructor PaaS demo | | Ex02 proposed; confirm in Brightspace |
+| Tue 9/15 | Database to application: portfolio from a template, repeatable setup, Python build-along, environment variables and Codespaces secrets, failure/recovery, commit/push and a small change; optional instructor PaaS demo | | Ex02 |
 | Thu 9/17 | Building with an agent and Git: executing the implementation plan, the request path through Nginx, the app server, and SQLite, and clone, add, commit, push, and pull | | |
 | Tue 9/22 | Migrating to a VM: feature branches and pull requests, what Git moves and what it doesn't, IaaS, PaaS, and SaaS, and Azure resource groups | | |
 | Thu 9/24 | Creating the VM: SSH keys, an Azure VM, a cloud firewall rule for SSH, and a written migration plan | | |
