@@ -100,16 +100,3 @@ and what it costs.
 - [ ] `docs/evidence/ex03-site.png` showing your own site at your VM's public IP
 - [ ] Repository URL submitted in the Exercise 03 drop box on Brightspace by
       Thu 10/1, 1:45 PM
-
-## If you get stuck
-
-If a push fails, read the error before you ask the agent to fix it. Most of
-them say whether the problem is a missing commit, a rejected push, or a file
-Git is ignoring.
-
-If your VM won't start or SSH times out, check section 8 of the
-[migration guide](../guides/azure-vm-migration.md) first.
-
-Still stuck, post in the course Teams channel with what you were doing, the
-exact error, and what you already tried. Start early enough to get help before
-Thursday.
