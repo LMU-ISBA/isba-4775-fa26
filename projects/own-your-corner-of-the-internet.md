@@ -1,6 +1,6 @@
 # Project 1: Own Your Corner of the Internet
 
-Project requirements, updated September 15, 2026.
+Project requirements, updated September 29, 2026.
 
 **125 points. Due Thursday, October 22, 2026.** Check Brightspace for the
 submission cutoff time. These requirements reflect the revised course direction.
@@ -9,7 +9,7 @@ The syllabus and exercise schedule are being aligned with this project brief.
 ## What you are building
 
 Build a personal website that you can explain and operate. Start in Codespaces,
-deploy it on an Azure Linux VM, then migrate the same application to Heroku.
+deploy it on an Azure Linux VM, then migrate the same application to Railway.
 Add a small Job Scout that finds relevant opportunities and emails a digest.
 
 Your site becomes the starting point for the career platform you will develop
@@ -17,7 +17,7 @@ throughout the semester. Use one repository for the application, infrastructure,
 and engineering record. Each migration should preserve the useful work already
 in that repository.
 
-By the deadline, your custom domain should reach the Heroku deployment. Keep
+By the deadline, your custom domain should reach the Railway deployment. Keep
 evidence of the earlier Azure deployment. Once the migration is verified,
 follow the instructor's cleanup directions for Azure resources.
 
@@ -34,7 +34,7 @@ Do not invent qualifications or experience.
 
 Store project entries in a database and read them when the page is requested.
 Choose the initial database engine during design and explain your choice. Use
-managed PostgreSQL for the later Heroku deployment. A useful initial entry is
+managed PostgreSQL for the later Railway deployment. A useful initial entry is
 a clearly labeled description of this website as a project in progress.
 
 Handle an empty table and a failed database connection deliberately. For our
@@ -61,14 +61,17 @@ VM restart. Explain which parts needed configuration to make that happen.
 
 Use a domain you control. Configure its authoritative DNS and records, then
 verify that the name reaches your application with a valid certificate.
-The course DNS lab uses Route 53; an instructor-approved alternative must allow
-you to demonstrate the same delegation and record-management concepts.
+The course DNS lab uses Cloudflare DNS, with every record set to DNS only so
+traffic and TLS reach your own server. An instructor-approved alternative must
+allow you to demonstrate the same delegation and record-management concepts.
 
 Record the relevant DNS records, their purpose, and your verification results.
 Explain the certificate's hostname, validity, and renewal arrangement. Update
-the domain during the Heroku migration and verify HTTPS at the new destination.
+the domain during the Railway migration and verify HTTPS at the new destination.
+Railway's trial allows one custom domain, so choose either the bare domain or
+www as your site's address before the cutover.
 
-### 4. Migrate to Heroku and managed PostgreSQL
+### 4. Migrate to Railway and managed PostgreSQL
 
 Write the migration plan before changing the working deployment. Identify the
 code, runtime, packages, configuration, secrets, schema, and current data that
@@ -85,7 +88,7 @@ rollback plan must account for data written after cutover, if writes are allowed
 You do not need to roll back a successful migration just to produce evidence.
 
 Compare who manages the OS, runtime, web entry point, TLS, application code,
-configuration, database software, data, and DNS on Azure versus Heroku. Explain
+configuration, database software, data, and DNS on Azure versus Railway. Explain
 remaining student responsibilities rather than treating PaaS as maintenance-free.
 
 ### 5. Deploy a reviewed change through GitHub Actions
@@ -109,7 +112,8 @@ you must explain the criteria and inspect the output.
 Save useful results and send yourself an email digest from a verified sender
 on your domain. Configure and explain the provider's required DNS authentication,
 including SPF and DKIM as applicable, and your domain's DMARC policy. Explain
-how this differs from setting up an inbound mailbox with MX records.
+how this differs from setting up an inbound mailbox with MX records. Cloudflare
+Email Routing, set up in class, gives you real MX records to compare.
 
 Show at least five distinct real postings you would consider, with source links,
 retrieval dates, and reasons they match. Keep credentials and personal email
@@ -131,7 +135,7 @@ the Azure lesson. Use the same project rules to clarify requirements, approve
 a spec and plan, review changes, debug, and verify the system. Every agent
 choice must preserve those review and explanation practices.
 
-Save architecture diagrams for Azure and Heroku, with component locations,
+Save architecture diagrams for Azure and Railway, with component locations,
 protocols, ports, and data flow. Explain at least two decisions, including an
 alternative you considered and why you chose the final approach.
 
@@ -151,20 +155,18 @@ These are progress targets during the lessons, not additional point categories.
 Exercise briefs and their Brightspace deadlines remain separate.
 
 
-| Target       | Evidence to have ready                                                                         |
-| ------------ | ---------------------------------------------------------------------------------------------- |
-| September 15 | Working Codespaces site, database reads, failure/recovery, and first application commit        |
-| September 17 | Application migrated and checked on the Azure VM, with incomplete public-service work recorded |
-| September 22 | Public Azure HTTP service and restart verification                                             |
-| September 24 | Custom domain and HTTPS on Azure                                                               |
-| September 29 | Networking/TLS investigation with verified repair                                              |
-| October 1    | PostgreSQL-compatible application, validated data, and migration plan                          |
-| October 6    | Heroku deployment, custom-domain cutover, HTTPS, and responsibility comparison                 |
-| October 8    | Verified transactional test email and sender DNS                                               |
-| October 13   | Job Scout end-to-end run and relevant postings                                                 |
-| October 15   | GitHub Actions deployment and integration-failure evidence                                     |
-| October 20   | Submission audit and practice explanation                                                      |
-| October 22   | Final project submission                                                                       |
+| Target     | Evidence to have ready                                                                                   |
+| ---------- | -------------------------------------------------------------------------------------------------------- |
+| October 1  | Public Azure HTTP service through Nginx, restart verification, and your domain delegated to Cloudflare   |
+| October 6  | HTTPS on Azure, sender DNS published, Email Routing MX records, and a networking or TLS investigation    |
+| October 8  | PostgreSQL on Railway, validated data, custom-domain cutover, HTTPS, and responsibility comparison      |
+| October 13 | Job Scout spec with its graph and state, and tools returning real postings                               |
+| October 15 | Job Scout end-to-end run with five relevant postings, a delivered digest, and a controlled failure       |
+| October 20 | GitHub Actions deployment, submission audit, and practice explanation                                    |
+| October 22 | Final project submission                                                                                 |
+
+Earlier targets were replaced on September 29, when the October lessons were
+re-sequenced.
 
 
 
@@ -205,7 +207,7 @@ Project 1 submission in Brightspace. Put the same information in
 `docs/project-1-submission.md`, with links to:
 
 1. The application spec, plan, and setup instructions.
-2. Azure and Heroku architecture diagrams.
+2. Azure and Railway architecture diagrams.
 3. Migration plans, source/target data checks, cutover results, and rollback plans.
 4. Azure HTTP/restart evidence and final DNS/HTTPS verification.
 5. A GitHub Actions run and the deployed change it produced.
@@ -220,7 +222,7 @@ you could not verify rather than filling in the expected result.
 
 Keep the final site available through your midterm interview. Follow the
 instructor's resource cleanup directions after that checkpoint. Do not assume
-you must keep both Azure and Heroku running for grading.
+you must keep both Azure and Railway running for grading.
 
 ## How the 125 points are earned
 
@@ -236,7 +238,7 @@ the technical behavior scored in the other rows.
 | Personal application      | 15     | Profile and clear content (3); actual database reads and rendered projects (6); empty, failure, and recovery behavior (6)                                                                                          |
 | Azure deployment          | 20     | Running application/database and public Nginx path (8); explained SSH/network rules and private dependency listeners (6); service management and restart evidence (6)                                              |
 | Domain and HTTPS          | 15     | Domain control, delegation, and accurate record explanation (5); working final DNS and HTTPS with hostname/validity checks (7); renewal explanation (3)                                                            |
-| Migration to Heroku       | 25     | Dependency inventory and plan (5); PostgreSQL compatibility and current-data comparison (8); working target and cutover validation (6); rollback and responsibility comparison (6)                                 |
+| Migration to Railway      | 25     | Dependency inventory and plan (5); PostgreSQL compatibility and current-data comparison (8); working target and cutover validation (6); rollback and responsibility comparison (6)                                 |
 | GitHub Actions deployment | 10     | Workflow and protected credentials with a meaningful failing check (4); traceable successful deployment (4); recovery explanation (2)                                                                              |
 | Job Scout and email       | 20     | Five real relevant postings and explainable matching (8); verified sender, DNS authentication, and delivered digest (7); inspectable run and controlled failure evidence (5)                                       |
 | Engineering record        | 20     | Spec, plan, agent rules, and meaningful Git history (4); diagrams and reproducible setup (5); three incident records and five-question FAQ (5); decisions, retrospective, cost inventory, and submission index (6) |
@@ -264,10 +266,18 @@ Prefer GitHub Student Developer Pack offers when they meet the learning goals,
 but compare alternatives with the instructor. Verify activation, eligibility,
 limits, and expiration before relying on any benefit.
 
-Heroku's student offer currently provides eligible students $13/month for 24
-months. It includes Heroku products such as Postgres, excludes paid third-party
-add-ons, requires a payment card, and charges usage beyond the monthly credit.
-Check the current terms before provisioning: [https://www.heroku.com/github-students/](https://www.heroku.com/github-students/)
+Railway's trial currently gives new accounts a one-time $5 credit for 30 days,
+with no card required. After the trial, the Free plan provides $1 of credit a
+month, which may not keep a web service and database running. Your trial
+starts when you sign in, so sign in between October 3 and 7 to keep the site
+available through your midterm interview. Railway checks your GitHub account
+at sign-in, and an unverified account gets a limited trial with restricted
+outbound network access. Check railway.com/verify, and tell the instructor if
+yours is limited. Check the current terms before provisioning:
+https://docs.railway.com/pricing/free-trial
+
+Cloudflare DNS and Email Routing are free. Keep every DNS record set to DNS
+only unless the instructor says otherwise.
 
 Keep a service inventory and distinguish compute from retained storage and
 other billable resources. Bring blocked access or unexpected costs to the

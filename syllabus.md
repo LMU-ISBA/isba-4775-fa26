@@ -128,18 +128,17 @@ diagram as a JPG and a short investigation report as Markdown. The rubric is
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 |
 | 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | To be announced |
 | 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1 |
-| 04 | Domain delegated to Route 53, live with TLS | Config | To be announced |
+| 04 | Domain delegated to Cloudflare DNS, live with TLS | Config | To be announced |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | To be announced |
-| 06 | Mailbox email with SPF, DKIM, DMARC; Resend verified | Config | Thu 10/8 |
+| 06 | Email DNS: MX through Email Routing, and SPF, DKIM, and DMARC for a verified Resend sender | Config | Thu 10/8 |
 | 07 | First orchestration: trigger, API call, notification | Build | Thu 10/15 |
 | 08 | **Broken integration: expired credential, changed schema** | Troubleshoot | Tue 10/20 |
 | 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/5 |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 |
 
 Ex02's proposed date is September 15; confirm the final deadline in
-Brightspace. Ex03 is due at 1:45 PM, before class. The Railway deployment and
-GA4 remain Project 1 requirements, and their place in the exercise sequence
-will be announced in Brightspace.
+Brightspace. Ex03 is due at 1:45 PM, before class. The Railway migration is a
+Project 1 requirement, taught on Thu 10/8. GA4 is an optional extension.
 
 ## Project 1: Own Your Corner of the Internet, 125 points
 
@@ -150,13 +149,11 @@ portfolio-grade assembly of them.
 
 | Deliverable | Requirement |
 |---|---|
-| Domain | Purchased, delegated to Route 53, hosted zone under your control |
-| Site | Personal site on Railway, live at your domain with valid TLS |
+| Domain | Purchased, delegated to Cloudflare DNS, zone under your control |
+| Site | Personal site on an Azure VM, then migrated to Railway with managed PostgreSQL, live at your domain with valid TLS |
 | CI/CD | GitHub Actions, push to main deploys |
-| Mailbox email | Zoho at your domain; SPF, DKIM, DMARC published and passing |
-| Transactional email | Resend verified on your domain |
-| Analytics | GA4 installed and reporting |
-| Job Scout | An orchestration that finds local companies, reads their careers pages, scores openings against your resume, and emails you a digest from your own domain |
+| Transactional email | Resend verified on your domain, with SPF, DKIM, and DMARC published and passing |
+| Job Scout | A small agent that retrieves real postings from a reliable source, matches them against your profile, and emails you a digest from your own domain |
 | Architecture diagram | One page, labeled, every service and the data flow between them |
 | README | Configuration guide, an FAQ of at least five questions drawn from real failures, and a retrospective |
 
@@ -271,48 +268,52 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 
 ## Class schedule
 
-| Date | Session | Due |
-|---|---|---|
-| Tue 9/1 | The map: where a request goes, and the devices it passes through | |
-| Thu 9/3 | Finding things: host names, IP and MAC addresses, the default gateway, DNS, and what your own machine will tell you | |
-| Tue 9/8 | Ports and web services: requests, responses, HTTP status codes, and investigating a service failure | Ex01 |
-| Thu 9/10 | Running and Troubleshooting Services: physical server, VM, container; Nginx and MySQL; processes, ports, logs; database creation, tables, and sample data | |
-| Tue 9/15 | Database to application: portfolio from a template, repeatable setup, Python build-along, environment variables and Codespaces secrets, failure/recovery, commit/push and a small change; optional instructor PaaS demo | Ex02 proposed; confirm in Brightspace |
-| Thu 9/17 | Building with an agent and Git: executing the implementation plan, the request path through Nginx, the app server, and SQLite, and clone, add, commit, push, and pull | |
-| Tue 9/22 | Migrating to a VM: feature branches and pull requests, what Git moves and what it doesn't, IaaS, PaaS, and SaaS, and Azure resource groups | |
-| Thu 9/24 | Creating the VM: SSH keys, an Azure VM, a cloud firewall rule for SSH, and a written migration plan | |
-| Tue 9/29 | Finishing the migration: rebuilding the environment, moving live SQLite data, and verifying the app on the VM | |
-| Thu 10/1 | Operating the VM: Nginx as a reverse proxy, Uvicorn, systemd, logs, and recovering after a restart | Ex03 |
-| Tue 10/6 | Email authentication: SPF, DKIM, DMARC, and deliverability as a DNS problem | |
-| Thu 10/8 | APIs: REST, JSON, status codes, authentication, rate limits, and idempotency | Ex06 |
-| Tue 10/13 | Orchestration: triggers, webhooks, polling, and joining two systems | |
-| Thu 10/15 | How integrations break: expired credentials, changed schemas, and reading 401, 403, 429, and 5xx | Ex07 |
-| Tue 10/20 | CI/CD with GitHub Actions, secrets, deploy on merge, and architecture diagrams | Ex08 |
-| Thu 10/22 | Project 1 walkthroughs, the midterm study guide, and what a whiteboard interview is | Project 1 |
-| Tue 10/27 | Midterm whiteboard interviews, no class session | |
-| Thu 10/29 | LLM calls: tokens, context windows, cost, and structured outputs | |
-| Tue 11/3 | The agent loop: tools, schemas, memory, and reading a trace | |
-| Thu 11/5 | Evals: what to measure, building a small eval set, and finding why a run failed | Ex09 |
-| Tue 11/10 | Reading a job description as a system spec, and architecture review one by one | M1 |
-| Thu 11/12 | Guardrails: loop limits, schema validation, token budgets, and cost controls | Ex10 |
-| Tue 11/17 | Environments: local, staging, production, and promotion through CI/CD | M2 |
-| Thu 11/19 | Cloud storage and databases: object versus relational, S3, and least-privilege IAM | |
-| Tue 11/24 | Grounding review, retrieval, chunking, and what the agent must not see. On Zoom | M3 |
-| Thu 11/26 | No class, Thanksgiving | |
-| Tue 12/1 | Operating a deployed system: auth, rate limiting, monitoring, and cost controls | |
-| Thu 12/3 | Staging in practice, then the decision record | M4 |
-| Tue 12/8 | Blog post workshop and final interview prep | Project 2 |
-| Thu 12/10 | Final interview practice in pairs, and a course retrospective | |
+| Date | Session | Before class | Due |
+|---|---|---|---|
+| Tue 9/1 | The map: where a request goes, and the devices it passes through | | |
+| Thu 9/3 | Finding things: host names, IP and MAC addresses, the default gateway, DNS, and what your own machine will tell you | | |
+| Tue 9/8 | Ports and web services: requests, responses, HTTP status codes, and investigating a service failure | | Ex01 |
+| Thu 9/10 | Running and Troubleshooting Services: physical server, VM, container; Nginx and MySQL; processes, ports, logs; database creation, tables, and sample data | | |
+| Tue 9/15 | Database to application: portfolio from a template, repeatable setup, Python build-along, environment variables and Codespaces secrets, failure/recovery, commit/push and a small change; optional instructor PaaS demo | | Ex02 proposed; confirm in Brightspace |
+| Thu 9/17 | Building with an agent and Git: executing the implementation plan, the request path through Nginx, the app server, and SQLite, and clone, add, commit, push, and pull | | |
+| Tue 9/22 | Migrating to a VM: feature branches and pull requests, what Git moves and what it doesn't, IaaS, PaaS, and SaaS, and Azure resource groups | | |
+| Thu 9/24 | Creating the VM: SSH keys, an Azure VM, a cloud firewall rule for SSH, and a written migration plan | | |
+| Tue 9/29 | Finishing the migration: rebuilding the environment, moving live SQLite data, and verifying the app on the VM | | |
+| Thu 10/1 | Operating the VM: Gunicorn and systemd, Nginx as a reverse proxy, recovering after a restart, and delegating your domain to Cloudflare DNS | Register your domain, using the Student Pack's .me offer or another registrar. Create a free Cloudflare account. | Ex03 |
+| Tue 10/6 | DNS for the web and for email: HTTPS for your domain, inbound mail through Email Routing and MX, and SPF, DKIM, and DMARC for a Resend sender | Run `dig NS yourdomain` and confirm that Cloudflare's name servers come back. Create a Resend account. | |
+| Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | Between 10/3 and 10/7, sign in to Railway with GitHub and check your trial at railway.com/verify. Create nothing yet. The 30-day trial starts when you sign in. | Ex06 |
+| Tue 10/13 | Designing an agent: model, tools, state, and loop, drawing Job Scout's graph, and calling a job-posting API | Set up model API access as described in Brightspace. Find your Ex01 self-discovery interview, and list ten companies near you that you'd like to work for. | |
+| Thu 10/15 | Building the agent: stop conditions, a human checkpoint on the top three postings, the email digest, and a controlled failure | Confirm that Resend shows your domain as verified. | Ex07 |
+| Tue 10/20 | CI/CD with GitHub Actions, a submission audit, and practice interviews in pairs | Draw your whole system from memory once, on paper. | Ex08 |
+| Thu 10/22 | Project 1 walkthroughs, the midterm study guide, and what a whiteboard interview is | | Project 1 |
+| Tue 10/27 | Midterm whiteboard interviews, no class session | | |
+| Thu 10/29 | LLM calls: tokens, context windows, cost, and structured outputs | | |
+| Tue 11/3 | The agent loop: tools, schemas, memory, and reading a trace | | |
+| Thu 11/5 | Evals: what to measure, building a small eval set, and finding why a run failed | | Ex09 |
+| Tue 11/10 | Reading a job description as a system spec, and architecture review one by one | | M1 |
+| Thu 11/12 | Guardrails: loop limits, schema validation, token budgets, and cost controls | | Ex10 |
+| Tue 11/17 | Environments: local, staging, production, and promotion through CI/CD | | M2 |
+| Thu 11/19 | Cloud storage and databases: object versus relational, S3, and least-privilege IAM | | |
+| Tue 11/24 | Grounding review, retrieval, chunking, and what the agent must not see. On Zoom | | M3 |
+| Thu 11/26 | No class, Thanksgiving | | |
+| Tue 12/1 | Operating a deployed system: auth, rate limiting, monitoring, and cost controls | | |
+| Thu 12/3 | Staging in practice, then the decision record | | M4 |
+| Tue 12/8 | Blog post workshop and final interview prep | | Project 2 |
+| Thu 12/10 | Final interview practice in pairs, and a course retrospective | | |
 
 September 15 continued the unfinished application build from September 10.
 September 17 went to building the application and to Git, so the Azure
 migration moved to September 22 and the sessions after it moved back one
 meeting. The migration then took two meetings, September 22 and 24, so
 finishing it moved to September 29 and Operating the VM moved to October 1.
-A domain and HTTPS and Diagnosing the request path now come after October 1.
-The Ex04 and Ex05 deadlines will be announced in Brightspace. The October
-schedule is being re-sequenced around these moves, and changes will be
-announced in class and Brightspace.
+On September 29, the rest of October was re-sequenced to fit the Project 1
+deadline. The domain moved from Route 53 to Cloudflare DNS, and the PaaS
+migration moved from Heroku to Railway, because neither needs a card or an
+approval wait to start. Diagnosing the request path now happens inside the
+HTTPS lesson, and Job Scout is built as an agent across two meetings. The
+Before class column lists what to set up ahead of each meeting, so class time
+goes to the work rather than to account sign-ups. The Ex04 and Ex05 deadlines
+will be announced in Brightspace.
 
 ## Work load expectations
 
@@ -334,13 +335,13 @@ money, and most of the spending starts in Exercise 01.
 | What | Cost | When |
 |---|---|---|
 | Claude Pro or an accepted ChatGPT subscription | Claude Pro is $20/month on monthly billing; alternative plan pricing varies | Choose one in Ex01; follow the relevant assignment for coding-agent setup |
-| Railway | Trial credit is limited; Hobby has a $5/month minimum with usage-based billing | Personal-site deployment for Project 1; setup timing to be announced |
-| Domain name | Free for a year through the GitHub Student Developer Pack, otherwise $10 to $15 | Exercise 04, and it stays yours after the course |
-| Route 53 hosted zone | $0.50 a month | Exercise 04 |
+| Railway | The 30-day trial includes a one-time $5 credit and needs no card. After it ends, the Free plan's $1 a month may not keep your site running | Sign in between 10/3 and 10/7 for the Thu 10/8 migration |
+| Domain name | Free for a year through the GitHub Student Developer Pack, otherwise $10 to $15 | Before Thu 10/1, and it stays yours after the course |
+| Cloudflare DNS | Free | Before Thu 10/1 |
 | GitHub | Free tier | Exercise 01 |
 | GitHub Codespaces | Personal-account compute/storage allowance; additional usage can cost money | Course Codespace in Session 04 for Ex02; new portfolio Codespace in Session 05 |
-| AWS | Free tier | Exercise 04 |
-| Zoho and Resend | Free tier | Exercise 06 |
+| AWS | Free tier | Project 2, after the midterm |
+| Resend and Cloudflare Email Routing | Free tier | Tue 10/6 |
 | Google Cloud and Firecrawl | Free tier | Exercise 07 |
 
 Plan your budget around the AI subscription you choose, domain registration,
@@ -445,8 +446,10 @@ connects this workflow to deployment. Student deployment instructions follow
 with the personal-site work.
 
 The early server lab does not require a local editor, database, or coding-agent
-installation. The Ex03 brief will specify any local workflow setup. AWS,
-Railway, and orchestration tools are introduced with their later assignments.
+installation. The Ex03 brief will specify any local workflow setup.
+Cloudflare, Railway, Resend, AWS, and orchestration tools are introduced with
+the lessons that use them. The class schedule's Before class column lists what
+to set up ahead of each meeting.
 
 See "Working with AI" below for how AI use is expected and assessed here.
 
