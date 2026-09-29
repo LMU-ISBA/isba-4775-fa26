@@ -16,7 +16,7 @@ through Namecheap's student site, nc.me, not through the GitHub page.
 1. Go to https://nc.me/landing/github, or sign in directly at
    https://nc.me/github/login.
 2. Authorize with GitHub. That's how Namecheap confirms your Pack.
-3. Search for a name ending in `.me` and add it to the cart.
+3. Search for a name with the `.me` domain extension and add it to the cart.
 4. Click "Complete Order," then sign in to Namecheap or create an account.
    Use your own account, since you'll own the domain.
 5. Finish checkout. With only the free .me in the cart, it should cost $0 and
@@ -43,11 +43,12 @@ $8.88.
 Over two years, the two options cost about the same. The .me is free now and
 renews higher, and the .com costs a little now and renews lower.
 
-## Other endings
+## Other domain extensions
 
-You're welcome to pick a different ending if you'd rather pay for it. Check
-the renewal price before you buy, not just the first-year price. Some endings
-cost under a dollar the first year and much more after that.
+You're welcome to pick a different domain extension, such as .dev or .io, if
+you'd rather pay for it. Check the renewal price before you buy, not just the
+first-year price. Some TLDs cost under a dollar the first year and much more
+after that.
 
 ## At checkout
 
