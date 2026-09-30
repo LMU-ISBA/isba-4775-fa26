@@ -1015,8 +1015,8 @@ While your site was up, the address bar said `http://`, with a "Not secure"
 warning and a port number no real visitor types. Everything on that
 connection traveled as plain text. That's what Nginx and HTTPS fix next.
 
-The app keeps running after the agent's SSH command ends because it was
-started with `nohup` and `&`. That's a stopgap. It won't come back if the app
+The app keeps running after the agent's SSH command ends because the agent
+started it in the background. That's a stopgap. It won't come back if the app
 crashes or the VM reboots. On Thursday, systemd takes over that job.
 
 ```text

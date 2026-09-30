@@ -3,11 +3,11 @@
 Session 10 · October 1, 2026
 
 On Tuesday your site ran on the VM, and a temporary rule for port 8000 put it
-on the Internet. It ran because the agent started it by hand with `nohup`, and
-nothing would bring it back after a crash or a restart. Today it becomes a
-real service. Nginx becomes the front door on port 80, Uvicorn runs the app
-behind it with two workers, and systemd keeps the app running and brings it
-back after a restart. You'll also point your domain at the VM through Cloudflare.
+on the Internet. It ran because the agent started it by hand, and nothing
+would bring it back after a crash or a restart. Today it becomes a real
+service. Nginx becomes the front door on port 80, Uvicorn runs the app behind
+it with two workers, and systemd keeps the app running and brings it back
+after a restart. You'll also point your domain at the VM through Cloudflare.
 
 By the end of class, `http://PUBLIC-IP` shows your site with your own data,
 with no port number. It survives a VM restart without anyone logging in, and
@@ -18,9 +18,23 @@ This lesson is draft status until the instructor rehearses it.
 
 ## 0. Before we start
 
-You registered a domain and created a Cloudflare account before class. If you
-didn't, do the first half of [Register your domain](register-a-domain.md) now,
-and skip section 1 until it's done.
+### Check your domain and Cloudflare account
+
+You had two things to do before class: register a domain and create a
+Cloudflare account. Section 1 uses both, so check them first.
+
+1. Sign in to Namecheap and open Domain List. Your domain should be listed,
+   with its expiration date about a year from now.
+2. Sign in at https://dash.cloudflare.com. You should land on your account's
+   home page. Don't add the domain yet, since that's section 1.
+
+If either one is missing, do it now with
+[Register your domain](register-a-domain.md). The domain takes about ten
+minutes, and the Cloudflare account takes two. If checkout gets stuck, tell
+me, start on section 2, and come back to section 1 once the domain shows up in
+Namecheap.
+
+### Start your VM
 
 If you didn't finish Tuesday's migration, finish sections 5 and 6 of
 [Migrate your site to an Azure VM](azure-vm-migration.md) first. Everything
@@ -62,8 +76,8 @@ Two companies are involved, and they do different jobs. Namecheap is your
 registrar. It records that you own the name, and it tells the .com or .me
 servers which name servers answer for it. Cloudflare is your DNS host. Its
 name servers are the computers that hold your domain's records and answer
-when anyone looks it up. Pointing the
-registrar at a different DNS host is called delegation.
+when anyone looks it up. Pointing the registrar at a different DNS host is
+called delegation.
 
 ### Add the domain to Cloudflare
 
@@ -83,8 +97,8 @@ registrar at a different DNS host is called delegation.
    | A | `www` | your VM's public IP | DNS only |
 
    An A record points a name at an IPv4 address, the four-number kind your
-   VM has. `@` means the domain itself. DNS only means Cloudflare answers with your
-   VM's address and stays out of the traffic. With the orange cloud,
+   VM has. `@` means the domain itself. DNS only means Cloudflare answers
+   with your VM's address and stays out of the traffic. With the orange cloud,
    visitors would connect to Cloudflare instead of your VM, and Tuesday's
    HTTPS lesson depends on them reaching your server.
 6. Cloudflare shows you two name servers, with names like
@@ -92,8 +106,8 @@ registrar at a different DNS host is called delegation.
 
 Your public IP has to stay the same for these records to keep working. Azure
 gives new VMs a Standard public IP, which is static, meaning it doesn't
-change, so it survives a deallocation. Check it on the VM's Overview page, under the public IP's
-settings, where the assignment should say Static.
+change, so it survives a deallocation. Check it on the VM's Overview page,
+under the public IP's settings, where the assignment should say Static.
 
 ### Point Namecheap at Cloudflare
 
@@ -106,8 +120,10 @@ settings, where the assignment should say Static.
 DNSSEC is a security feature that signs your domain's answers so nobody can
 fake them. Namecheap made those signatures, so if it stays on, Cloudflare's
 answers won't match and your domain can stop working. If Namecheap shows
-DNSSEC turned on for your domain, turn it off before you switch. From here on, your DNS records live in Cloudflare. Namecheap's
-Advanced DNS tab no longer affects anything.
+DNSSEC turned on for your domain, turn it off before you switch.
+
+From here on, your DNS records live in Cloudflare. Namecheap's Advanced DNS
+tab no longer affects anything.
 
 Cloudflare emails you when the domain is active. Don't wait for it. Go on to
 section 2.
@@ -130,17 +146,16 @@ ls ~/career-platform
 
 Use your own folder name if it's different. The files are all there, and the
 `curl` is refused, because nothing is listening. The disk kept everything
-that was written to it. A process is a program while it's running.
-Your app's process lived in memory, which empties when the VM turns off, and
-nothing told the VM to start it again. `nohup`, the command Tuesday's agent
-used, kept the app running after you logged out, but that's all it does. A
-crash or a restart ends it for good.
+that was written to it. A process is a program while it's running. Your
+app's process lived in memory, which empties when the VM turns off, and
+nothing told the VM to start it again. An app started by hand keeps running
+only until something stops it. A crash or a restart ends it for good.
 
-That's the problem for today. A program that runs in the background like this
-is called a service. A service has to start at boot, restart when it crashes,
-and keep logs you can read afterward. On Linux, systemd is the program that
-manages services. It's the first program Ubuntu starts at boot, and it starts
-everything else.
+That's the problem for today. A program that should always be running, like
+your site, is called a service. A service has to start at boot, restart when
+it crashes, and keep logs you can read afterward. On Linux, systemd is the
+program that manages services. It's the first program Ubuntu starts at boot,
+and it starts everything else.
 
 Type `exit` to leave the VM. The agent does the rest.
 
@@ -475,7 +490,7 @@ start it, because of what you built today.
 
 ## 9. What you should be able to explain now
 
-- What systemd does that `nohup` doesn't.
+- What systemd does for your app that starting it by hand doesn't.
 - The difference between `systemctl enable` and `systemctl start`.
 - Why Uvicorn listens on `127.0.0.1` while Nginx listens on `0.0.0.0`.
 - What Uvicorn's main process does that its workers don't.
