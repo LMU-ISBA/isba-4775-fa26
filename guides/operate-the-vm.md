@@ -161,6 +161,80 @@ Type `exit` to leave the VM. The agent does the rest.
 
 ## 3. Plan it, then read the plan
 
+### Write yours first
+
+Take ninety seconds, like Tuesday, and answer this on paper. What has to be
+true for your site to answer at `http://PUBLIC-IP`, with no port number, and
+come back on its own after a crash or a restart? List what you think has to
+happen, in order. Don't worry about program names yet.
+
+### Ask for the plan
+
+This time you describe what the site has to do, and the agent decides how.
+You don't need to give it your VM's details, because it's signed in to the
+Azure CLI and can look them up.
+
+```text
+My site runs on my Azure VM. Use the Azure CLI to find it and how to SSH in.
+If you find more than one VM, ask me which one.
+
+Right now my site runs only when someone starts it by hand, and it's gone
+after a crash or a restart. I want it to run like a real website:
+- Visitors reach it at http://PUBLIC-IP, with no port number.
+- It starts on its own when the VM boots, and comes back if it crashes.
+- One crash inside the app doesn't take the whole site down.
+- Port 8000 stays closed to the Internet.
+- The app doesn't run as root.
+I'll change the Azure firewall myself in the portal. Don't change anything
+in Azure. If you create a service, name it career-platform.
+
+Use your writing-plans skill to write
+docs/superpowers/plans/2026-10-01-operate-the-vm.md. At the top, list the
+VM, resource group, public IP, user, and SSH key you found. Then write one
+section for each job. Start each section with a short explanation for a
+beginner: what the piece is, why my site needs it, and what would break
+without it. Then list the steps with where each runs (laptop, VM, or
+portal), what to run or click, how we check it worked, and how we undo it.
+End with a section that restarts the VM and proves the site comes back. As
+each section finishes, write what ran and what the checks showed under it.
+Don't run anything yet.
+```
+
+The agent will run `az` commands to find your VM. Those only read, so approve
+them. If `az` asks you to sign in, run `az login` and try again.
+
+The line about writing results under each section matters today, for a
+reason you'll see in section 4.
+
+### Read the plan
+
+Check the top first. The VM, resource group, and public IP should match what
+the portal shows. If they don't, tell the agent before anything else.
+
+Then answer these from your plan, in your own words. If the plan doesn't
+answer one, ask the agent to add it.
+
+| Question | Why it matters |
+| --- | --- |
+| Which program faces the Internet, and on which port? | That's the only thing visitors should reach |
+| Which address and port does your app listen on? | If it's `0.0.0.0`, anyone who can reach the VM can skip the front door |
+| What starts the app when the VM boots? | Without it, you're back to starting it by hand |
+| What brings it back after a crash? | Starting at boot and restarting after a crash are two different settings |
+| What keeps one crash from taking the whole site down? | Your prompt asked for it, so find where the plan answers it |
+| Which user runs the app? | Root is the administrator account that can change anything. If someone broke into your app, you want them stuck with less. |
+| Which folder does the app start in? | Your app finds `.env` and your database from there. Tuesday's demo profile comes back if it starts somewhere else. |
+| Which steps happen in the portal? | Those are yours. The agent shouldn't touch Azure. |
+| How does the last section prove the site came back? | You're proving it, not assuming it |
+
+One check has no room for discussion: no step opens port 8000. If one does,
+tell the agent to take it out.
+
+### Compare it with this
+
+Most agents land on something close to this. If yours chose different
+programs, that's fine. Say what each of your pieces does and which row below
+it matches.
+
 ```text
 Internet
    │
@@ -174,12 +248,11 @@ Ubuntu VM
    │                    (two workers, kept running by systemd)
 ```
 
-This is where you're headed. Port 8000 never opens to the Internet. Nginx is
-the only thing visitors reach, and it passes each request to Uvicorn on
-127.0.0.1. That's the loopback address, which a computer uses to talk to
-itself, so nothing outside the VM can reach Uvicorn directly. When one program
-takes every request and hands it to another like this, it's called a reverse
-proxy.
+Port 8000 never opens to the Internet. Nginx is the only thing visitors
+reach, and it passes each request to Uvicorn on 127.0.0.1. That's the
+loopback address, which a computer uses to talk to itself, so nothing outside
+the VM can reach Uvicorn directly. When one program takes every request and
+hands it to another like this, it's called a reverse proxy.
 
 Four programs share the work. Picture a restaurant:
 
@@ -199,93 +272,31 @@ Nginx sits in front because it's built to face the Internet. It deals with
 slow connections and malformed requests before they reach Python, and it's
 where HTTPS goes on Tuesday.
 
-### Write yours first
-
-Take ninety seconds, like Tuesday, and write the order on paper:
-
-```text
-App server   ?
-Service      ?
-Front door   ?
-Firewall     ?
-Restart      ?
-Record       ?
-```
-
-Ask yourself why the firewall comes after the front door. What would a
-visitor see if you opened port 80 before Nginx was ready?
-
-### Ask for the plan
-
-```text
-My VM is vm-career-platform in resource group rg-career-platform. Its
-public IP is PUBLIC-IP, the user is azureuser, and the SSH key is
-~/.ssh/isba4775_azure. Use that user and key whenever you SSH to the VM.
-
-Today the app becomes a real service. Here is my plan, in order:
-
-App server   Uvicorn with --workers 2, listening on 127.0.0.1:8000, run
-             by hand once to prove the command works
-Service      a systemd unit named career-platform that starts the app at
-             boot and restarts it if it dies
-Front door   Nginx on port 80, passing requests to 127.0.0.1:8000
-Firewall     I'll add a port 80 rule in the portal myself
-Restart      restart the VM and prove the site comes back on its own
-Record       what's listening, the addresses, the network rules, and the
-             restart evidence
-
-Use your writing-plans skill to turn this into
-docs/superpowers/plans/2026-10-01-operate-the-vm.md. Keep my categories
-as the sections, in this order. Under each one, list the steps with: where
-it runs (laptop, VM, or portal), what to run or click, why, how we check it
-worked, and how we undo it. As each section finishes, write what ran and
-what the checks showed under that section. Don't change anything in Azure,
-and don't run anything yet.
-```
-
-The line about writing results under each section matters today, for a
-reason you'll see in section 4.
-
-### Review it against your list
-
-The plan will mention a unit, or unit file. That's a short settings file that
-tells systemd what to run, which folder to start in, and what to do if it
-stops. You give systemd commands with `systemctl`, as in
-`systemctl start career-platform`.
-
-| Look for | Why |
-| --- | --- |
-| No new packages. Uvicorn is already in `pyproject.toml` | It's the same app server as Tuesday, started a different way |
-| The App server check runs the exact command systemd will run, then stops it | If it fails by hand, it'll fail under systemd too, where it's harder to see |
-| Uvicorn binds `127.0.0.1:8000`, not `0.0.0.0` | Only Nginx needs to reach it |
-| Nothing left over from Tuesday is still running on port 8000 | An old Uvicorn would hold the port, and the new service couldn't start |
-| The unit runs as `azureuser`, not root | Root is the administrator account that can change anything. If someone broke into your app, they'd get only what `azureuser` can do. |
-| The unit's working directory, the folder the app starts in, is your repository folder | The app finds `.env` and your database from there. Tuesday's demo-profile problem comes back if it starts somewhere else. |
-| `Restart=` in the unit, and `systemctl enable` as well as `start` | `start` runs it now. `enable` is what makes it start at boot. |
-| Nginx's default site is disabled | Nginx comes with a sample welcome page. If it stays on, visitors see that instead of your site. |
-| `nginx -t` before every reload | A reload makes Nginx reread its settings without stopping. `nginx -t` checks the settings first, so a typo can't take the site down. |
-| The firewall section is marked as a portal step for you | The agent shouldn't touch Azure |
-| The restart section has a check after it, not just "it should work" | You're proving it, not assuming it |
-| No step opens port 8000 | That door stays shut |
-
-Roughly, you should see these pieces:
+Your plan will probably create these files:
 
 | Piece | Where it lives | Roughly |
 | --- | --- | --- |
-| App server | Already in your repository | `.venv/bin/uvicorn` with `--host 127.0.0.1 --port 8000 --workers 2` |
-| Service | `/etc/systemd/system/career-platform.service` | `ExecStart=` runs that same `.venv/bin/uvicorn` command |
-| Front door | `/etc/nginx/sites-available/`, linked into `sites-enabled/` | `listen 80 default_server;` and `proxy_pass http://127.0.0.1:8000;` |
+| The app | Already in your repository | `.venv/bin/uvicorn` with `--host 127.0.0.1 --port 8000 --workers 2` |
+| The service | `/etc/systemd/system/career-platform.service` | `ExecStart=` runs that same command |
+| The front door | `/etc/nginx/sites-available/`, linked into `sites-enabled/` | `listen 80` and `proxy_pass http://127.0.0.1:8000;` |
 
-`sites-available` holds every site Nginx knows about, and `sites-enabled`
-holds links to the ones it actually serves. `proxy_pass` is the line that
-hands each request to Uvicorn.
+A few words you'll see in the plan:
 
-Two workers is plenty for a small VM. `server_name _` is fine for now, since
-it answers for any name. On Tuesday you'll set it to your domain for the
-certificate.
+- A unit, or unit file, is the short settings file that tells systemd what
+  to run, which folder to start in, and what to do if it stops.
+- `systemctl` is how you give systemd commands, as in
+  `systemctl start career-platform`. `start` runs a service now, and `enable`
+  makes it start at every boot.
+- `Restart=` is the line in the unit that brings the app back after a crash.
+- `sites-available` holds every site Nginx knows about, and `sites-enabled`
+  holds links to the ones it actually serves. Nginx comes with a sample
+  welcome site that should be disabled, or visitors see it instead of yours.
+- `proxy_pass` is the line that hands each request to Uvicorn.
+- A reload makes Nginx reread its settings without stopping. `nginx -t`
+  checks the settings first, so a typo can't take the site down.
 
-Checkpoint: what did the agent add that you didn't predict? Say what each
-addition is for, in your own words.
+Checkpoint: compare the plan with what you wrote on paper. What did the agent
+add that you didn't predict? Say what each addition is for, in your own words.
 
 ## 4. Build it one section at a time
 
@@ -297,14 +308,14 @@ inline execution in this session.
 ```
 
 After each section, read what the agent reports, then say "Let's work on the
-next section." Stop after Front door, since the firewall is yours. Use the
-pauses for these:
+next section." Stop before any firewall step, since the firewall is yours. Use
+the pauses for these:
 
 | After | Look at | Answer this |
 | --- | --- | --- |
-| App server | `ps -ef \| grep uvicorn` while it runs by hand | Which line is the main process, and how can you tell? |
-| Service | `systemctl status career-platform` | What's the difference between `enable` and `start`? |
-| Front door | `curl -I http://localhost` on the VM | Which program answered, Nginx or Uvicorn? The `Server:` header says one, but both did. |
+| The app runs by hand | `ps -ef \| grep uvicorn` | Which line is the main process, and how can you tell? |
+| The service is set up | `systemctl status career-platform` | What's the difference between `enable` and `start`? |
+| The front door is set up | `curl -I http://localhost` on the VM | Which program answered, Nginx or Uvicorn? The `Server:` header says one, but both did. |
 
 `ps -ef` lists every running process, and `grep uvicorn` keeps only the lines
 that mention Uvicorn. In that list, PID is a process's ID number, which Linux
@@ -312,12 +323,12 @@ gives every running process, and PPID is the ID of the process that started
 it. `curl -I` asks for only the headers, the short labels at the top of a
 response, like `Server:`.
 
-Stay in manual mode through App server so you can read each command. After
-that, press Shift+Tab for auto mode if you're keeping up.
+Stay in manual mode through the first section so you can read each command.
+After that, press Shift+Tab for auto mode if you're keeping up.
 
 ### A pause: what the agent remembers
 
-Do this after the Service section, before Front door.
+Do this after the service is set up, before the front door.
 
 1. Ask the agent: "What's my VM's public IP, and which section of the plan are
    we on?" It knows both.
@@ -327,10 +338,12 @@ Do this after the Service section, before Front door.
    Where are we, and what's next?"
 
 Before step 3, predict what it will say. Before step 4, predict whether the
-plan file will be enough to get it back on track.
+plan file will be enough to get it back on track. Watch how it answers in step
+3. It may look up the IP again with the Azure CLI, but no command can tell it
+which section you're on.
 
-Checkpoint: what survived `/clear`, and why? How is that like what survived
-the VM restart in section 2?
+Checkpoint: which answer came from a tool, and which came from the file? How
+is the file like what survived the VM restart in section 2?
 
 ## 5. Open the front door
 
@@ -377,7 +390,7 @@ Nobody logged in, and the site came back. Now ask for the evidence:
 ```text
 Show me when the VM last booted, when the career-platform service started,
 and that the site answers through Nginx with my own name on the page. Add
-the results to the Restart section of the plan.
+the results to the plan's restart section.
 ```
 
 The service's start time should match the boot time. That's systemd starting
@@ -516,6 +529,9 @@ anything.
 
 | Symptom | What it tells you | Check first |
 | --- | --- | --- |
+| `az` asks you to sign in | The Azure CLI's sign-in expired | Run `az login`, then ask the agent to try again |
+| `az login` fails on Windows with a device registration or MDM error | LMU's device policy blocks the Windows sign-in helper | `az account clear`, then `az config set core.enable_broker_on_windows=false`, then `az login` |
+| The agent finds more than one VM | A VM or resource group is left over from an earlier try | Tell it which one, and check the resource group in the portal |
 | SSH hangs, then times out | Your laptop's address changed, or the VM isn't running | The SSH rule's source IP, and the VM's status |
 | The Nginx welcome page instead of your site | The default site is still enabled | `ls /etc/nginx/sites-enabled` |
 | `502 Bad Gateway` | Nginx can't reach the app | `systemctl status career-platform`, then `journalctl -u career-platform -n 50` |
