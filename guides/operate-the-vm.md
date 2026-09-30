@@ -9,10 +9,9 @@ service. Nginx becomes the front door on port 80, Uvicorn runs the app behind
 it with two workers, and systemd keeps the app running and brings it back
 after a restart. You'll also point your domain at the VM through Cloudflare.
 
-By the end of class, `http://PUBLIC-IP` shows your site with your own data,
-with no port number. It survives a VM restart without anyone logging in, and
-your domain is on its way to Cloudflare. Your plan file doubles as your
-evidence, the same as Tuesday.
+By the end of class, `http://yourname.com` shows your site with your own
+data, with no port number. It survives a VM restart without anyone logging in.
+Your plan file doubles as your evidence, the same as Tuesday.
 
 This lesson is draft status until the instructor rehearses it.
 
@@ -446,7 +445,9 @@ back after the restart. Some of it is on the VM, and some of it isn't.
 
 ## 7. Check your domain
 
-Back on your laptop, check whether the delegation from section 1 has spread:
+You switched your name servers over an hour ago. For a new domain, that's
+usually plenty of time. Back on your laptop, check whether the switch is
+visible:
 
 ```text
 nslookup -type=NS yourname.com
@@ -461,10 +462,29 @@ nslookup yourname.com
 It should return your VM's public IP. Then open `http://yourname.com` in a
 browser. Your site answers at your own name.
 
-If you still see Namecheap's name servers, that's normal for now. Check again
-tonight. If the name servers are Cloudflare's but the address isn't your VM's,
-look at the A records in Cloudflare. Addresses starting with `104.` or `172.`
-mean the orange cloud is on, so switch it to DNS only.
+If it doesn't work yet, try these in order:
+
+1. In the Cloudflare dashboard, open your domain and select "Check
+   nameservers now." Cloudflare checks on a schedule, and this makes it look
+   right away.
+2. Ask Cloudflare's own resolver, which skips your network's saved answers:
+
+   ```text
+   nslookup yourname.com 1.1.1.1
+   ```
+
+   If this returns your VM's IP and the plain `nslookup` doesn't, the switch
+   worked. Your laptop or the campus network is still holding an old answer,
+   often Namecheap's parking page, and it clears on its own within about half
+   an hour.
+3. Open `http://yourname.com` on your phone with Wi-Fi off. Your carrier's
+   resolver probably hasn't saved an old answer.
+
+If the name servers still show Namecheap's after all three, check that the
+Custom DNS change saved and that DNSSEC is off, then check again tonight. If
+the name servers are Cloudflare's but the address isn't your VM's, look at the
+A records in Cloudflare. Addresses starting with `104.` or `172.` mean the
+orange cloud is on, so switch it to DNS only.
 
 The browser still says "Not secure," and that's what Tuesday fixes.
 
@@ -541,7 +561,7 @@ anything.
 | `nginx -t` reports an error | A typo in the site file | The line number in the message |
 | `http://PUBLIC-IP` hangs | The port 80 rule is missing | The inbound rules in the portal |
 | The site doesn't come back after Restart | The service was started but never enabled | `systemctl is-enabled career-platform` |
-| `nslookup` shows Namecheap's name servers | The change hasn't spread yet, or it wasn't saved | The Nameservers section in Namecheap, then wait |
+| `nslookup` shows Namecheap's name servers | The change hasn't spread yet, or it wasn't saved | "Check nameservers now" in Cloudflare, `nslookup yourname.com 1.1.1.1`, then the Nameservers section in Namecheap |
 | `nslookup` returns a `104.` or `172.` address | The Cloudflare proxy is on | Set the A records to DNS only |
 
 `journalctl` reads the logs systemd keeps for each service, and `-n 50` shows
