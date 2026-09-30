@@ -2,11 +2,12 @@
 
 Session 10 · October 1, 2026
 
-On Tuesday your site ran on the VM, but only the VM itself could reach it, and
-it ran because the agent started it by hand with `nohup`. Today it becomes a
-real service. Nginx becomes the front door on port 80, Gunicorn runs the app
-behind it, and systemd keeps the app running and brings it back after a
-restart. You'll also point your domain at the VM through Cloudflare.
+On Tuesday your site ran on the VM, and a temporary rule for port 8000 put it
+on the Internet. It ran because the agent started it by hand with `nohup`, and
+nothing would bring it back after a crash or a restart. Today it becomes a
+real service. Nginx becomes the front door on port 80, Uvicorn runs the app
+behind it with two workers, and systemd keeps the app running and brings it
+back after a restart. You'll also point your domain at the VM through Cloudflare.
 
 By the end of class, `http://PUBLIC-IP` shows your site with your own data,
 with no port number. It survives a VM restart without anyone logging in, and
@@ -25,9 +26,15 @@ If you didn't finish Tuesday's migration, finish sections 5 and 6 of
 [Migrate your site to an Azure VM](azure-vm-migration.md) first. Everything
 below assumes your data is on the VM.
 
-1. In the Azure portal, start your VM from its Overview page. It's been
-   deallocated since Tuesday.
-2. Open a terminal on your laptop and connect, the same way as Tuesday:
+1. In the Azure portal, open your VM's Overview page and check its status.
+   If it says Stopped (deallocated), select Start. If it says Running, it's
+   been on since Tuesday and spending your credits. Select Stop, wait for
+   Stopped (deallocated), and then select Start. Section 2 needs a VM that
+   was fully off.
+2. Open your VM's Networking, then Network settings, and delete the
+   `Temp-HTTP-8000` rule if it's still there. That rule was for Tuesday's
+   test only, and port 8000 stays closed from here on.
+3. Open a terminal on your laptop and connect, the same way as Tuesday:
 
    ```text
    ssh -i ~/.ssh/isba4775_azure azureuser@PUBLIC-IP
@@ -36,7 +43,7 @@ below assumes your data is on the VM.
    If it hangs, your laptop's address probably changed since Tuesday, because
    you're on a different network. Update the source address on the SSH rule
    in the portal to your current IP, and try again.
-3. In Claude Code, start in your `career-platform` folder on your laptop.
+4. In Claude Code, start in your `career-platform` folder on your laptop.
 
 ## 1. Start the DNS change first
 
@@ -54,7 +61,8 @@ Your browser ─▶ resolver ─▶ .me or .com servers: "ask Cloudflare"
 Two companies are involved, and they do different jobs. Namecheap is your
 registrar. It records that you own the name, and it tells the .com or .me
 servers which name servers answer for it. Cloudflare is your DNS host. Its
-name servers hold your records and answer the questions. Pointing the
+name servers are the computers that hold your domain's records and answer
+when anyone looks it up. Pointing the
 registrar at a different DNS host is called delegation.
 
 ### Add the domain to Cloudflare
@@ -74,7 +82,8 @@ registrar at a different DNS host is called delegation.
    | A | `@` | your VM's public IP | DNS only |
    | A | `www` | your VM's public IP | DNS only |
 
-   `@` means the domain itself. DNS only means Cloudflare answers with your
+   An A record points a name at an IPv4 address, the four-number kind your
+   VM has. `@` means the domain itself. DNS only means Cloudflare answers with your
    VM's address and stays out of the traffic. With the orange cloud,
    visitors would connect to Cloudflare instead of your VM, and Tuesday's
    HTTPS lesson depends on them reaching your server.
@@ -82,8 +91,8 @@ registrar at a different DNS host is called delegation.
    `ada.ns.cloudflare.com`. Leave that page open.
 
 Your public IP has to stay the same for these records to keep working. Azure
-gives new VMs a Standard public IP, which is static, so it survives a
-deallocation. Check it on the VM's Overview page, under the public IP's
+gives new VMs a Standard public IP, which is static, meaning it doesn't
+change, so it survives a deallocation. Check it on the VM's Overview page, under the public IP's
 settings, where the assignment should say Static.
 
 ### Point Namecheap at Cloudflare
@@ -94,8 +103,10 @@ settings, where the assignment should say Static.
 3. Enter Cloudflare's two name servers exactly as shown, then click the green
    checkmark to save.
 
-If Namecheap shows DNSSEC turned on for your domain, turn it off before you
-switch. From here on, your DNS records live in Cloudflare. Namecheap's
+DNSSEC is a security feature that signs your domain's answers so nobody can
+fake them. Namecheap made those signatures, so if it stays on, Cloudflare's
+answers won't match and your domain can stop working. If Namecheap shows
+DNSSEC turned on for your domain, turn it off before you switch. From here on, your DNS records live in Cloudflare. Namecheap's
 Advanced DNS tab no longer affects anything.
 
 Cloudflare emails you when the domain is active. Don't wait for it. Go on to
@@ -106,7 +117,7 @@ one if your records were wrong?
 
 ## 2. What stopped when the VM did
 
-You deallocated the VM on Tuesday and started it again just now. Before you
+Your VM was deallocated, and you started it again just now. Before you
 look, predict: is your site running on the VM right now? Are your code and
 your database still there?
 
@@ -119,13 +130,17 @@ ls ~/career-platform
 
 Use your own folder name if it's different. The files are all there, and the
 `curl` is refused, because nothing is listening. The disk kept everything
-that was written to it. The running process lived in memory, and nothing
-told the VM to start it again. `nohup` kept the app alive after an SSH session
-ended, but that's all it does. A crash or a restart ends it for good.
+that was written to it. A process is a program while it's running.
+Your app's process lived in memory, which empties when the VM turns off, and
+nothing told the VM to start it again. `nohup`, the command Tuesday's agent
+used, kept the app running after you logged out, but that's all it does. A
+crash or a restart ends it for good.
 
-That's the problem for today. A service has to start at boot, restart when it
-crashes, and keep logs you can read afterward. On Linux, systemd does that
-job.
+That's the problem for today. A program that runs in the background like this
+is called a service. A service has to start at boot, restart when it crashes,
+and keep logs you can read afterward. On Linux, systemd is the program that
+manages services. It's the first program Ubuntu starts at boot, and it starts
+everything else.
 
 Type `exit` to leave the VM. The agent does the rest.
 
@@ -140,18 +155,34 @@ Network security group: 22 from your laptop, 80 from anyone
    │
 Ubuntu VM
    ├── sshd :22
-   ├── Nginx :80 ──▶ Gunicorn on 127.0.0.1:8000 ─▶ the .db file
-   │                    (kept running by systemd)
+   ├── Nginx :80 ──▶ Uvicorn on 127.0.0.1:8000 ─▶ the .db file
+   │                    (two workers, kept running by systemd)
 ```
 
 This is where you're headed. Port 8000 never opens to the Internet. Nginx is
-the only thing visitors reach, and it passes each request to Gunicorn on the
-VM's own loopback address.
+the only thing visitors reach, and it passes each request to Uvicorn on
+127.0.0.1. That's the loopback address, which a computer uses to talk to
+itself, so nothing outside the VM can reach Uvicorn directly. When one program
+takes every request and hands it to another like this, it's called a reverse
+proxy.
 
-Why Gunicorn: plain Uvicorn is one process. Gunicorn is a process manager
-that runs several Uvicorn workers and replaces any that die. Why Nginx in
-front: it's built to face the Internet, it handles slow clients and bad
-requests before they reach Python, and it's where HTTPS goes on Tuesday.
+Four programs share the work. Picture a restaurant:
+
+| Program | Its job | In a restaurant |
+| --- | --- | --- |
+| Nginx | Takes every request from the Internet and passes it to your app | The host at the front door, who greets guests and seats them |
+| Uvicorn's main process | Starts the workers, and replaces any that die or get stuck | The kitchen manager |
+| Uvicorn's workers | Run your Python app and answer requests | The cooks |
+| systemd | Starts Uvicorn when the VM boots, and starts it again if it crashes | The building manager, who unlocks the doors every morning |
+
+A worker is a process that does the actual work of answering requests. With
+`--workers 2`, Uvicorn runs one main process and two workers. If one worker
+crashes, the other keeps answering while the main process replaces it, the
+way a kitchen keeps cooking when one cook walks out.
+
+Nginx sits in front because it's built to face the Internet. It deals with
+slow connections and malformed requests before they reach Python, and it's
+where HTTPS goes on Tuesday.
 
 ### Write yours first
 
@@ -178,8 +209,8 @@ public IP is PUBLIC-IP, the user is azureuser, and the SSH key is
 
 Today the app becomes a real service. Here is my plan, in order:
 
-App server   Gunicorn with uvicorn-worker, added with uv on my laptop,
-             listening on 127.0.0.1:8000
+App server   Uvicorn with --workers 2, listening on 127.0.0.1:8000, run
+             by hand once to prove the command works
 Service      a systemd unit named career-platform that starts the app at
              boot and restarts it if it dies
 Front door   Nginx on port 80, passing requests to 127.0.0.1:8000
@@ -202,16 +233,22 @@ reason you'll see in section 4.
 
 ### Review it against your list
 
+The plan will mention a unit, or unit file. That's a short settings file that
+tells systemd what to run, which folder to start in, and what to do if it
+stops. You give systemd commands with `systemctl`, as in
+`systemctl start career-platform`.
+
 | Look for | Why |
 | --- | --- |
-| Gunicorn and `uvicorn-worker` added on the laptop with `uv add`, then committed, pushed, and pulled on the VM | The lock file stays the receipt. Installing straight onto the VM would leave your repository out of date. |
-| The worker class is `uvicorn_worker.UvicornWorker` | Uvicorn's own `uvicorn.workers` is deprecated |
-| Gunicorn binds `127.0.0.1:8000`, not `0.0.0.0` | Only Nginx needs to reach it |
-| The unit runs as `azureuser`, not root | A compromised app shouldn't own the machine |
-| The unit's working directory is your repository folder | The app finds `.env` and your database from there. Tuesday's demo-profile problem comes back if it starts somewhere else. |
+| No new packages. Uvicorn is already in `pyproject.toml` | It's the same app server as Tuesday, started a different way |
+| The App server check runs the exact command systemd will run, then stops it | If it fails by hand, it'll fail under systemd too, where it's harder to see |
+| Uvicorn binds `127.0.0.1:8000`, not `0.0.0.0` | Only Nginx needs to reach it |
+| Nothing left over from Tuesday is still running on port 8000 | An old Uvicorn would hold the port, and the new service couldn't start |
+| The unit runs as `azureuser`, not root | Root is the administrator account that can change anything. If someone broke into your app, they'd get only what `azureuser` can do. |
+| The unit's working directory, the folder the app starts in, is your repository folder | The app finds `.env` and your database from there. Tuesday's demo-profile problem comes back if it starts somewhere else. |
 | `Restart=` in the unit, and `systemctl enable` as well as `start` | `start` runs it now. `enable` is what makes it start at boot. |
-| Nginx's default site is disabled | Otherwise you'll get the Nginx welcome page instead of your site |
-| `nginx -t` before every reload | It checks the configuration before a typo takes the site down |
+| Nginx's default site is disabled | Nginx comes with a sample welcome page. If it stays on, visitors see that instead of your site. |
+| `nginx -t` before every reload | A reload makes Nginx reread its settings without stopping. `nginx -t` checks the settings first, so a typo can't take the site down. |
 | The firewall section is marked as a portal step for you | The agent shouldn't touch Azure |
 | The restart section has a check after it, not just "it should work" | You're proving it, not assuming it |
 | No step opens port 8000 | That door stays shut |
@@ -220,9 +257,13 @@ Roughly, you should see these pieces:
 
 | Piece | Where it lives | Roughly |
 | --- | --- | --- |
-| App server | Your repository | `uv add gunicorn uvicorn-worker` |
-| Service | `/etc/systemd/system/career-platform.service` | `ExecStart=` runs `.venv/bin/gunicorn` with `-k uvicorn_worker.UvicornWorker -w 2 -b 127.0.0.1:8000` |
+| App server | Already in your repository | `.venv/bin/uvicorn` with `--host 127.0.0.1 --port 8000 --workers 2` |
+| Service | `/etc/systemd/system/career-platform.service` | `ExecStart=` runs that same `.venv/bin/uvicorn` command |
 | Front door | `/etc/nginx/sites-available/`, linked into `sites-enabled/` | `listen 80 default_server;` and `proxy_pass http://127.0.0.1:8000;` |
+
+`sites-available` holds every site Nginx knows about, and `sites-enabled`
+holds links to the ones it actually serves. `proxy_pass` is the line that
+hands each request to Uvicorn.
 
 Two workers is plenty for a small VM. `server_name _` is fine for now, since
 it answers for any name. On Tuesday you'll set it to your domain for the
@@ -246,9 +287,15 @@ pauses for these:
 
 | After | Look at | Answer this |
 | --- | --- | --- |
-| App server | The new lines in `pyproject.toml` and `uv.lock` | Why did this change happen on your laptop and reach the VM through Git? |
+| App server | `ps -ef \| grep uvicorn` while it runs by hand | Which line is the main process, and how can you tell? |
 | Service | `systemctl status career-platform` | What's the difference between `enable` and `start`? |
-| Front door | `curl -I http://localhost` on the VM | Which program answered, Nginx or Gunicorn? The `Server:` header says one, but both did. |
+| Front door | `curl -I http://localhost` on the VM | Which program answered, Nginx or Uvicorn? The `Server:` header says one, but both did. |
+
+`ps -ef` lists every running process, and `grep uvicorn` keeps only the lines
+that mention Uvicorn. In that list, PID is a process's ID number, which Linux
+gives every running process, and PPID is the ID of the process that started
+it. `curl -I` asks for only the headers, the short labels at the top of a
+response, like `Server:`.
 
 Stay in manual mode through App server so you can read each command. After
 that, press Shift+Tab for auto mode if you're keeping up.
@@ -288,8 +335,9 @@ inbound port rule like the SSH one, with these changes:
 Reload in a new tab. You should see your site, with your name on it and no
 port number.
 
-Now try `http://PUBLIC-IP:8000`. It should hang, because that port is still
-closed, and that's the point. Try your phone with Wi-Fi off, too.
+Now try `http://PUBLIC-IP:8000`. It should hang, because you deleted
+`Temp-HTTP-8000` at the start of class, and that's the point. Try your phone
+with Wi-Fi off, too.
 
 Unlike Tuesday's `Temp-HTTP-8000`, this rule stays. Port 80 is meant to be
 public, because Nginx is the one program built to face the Internet.
@@ -322,16 +370,28 @@ it, not you.
 
 ### Break it on purpose
 
-Predict each result before you ask for it.
+`kill -9` forces a process to stop right away, with no chance to clean up.
+That's the closest thing to a real crash. Predict each result before you ask
+for it.
 
 ```text
-Kill the Gunicorn master process with kill -9, the way a crash would.
+Kill one Uvicorn worker process with kill -9, not the main one. Then
+show me the Uvicorn processes and systemctl status career-platform.
+```
+
+The worker's process ID changes, and the main one doesn't. Uvicorn's main
+process replaced the worker, and systemd never had to act.
+
+```text
+Now kill the main Uvicorn process with kill -9, the way a crash would.
 Don't use systemctl. Then show me systemctl status career-platform twice,
 five seconds apart.
 ```
 
-The process ID changes. systemd noticed the crash and started a new one,
-which is what `Restart=` is for.
+Every process ID changes this time. The main process took its workers down
+with it, and systemd noticed and started the service again, which is what
+`Restart=` is for. Uvicorn's main process recovers from a worker crash, and
+systemd recovers from a crash of Uvicorn itself.
 
 ```text
 Stop the career-platform service with systemctl, then show me what Nginx
@@ -340,9 +400,10 @@ Then start the service again.
 ```
 
 Reload your site while it's stopped. You'll see `502 Bad Gateway`. That page
-comes from Nginx, which is still running. Nginx reached for Gunicorn, and
+comes from Nginx, which is still running. Nginx reached for Uvicorn, and
 nothing answered. The error log says so, with a line about the connection to
-the upstream being refused.
+the upstream being refused. Upstream is Nginx's word for the program it passes
+requests to, which is Uvicorn here.
 
 You now have three different failures, and each points at a different layer:
 
@@ -395,25 +456,29 @@ or my Azure subscription ID. Show me the changes, then commit the plan and
 push it.
 ```
 
-In the listening ports, expect `0.0.0.0:22` for SSH, `0.0.0.0:80` for Nginx,
-and `127.0.0.1:8000` for Gunicorn. You'll also see `127.0.0.53:53`, which is
-Ubuntu's local DNS helper, and matching lines for IPv6.
+`ss -ltnp` lists each port a program is listening on, and which program it
+is. Expect `0.0.0.0:22` for SSH, `0.0.0.0:80` for Nginx, and `127.0.0.1:8000`
+for Uvicorn. You'll also see `127.0.0.53:53`, which is Ubuntu's local DNS
+helper, and matching lines for IPv6, the newer and longer style of address.
 
 Look closely at the addresses. The VM's own address is private, starting with
-`10.`, and the public IP doesn't appear anywhere on the VM. Azure holds the
+`10.`, which means it works only inside Azure's network. The public IP doesn't
+appear anywhere on the VM. Azure holds the
 public address and forwards traffic to the private one.
 
-Then shut down the same way as Tuesday. Select Stop on the Overview page and
-wait for Stopped (deallocated). Keep the `Allow-HTTP-80` rule, since you'll
-need it Tuesday. Your domain's A records keep pointing at the static IP while
-the VM is off, and the site comes back on its own when you start it, because
-of what you built today.
+Then shut down before you leave. Select Stop on the Overview page and wait for
+Stopped (deallocated). A running VM spends your credits all night, and some
+regions don't offer auto-shutdown as a backup. Keep the `Allow-HTTP-80` rule,
+since you'll need it Tuesday. Your domain's A records keep pointing at the
+static IP while the VM is off, and the site comes back on its own when you
+start it, because of what you built today.
 
 ## 9. What you should be able to explain now
 
 - What systemd does that `nohup` doesn't.
 - The difference between `systemctl enable` and `systemctl start`.
-- Why Gunicorn listens on `127.0.0.1` while Nginx listens on `0.0.0.0`.
+- Why Uvicorn listens on `127.0.0.1` while Nginx listens on `0.0.0.0`.
+- What Uvicorn's main process does that its workers don't.
 - What a 502 tells you, compared with a timeout and a 503.
 - Everything that had to be configured for the site to survive a restart.
 - The difference between a registrar and a DNS host, and what delegation
@@ -439,14 +504,17 @@ anything.
 | SSH hangs, then times out | Your laptop's address changed, or the VM isn't running | The SSH rule's source IP, and the VM's status |
 | The Nginx welcome page instead of your site | The default site is still enabled | `ls /etc/nginx/sites-enabled` |
 | `502 Bad Gateway` | Nginx can't reach the app | `systemctl status career-platform`, then `journalctl -u career-platform -n 50` |
-| The service fails with "No such file or directory" | A path in the unit file is wrong | `WorkingDirectory=` and the path to `.venv/bin/gunicorn` |
-| The service fails with "Address already in use" | Something else is on port 8000, probably an old Uvicorn | `sudo ss -ltnp` and look for 8000 |
+| The service fails with "No such file or directory" | A path in the unit file is wrong | `WorkingDirectory=` and the path to `.venv/bin/uvicorn` |
+| The service fails with "Address already in use" | Something else is on port 8000, probably Tuesday's Uvicorn started by hand | `sudo ss -ltnp` and look for 8000 |
 | The site loads with the demo profile | The service can't find your database | The unit's working directory, and `DATABASE_URL` in `.env` |
 | `nginx -t` reports an error | A typo in the site file | The line number in the message |
 | `http://PUBLIC-IP` hangs | The port 80 rule is missing | The inbound rules in the portal |
 | The site doesn't come back after Restart | The service was started but never enabled | `systemctl is-enabled career-platform` |
 | `nslookup` shows Namecheap's name servers | The change hasn't spread yet, or it wasn't saved | The Nameservers section in Namecheap, then wait |
 | `nslookup` returns a `104.` or `172.` address | The Cloudflare proxy is on | Set the A records to DNS only |
+
+`journalctl` reads the logs systemd keeps for each service, and `-n 50` shows
+the last 50 lines.
 
 If the agent suggests opening port 8000, running the app as root, or allowing
 SSH from Any to get past a problem, say no. Write down the symptom, the
@@ -455,8 +523,6 @@ evidence, and your next check instead.
 ## 11. Sources
 
 - https://www.uvicorn.org/deployment/
-- https://github.com/Kludex/uvicorn-worker
-- https://docs.gunicorn.org/en/stable/deploy.html
 - https://nginx.org/en/docs/http/ngx_http_proxy_module.html
 - https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html
 - https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/

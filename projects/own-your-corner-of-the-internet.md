@@ -47,8 +47,9 @@ application restart. Do not substitute sample content to hide a failed query.
 
 Use an Ubuntu VM, an application server, Nginx, and your chosen database. Keep
 the same database engine for this first migration. By the completed Azure milestone, Nginx forwards public web requests to the application, and the
-application accesses its database locally. Use a production application server
-such as Gunicorn, with service management that survives a VM restart.
+application accesses its database locally. Run the application server with
+multiple workers, such as Uvicorn with `--workers`, under service management
+that survives a VM restart.
 
 Document SSH access, the public/private addresses, and the network rules.
 Restrict SSH to the intended source. Keep the database and application listener
