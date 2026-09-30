@@ -13,8 +13,6 @@ By the end of class, `http://yourname.com` shows your site with your own
 data, with no port number. It survives a VM restart without anyone logging in.
 Your plan file doubles as your evidence, the same as Tuesday.
 
-This lesson is draft status until the instructor rehearses it.
-
 ## 0. Before we start
 
 ### Check your domain and Cloudflare account
