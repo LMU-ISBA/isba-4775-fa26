@@ -448,9 +448,9 @@ add that you didn't predict? Say what each addition is for, in your own words.
 ## 4. Build it one section at a time
 
 Before you approve anything, check the bottom of the Claude Code window. If
-it says auto mode on, press Shift+Tab until that line is gone. Now you're in
-manual mode, and the agent asks before it runs each command, so you can read
-what it's about to do.
+it says auto mode on, press Shift+Tab until it says manual mode on. In manual
+mode, the agent asks before it runs each command, so you can read what it's
+about to do.
 
 Approve the plan and start the first section, the same way as Tuesday. The
 skill offers two ways to run it: Subagent-driven, where a fresh agent does
@@ -479,7 +479,10 @@ the pauses for these:
 `ps -ef` lists every running process, and `grep uvicorn` keeps only the lines
 that mention Uvicorn. In that list, PID is a process's ID number, which Linux
 gives every running process, and PPID is the ID of the process that started
-it. `curl -I` asks for only the headers, the short labels at the top of a
+it. `ps` cuts user names to eight characters, so `azureuser` shows up as
+`azureus+`. You may also see one more Python process than you expect. It's a
+helper Python starts to track shared resources for the workers, and it's
+normal. `curl -I` asks for only the headers, the short labels at the top of a
 response, like `Server:`.
 
 Stay in manual mode through the first section. After that, if you're keeping
