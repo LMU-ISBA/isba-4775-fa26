@@ -267,10 +267,43 @@ and it starts everything else.
 
 ### Write yours first
 
-Take ninety seconds, like Tuesday, and answer this on paper. What has to be
-true for your site to answer at `http://PUBLIC-IP`, with no port number, and
-come back on its own after a crash or a restart? List what you think has to
-happen, in order. Don't worry about program names yet.
+Take ninety seconds, like Tuesday, and answer two questions on paper. Describe
+each job in plain words. If you know a program's name, add it, but you don't
+need to.
+
+1. On Tuesday you typed `:8000` after your IP. A browser without a port
+   number uses port 80. What has to be listening on port 80 on your VM?
+2. What has to change in the Azure portal before a visitor can reach port
+   80?
+
+We'll fill in the rest together.
+
+### What the writing-plans skill does
+
+A skill is a set of written instructions your agent loads for one kind of
+job, like a recipe card it follows every time. You've used one since
+September 15. The prompt below asks for the writing-plans skill, so it helps
+to know what that card says. You can read the whole thing at
+https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md.
+
+In short, it tells the agent to write the plan for someone who has never seen
+your project. The plan opens with a header that names the goal, the approach,
+and the tools. Then it breaks the work into small tasks, and each step in a
+task is one action with a result you can check. When the plan is done, the
+agent checks it against what you asked for, fixes any gaps, and saves it
+under `docs/superpowers/plans/`. Then it asks how you want to run it.
+
+The skill was written for building software, so it expects tests and code
+changes in every task. Today's work is setting up a server, which doesn't fit
+that shape. That's why the prompt adds its own structure: a short explanation
+for a beginner, where each step runs, how to check it, and how to undo it.
+
+You can also change a skill to fit the way you like to work. Don't edit the
+copy that came with Superpowers, because the next update replaces it. Copy
+the skill's folder into your project at `.claude/skills/`, give it a new name
+on its `name:` line, and change the template to your own. Then ask for it by
+that name. You don't need to do this today, but it's worth trying once you've
+seen a few plans.
 
 ### Ask for the plan
 
@@ -404,11 +437,14 @@ add that you didn't predict? Say what each addition is for, in your own words.
 
 ## 4. Build it one section at a time
 
-Approve the plan and start the first section, the same way as Tuesday:
+Approve the plan and start the first section, the same way as Tuesday. The
+skill offers two ways to run it: Subagent-driven, where a fresh agent does
+each task, and Native, where this session does them all. Choose Native, which
+is what Tuesday called inline:
 
 ```text
 The implementation plan looks good. Let's work on the first section using
-inline execution in this session.
+native execution in this session.
 ```
 
 After each section, read what the agent reports, then say "Let's work on the
