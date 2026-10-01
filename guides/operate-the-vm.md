@@ -536,6 +536,10 @@ with Wi-Fi off, too.
 Unlike Tuesday's `Temp-HTTP-8000`, this rule stays. Port 80 is meant to be
 public, because Nginx is the one program built to face the Internet.
 
+When the plan's last section is done, the agent may ask whether to commit
+the plan. Say not yet. It still holds private details, like your laptop's IP
+address, and section 8 removes them before you commit and push it.
+
 Checkpoint: a visitor's request passes three things on the VM's side before
 it reaches your data. Name them in order.
 
@@ -678,8 +682,14 @@ helper, and matching lines for IPv6, the newer and longer style of address.
 
 Look closely at the addresses. The VM's own address is private, starting with
 `10.`, which means it works only inside Azure's network. The public IP doesn't
-appear anywhere on the VM. Azure holds the
-public address and forwards traffic to the private one.
+appear anywhere on the VM. Azure holds the public address and forwards
+traffic to the private one.
+
+Make sure the plan reached GitHub. A commit saves it only on your laptop, and
+the push is what sends it to GitHub. Open your `career-platform` repository
+on github.com, go to `docs/superpowers/plans/`, and open
+`2026-10-01-operate-the-vm.md`. You should see the Record section and the
+results under each section. If it isn't there, ask the agent to push it.
 
 Then shut down before you leave. Select Stop on the Overview page and wait for
 Stopped (deallocated). A running VM spends your credits all night, and some
