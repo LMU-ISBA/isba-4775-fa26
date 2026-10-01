@@ -447,6 +447,11 @@ add that you didn't predict? Say what each addition is for, in your own words.
 
 ## 4. Build it one section at a time
 
+Before you approve anything, check the bottom of the Claude Code window. If
+it says auto mode on, press Shift+Tab until that line is gone. Now you're in
+manual mode, and the agent asks before it runs each command, so you can read
+what it's about to do.
+
 Approve the plan and start the first section, the same way as Tuesday. The
 skill offers two ways to run it: Subagent-driven, where a fresh agent does
 each task, and Native, where this session does them all. Choose Native, which
@@ -477,8 +482,8 @@ gives every running process, and PPID is the ID of the process that started
 it. `curl -I` asks for only the headers, the short labels at the top of a
 response, like `Server:`.
 
-Stay in manual mode through the first section so you can read each command.
-After that, press Shift+Tab for auto mode if you're keeping up.
+Stay in manual mode through the first section. After that, if you're keeping
+up, press Shift+Tab until it says auto mode on.
 
 ### A pause: what the agent remembers
 
