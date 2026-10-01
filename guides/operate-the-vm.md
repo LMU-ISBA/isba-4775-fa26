@@ -332,9 +332,13 @@ it run like a real website:
 - It starts when the VM boots, comes back if it crashes, and one crash
   doesn't take the whole site down.
 - Port 8000 stays closed to the Internet, and the app doesn't run as root.
-- The last step restarts the VM and proves the site comes back.
 I'll change the Azure firewall myself. If you create a service, name it
 career-platform.
+
+Keep it small enough to read in five minutes and run in twenty. Use the
+code, Python environment, and database already in ~/career-platform, and run
+the service as azureuser. Don't change files in the repo or add tests. Leave
+out crash and restart tests, since I'll run those myself.
 
 Use your writing-plans skill and save the plan to
 docs/superpowers/plans/2026-10-01-operate-the-vm.md, with the VM details you
@@ -357,10 +361,10 @@ answer one, ask the agent to add it.
 | What starts the app when the VM boots? | Without it, you're back to starting it by hand |
 | What brings it back after a crash? | Starting at boot and restarting after a crash are two different settings |
 | What keeps one crash from taking the whole site down? | Your prompt asked for it, so find where the plan answers it |
-| Which user runs the app? | Root is the administrator account that can change anything. If someone broke into your app, you want them stuck with less. |
+| Which user runs the app? | It should be `azureuser`, not root. Root is the administrator account that can change anything. `azureuser` can still use `sudo` to act as root, so a real company would create a separate account just for the app. Be ready to explain what that would protect against. |
 | Which folder does the app start in? | Your app finds `.env` and your database from there. Tuesday's demo profile comes back if it starts somewhere else. |
 | Which steps happen in the portal? | Those are yours. The agent shouldn't touch Azure. |
-| How does the last section prove the site came back? | You're proving it, not assuming it |
+| After a restart, what would you check to know the app started on its own? | You'll run that test yourself in section 6 |
 
 One check has no room for discussion: no step opens port 8000. If one does,
 tell the agent to take it out.
@@ -509,6 +513,9 @@ inbound port rule like the SSH one, with these changes:
 | Source | Any |
 | Destination port ranges | `80` |
 | Priority and name | `320`, `Allow-HTTP-80` |
+
+If your plan suggests a different name or priority for this rule, use the
+ones above, so everyone's rules match.
 
 Reload in a new tab. You should see your site, with your name on it and no
 port number.
