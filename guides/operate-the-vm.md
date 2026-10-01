@@ -305,48 +305,47 @@ on its `name:` line, and change the template to your own. Then ask for it by
 that name. You don't need to do this today, but it's worth trying once you've
 seen a few plans.
 
-### Ask for the plan
+### Find your VM
 
-This time you describe what the site has to do, and the agent decides how.
-You don't need to give it your VM's details, because it's signed in to the
-Azure CLI and can look them up.
+You don't need to give the agent your VM's details. It's signed in to the
+Azure CLI and can look them up:
 
 ```text
-My site runs on my Azure VM. Use the Azure CLI to find it and how to SSH in.
-If you find more than one VM, ask me which one.
-
-Right now my site runs only when someone starts it by hand, and it's gone
-after a crash or a restart. I want it to run like a real website:
-- Visitors reach it at http://PUBLIC-IP, with no port number.
-- It starts on its own when the VM boots, and comes back if it crashes.
-- One crash inside the app doesn't take the whole site down.
-- Port 8000 stays closed to the Internet.
-- The app doesn't run as root.
-I'll change the Azure firewall myself in the portal. Don't change anything
-in Azure. If you create a service, name it career-platform.
-
-Use your writing-plans skill to write
-docs/superpowers/plans/2026-10-01-operate-the-vm.md. At the top, list the
-VM, resource group, public IP, user, and SSH key you found. Then write one
-section for each job. Start each section with a short explanation for a
-beginner: what the piece is, why my site needs it, and what would break
-without it. Then list the steps with where each runs (laptop, VM, or
-portal), what to run or click, how we check it worked, and how we undo it.
-End with a section that restarts the VM and proves the site comes back. As
-each section finishes, write what ran and what the checks showed under it.
-Don't run anything yet.
+My site runs on my Azure VM. Use the Azure CLI to find the VM, its public
+IP, and how to SSH in. If you find more than one VM, ask me which one. Only
+look. Don't change anything in Azure.
 ```
 
-The agent will run `az` commands to find your VM. Those only read, so approve
-them. If `az` asks you to sign in, run `az login` and try again.
+The agent will run `az` commands. Those only read, so approve them. If `az`
+asks you to sign in, run `az login` and try again. When it answers, compare
+the VM name, resource group, and public IP with what the portal shows, and
+tell the agent if anything doesn't match.
 
-The line about writing results under each section matters today, for a
-reason you'll see in section 4.
+### Ask for the plan
+
+This time you describe what the site has to do, and the agent decides how:
+
+```text
+Right now my site runs only when someone starts it by hand. Plan how to make
+it run like a real website:
+- Visitors reach it at http://PUBLIC-IP, with no port number.
+- It starts when the VM boots, comes back if it crashes, and one crash
+  doesn't take the whole site down.
+- Port 8000 stays closed to the Internet, and the app doesn't run as root.
+- The last step restarts the VM and proves the site comes back.
+I'll change the Azure firewall myself. If you create a service, name it
+career-platform.
+
+Use your writing-plans skill and save the plan to
+docs/superpowers/plans/2026-10-01-operate-the-vm.md, with the VM details you
+found at the top. Explain each section for a beginner, and say where each
+step runs and how we'll check it. Don't run anything yet.
+```
 
 ### Read the plan
 
-Check the top first. The VM, resource group, and public IP should match what
-the portal shows. If they don't, tell the agent before anything else.
+Check the top first. The VM details should be the ones you confirmed a
+minute ago.
 
 Then answer these from your plan, in your own words. If the plan doesn't
 answer one, ask the agent to add it.
@@ -365,6 +364,13 @@ answer one, ask the agent to add it.
 
 One check has no room for discussion: no step opens port 8000. If one does,
 tell the agent to take it out.
+
+A plan you can't back out of is a risk. If yours doesn't say how to undo each
+section, ask:
+
+```text
+How would we undo each section? Add it to the plan.
+```
 
 ### Compare it with this
 
@@ -444,8 +450,12 @@ is what Tuesday called inline:
 
 ```text
 The implementation plan looks good. Let's work on the first section using
-native execution in this session.
+native execution in this session. As each section finishes, write what ran
+and what the checks showed under that section of the plan.
 ```
+
+The last sentence of that prompt matters today, for a reason you'll see in the
+pause below.
 
 After each section, read what the agent reports, then say "Let's work on the
 next section." Stop before any firewall step, since the firewall is yours. Use
