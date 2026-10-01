@@ -107,13 +107,17 @@ called delegation.
 1. Sign in at https://dash.cloudflare.com, select Domains in the left
    sidebar, and then select Add domain. Skip Buy domain, since yours is
    already registered at Namecheap.
-2. Enter your domain without `www`, such as `yourname.com`, and let
+2. On the "Add a site" page, choose Connect a domain. Transfer a domain would
+   make Cloudflare your registrar instead of Namecheap, and that's not what
+   you're doing today. You're keeping Namecheap as the registrar and making
+   Cloudflare your DNS host.
+3. Enter your domain without `www`, such as `yourname.com`, and let
    Cloudflare scan for existing records.
-3. Choose the Free plan.
-4. Review the records Cloudflare imported. Namecheap parks new domains on a
+4. Choose the Free plan.
+5. Review the records Cloudflare imported. Namecheap parks new domains on a
    placeholder page, so you may see records pointing at Namecheap. Delete
    anything you can't explain.
-5. Add two records, both with the proxy status set to DNS only, which shows
+6. Add two records, both with the proxy status set to DNS only, which shows
    a gray cloud:
 
    | Type | Name | IPv4 address | Proxy status |
@@ -126,7 +130,7 @@ called delegation.
    with your VM's address and stays out of the traffic. With the orange cloud,
    visitors would connect to Cloudflare instead of your VM, and Tuesday's
    HTTPS lesson depends on them reaching your server.
-6. Cloudflare shows you two name servers, with names like
+7. Cloudflare shows you two name servers, with names like
    `ada.ns.cloudflare.com`. Leave that page open.
 
 Your public IP has to stay the same for these records to keep working. Azure
