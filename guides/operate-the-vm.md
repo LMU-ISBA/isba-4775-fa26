@@ -135,16 +135,39 @@ called delegation.
    | A | `www` | your VM's public IP | DNS only |
 
    An A record points a name at an IPv4 address, the four-number kind your
-   VM has. `@` means the domain itself. DNS only means Cloudflare answers
-   with your VM's address and stays out of the traffic. With the orange cloud,
-   visitors would connect to Cloudflare instead of your VM, and Tuesday's
-   HTTPS lesson depends on them reaching your server.
+   VM has. `@` means the domain itself. "Proxied or DNS only," below the
+   steps, explains the cloud.
 7. Check that both rows say DNS only, then select Continue to activation.
    A box warns that your domain "is not fully protected" and suggests
    switching records to proxied. Select I'll do this later, not the blue Go
    back button. DNS only is what you want today.
 8. Cloudflare shows you two name servers, with names like
    `ada.ns.cloudflare.com`. Leave that page open.
+
+### Proxied or DNS only
+
+Cloudflare can play two roles for your domain, and the cloud on each record
+picks which one.
+
+With DNS only, the gray cloud, Cloudflare is the phone book. A browser asks
+where `yourname.com` is, Cloudflare answers with your VM's IP, and the browser
+connects straight to your VM. Cloudflare is out of the picture after that.
+
+With Proxied, the orange cloud, Cloudflare is a middleman. It answers with one
+of its own addresses, the browser connects to Cloudflare, and Cloudflare
+connects to your VM and passes the page back. That's how it offers the caching
+and attack protection its warning box mentions.
+
+You want DNS only for now. This course traces each request from the browser
+to your database, and a proxy adds a hop you can't see. In section 7,
+`nslookup` would return Cloudflare's address instead of your VM's. On Tuesday
+you'll get an HTTPS certificate for your own server, and the service that
+issues it has to reach your VM directly to confirm the domain is yours. When
+something breaks, you also want the error to come from your own server, not
+from one of Cloudflare's error pages. The proxy is useful, and you can add it
+once the plain path works.
+
+### Keep your IP the same
 
 Your public IP has to stay the same for these records to keep working. Azure
 gives new VMs a Standard public IP, which is static, meaning it doesn't
