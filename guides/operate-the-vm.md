@@ -633,6 +633,13 @@ nslookup yourname.com
 It should return your VM's public IP. Then open `http://yourname.com` in a
 browser. Your site answers at your own name.
 
+On campus Wi-Fi, you'll probably see a red "Web Page Blocked" page that warns
+about malware instead. Your site doesn't have any. LMU's network blocks
+websites it hasn't reviewed yet, and your domain is only days old. The review
+can take a few days to a few weeks. Until then, open your site on your phone
+with Wi-Fi off, or from home. The `nslookup` checks above still work on
+campus.
+
 If it doesn't work yet, try these in order:
 
 1. In the Cloudflare dashboard, open your domain and select "Check
