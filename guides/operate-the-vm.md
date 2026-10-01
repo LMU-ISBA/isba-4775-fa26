@@ -263,8 +263,6 @@ it crashes, and keep logs you can read afterward. On Linux, systemd is the
 program that manages services. It's the first program Ubuntu starts at boot,
 and it starts everything else.
 
-Type `exit` to leave the VM. The agent does the rest.
-
 ## 3. Plan it, then read the plan
 
 ### Write yours first
