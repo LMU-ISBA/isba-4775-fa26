@@ -57,20 +57,19 @@ below assumes your data is on the VM.
 4. Start a new Claude Code session in your `career-platform` folder on your
    laptop. Today's plan is new, and the agent can find your VM on its own.
 
-   If Tuesday's session is still open, name it as you leave it, so you can
-   find it later with `/resume`:
+   If Tuesday's session is still open, name it first, so you can find it
+   later with `/resume`. Then clear it to start a new, empty session, and name
+   the new one for today:
 
    ```text
-   /clear azure-vm-migration
-   ```
-
-   That saves Tuesday's conversation under the name `azure-vm-migration` and
-   starts a new, empty one. If Claude Code isn't open, start it with `claude`
-   instead. Either way, name today's session:
-
-   ```text
+   /rename azure-vm-migration
+   /clear
    /rename operate-the-vm
    ```
+
+   Run them one at a time. Right after `/clear`, the new session still shows
+   Tuesday's name, so don't skip the last `/rename`. If Claude Code isn't
+   open, start it with `claude` and run only the last line.
 
    A named session is easy to find in the `/resume` list, the same way a
    named file is easy to find in a folder.
