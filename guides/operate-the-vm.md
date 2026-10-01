@@ -417,7 +417,11 @@ way a kitchen keeps cooking when one cook walks out.
 
 Nginx sits in front because it's built to face the Internet. It deals with
 slow connections and malformed requests before they reach Python, and it's
-where HTTPS goes on Tuesday.
+where HTTPS goes on Tuesday. If you check which user runs Nginx, you'll see
+its main process runs as root and its workers as `www-data`. Only root can
+open a port below 1024, like 80, so the main process opens the port and the
+workers, which handle the actual requests, run with less access. Your app
+still runs as `azureuser`.
 
 Your plan will probably create these files:
 
