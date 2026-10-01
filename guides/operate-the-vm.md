@@ -119,11 +119,15 @@ called delegation.
 4. On "Select a plan," select the outlined Select plan button under Free,
    which costs $0. The filled blue button is for Pro, which costs $20 a
    month, and it's easy to click by mistake.
-5. Review the records Cloudflare imported. Namecheap parks new domains on a
-   placeholder page, so you may see records pointing at Namecheap. Delete
-   anything you can't explain.
-6. Add two records, both with the proxy status set to DNS only, which shows
-   a gray cloud:
+5. On "Review your DNS records," look at what Cloudflare imported.
+   Namecheap parks new domains on a placeholder page, so you'll probably see
+   an A record for your domain and a record for `www`, both pointing at
+   Namecheap. Delete each one with the Delete link on its row. Your site
+   replaces them, and a leftover `www` record would block the new one.
+6. Select Add record and add the two records below. Cloudflare turns the
+   proxy on by default, with an orange cloud and the word Proxied. Switch
+   Proxy status off on each record until it says DNS only, with a gray
+   cloud:
 
    | Type | Name | IPv4 address | Proxy status |
    | --- | --- | --- | --- |
@@ -135,7 +139,8 @@ called delegation.
    with your VM's address and stays out of the traffic. With the orange cloud,
    visitors would connect to Cloudflare instead of your VM, and Tuesday's
    HTTPS lesson depends on them reaching your server.
-7. Cloudflare shows you two name servers, with names like
+7. Check that both rows say DNS only, then select Continue to activation.
+   Cloudflare shows you two name servers, with names like
    `ada.ns.cloudflare.com`. Leave that page open.
 
 Your public IP has to stay the same for these records to keep working. Azure
