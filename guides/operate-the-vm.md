@@ -185,19 +185,22 @@ under the public IP's settings, where the assignment should say Static.
 
 1. Sign in to Namecheap, select Domain List, and click Manage next to your
    domain.
-2. In the Nameservers section, choose Custom DNS from the drop-down.
-3. Enter Cloudflare's two name servers exactly as shown, then click the green
+2. Open the Advanced DNS tab and find DNSSEC. Its Status switch should be
+   off. If it's on, turn it off.
+3. Go back to the Domain tab. In the Nameservers section, choose Custom DNS
+   from the drop-down.
+4. Enter Cloudflare's two name servers exactly as shown, then click the green
    checkmark to save. Use the copy buttons on Cloudflare's page, since one
    wrong letter breaks the switch.
-4. Back on Cloudflare's page, select I updated my nameservers.
+5. Back on Cloudflare's page, select I updated my nameservers.
 
 DNSSEC is a security feature that signs your domain's answers so nobody can
 fake them. Namecheap made those signatures, so if it stays on, Cloudflare's
-answers won't match and your domain can stop working. If Namecheap shows
-DNSSEC turned on for your domain, turn it off before you switch.
+answers won't match and your domain can stop working. That's why step 2 comes
+before the switch.
 
-From here on, your DNS records live in Cloudflare. Namecheap's Advanced DNS
-tab no longer affects anything.
+From here on, your DNS records live in Cloudflare. The host records on
+Namecheap's Advanced DNS tab no longer affect anything.
 
 Cloudflare emails you when the domain is active. Don't wait for it. Go on to
 section 2.
