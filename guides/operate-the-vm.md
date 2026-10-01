@@ -141,8 +141,15 @@ called delegation.
    A box warns that your domain "is not fully protected" and suggests
    switching records to proxied. Select I'll do this later, not the blue Go
    back button. DNS only is what you want today.
-8. Cloudflare shows you two name servers, with names like
-   `ada.ns.cloudflare.com`. Leave that page open.
+8. The next page, "Update your nameservers to activate Cloudflare," shows
+   the two name servers assigned to you, with names like
+   `christina.ns.cloudflare.com` and `theo.ns.cloudflare.com`. Yours will
+   have different first names. Each has a copy button. Leave this page open.
+
+   Skip the Recommended note that says to only allow Cloudflare IP addresses
+   at your origin. That's for the orange cloud. With DNS only, visitors
+   connect straight to your VM, so that rule would block every one of
+   them.
 
 ### Proxied or DNS only
 
@@ -180,7 +187,9 @@ under the public IP's settings, where the assignment should say Static.
    domain.
 2. In the Nameservers section, choose Custom DNS from the drop-down.
 3. Enter Cloudflare's two name servers exactly as shown, then click the green
-   checkmark to save.
+   checkmark to save. Use the copy buttons on Cloudflare's page, since one
+   wrong letter breaks the switch.
+4. Back on Cloudflare's page, select I updated my nameservers.
 
 DNSSEC is a security feature that signs your domain's answers so nobody can
 fake them. Namecheap made those signatures, so if it stays on, Cloudflare's
