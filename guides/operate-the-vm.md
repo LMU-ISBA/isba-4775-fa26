@@ -332,8 +332,8 @@ it run like a real website:
 - It starts when the VM boots, comes back if it crashes, and one crash
   doesn't take the whole site down.
 - Port 8000 stays closed to the Internet, and the app doesn't run as root.
-I'll change the Azure firewall myself. If you create a service, name it
-career-platform.
+I'll add the port 80 rule in the portal myself, named Allow-HTTP-80 at
+priority 320. If you create a service, name it career-platform.
 
 Keep it small enough to read in five minutes and run in twenty. Use the
 code, Python environment, and database already in ~/career-platform, and run
@@ -525,9 +525,6 @@ inbound port rule like the SSH one, with these changes:
 | Source | Any |
 | Destination port ranges | `80` |
 | Priority and name | `320`, `Allow-HTTP-80` |
-
-If your plan suggests a different name or priority for this rule, use the
-ones above, so everyone's rules match.
 
 Reload in a new tab. You should see your site, with your name on it and no
 port number.
