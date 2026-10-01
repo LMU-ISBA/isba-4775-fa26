@@ -465,11 +465,11 @@ After each section, read what the agent reports, then say "Let's work on the
 next section." Stop before any firewall step, since the firewall is yours. Use
 the pauses for these:
 
-| After | Look at | Answer this |
+| After | Look at, in your SSH terminal | Answer this |
 | --- | --- | --- |
-| The app runs by hand | `ps -ef \| grep uvicorn` | Which line is the main process, and how can you tell? |
+| The service is set up | `ps -ef \| grep uvicorn` | Which line is the main process, and how can you tell? |
 | The service is set up | `systemctl status career-platform` | What's the difference between `enable` and `start`? |
-| The front door is set up | `curl -I http://localhost` on the VM | Which program answered, Nginx or Uvicorn? The `Server:` header says one, but both did. |
+| The front door is set up | `curl -I http://localhost` | Which program answered, Nginx or Uvicorn? The `Server:` header says one, but both did. |
 
 `ps -ef` lists every running process, and `grep uvicorn` keeps only the lines
 that mention Uvicorn. In that list, PID is a process's ID number, which Linux
