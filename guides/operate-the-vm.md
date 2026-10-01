@@ -88,12 +88,36 @@ Changing a domain's name servers can take anywhere from minutes to a day to
 spread. Start it now, so it can finish while you work on the VM. The rest of
 this section waits in the background until section 7.
 
+### How a name becomes an address
+
 ```text
-Your browser ─▶ resolver ─▶ .me or .com servers: "ask Cloudflare"
-                                   │
-                                   ▼
-                  Cloudflare: "yourname.com is PUBLIC-IP" ─▶ your VM
+                          ──2──▶ Root servers (.)    "ask the .com servers"
+Browser ──1──▶ Resolver   ──3──▶ .com servers        "ask Cloudflare"
+   ▲           (cache)    ──4──▶ Cloudflare          "yourname.com is PUBLIC-IP"
+   └───────5───────┘
+Browser ──6──▶ your VM at PUBLIC-IP
 ```
+
+1. Your browser asks a resolver for `yourname.com`. The resolver is the
+   name server that does the looking up for you. It's usually run by your
+   network or internet provider, or it's a public one like Cloudflare's
+   1.1.1.1 or Google's 8.8.8.8.
+2. The resolver asks a root server, the top of the system. The root server
+   doesn't know your domain, but it knows who runs .com.
+3. The resolver asks the .com servers, the top-level domain (TLD) servers.
+   They don't know your address either, but they know which name servers
+   answer for your domain. Your registrar told them.
+4. The resolver asks those name servers, which are authoritative for your
+   domain, meaning they hold its records. They answer with your A record.
+5. The resolver hands the address back to your browser. It also keeps a copy
+   for a while, called caching, so the next lookup is instant. How long it
+   keeps the copy is the record's TTL, short for time to live.
+6. Your browser connects to that address, which is your VM.
+
+Today you change who answers in step 4. Right now it's Namecheap. After this
+section, it's Cloudflare.
+
+### Registrar and DNS host
 
 Two companies are involved, and they do different jobs. Namecheap is your
 registrar. It records that you own the name, and it tells the .com or .me
@@ -202,7 +226,12 @@ before the switch.
 From here on, your DNS records live in Cloudflare. The host records on
 Namecheap's Advanced DNS tab no longer affect anything.
 
-Cloudflare emails you when the domain is active. Don't wait for it. Go on to
+After you select I updated my nameservers, Cloudflare checks for the switch.
+For a new domain, it often finds it within minutes and shows "Your domain is
+now protected by Cloudflare," along with an orange Proxy DNS records warning.
+That page says your traffic is proxying through Cloudflare, but with DNS only
+records, it isn't. Leave the records as they are. If Cloudflare is still
+waiting, it emails you when the domain is active. Don't wait for it. Go on to
 section 2.
 
 Checkpoint: which company would you contact if your domain expired, and which
