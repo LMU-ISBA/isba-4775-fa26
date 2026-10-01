@@ -54,7 +54,26 @@ below assumes your data is on the VM.
    If it hangs, your laptop's address probably changed since Tuesday, because
    you're on a different network. Update the source address on the SSH rule
    in the portal to your current IP, and try again.
-4. In Claude Code, start in your `career-platform` folder on your laptop.
+4. Start a new Claude Code session in your `career-platform` folder on your
+   laptop. Today's plan is new, and the agent can find your VM on its own.
+
+   If Tuesday's session is still open, name it as you leave it, so you can
+   find it later with `/resume`:
+
+   ```text
+   /clear azure-vm-migration
+   ```
+
+   That saves Tuesday's conversation under the name `azure-vm-migration` and
+   starts a new, empty one. If Claude Code isn't open, start it with `claude`
+   instead. Either way, name today's session:
+
+   ```text
+   /rename operate-the-vm
+   ```
+
+   A named session is easy to find in the `/resume` list, the same way a
+   named file is easy to find in a folder.
 
 ## 1. Start the DNS change first
 
