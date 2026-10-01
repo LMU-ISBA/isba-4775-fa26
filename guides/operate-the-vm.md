@@ -116,7 +116,9 @@ called delegation.
    including Import DNS records set to Automatic, and select Continue. The
    AI and bot settings there decide which automated programs may read your
    site. The defaults are fine, and you can change them later.
-4. Choose the Free plan.
+4. On "Select a plan," select the outlined Select plan button under Free,
+   which costs $0. The filled blue button is for Pro, which costs $20 a
+   month, and it's easy to click by mistake.
 5. Review the records Cloudflare imported. Namecheap parks new domains on a
    placeholder page, so you may see records pointing at Namecheap. Delete
    anything you can't explain.
