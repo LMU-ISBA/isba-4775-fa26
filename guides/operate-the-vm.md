@@ -140,7 +140,10 @@ called delegation.
    visitors would connect to Cloudflare instead of your VM, and Tuesday's
    HTTPS lesson depends on them reaching your server.
 7. Check that both rows say DNS only, then select Continue to activation.
-   Cloudflare shows you two name servers, with names like
+   A box warns that your domain "is not fully protected" and suggests
+   switching records to proxied. Select I'll do this later, not the blue Go
+   back button. DNS only is what you want today.
+8. Cloudflare shows you two name servers, with names like
    `ada.ns.cloudflare.com`. Leave that page open.
 
 Your public IP has to stay the same for these records to keep working. Azure
