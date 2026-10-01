@@ -111,8 +111,11 @@ called delegation.
    make Cloudflare your registrar instead of Namecheap, and that's not what
    you're doing today. You're keeping Namecheap as the registrar and making
    Cloudflare your DNS host.
-3. Enter your domain without `www`, such as `yourname.com`, and let
-   Cloudflare scan for existing records.
+3. On "Connect your domain," enter your domain without `www`, such as
+   `yourname.com`. Leave everything under Additional configuration as it is,
+   including Import DNS records set to Automatic, and select Continue. The
+   AI and bot settings there decide which automated programs may read your
+   site. The defaults are fine, and you can change them later.
 4. Choose the Free plan.
 5. Review the records Cloudflare imported. Namecheap parks new domains on a
    placeholder page, so you may see records pointing at Namecheap. Delete
