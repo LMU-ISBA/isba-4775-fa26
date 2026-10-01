@@ -37,8 +37,8 @@ If you didn't finish Tuesday's migration, finish sections 5 and 6 of
 [Migrate your site to an Azure VM](azure-vm-migration.md) first. Everything
 below assumes your data is on the VM.
 
-1. In the Azure portal, open your VM's Overview page and check its status.
-   If it says Stopped (deallocated), select Start. If it says Running, it's
+1. In the [Azure portal](https://portal.azure.com), open your VM's Overview
+   page and check its status. If it says Stopped (deallocated), select Start. If it says Running, it's
    been on since Tuesday and spending your credits. Select Stop, wait for
    Stopped (deallocated), and then select Start. Section 2 needs a VM that
    was fully off.
