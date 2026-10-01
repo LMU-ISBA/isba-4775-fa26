@@ -78,7 +78,9 @@ called delegation.
 
 ### Add the domain to Cloudflare
 
-1. Sign in at https://dash.cloudflare.com and select "Onboard a domain."
+1. Sign in at https://dash.cloudflare.com, select Domains in the left
+   sidebar, and then select Add domain. Skip Buy domain, since yours is
+   already registered at Namecheap.
 2. Enter your domain without `www`, such as `yourname.com`, and let
    Cloudflare scan for existing records.
 3. Choose the Free plan.
