@@ -6,8 +6,9 @@ class guide for each lab.
 
 Starting with Exercise 03, your work goes in your public `career-platform`
 repository, the one you've built since September 15. Each exercise adds an
-evidence file, `docs/evidence/ex03.md` through `docs/evidence/ex10.md`, and you
-submit the repository URL in Brightspace.
+evidence file as specified in its brief, and you submit the repository URL
+in Brightspace. Exercise 04 uses `docs/how-this-site-is-secured.md` and also
+asks for your live site URL and a direct link to that explanation.
 
 Exercise 01 is submitted entirely through Brightspace: the
 [self-discovery interview](self-discovery-interview.md) and the photo of your
@@ -29,7 +30,7 @@ for the full instructions.
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 | [published](ex01-accounts-and-dev-env.md) |
 | 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | Tue 9/15 | [published](ex02-troubleshoot-a-cloud-service.md) |
 | 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1, 1:45 PM | [published](ex03-build-and-migrate.md) |
-| 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8 | |
+| 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8, 1:45 PM | [published](ex04-secure-your-site.md) |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/15 | |
 | 06 | Email DNS: Email Routing MX, and SPF, DKIM, and DMARC for Resend | Config | Tue 10/13 | |
 | 07 | Job Scout's first loop: tools, state, stop conditions, and a real run | Build | Tue 10/20 | |
@@ -43,6 +44,13 @@ Project 1 requirement, and GA4 is an optional extension. Confirm deadlines in
 Brightspace.
 
 ## What every exercise needs
+
+Follow each exercise's brief for its required evidence and grading.
+Exercise 04 uses the live HTTPS site and `docs/how-this-site-is-secured.md`;
+it doesn't require a separate spec, plan, `docs/evidence/ex04.md`, or
+"The change" response. Its brief explains credit/no-credit grading.
+
+The general format for other exercises is:
 
 1. A working system, verified live rather than by screenshot.
 2. A specification and implementation plan, scaled to the exercise, written

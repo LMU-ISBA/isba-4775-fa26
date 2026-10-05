@@ -24,12 +24,15 @@ doesn't load, section 1 helps you find out why.
 
 1. In the [Azure portal](https://portal.azure.com), check that your VM is
    Running, and start it if it isn't.
+   Under **Operations > Auto-shutdown**, set **Enabled** to **Off** and save
+   so the live site won't shut down overnight. If auto-shutdown is already
+   off or wasn't available for your VM, leave it that way.
 2. Open three terminal windows or tabs on your laptop:
 
-   - **First — VM logs:** SSH into the VM. In section 4, you'll watch Nginx's
-     access log here to see Let's Encrypt's requests.
-   - **Second — VM commands:** SSH into the VM. Use this window to install
+   - **First — VM commands:** SSH into the VM. Use this window to install
      Certbot, request your certificate, and check renewal.
+   - **Second — VM logs:** SSH into the VM. In section 4, you'll watch Nginx's
+     access log here to see Let's Encrypt's requests.
    - **Third — laptop commands:** Stay at your laptop's prompt without SSH.
      Use this window for the DNS and HTTP checks in section 1.
 
@@ -196,34 +199,54 @@ the same?
 
 ### Install Certbot
 
-In your second SSH window, install Certbot and its Nginx plugin:
+In your first terminal window (VM commands), connected to the VM over SSH,
+install Certbot and its Nginx plugin:
 
 ```text
 sudo apt-get update
 sudo apt-get install -y certbot python3-certbot-nginx
 ```
 
+- **`certbot`** requests and renews your HTTPS certificate from Let's Encrypt.
+- **`python3-certbot-nginx`** lets Certbot configure Nginx to prove control of
+  your domain and install the certificate.
+
 ### Start watching
 
-In your first SSH window, watch Nginx's access log. Every request to your site
-adds a line here:
+In your second terminal window (VM logs), connected to the VM over SSH,
+watch Nginx's access log. Every request to your site adds a line here:
 
 ```text
 sudo tail -f /var/log/nginx/access.log
 ```
 
-Leave it running.
+Leave it running. Press Enter (Return) a couple of times to add blank lines
+in the terminal, separating the existing output from the new requests you'll
+watch for next.
 
 ### A test run
 
-In your second window, run Certbot in test mode. It uses Let's Encrypt's
-test server and does everything except issue a real certificate. Let's
-Encrypt limits how many times you can fail in an hour, and mistakes on the
-test server don't count toward that limit:
+Return to your first terminal window (VM commands) and run Certbot in test
+mode. It checks whether you can obtain a certificate using Let's Encrypt's
+test server, without saving or installing the test certificate. Let's
+Encrypt limits failed attempts on its production server; test-server
+attempts don't count toward that limit.
+
+Replace `yourname.com` with your own domain and `www.yourname.com` with its
+`www` version before running this command:
 
 ```text
 sudo certbot certonly --nginx --dry-run -d yourname.com -d www.yourname.com
 ```
+
+- **`certonly`** means obtain a certificate without installing it in Nginx.
+  It's a subcommand, written as one word without a dash.
+- **`--dry-run`** tests that process without saving the certificate. It works
+  with `certonly` or `renew`, so we need `certonly` for this first test.
+
+The Nginx plugin still temporarily configures Nginx to answer the challenge,
+then restores the configuration. Keep both `-d` options so the certificate
+will cover both names.
 
 It asks for your email address, so Let's Encrypt can warn you before a
 certificate expires, and it asks you to agree to its terms. Read them and
@@ -231,7 +254,8 @@ answer yourself. Don't let an agent answer for you, since you're the one
 agreeing. It may also ask whether to share your email with the EFF, the
 nonprofit behind Certbot. That one is up to you.
 
-Now look at your first window. New lines appear, asking for paths that start
+Now look at your second terminal window (VM logs). New lines appear, asking
+for paths that start
 with `/.well-known/acme-challenge/`. Those requests come from Let's Encrypt,
 and you'll probably see more than one IP address. It checks from several
 places on the internet, so one tampered network path can't fool it.
@@ -250,7 +274,10 @@ Let's Encrypt use, and why does your port 443 rule not matter for this step?
 
 ### The real run
 
-Now ask for the real certificate and let Certbot install it:
+In your first terminal window (VM commands), ask for the real certificate
+and let Certbot install it. Remove both `certonly` and `--dry-run`: the
+default action obtains the certificate and installs it in Nginx.
+Use the same two domain names as in your test run:
 
 ```text
 sudo certbot --nginx -d yourname.com -d www.yourname.com
@@ -286,8 +313,8 @@ attacker most want, and what could they do with it?
 ## 6. Check it from outside
 
 Campus Wi-Fi may still block your domain in a browser, so check from the VM,
-which sits outside LMU's network. In your first SSH window, press Ctrl+C to
-stop the log, then run:
+which sits outside LMU's network. In your first terminal window (VM commands),
+run:
 
 ```text
 curl -I http://yourname.com
@@ -305,11 +332,23 @@ then prints three facts from the certificate it gets back:
 - `notBefore` and `notAfter` are when it starts and stops being valid, about
   90 days apart.
 
-Keep that output. It's your evidence in section 9.
+Save the `openssl` output as evidence for **Exercise 04 (Ex04)**. In section
+9, you'll include it in `docs/how-this-site-is-secured.md` and push that file
+to your `career-platform` repository on GitHub.
 
-Then open `https://yourname.com` on your phone with Wi-Fi off. Tap the padlock
-or the site settings icon next to the address, and find the certificate. It
-shows the same three facts.
+Now view the certificate in **Chrome on your laptop**:
+
+1. Open `https://yourname.com`, using your own domain.
+2. Click the site controls icon just to the left of the domain in the
+   address bar.
+3. Click **Connection is secure**.
+4. Click **Certificate is valid** to open the certificate details.
+5. Find the domain name, issuer, and validity dates. Compare them with your
+   `openssl` output.
+
+If campus Wi-Fi blocks your site, connect your laptop to your phone's
+hotspot and try again. You can also check that the page loads on your phone
+with Wi-Fi off, but use Chrome on your laptop for the certificate walkthrough.
 
 ## 7. What happens before your page loads
 
@@ -343,7 +382,8 @@ Predict each result before you try it.
 1. Open `https://PUBLIC-IP` on your phone, using your VM's IP instead of your
    domain. The browser warns you. The certificate covers your domain, not the
    IP, so step 3 of the handshake fails.
-2. Check that renewal will work, without renewing anything yet:
+2. In your first terminal window (VM commands), check that renewal will work,
+   without renewing anything yet:
 
    ```text
    sudo certbot renew --dry-run
@@ -426,7 +466,10 @@ symptom, the evidence, and your next check instead.
 
 1. Ex04 is due Thursday, October 8, at 1:45 PM. It needs your site live at
    `https://yourname.com` and `docs/how-this-site-is-secured.md` pushed to
-   GitHub. Leave your VM running until then, so the site is up when I check.
+   GitHub. Keep auto-shutdown off and leave your VM running through the
+   deadline and until your Railway migration is verified. After your app,
+   data, and domain work over HTTPS on Railway, stop the Azure VM in the
+   portal and confirm **Stopped (deallocated)**. Keep the VM and disk for now.
 2. If you haven't yet, sign in to Railway between now and Wednesday,
    October 7. See the syllabus for the link.
 3. Optional: try section 6 of
