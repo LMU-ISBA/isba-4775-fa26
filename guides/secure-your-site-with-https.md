@@ -1,0 +1,378 @@
+# Secure your site with HTTPS
+
+Session 11 · October 6, 2026
+
+Right now your site answers at `http://yourname.com`, and everything between a
+visitor and your VM travels as plain text. Anyone on the path can read it, and
+anyone on the path can change it. Today you add HTTPS. You'll get a
+certificate from Let's Encrypt, install it in Nginx, and open port 443. Along
+the way, you'll watch Let's Encrypt check that the domain is yours.
+
+By the end of class, `https://yourname.com` shows your site with a padlock,
+and `http://` sends visitors there automatically. You'll also be able to
+answer the question a customer would ask: how do I know my data to your site
+is encrypted? Your written answer is part of Ex04, which is due Thursday.
+
+Cloudflare stays DNS only today, with the gray cloud. The secure connection
+runs straight from the browser to your VM, so you can see every piece of it.
+
+## 0. Before we start
+
+Your site should load at `http://yourname.com`, which was Thursday's
+homework. If it doesn't, section 1 helps you find out why.
+
+1. In the [Azure portal](https://portal.azure.com), check that your VM is
+   Running, and start it if it isn't.
+2. Open two terminal windows on your laptop and SSH into the VM in both. One
+   watches a log in section 4 while the other runs commands.
+
+   ```text
+   ssh -i ~/.ssh/isba4775_azure azureuser@PUBLIC-IP
+   ```
+
+   If it hangs, update the source address on your SSH rule to your current
+   IP, the same as Thursday.
+3. Start a new Claude Code session in your `career-platform` folder and name
+   it:
+
+   ```text
+   /rename secure-with-https
+   ```
+
+## 1. Does your site work?
+
+Let's Encrypt only gives a certificate to a domain that works over plain HTTP
+first, so check that before anything else. On your laptop, run these four
+commands with your own domain:
+
+```text
+nslookup yourname.com
+nslookup yourname.com 8.8.8.8
+nslookup yourname.com 1.1.1.1
+curl -sI http://yourname.com
+```
+
+The first one asks your usual resolver, the one your network gave you. The
+next two ask Google's and Cloudflare's public resolvers directly. The last one
+asks for your home page's headers, the short labels at the top of a response.
+
+Read your results against this table, and tell me which row you're in:
+
+| Your usual resolver | 8.8.8.8 and 1.1.1.1 | `curl` | What it means |
+| --- | --- | --- | --- |
+| Your VM's IP | Your VM's IP | `200 OK` | Everything works. Help a neighbor. |
+| A different answer, or no answer | Your VM's IP | Blocked page, or nothing | Public DNS is right. Something on your local network is answering differently. |
+| No answer | No answer | Nothing | The internet can't find your domain. Check the name servers in Namecheap and the A records in Cloudflare. |
+| An address starting with `104.` or `172.` | The same | Anything | Cloudflare's proxy is on. Set both records to DNS only. |
+| Your VM's IP | Your VM's IP | Times out | DNS is fine. Check the port 80 rule in Azure, then Nginx on the VM. |
+
+LMU's campus Wi-Fi blocks websites it hasn't reviewed yet, and your domain is
+new. If you're on campus and in the second row, that's probably why, and it
+isn't something you broke. The public resolvers are the ones Let's Encrypt
+relies on, so if they return your VM's IP, you're ready.
+
+Checkpoint: your usual resolver and 1.1.1.1 disagree. Which one would you
+trust to tell you what the rest of the internet sees, and why?
+
+## 2. Who do we trust?
+
+You already know one kind of key pair. When you SSH into your VM, your laptop
+holds a private key, and the VM holds the matching public key you gave it.
+Your laptop proves who it is to the server.
+
+HTTPS flips that around. The server holds the private key, and it hands the
+matching public key to every visitor inside a certificate. Now the server is
+proving who it is to your browser.
+
+| | SSH | HTTPS |
+| --- | --- | --- |
+| Who proves who they are? | Your laptop, the client | The server |
+| Where the private key lives | On your laptop | On your VM |
+| Where the public key goes | Onto the VM, by you | Into a certificate, sent to everyone |
+| Who vouches for the public key? | You did, when you added it | A certificate authority |
+
+That last row is the hard part. A server can't vouch for itself, because an
+imposter could say the same thing. So a third party that browsers already
+trust checks that you control the domain and then signs your certificate. That
+third party is a certificate authority, or CA. Your browser and your laptop
+come with a list of CAs they trust.
+
+You'll hear "SSL certificate" a lot. SSL is the old name. What runs today is
+TLS, short for Transport Layer Security, and HTTPS is plain HTTP sent through
+a TLS connection. People still say SSL, and they mean the same thing.
+
+Five pieces work together today:
+
+| Piece | Its job today |
+| --- | --- |
+| Let's Encrypt | The CA. It checks that you control your domain and issues a free certificate that lasts 90 days. |
+| Certbot | A program on your VM that asks Let's Encrypt for the certificate, installs it in Nginx, and renews it before it expires |
+| Nginx | Your web server. It keeps the private key and uses the certificate on port 443. |
+| Azure network security group | Decides whether ports 80 and 443 can reach your VM at all |
+| Cloudflare | Your DNS host only. It answers with your VM's IP and stays out of the traffic. |
+
+## 3. Get ready for Certbot
+
+### Predict first
+
+Take a minute and write this on paper: what will Let's Encrypt need to see
+before it trusts that `yourname.com` is yours? Also guess which port it will
+use to check.
+
+### Open port 443
+
+HTTPS uses port 443, and right now Azure drops anything sent to it. In the
+portal, open your VM's Networking, then Network settings, and add an inbound
+port rule like your port 80 rule, with these changes:
+
+| Field | Value |
+| --- | --- |
+| Source | Any |
+| Destination port ranges | `443` |
+| Priority and name | `320`, and a name that matches your port 80 rule. If that one is `Allow-HTTP`, use `Allow-HTTPS`. |
+
+### Tell Nginx your domain's name
+
+On Thursday, your Nginx site was set to `server_name _`, which means "answer
+for any name." Certbot needs a site that names your domain, so it knows where
+to install the certificate. Ask the agent:
+
+```text
+Read docs/superpowers/plans/2026-10-01-operate-the-vm.md for my VM's
+details. On my VM, change my Nginx site's server_name from _ to
+yourname.com www.yourname.com. Run sudo nginx -t, reload Nginx, and show me
+the server block. Don't change anything else.
+```
+
+Use your own domain in that prompt. The agent doesn't need to search Azure
+this time, because Thursday's plan already holds your VM's details. That's the
+plan file doing its job.
+
+Check that `http://yourname.com` still loads before you go on.
+
+## 4. Watch Let's Encrypt check your domain
+
+### Install Certbot
+
+In your second SSH window, install Certbot and its Nginx plugin:
+
+```text
+sudo apt-get update
+sudo apt-get install -y certbot python3-certbot-nginx
+```
+
+### Start watching
+
+In your first SSH window, watch Nginx's access log. Every request to your site
+adds a line here:
+
+```text
+sudo tail -f /var/log/nginx/access.log
+```
+
+Leave it running.
+
+### A test run
+
+In your second window, run Certbot in test mode. It does everything except
+issue a real certificate, so a mistake here doesn't count against you:
+
+```text
+sudo certbot certonly --nginx --dry-run -d yourname.com -d www.yourname.com
+```
+
+It asks for your email address, so Let's Encrypt can warn you before a
+certificate expires, and it asks you to agree to its terms. Read them and
+answer yourself. Don't let an agent answer for you, since you're the one
+agreeing.
+
+Now look at your first window. New lines appear, asking for paths that start
+with `/.well-known/acme-challenge/`. Those requests come from Let's Encrypt,
+and you'll probably see more than one IP address. It checks from several
+places on the internet, so one tampered network path can't fool it.
+
+Here's what happened. Certbot asked Let's Encrypt for a certificate, and Let's
+Encrypt answered with a challenge: put this random token at this path on your
+site. Certbot had Nginx serve it, and Let's Encrypt came and fetched it over
+port 80. Only someone who controls both the domain's DNS and the server it
+points to could do that. This check is called the HTTP-01 challenge.
+
+The test run should end with "The dry run was successful." If it doesn't, find
+the error in section 10 before you go on.
+
+Checkpoint: compare what you predicted with the log lines. Which port did
+Let's Encrypt use, and why does your port 443 rule not matter for this step?
+
+### The real run
+
+Now ask for the real certificate and let Certbot install it:
+
+```text
+sudo certbot --nginx -d yourname.com -d www.yourname.com
+```
+
+It may ask for your email and the terms again, since the test used a separate
+test server. When it finishes, it tells you where it saved the certificate and
+the private key, under `/etc/letsencrypt/live/yourname.com/`, and when the
+certificate expires. It also changes your Nginx site so that `http://`
+visitors get sent to `https://`.
+
+## 5. What did Certbot change?
+
+Certbot edited your Nginx site for you. Find out exactly what it did:
+
+```text
+Show me my Nginx site file on my VM and explain, for a beginner, each line
+Certbot added. Don't change anything.
+```
+
+You should see a `listen 443 ssl` line, which is Nginx answering HTTPS on port
+443. `ssl_certificate` and `ssl_certificate_key` point at the certificate and
+the private key. A new block for port 80 sends every visitor to `https://`
+with a `301` redirect.
+
+The private key file is readable only by root. Anyone who copied it could
+pretend to be your site. So it never leaves the VM, the same way your SSH
+private key never leaves your laptop.
+
+## 6. Check it from outside
+
+Campus Wi-Fi may still block your domain in a browser, so check from the VM,
+which sits outside LMU's network. In an SSH window, press Ctrl+C to stop the
+log, then run:
+
+```text
+curl -sI http://yourname.com
+curl -sI https://yourname.com
+openssl s_client -connect yourname.com:443 -servername yourname.com </dev/null 2>/dev/null | openssl x509 -noout -subject -issuer -dates
+```
+
+The first should show `301` and a `Location` line with `https://`. The second
+should show `200`. The third prints three facts from your certificate:
+
+- `subject` is the domain the certificate covers.
+- `issuer` is who signed it, which is Let's Encrypt.
+- `notBefore` and `notAfter` are when it starts and stops being valid, about
+  90 days apart.
+
+Then open `https://yourname.com` on your phone with Wi-Fi off. Tap the padlock
+or the site settings icon next to the address, and find the certificate. It
+shows the same three facts.
+
+## 7. What happens before your page loads
+
+Before your browser sends a single HTTP request, it and your server set up the
+TLS connection. This is called the handshake, and it goes roughly like this:
+
+1. The browser says hello and names the site it wants, `yourname.com`.
+2. Nginx sends back your certificate.
+3. The browser checks the certificate. Is it signed by a CA it trusts? Does it
+   cover `yourname.com`? Is it still within its dates?
+4. The browser and the server agree on fresh keys that only the two of them
+   know, for this one connection.
+5. Every HTTP request and response after that travels encrypted with those
+   keys.
+
+The certificate's public key proves the server is who it says it is. It
+doesn't encrypt your data directly. The keys from step 4 do that, and they're
+new for every connection.
+
+Notice step 1. The site's name travels before encryption starts, so someone
+watching the network can see that you visited `yourname.com`. They can't see
+which page, what you typed, or what came back.
+
+Checkpoint: where does the encryption end? Think about the trip from Nginx to
+Uvicorn on `127.0.0.1:8000`, and why that hop is still plain HTTP.
+
+## 8. What breaks
+
+Predict each result before you try it.
+
+1. Open `https://PUBLIC-IP` on your phone, using your VM's IP instead of your
+   domain. The browser warns you. The certificate covers your domain, not the
+   IP, so step 3 of the handshake fails.
+2. Check that renewal will work, without renewing anything yet:
+
+   ```text
+   sudo certbot renew --dry-run
+   systemctl list-timers | grep certbot
+   ```
+
+   Certificates from Let's Encrypt last 90 days. A timer on your VM runs
+   Certbot twice a day, and Certbot renews any certificate that's within 30
+   days of expiring.
+3. What would a visitor see if someone deleted your port 443 rule? Say it out
+   loud before you check section 10.
+
+## 9. Explain it to a customer
+
+Pair up. One of you plays a customer who's careful about data and asks, "How
+do I know my data to your site is encrypted?" The other answers in about two
+minutes, using your own site as the evidence. Then switch.
+
+Then write it down yourself, in your own words, in a new file in your
+repository, `docs/how-this-site-is-secured.md`. Cover these:
+
+- Who issued your certificate, which names it covers, and when it expires
+- How it renews, and how you checked that renewal works
+- Which ports are open to the internet, and why each one is open
+- Where encryption starts and where it ends
+- How a customer could check all this for themselves
+
+You can ask the agent to check what you wrote for mistakes, but the
+explanation has to be yours. You'll be asked to explain it out loud in your
+project interview. Then commit and push it:
+
+```text
+Commit docs/how-this-site-is-secured.md and push it. Don't change the
+wording.
+```
+
+Check that the file shows up in your `career-platform` repository on
+github.com. This file is part of Ex04.
+
+## 10. If something goes wrong
+
+Give the agent the exact error, and ask it to explain before it fixes
+anything.
+
+| Symptom | What it tells you | Check first |
+| --- | --- | --- |
+| Your usual resolver disagrees with 1.1.1.1 | Your local network is answering differently | Use the VM or your phone off Wi-Fi to test |
+| Every resolver fails, or gives the wrong IP | The internet can't find your domain | Namecheap's Custom DNS, then the A records in Cloudflare |
+| An address starting with `104.` or `172.` | Cloudflare's proxy is on | Set both records to DNS only |
+| `curl http://` times out | Nothing reaches Nginx | Your port 80 rule, then `systemctl status nginx` |
+| Certbot says "Timeout during connect" | Let's Encrypt couldn't reach port 80 | Your port 80 rule's source must be Any |
+| Certbot says "NXDOMAIN" for `www` | There's no record for `www` | Add the `www` A record in Cloudflare |
+| Certbot shows a `404` for `/.well-known/acme-challenge/` | A different Nginx site answered | The default site is back, or `server_name` doesn't match |
+| Certbot can't find a matching server block | `server_name` is still `_` | Section 3, "Tell Nginx your domain's name" |
+| Certbot mentions a rate limit | Too many tries for the same domain | Wait, and use `--dry-run` while you fix things |
+| `https://` times out | Port 443 is closed | Your port 443 rule in the portal |
+| The browser warns that the name doesn't match | You visited a name the certificate doesn't cover | Use the exact domain, not the IP |
+
+If the agent suggests turning on Cloudflare's proxy, opening port 22 to Any,
+or skipping the test run to get past a problem, say no. Write down the
+symptom, the evidence, and your next check instead.
+
+## Before Thursday
+
+1. Ex04 is due Thursday, October 8, at 1:45 PM. It needs your site live at
+   `https://yourname.com` and `docs/how-this-site-is-secured.md` pushed to
+   GitHub. Leave your VM running until then, so the site is up when I check.
+2. If you haven't yet, sign in to Railway between now and Wednesday,
+   October 7. See the syllabus for the link.
+3. Optional: try section 6 of
+   [Operate your site on the VM](operate-the-vm.md), the restart test and the
+   two deliberate crashes.
+
+The email setup with Resend moved to Tuesday, October 13. Keep your Resend
+account. You'll need it then.
+
+## 11. Sources
+
+- https://letsencrypt.org/how-it-works/
+- https://letsencrypt.org/docs/challenge-types/
+- https://letsencrypt.org/docs/rate-limits/
+- https://eff-certbot.readthedocs.io/en/stable/using.html
+- https://nginx.org/en/docs/http/configuring_https_servers.html
+- https://developers.cloudflare.com/dns/proxy-status/
