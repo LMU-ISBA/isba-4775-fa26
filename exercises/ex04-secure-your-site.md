@@ -24,6 +24,20 @@ Most of this exercise is finished if you complete the guide in class.
 
 Use your own domain wherever the guide says `yourname.com`.
 
+### Check renewal outside class
+
+Before moving your domain to Railway, run these in an SSH terminal on your
+Azure VM:
+
+```text
+sudo certbot renew --dry-run
+systemctl list-timers | grep certbot
+```
+
+The first tests renewal without replacing your live certificate. The second
+shows when Certbot is scheduled to run automatically. Record what each check
+shows for your explanation below.
+
 ### Keep the site available
 
 In the Azure portal, open your VM's **Operations > Auto-shutdown**, set

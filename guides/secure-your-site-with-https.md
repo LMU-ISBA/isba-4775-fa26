@@ -30,7 +30,7 @@ doesn't load, section 1 helps you find out why.
 2. Open three terminal windows or tabs on your laptop:
 
    - **First — VM commands:** SSH into the VM. Use this window to install
-     Certbot, request your certificate, and check renewal.
+     Certbot, request your certificate, and inspect it.
    - **Second — VM logs:** SSH into the VM. In section 4, you'll watch Nginx's
      access log here to see Let's Encrypt's requests.
    - **Third — laptop commands:** Stay at your laptop's prompt without SSH.
@@ -139,6 +139,11 @@ Five pieces work together today:
 
 Checkpoint: your padlock disappears 90 days from now. Which of these five
 pieces would you look at first, and why?
+
+**When we move to Railway:** on our VM, we manage certificate renewal
+with Certbot. After we connect our custom domain to Railway and update DNS,
+Railway issues and automatically renews its own certificate. We still verify
+that our domain serves a valid certificate. See [Railway's certificate documentation](https://docs.railway.com/networking/domains/working-with-domains#ssl-certificates).
 
 ## 3. Get ready for Certbot
 
@@ -266,8 +271,8 @@ site. Certbot had Nginx serve it, and Let's Encrypt came and fetched it over
 port 80. Only someone who controls both the domain's DNS and the server it
 points to could do that. This check is called the HTTP-01 challenge.
 
-The test run should end with "The dry run was successful." If it doesn't, find
-the error in section 11 before you go on.
+The test run should end with "The dry run was successful." If it doesn't,
+share the exact error with your instructor before you go on.
 
 Checkpoint: compare what you predicted with the log lines. Which port did
 Let's Encrypt use, and why does your port 443 rule not matter for this step?
@@ -333,7 +338,7 @@ then prints three facts from the certificate it gets back:
   90 days apart.
 
 Save the `openssl` output as evidence for **Exercise 04 (Ex04)**. In section
-9, you'll include it in `docs/how-this-site-is-secured.md` and push that file
+8, you'll include it in `docs/how-this-site-is-secured.md` and push that file
 to your `career-platform` repository on GitHub.
 
 Now view the certificate in **Chrome on your laptop**:
@@ -375,33 +380,12 @@ which page, what you typed, or what came back.
 Checkpoint: where does the encryption end? Think about the trip from Nginx to
 Uvicorn on `127.0.0.1:8000`, and why that hop is still plain HTTP.
 
-## 8. What breaks
-
-Predict each result before you try it.
-
-1. Open `https://PUBLIC-IP` on your phone, using your VM's IP instead of your
-   domain. The browser warns you. The certificate covers your domain, not the
-   IP, so step 3 of the handshake fails.
-2. In your first terminal window (VM commands), check that renewal will work,
-   without renewing anything yet:
-
-   ```text
-   sudo certbot renew --dry-run
-   systemctl list-timers | grep certbot
-   ```
-
-   Certificates from Let's Encrypt last 90 days. A timer on your VM runs
-   Certbot twice a day, and Certbot renews any certificate that's within 30
-   days of expiring.
-3. What would a visitor see if someone deleted your port 443 rule? Say it out
-   loud before you check section 11.
-
-## 9. Explain it to a customer
+## 8. Explain it to a customer
 
 Pair up. One of you plays a customer who's careful about data. The customer
 asks, "How do I know my data to your site is encrypted?" The other answers in about two
 minutes, using your own site as the evidence. Start with what the customer
-can see, which is the padlock. Then walk back through how it got there: who
+can check in Chrome: **Connection is secure** and the certificate details. Then walk back through how it got there: who
 issued the certificate, how the browser checks it, and what stays encrypted. Then
 switch.
 
@@ -409,7 +393,7 @@ Then write it down yourself, in your own words, in a new file in your
 repository, `docs/how-this-site-is-secured.md`. Cover these:
 
 - Who issued your certificate, which names it covers, and when it expires
-- How it renews, and how you checked that renewal works
+- How it renews (complete the renewal check in Exercise 04 outside class)
 - Which ports are open to the internet, and why each one is open
 - Where encryption starts and where it ends
 - How a customer could check all this for themselves
@@ -427,7 +411,7 @@ wording.
 Check that the file shows up in your `career-platform` repository on
 github.com. This file is part of Ex04.
 
-## 10. What you should be able to explain now
+## 9. What you should be able to explain now
 
 - Why HTTP isn't safe for anything private, and what HTTPS changes.
 - How SSH keys and HTTPS certificates are alike, and who proves what to whom.
@@ -437,30 +421,6 @@ github.com. This file is part of Ex04.
 - What happens in the handshake before your page loads.
 - Where encryption starts and ends on your site.
 - What a visitor sees when the certificate is expired or the name is wrong.
-
-## 11. If something goes wrong
-
-Give the agent the exact error, and ask it to explain before it fixes
-anything.
-
-| Symptom | What it tells you | Check first |
-| --- | --- | --- |
-| Your usual resolver disagrees with 1.1.1.1 | Your local network is answering differently | Use the VM or your phone off Wi-Fi to test |
-| Every resolver fails, or gives the wrong IP | The internet can't find your domain | Namecheap's Custom DNS, then the A records in Cloudflare |
-| An address starting with `104.` or `172.` | Cloudflare's proxy is on | Set both records to DNS only |
-| `curl http://` times out | Nothing reaches Nginx | Your port 80 rule, then `systemctl status nginx` |
-| `curl -I` returns `405` with `allow: GET` | The app doesn't accept `HEAD` at this URL | Repeat with lowercase `-i` to check a normal `GET` request |
-| Certbot says "Timeout during connect" | Let's Encrypt couldn't reach port 80 | Your port 80 rule's source must be Any |
-| Certbot says "NXDOMAIN" for `www` | There's no record for `www` | Add the `www` A record in Cloudflare |
-| Certbot shows a `404` for `/.well-known/acme-challenge/` | A different Nginx site answered | The default site is back, or `server_name` doesn't match |
-| Certbot can't find a matching server block | `server_name` is still `_` | Section 3, "Tell Nginx your domain's name" |
-| Certbot mentions a rate limit | Too many tries for the same domain | Wait, and use `--dry-run` while you fix things |
-| `https://` times out | Port 443 is closed | Your port 443 rule in the portal |
-| The browser warns that the name doesn't match | You visited a name the certificate doesn't cover | Use the exact domain, not the IP |
-
-If the agent suggests turning on Cloudflare's proxy, opening port 22 to Any,
-or skipping the test run to get past a problem, say no. Write down the
-symptom, the evidence, and your next check instead.
 
 ## Before Thursday
 
@@ -479,7 +439,7 @@ symptom, the evidence, and your next check instead.
 The email setup with Resend moved to Tuesday, October 13. Keep your Resend
 account. You'll need it then.
 
-## 12. Sources
+## 10. Sources
 
 - https://letsencrypt.org/how-it-works/
 - https://letsencrypt.org/docs/challenge-types/
