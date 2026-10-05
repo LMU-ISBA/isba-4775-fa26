@@ -3,8 +3,8 @@
 Session 11 · October 6, 2026
 
 Right now your site answers at `http://yourname.com`, and everything between a
-visitor and your VM travels as plain text. Anyone on the path can read it, and
-anyone on the path can change it. Today you add HTTPS. You'll get a
+visitor and your VM travels as plain text. Anyone on the path can read it or
+change it. Today you add HTTPS. You'll get a
 certificate from Let's Encrypt, install it in Nginx, and open port 443. Along
 the way, you'll watch Let's Encrypt check that the domain is yours.
 
@@ -19,7 +19,8 @@ runs straight from the browser to your VM, so you can see every piece of it.
 ## 0. Before we start
 
 Your site should load at `http://yourname.com`, which was Thursday's
-homework. If it doesn't, section 1 helps you find out why.
+homework. On campus Wi-Fi, check it on your phone with Wi-Fi off. If it
+doesn't load, section 1 helps you find out why.
 
 1. In the [Azure portal](https://portal.azure.com), check that your VM is
    Running, and start it if it isn't.
@@ -41,8 +42,8 @@ homework. If it doesn't, section 1 helps you find out why.
 
 ## 1. Does your site work?
 
-Let's Encrypt only gives a certificate to a domain that works over plain HTTP
-first, so check that before anything else. On your laptop, run these four
+Let's Encrypt only gives a certificate to a domain that already works over
+plain HTTP. Check that first, even if your site worked last night. On your laptop, run these four
 commands with your own domain:
 
 ```text
@@ -68,8 +69,9 @@ Read your results against this table, and tell me which row you're in:
 
 LMU's campus Wi-Fi blocks websites it hasn't reviewed yet, and your domain is
 new. If you're on campus and in the second row, that's probably why, and it
-isn't something you broke. The public resolvers are the ones Let's Encrypt
-relies on, so if they return your VM's IP, you're ready.
+isn't something you broke. Let's Encrypt looks up your domain from the
+public internet, the same way 8.8.8.8 and 1.1.1.1 do. If they return your
+VM's IP, you're ready.
 
 Checkpoint: your usual resolver and 1.1.1.1 disagree. Which one would you
 trust to tell you what the rest of the internet sees, and why?
@@ -111,6 +113,9 @@ Five pieces work together today:
 | Azure network security group | Decides whether ports 80 and 443 can reach your VM at all |
 | Cloudflare | Your DNS host only. It answers with your VM's IP and stays out of the traffic. |
 
+Checkpoint: your padlock disappears 90 days from now. Which of these five
+pieces would you look at first, and why?
+
 ## 3. Get ready for Certbot
 
 ### Predict first
@@ -144,7 +149,8 @@ yourname.com www.yourname.com. Run sudo nginx -t, reload Nginx, and show me
 the server block. Don't change anything else.
 ```
 
-Use your own domain in that prompt. The agent doesn't need to search Azure
+Replace both `yourname.com` names with your own domain before you send it.
+The agent doesn't need to search Azure
 this time, because Thursday's plan already holds your VM's details. That's the
 plan file doing its job.
 
@@ -174,8 +180,10 @@ Leave it running.
 
 ### A test run
 
-In your second window, run Certbot in test mode. It does everything except
-issue a real certificate, so a mistake here doesn't count against you:
+In your second window, run Certbot in test mode. It uses Let's Encrypt's
+test server and does everything except issue a real certificate. Let's
+Encrypt limits how many times you can fail in an hour, and mistakes on the
+test server don't count toward that limit:
 
 ```text
 sudo certbot certonly --nginx --dry-run -d yourname.com -d www.yourname.com
@@ -184,7 +192,8 @@ sudo certbot certonly --nginx --dry-run -d yourname.com -d www.yourname.com
 It asks for your email address, so Let's Encrypt can warn you before a
 certificate expires, and it asks you to agree to its terms. Read them and
 answer yourself. Don't let an agent answer for you, since you're the one
-agreeing.
+agreeing. It may also ask whether to share your email with the EFF, the
+nonprofit behind Certbot. That one is up to you.
 
 Now look at your first window. New lines appear, asking for paths that start
 with `/.well-known/acme-challenge/`. Those requests come from Let's Encrypt,
@@ -198,7 +207,7 @@ port 80. Only someone who controls both the domain's DNS and the server it
 points to could do that. This check is called the HTTP-01 challenge.
 
 The test run should end with "The dry run was successful." If it doesn't, find
-the error in section 10 before you go on.
+the error in section 11 before you go on.
 
 Checkpoint: compare what you predicted with the log lines. Which port did
 Let's Encrypt use, and why does your port 443 rule not matter for this step?
@@ -235,11 +244,14 @@ The private key file is readable only by root. Anyone who copied it could
 pretend to be your site. So it never leaves the VM, the same way your SSH
 private key never leaves your laptop.
 
+Checkpoint: of everything Certbot created on your VM, which file would an
+attacker most want, and what could they do with it?
+
 ## 6. Check it from outside
 
 Campus Wi-Fi may still block your domain in a browser, so check from the VM,
-which sits outside LMU's network. In an SSH window, press Ctrl+C to stop the
-log, then run:
+which sits outside LMU's network. In your first SSH window, press Ctrl+C to
+stop the log, then run:
 
 ```text
 curl -sI http://yourname.com
@@ -248,12 +260,15 @@ openssl s_client -connect yourname.com:443 -servername yourname.com </dev/null 2
 ```
 
 The first should show `301` and a `Location` line with `https://`. The second
-should show `200`. The third prints three facts from your certificate:
+should show `200`. The third connects to your site the way a browser would,
+then prints three facts from the certificate it gets back:
 
 - `subject` is the domain the certificate covers.
 - `issuer` is who signed it, which is Let's Encrypt.
 - `notBefore` and `notAfter` are when it starts and stops being valid, about
   90 days apart.
+
+Keep that output. It's your evidence in section 9.
 
 Then open `https://yourname.com` on your phone with Wi-Fi off. Tap the padlock
 or the site settings icon next to the address, and find the certificate. It
@@ -302,13 +317,16 @@ Predict each result before you try it.
    Certbot twice a day, and Certbot renews any certificate that's within 30
    days of expiring.
 3. What would a visitor see if someone deleted your port 443 rule? Say it out
-   loud before you check section 10.
+   loud before you check section 11.
 
 ## 9. Explain it to a customer
 
-Pair up. One of you plays a customer who's careful about data and asks, "How
-do I know my data to your site is encrypted?" The other answers in about two
-minutes, using your own site as the evidence. Then switch.
+Pair up. One of you plays a customer who's careful about data. The customer
+asks, "How do I know my data to your site is encrypted?" The other answers in about two
+minutes, using your own site as the evidence. Start with what the customer
+can see, which is the padlock. Then walk back through how it got there: who
+issued the certificate, how the browser checks it, and what stays encrypted. Then
+switch.
 
 Then write it down yourself, in your own words, in a new file in your
 repository, `docs/how-this-site-is-secured.md`. Cover these:
@@ -318,6 +336,7 @@ repository, `docs/how-this-site-is-secured.md`. Cover these:
 - Which ports are open to the internet, and why each one is open
 - Where encryption starts and where it ends
 - How a customer could check all this for themselves
+- The output of the `openssl` command from section 6, as evidence
 
 You can ask the agent to check what you wrote for mistakes, but the
 explanation has to be yours. You'll be asked to explain it out loud in your
@@ -331,7 +350,18 @@ wording.
 Check that the file shows up in your `career-platform` repository on
 github.com. This file is part of Ex04.
 
-## 10. If something goes wrong
+## 10. What you should be able to explain now
+
+- Why HTTP isn't safe for anything private, and what HTTPS changes.
+- How SSH keys and HTTPS certificates are alike, and who proves what to whom.
+- What a certificate authority does, and why a server can't vouch for itself.
+- The roles of Let's Encrypt, Certbot, Nginx, the NSG, and Cloudflare.
+- How the HTTP-01 challenge proves you control your domain.
+- What happens in the handshake before your page loads.
+- Where encryption starts and ends on your site.
+- What a visitor sees when the certificate is expired or the name is wrong.
+
+## 11. If something goes wrong
 
 Give the agent the exact error, and ask it to explain before it fixes
 anything.
@@ -368,7 +398,7 @@ symptom, the evidence, and your next check instead.
 The email setup with Resend moved to Tuesday, October 13. Keep your Resend
 account. You'll need it then.
 
-## 11. Sources
+## 12. Sources
 
 - https://letsencrypt.org/how-it-works/
 - https://letsencrypt.org/docs/challenge-types/
