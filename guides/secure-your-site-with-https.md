@@ -24,8 +24,16 @@ doesn't load, section 1 helps you find out why.
 
 1. In the [Azure portal](https://portal.azure.com), check that your VM is
    Running, and start it if it isn't.
-2. Open two terminal windows on your laptop and SSH into the VM in both. One
-   watches a log in section 4 while the other runs commands.
+2. Open three terminal windows or tabs on your laptop:
+
+   - **First — VM logs:** SSH into the VM. In section 4, you'll watch Nginx's
+     access log here to see Let's Encrypt's requests.
+   - **Second — VM commands:** SSH into the VM. Use this window to install
+     Certbot, request your certificate, and check renewal.
+   - **Third — laptop commands:** Stay at your laptop's prompt without SSH.
+     Use this window for the DNS and HTTP checks in section 1.
+
+   Run this in each of the first two:
 
    ```text
    ssh -i ~/.ssh/isba4775_azure azureuser@PUBLIC-IP
@@ -43,19 +51,32 @@ doesn't load, section 1 helps you find out why.
 ## 1. Does your site work?
 
 Let's Encrypt only gives a certificate to a domain that already works over
-plain HTTP. Check that first, even if your site worked last night. On your laptop, run these four
-commands with your own domain:
+plain HTTP. Check that first, even if your site worked last night. In your
+third terminal, at your laptop's prompt, run these four commands with your own
+domain:
 
 ```text
 nslookup yourname.com
 nslookup yourname.com 8.8.8.8
 nslookup yourname.com 1.1.1.1
-curl -sI http://yourname.com
+curl -I http://yourname.com
 ```
 
 The first one asks your usual resolver, the one your network gave you. The
 next two ask Google's and Cloudflare's public resolvers directly. The last one
-asks for your home page's headers, the short labels at the top of a response.
+requests only your home page's response headers, using capital `-I`. Look
+for the status line, such as `HTTP/1.1 200 OK`.
+
+Capital `-I` sends a `HEAD` request. If you get `405 Method Not Allowed`
+with `allow: GET`, your app doesn't accept that method at this URL. Check
+with a normal `GET` request instead, using lowercase `-i`:
+
+```text
+curl -i http://yourname.com
+```
+
+This prints the headers followed by the page's HTML. Use its status in the
+table below. A `405` from the `HEAD` check alone doesn't mean your site is down.
 
 Read your results against this table, and tell me which row you're in:
 
@@ -138,15 +159,28 @@ port rule like your port 80 rule, with these changes:
 
 ### Tell Nginx your domain's name
 
-On Thursday, your Nginx site was set to `server_name _`, which means "answer
-for any name." Certbot needs a site that names your domain, so it knows where
-to install the certificate. Ask the agent:
+A **server block** is a `server { ... }` section in an Nginx configuration
+file. It holds the settings for a site: which port to listen on, which
+domain names to match, and how to handle requests.
+
+Thursday's setup used `server_name _`, a placeholder rather than your domain.
+Your site can still load because Nginx uses a default server block when no
+name matches. Naming your domain explicitly helps Certbot find the block
+where it should install the certificate.
+
+Before you send the prompt, predict: does changing `server_name` change
+where DNS sends visitors?
+
+Ask the agent:
 
 ```text
 Read docs/superpowers/plans/2026-10-01-operate-the-vm.md for my VM's
-details. On my VM, change my Nginx site's server_name from _ to
-yourname.com www.yourname.com. Run sudo nginx -t, reload Nginx, and show me
-the server block. Don't change anything else.
+details. Show the Nginx configuration for my site and explain what
+server_name does.
+
+Update server_name to yourname.com www.yourname.com without
+changing other settings. Test the configuration, reload Nginx if
+the test passes, and show what changed.
 ```
 
 Replace both `yourname.com` names with your own domain before you send it.
@@ -154,7 +188,9 @@ The agent doesn't need to search Azure
 this time, because Thursday's plan already holds your VM's details. That's the
 plan file doing its job.
 
-Check that `http://yourname.com` still loads before you go on.
+Check that `http://yourname.com` still loads before you go on. Compare the
+agent's explanation with your prediction: what changed, and what stayed
+the same?
 
 ## 4. Watch Let's Encrypt check your domain
 
@@ -254,13 +290,14 @@ which sits outside LMU's network. In your first SSH window, press Ctrl+C to
 stop the log, then run:
 
 ```text
-curl -sI http://yourname.com
-curl -sI https://yourname.com
+curl -I http://yourname.com
+curl -I https://yourname.com
 openssl s_client -connect yourname.com:443 -servername yourname.com </dev/null 2>/dev/null | openssl x509 -noout -subject -issuer -dates
 ```
 
 The first should show `301` and a `Location` line with `https://`. The second
-should show `200`. The third connects to your site the way a browser would,
+should show `200`. If it shows `405` with `allow: GET`, repeat it with
+lowercase `-i`, as in section 1. The third connects to your site the way a browser would,
 then prints three facts from the certificate it gets back:
 
 - `subject` is the domain the certificate covers.
@@ -372,6 +409,7 @@ anything.
 | Every resolver fails, or gives the wrong IP | The internet can't find your domain | Namecheap's Custom DNS, then the A records in Cloudflare |
 | An address starting with `104.` or `172.` | Cloudflare's proxy is on | Set both records to DNS only |
 | `curl http://` times out | Nothing reaches Nginx | Your port 80 rule, then `systemctl status nginx` |
+| `curl -I` returns `405` with `allow: GET` | The app doesn't accept `HEAD` at this URL | Repeat with lowercase `-i` to check a normal `GET` request |
 | Certbot says "Timeout during connect" | Let's Encrypt couldn't reach port 80 | Your port 80 rule's source must be Any |
 | Certbot says "NXDOMAIN" for `www` | There's no record for `www` | Add the `www` A record in Cloudflare |
 | Certbot shows a `404` for `/.well-known/acme-challenge/` | A different Nginx site answered | The default site is back, or `server_name` doesn't match |
