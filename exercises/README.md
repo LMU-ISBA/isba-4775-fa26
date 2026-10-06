@@ -31,7 +31,7 @@ for the full instructions.
 | 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | Tue 9/15 | [published](ex02-troubleshoot-a-cloud-service.md) |
 | 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1, 1:45 PM | [published](ex03-build-and-migrate.md) |
 | 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8, 1:45 PM | [published](ex04-secure-your-site.md) |
-| 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/15, 1:45 PM | [instructions](ex05-troubleshoot-dns-tls.md) |
+| 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Tue 10/13, 1:45 PM | [instructions](ex05-troubleshoot-dns-tls.md) |
 | 06 | Email DNS: Zoho Mail, MX, SPF, DKIM, and DMARC, with a send/receive/reply test | Config | Thu 10/15, 1:45 PM | [instructions](ex06-domain-email.md) |
 | 07 | Job Scout's first loop: tools, state, stop conditions, and a real run | Build | Tue 11/10, 1:45 PM | |
 | 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Thu 11/12, 1:45 PM | |
@@ -40,9 +40,10 @@ for the full instructions.
 
 Exercise 03 collects the spec, implementation plan, and migration plan from
 the resume-site build and the Azure migration. The Railway migration is a
-Project 1 requirement, and basic GA4 is also required. Exercises 05 and 06
-are both due Thursday, October 15, after their lessons. Job Scout and its
-integration exercise move after the midterm. Job Scout lessons are November 3
+Project 1 requirement, and basic GA4 is also required. Exercise 05 is due
+Tuesday, October 13, after the DNS/TLS lesson. Exercise 06 is due Thursday,
+October 15, after the Zoho lesson. Both are due at 1:45 PM Pacific. Job Scout
+and its integration exercise move after the midterm. Job Scout lessons are November 3
 and 5. Choose the Project 2 posting by November 5, with the instructor's vetted
 feed available if needed. All listed November deadlines are at 1:45 PM Pacific.
 

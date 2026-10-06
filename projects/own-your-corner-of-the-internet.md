@@ -188,15 +188,15 @@ agent-generated version.
 
 ## Checkpoints before submission
 
-These progress targets follow the class schedule. Exercises 05 and 06 are
-both due October 15 at 1:45 PM Pacific. Their records can also support the
-project, without copying the same evidence into another report.
+These progress targets follow the class schedule. Exercise 05 is due October
+13, and Exercise 06 is due October 15. Both are due at 1:45 PM Pacific. Their
+records can also support the project, without copying evidence into another report.
 
 | Target | Evidence to have ready |
 | --- | --- |
 | Before the Railway cutover | Azure HTTP, restart, DNS, HTTPS, and renewal evidence retained |
 | October 8 | Railway/PostgreSQL target, current-data comparison, and a verified cutover or documented remaining steps |
-| October 13 | Zoho address with incoming and outgoing mail, replies, and DNS authentication checks |
+| October 13 | Ex05 investigation submitted before class; begin Zoho mail setup and delivery checks |
 | October 15 | Migration and email completion, GA4 verification, and troubleshooting evidence |
 | October 20 | Completed technical work and evidence ready for the submission audit and practice explanation |
 | October 22, 1:45 PM | Final project submission before class |
