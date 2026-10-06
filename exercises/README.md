@@ -48,6 +48,11 @@ feed available if needed. All listed November deadlines are at 1:45 PM Pacific.
 
 ## What every exercise needs
 
+Before Thursday, October 8, at 1:45 PM, also complete the required
+[website design activity with Impeccable](../guides/improve-your-site-design.md).
+It is independent preparation alongside Ex04, with no extra grade item or
+points. Keep the current site working and bring your branch and dated checks.
+
 Follow each exercise's brief for its required evidence and grading.
 Exercise 04 uses the live HTTPS site and `docs/how-this-site-is-secured.md`;
 it doesn't require a separate spec, plan, `docs/evidence/ex04.md`, or

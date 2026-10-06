@@ -15,6 +15,11 @@ and call that a migration.
 
 ## 0. Before changing anything
 
+Bring the branch and results from the required
+[website design activity](improve-your-site-design.md). Identify the tested
+commit that Azure is actually serving before planning the migration. If the
+design is still on a separate branch, keep that distinction in your plan.
+
 Exercise 04 is due today at 1:45 PM. Preserve dated evidence that Azure
 served your site over HTTP, survived a controlled restart, and served your
 domain over HTTPS. Keep the certificate and renewal check from Exercise 04.
