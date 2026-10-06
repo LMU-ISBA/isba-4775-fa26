@@ -121,9 +121,13 @@ Use the same reader account for every database check. If a command hangs, press 
 
 ## Grading
 
-| Criterion | Points | Evidence |
-| --- | --- | --- |
-| Two investigations | 8 | Four per incident: prediction and actual failure; diagnostic check with interpretation; other-service check; repair and identical retest. MySQL recovery includes the sum query. |
-| Diagram and explanation | 4 | Accurate components, boundaries, arrows, and ports; a clear explanation of the database dependency. |
-| Baseline and shutdown | 3 | Healthy web and database evidence (2); verified shutdown or a clearly documented shutdown problem (1). |
-| **Total** | **15** | |
+This exercise is credit/no credit: 15 points or 0. The criteria below guide
+feedback, without separate point deductions. A meaningful investigation can
+earn credit even when a check is missing or a conclusion needs correction.
+Absent work or work that does not show a meaningful attempt earns no credit.
+
+| Criterion | Evidence |
+| --- | --- |
+| Two investigations | Prediction and actual failure, diagnostic check with interpretation, other-service check, repair, and identical retest. MySQL recovery includes the sum query. |
+| Diagram and explanation | Components, boundaries, arrows, ports, and an explanation of the database dependency. |
+| Baseline and shutdown | Healthy web and database evidence, plus verified shutdown or a documented shutdown problem. |

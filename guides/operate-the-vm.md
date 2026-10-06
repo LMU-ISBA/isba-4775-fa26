@@ -722,7 +722,8 @@ start it, because of what you built today.
 
 1. Run `nslookup -type=NS yourname.com` and confirm that Cloudflare's name
    servers come back. If they don't by Sunday, send me a Teams message.
-2. Create a Resend account at https://resend.com/signup.
+2. Check the [syllabus preparation checklist](../syllabus.md#prepare-before-class)
+   for upcoming account setup. Resend is deferred until after the midterm.
 3. Leave the VM deallocated, and keep the resource group.
 4. Railway's sign-in window opens Saturday, October 3. See the syllabus.
 

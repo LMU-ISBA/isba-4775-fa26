@@ -1,16 +1,16 @@
 # Project 1: Own Your Corner of the Internet
 
-Project requirements, updated September 29, 2026.
+Updated October 6, 2026. Website, domain email, and basic analytics, with the
+Azure-to-Railway/PostgreSQL migration retained.
 
-**125 points. Due Thursday, October 22, 2026.** Check Brightspace for the
-submission cutoff time. These requirements reflect the revised course direction.
-The syllabus and exercise schedule are being aligned with this project brief.
+**125 points. Due Thursday, October 22, 2026, at 1:45 PM Pacific, before class.**
 
 ## What you are building
 
 Build a personal website that you can explain and operate. Start in Codespaces,
 deploy it on an Azure Linux VM, then migrate the same application to Railway.
-Add a small Job Scout that finds relevant opportunities and emails a digest.
+Connect your own domain with HTTPS, use Zoho Mail to send and receive from
+that domain, and add Google Analytics to understand activity on your site.
 
 Your site becomes the starting point for the career platform you will develop
 throughout the semester. Use one repository for the application, infrastructure,
@@ -21,9 +21,10 @@ By the deadline, your custom domain should reach the Railway deployment. Keep
 evidence of the earlier Azure deployment. Once the migration is verified,
 follow the instructor's cleanup directions for Azure resources.
 
+Job Scout, Resend, and GitHub Actions will be taught after the midterm.
+For this project, Railway handles deployment from your GitHub repository.
+
 ## What the system must do
-
-
 
 ### 1. Present your profile and read project data
 
@@ -34,7 +35,7 @@ Do not invent qualifications or experience.
 
 Store project entries in a database and read them when the page is requested.
 Choose the initial database engine during design and explain your choice. Use
-managed PostgreSQL for the later Railway deployment. A useful initial entry is
+Railway-hosted PostgreSQL for the later Railway deployment. A useful initial entry is
 a clearly labeled description of this website as a project in progress.
 
 Handle an empty table and a failed database connection deliberately. For our
@@ -72,7 +73,7 @@ the domain during the Railway migration and verify HTTPS at the new destination.
 Railway's trial allows one custom domain, so choose either the bare domain or
 www as your site's address before the cutover.
 
-### 4. Migrate to Railway and managed PostgreSQL
+### 4. Migrate to Railway and PostgreSQL
 
 Write the migration plan before changing the working deployment. Identify the
 code, runtime, packages, configuration, secrets, schema, and current data that
@@ -92,114 +93,129 @@ Compare who manages the OS, runtime, web entry point, TLS, application code,
 configuration, database software, data, and DNS on Azure versus Railway. Explain
 remaining student responsibilities rather than treating PaaS as maintenance-free.
 
-### 5. Deploy a reviewed change through GitHub Actions
+### 5. Publish a reviewed change through Railway
 
-Create a workflow that deploys the application when a reviewed change reaches
-the deployment branch. For an individual repository, review the diff and verify
-the change before committing and pushing to `main`.
+Connect your GitHub repository to Railway and configure deployment from your
+chosen branch. Review the diff and verify the change locally before committing
+and pushing. Keep credentials in the appropriate secret or environment-variable
+settings, outside your public repository.
 
-Keep deployment credentials in GitHub Actions secrets. Include a check that
-can fail the workflow when required application behavior is broken. Demonstrate
-one successful deployment by connecting the commit, workflow run, and resulting
-live behavior. Explain how you would restore a previous working version.
+Demonstrate one change reaching the live site. Connect the commit SHA to the
+Railway deployment and the behavior you observed at your domain. Explain how
+you would restore a previous working version. Consider database changes as
+well as application code when explaining recovery.
 
-### 6. Build Job Scout version 1
+Railway can deploy directly from GitHub. The separate GitHub Actions workflow
+comes later in the course.
+https://docs.railway.com/deployments/github-autodeploys
 
-Use a reliable posting source, such as a supported API or the instructor's vetted
-feed. Gather real job postings and compare them with your profile, interests,
-and constraints. Matching can use explicit rules or a bounded model call, but
-you must explain the criteria and inspect the output.
+### 6. Send and receive email at your domain
 
-Save useful results and send yourself an email digest from a verified sender
-on your domain. Configure and explain the provider's required DNS authentication,
-including SPF and DKIM as applicable, and your domain's DMARC policy. Explain
-how this differs from setting up an inbound mailbox with MX records. Cloudflare
-Email Routing, set up in class, gives you real MX records to compare.
+Set up Zoho Mail with an address such as `hello@yourdomain.com`. Use Zoho
+webmail to send, receive, and reply from that same address. Mobile setup is optional.
+Cloudflare remains your DNS provider. Use Zoho's MX records for incoming mail.
 
-Show at least five distinct real postings you would consider, with source links,
-retrieval dates, and reasons they match. Keep credentials and personal email
-addresses out of public logs. A manual trigger is sufficient for this version.
-Record retrieval, matching, and delivery steps so someone can inspect one run.
+Configure and explain MX, SPF, DKIM, and DMARC. Use the values provided for your
+account, and verify the resulting records and authentication results.
+https://www.zoho.com/mail/help/adminconsole/cloudflare.html
 
-Demonstrate a controlled external-service failure and explain its result. A
-failed request must not be reported as a successful retrieval or delivery.
+Show that a message from an external account reaches your custom address.
+Reply from Zoho, then check that the external account receives the reply and
+sees your custom address as the sender. Also verify a new outgoing message.
+Save dated, redacted evidence of delivery and sender authentication. Explain
+any failed or unresolved check. Keep private message contents and credentials
+out of the public repository.
 
-If your chosen source becomes unavailable, use the instructor's vetted feed
-and document the substitution. Clearly label sample or mock runs; they do not
-replace the required run using real postings.
+### 7. Measure activity with Google Analytics
 
-### 7. Keep an engineering record
+Add GA4 to the deployed website. Verify a page view and one useful interaction,
+such as a click on an external project link. Record the action you performed,
+the event you observed, and why that event is useful for your website.
 
-Maintain an `AGENTS.md` with your working rules. Begin with GitHub Copilot CLI
-and Superpowers in Codespaces, then use Claude Code (preferred) or Codex for
-the Azure lesson. Use the same project rules to clarify requirements, approve
-a spec and plan, review changes, debug, and verify the system. Every agent
-choice must preserve those review and explanation practices.
+Use Realtime or DebugView to verify collection. Explain how activity in the
+visitor's browser reaches Google Analytics and what your checks demonstrate.
+Your grade depends on configuration, verification, and explanation. You do
+not need a particular number of visitors.
+https://developers.google.com/analytics/devguides/collection/ga4/troubleshoot
 
-Save architecture diagrams for Azure and Railway, with component locations,
-protocols, ports, and data flow. Explain at least two decisions, including an
-alternative you considered and why you chose the final approach.
+### 8. Keep a concise engineering record
 
-Document at least three investigated failures. Cover an application dependency,
-networking or TLS, and an external integration. For each, record the symptom,
-evidence, hypothesis, root cause, fix, and repeated verification. Write an FAQ
-with at least five questions drawn from those actual investigations.
+Keep one README that explains your system and one submission index at
+`docs/project-1-submission.md` that links to the evidence. Reuse the plans,
+exercise explanations, diagrams, and checks already in your repository.
+The engineering record is this README, the submission index, and the evidence
+they link to. It isn't an additional report. The technical categories score
+whether the systems work. The engineering-record category scores whether
+someone can understand your work, follow your setup, and find its evidence.
 
-Your README should explain setup, operation, migration evidence, and remaining
-limitations. Include a short retrospective about what you understand better
-and what you would change next. Meaningful commits should identify working
-milestones, configuration changes, and repairs.
+Your README should cover:
+
+- What the site does, its live address, and how to set up and update it.
+- Azure and Railway architecture diagrams showing locations, protocols,
+  ports, and data flow. Include the email and analytics paths.
+- How the migration preserved current data and which responsibilities moved
+  to Railway.
+- At least two decisions, the alternatives considered, and your reasons.
+- Investigated failures, what you checked, what fixed them, and the results
+  when you repeated the check. Include remaining limitations.
+- A short reflection on what you understand better and what you would change.
+- Your service costs or credits, expiration dates, and cleanup plans.
+
+You can link from the README to an existing file rather than copy its contents.
+Keep your `AGENTS.md`, original spec and plans, and meaningful commit history.
+Include two investigated failures: one application or database-dependency
+failure and one network, DNS, or TLS failure. You may reuse your build,
+migration, or exercise records. Identify a deliberate lab failure as such.
+For each, show the symptom, checks, diagnosis, repair, and repeated verification.
+No Job Scout integration incident is required for Project 1.
+
+You may use your coding agent to help reconstruct this record. Ask it to read
+the repository, Git history, plans, configuration, and saved evidence. Have it
+link claims to the files, commits, or observations that support them. It can
+help assemble diagrams, summarize decisions, and draft the README and index.
+
+Review and correct its account. Code shows what was implemented, but doesn't
+by itself prove a deployment worked, an email arrived, or a test passed.
+If evidence is missing, rerun the check and record its actual date and result,
+or identify it as unverified. A retrospective explanation should be identified
+as written afterward, rather than presented as a plan made before the work.
+Keep the requirement to write the migration plan before changing the deployment.
+
+You remain responsible for explaining the system at the interview. Existing
+exercise instructions still apply, including Ex04's requirement to write your
+own HTTPS explanation. Link to that file instead of replacing it with an
+agent-generated version.
 
 ## Checkpoints before submission
 
-These are progress targets during the lessons, not additional point categories.
-Exercise briefs and their Brightspace deadlines remain separate.
+These progress targets follow the class schedule. Exercises 05 and 06 are
+both due October 15 at 1:45 PM Pacific. Their records can also support the
+project, without copying the same evidence into another report.
 
-
-| Target     | Evidence to have ready                                                                                   |
-| ---------- | -------------------------------------------------------------------------------------------------------- |
-| October 1  | Public Azure HTTP service through Nginx, restart verification, and your domain delegated to Cloudflare   |
-| October 6  | HTTPS on Azure, sender DNS published, Email Routing MX records, and a networking or TLS investigation    |
-| October 8  | PostgreSQL on Railway, validated data, custom-domain cutover, HTTPS, and responsibility comparison      |
-| October 13 | Job Scout spec with its graph and state, and tools returning real postings                               |
-| October 15 | Job Scout end-to-end run with five relevant postings, a delivered digest, and a controlled failure       |
-| October 20 | GitHub Actions deployment, submission audit, and practice explanation                                    |
-| October 22 | Final project submission                                                                                 |
-
-Earlier targets were replaced on September 29, when the October lessons were
-re-sequenced.
-
-
-
+| Target | Evidence to have ready |
+| --- | --- |
+| Before the Railway cutover | Azure HTTP, restart, DNS, HTTPS, and renewal evidence retained |
+| October 8 | Railway/PostgreSQL target, current-data comparison, and a verified cutover or documented remaining steps |
+| October 13 | Zoho address with incoming and outgoing mail, replies, and DNS authentication checks |
+| October 15 | Migration and email completion, GA4 verification, and troubleshooting evidence |
+| October 20 | Completed technical work and evidence ready for the submission audit and practice explanation |
+| October 22, 1:45 PM | Final project submission before class |
 
 ## Organize your repository
 
-Use `career-platform` throughout the semester, under your own GitHub account:
-`https://github.com/YOUR-USERNAME/career-platform`. Keep the application in one
-place as environments change. A suggested structure is:
+Use your existing public `career-platform` repository. Keep the application in
+one place as environments change. Retain your current folder structure and
+add the README sections and submission index around the work already there.
 
-```text
-career-platform/
-  AGENTS.md
-  README.md
-  application/
-    database/
-  infrastructure/
-  scripts/
-  docs/
-    architecture.md
-    decisions/
-    migrations/
-    troubleshooting/
-    project-1-submission.md
-  evidence/
-  .github/workflows/
-```
+The submission index is a list of links to evidence. It can point to files,
+README sections, commits, and redacted screenshots or command output. Azure
+and Railway diagrams can share a file. Decisions and reflections can be
+README sections. A separate FAQ or repeated copies of exercise evidence
+aren't required.
 
-In your student repository, `docs/` should be tracked. Store safe configuration
-examples and setup scripts, but keep passwords, private keys, local environments,
-and sensitive database exports out of Git. Existing exercise folders may stay;
-do not create a separate copy of the application for every exercise.
+Track your documentation in Git, including `docs/` in the student repository.
+Keep passwords, private keys, local environments, and sensitive database
+exports out of Git. Redact private information from email and analytics evidence.
 
 ## Submit
 
@@ -207,48 +223,51 @@ Submit your repository URL, live HTTPS URL, and final commit SHA through the
 Project 1 submission in Brightspace. Put the same information in
 `docs/project-1-submission.md`, with links to:
 
-1. The application spec, plan, and setup instructions.
-2. Azure and Railway architecture diagrams.
-3. Migration plans, source/target data checks, cutover results, and rollback plans.
+1. The README, original application spec and plans, and `AGENTS.md`.
+2. Azure and Railway diagrams, including email and analytics data flow.
+3. Migration plans, source/target data comparisons, cutover results, and rollback.
 4. Azure HTTP/restart evidence and final DNS/HTTPS verification.
-5. A GitHub Actions run and the deployed change it produced.
-6. The five relevant postings and a redacted Job Scout delivery record.
-7. The incident records, FAQ, decision records, and retrospective.
-8. A cost/credit inventory, including expiration dates and cleanup plans.
+5. A reviewed commit, its Railway deployment, and verification of the live change.
+6. Zoho sending, receiving, replying, and DNS authentication evidence.
+7. GA4 page-view and interaction evidence, with an explanation.
+8. The README sections or existing records covering failures, decisions,
+   reflection, costs, and remaining limitations.
 
 Date your observations and record commands with their actual results. Redacted
-terminal output, screenshots, and short explanations can support a check.
-Screenshots alone do not replace the working final system. Identify anything
-you could not verify rather than filling in the expected result.
+output, screenshots, and short explanations can support a check. Screenshots
+alone do not replace the working final system. Mark anything unverified rather
+than filling in the expected result.
 
 Keep the final site available through your midterm interview. Follow the
-instructor's resource cleanup directions after that checkpoint. Do not assume
-you must keep both Azure and Railway running for grading.
+instructor's cleanup directions after that checkpoint. You do not need to
+keep Azure running after the migration is verified, but retain its evidence
+and follow the instructions for keeping its disk.
 
 ## How the 125 points are earned
 
-Each row lists separately scored parts. Full credit on a part requires working
-behavior and the specified evidence. Partial credit reflects the portions you
-can demonstrate. Missing or unverified portions earn no credit for that part.
-Documentation points assess explanation and reproducibility, separately from
-the technical behavior scored in the other rows.
+Each area is scored separately. Full credit requires the behavior and evidence
+described in this brief. Partial credit reflects what you can demonstrate.
+Identify missing or unverified work honestly.
 
+| Area | Points | What is assessed |
+| --- | --- | --- |
+| Personal application | 15 | Profile and project content, actual database reads, and empty/failure/recovery behavior |
+| Azure deployment | 20 | Public Nginx/application/database path, explained SSH and network rules, service management, and restart evidence |
+| Domain and HTTPS | 15 | Domain control and DNS explanation, working final HTTPS, and certificate and renewal explanation |
+| Railway/PostgreSQL migration | 25 | Plan and dependency inventory, database compatibility, preservation and comparison of current data, verified cutover, rollback, and operating responsibilities |
+| Verified website update | 5 | A reviewed and checked change connected to its commit, Railway deployment, and live result, with a recovery explanation |
+| Zoho email | 15 | Custom-domain sending, receiving, and replies, plus MX/SPF/DKIM/DMARC configuration, verification, and explanation |
+| GA4 | 10 | Verified page views and one useful interaction, with an explanation of collection and meaning; visitor counts do not affect the score |
+| Engineering record | 20 | A clear README covering setup, diagrams, decisions, troubleshooting, reflection, costs, and limitations; a submission index and links to existing evidence and history |
+| Total | 125 | |
 
-| Area                      | Points | Scored parts                                                                                                                                                                                                       |
-| ------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Personal application      | 15     | Profile and clear content (3); actual database reads and rendered projects (6); empty, failure, and recovery behavior (6)                                                                                          |
-| Azure deployment          | 20     | Running application/database and public Nginx path (8); explained SSH/network rules and private dependency listeners (6); service management and restart evidence (6)                                              |
-| Domain and HTTPS          | 15     | Domain control, delegation, and accurate record explanation (5); working final DNS and HTTPS with hostname/validity checks (7); renewal explanation (3)                                                            |
-| Migration to Railway      | 25     | Dependency inventory and plan (5); PostgreSQL compatibility and current-data comparison (8); working target and cutover validation (6); rollback and responsibility comparison (6)                                 |
-| GitHub Actions deployment | 10     | Workflow and protected credentials with a meaningful failing check (4); traceable successful deployment (4); recovery explanation (2)                                                                              |
-| Job Scout and email       | 20     | Five real relevant postings and explainable matching (8); verified sender, DNS authentication, and delivered digest (7); inspectable run and controlled failure evidence (5)                                       |
-| Engineering record        | 20     | Spec, plan, agent rules, and meaningful Git history (4); diagrams and reproducible setup (5); three incident records and five-question FAQ (5); decisions, retrospective, cost inventory, and submission index (6) |
-| Total                     | 125    |                                                                                                                                                                                                                    |
+The engineering record is assessed through your README, submission index,
+and their linked records. It does not require another report or duplicated
+screenshots. This category scores clarity, reproducibility, and traceability.
+The technical categories score the working behavior and its verification.
 
-
-A separate domain mailbox and GA4 are optional extensions, with no extra points
-in this rubric. Prioritize the required system and evidence before extensions.
-AWS hosting, a custom agent loop, and the AI project builder come after Project 1.
+You may use an agent to help assemble the documentation. You remain
+responsible for checking its claims and explaining your system.
 
 ## Prepare to explain it at the midterm
 
@@ -256,36 +275,36 @@ Your interview is a separate 125-point assessment, scheduled October 27-29.
 For the first 15 minutes, draw and explain your system from memory, without
 notes or the repository. The final five minutes change one constraint.
 
-Be ready to trace a request, explain a migration, diagnose a failure, compare
-provider responsibilities, and discuss costs and remaining limits. Explain
+Be ready to trace a web request and an email, explain a migration and an
+analytics event, diagnose a failure, compare provider responsibilities, and
+discuss costs and remaining limits. Explain
 what the coding agent created, what you changed, and how you verified it. A working
 artifact and an explanation of that artifact are assessed separately.
 
 ## Choose and budget for services
 
-Prefer GitHub Student Developer Pack offers when they meet the learning goals,
-but compare alternatives with the instructor. Verify activation, eligibility,
-limits, and expiration before relying on any benefit.
+Prefer student offers when they meet the learning goals. Verify eligibility,
+limits, costs, and expiration before relying on an offer.
 
-Railway's trial currently gives new accounts a one-time $5 credit for 30 days,
-with no card required. After the trial, the Free plan provides $1 of credit a
-month, which may not keep a web service and database running. Your trial
-starts when you sign in, so sign in between October 3 and 7 to keep the site
-available through your midterm interview. Railway checks your GitHub account
-at sign-in, and an unverified account gets a limited trial with restricted
-outbound network access. Check railway.com/verify, and tell the instructor if
-yours is limited. Check the current terms before provisioning:
+For Railway, follow the assigned October 3-7 sign-in window and check your
+account's verification and remaining credits. Plan to keep the site available
+through your midterm interview. Check the current terms before provisioning:
 https://docs.railway.com/pricing/free-trial
 
-Cloudflare DNS and Email Routing are free. Keep every DNS record set to DNS
-only unless the instructor says otherwise.
+Use Zoho's Forever Free plan where available and follow the course signup
+instructions. Free-plan availability depends on the data center.
+Bring account restrictions to the instructor before selecting a paid plan.
+https://www.zoho.com/mail/zohomail-pricing.html
 
-Keep a service inventory and distinguish compute from retained storage and
-other billable resources. Bring blocked access or unexpected costs to the
-instructor before changing subscriptions.
+Cloudflare remains the DNS provider. Keep proxy-capable records set to DNS
+only unless instructed otherwise. The email setup uses Zoho's MX records.
+
+Keep a service inventory. Distinguish compute from retained storage and other
+billable resources, and record renewal dates and cleanup plans.
 
 ## Start here
 
 Begin with [Build your resume site in Codespaces](../guides/resume-site-in-codespaces.md).
 Then use [Migrate your site to an Azure VM](../guides/azure-vm-migration.md).
-Both are lesson drafts pending the instructor's environment rehearsal.
+Continue with the Railway, Zoho, analytics, and project-audit guides linked
+from the course README as those lessons are introduced.

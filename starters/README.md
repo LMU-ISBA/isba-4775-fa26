@@ -1,5 +1,9 @@
 # Student repository starters
 
+> Archived sales-lab material. The current course builds a resume site in
+> `career-platform`. Follow the [current resume-site guide](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/resume-site-in-codespaces.md).
+> This older starter and its `ex03/` folder are not the current Exercise 03.
+
 The [portfolio starter](portfolio/README.md) supplies the files used in the
 Session 5 portfolio setup. Its contents become the root of a student's
 `isba-4775-portfolio` repository.

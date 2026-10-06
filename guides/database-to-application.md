@@ -1,5 +1,9 @@
 # From a database to a working application
 
+> Archived sales-lab material. The current course builds a resume site in
+> `career-platform`. Follow the [current resume-site guide](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/resume-site-in-codespaces.md).
+> This older starter and its `ex03/` folder are not the current Exercise 03.
+
 Session 05 · September 15, 2026
 
 Last class, you installed MySQL and created a table containing five sales.
