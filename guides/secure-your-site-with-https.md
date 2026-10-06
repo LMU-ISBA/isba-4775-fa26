@@ -13,6 +13,11 @@ and `http://` sends visitors there automatically. You'll also be able to
 answer the question a customer would ask: how do I know my data to your site
 is encrypted? Your written answer is part of Ex04, which is due Thursday.
 
+Before Thursday, also complete the required 30–45 minute
+[Impeccable design activity](improve-your-site-design.md) in your existing
+career-platform project. It has no separate points, and Ex04's HTTPS checks
+still apply.
+
 Cloudflare stays DNS only today, with the gray cloud. The secure connection
 runs straight from the browser to your VM, so you can see every piece of it.
 
@@ -430,9 +435,15 @@ github.com. This file is part of Ex04.
    deadline and until your Railway migration is verified. After your app,
    data, and domain work over HTTPS on Railway, stop the Azure VM in the
    portal and confirm **Stopped (deallocated)**. Keep the VM and disk for now.
-2. If you haven't yet, sign in to Railway between now and Wednesday,
+2. Complete the required [Impeccable design activity](improve-your-site-design.md)
+   before Thursday, October 8, at 1:45 PM Pacific, alongside Ex04. Allow
+   30–45 minutes. If setup is blocked after ten minutes, use the guide's
+   ordinary-language critique fallback; stop at 45 minutes and bring your
+   branch and blocker notes if needed. Keep the working HTTPS site intact.
+   This preparation has no separate grade item or extra points.
+3. If you haven't yet, sign in to Railway between now and Wednesday,
    October 7. See the syllabus for the link.
-3. Before cutting over to Railway, complete the restart verification in
+4. Before cutting over to Railway, complete the restart verification in
    section 6 of [Operate your site on the VM](operate-the-vm.md) and save
    the result for Project 1. If class time runs short, finish it as homework
    before cutover. The two deliberate crashes are troubleshooting practice;
