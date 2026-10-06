@@ -1,53 +1,41 @@
 # Send and receive email at your domain with Zoho
 
-For Tuesday, October 13. Create your own Zoho Mail account on the Forever Free plan by Monday, October 12. Use a domain you control in Cloudflare DNS. Bring your laptop, Zoho sign-in, Cloudflare sign-in, and an external mailbox you control. Zoho webmail is required. The free plan excludes IMAP, POP, and ActiveSync, so do not plan to use Apple Mail or another external mail client. Mobile access is optional only if your Zoho account offers a supported method.
+For Tuesday, October 13: create a Zoho Mail Forever Free account by Monday, October 12. Bring your Zoho and Cloudflare sign-ins and an external mailbox you control. Use Zoho webmail. The free plan does not include IMAP, POP, or ActiveSync. Mobile mail is optional if your account supports it. If signup offers only a trial or paid plan in your region, stop, record the dated screen without personal details, and tell the instructor. Do not pay. A pricing page does not prove your account can use the plan.
 
-If Forever Free isn't offered for your signup region, or the account asks for payment or a trial, stop and contact the instructor. Do not buy a plan for this class. Record the exact screen and date, without showing personal information. Plan availability must be checked during a fresh signup. A pricing page alone doesn't prove your account can use it.
-
-Your website and email use the same domain for different jobs. The website's A or CNAME record tells browsers where to go. MX tells other mail systems where to deliver incoming mail. SPF names approved senders, DKIM signs outbound mail, and DMARC checks whether authentication aligns with the visible From domain. You will use Zoho to send and read mail, including replies. A forwarded message arriving in another inbox does not show that you can reply as your custom address.
+Your website's A/CNAME records locate the web service. MX directs incoming mail. SPF lists authorized senders, DKIM signs outgoing mail, and DMARC checks authentication against the visible From domain. Forwarding alone does not prove you can send or reply as your domain.
 
 ## Before changing DNS
 
-1. Open Cloudflare DNS for your domain. Save a dated copy or screenshot of all current records, including MX, TXT, CNAME, A, and AAAA. Redact account identifiers before publishing evidence.
-2. Confirm the website still loads over HTTPS and record its current target. Do not delete its web records or change name servers for this lab.
-3. Check whether the domain already receives mail. List every address that gets mail, including individual mailboxes, aliases, groups, and forwarding addresses. Record where each address currently delivers. The free plan supports one domain and up to five users, and some routing or forwarding features require a paid plan. If you cannot create working Zoho destinations for every active address, stop and ask the instructor before changing MX.
-4. Plan a short cutover if the domain already receives mail. Keep the old MX entries until every needed destination is ready in Zoho. Retain access to old mailboxes while DNS caches change. Old messages do not move with MX.
-5. In Zoho Mail Admin Console, add your existing domain and follow its domain ownership check. For a manual Cloudflare CNAME check, use the host and target shown for *your* domain, and set the CNAME to DNS only. You can use Zoho's Cloudflare one-click path if offered, but inspect the resulting DNS entries before continuing.
-6. Create your mailbox, such as `hello@yourdomain.com`, and the other required recipient destinations in Zoho. Check each address or alias before cutover. Write down the actual address you will test.
+1. Save a dated copy of your Cloudflare DNS records (MX, TXT, CNAME, A, AAAA). Keep private details out of public evidence. Confirm the website works over HTTPS. Leave its web records and name servers alone.
+2. If the domain already receives mail, list every active mailbox, alias, group, and forwarding address and its current destination. The free plan has limits. If Zoho cannot serve every active recipient, ask the instructor before changing MX.
+3. In Zoho Admin Console, add the domain and complete its ownership check using the exact DNS values it gives you. If it offers Cloudflare automation, inspect what it creates. Set a manual verification CNAME to DNS only. Create and check all needed Zoho recipient destinations before cutover.
 
 Zoho's Cloudflare instructions: https://www.zoho.com/mail/help/adminconsole/cloudflare.html
-Free-plan limits: https://www.zoho.com/mail/help/adminconsole/subscription.html
 
-## Route incoming mail
+Plan limits: https://www.zoho.com/mail/help/adminconsole/subscription.html
 
-Open the domain's Email Configuration or DNS Mapping in Zoho Admin Console. Copy its MX hosts and priorities. Prepare the Cloudflare entries at the host Zoho names, usually the root (`@`). Use the values shown in your account and region, not a generic example from a guide. Do not publish the new MX yet. When all active recipient addresses have working Zoho destinations, replace the old MX with Zoho's MX as one cutover and check the saved entries. Leaving old and new mail providers together can split delivery. Keep access to the old provider during DNS propagation, and check each active address after cutover. If delivery fails, use your saved records and ask the instructor before making another change. Do not remove unrelated records or the website's A/CNAME records.
+## Route and authenticate mail
 
-Verify MX in Zoho Admin Console. You can also run `dig MX yourdomain.com +short` or use a DNS lookup tool. DNS visibility and Zoho's verification can lag. Record the time and the value observed. If the old provider still appears, allow propagation and inspect authoritative Cloudflare DNS before changing more records. A successful MX lookup shows routing configuration, not that a message arrived.
+Copy Zoho's MX hosts and priorities for your account and region. Once every active recipient has a Zoho destination, replace the old MX records as one cutover. Mixing providers can split delivery. Keep access to old mailboxes during DNS propagation. Old messages do not move with MX. Check each recipient afterward. If delivery fails, use your saved records and ask the instructor before another change. Verify the published MX in Zoho and with `dig MX yourdomain.com +short`. Record the time. An MX lookup proves routing configuration, not delivery.
 
-## Authenticate mail from your domain
+At the same DNS name, keep one SPF TXT record beginning `v=spf1`. If other legitimate senders exist, merge them with Zoho's current value instead of adding a second SPF record. Verify it in Zoho. Create a DKIM selector, publish Zoho's exact TXT host and value, then verify and enable the selector in Zoho if required. Never publish a private key.
 
-In Zoho Admin Console, open the SPF configuration for this domain. Check existing SPF TXT records at the same DNS name. Keep **one** TXT record beginning `v=spf1` per name. Merge legitimate senders into that policy if you use more than Zoho. Follow Zoho's value for your account and region. Do not paste an example SPF include blindly or create a second SPF record. Save the DNS value, wait for propagation, and verify SPF back in Zoho.
+At `_dmarc.yourdomain.com`, keep one DMARC record. Preserve an existing policy, alignment, and reporting settings. Ask the instructor before changing it. If none exists, `v=DMARC1; p=none` is a starter policy. DMARC needs an SPF or DKIM pass aligned with the visible From domain. Verify the record. Do not weaken or tighten an existing policy during this lab.
 
-Create a DKIM selector in Zoho. Copy the exact selector host and long TXT value to Cloudflare. Verify it in Zoho, then enable the verified selector if the console requires that step. A published key that Zoho has not enabled may not sign mail. DKIM propagation can take longer than MX. Check with `dig TXT selector._domainkey.yourdomain.com +short`, substituting your actual selector. Never publish a private key.
+Zoho guides: https://www.zoho.com/mail/help/adminconsole/spf-configuration.html , https://www.zoho.com/mail/help/adminconsole/dkim-configuration.html , and https://www.zoho.com/mail/help/adminconsole/dmarc-policy.html
 
-After SPF and DKIM are configured, inspect TXT records at `_dmarc.yourdomain.com`. Keep exactly one DMARC policy. If one already exists, preserve its enforcement level, alignment, and reporting settings. Ask the instructor before changing an established policy, especially `p=quarantine` or `p=reject`. A second DMARC record causes a permanent error. If no policy exists, add a starter record such as `v=DMARC1; p=none`. `p=none` asks receivers to observe failures without requesting quarantine or rejection. DMARC passes when either SPF or DKIM passes **and** that passing domain aligns with the visible From domain. A bare SPF pass for some unrelated sending domain does not establish alignment. Verify the published DMARC record in DNS and Zoho if available. Do not relax or tighten an existing policy during this lab without checking every legitimate sender and getting instructor help.
+## Test actual messages
 
-Zoho's setup and explanation: https://www.zoho.com/mail/help/adminconsole/spf-configuration.html , https://www.zoho.com/mail/help/adminconsole/dkim-configuration.html , and https://www.zoho.com/mail/help/adminconsole/dmarc-policy.html
+Use your own external mailbox or a willing contact. Send no sensitive content.
 
-## Test three distinct mail paths
+1. Send external to Zoho and confirm the message arrives in Zoho webmail.
+2. Reply from Zoho and confirm arrival with your domain address in From.
+3. Compose a new Zoho message to the external mailbox and confirm arrival and From. A reply does not replace this test.
+4. For the outgoing messages, inspect the receiver's authentication details where available. Record SPF, DKIM, DMARC, and the passing/aligned domain, or say what you could not inspect.
+5. Recheck the website over HTTPS. Mail DNS should not change its destination.
 
-Use your own external mailbox or a contact who agrees to the test. Keep messages short and free of sensitive content.
+A Sent-folder entry or sender name is not proof of external delivery or authentication. If a result fails, inspect receiver details and Zoho verification before changing DNS again.
 
-1. From the external mailbox, send to your Zoho custom address. Confirm it appears in Zoho webmail. This proves an actual incoming delivery, beyond an MX lookup.
-2. In Zoho webmail, reply to that message. In the external mailbox, confirm the reply arrived and the visible From address is your custom domain address.
-3. Compose a **new** message in Zoho webmail to the external mailbox. Confirm it arrives and has the same custom From address. The reply test alone doesn't replace this check.
-4. For both outgoing messages, inspect the recipient mailbox's original message or authentication details. Record SPF, DKIM, and DMARC results where exposed, and note which domain passed and aligned. If the interface does not expose a result, say which result you could not inspect.
-5. Recheck your website over HTTPS after DNS work. Mail routing should not change its destination.
+## Record the result
 
-A sender name in the inbox is not proof of authentication. If an external mailbox reports failure, inspect the actual header results and Zoho's verification status before changing DNS again. If you were previously using Gmail send-as or a forwarding service, perform these tests from actual Zoho webmail.
-
-## Record your evidence
-
-Add a short, dated entry to your repository's existing engineering record and link it from `docs/project-1-submission.md`. Include the domain's MX, SPF, DKIM selector, and DMARC names and purposes, the DNS or Zoho verification result, and what happened in each of the three mail tests. Redact recipient addresses, message bodies, message IDs, and private account details. Keep the visible custom From domain and authentication result. State a failed or delayed check as such, then record the later retest separately. Do not put credentials or private correspondence in Git.
-
-If Zoho account access, DNS propagation, or external delivery is blocked, write the observed failure and the next check. Contact the instructor about a blocked free account. Do not substitute forwarding, a paid trial, or a Gmail send-as address for the Zoho requirement.
+Add a dated entry to your engineering record and link it from `docs/project-1-submission.md`. Note the MX, SPF, DKIM selector, and DMARC records and purposes, DNS/Zoho verification, and results of all three mail paths. Redact addresses, message bodies, IDs, credentials, and private account details while retaining the custom From domain and authentication result. Date retests separately. If setup, propagation, or delivery remains blocked, report the observed failure and next check. Forwarding, Gmail send-as, and paid trials do not substitute for this Zoho exercise.
