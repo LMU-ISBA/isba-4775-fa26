@@ -17,6 +17,7 @@ Zoho email, and basic GA4. Project 1 is due October 22 at 1:45 PM Pacific.
 | Date | Lesson and guide |
 | --- | --- |
 | October 6 | [Secure your site with HTTPS](guides/secure-your-site-with-https.md) |
+| Before October 8, 1:45 PM | Required independent [website design activity with Impeccable](guides/improve-your-site-design.md), alongside Exercise 04 |
 | October 8 | [Migrate to Railway and PostgreSQL](guides/migrate-to-railway.md) |
 | October 13 | [Send and receive domain email with Zoho](guides/domain-email-with-zoho.md) |
 | October 15 | [Measure your website with GA4](guides/google-analytics.md), then troubleshooting and completion |

@@ -12,6 +12,12 @@ certificate and test results as evidence.
 Follow [Secure your site with HTTPS](../guides/secure-your-site-with-https.md).
 Most of this exercise is finished if you complete the guide in class.
 
+Also required before Thursday's class: the independent
+[website design activity with Impeccable](../guides/improve-your-site-design.md).
+It takes about 30-45 minutes and has its own short repository record. It adds
+no separate grade item or points. The HTTPS evidence and submission below
+remain the requirements for Exercise 04.
+
 ## Check your live site
 
 - Your domain uses Cloudflare for DNS. The records for your domain and its

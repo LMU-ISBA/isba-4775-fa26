@@ -293,7 +293,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 9/29 | Finishing the migration: rebuilding the environment, moving live SQLite data, and verifying the app on the VM | | |
 | Thu 10/1 | Operating the VM: Uvicorn workers and systemd, Nginx as a reverse proxy, recovering after a restart, and delegating your domain to Cloudflare DNS | Register your domain with [the domain guide](guides/register-a-domain.md), a free .me or a $6.79 .com. Create a [free Cloudflare account](https://dash.cloudflare.com/sign-up). | Ex03 |
 | Tue 10/6 | HTTPS for your domain: certificates, the request path, renewal, and troubleshooting DNS/TLS | Run `nslookup -type=NS yourdomain` and confirm Cloudflare's name servers. Confirm your site loads over HTTP. No Resend signup is needed. | |
-| Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | By 10/7, finish the Railway signup and HTTPS preparation below. Keep your Azure VM running until the migration is verified. | Ex04 |
+| Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | By 10/7, finish Railway signup. Before class, complete Ex04 and the required [Impeccable design activity](guides/improve-your-site-design.md). Keep Azure running until migration is verified. | Ex04 |
 | Tue 10/13 | Zoho Mail at your domain: MX, SPF, DKIM, and DMARC, then sending, receiving, and replying | By 10/12, finish the Zoho account preparation below. Bring access to your domain's Cloudflare zone. | |
 | Thu 10/15 | GA4: page views, one useful interaction, and event verification, followed by troubleshooting and project completion | By 10/14, create your Analytics account, GA4 property, and web stream using the preparation below. Bring the measurement ID and access to your site repository. | Ex05, Ex06 |
 | Tue 10/20 | Project audit and practice interviews in pairs | Finish the site, migration, domain email, and GA4 checks. Bring your README and submission index. Draw the system from memory once. | |
@@ -325,6 +325,14 @@ credit purchase is needed for Project 1.
 
 Complete account setup ahead of the lesson so we can use class time to
 configure and verify the system.
+
+- **Before Thursday, October 8, at 1:45 PM:** complete the required
+  [website design activity with Impeccable](guides/improve-your-site-design.md)
+  alongside Ex04. Spend 30-45 minutes making two or three focused improvements
+  in your existing repository, with before/after screenshots and checks.
+  Follow the guide's fallback if installation or deployment is blocked. Bring
+  the branch and honest results. This preparation adds no separate grade item
+  or points, and Ex04's HTTPS requirements remain in effect.
 
 - **By Wednesday, October 7, for Thursday's migration:**
   [sign in to Railway](https://railway.com/login) with GitHub and
