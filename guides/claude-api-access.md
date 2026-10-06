@@ -2,7 +2,6 @@
 
 For Job Scout on Tuesday, November 3, 2026. Complete setup by Monday, November 2.
 
-Complete this setup after the midterm, before the November 3 lesson.
 Project 1 doesn't require Claude API access or an API credit purchase.
 
 Job Scout's evaluate step asks a model whether each posting fits you. Your
@@ -24,10 +23,8 @@ Open Settings, then Billing, and click "Buy credits." Buy $5, or the smallest
 amount the page allows if that's higher. Credits are available right away,
 they expire a year after purchase, and they can't be refunded.
 
-Leave auto-reload off. With it off, the most you can ever spend is what you
-bought. If a bug sends your agent into an endless loop, it stops when the
-credits run out, and your card isn't charged again. We'll break an agent
-this way on purpose later in the semester.
+Leave auto-reload off so an accidental loop cannot trigger another credit
+purchase. Check your remaining balance while developing Job Scout.
 
 ## 3. Create an API key
 
@@ -42,33 +39,30 @@ Treat the key like a password. Anyone who has it can spend your credits.
 In your `career-platform` repository on your laptop, ask your agent:
 
 ```text
-Add ANTHROPIC_API_KEY to a .env file at the root of this repository, and
-make sure .gitignore lists .env. I'll paste the key into the file myself.
-Then run git check-ignore .env and show me the result.
+Prepare a local .env file for my Claude API key and keep it out of Git.
 ```
 
-Paste the key into `.env` yourself rather than into the chat. The check
-should print `.env`, which means Git ignores the file. If it prints nothing,
-stop and fix `.gitignore` before you commit anything.
+Paste the key into `.env` yourself as `ANTHROPIC_API_KEY`, never into chat.
+Run `git check-ignore .env`, which should print `.env`. Also confirm
+`git ls-files .env` prints nothing: the file must not already be tracked.
+Fix either failed check before committing.
 
 ## 5. Check that the key works
 
 Ask your agent:
 
 ```text
-Read ANTHROPIC_API_KEY from .env without printing it. Call
-GET https://api.anthropic.com/v1/models with the headers x-api-key and
-anthropic-version: 2023-06-01. Show me the HTTP status code and the list of
-model IDs, and nothing else from the response.
+List the available Claude models using my local key. Never print the key.
 ```
 
-You should see status 200 and a list of model IDs. A 401 means the key is
-wrong or incomplete, so copy it again. Listing models doesn't use credits, so
-you can run this check as often as you like.
+Use the [Models API](https://platform.claude.com/docs/en/api/models/list),
+which lists models without generating a paid response. You should see status
+200 and model IDs. A 401 means authentication failed. Recheck the saved key
+and request setup without exposing the key in output or screenshots.
 
 ## Which model you'll use
 
-We'll choose on October 13, in class. Models and prices change often enough
+We'll choose on November 3, in class. Models and prices change often enough
 that a choice made now could be out of date by then. Keep the model list from
 step 5, and look at the current prices before class:
 https://platform.claude.com/docs/en/about-claude/pricing
@@ -80,7 +74,7 @@ capable one may judge a borderline posting better.
 
 ## If something goes wrong
 
-Send me a Teams message before October 13 if your card is declined, the
+Send me a Teams message by November 2 if your card is declined, the
 Billing page doesn't appear, or step 5 keeps failing. Don't switch
 to a different paid plan to get around it. Include what you tried, so we can
 fix it before class.
