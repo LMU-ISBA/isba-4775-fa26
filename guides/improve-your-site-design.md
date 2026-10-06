@@ -4,7 +4,7 @@ Complete this required 30–45 minute activity in `career-platform` before Thurs
 
 ## Before you start
 
-You need Claude Code and Node.js 22.18 or later. Check Node with `node --version`. If Claude Code isn't installed yet, open a terminal and run the command for your system.
+You need Claude Code. If it isn't installed yet, open a terminal and run the command for your system.
 
 macOS, Linux, or WSL:
 
@@ -22,7 +22,13 @@ Open a new terminal and run `claude --version`. If it prints a version number, y
 
 ## Steps
 
-1. Install Impeccable. In your `career-platform` folder, run `npx impeccable install`. Choose Claude Code and the project scope. Then start Claude Code in that folder, or restart it if it was already open. Impeccable's setup guide is at https://impeccable.style/tutorials/getting-started/
+1. Install Impeccable. Start Claude Code in your `career-platform` folder. In the Claude Code chat, add the marketplace:
+
+   ```text
+   /plugin marketplace add pbakaus/impeccable
+   ```
+
+   Then open `/plugin`, choose Discover, and install Impeccable. Type `/impeccable` to check that it appears. If it doesn't, type `/exit`, then run `claude --continue` to resume the session. Impeccable's setup guide is at https://impeccable.style/tutorials/getting-started/
 
 2. Get a critique. Run these in order, or skip the first one and go straight to the critique:
 
