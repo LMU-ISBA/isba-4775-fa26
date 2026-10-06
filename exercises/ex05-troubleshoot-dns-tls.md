@@ -1,6 +1,6 @@
 # Exercise 05: Investigate a DNS or TLS failure
 
-**Due Thursday, October 15, 2026, at 1:45 PM Pacific. 15 points.** Submit your public `career-platform` repository URL and a direct GitHub link to `docs/evidence/ex05.md` in Brightspace.
+**Due Tuesday, October 13, 2026, at 1:45 PM Pacific. 15 points.** Submit your public `career-platform` repository URL and a direct GitHub link to `docs/evidence/ex05.md` in Brightspace.
 
 Your job is to investigate one failed network, DNS, or TLS check. Predict what should happen, record what happened, locate the failing step, make or propose a safe repair, and repeat the same check. You can use a failure you already investigated if you saved its actual before and after evidence. Otherwise, use the simulation below. A deliberate lab failure must be labeled as such.
 

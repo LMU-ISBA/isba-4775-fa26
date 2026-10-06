@@ -24,8 +24,9 @@ Zoho email, and basic GA4. Project 1 is due October 22 at 1:45 PM Pacific.
 | October 20 | [Project audit](guides/project-1-audit.md) and [midterm practice](guides/midterm-study-guide.md) |
 | October 22 | Submit before class, then project walkthroughs |
 
-Exercises 05 and 06 are both due October 15 at 1:45 PM. Job Scout and Resend
-begin after the October 27-29 midterm, on November 3 and 5. GitHub Actions
+Exercise 05 is due October 13 at 1:45 PM. Exercise 06 is due October 15 at
+the same time. Job Scout and Resend begin after the October 27-29 midterm,
+on November 3 and 5. GitHub Actions
 follows on November 17, alongside tests for the more complex application.
 
 Earlier work remains available:
