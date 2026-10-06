@@ -1,11 +1,13 @@
 # Set up Claude API access
 
-Before class on Tuesday, October 13, 2026
+For Job Scout on Tuesday, November 3, 2026. Complete setup by Monday, November 2.
 
-On October 13 we start building Job Scout, and its evaluate step asks a model
-whether each posting fits you. Your code makes that call through the Claude
-API, so you need an API account and a key before class. Plan on about 15
-minutes and $5.
+Complete this setup after the midterm, before the November 3 lesson.
+Project 1 doesn't require Claude API access or an API credit purchase.
+
+Job Scout's evaluate step asks a model whether each posting fits you. Your
+code makes that call through the Claude API, so you'll need an API account
+and a key for that lesson. Plan on about 15 minutes and $5.
 
 Your Claude Pro subscription doesn't cover this. Pro pays for the Claude app
 and Claude Code, and the API is billed separately through prepaid credits:

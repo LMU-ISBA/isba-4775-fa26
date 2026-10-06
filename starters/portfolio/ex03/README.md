@@ -1,5 +1,9 @@
 # Exercise 03 workspace
 
+> Archived sales-lab material. The current course builds a resume site in
+> `career-platform`. Follow the [current resume-site guide](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/resume-site-in-codespaces.md).
+> This older starter and its `ex03/` folder are not the current Exercise 03.
+
 We use this folder for the Session 5 build-along. The final Ex03 assignment
 scope and deadline will be announced separately.
 

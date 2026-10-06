@@ -31,17 +31,20 @@ for the full instructions.
 | 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | Tue 9/15 | [published](ex02-troubleshoot-a-cloud-service.md) |
 | 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1, 1:45 PM | [published](ex03-build-and-migrate.md) |
 | 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8, 1:45 PM | [published](ex04-secure-your-site.md) |
-| 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/15 | |
-| 06 | Email DNS: Email Routing MX, and SPF, DKIM, and DMARC for Resend | Config | Tue 10/13 | |
-| 07 | Job Scout's first loop: tools, state, stop conditions, and a real run | Build | Tue 10/20 | |
-| 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Tue 10/20 | |
-| 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/5 | |
-| 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 | |
+| 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/15, 1:45 PM | [instructions](ex05-troubleshoot-dns-tls.md) |
+| 06 | Email DNS: Zoho Mail, MX, SPF, DKIM, and DMARC, with a send/receive/reply test | Config | Thu 10/15, 1:45 PM | [instructions](ex06-domain-email.md) |
+| 07 | Job Scout's first loop: tools, state, stop conditions, and a real run | Build | Tue 11/10, 1:45 PM | |
+| 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Thu 11/12, 1:45 PM | |
+| 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Tue 11/17, 1:45 PM | |
+| 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Tue 11/24, 1:45 PM | |
 
 Exercise 03 collects the spec, implementation plan, and migration plan from
 the resume-site build and the Azure migration. The Railway migration is a
-Project 1 requirement, and GA4 is an optional extension. Confirm deadlines in
-Brightspace.
+Project 1 requirement, and basic GA4 is also required. Exercises 05 and 06
+are both due Thursday, October 15, after their lessons. Job Scout and its
+integration exercise move after the midterm. Job Scout lessons are November 3
+and 5. Choose the Project 2 posting by November 5, with the instructor's vetted
+feed available if needed. All listed November deadlines are at 1:45 PM Pacific.
 
 ## What every exercise needs
 
@@ -50,7 +53,11 @@ Exercise 04 uses the live HTTPS site and `docs/how-this-site-is-secured.md`;
 it doesn't require a separate spec, plan, `docs/evidence/ex04.md`, or
 "The change" response. Its brief explains credit/no-credit grading.
 
-The general format for other exercises is:
+Exercises 05 and 06 use `docs/evidence/ex05.md` and `docs/evidence/ex06.md`,
+with direct GitHub evidence links submitted in Brightspace. Follow their
+briefs. They do not require an extra spec, plan, or "The change" response.
+
+When an exercise brief calls for the general format, use:
 
 1. A working system, verified live rather than by screenshot.
 2. A specification and implementation plan, scaled to the exercise, written
@@ -62,9 +69,11 @@ The general format for other exercises is:
 in two or three sentences rather than build for it: what breaks, what you would
 do about it, and what that costs.
 
-Missing any one of the three means no credit. Exercise 01 is the exception. It
-has no plan, no system, and no README, because nothing gets built yet, and its
-two files go to Brightspace.
+Exercises are credit/no credit: 15 or 0 points. Meaningful attempts, recorded
+investigation, and honest explanations can earn credit even when checks are
+incomplete or conclusions need correction. Missing work or no meaningful
+attempt earns no credit. Follow the individual brief for its required work.
+Exercise 01 has no plan, system, or README, and its two files go to Brightspace.
 
 Section "Exercises, 150 points" of the [syllabus](../syllabus.md) has the full
 rules.

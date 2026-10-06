@@ -9,6 +9,7 @@ import markdown
 from weasyprint import HTML
 
 ROOT = Path(__file__).resolve().parents[1]
+PUBLIC_BASE_URL = "https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/"
 CSS = """
 @page {
   size: Letter;
@@ -35,7 +36,7 @@ th, td { border: 1px solid #ccc; padding: 4pt 6pt; vertical-align: top;
 th { background: #f3f3f3; text-align: left; }
 tr { break-inside: avoid; }
 ul, ol { margin: 5pt 0 10pt; padding-left: 20pt; }
-li { margin-bottom: 4pt; }
+li { margin-bottom: 4pt; break-inside: avoid; }
 code { font-family: monospace; font-size: .9em; overflow-wrap: anywhere; }
 pre { white-space: pre-wrap; }
 """
@@ -51,7 +52,7 @@ def main():
         f"<style>{CSS}</style></head><body>{body}</body></html>"
     )
     output = ROOT / "isba-4775-syllabus-fa26.pdf"
-    HTML(string=html, base_url=str(ROOT)).write_pdf(output)
+    HTML(string=html, base_url=PUBLIC_BASE_URL).write_pdf(output)
     print(output)
 
 

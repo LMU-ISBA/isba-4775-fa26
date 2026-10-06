@@ -432,12 +432,17 @@ github.com. This file is part of Ex04.
    portal and confirm **Stopped (deallocated)**. Keep the VM and disk for now.
 2. If you haven't yet, sign in to Railway between now and Wednesday,
    October 7. See the syllabus for the link.
-3. Optional: try section 6 of
-   [Operate your site on the VM](operate-the-vm.md), the restart test and the
-   two deliberate crashes.
+3. Before cutting over to Railway, complete the restart verification in
+   section 6 of [Operate your site on the VM](operate-the-vm.md) and save
+   the result for Project 1. If class time runs short, finish it as homework
+   before cutover. The two deliberate crashes are troubleshooting practice;
+   existing application/dependency failure evidence can satisfy that project
+   category without repeating both crashes.
 
-The email setup with Resend moved to Tuesday, October 13. Keep your Resend
-account. You'll need it then.
+The Zoho Mail lesson is Tuesday, October 13. Complete the account preparation
+in the [syllabus](../syllabus.md#prepare-before-class) by Monday, October 12.
+Resend moves after the midterm. If you already created an account, keep it,
+but there's no additional Resend setup to do now.
 
 ## 10. Sources
 

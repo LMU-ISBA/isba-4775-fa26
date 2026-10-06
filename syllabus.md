@@ -112,14 +112,16 @@ explain what you built about as heavily as the artifact itself.
 There are ten exercises, worth 15 points each. Exercise 01 and Exercise 02
 are submitted as files through Brightspace. From Exercise 03 on, exercises go
 in your public `career-platform` repository, as specified in their briefs. Each brief defines its
-required evidence and grading.
+required evidence and grading. Exercises are credit/no credit: credit earns
+15 points and no credit earns 0. Meaningful attempts and honest investigation
+can earn credit even when a result needs correction.
 
 Exercise 02 extends the in-class server lab: independently investigate a
 stopped Nginx service and a stopped MySQL service, explain your evidence,
 repair each service, and repeat the failed test. Submit a hand-drawn system
-diagram as a JPG and a short investigation report as Markdown. The rubric is
-8 points for the two investigations, 4 for the diagram and explanation, and
-3 for the healthy baseline and verified Codespace shutdown.
+diagram as a JPG and a short investigation report as a PDF. The two
+investigations, diagram and explanation, healthy baseline, and verified
+Codespace shutdown guide feedback within the credit/no-credit assessment.
 
 ### Exercise schedule
 
@@ -130,19 +132,21 @@ diagram as a JPG and a short investigation report as Markdown. The rubric is
 | 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1 |
 | 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8 |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Thu 10/15 |
-| 06 | Email DNS: Email Routing MX, and SPF, DKIM, and DMARC for Resend | Config | Tue 10/13 |
-| 07 | Job Scout's first loop: tools, state, stop conditions, and a real run | Build | Tue 10/20 |
-| 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Tue 10/20 |
-| 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/5 |
-| 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 11/12 |
+| 06 | Email DNS: Zoho Mail, MX, SPF, DKIM, and DMARC, with a send/receive/reply test | Config | Thu 10/15 |
+| 07 | Job Scout's first loop: tools, state, stop conditions, and a real run | Build | Tue 11/10, 1:45 PM |
+| 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Thu 11/12, 1:45 PM |
+| 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Tue 11/17, 1:45 PM |
+| 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Tue 11/24, 1:45 PM |
 
 Ex01 and Ex02 were due at 1:45 PM, before class, and Ex03 is due at the same
 time on Thu 10/1. The Railway migration is a Project 1 requirement, taught on
-Thu 10/8. GA4 is an optional extension.
+Thu 10/8. Exercises 05 and 06 are both due Thu 10/15, after their lessons.
+Basic GA4 is required for Project 1 and taught on Thu 10/15.
 
 ## Project 1: Own Your Corner of the Internet, 125 points
 
-Project 1 runs from week 1 through week 8, and it is **due Thu 10/22.**
+Project 1 runs from week 1 through week 8, and it is **due Thu 10/22 at
+1:45 PM, before class.**
 
 The exercises build the pieces. Project 1 is the integrated, documented,
 portfolio-grade assembly of them.
@@ -150,19 +154,26 @@ portfolio-grade assembly of them.
 | Deliverable | Requirement |
 |---|---|
 | Domain | Purchased, delegated to Cloudflare DNS, zone under your control |
-| Site | Personal site on an Azure VM, then migrated to Railway with managed PostgreSQL, live at your domain with valid TLS |
-| CI/CD | GitHub Actions, push to main deploys |
-| Transactional email | Resend verified on your domain, with SPF, DKIM, and DMARC published and passing |
-| Job Scout | A small agent that retrieves real postings from a reliable source, matches them against your profile, and emails you a digest from your own domain |
-| Architecture diagram | One page, labeled, every service and the data flow between them |
-| README | Configuration guide, an FAQ of at least five questions drawn from real failures, and a retrospective |
+| Site | Personal site on an Azure VM, then migrated to Railway with Railway-hosted PostgreSQL, live at your domain with valid TLS |
+| Website update | Railway's GitHub autodeploy, with a reviewed and locally checked change, its commit and deployment, and verification of the live result |
+| Domain email | Zoho Mail with MX, SPF, DKIM, and DMARC configured, plus verified sending, receiving, and replying from your domain |
+| Analytics | GA4 with a verified page view and one useful interaction, plus an explanation of what each measures |
+| Architecture diagram | Labeled services and data flow, including the migration and current system |
+| Engineering record | A concise README and `docs/project-1-submission.md` linking configuration, plans, checks, and troubleshooting evidence already in the repository |
 
 The question is not whether you completed the steps but whether you would show
 this repository to an employer.
 
-Your Job Scout must surface at least five real postings you would actually want.
-You pick one, and it becomes Project 2's brief. If your scout underperforms,
-there is a vetted feed of postings so you are not blocked.
+You may use your agent to reconstruct the engineering record from your files
+and Git history. Verify its account and link the supporting evidence. Rerun
+missing checks or mark them unverified, and identify accounts written afterward.
+The engineering record does not require a separate report.
+
+Job Scout, Resend, and GitHub Actions move after the midterm. Job Scout will
+help you find the posting for Project 2, with a vetted feed available if
+needed. Job Scout begins November 3, and its first complete run is due
+November 10. Choose your Project 2 posting by November 5, using the vetted
+feed if needed, so the agent doesn't block your first project milestone.
 
 ## Midterm whiteboard interview, 125 points
 
@@ -187,7 +198,8 @@ and that is why it sits before the November 13 withdrawal deadline.
 ## Project 2: the job-description-driven build, 300 points
 
 Project 2 runs from week 10 through week 15. You pick one posting your Job Scout
-surfaced, read the system that job implies, and build it. The architecture is
+surfaced, or use the vetted feed if needed, read the system that job implies,
+and build it. The architecture is
 fixed, and the job description chooses the problem domain.
 
 | Deliverable | Requirement |
@@ -243,9 +255,9 @@ you chose, so this is a simulated interview for that job.
 
 | Weeks | What happens |
 |---|---|
-| 1-8 | Networking foundations, then the cloud arc. Exercises 01-08, Project 1 |
+| 1-8 | Networking foundations, then the cloud arc. Exercises 01-06, Project 1 |
 | 9 | Midterm whiteboard interviews |
-| 10-15 | Project 2, the job-description-driven build. Exercises 09-10, milestones M1-M4 |
+| 10-15 | Job Scout and Project 2, the job-description-driven build. Exercises 07-10, milestones M1-M4 |
 | Finals | Final whiteboard interview |
 
 Thanksgiving week meets once, on Zoom. Tuesday, November 24 is remote, and you
@@ -274,46 +286,70 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 9/3 | Finding things: host names, IP and MAC addresses, the default gateway, DNS, and what your own machine will tell you | | |
 | Tue 9/8 | Ports and web services: requests, responses, HTTP status codes, and investigating a service failure | | Ex01 |
 | Thu 9/10 | Running and Troubleshooting Services: physical server, VM, container; Nginx and MySQL; processes, ports, logs; database creation, tables, and sample data | | |
-| Tue 9/15 | Database to application: portfolio from a template, repeatable setup, Python build-along, environment variables and Codespaces secrets, failure/recovery, commit/push and a small change; optional instructor PaaS demo | | Ex02 |
+| Tue 9/15 | Build your resume site: your own repository and Codespace, a specification and plan, a database-backed application, failure/recovery, and verified changes saved in Git | | Ex02 |
 | Thu 9/17 | Building with an agent and Git: executing the implementation plan, the request path through Nginx, the app server, and SQLite, and clone, add, commit, push, and pull | | |
 | Tue 9/22 | Migrating to a VM: feature branches and pull requests, what Git moves and what it doesn't, IaaS, PaaS, and SaaS, and Azure resource groups | | |
 | Thu 9/24 | Creating the VM: SSH keys, an Azure VM, a cloud firewall rule for SSH, and a written migration plan | | |
 | Tue 9/29 | Finishing the migration: rebuilding the environment, moving live SQLite data, and verifying the app on the VM | | |
 | Thu 10/1 | Operating the VM: Uvicorn workers and systemd, Nginx as a reverse proxy, recovering after a restart, and delegating your domain to Cloudflare DNS | Register your domain with [the domain guide](guides/register-a-domain.md), a free .me or a $6.79 .com. Create a [free Cloudflare account](https://dash.cloudflare.com/sign-up). | Ex03 |
-| Tue 10/6 | DNS for the web and for email: HTTPS for your domain, inbound mail through Email Routing and MX, and SPF, DKIM, and DMARC for a Resend sender | Run `nslookup -type=NS yourdomain` and confirm that Cloudflare's name servers come back. Create a [Resend account](https://resend.com/signup). | |
-| Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | Between 10/3 and 10/7, [sign in to Railway](https://railway.com/login) with GitHub and [check your trial](https://railway.com/verify). Create nothing yet. The 30-day trial starts when you sign in. | Ex04 |
-| Tue 10/13 | Designing an agent: model, tools, state, and loop, drawing Job Scout's graph, and calling a job-posting API | Set up Claude API access with [the setup guide](guides/claude-api-access.md), which costs about $5. Find your Ex01 [self-discovery interview](exercises/self-discovery-interview.md), and list ten companies near you that you'd like to work for. | Ex06 |
-| Thu 10/15 | Building the agent: stop conditions, a human checkpoint on the top three postings, the email digest, and a controlled failure | Confirm that [Resend's domains page](https://resend.com/domains) shows your domain as verified. | Ex05 |
-| Tue 10/20 | CI/CD with GitHub Actions, a submission audit, and practice interviews in pairs | Draw your whole system from memory once, on paper. | Ex07, Ex08 |
-| Thu 10/22 | Project 1 walkthroughs, the midterm study guide, and what a whiteboard interview is | | Project 1 |
+| Tue 10/6 | HTTPS for your domain: certificates, the request path, renewal, and troubleshooting DNS/TLS | Run `nslookup -type=NS yourdomain` and confirm Cloudflare's name servers. Confirm your site loads over HTTP. No Resend signup is needed. | |
+| Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | By 10/7, finish the Railway signup and HTTPS preparation below. Keep your Azure VM running until the migration is verified. | Ex04 |
+| Tue 10/13 | Zoho Mail at your domain: MX, SPF, DKIM, and DMARC, then sending, receiving, and replying | By 10/12, finish the Zoho account preparation below. Bring access to your domain's Cloudflare zone. | |
+| Thu 10/15 | GA4: page views, one useful interaction, and event verification, followed by troubleshooting and project completion | By 10/14, create your Analytics account, GA4 property, and web stream using the preparation below. Bring the measurement ID and access to your site repository. | Ex05, Ex06 |
+| Tue 10/20 | Project audit and practice interviews in pairs | Finish the site, migration, domain email, and GA4 checks. Bring your README and submission index. Draw the system from memory once. | |
+| Thu 10/22 | Project 1 walkthroughs, the midterm study guide, and what a whiteboard interview is | Submit Project 1 before class at 1:45 PM. Check every link in your submission index. | Project 1 |
 | Tue 10/27 | Midterm whiteboard interviews, no class session | | |
-| Thu 10/29 | LLM calls: tokens, context windows, cost, and structured outputs | | |
-| Tue 11/3 | The agent loop: tools, schemas, memory, and reading a trace | | |
-| Thu 11/5 | Evals: what to measure, building a small eval set, and finding why a run failed | | Ex09 |
-| Tue 11/10 | Reading a job description as a system spec, and architecture review one by one | | M1 |
-| Thu 11/12 | Guardrails: loop limits, schema validation, token budgets, and cost controls | | Ex10 |
-| Tue 11/17 | Environments: local, staging, production, and promotion through CI/CD | | M2 |
-| Thu 11/19 | Cloud storage and databases: object versus relational, S3, and least-privilege IAM | | |
-| Tue 11/24 | Grounding review, retrieval, chunking, and what the agent must not see. On Zoom | | M3 |
+| Thu 10/29 | Midterm whiteboard interviews, no class session | | |
+| Tue 11/3 | Job Scout 1: LLM calls, tokens and cost, structured output, retrieval tools, and the first loop | By 11/2, complete the [Claude API setup](guides/claude-api-access.md). Privately review your Ex01 interview and choose target roles and companies. | |
+| Thu 11/5 | Job Scout 2: tools, state, stop conditions, a human approval step, a Resend digest, and integration failures | By 11/4, create a Resend account and bring Cloudflare access. Keep Zoho mail working. Bring retrieved postings and choose your Project 2 posting today, with the vetted feed as a fallback. | |
+| Tue 11/10 | Reading a job description as a system spec, architecture review, and an integration troubleshooting clinic | Finish Job Scout's first run and bring the posting chosen on 11/5, your spec, and architecture. | Ex07, M1 |
+| Thu 11/12 | Raw agent loops in Python: three tools, small eval sets, trace reading, and finding why a run failed | Bring the same Job Scout repository and the integration investigation. Review a real trace before class. | Ex08 |
+| Tue 11/17 | Environments and tested deployment: local, staging, production, GitHub Actions, and promotion through CI/CD | Bring the three-tool loop, eval cases, and a reviewed application change. Check the tests locally. | Ex09, M2 |
+| Thu 11/19 | Cloud storage and databases, least-privilege IAM, and agent guardrails for loop limits, schemas, and costs | Bring your data-flow diagram and identify stored data, permissions, and the agent's stop conditions. | |
+| Tue 11/24 | Grounding review, retrieval, chunking, and what the agent must not see. On Zoom | Complete the controlled agent-failure investigation and M3 checks. Join through Brightspace's Zoom link. | Ex10, M3 |
 | Thu 11/26 | No class, Thanksgiving | | |
 | Tue 12/1 | Operating a deployed system: auth, rate limiting, monitoring, and cost controls | | |
 | Thu 12/3 | Staging in practice, then the decision record | | M4 |
 | Tue 12/8 | Blog post workshop and final interview prep | | Project 2 |
 | Thu 12/10 | Final interview practice in pairs, and a course retrospective | | |
 
-September 15 continued the unfinished application build from September 10.
-September 17 went to building the application and to Git, so the Azure
-migration moved to September 22 and the sessions after it moved back one
-meeting. The migration then took two meetings, September 22 and 24, so
-finishing it moved to September 29 and Operating the VM moved to October 1.
-On September 29, the rest of October was re-sequenced to fit the Project 1
-deadline. The domain moved from Route 53 to Cloudflare DNS, and the PaaS
-migration moved from Heroku to Railway, because neither needs a card or an
-approval wait to start. Diagnosing the request path now happens inside the
-HTTPS lesson, and Job Scout is built as an agent across two meetings. The
-Before class column lists what to set up ahead of each meeting, so class time
-goes to the work rather than to account sign-ups. Ex04 through Ex08 moved
-with the lessons, so Ex06 is now due 10/13 and Ex07 is due 10/20.
+The October 6 revision keeps the Railway/PostgreSQL migration and focuses
+Project 1 on your website, domain, Zoho email, and basic GA4. October 20 is
+reserved for the project audit and interview practice. Job Scout, Resend,
+and GitHub Actions move after the midterm. The November sequence now builds
+Job Scout before the first Project 2 milestone, then adds evals and tested
+deployment. No Resend signup or Claude API
+credit purchase is needed for Project 1.
+
+### Prepare before class
+
+Complete account setup ahead of the lesson so we can use class time to
+configure and verify the system.
+
+- **By Wednesday, October 7, for Thursday's migration:**
+  [sign in to Railway](https://railway.com/login) with GitHub and
+  [check your trial](https://railway.com/verify). The sign-in window is
+  October 3-7, and the trial starts when you sign in. Create nothing yet.
+  Finish Ex04, save your HTTPS and certificate-renewal evidence, and have
+  the current Azure database ready to migrate. Keep the VM running until
+  the app, data, and domain work over HTTPS on Railway.
+- **By Monday, October 12, for Tuesday's email lesson:** create your own
+  Zoho account using the Forever Free option on the
+  [Zoho Mail pricing page](https://www.zoho.com/mail/zohomail-pricing.html).
+  Have your domain name and Cloudflare login ready. If Forever Free isn't
+  offered in your signup region, contact me before choosing a paid plan
+  or trial. Leave the mail DNS records for class, when we'll configure
+  the mailbox and test delivery and replies together.
+- **By Wednesday, October 14, for Thursday's analytics lesson:** sign in
+  with a Google account and follow Google's
+  [Analytics setup instructions](https://support.google.com/analytics/answer/9304153?hl=en)
+  to create an Analytics account, a GA4 property, and a web data stream for
+  your site's HTTPS URL. Bring the stream's measurement ID. Stop before
+  installing the tag, which we'll do and verify together in class.
+- **After the midterm:** complete the Claude API setup by November 2 and
+  create a Resend account by November 4. We will configure Resend's sending
+  subdomain in class, keeping Zoho's incoming-mail records intact. If you
+  already created an account, keep it. There's no additional setup to do now.
 
 ## Work load expectations
 
@@ -341,8 +377,11 @@ money, and most of the spending starts in Exercise 01.
 | GitHub | Free tier | Exercise 01 |
 | GitHub Codespaces | Personal-account compute/storage allowance; additional usage can cost money | Course Codespace in Session 04 for Ex02; new portfolio Codespace in Session 05 |
 | AWS | Free tier | Project 2, after the midterm |
-| Resend and Cloudflare Email Routing | Free tier | Tue 10/6 |
-| Google Cloud and Firecrawl | Free tier | Exercise 07 |
+| Zoho Mail | Forever Free where offered; contact me if unavailable | Create your account by Mon 10/12 for Tue 10/13 |
+| Google Analytics 4 | Standard account is free | Create the account, property, and web stream by Wed 10/14 for Thu 10/15 |
+| Resend | Free tier | Create an account by Wed 11/4 for Thu 11/5 |
+| Claude API | Billed separately from your subscription | Complete the setup guide by Mon 11/2 for Tue 11/3 |
+| Posting source or retrieval service | Depends on the approved source | Job Scout, after the midterm; no Google Cloud or Firecrawl signup is assigned now |
 
 Plan your budget around the AI subscription you choose, domain registration,
 and the services you actually run. Prices, credits, and eligibility can
@@ -381,21 +420,21 @@ A date marked proposed or to be announced is not a confirmed deadline.
 
 For Ex02, Google Docs saves your report automatically. Confirm it is saved to
 Drive, stop the Codespace, add your shutdown note, and download the report as
-Markdown for submission. Your diagram is a separate JPG. The Codespace should
+a PDF for submission. Your diagram is a separate JPG. The Codespace should
 be stopped after testing; it does not need to remain running for grading.
 
 Feedback is given in class, in Brightspace, or in the repository, depending on
 the assignment. Interview feedback is given verbally at the end of the interview.
 
-Deadlines are hard. Late work loses 10% per day, down to a floor of 50%. A late
-assignment is worth less, but it's never worth nothing, so finish it and turn it
-in.
+Projects lose 10% per day when late, down to a floor of 50%. Percentage late
+penalties apply only to projects. Exercises remain credit/no credit, 15 or 0
+points, including late work. Finish and submit the work even when it is late.
 
 If you know you're going to miss a deadline, send me a Teams message before it
 passes. I may move it. That's case by case, and there's no bank of late days to
-spend. If I move a deadline, the new date is the deadline, and the 10% per day
-runs from there. No message before the deadline means no conversation after it,
-and the 10% per day runs from the original date.
+spend. For projects, the 10% per day runs from the new date if I move it.
+Otherwise it runs from the original project deadline. Exercises retain their
+15-or-0 grading without a percentage late deduction.
 
 Some assignments are delivered in person at a fixed time, and the meeting time is
 the deadline. The two whiteboard interviews can't be rescheduled, so missing one
@@ -432,11 +471,10 @@ We introduce tools when the relevant lesson or assignment needs them. In
 Session 04, students create a Codespace directly from the course repository.
 They install services and create a MySQL database with sample data.
 
-In Session 05, students create their own public portfolio from the
-[instructor template](https://github.com/LMU-ISBA/isba-4775-portfolio-template).
-They add a Codespaces secret and open a new Codespace from their portfolio.
-GitHub clones that repository automatically. Setup scripts and SQL recreate
-the services and data inside its Linux container.
+In Session 05, students create a public `career-platform` repository and open
+their own Codespace using the [resume-site guide](guides/resume-site-in-codespaces.md).
+They start with a README and Python `.gitignore`, then use the coding agent
+to develop their specification and implementation plan before building.
 
 The coding agent interviews students, then helps build a Python application
 after plan approval. Students verify database reads, failure, and recovery.
@@ -446,10 +484,11 @@ connects this workflow to deployment. Student deployment instructions follow
 with the personal-site work.
 
 The early server lab does not require a local editor, database, or coding-agent
-installation. The Ex03 brief will specify any local workflow setup.
-Cloudflare, Railway, Resend, AWS, and orchestration tools are introduced with
-the lessons that use them. The class schedule's Before class column lists what
-to set up ahead of each meeting.
+installation. Follow each later lesson guide for its workflow setup.
+Cloudflare, Railway, Zoho Mail, and GA4 support Project 1. Resend, AWS, and
+orchestration tools follow after the midterm. The class schedule's Before
+class column and preparation checklist list what to set up ahead of each
+meeting.
 
 See "Working with AI" below for how AI use is expected and assessed here.
 
