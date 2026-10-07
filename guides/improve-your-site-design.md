@@ -29,10 +29,10 @@ Start a new Claude Code session in your `career-platform` folder.
 
 3. Make and review the changes. Tell the agent which findings you chose: "Make these changes." Review the diff. Preserve real content, backend, database, routes, environment, Azure service setup, DNS, and HTTPS. Check the local result at desktop and phone widths, try links with the keyboard, and confirm current data. Record anything you couldn't verify.
 
-4. Commit, push, and deploy. In `docs/evidence/design-refresh.md`, record the findings you chose, what changed, your checks, and any blockers. When local checks pass, commit and push to `main`. Then ask the agent:
+4. Commit, push, and deploy. Ask the agent:
 
    ```text
-   Deploy the latest main to my VM.
+   Commit and push to main, then deploy to my VM.
    ```
 
    Confirm the live site shows the new design over HTTPS with current data, and that the VM is on the commit you pushed. Stop at 45 minutes. If time runs out, keep the VM working and bring your notes to class.
