@@ -4,25 +4,11 @@ Complete this required 30–45 minute activity in `career-platform` before Thurs
 
 ## Before you start
 
-You need Claude Code. If it isn't installed yet, open a terminal and run the command for your system.
-
-macOS, Linux, or WSL:
-
-```text
-curl -fsSL https://claude.ai/install.sh | bash
-```
-
-Windows PowerShell:
-
-```text
-irm https://claude.ai/install.ps1 | iex
-```
-
-Open a new terminal and run `claude --version`. If it prints a version number, you're set. For other install options and fixes, see the setup guide: https://code.claude.com/docs/en/setup
+Start a new Claude Code session in your `career-platform` folder.
 
 ## Steps
 
-1. Install Impeccable. Start Claude Code in your `career-platform` folder. In the Claude Code chat, add the marketplace:
+1. Install Impeccable. In the Claude Code chat, add the marketplace:
 
    ```text
    /plugin marketplace add pbakaus/impeccable
