@@ -100,8 +100,14 @@ Keep separate code and data rollback steps. Reverting code does not undo a schem
 
 Railway manages the host, routing, and custom-domain certificate. You still manage code, runtime and package versions, app settings, secrets, data, schema, DNS, checks, and recovery. Railway hosts the PostgreSQL service template but calls it unmanaged. You choose and verify its configuration, updates, monitoring, backups, and restore procedure. Add this responsibility split to your engineering record. See https://docs.railway.com/databases/postgresql.
 
+Update your README before you stop Azure. After cutover it describes a system that no longer exists, because the setup, update path, live address, and architecture all changed. Ask your agent:
+
+> Update the README so it matches how the site runs on Railway now.
+
+Review what it writes against what you actually did. The README needs the Railway and PostgreSQL setup and update path, the responsibility split above, and how the migration preserved current data. Keep the Azure section as history, and link your migration plan and comparison instead of pasting them. The project brief lists everything the README covers: [Keep a concise engineering record](../projects/own-your-corner-of-the-internet.md#8-keep-a-concise-engineering-record).
+
 Only after the app, current data, chosen domain, and HTTPS all pass should you stop Azure. Confirm the VM says `Stopped (deallocated)`. Keep its disk and rollback evidence for now. Deallocation stops VM compute billing, but retained resources can still cost money. Record what remains and when you will remove it. See https://learn.microsoft.com/en-us/azure/virtual-machines/states-billing.
 
 If Railway access or setup is blocked, record the exact message and stop provisioning. Complete the source inventory, edited row, backup, plan, and local tests. The instructor's synthetic example can practice comparisons: `(1, Site, edited)` and `(2, Lab, current)` match a target with both rows, but a target row 1 saying `initial` fails even when both counts are 2. Label your own PostgreSQL import, data match, Railway URL, domain, HTTPS, and autodeploy **pending** until tested on your system.
 
-Before Tuesday, finish pending cutover checks. Link your plan, redacted comparison, results, rollback, responsibilities, and cost notes from `docs/project-1-submission.md`. Bring blockers to the instructor before selecting a paid plan.
+Before Tuesday, finish pending cutover checks and the README update. Link your plan, redacted comparison, results, rollback, responsibilities, and cost notes from `docs/project-1-submission.md`. Bring blockers to the instructor before selecting a paid plan.
