@@ -10,6 +10,11 @@ force-add them, or copy student information into tracked course materials.
 The private guide must be carried over separately when moving to a new checkout;
 it is not included in a Git clone.
 
+Before planning a lesson, sync the class log in
+[planning/class-log/README.md](planning/class-log/README.md) so the last class
+has its Granola transcript, Zoom summary, and Zoom transcript. If the Zoom
+transcript is missing and not in ~/Downloads, say so before planning.
+
 ## Student guides
 
 Keep guides short, with a clear goal and a few actionable steps. Use simple,
