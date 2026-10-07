@@ -35,6 +35,6 @@ Start a new Claude Code session in your `career-platform` folder.
    Commit and push to main, then deploy to my VM.
    ```
 
-   Confirm the live site shows the new design over HTTPS with current data, and that the VM is on the commit you pushed. Stop at 45 minutes. If time runs out, keep the VM working and bring your notes to class.
+   Confirm the live site shows the new design over HTTPS with current data, and that the VM is on the commit you pushed.
 
 Use this verified commit, or the earlier working one, for the Railway migration. Azure work alone doesn't satisfy Project 1's later Railway auto-deploy requirement.
