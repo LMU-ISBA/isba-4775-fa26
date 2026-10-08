@@ -102,11 +102,15 @@ Same pattern as Cloudflare: you've done the Railway dashboard by hand, now give 
 
 > Install the Railway CLI from https://docs.railway.com/cli, log me in, and link this repo to my Railway project.
 
-It installs with npm, `railway login` opens a browser, and `railway link` asks which project. Pick the one you just built.
+It installs with npm, `railway login` opens a browser, and `railway link` asks which project. Pick the one you just built. Then read back what you clicked through in section 2:
+
+> Using the Railway CLI, show me the latest deployment, its logs, and my domains.
+
+Everything in the dashboard has a command. That's what the agent will use from now on.
 
 Prove the new database takes writes:
 
-> Add one new skill to my Railway database and show me it on the live site.
+> Connect to my Railway database with the Railway CLI and add one new skill. Show me it on the live site.
 
 Ask for a skill you actually have. When it appears at your domain, the site is reading and writing PostgreSQL on Railway, not the old SQLite file.
 
