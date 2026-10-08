@@ -109,11 +109,13 @@ Wait for Railway domain verification and certificate issuance. Check DNS, then v
 
 ## 6. Prove an update and plan recovery
 
-Make one small reviewed change, test locally, commit, and push to the connected branch. Find the same commit SHA in Railway deployment history, wait for success, and see the changed page at your custom domain. Record SHA, deployment, URL, time, and observed content. A CLI upload does not prove native GitHub autodeploy. See https://docs.railway.com/deployments/github-autodeploys.
+Make one small reviewed change, test locally, commit, and push to the connected branch. Find the same commit SHA in Railway deployment history, wait for success, and see the changed page at your custom domain. On Azure that same update was pull, sync, and restart over SSH. Here it was a push. Record SHA, deployment, URL, time, and observed content. A CLI upload does not prove native GitHub autodeploy. See https://docs.railway.com/deployments/github-autodeploys.
 
 Keep separate code and data rollback steps. Reverting code does not undo a schema change or new database writes. If Railway accepts writes after cutover, switching DNS back to Azure could lose them. Pause writes, compare both databases, and plan reconciliation before any rollback. Keep the private source backup and a target backup plan. Name who decides when writes resume.
 
 Railway manages the host, routing, and custom-domain certificate. You still manage code, runtime and package versions, app settings, secrets, data, schema, DNS, checks, and recovery. Railway hosts the PostgreSQL service template but calls it unmanaged. You choose and verify its configuration, updates, monitoring, backups, and restore procedure. Add this responsibility split to your engineering record. See https://docs.railway.com/databases/postgresql.
+
+Compare Tuesday with today. On Azure, HTTPS took a firewall rule, `server_name`, Certbot, domain validation, and a renewal timer. On Railway it took one hostname and two DNS records. The work didn't disappear. The platform took it on, and you pay for that. Write two sentences in your README on which of Tuesday's tasks moved to Railway and what you still own.
 
 Update your README before you stop Azure. After cutover it describes a system that no longer exists, because the setup, update path, live address, and architecture all changed. Ask your agent:
 
