@@ -8,7 +8,11 @@ Our example uses FastAPI, Uvicorn, and SQLite, so inspect your app before choosi
 
 ## 1. Check your starting point
 
-Bring the tested branch from the [website design activity](improve-your-site-design.md), and identify the commit Azure actually serves. Preserve your Exercise 04 evidence: Azure HTTP, controlled restart, domain HTTPS, certificate, and renewal. Exercise 04 is due today at 1:45 PM, so tell the instructor if that baseline is unfinished.
+Bring the tested branch from the [website design activity](improve-your-site-design.md), and identify the commit Azure actually serves. Ask your agent:
+
+> SSH to my VM and tell me which commit the running site is on.
+
+If it isn't on main, deploy main first: pull, restart the service, and check the site. The migration starts from the commit your site actually runs. Preserve your Exercise 04 evidence: Azure HTTP, controlled restart, domain HTTPS, certificate, and renewal. Exercise 04 is due today at 1:45 PM, so tell the instructor if that baseline is unfinished.
 
 Check Railway's trial status, remaining credit, verification, and Usage page before provisioning. Current trial terms offer a one-time $5 credit for up to 30 days, followed by $1 in monthly Free plan credit. A limited trial can restrict networking, and stateful volumes may be lost after trial credits expire. Record *your* account dates and limits, and ask the instructor about a blocker before choosing a paid plan. See https://docs.railway.com/pricing/free-trial and https://docs.railway.com/pricing/plans.
 
