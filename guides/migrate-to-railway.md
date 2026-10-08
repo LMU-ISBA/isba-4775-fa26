@@ -21,7 +21,7 @@ Ask your agent:
 
 If it isn't on main, deploy main first: pull, restart the service, and check the site. The migration starts from the commit your site actually runs.
 
-Choose one hostname, `yourdomain.com` or `www.yourdomain.com`. Railway's trial allows one custom domain, and those count as two. Write down the current Cloudflare record for it, so you can put it back. Trial terms: https://docs.railway.com/pricing/free-trial.
+You'll move the root domain only, `yourdomain.com`, not `www`. Railway's trial allows one custom domain, and those count as two. The trial lasts 30 days or $5 of usage, and the Free plan after it allows no custom domain, so your site has a clock on Railway. That is why Azure stays running through this guide. Write down the current Cloudflare A record for `@`, so you can put it back. Trial terms: https://railway.com/pricing.
 
 ## 2. Plan and back up
 
@@ -77,8 +77,8 @@ This step replaces Tuesday's A record with a CNAME. An A record says "this name 
 
 You do this part yourself, in the two dashboards. The agent doesn't touch Railway or Cloudflare here. If its plan has a task for the domain, tell it you're doing that step by hand.
 
-1. In Railway, open the web service, Settings, Networking, and under Public Networking click Custom Domain. Enter only your hostname. Railway shows a CNAME target and a verification TXT name and value. Copy both.
-2. In Cloudflare, change that hostname's A record to a CNAME at Railway's target, DNS only, grey cloud. Add the TXT record. Leave every other record alone. Note the time you save.
+1. In Railway, open the web service, Settings, Networking, and under Public Networking click Custom Domain. Enter your root domain, `yourdomain.com`, and nothing else. Railway shows a CNAME target and a verification TXT name and value. Copy both.
+2. In Cloudflare, change the A record for `@` to a CNAME at Railway's target, DNS only, grey cloud. Add the TXT record. Leave every other record alone. Note the time you save.
 
 While Railway waits for the record, ask the agent:
 
@@ -86,7 +86,7 @@ While Railway waits for the record, ask the agent:
 
 It installs `cf` with npm, and `cf auth login` opens a browser for you to approve. The list is the Cloudflare DNS page as a script sees it, and your new CNAME and TXT should be in it. From now on, that command is how you and the agent check a record.
 
-In rehearsal the padlock came three minutes after the Cloudflare save. Visit `https://yourdomain.com`, click the padlock, and check the certificate is for your hostname and the page shows your data. Pending DNS or TLS is pending work, not success. If you see a redirect loop, find the instructor before changing anything in Cloudflare.
+In rehearsal the padlock came three minutes after the Cloudflare save. Visit `https://yourdomain.com`, click the padlock, and check the certificate is for your domain and the page shows your data. Pending DNS or TLS is pending work, not success. If you see a redirect loop, find the instructor before changing anything in Cloudflare.
 
 ## 6. Prove it works, then write it down
 
@@ -106,7 +106,7 @@ Prove an update. Make one small change, commit, and push. Find the same commit S
 
 Compare Tuesday with today. On Azure, HTTPS took a firewall rule, `server_name`, Certbot, domain validation, and a renewal timer. On Railway it took one hostname and two DNS records. The work didn't disappear. The platform took it on, and you pay for that. Railway now owns the host, routing, and the certificate. You still own code, runtime versions, settings, secrets, data, schema, DNS, testing, and recovery. Railway hosts the PostgreSQL service but calls it unmanaged, so backups and restores are yours too.
 
-Then update the README before you stop Azure, because after cutover it describes a system that no longer exists:
+Then update the README, because after cutover it describes a system that no longer exists:
 
 > Update the README so it matches how the site runs on Railway now.
 
@@ -116,7 +116,7 @@ One of the README's decisions is this migration. Write it as a recommendation: y
 
 Rollback is two different things. Reverting code is a push. Reverting data is not, because once Railway takes writes, pointing DNS back at Azure loses them. If you have to go back, pause writes and compare both databases first.
 
-Only after the app, your data, your domain, and HTTPS all pass should you stop Azure. Confirm the VM says `Stopped (deallocated)`, and keep its disk for now. Deallocation stops compute billing, but the disk and IP still cost money, so write down what remains and when you'll remove it.
+Leave Azure running. Railway's trial ends in 30 days or at $5 of usage, and the Free plan after it drops your custom domain, so the VM is where your site goes back to. Note the trial end date in your README. The instructor will say when the VM can stop.
 
 If Railway access is blocked, record the exact message and stop there. Finish the plan, backup, and code changes, and label the Railway steps **pending** in your README.
 
