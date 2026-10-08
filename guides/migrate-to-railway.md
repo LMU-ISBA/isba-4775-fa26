@@ -33,7 +33,7 @@ This section is all in the Railway dashboard, by hand. Create a project with a P
 
 Now add the web service, but don't deploy it yet. Your code can't run on Railway until section 4.
 
-4. Create, then GitHub Repo. Your repo won't be in the list at first. Click "Configure GitHub App," which takes you to GitHub. Have your passkey ready. Add only `career-platform`, save, and come back. Now it's listed. Pick it.
+4. Click Add at the top right of the canvas, then GitHub Repo. Your repo won't be in the list at first. Click "Configure GitHub App," which takes you to GitHub. Have your passkey ready. Add only `career-platform`, save, and come back. Now it's listed. Pick it.
 5. On the new web service, Variables, add `DATABASE_URL` with Railway's picker, pointing at the Postgres service's `DATABASE_URL`. It looks like `${{Postgres.DATABASE_URL}}`.
 6. Stop here. The web service and its variable stay staged until section 4. If you click Deploy now, Railway builds a repo that has no start command and no PostgreSQL support, and the deploy fails. Not harmful, just confusing. Wait for section 4 and deploy then.
 
