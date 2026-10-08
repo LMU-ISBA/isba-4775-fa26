@@ -43,7 +43,7 @@ You should see two services on the canvas: Postgres online, and the web service 
 
 Ask your agent, from inside your repository:
 
-> Inspect my app and plan its move to Railway and PostgreSQL. The Railway project already exists, with Postgres and an empty web service, and the public database URL is in .env.
+> Inspect my app and plan its move to Railway and PostgreSQL. The Railway project already exists with Postgres and a web service.
 
 That triggers the Superpowers brainstorming skill, the same one that started your app. Answer its questions from what you know about your site, and let it write the spec and then the plan before anything changes.
 
