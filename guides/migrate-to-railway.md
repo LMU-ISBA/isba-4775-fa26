@@ -49,7 +49,7 @@ That triggers the Superpowers brainstorming skill, the same one that started you
 
 Two things to say:
 
-- If its design seeds the database on deploy, say the current rows move from the VM and the seed stays out of deploy. A reseed is not a migration.
+- If its design seeds the database on deploy, say the current rows move from the VM and the seed stays out of deploy.
 - Tell it the app will sit behind Railway's proxy, so Uvicorn has to trust the forwarded protocol header. Without that the page loads unstyled.
 
 If it asks about Codespaces or local PostgreSQL, say no. Local development stays on SQLite.
@@ -62,7 +62,7 @@ Note where the backup went and the row counts. Keep exports, `.env`, passwords, 
 
 ## 4. Code, deploy, and move data
 
-> Do the plan's code tasks: PostgreSQL support, the Railway start command, and the transfer script. Commit and push. Don't create or change anything on Railway.
+> Do the plan's code tasks. Commit and push. Don't create or change anything on Railway.
 
 That triggers the Superpowers executing-plans skill. Read the diff. The connection URL comes from an environment variable, the app binds to `0.0.0.0` and Railway's `PORT`, and a page still loads when the database is down. Don't let it invent sample projects to make an empty site look full.
 
