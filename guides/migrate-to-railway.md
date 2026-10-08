@@ -114,15 +114,11 @@ Wait for Railway domain verification and certificate issuance. Check DNS, then v
 
 ## 6. Prove an update and plan recovery
 
-Same pattern as Cloudflare: you've done the Railway dashboard by hand, now give your agent the same controls. In a terminal, not in Claude Code:
+Same pattern as Cloudflare: you've done the Railway dashboard by hand, now give your agent the same controls. Ask it:
 
-```text
-bash <(curl -fsSL railway.com/install.sh) -y
-railway login
-railway link
-```
+> Install the Railway CLI from https://docs.railway.com/cli, log me in, and link this repo to my Railway project.
 
-The login opens a browser, and `link` picks the project you just built. On Windows without a bash shell, use `npm i -g @railway/cli` instead. Other installs: https://docs.railway.com/cli. From here the agent can read logs, set variables, and check domains itself.
+It installs with npm, and `railway login` opens a browser for you to approve. Then `railway link` asks which project, so pick the one you just built. From here the agent can read logs, set variables, and check domains itself.
 
 Then prove the new database takes writes. Ask the agent:
 
