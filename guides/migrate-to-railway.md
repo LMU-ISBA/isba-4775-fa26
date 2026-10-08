@@ -47,13 +47,12 @@ Ask your agent, from inside your repository:
 
 That triggers the Superpowers brainstorming skill, the same one that started your app. Answer its questions from what you know about your site, and let it write the spec and then the plan before anything changes.
 
-Three things to say no to:
+Two things to say:
 
-- If it asks about Codespaces or local PostgreSQL, say local development stays on SQLite.
 - If its design seeds the database on deploy, say the current rows move from the VM and the seed stays out of deploy. A reseed is not a migration.
-- If it plans a proxied Cloudflare record, SSL mode changes, or redirects, say the record stays DNS only and Railway issues the certificate.
+- Tell it the app will sit behind Railway's proxy, so Uvicorn has to trust the forwarded protocol header. Without that the page loads unstyled.
 
-One thing to add: tell it the app will sit behind Railway's proxy, so Uvicorn has to trust the forwarded protocol header. Without that the page builds `http://` links on an `https://` page and loads unstyled.
+If it asks about Codespaces or local PostgreSQL, say no. Local development stays on SQLite.
 
 Then one more prompt:
 
