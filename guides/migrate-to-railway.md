@@ -6,6 +6,15 @@ Move your Azure resume site and its current data to a Railway web service and Ra
 
 Our example uses FastAPI, Uvicorn, and SQLite, so inspect your app before choosing commands. A starter app or reloaded seed rows are not a migration.
 
+## 0. Before you start
+
+Tuesday lost half an hour to setup. Have these done before 1:45 PM:
+
+1. Your VM is running, auto-shutdown is off, and your SSH rule has today's IP from ifconfig.me.
+2. VS Code is open on `career-platform` with a new Claude Code session, renamed with `/rename` to something like `railway-migration`.
+3. You're signed in to Railway with GitHub, and https://railway.com/verify says Full Trial. If it says Limited, tell the instructor.
+4. This guide is open on github.com, so you see fixes as they're pushed.
+
 ## 1. Check your starting point
 
 Bring the tested branch from the [website design activity](improve-your-site-design.md), and identify the commit Azure actually serves. Ask your agent:
@@ -26,11 +35,13 @@ Ask your coding agent, from inside your existing repository:
 
 That prompt triggers the Superpowers brainstorming skill, the same one that started your app. Answer its questions from what you know about your site, and let it write the spec and then the plan before anything changes. Two things to say no to. If it asks about Codespaces or local PostgreSQL, say local development stays on SQLite. If its design seeds the database on deploy, say the current rows move from the VM and the seed stays out of deploy, because a reseed is not a migration. Review its findings against your running site. Locate the real entry point, runtime, dependencies, start command, database engine and location, schema, secrets, and local file writes. Git carries tracked code, but it doesn't carry database rows, environment variables, or DNS. Railway's app filesystem must not be the permanent home of your SQLite data.
 
-Before transfer:
+Before transfer, two more prompts:
 
-- Back up the *current* database privately with a method suited to its engine, then test that you can read the backup. Keep exports, `.env`, passwords, and keys out of Git.
-- Edit one existing project row on Azure, then record its stable ID and exact new text privately. This catches a stale export or seed-data reload.
-- Record table names, columns, keys and constraints, counts, selected rows, and the Azure page's HTTP status and edited text. Decide when to pause writes or take a final export because a backup can become stale while writes continue.
+> Back up the current database on the VM privately, confirm you can read the backup, and record the tables, columns, keys, row counts, and the home page's HTTP status.
+
+> Change one project's title in the VM's database to include today's date, and tell me its ID and new text.
+
+Write that ID and text down privately. It catches a stale export or a seed-data reload later. Keep exports, `.env`, passwords, and keys out of Git. A backup goes stale while writes continue, so take the final export right before transfer.
 
 If you cannot identify the source database, find it before creating a target that only *looks* healthy.
 
@@ -48,7 +59,7 @@ Replace the placeholders after inspecting your app. A Dockerfile may need an exp
 
 ## 4. Build the target and move data
 
-Create a Railway project with a PostgreSQL service and a web service connected to your existing GitHub repository and chosen branch. Add a Railway-provided web domain for testing, and put secrets in service Variables, not Git. Use Railway's variable picker to set web `DATABASE_URL` to the PostgreSQL service's `DATABASE_URL`. If named `Postgres`, the reference looks like `${{Postgres.DATABASE_URL}}`. Deploy staged changes and inspect build and deploy logs.
+Create a Railway project with a PostgreSQL service and a web service connected to your existing GitHub repository and chosen branch. When you pick "Deploy from GitHub repo," Railway asks to install its GitHub App. Choose only `career-platform`, and have your GitHub passkey or password ready, since GitHub re-authenticates there. Add a Railway-provided web domain for testing, and put secrets in service Variables, not Git. Use Railway's variable picker to set web `DATABASE_URL` to the PostgreSQL service's `DATABASE_URL`. If named `Postgres`, the reference looks like `${{Postgres.DATABASE_URL}}`. Deploy staged changes and inspect build and deploy logs.
 
 That database URL is private to the Railway project, so it will not connect from your laptop. If your reviewed transfer needs an external client, enable temporary public database access only for the transfer, then remove it and check any proxy cost. See https://docs.railway.com/databases/postgresql.
 
