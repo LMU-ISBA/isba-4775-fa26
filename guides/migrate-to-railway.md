@@ -8,8 +8,6 @@ Our example uses FastAPI, Uvicorn, and SQLite, so inspect your app before choosi
 
 ## 0. Before you start
 
-Tuesday lost half an hour to setup. Have these done before 1:45 PM:
-
 1. Your VM is running, auto-shutdown is off, and your SSH rule has today's IP from ifconfig.me.
 2. VS Code is open on `career-platform` with a new Claude Code session, renamed with `/rename` to something like `railway-migration`.
 3. You're signed in to Railway with GitHub, and https://railway.com/verify says Full Trial. If it says Limited, tell the instructor.
