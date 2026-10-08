@@ -47,7 +47,11 @@ If you cannot identify the source database, find it before creating a target tha
 
 ## 3. Make the same app work with PostgreSQL
 
-Have your agent adapt the reviewed app, then inspect the diff. Read the connection URL from an environment variable, and check SQLite-specific SQL, placeholders, IDs, types, transactions, and migrations. Keep a healthy page and useful behavior when the database is unavailable. For the class example, healthy is HTTP 200, while an unavailable database gives HTTP 503 with the profile still visible. Do not invent sample projects to make an empty target look complete.
+Ask the agent to do the plan's code work and nothing on Railway yet:
+
+> Do the plan's code tasks: PostgreSQL support, the Railway start command, and the transfer script. Commit and push. Stop before creating anything on Railway.
+
+It triggers the Superpowers executing-plans skill. Then inspect the diff. Read the connection URL from an environment variable, and check SQLite-specific SQL, placeholders, IDs, types, transactions, and migrations. Keep a healthy page and useful behavior when the database is unavailable. For the class example, healthy is HTTP 200, while an unavailable database gives HTTP 503 with the profile still visible. Do not invent sample projects to make an empty target look complete.
 
 Railway needs the web process to bind to `0.0.0.0` and its `PORT`. A possible FastAPI command is:
 
