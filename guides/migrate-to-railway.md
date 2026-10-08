@@ -134,4 +134,6 @@ If Railway access is blocked, record the exact message and stop there. Finish th
 
 Last, on the Postgres service, Settings, Networking, remove the TCP Proxy and click Deploy. Your laptop doesn't need the database anymore, and the password-protected address is one less thing on the internet.
 
+Before you leave, commit and push everything: the code changes, the plan, and the README. If you worked on a branch, merge it to main, since main is what Railway deploys.
+
 Before Tuesday, finish pending cutover checks and the README update. Link your plan, redacted comparison, results, rollback notes, and cost notes from `docs/project-1-submission.md`. Bring blockers to the instructor before choosing a paid plan.
