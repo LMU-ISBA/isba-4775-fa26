@@ -28,7 +28,7 @@ You'll move the root domain only, `yourdomain.com`, not `www`. Railway's trial a
 This section is all in the Railway dashboard, by hand. Create a project with a PostgreSQL service first.
 
 1. New Project, then Deploy PostgreSQL. Click Deploy at the top left.
-2. On the Postgres service, Settings, Networking, enable TCP Proxy, and click Deploy again. That gives the database a public address, which your laptop needs for the transfer. Leave it on.
+2. On the Postgres service, Settings, Networking, enable TCP Proxy, and click Deploy again. That gives the database a public address, which your laptop needs for the transfer. It comes off at the end of section 6.
 3. In the Postgres service's Variables tab, copy `DATABASE_PUBLIC_URL` into your local `.env` as `RAILWAY_DATABASE_URL`. It contains the password, so it goes in `.env` and nowhere else: not in chat, not in Git.
 
 Now add the web service, but don't deploy it yet. Your code can't run on Railway until section 4.
@@ -127,5 +127,7 @@ Rollback is two different things. Reverting code is a push. Reverting data is no
 Leave Azure running. Railway's trial ends in 30 days or at $5 of usage, and the Free plan after it drops your custom domain, so the VM is where your site goes back to. Note the trial end date in your README. The instructor will say when the VM can stop.
 
 If Railway access is blocked, record the exact message and stop there. Finish the plan, backup, and code changes, and label the Railway steps **pending** in your README.
+
+Last, on the Postgres service, Settings, Networking, remove the TCP Proxy and click Deploy. Your laptop doesn't need the database anymore, and the password-protected address is one less thing on the internet.
 
 Before Tuesday, finish pending cutover checks and the README update. Link your plan, redacted comparison, results, rollback notes, and cost notes from `docs/project-1-submission.md`. Bring blockers to the instructor before choosing a paid plan.
