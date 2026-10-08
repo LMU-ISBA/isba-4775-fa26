@@ -77,7 +77,7 @@ Now move the rows. Ask the agent:
 
 > Transfer the backup into the Railway database, then compare row counts and content between my VM database and the Railway database, table by table.
 
-Keep its output. Check `git status` before anything is committed. The backup copy and comparison file on your laptop stay out of Git, so add their folder to `.gitignore` if it isn't already. Then open the Railway URL and read the page. Your profile, experiences, and skills should be the ones from your VM. A matching count alone doesn't prove it, so read the page.
+Open the Railway URL and read the page. Your profile, experiences, and skills should be the ones from your VM. A matching count alone doesn't prove it, so read the page.
 
 ## 5. Point your domain at Railway
 
