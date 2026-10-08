@@ -11,7 +11,7 @@ Move your Azure resume site and its current data to a Railway web service and Ra
 3. You're signed in to Railway with GitHub, and https://railway.com/verify says Full Trial. If it says Limited, tell the instructor.
 4. This guide is open on github.com, so you see fixes as they're pushed.
 
-Sections 4 and 5 happen in the Railway and Cloudflare dashboards on purpose, so you see what a service, a variable, a deploy log, and a DNS record look like. Each one then gets a CLI, once you know what it's abstracting. That's the pattern from here on: dashboard first, then the CLI, because the CLI is what your agent uses.
+Sections 2 and 5 happen in the Railway and Cloudflare dashboards on purpose, so you see what a service, a variable, a deploy log, and a DNS record look like. Each one then gets a CLI, once you know what it's abstracting. That's the pattern from here on: dashboard first, then the CLI, because the CLI is what your agent uses.
 
 ## 1. Check your starting point
 
@@ -23,11 +23,27 @@ If it isn't on main, deploy main first: pull, restart the service, and check the
 
 You'll move the root domain only, `yourdomain.com`, not `www`. Railway's trial allows one custom domain, and those count as two. The trial lasts 30 days or $5 of usage, and the Free plan after it allows no custom domain, so your site has a clock on Railway. That is why Azure stays running through this guide. Write down the current Cloudflare A record for `@`, so you can put it back. Trial terms: https://railway.com/pricing.
 
-## 2. Plan and back up
+## 2. Build the empty target
+
+This section is all in the Railway dashboard, by hand. Create a project with a PostgreSQL service first.
+
+1. New Project, then Deploy PostgreSQL. Click Deploy at the top left. Nothing runs until you do, and an error before that click is only the staged state.
+2. On the Postgres service, Settings, Networking, enable TCP Proxy, and click Deploy again. That gives the database a public address, which your laptop needs for the transfer. Leave it on.
+3. In the Postgres service's Variables tab, copy `DATABASE_PUBLIC_URL` into your local `.env` as `RAILWAY_DATABASE_URL`. It contains the password, so it goes in `.env` and nowhere else: not in chat, not in Git.
+
+Now add the web service, but don't deploy it yet. Your code can't run on Railway until section 4.
+
+4. Create, then GitHub Repo. Your repo won't be in the list at first. Click "Configure GitHub App," which takes you to GitHub. Have your passkey ready. Add only `career-platform`, save, and come back. Now it's listed. Pick it.
+5. On the new web service, Variables, add `DATABASE_URL` with Railway's picker, pointing at the Postgres service's `DATABASE_URL`. It looks like `${{Postgres.DATABASE_URL}}`.
+6. Stop here. The web service and its variable stay staged until section 4. If you click Deploy now, Railway builds a repo that has no start command and no PostgreSQL support, and the deploy fails. Not harmful, just confusing. Wait for section 4 and deploy then.
+
+You should see two services on the canvas: Postgres online, and the web service waiting.
+
+## 3. Plan and back up
 
 Ask your agent, from inside your repository:
 
-> Inspect my app and plan its move to Railway and PostgreSQL.
+> Inspect my app and plan its move to Railway and PostgreSQL. The Railway project already exists, with Postgres and an empty web service, and the public database URL is in .env.
 
 That triggers the Superpowers brainstorming skill, the same one that started your app. Answer its questions from what you know about your site, and let it write the spec and then the plan before anything changes.
 
@@ -45,25 +61,18 @@ Then one more prompt:
 
 Note where the backup went and the row counts. Keep exports, `.env`, passwords, and keys out of Git.
 
-## 3. Make the same app work with PostgreSQL
+## 4. Code, deploy, and move data
 
-> Do the plan's code tasks: PostgreSQL support, the Railway start command, and the transfer script. Commit and push. Stop before creating anything on Railway.
+> Do the plan's code tasks: PostgreSQL support, the Railway start command, and the transfer script. Commit and push. Don't create or change anything on Railway.
 
 That triggers the Superpowers executing-plans skill. Read the diff. The connection URL comes from an environment variable, the app binds to `0.0.0.0` and Railway's `PORT`, and a page still loads when the database is down. Don't let it invent sample projects to make an empty site look full.
 
-While the agent works, start section 4 in the Railway dashboard. The two don't depend on each other until the deploy.
+Once the push is on GitHub, go back to the Railway dashboard.
 
-## 4. Build the target and move data
-
-Create a Railway project with a PostgreSQL service and a web service from your GitHub repo.
-
-- Your repo won't be in the "Deploy from GitHub repo" list at first. Click "Configure GitHub App," which takes you to GitHub. Have your passkey ready. Add only `career-platform`, save, and come back. Now it's listed.
-- On the web service, set the variable `DATABASE_URL` with Railway's picker to the Postgres service's `DATABASE_URL`. It looks like `${{Postgres.DATABASE_URL}}`.
-- Nothing runs until you click Deploy at the top left. An error before that click is only the staged state.
-- Under the web service's Settings, Networking, click Generate Domain. Open it exactly as shown, with no port. With empty tables it shows a default name, which is what you want before the transfer. If it loads without styles, the proxy fix from section 2 is missing. Tell the agent the stylesheet links come out as `http://` behind Railway's proxy and let it fix the start command.
+- Click Deploy at the top left. Watch the build and deploy logs on the web service.
 - Confirm the migrations ran. Look for `alembic upgrade head` in the deploy log, or ask the agent to check the migration version on Railway. If the log says `relation "profiles" does not exist`, ask the agent to run the migrations against `RAILWAY_DATABASE_URL`.
-
-That `DATABASE_URL` is private to the project, so your laptop can't use it for the transfer. On the Postgres service, Settings, Networking, enable TCP Proxy and click Deploy. Then in its Variables tab, copy `DATABASE_PUBLIC_URL` into your local `.env` as `RAILWAY_DATABASE_URL`. It contains the password, so it goes in `.env` and nowhere else: not in chat, not in Git. Tell the agent to read it from there. Leave the public address on. Your laptop needs it again in section 6.
+- Under the web service's Settings, Networking, click Generate Domain. Open it exactly as shown, with no port. The 8080 in the logs is inside the container. With empty tables it shows a default name, which is what you want before the transfer.
+- If the page loads without styles, the proxy fix from section 3 is missing. Tell the agent the stylesheet links come out as `http://` behind Railway's proxy and let it fix the start command and push. Railway redeploys on the push.
 
 Now move the rows. Ask the agent:
 
