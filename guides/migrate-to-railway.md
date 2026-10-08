@@ -14,8 +14,9 @@ Tuesday lost half an hour to setup. Have these done before 1:45 PM:
 2. VS Code is open on `career-platform` with a new Claude Code session, renamed with `/rename` to something like `railway-migration`.
 3. You're signed in to Railway with GitHub, and https://railway.com/verify says Full Trial. If it says Limited, tell the instructor.
 4. This guide is open on github.com, so you see fixes as they're pushed.
+5. `node --version` and `npm --version` work in your terminal. Two CLIs later in this guide install with npm. If they don't, install Node from https://nodejs.org.
 
-Sections 4 and 5 happen in the Railway dashboard on purpose, so you see what a service, a variable, a deploy log, and a domain look like. The CLI comes in section 6, once you know what it's abstracting.
+Sections 4 and 5 happen in the Railway and Cloudflare dashboards on purpose, so you see what a service, a variable, a deploy log, and a DNS record look like. Each one then gets a CLI, once you know what it's abstracting. That is the pattern from here on: dashboard first, then the CLI, because the CLI is what your agent will use.
 
 ## 1. Check your starting point
 
@@ -103,11 +104,21 @@ This step replaces Tuesday's A record with a CNAME. An A record says "this name 
 
 In Railway, add only your hostname to the web service. Copy the CNAME target and verification TXT name/value shown there. In Cloudflare, replace only that hostname's Azure routing record and add the TXT record. Cloudflare can flatten a CNAME at the apex, and this setup uses DNS-only. Preserve mail records and every unrelated hostname rather than inventing a Railway IP. Follow the actual instructions if they differ: https://docs.railway.com/networking/domains/working-with-domains.
 
+While Railway waits for your record, read the same record from a terminal. Install the Cloudflare CLI, not in Claude Code:
+
+```text
+npm install --global cf
+cf auth login
+cf dns records list --zone yourdomain.com
+```
+
+The login opens a browser. The list is the Cloudflare DNS page as a script sees it, and your new CNAME and TXT should be in it. From now on, that command is how you and the agent check a record, instead of a screenshot. Docs: https://developers.cloudflare.com/cf/
+
 Wait for Railway domain verification and certificate issuance. Check DNS, then visit the chosen `https://` URL and verify certificate hostname and validity, status, links, profile, and your data. Record the date and network. Try another network if caches disagree. Pending DNS or TLS is pending work, not success. Diagnose a redirect loop with the instructor before proceeding. Do not change Cloudflare proxy mode without checking the TLS path.
 
 ## 6. Prove an update and plan recovery
 
-You've done the dashboard by hand. Now give your agent the same controls. In a terminal, not in Claude Code:
+Same pattern as Cloudflare: you've done the Railway dashboard by hand, now give your agent the same controls. In a terminal, not in Claude Code:
 
 ```text
 bash <(curl -fsSL railway.com/install.sh) -y
