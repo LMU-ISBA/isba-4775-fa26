@@ -10,7 +10,6 @@ Move your Azure resume site and its current data to a Railway web service and Ra
 2. VS Code is open on `career-platform` with a new Claude Code session, renamed with `/rename` to something like `railway-migration`.
 3. You're signed in to Railway with GitHub, and https://railway.com/verify says Full Trial. If it says Limited, tell the instructor.
 4. This guide is open on github.com, so you see fixes as they're pushed.
-5. `node --version` and `npm --version` work in your terminal. Two CLIs later in this guide install with npm. If they don't, install Node from https://nodejs.org.
 
 Sections 4 and 5 happen in the Railway and Cloudflare dashboards on purpose, so you see what a service, a variable, a deploy log, and a DNS record look like. Each one then gets a CLI, once you know what it's abstracting. That's the pattern from here on: dashboard first, then the CLI, because the CLI is what your agent uses.
 
