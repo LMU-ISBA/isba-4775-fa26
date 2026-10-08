@@ -1,7 +1,7 @@
 # ISBA 4775-01: Networking and Cloud Computing, Fall 2026
 
 This repository holds the course materials for ISBA 4775 at Loyola Marymount
-University. Class meets Tuesdays and Thursdays, 1:45 to 3:25 PM, in Hilton 115.
+University. Class meets Tuesdays and Thursdays, 1:45 to 3:25 PM, in Hilton 113.
 Read everything here on GitHub and leave this repository unchanged. Your own
 work goes in your `career-platform` repository or in Brightspace, as each brief
 tells you.

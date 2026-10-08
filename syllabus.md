@@ -7,7 +7,7 @@
 | Course | ISBA 4775-01, Networking & Cloud Computing |
 | Credit hours | 4 |
 | Meets | Tuesday and Thursday, 1:45 PM to 3:25 PM |
-| Location | Hilton 115 |
+| Location | Hilton 113 |
 
 ## Instructor
 
@@ -262,7 +262,7 @@ you chose, so this is a simulated interview for that job.
 | Finals | Final whiteboard interview |
 
 Thanksgiving week meets once, on Zoom. Tuesday, November 24 is remote, and you
-join from the Zoom tool in Brightspace rather than coming to Hilton 115.
+join from the Zoom tool in Brightspace rather than coming to Hilton 113.
 Thursday, November 26 is Thanksgiving Day, and it is the only cancelled meeting
 all semester.
 

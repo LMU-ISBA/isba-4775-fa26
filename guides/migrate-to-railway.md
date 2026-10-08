@@ -4,8 +4,6 @@ Session 12 · Thursday, October 8, 2026
 
 Move your Azure resume site and its current data to a Railway web service and Railway PostgreSQL. Keep Azure running until the app, data, domain, and HTTPS all work. Finish what's left for homework.
 
-Four things move, and Git only carries one of them: code, data, configuration, and the address. A starter app or reloaded seed rows are not a migration.
-
 ## 0. Before you start
 
 1. Your VM is running, auto-shutdown is off, and your SSH rule has today's IP from ifconfig.me.
