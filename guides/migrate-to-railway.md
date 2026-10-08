@@ -27,7 +27,7 @@ You'll move the root domain only, `yourdomain.com`, not `www`. Railway's trial a
 
 This section is all in the Railway dashboard, by hand. Create a project with a PostgreSQL service first.
 
-1. New Project, then Deploy PostgreSQL. Click Deploy at the top left. Nothing runs until you do, and an error before that click is only the staged state.
+1. New Project, then Deploy PostgreSQL. Click Deploy at the top left.
 2. On the Postgres service, Settings, Networking, enable TCP Proxy, and click Deploy again. That gives the database a public address, which your laptop needs for the transfer. Leave it on.
 3. In the Postgres service's Variables tab, copy `DATABASE_PUBLIC_URL` into your local `.env` as `RAILWAY_DATABASE_URL`. It contains the password, so it goes in `.env` and nowhere else: not in chat, not in Git.
 
