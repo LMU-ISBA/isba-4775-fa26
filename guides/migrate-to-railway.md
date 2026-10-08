@@ -75,7 +75,7 @@ Compare source and target before changing DNS. Ask the agent:
 
 > Compare row counts and content between my VM database and the Railway database, table by table.
 
-Keep its output. Then open the Railway-provided URL and check that your profile, experiences, and skills are the ones from your VM, not seed data. A matching count alone does not prove matching data, so read the page.
+Keep its output. Before anything is committed, check `git status`. The backup copy and comparison file the agent made on your laptop stay out of Git, so add their folder to `.gitignore` if it isn't already. Then open the Railway-provided URL and check that your profile, experiences, and skills are the ones from your VM, not seed data. A matching count alone does not prove matching data, so read the page.
 
 ## 5. Test the Railway URL, then the domain
 
