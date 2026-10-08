@@ -2,9 +2,9 @@
 
 Session 12 · Thursday, October 8, 2026
 
-Move your Azure resume site and its current data to a Railway web service and Railway-hosted PostgreSQL. Keep Azure running until the app, data, domain, and HTTPS work. Finish remaining checks for homework.
+Move your Azure resume site and its current data to a Railway web service and Railway PostgreSQL. Keep Azure running until the app, data, domain, and HTTPS all work. Finish what's left for homework.
 
-Our example uses FastAPI, Uvicorn, and SQLite, so inspect your app before choosing commands. A starter app or reloaded seed rows are not a migration.
+Four things move, and Git only carries one of them: code, data, configuration, and the address. A starter app or reloaded seed rows are not a migration.
 
 ## 0. Before you start
 
@@ -14,134 +14,113 @@ Our example uses FastAPI, Uvicorn, and SQLite, so inspect your app before choosi
 4. This guide is open on github.com, so you see fixes as they're pushed.
 5. `node --version` and `npm --version` work in your terminal. Two CLIs later in this guide install with npm. If they don't, install Node from https://nodejs.org.
 
-Sections 4 and 5 happen in the Railway and Cloudflare dashboards on purpose, so you see what a service, a variable, a deploy log, and a DNS record look like. Each one then gets a CLI, once you know what it's abstracting. That is the pattern from here on: dashboard first, then the CLI, because the CLI is what your agent will use.
+Sections 4 and 5 happen in the Railway and Cloudflare dashboards on purpose, so you see what a service, a variable, a deploy log, and a DNS record look like. Each one then gets a CLI, once you know what it's abstracting. That's the pattern from here on: dashboard first, then the CLI, because the CLI is what your agent uses.
 
 ## 1. Check your starting point
 
-Bring the tested branch from the [website design activity](improve-your-site-design.md), and identify the commit Azure actually serves. Ask your agent:
+Ask your agent:
 
 > SSH to my VM and tell me which commit the running site is on.
 
-If it isn't on main, deploy main first: pull, restart the service, and check the site. The migration starts from the commit your site actually runs. Preserve your Exercise 04 evidence: Azure HTTP, controlled restart, domain HTTPS, certificate, and renewal. Exercise 04 is due today at 1:45 PM, so tell the instructor if that baseline is unfinished.
+If it isn't on main, deploy main first: pull, restart the service, and check the site. The migration starts from the commit your site actually runs.
 
-Check Railway's trial status, remaining credit, verification, and Usage page before provisioning. Current trial terms offer a one-time $5 credit for up to 30 days, followed by $1 in monthly Free plan credit. A limited trial can restrict networking, and stateful volumes may be lost after trial credits expire. Record *your* account dates and limits, and ask the instructor about a blocker before choosing a paid plan. See https://docs.railway.com/pricing/free-trial and https://docs.railway.com/pricing/plans.
+Choose one hostname, `yourdomain.com` or `www.yourdomain.com`. Railway's trial allows one custom domain, and those count as two. Write down the current Cloudflare record for it, so you can put it back. Trial terms: https://docs.railway.com/pricing/free-trial.
 
-Choose one hostname: `yourdomain.com` or `www.yourdomain.com`. Railway's trial permits one custom domain, and those names count as two. Keep Cloudflare as DNS provider, and privately record the current Azure record and how to restore it.
+## 2. Plan and back up
 
-## 2. Inventory and back up
-
-Ask your coding agent, from inside your existing repository:
+Ask your agent, from inside your repository:
 
 > Inspect my app and plan its move to Railway and PostgreSQL.
 
-That prompt triggers the Superpowers brainstorming skill, the same one that started your app. Answer its questions from what you know about your site, and let it write the spec and then the plan before anything changes. Two things to say no to. If it asks about Codespaces or local PostgreSQL, say local development stays on SQLite. If its design seeds the database on deploy, say the current rows move from the VM and the seed stays out of deploy, because a reseed is not a migration. If it plans a proxied Cloudflare record, SSL mode changes, or redirects, say the record stays DNS only and Railway issues the certificate. One thing to add: tell it the app will sit behind Railway's proxy, so Uvicorn has to trust the forwarded protocol header. Without that the page builds `http://` links on an `https://` page and loads unstyled. Review its findings against your running site. Locate the real entry point, runtime, dependencies, start command, database engine and location, schema, secrets, and local file writes. Git carries tracked code, but it doesn't carry database rows, environment variables, or DNS. Railway's app filesystem must not be the permanent home of your SQLite data.
+That triggers the Superpowers brainstorming skill, the same one that started your app. Answer its questions from what you know about your site, and let it write the spec and then the plan before anything changes.
 
-Before transfer, one more prompt:
+Three things to say no to:
+
+- If it asks about Codespaces or local PostgreSQL, say local development stays on SQLite.
+- If its design seeds the database on deploy, say the current rows move from the VM and the seed stays out of deploy. A reseed is not a migration.
+- If it plans a proxied Cloudflare record, SSL mode changes, or redirects, say the record stays DNS only and Railway issues the certificate.
+
+One thing to add: tell it the app will sit behind Railway's proxy, so Uvicorn has to trust the forwarded protocol header. Without that the page builds `http://` links on an `https://` page and loads unstyled.
+
+Then one more prompt:
 
 > Back up the database on the VM and confirm you can read the backup.
 
-Note where the backup went and the row counts it reports. Keep exports, `.env`, passwords, and keys out of Git.
-
-If you cannot identify the source database, find it before creating a target that only *looks* healthy.
+Note where the backup went and the row counts. Keep exports, `.env`, passwords, and keys out of Git.
 
 ## 3. Make the same app work with PostgreSQL
 
-Ask the agent to do the plan's code work and nothing on Railway yet:
-
 > Do the plan's code tasks: PostgreSQL support, the Railway start command, and the transfer script. Commit and push. Stop before creating anything on Railway.
 
-It triggers the Superpowers executing-plans skill. Then inspect the diff. Read the connection URL from an environment variable, and check SQLite-specific SQL, placeholders, IDs, types, transactions, and migrations. Keep a healthy page and useful behavior when the database is unavailable. For the class example, healthy is HTTP 200, while an unavailable database gives HTTP 503 with the profile still visible. Do not invent sample projects to make an empty target look complete.
+That triggers the Superpowers executing-plans skill. Read the diff. The connection URL comes from an environment variable, the app binds to `0.0.0.0` and Railway's `PORT`, and a page still loads when the database is down. Don't let it invent sample projects to make an empty site look full.
 
-Railway needs the web process to bind to `0.0.0.0` and its `PORT`. A possible FastAPI command is:
-
-```text
-uv run --no-dev uvicorn <actual_module>:<actual_app> --host 0.0.0.0 --port $PORT
-```
-
-Replace the placeholders after inspecting your app. A Dockerfile may need an explicit shell to expand `$PORT`, so confirm the real command and logs in Railway. See https://docs.railway.com/deployments/start-command. Run your app's meaningful local tests against disposable PostgreSQL if available, and record what actually passed. A local test does not prove a Railway deployment.
+While the agent works, start section 4 in the Railway dashboard. The two don't depend on each other until the deploy.
 
 ## 4. Build the target and move data
 
-Create a Railway project with a PostgreSQL service and a web service connected to your existing GitHub repository and chosen branch. When you pick "Deploy from GitHub repo," your repo probably won't be in the list. Railway only sees repos its GitHub App has been given. Click "Configure GitHub App" in that dialog, which takes you to GitHub. Have your passkey or password ready, since GitHub re-authenticates there. Add only `career-platform`, save, and come back to Railway. The repo appears in the list now. Add a Railway-provided web domain for testing, and put secrets in service Variables, not Git. Use Railway's variable picker to set web `DATABASE_URL` to the PostgreSQL service's `DATABASE_URL`. If named `Postgres`, the reference looks like `${{Postgres.DATABASE_URL}}`. Nothing runs until you click Deploy at the top left. An error before that click is only the staged state. Then inspect build and deploy logs.
+Create a Railway project with a PostgreSQL service and a web service from your GitHub repo.
 
-That database URL is private to the Railway project, so it will not connect from your laptop. The transfer runs from your laptop, so it needs the public one. The Postgres service has no public address until you turn one on: in its Settings, Networking, enable TCP Proxy, and click Deploy. Then in its Variables tab, copy `DATABASE_PUBLIC_URL` into your local `.env` as `RAILWAY_DATABASE_URL`. It contains the password, so it goes in `.env` and nowhere else: not in chat, not in Git. Tell the agent to read it from there. The public address stays on. It is password protected, and your laptop needs it again in section 6. See https://docs.railway.com/databases/postgresql.
+- Your repo won't be in the "Deploy from GitHub repo" list at first. Click "Configure GitHub App," which takes you to GitHub. Have your passkey ready. Add only `career-platform`, save, and come back. Now it's listed.
+- On the web service, set the variable `DATABASE_URL` with Railway's picker to the Postgres service's `DATABASE_URL`. It looks like `${{Postgres.DATABASE_URL}}`.
+- Nothing runs until you click Deploy at the top left. An error before that click is only the staged state.
+- Under the web service's Settings, Networking, click Generate Domain. Open it exactly as shown, with no port. With empty tables it shows a default name, which is what you want before the transfer. If it loads without styles, the proxy fix from section 2 is missing. Tell the agent the stylesheet links come out as `http://` behind Railway's proxy and let it fix the start command.
+- Confirm the migrations ran. Look for `alembic upgrade head` in the deploy log, or ask the agent to check the migration version on Railway. If the log says `relation "profiles" does not exist`, ask the agent to run the migrations against `RAILWAY_DATABASE_URL`.
 
-Then generate a Railway-provided domain for the web service under Settings, Networking, and open it exactly as shown, with no port. The 8080 in the logs is inside the container. With empty tables the page shows a default name, which is what you want to see before the transfer. If the page loads without styles, the proxy fix from section 2 is missing. Tell the agent the stylesheet links come out as `http://` behind Railway's proxy, and let it fix the start command and push.
+That `DATABASE_URL` is private to the project, so your laptop can't use it for the transfer. On the Postgres service, Settings, Networking, enable TCP Proxy and click Deploy. Then in its Variables tab, copy `DATABASE_PUBLIC_URL` into your local `.env` as `RAILWAY_DATABASE_URL`. It contains the password, so it goes in `.env` and nowhere else: not in chat, not in Git. Tell the agent to read it from there. Leave the public address on. Your laptop needs it again in section 6.
 
-Confirm the migrations ran before transfer. Look for `alembic upgrade head` in the deploy log, or ask the agent to check the migration version on Railway. If the tables are missing, the page shows the fallback profile and the log says `relation "profiles" does not exist`. Ask the agent to run the migrations against `RAILWAY_DATABASE_URL`. Then transfer the backed-up rows with an engine-appropriate method and confirm the transaction results. If you insert explicit IDs, check the PostgreSQL identity sequence so the next new row will not collide.
+Now move the rows. Ask the agent:
 
-Compare source and target before changing DNS. Ask the agent:
+> Transfer the backup into the Railway database, then compare row counts and content between my VM database and the Railway database, table by table.
 
-> Compare row counts and content between my VM database and the Railway database, table by table.
+Keep its output. Check `git status` before anything is committed. The backup copy and comparison file on your laptop stay out of Git, so add their folder to `.gitignore` if it isn't already. Then open the Railway URL and read the page. Your profile, experiences, and skills should be the ones from your VM. A matching count alone doesn't prove it, so read the page.
 
-Keep its output. Before anything is committed, check `git status`. The backup copy and comparison file the agent made on your laptop stay out of Git, so add their folder to `.gitignore` if it isn't already. Then open the Railway-provided URL and check that your profile, experiences, and skills are the ones from your VM, not seed data. A matching count alone does not prove matching data, so read the page.
+## 5. Point your domain at Railway
 
-## 5. Test the Railway URL, then the domain
+This step replaces Tuesday's A record with a CNAME. An A record says "this name is this IP address." A CNAME says "this name is another name, look that one up." The VM had one fixed IP, so an A record fit. Railway's edge is many machines whose addresses change, so it gives you a name like `abc123.up.railway.app` and your domain points at that. When Railway moves things, the name still resolves and you change nothing.
 
-At the Railway-provided HTTPS URL, check status, profile, your experiences and skills, links, and layout. Check logs for SQL and connection errors, then test database failure and recovery in a safe isolated setting. For this class app, the expected sequence is:
+You do this part yourself, in the two dashboards. The agent doesn't touch Railway or Cloudflare here. If its plan has a task for the domain, tell it you're doing that step by hand.
 
-```text
-GET / → 200, profile and your data visible
-safe database-failure test → 503, profile and unavailable message visible
-recovery, GET / again → 200, your data returns
-```
+1. In Railway, open the web service, Settings, Networking, and under Public Networking click Custom Domain. Enter only your hostname. Railway shows a CNAME target and a verification TXT name and value. Copy both.
+2. In Cloudflare, change that hostname's A record to a CNAME at Railway's target, DNS only, grey cloud. Add the TXT record. Leave every other record alone. Note the time you save.
 
-Record actual URLs, times, statuses, and visible text because these lines are expectations, not proof. Never interrupt a live site just to force a 503. If a safe Railway failure test is unavailable, show a local test and mark the Railway check pending.
-
-Keep the network paths distinct:
-
-```text
-DNS: browser's resolver ↔ Cloudflare authoritative DNS
-HTTPS before: browser → Azure Nginx/TLS → app → source database
-HTTPS after:  browser → Railway edge/TLS → app → Railway PostgreSQL
-```
-
-DNS gives the destination, while the subsequent HTTPS request goes to the destination rather than through the DNS server. Write down your source snapshot time, write-freeze state, data comparison, Railway URL result, current Azure DNS record, and rollback decision. Keep Azure running until the checks pass.
-
-This step replaces Tuesday's A record with a CNAME. An A record says "this name is this IP address." A CNAME says "this name is another name, look that one up." The VM had one fixed IP, so an A record fit. Railway's edge is many machines whose addresses change, so it gives you a name like `abc123.up.railway.app` instead, and your domain points at that. When Railway moves things, the name still resolves and you change nothing. The cost is one more lookup and trusting Railway's DNS for the last hop.
-
-You do this part yourself, in the two dashboards. The agent does not touch Railway or Cloudflare in this section, so if its plan has a task for the domain, tell it you are doing that step by hand. In Railway, open the web service, Settings, Networking, and under Public Networking click Custom Domain. Enter only your hostname. Railway then shows the CNAME target and a verification TXT name and value. Copy both. In Cloudflare, replace only that hostname's Azure routing record and add the TXT record. Cloudflare can flatten a CNAME at the apex, and this setup uses DNS-only. Preserve mail records and every unrelated hostname rather than inventing a Railway IP. Follow the actual instructions if they differ: https://docs.railway.com/networking/domains/working-with-domains.
-
-While Railway waits for your record, read the same record from a terminal. Ask the agent:
+While Railway waits for the record, ask the agent:
 
 > Install the Cloudflare CLI from https://developers.cloudflare.com/cf/, log me in, and list the DNS records for my domain.
 
-It installs `cf` with npm and runs `cf auth login`, which opens a browser for you to approve. Then `cf dns records list --zone yourdomain.com` prints the Cloudflare DNS page as a script sees it, and your new CNAME and TXT should be in it. From now on, that command is how you and the agent check a record, instead of a screenshot. Docs: https://developers.cloudflare.com/cf/
+It installs `cf` with npm, and `cf auth login` opens a browser for you to approve. The list is the Cloudflare DNS page as a script sees it, and your new CNAME and TXT should be in it. From now on, that command is how you and the agent check a record.
 
-Wait for Railway domain verification and certificate issuance. Check DNS, then visit the chosen `https://` URL and verify certificate hostname and validity, status, links, profile, and your data. Record the date and network. Try another network if caches disagree. Pending DNS or TLS is pending work, not success. Diagnose a redirect loop with the instructor before proceeding. Do not change Cloudflare proxy mode without checking the TLS path.
+In rehearsal the padlock came three minutes after the Cloudflare save. Visit `https://yourdomain.com`, click the padlock, and check the certificate is for your hostname and the page shows your data. Pending DNS or TLS is pending work, not success. If you see a redirect loop, find the instructor before changing anything in Cloudflare.
 
-## 6. Prove an update and plan recovery
+## 6. Prove it works, then write it down
 
-Same pattern as Cloudflare: you've done the Railway dashboard by hand, now give your agent the same controls. Ask it:
+Same pattern as Cloudflare: you've done the Railway dashboard by hand, now give your agent the same controls.
 
 > Install the Railway CLI from https://docs.railway.com/cli, log me in, and link this repo to my Railway project.
 
-It installs with npm, and `railway login` opens a browser for you to approve. Then `railway link` asks which project, so pick the one you just built. From here the agent can read logs, set variables, and check domains itself.
+It installs with npm, `railway login` opens a browser, and `railway link` asks which project. Pick the one you just built.
 
-Then prove the new database takes writes. Ask the agent:
+Prove the new database takes writes:
 
 > Add one new skill to my Railway database and show me it on the live site.
 
 Ask for a skill you actually have. When it appears at your domain, the site is reading and writing PostgreSQL on Railway, not the old SQLite file.
 
-Then prove an update. Make one small reviewed change, test locally, commit, and push to the connected branch. Find the same commit SHA in Railway deployment history, wait for success, and see the changed page at your custom domain. On Azure that same update was pull, sync, and restart over SSH. Here it was a push. Record SHA, deployment, URL, time, and observed content. A CLI upload does not prove native GitHub autodeploy. See https://docs.railway.com/deployments/github-autodeploys.
+Prove an update. Make one small change, commit, and push. Find the same commit SHA in Railway's deployment history, wait for it to succeed, and see the change at your domain. On Azure that same update was pull, sync, and restart over SSH. Here it was a push.
 
-Keep separate code and data rollback steps. Reverting code does not undo a schema change or new database writes. If Railway accepts writes after cutover, switching DNS back to Azure could lose them. Pause writes, compare both databases, and plan reconciliation before any rollback. Keep the private source backup and a target backup plan. Name who decides when writes resume.
+Compare Tuesday with today. On Azure, HTTPS took a firewall rule, `server_name`, Certbot, domain validation, and a renewal timer. On Railway it took one hostname and two DNS records. The work didn't disappear. The platform took it on, and you pay for that. Railway now owns the host, routing, and the certificate. You still own code, runtime versions, settings, secrets, data, schema, DNS, testing, and recovery. Railway hosts the PostgreSQL service but calls it unmanaged, so backups and restores are yours too.
 
-Railway manages the host, routing, and custom-domain certificate. You still manage code, runtime and package versions, app settings, secrets, data, schema, DNS, checks, and recovery. Railway hosts the PostgreSQL service template but calls it unmanaged. You choose and verify its configuration, updates, monitoring, backups, and restore procedure. Add this responsibility split to your engineering record. See https://docs.railway.com/databases/postgresql.
-
-Compare Tuesday with today. On Azure, HTTPS took a firewall rule, `server_name`, Certbot, domain validation, and a renewal timer. On Railway it took one hostname and two DNS records. The work didn't disappear. The platform took it on, and you pay for that. Write two sentences in your README on which of Tuesday's tasks moved to Railway and what you still own.
-
-Update your README before you stop Azure. After cutover it describes a system that no longer exists, because the setup, update path, live address, and architecture all changed. Ask your agent:
+Then update the README before you stop Azure, because after cutover it describes a system that no longer exists:
 
 > Update the README so it matches how the site runs on Railway now.
 
-Review what it writes against what you actually did. The README needs the Railway and PostgreSQL setup and update path, the responsibility split above, and how the migration preserved current data. Keep the Azure section as history, and link your migration plan and comparison instead of pasting them. The project brief lists everything the README covers: [Keep a concise engineering record](../projects/own-your-corner-of-the-internet.md#8-keep-a-concise-engineering-record).
+Review what it writes against what you did. The README needs the Railway and PostgreSQL setup and update path, the responsibility split above, two sentences on which of Tuesday's tasks moved to Railway, and how the migration kept your current data. Keep the Azure section as history and link your plan and comparison instead of pasting them. The project brief lists everything the README covers: [Keep a concise engineering record](../projects/own-your-corner-of-the-internet.md#8-keep-a-concise-engineering-record).
 
 One of the README's decisions is this migration. Write it as a recommendation: you're the CTO of a three-developer startup on an Azure VM, and Railway offers to take the infrastructure. Should you move? Argue it with what you saw today: cost, your own hours, control, reliability, and what would change your answer.
 
-Only after the app, current data, chosen domain, and HTTPS all pass should you stop Azure. Confirm the VM says `Stopped (deallocated)`. Keep its disk and rollback evidence for now. Deallocation stops VM compute billing, but retained resources can still cost money. Record what remains and when you will remove it. See https://learn.microsoft.com/en-us/azure/virtual-machines/states-billing.
+Rollback is two different things. Reverting code is a push. Reverting data is not, because once Railway takes writes, pointing DNS back at Azure loses them. If you have to go back, pause writes and compare both databases first.
 
-If Railway access or setup is blocked, record the exact message and stop provisioning. Complete the source inventory, backup, plan, and local tests. Label your own PostgreSQL import, data match, Railway URL, domain, HTTPS, new skill, and autodeploy **pending** until tested on your system.
+Only after the app, your data, your domain, and HTTPS all pass should you stop Azure. Confirm the VM says `Stopped (deallocated)`, and keep its disk for now. Deallocation stops compute billing, but the disk and IP still cost money, so write down what remains and when you'll remove it.
 
-Before Tuesday, finish pending cutover checks and the README update. Link your plan, redacted comparison, results, rollback, responsibilities, and cost notes from `docs/project-1-submission.md`. Bring blockers to the instructor before selecting a paid plan.
+If Railway access is blocked, record the exact message and stop there. Finish the plan, backup, and code changes, and label the Railway steps **pending** in your README.
+
+Before Tuesday, finish pending cutover checks and the README update. Link your plan, redacted comparison, results, rollback notes, and cost notes from `docs/project-1-submission.md`. Bring blockers to the instructor before choosing a paid plan.
