@@ -104,15 +104,11 @@ This step replaces Tuesday's A record with a CNAME. An A record says "this name 
 
 You do this part yourself, in the two dashboards. The agent does not touch Railway or Cloudflare in this section, so if its plan has a task for the domain, tell it you are doing that step by hand. In Railway, open the web service, Settings, Networking, and under Public Networking click Custom Domain. Enter only your hostname. Railway then shows the CNAME target and a verification TXT name and value. Copy both. In Cloudflare, replace only that hostname's Azure routing record and add the TXT record. Cloudflare can flatten a CNAME at the apex, and this setup uses DNS-only. Preserve mail records and every unrelated hostname rather than inventing a Railway IP. Follow the actual instructions if they differ: https://docs.railway.com/networking/domains/working-with-domains.
 
-While Railway waits for your record, read the same record from a terminal. Install the Cloudflare CLI, not in Claude Code:
+While Railway waits for your record, read the same record from a terminal. Ask the agent:
 
-```text
-npm install --global cf
-cf auth login
-cf dns records list --zone yourdomain.com
-```
+> Install the Cloudflare CLI from https://developers.cloudflare.com/cf/, log me in, and list the DNS records for my domain.
 
-The login opens a browser. The list is the Cloudflare DNS page as a script sees it, and your new CNAME and TXT should be in it. From now on, that command is how you and the agent check a record, instead of a screenshot. Docs: https://developers.cloudflare.com/cf/
+It installs `cf` with npm and runs `cf auth login`, which opens a browser for you to approve. Then `cf dns records list --zone yourdomain.com` prints the Cloudflare DNS page as a script sees it, and your new CNAME and TXT should be in it. From now on, that command is how you and the agent check a record, instead of a screenshot. Docs: https://developers.cloudflare.com/cf/
 
 Wait for Railway domain verification and certificate issuance. Check DNS, then visit the chosen `https://` URL and verify certificate hostname and validity, status, links, profile, and your data. Record the date and network. Try another network if caches disagree. Pending DNS or TLS is pending work, not success. Diagnose a redirect loop with the instructor before proceeding. Do not change Cloudflare proxy mode without checking the TLS path.
 
