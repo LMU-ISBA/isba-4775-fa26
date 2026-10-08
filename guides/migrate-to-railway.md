@@ -88,6 +88,8 @@ You do this part yourself, in the two dashboards. The agent doesn't touch Railwa
 1. In Railway, open the web service, Settings, Networking, and under Public Networking click Custom Domain. Enter your root domain, `yourdomain.com`, and nothing else. Railway shows a CNAME target and a verification TXT name and value. Copy both.
 2. In Cloudflare, change the A record for `@` to a CNAME at Railway's target, DNS only, grey cloud. Add the TXT record. Leave every other record alone. Note the time you save.
 
+Railway issues the certificate itself once both records verify. The TXT record is the domain validation, so there's no Certbot this time.
+
 While Railway waits for the record, ask the agent:
 
 > Install the Cloudflare CLI from https://developers.cloudflare.com/cf/, log me in, and list the DNS records for my domain.
