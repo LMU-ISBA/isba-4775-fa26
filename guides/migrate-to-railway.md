@@ -123,6 +123,8 @@ Update your README before you stop Azure. After cutover it describes a system th
 
 Review what it writes against what you actually did. The README needs the Railway and PostgreSQL setup and update path, the responsibility split above, and how the migration preserved current data. Keep the Azure section as history, and link your migration plan and comparison instead of pasting them. The project brief lists everything the README covers: [Keep a concise engineering record](../projects/own-your-corner-of-the-internet.md#8-keep-a-concise-engineering-record).
 
+One of the README's decisions is this migration. Write it as a recommendation: you're the CTO of a three-developer startup on an Azure VM, and Railway offers to take the infrastructure. Should you move? Argue it with what you saw today: cost, your own hours, control, reliability, and what would change your answer.
+
 Only after the app, current data, chosen domain, and HTTPS all pass should you stop Azure. Confirm the VM says `Stopped (deallocated)`. Keep its disk and rollback evidence for now. Deallocation stops VM compute billing, but retained resources can still cost money. Record what remains and when you will remove it. See https://learn.microsoft.com/en-us/azure/virtual-machines/states-billing.
 
 If Railway access or setup is blocked, record the exact message and stop provisioning. Complete the source inventory, edited row, backup, plan, and local tests. The instructor's synthetic example can practice comparisons: `(1, Site, edited)` and `(2, Lab, current)` match a target with both rows, but a target row 1 saying `initial` fails even when both counts are 2. Label your own PostgreSQL import, data match, Railway URL, domain, HTTPS, and autodeploy **pending** until tested on your system.
