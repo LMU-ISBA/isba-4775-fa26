@@ -13,16 +13,9 @@ Tuesday lost half an hour to setup. Have these done before 1:45 PM:
 1. Your VM is running, auto-shutdown is off, and your SSH rule has today's IP from ifconfig.me.
 2. VS Code is open on `career-platform` with a new Claude Code session, renamed with `/rename` to something like `railway-migration`.
 3. You're signed in to Railway with GitHub, and https://railway.com/verify says Full Trial. If it says Limited, tell the instructor.
-4. In the Railway dashboard, create an empty project named `career-platform`. Leave it empty. Services come in class.
-5. The Railway CLI is installed and logged in, so your agent can read logs, set variables, and add domains from the terminal. In a terminal, not in Claude Code:
+4. This guide is open on github.com, so you see fixes as they're pushed.
 
-   ```text
-   bash <(curl -fsSL railway.com/install.sh) -y
-   railway login
-   ```
-
-   The login opens a browser. On Windows without a bash shell, use `npm i -g @railway/cli` instead. Other installs: https://docs.railway.com/cli
-6. This guide is open on github.com, so you see fixes as they're pushed.
+Sections 4 and 5 happen in the Railway dashboard on purpose, so you see what a service, a variable, a deploy log, and a domain look like. The CLI comes in section 6, once you know what it's abstracting.
 
 ## 1. Check your starting point
 
@@ -108,7 +101,17 @@ Wait for Railway domain verification and certificate issuance. Check DNS, then v
 
 ## 6. Prove an update and plan recovery
 
-First prove the new database takes writes. Ask the agent:
+You've done the dashboard by hand. Now give your agent the same controls. In a terminal, not in Claude Code:
+
+```text
+bash <(curl -fsSL railway.com/install.sh) -y
+railway login
+railway link
+```
+
+The login opens a browser, and `link` picks the project you just built. On Windows without a bash shell, use `npm i -g @railway/cli` instead. Other installs: https://docs.railway.com/cli. From here the agent can read logs, set variables, and check domains itself.
+
+Then prove the new database takes writes. Ask the agent:
 
 > Add one new skill to my Railway database and show me it on the live site.
 
