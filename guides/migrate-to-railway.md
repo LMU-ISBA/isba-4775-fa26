@@ -13,7 +13,16 @@ Tuesday lost half an hour to setup. Have these done before 1:45 PM:
 1. Your VM is running, auto-shutdown is off, and your SSH rule has today's IP from ifconfig.me.
 2. VS Code is open on `career-platform` with a new Claude Code session, renamed with `/rename` to something like `railway-migration`.
 3. You're signed in to Railway with GitHub, and https://railway.com/verify says Full Trial. If it says Limited, tell the instructor.
-4. This guide is open on github.com, so you see fixes as they're pushed.
+4. In the Railway dashboard, create an empty project named `career-platform`. Leave it empty. Services come in class.
+5. The Railway CLI is installed and logged in, so your agent can read logs, set variables, and add domains from the terminal. In a terminal, not in Claude Code:
+
+   ```text
+   bash <(curl -fsSL railway.com/install.sh) -y
+   railway login
+   ```
+
+   The login opens a browser. On Windows without a bash shell, use `npm i -g @railway/cli` instead. Other installs: https://docs.railway.com/cli
+6. This guide is open on github.com, so you see fixes as they're pushed.
 
 ## 1. Check your starting point
 
