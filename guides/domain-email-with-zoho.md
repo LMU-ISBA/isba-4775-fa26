@@ -46,8 +46,8 @@ Leave the root CNAME and Railway's TXT record alone. Mail records go at the same
 
 This part is by hand, in the Zoho Admin Console and the Cloudflare dashboard.
 
-1. In the Admin Console, open Domains. If signup already asked for your domain, it's listed here. If not, click Add and enter `yourdomain.com`.
-2. Open the domain. Under Verify Domain Ownership, Zoho offers "Login to my DNS," which lets Zoho write your Cloudflare records for you. Skip it today, because you'd never see the records. Choose "Add a TXT record in the DNS" and copy the value.
+1. Zoho's setup wizard asks for your domain first. If you see "Add an existing domain," click Add now and enter `yourdomain.com`. If the domain is already listed under Domains in the Admin Console, open it.
+2. On Verify Your Domain Ownership, Zoho offers "Log in to my DNS," which lets Zoho write your Cloudflare records for you. Skip it today, because you'd never see the records. Click Configure manually, choose the TXT record method, and copy the value.
 3. In Cloudflare, add a TXT record at `@` with that value. Save, go back to Zoho, and click Verify TXT record.
 4. Open Users and confirm your mailbox exists as `you@yourdomain.com`. Create it if it doesn't. Pick a name you'd put on a resume.
 
