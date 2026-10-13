@@ -1,6 +1,6 @@
 # Project 1: Own Your Corner of the Internet
 
-Updated October 6, 2026. Website, domain email, and basic analytics, with the
+Updated October 13, 2026. Website, domain email, and basic analytics, with the
 Azure-to-Railway/PostgreSQL migration retained.
 
 **125 points. Due Thursday, October 22, 2026, at 1:45 PM Pacific, before class.**
@@ -18,8 +18,10 @@ and engineering record. Each migration should preserve the useful work already
 in that repository.
 
 By the deadline, your custom domain should reach the Railway deployment. Keep
-evidence of the earlier Azure deployment. Once the migration is verified,
-follow the instructor's cleanup directions for Azure resources.
+evidence of the earlier Azure deployment, and keep the Azure VM running until
+the instructor says otherwise. Railway's trial ends after 30 days or $5 of
+usage, and its Free plan allows no custom domain, so the VM is where your site
+goes back to. Record the trial end date with your costs.
 
 Job Scout, Resend, and GitHub Actions will be taught after the midterm.
 For this project, Railway handles deployment from your GitHub repository.
@@ -63,15 +65,19 @@ VM restart. Explain which parts needed configuration to make that happen.
 
 Use a domain you control. Configure its authoritative DNS and records, then
 verify that the name reaches your application with a valid certificate.
-The course DNS lab uses Cloudflare DNS, with every record set to DNS only so
-traffic and TLS reach your own server. An instructor-approved alternative must
-allow you to demonstrate the same delegation and record-management concepts.
+The course DNS lab uses Cloudflare DNS. Records that reach your own server are
+set to DNS only, so traffic and TLS go straight to Azure or Railway. An
+instructor-approved alternative must allow you to demonstrate the same
+delegation and record-management concepts.
 
 Record the relevant DNS records, their purpose, and your verification results.
 Explain the certificate's hostname, validity, and renewal arrangement. Update
 the domain during the Railway migration and verify HTTPS at the new destination.
-Railway's trial allows one custom domain, so choose either the bare domain or
-www as your site's address before the cutover.
+Railway's trial allows one custom domain, so the bare domain is your site's
+address on Railway. Send `www` to it with a Cloudflare redirect rule on a
+proxied `www` record, as the Zoho guide shows, so the site keeps one address
+after the VM stops. Verify that both `http://www` and `https://www` land on the
+root with a valid certificate.
 
 ### 4. Migrate to Railway and PostgreSQL
 
@@ -111,15 +117,18 @@ https://docs.railway.com/deployments/github-autodeploys
 
 ### 6. Send and receive email at your domain
 
-Set up Zoho Mail with an address such as `hello@yourdomain.com`. Use Zoho
-webmail to send, receive, and reply from that same address. Mobile setup is optional.
-Cloudflare remains your DNS provider. Use Zoho's MX records for incoming mail.
+Set up Zoho Mail with an address you'd put on a resume, such as
+`firstname@yourdomain.com`. Use Zoho webmail to send, receive, and reply from
+that same address. Cloudflare remains your DNS provider. Use Zoho's MX records
+for incoming mail.
 
 Configure and explain MX, SPF, DKIM, and DMARC. Use the values provided for your
 account, and verify the resulting records and authentication results.
 https://www.zoho.com/mail/help/adminconsole/cloudflare.html
 
-Show that a message from an external account reaches your custom address.
+Before any mail record exists, send one message from an external account to
+your custom address and record what happened to it. Then show that a message
+from the external account reaches your custom address once MX is published.
 Reply from Zoho, then check that the external account receives the reply and
 sees your custom address as the sender. Also verify a new outgoing message.
 Save dated, redacted evidence of delivery and sender authentication. Explain
@@ -155,7 +164,9 @@ Your README should cover:
   ports, and data flow. Include the email and analytics paths.
 - How the migration preserved current data and which responsibilities moved
   to Railway.
-- At least two decisions, the alternatives considered, and your reasons.
+- At least two decisions, the alternatives considered, and your reasons. The
+  Railway migration and managed versus self-hosted email, both written during
+  class, count.
 - Investigated failures, what you checked, what fixed them, and the results
   when you repeated the check. Include remaining limitations.
 - A short reflection on what you understand better and what you would change.
@@ -238,10 +249,9 @@ output, screenshots, and short explanations can support a check. Screenshots
 alone do not replace the working final system. Mark anything unverified rather
 than filling in the expected result.
 
-Keep the final site available through your midterm interview. Follow the
-instructor's cleanup directions after that checkpoint. You do not need to
-keep Azure running after the migration is verified, but retain its evidence
-and follow the instructions for keeping its disk.
+Keep the final site available through your midterm interview. Keep the Azure
+VM running too, until the instructor's cleanup directions say otherwise, and
+retain its evidence.
 
 ## How the 125 points are earned
 
@@ -296,8 +306,9 @@ instructions. Free-plan availability depends on the data center.
 Bring account restrictions to the instructor before selecting a paid plan.
 https://www.zoho.com/mail/zohomail-pricing.html
 
-Cloudflare remains the DNS provider. Keep proxy-capable records set to DNS
-only unless instructed otherwise. The email setup uses Zoho's MX records.
+Cloudflare remains the DNS provider. Keep records that reach your own server
+set to DNS only. The `www` record is the exception: it's proxied so Cloudflare
+can answer the redirect. The email setup uses Zoho's MX records.
 
 Keep a service inventory. Distinguish compute from retained storage and other
 billable resources, and record renewal dates and cleanup plans.
