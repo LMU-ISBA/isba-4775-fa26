@@ -30,8 +30,8 @@ GA4. Project 1 is due **Thursday, October 22, at 1:45 PM Pacific**.
 | October 20 | [Measure your website with GA4](guides/google-analytics.md), then the [project audit](guides/project-1-audit.md) and [midterm practice](guides/midterm-study-guide.md) |
 | October 22 | Submit Project 1 before class, then project walkthroughs |
 
-Exercise 05 is due Tuesday, October 13, and Exercise 06 is due Thursday,
-October 15. Both are due at 1:45 PM Pacific. Midterm whiteboard interviews run
+Exercise 05 is due Tuesday, October 13, and Exercise 06 is due Tuesday,
+October 20. Both are due at 1:45 PM Pacific. Midterm whiteboard interviews run
 October 27 to 29. After the midterm you'll build Job Scout, starting with the
 November 3 and 5 lessons. GitHub Actions and tests follow on November 17.
 

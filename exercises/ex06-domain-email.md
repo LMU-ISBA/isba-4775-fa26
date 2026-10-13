@@ -1,6 +1,6 @@
 # Exercise 06: Send and receive mail at your domain
 
-**Due Thursday, October 15, 2026, at 1:45 PM Pacific. 15 points.** Submit your public `career-platform` repository URL and a direct GitHub link to `docs/evidence/ex06.md` in Brightspace.
+**Due Tuesday, October 20, 2026, at 1:45 PM Pacific. 15 points.** Submit your public `career-platform` repository URL and a direct GitHub link to `docs/evidence/ex06.md` in Brightspace.
 
 Set up Zoho Mail for an address at your own domain. Use Zoho webmail to receive a message from an external mailbox, reply to it, and send a new message from your domain address. Cloudflare remains your DNS provider, and your website's routing records should keep serving the site.
 

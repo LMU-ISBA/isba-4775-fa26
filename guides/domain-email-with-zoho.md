@@ -2,7 +2,7 @@
 
 Session 13 · Tuesday, October 13, 2026
 
-Your website works. Can a recruiter reach you at `you@yourdomain.com`? Today you set that address up on Zoho Mail's free plan, prove it sends, receives, and replies, and check that other providers trust it. Your website stays on Railway the whole time. Finish what's left for [Exercise 06](../exercises/ex06-domain-email.md), due Thursday, October 15, at 1:45 PM.
+Your website works. Can a recruiter reach you at `you@yourdomain.com`? Today you set that address up on Zoho Mail's free plan, prove it sends, receives, and replies, and check that other providers trust it. Your website stays on Railway the whole time. Finish what's left for [Exercise 06](../exercises/ex06-domain-email.md), due Tuesday, October 20, at 1:45 PM.
 
 ## 0. Before you start
 
@@ -12,12 +12,12 @@ Have these open in browser tabs, in this order, so you can move left to right:
 2. The [Zoho Mail Admin Console](https://mailadmin.zoho.com/), signed in to the account you created before class.
 3. [Zoho Mail webmail](https://mail.zoho.com/), in the same account.
 4. The [Cloudflare dashboard](https://dash.cloudflare.com/), on your domain's DNS page.
-5. An outside mailbox you control, such as Gmail or your LMU Outlook. You'll send test mail to and from it.
+5. An outside mailbox you control, such as [Gmail](https://mail.google.com/) or your LMU [Outlook](https://outlook.office.com/). You'll send test mail to and from it.
 6. `https://yourdomain.com`, loading from Railway. If Thursday's cutover is still pending, the site can load from Azure for now. Email doesn't depend on it.
 
 Have these open on your laptop:
 
-- VS Code on `career-platform`, with a new Claude Code session renamed with `/rename` to something like `zoho-email`.
+- VS Code on `career-platform`, with a new Claude Code session renamed with `/rename` to `zoho-email`.
 - A terminal where `cf` works. If it doesn't, run the install prompt from [section 5 of the Railway guide](migrate-to-railway.md#5-point-your-domain-at-railway) first.
 
 Keep your phone nearby. It's your hotspot if a Zoho or Cloudflare page won't load on campus Wi-Fi, as on October 6.
