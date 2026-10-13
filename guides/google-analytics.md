@@ -1,6 +1,6 @@
 # Measure your website with Google Analytics 4
 
-For Tuesday, October 20: by Monday, October 19, create a Google Analytics account, GA4 property, and Web stream for your production HTTPS site. Bring its Measurement ID (`G-`). The account can exist before the site sends data. Your task is to observe one `page_view` and one useful outbound `click`, then explain them. Visitor count is not graded. Tracking has delays and privacy limits.
+For Thursday, October 15: by Wednesday, October 14, create a Google Analytics account, GA4 property, and Web stream for your production HTTPS site. Bring its Measurement ID (`G-`). The account can exist before the site sends data. Your task is to observe one `page_view` and one useful outbound `click`, then explain them. Visitor count is not graded. Tracking has delays and privacy limits.
 
 ## Set up the stream and tag
 

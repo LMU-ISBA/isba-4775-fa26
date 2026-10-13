@@ -42,8 +42,7 @@ Exercise 03 collects the spec, implementation plan, and migration plan from
 the resume-site build and the Azure migration. The Railway migration is a
 Project 1 requirement, and basic GA4 is also required. Exercise 05 is due
 Tuesday, October 13, after the DNS/TLS lesson. Exercise 06 is due Tuesday,
-October 20, the class after the Zoho lesson, since Thursday, October 15 is
-the guest-speaker session. Both are due at 1:45 PM Pacific. Job Scout
+October 20, a week after the Zoho lesson. Both are due at 1:45 PM Pacific. Job Scout
 and its integration exercise move after the midterm. Job Scout lessons are November 3
 and 5. Choose the Project 2 posting by November 5, with the instructor's vetted
 feed available if needed. All listed November deadlines are at 1:45 PM Pacific.
