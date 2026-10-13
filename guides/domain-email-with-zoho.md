@@ -24,7 +24,9 @@ Keep your phone nearby. It's your hotspot if a Zoho or Cloudflare page won't loa
 
 No Zoho account yet? Use the [Forever Free signup](https://workplace.zoho.com/signup?type=org&plan=free). Keep Business Email selected, not Personal Email, because a personal account has no Admin Console and can't host your domain. Enter your name, an email address you already have (it becomes your Zoho login, so use Gmail or LMU, not the address you're about to create), and a password. Accept the terms, enter the code Zoho sends, and when it asks about a domain, choose the option for a domain you already own and enter `yourdomain.com`.
 
-If you already signed up and the [Admin Console](https://mailadmin.zoho.com/) shows no organization, you have a personal account. Either sign up again with Business Email using a different email address, or follow Zoho's steps to [switch a personal account to a business account](https://www.zoho.com/mail/help/adminconsole/manage-subscription.html#upgrade-personal-account).
+Already have a Zoho login, and the setup page offers only paid plans and trials? The free plan is hidden unless the link asks for it. Open https://mailadmin.zoho.com/hosting?plan=free, which goes straight to "Add an existing domain." Don't start a trial.
+
+If the [Admin Console](https://mailadmin.zoho.com/) shows no organization at all, you have a personal account. Either sign up again with Business Email using a different email address, or follow Zoho's steps to [switch a personal account to a business account](https://www.zoho.com/mail/help/adminconsole/manage-subscription.html#upgrade-personal-account).
 
 Do two checks before section 1. In the Admin Console, your plan should say Free. If signup offered only a trial or a paid plan, stop, screenshot the screen without personal details, and tell the instructor. Don't pay. Zoho says the [free plan](https://www.zoho.com/mail/help/adminconsole/subscription.html) is one domain, five users, and 5 GB each, with web access and Zoho's own apps only. It has no IMAP or POP, so Apple Mail, Outlook, and the Gmail app can't connect to it. That's expected.
 
