@@ -18,7 +18,11 @@ Have these open in browser tabs, in this order, so you can move left to right:
 Have these open on your laptop:
 
 - VS Code on `career-platform`, with a new Claude Code session renamed with `/rename` to `zoho-email`.
-- A terminal where `cf` works. If it doesn't, run the install prompt from [section 5 of the Railway guide](migrate-to-railway.md#5-point-your-domain-at-railway) first.
+- A terminal where `cf` works. Prove it with the command below, which should print your Railway records. If it errors, run the install prompt from [section 5 of the Railway guide](migrate-to-railway.md#5-point-your-domain-at-railway) first.
+
+  ```
+  cf dns records list --zone yourdomain.com
+  ```
 
 Keep your phone nearby. It's your hotspot if a Zoho or Cloudflare page won't load on campus Wi-Fi, as on October 6.
 
@@ -40,7 +44,9 @@ Number every test message today, so each one is findable later and the evidence 
 
 Your domain already has records for the website. Mail adds a few more next to them. Save what's there first, so you can put it back.
 
-> Using the Cloudflare CLI, list every DNS record for my domain and save a dated copy as docs/evidence/dns-before-zoho.md.
+```text
+Using the Cloudflare CLI, list every DNS record for my domain and save a dated copy as docs/evidence/dns-before-zoho.md.
+```
 
 Read the list. Your zone already answers "where is the website." Which record type would answer "where is the mail server"? If no record does, where did your test message go?
 
@@ -115,7 +121,9 @@ While you wait, write one sentence each in your own words: what SPF authorizes, 
 
 Zoho's green checks are Zoho's view. Ask the internet too:
 
-> Using the Cloudflare CLI and a DNS lookup against 8.8.8.8, show my domain's MX, SPF, DKIM, and DMARC records, and compare them with what Zoho expects.
+```text
+Using the Cloudflare CLI and a DNS lookup against 8.8.8.8, show my domain's MX, SPF, DKIM, and DMARC records, and compare them with what Zoho expects.
+```
 
 Without a terminal, [MXToolbox](https://mxtoolbox.com/SuperTool.aspx) answers the same questions. It will show "DMARC Policy Not Enabled" in red. That's your `p=none`, and it's deliberate: you monitor first and tighten to `quarantine` later, once you've seen that your own mail passes. Notice too that it asked your Cloudflare name server directly, which is why there was no wait.
 
@@ -132,11 +140,15 @@ Use your outside mailbox, and keep anything sensitive out of the messages. Incom
 
 Before you open the header, predict which of SPF, DKIM, and DMARC will pass, and for which domain. Then read what the receiving side decided. In Gmail, open the message from Zoho, click the three dots, then [Show original](https://support.google.com/mail/answer/29436). In Outlook on the web, it's the three dots, View, then View message details. Look for the `Authentication-Results` line. You want all three to say PASS, with your domain. Paste the header into your agent if it's hard to read:
 
-> Read this mail header and tell me whether SPF, DKIM, and DMARC passed and for which domain.
+```text
+Read this mail header and tell me whether SPF, DKIM, and DMARC passed and for which domain.
+```
 
 In rehearsal the receiver's verdict named a different thing for each check: SPF the envelope sender, DKIM the `zmail` selector, and DMARC the From header. That's the alignment DMARC enforces. Keep the agent's table:
 
-> Save this header analysis as docs/evidence/zoho-header-check.md, without the message body.
+```text
+Save this header analysis as docs/evidence/zoho-header-check.md, without the message body.
+```
 
 A message in Zoho's Sent folder doesn't prove it arrived. Check the receiving side.
 
@@ -146,7 +158,9 @@ The instructor will run one on the projector. [mail-tester.com](https://www.mail
 
 Subject: `Test 03: deliverability`
 
-> Test 03. Hi, this is my new address. My resume is at https://yourdomain.com. Thank you, Your Name
+```text
+Test 03. Hi, this is my new address. My resume is at https://yourdomain.com. Thank you, Your Name
+```
 
 Skip words like free, urgent, or click here, and no capitals or exclamation points in the subject, because those cost points. In rehearsal this message scored 10 out of 10. The one orange line, no List-Unsubscribe header, is a rule for bulk senders and doesn't apply to a personal mailbox. Read what it marks down, because a missing DKIM signature or a second SPF record shows up here first. The free version allows three checks per 24 hours, and mail-tester doesn't say whether it counts by person or by network, so if it refuses you on campus, use the projector result. Your report stays public to anyone with the test address for seven days, so keep the body as written.
 
@@ -186,7 +200,9 @@ Then one decision for your README, written the way you wrote Thursday's Railway 
 
 ## 11. Write it down
 
-> Draft docs/evidence/ex06.md from what we did today: the records and their purposes, the lookup results, the Zoho verification states, and a table of the three mail tests. Leave out message bodies and personal addresses.
+```text
+Draft docs/evidence/ex06.md from what we did today: the records and their purposes, the lookup results, the Zoho verification states, and a table of the three mail tests. Leave out message bodies and personal addresses.
+```
 
 Check every line against what you actually saw, including the section 1 experiment and its result. Add redacted screenshots of the From line and the authentication results. If something is still pending, say so and name the next check. [Exercise 06](../exercises/ex06-domain-email.md) lists everything the evidence covers.
 
