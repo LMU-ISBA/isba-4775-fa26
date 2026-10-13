@@ -225,3 +225,6 @@ slides/
 
 # Student submissions downloaded from Brightspace (private, never commit)
 grading/
+
+# Local Claude Code settings
+.claude/
