@@ -28,6 +28,8 @@ If you already signed up and the [Admin Console](https://mailadmin.zoho.com/) sh
 
 Do two checks before section 1. In the Admin Console, your plan should say Free. If signup offered only a trial or a paid plan, stop, screenshot the screen without personal details, and tell the instructor. Don't pay. Zoho says the [free plan](https://www.zoho.com/mail/help/adminconsole/subscription.html) is one domain, five users, and 5 GB each, with web access and Zoho's own apps only. It has no IMAP or POP, so Apple Mail, Outlook, and the Gmail app can't connect to it. That's expected.
 
+One leftover from Thursday. If your data transfer finished and the site at your domain shows your rows, open the Postgres service in Railway, then Settings, Networking, remove the TCP Proxy, and click Deploy. Your laptop doesn't need the database anymore, and that was the last step of [the Railway guide](migrate-to-railway.md#6-prove-it-works-then-write-it-down). If the transfer is still unfinished, leave it on until it's done.
+
 ## 1. Snapshot your zone
 
 Your domain already has records for the website. Mail adds a few more next to them. Save what's there first, so you can put it back.
