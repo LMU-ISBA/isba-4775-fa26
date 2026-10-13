@@ -9,11 +9,10 @@ Your website works. Can a recruiter reach you at `you@yourdomain.com`? Today you
 Have these open in browser tabs, in this order, so you can move left to right:
 
 1. This guide on github.com, so you see fixes as they're pushed.
-2. The [Zoho Mail Admin Console](https://mailadmin.zoho.com/), signed in to the account you created before class.
-3. [Zoho Mail webmail](https://mail.zoho.com/), in the same account.
-4. The [Cloudflare dashboard](https://dash.cloudflare.com/), on your domain's DNS page.
-5. An outside mailbox you control, such as [Gmail](https://mail.google.com/) or your LMU [Outlook](https://outlook.office.com/). You'll send test mail to and from it.
-6. `https://yourdomain.com`, loading from Railway. If Thursday's cutover is still pending, the site can load from Azure for now. Email doesn't depend on it.
+2. [Zoho's email setup wizard](https://mailadmin.zoho.com/hosting?plan=free), signed in to the account you created before class. Use that exact link. Without `plan=free`, the admin console shows only paid plans, and webmail at mail.zoho.com asks you to create an account, which can land you in a personal @zohomail.com mailbox. Webmail comes later, in section 3, once your mailbox exists.
+3. The [Cloudflare dashboard](https://dash.cloudflare.com/), on your domain's DNS page.
+4. An outside mailbox you control, such as [Gmail](https://mail.google.com/) or your LMU [Outlook](https://outlook.office.com/). You'll send test mail to and from it.
+5. `https://yourdomain.com`, loading from Railway. If Thursday's cutover is still pending, the site can load from Azure for now. Email doesn't depend on it.
 
 Have these open on your laptop:
 
@@ -28,11 +27,11 @@ Keep your phone nearby. It's your hotspot if a Zoho or Cloudflare page won't loa
 
 No Zoho account yet? Use the [Forever Free signup](https://workplace.zoho.com/signup?type=org&plan=free). Keep Business Email selected, not Personal Email, because a personal account has no Admin Console and can't host your domain. Enter your name, an email address you already have (it becomes your Zoho login, so use Gmail or LMU, not the address you're about to create), and a password. Accept the terms, enter the code Zoho sends, and when it asks about a domain, choose the option for a domain you already own and enter `yourdomain.com`.
 
-Already have a Zoho login, and the setup page offers only paid plans and trials? The free plan is hidden unless the link asks for it. Open https://mailadmin.zoho.com/hosting?plan=free, which goes straight to "Add an existing domain." Don't start a trial.
+If the wizard offers only paid plans and trials, you opened it without `plan=free`. Use the tab 2 link, which goes straight to "Add an existing domain." Don't start a trial.
 
-If the [Admin Console](https://mailadmin.zoho.com/) shows no organization at all, you have a personal account. Either sign up again with Business Email using a different email address, or follow Zoho's steps to [switch a personal account to a business account](https://www.zoho.com/mail/help/adminconsole/manage-subscription.html#upgrade-personal-account).
+If the wizard shows no organization at all and Zoho offers you a @zohomail.com address, you have a personal account. Either sign up again with Business Email using a different email address, or follow Zoho's steps to [switch a personal account to a business account](https://www.zoho.com/mail/help/adminconsole/manage-subscription.html#upgrade-personal-account).
 
-Do two checks before section 1. In the Admin Console, your plan should say Free. If signup offered only a trial or a paid plan, stop, screenshot the screen without personal details, and tell the instructor. Don't pay. Zoho says the [free plan](https://www.zoho.com/mail/help/adminconsole/subscription.html) is one domain, five users, and 5 GB each, with web access and Zoho's own apps only. It has no IMAP or POP, so Apple Mail, Outlook, and the Gmail app can't connect to it. That's expected.
+Do two checks before section 1. The wizard should offer "Add an existing domain" with no price on it. If signup offered only a trial or a paid plan, stop, screenshot the screen without personal details, and tell the instructor. Don't pay. Zoho says the [free plan](https://www.zoho.com/mail/help/adminconsole/subscription.html) is one domain, five users, and 5 GB each, with web access and Zoho's own apps only. It has no IMAP or POP, so Apple Mail, Outlook, and the Gmail app can't connect to it. That's expected.
 
 One leftover from Thursday. If your data transfer finished and the site at your domain shows your rows, open the Postgres service in Railway, then Settings, Networking, remove the TCP Proxy, and click Deploy. Your laptop doesn't need the database anymore, and that was the last step of [the Railway guide](migrate-to-railway.md#6-prove-it-works-then-write-it-down). If the transfer is still unfinished, leave it on until it's done.
 
@@ -89,7 +88,7 @@ Add only the three MX rows now, in Cloudflare by hand, and note the time you sav
 | MX | `@` | `mx2.zoho.com` | 20 |
 | MX | `@` | `mx3.zoho.com` | 50 | If old Namecheap MX records are there, delete them in the same minute, so mail doesn't split between two providers. Back in Zoho, click Verify all records. The MX rows should turn green and the other two stay red, which is right for now. Zoho's page says to allow up to a day. In rehearsal all three turned green within a couple of seconds, so try right away.
 
-Once MX verifies, send `Test 01: inbound` from your outside mailbox to `you@yourdomain.com` and watch Zoho webmail. In rehearsal it arrived in about 30 seconds. Then look for the message you sent in section 1. If the sender was still retrying, it may arrive now too. If it bounced, read the bounce: it says what the sending server tried.
+Once MX verifies, send `Test 01: inbound` from your outside mailbox to `you@yourdomain.com` and watch [Zoho webmail](https://mail.zoho.com/), signed in as that address. In rehearsal it arrived in about 30 seconds. Then look for the message you sent in section 1. If the sender was still retrying, it may arrive now too. If it bounced, read the bounce: it says what the sending server tried.
 
 A published MX record and a delivered message are two different pieces of evidence. Keep both.
 
