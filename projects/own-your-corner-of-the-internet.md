@@ -197,8 +197,8 @@ records can also support the project, without copying evidence into another repo
 | Before the Railway cutover | Azure HTTP, restart, DNS, HTTPS, and renewal evidence retained |
 | October 8 | Railway/PostgreSQL target, current-data comparison, and a verified cutover or documented remaining steps |
 | October 13 | Ex05 investigation submitted before class; begin Zoho mail setup and delivery checks |
-| October 15 | Migration and email completion, GA4 verification, and troubleshooting evidence |
-| October 20 | Completed technical work and evidence ready for the submission audit and practice explanation |
+| October 15 | Migration and email completion; guest speakers from ServiceNow in class |
+| October 20 | GA4 verification, then completed technical work and evidence ready for the submission audit and practice explanation |
 | October 22, 1:45 PM | Final project submission before class |
 
 ## Organize your repository

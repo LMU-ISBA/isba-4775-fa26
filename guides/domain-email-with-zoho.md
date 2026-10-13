@@ -36,7 +36,7 @@ One leftover from Thursday. If your data transfer finished and the site at your 
 
 First, an experiment. From your outside mailbox, send a message to `you@yourdomain.com` now, before anything is set up. Write down what you expect to happen: it arrives, it bounces right away, or something else. You'll check on it in section 3.
 
-Number every test message today, so each one is findable later and the evidence table in section 10 writes itself. Subject `Test NN: what it checks`, body one line: the number, who sent it to whom, and the time. This one is `Test 00: before setup`.
+Number every test message today, so each one is findable later and the evidence table in section 11 writes itself. Subject `Test NN: what it checks`, body one line: the number, who sent it to whom, and the time. This one is `Test 00: before setup`.
 
 Your domain already has records for the website. Mail adds a few more next to them. Save what's there first, so you can put it back.
 
@@ -158,13 +158,33 @@ Close the webmail tab. Your mail is still there, because the mailbox is on Zoho'
 
 If every window were closed, where would the mail be?
 
-## 9. Explain the system
+## 9. Send www to the root
+
+Thursday moved your root domain to Railway and left `www` on the Azure VM, because Railway's trial allows one custom domain. When the VM stops, `www.yourdomain.com` stops with it. Cloudflare can answer for `www` instead: a redirect rule sends every `www` request to the root with a 301 before any server is contacted, so Railway never needs a second domain and the VM is out of the path.
+
+1. In Cloudflare DNS, edit the `www` record. For most of you that's the A record with the VM's IP from October 1. Leave the IP alone and switch Proxy status from DNS only to Proxied, the orange cloud. Save. Cloudflare now answers for `www`, and the address behind it stops mattering, even after the VM is gone.
+2. In the left menu, open Rules, then Redirect Rules, and click Create rule. Under "Redirect from WWW to root," click Create from template. Rename the rule `Redirect www to root`, dropping the "[Template]" tag.
+3. The template fills in a wildcard pattern of `https://www.*` with a target of `https://${1}`, a 301, and preserve query string. That only catches HTTPS. Change two fields so plain HTTP is caught too:
+
+   | Field | Template says | Change to |
+   | --- | --- | --- |
+   | Request URL | `https://www.*` | `http*://www.*` |
+   | Target URL | `https://${1}` | `https://${2}` |
+
+   Each `*` in the pattern is a capture. The first is now the `s` or nothing, and the second is everything after `www.`, so `http://www.yourdomain.com/resume` lands on `https://yourdomain.com/resume`.
+4. Click Deploy. Cloudflare warns that "your DNS configuration may not be proxying traffic for http." It read the `http*` in the pattern as a hostname. Your `www` record is the one that matters, and you proxied it in step 1, so keep "Ignore and deploy rule anyway" and click Deploy rule. Don't choose "Create a new proxied DNS record," which would add a record named `http`. In a private window, open `http://www.yourdomain.com` and then `https://www.yourdomain.com`, and watch the address bar change to the root.
+
+Two questions. Who answered that request, and did the VM ever see it? And run the section 5 lookup again for `www`: whose address does DNS return now?
+
+Cloudflare's own example of this rule: https://developers.cloudflare.com/rules/url-forwarding/examples/redirect-www-to-root/
+
+## 10. Explain the system
 
 With a classmate, draw two paths on paper or a whiteboard. First, a recruiter's mail server to DNS to Zoho to your browser. Label the record it looked up. Second, your reply to Gmail, with the three checks Gmail runs at its end and where each one finds its answer. Then trade drawings and find one thing the other person left out.
 
 Then one decision for your README, written the way you wrote Thursday's Railway decision. You're the CTO of a three-developer startup. Would you run your own mail server or use Zoho? Argue it with what you saw today: what Zoho handled, what you still own (DNS, the records, the evidence that it works), what breaks if a record is wrong, and what would change your answer.
 
-## 10. Write it down
+## 11. Write it down
 
 > Draft docs/evidence/ex06.md from what we did today: the records and their purposes, the lookup results, the Zoho verification states, and a table of the three mail tests. Leave out message bodies and personal addresses.
 
