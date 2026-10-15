@@ -4,6 +4,18 @@ By Wednesday, October 14, create a Google Analytics account, GA4 property, and W
 
 In class, you'll add the tag to your live site, observe one `page_view` and one outbound `click`, and explain them. An outbound click follows a link to another website. Visitor count is not graded. Tracking has delays and privacy limits.
 
+## Start here for class
+
+Follow [Connect Coding Agent to Zoho Mail](connect-coding-agent-to-zoho-mail.md#0-before-you-start) first. For the GA4 work, have these ready:
+
+- Your own `career-platform` repository open in VS Code, with Claude Code or Codex ready. Keep using the same website project from the Zoho work.
+- https://analytics.google.com in a tab, with your website's GA4 property selected.
+- Your live website at its HTTPS address in another tab.
+- Your Railway project open so you can check the deployment.
+- Your saved Google tag code and Measurement ID, which starts with `G-`.
+
+If your account, property, and stream are ready, continue at [prepare the privacy notice](#in-class-prepare-the-privacy-notice). Otherwise, complete the setup below first.
+
 ## Choose recognizable names
 
 The account holds your properties. A property holds your website's reports, and its Web stream receives activity from the site.

@@ -14,7 +14,7 @@ Which of the two models would you choose for a service the agent talks to every 
 
 ## 0. Before you start
 
-- VS Code on `career-platform` with a new Claude Code or Codex session. In Claude Code, name it with:
+- Open your own `career-platform` repository in VS Code, with a new Claude Code or Codex session. This is the website project you'll update today. In Claude Code, name the session with:
 
   ```text
   /rename zoho-mcp
@@ -22,6 +22,8 @@ Which of the two models would you choose for a service the agent talks to every 
 
 - https://mcp.zoho.com in a tab. Sign in with the same login you use for Zoho Mail at your domain.
 - [Zoho webmail](https://mail.zoho.com/) and your outside mailbox, Gmail or LMU Outlook, in two more tabs.
+
+Start with this guide. When we move to [Google Analytics](google-analytics.md#start-here-for-class), keep the same repository open and follow its starting checklist.
 
 If Tuesday's mailbox doesn't receive yet, finish [sections 2 and 3 of the Zoho guide](domain-email-with-zoho.md#2-prove-you-own-the-domain) first. The server needs a working mailbox to act on.
 
