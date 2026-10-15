@@ -2,6 +2,25 @@
 
 For Thursday, October 15: by Wednesday, October 14, create a Google Analytics account, GA4 property, and Web stream for your production HTTPS site. Bring its Measurement ID (`G-`). The account can exist before the site sends data. Your task is to observe one `page_view` and one useful outbound `click`, then explain them. Visitor count is not graded. Tracking has delays and privacy limits.
 
+## Choose recognizable names
+
+Use this naming convention when creating your setup:
+
+| Field | Use | Example |
+|---|---|---|
+| Account name | Your name | `Greg Lontok` |
+| Property name | Your website domain | `greglontok.com` |
+| Web stream name | Your domain + Web | `greglontok.com Web` |
+| Website URL | Your live HTTPS address | `https://greglontok.com` |
+
+Already used different names? You can keep them if they're clear. To rename them, select the correct account and property in Admin:
+
+- Account > Account details: edit the name and Save.
+- Property > Property details: edit the name and Save.
+- Data collection and modification > Data streams: open your Web stream, click the pencil icon, edit Stream name, and click Update stream.
+
+You need Editor access or above. Rename the existing items instead of recreating them. Changing these labels keeps your collected data and Measurement ID. Google's instructions: https://support.google.com/analytics/answer/9304776
+
 ## Set up the stream and tag
 
 1. At https://analytics.google.com, create the account and GA4 property. Under Admin > Data streams, create a Web stream for the final `https://` address. Copy its Measurement ID and check the selected property.
