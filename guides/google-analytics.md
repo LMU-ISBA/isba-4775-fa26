@@ -1,10 +1,12 @@
 # Measure your website with Google Analytics 4
 
-By Wednesday, October 14, create a Google Analytics account, GA4 property, and Web stream for your production HTTPS site. Bring its Measurement ID (`G-`) and saved Google tag code to class on Thursday, October 15. Stop before installing the tag.
+By Wednesday, October 14, create a Google Analytics account, GA4 property, and Web stream for your live website's `https://` address. Bring its Measurement ID (`G-`) and saved Google tag code to class on Thursday, October 15. The tag is the code that sends activity from a visitor's browser to Google Analytics. Stop before installing it.
 
-In class, you'll deploy the tag, observe one `page_view` and one useful outbound `click`, and explain them. Visitor count is not graded. Tracking has delays and privacy limits.
+In class, you'll add the tag to your live site, observe one `page_view` and one outbound `click`, and explain them. An outbound click follows a link to another website. Visitor count is not graded. Tracking has delays and privacy limits.
 
 ## Choose recognizable names
+
+The account holds your properties. A property holds your website's reports, and its Web stream receives activity from the site.
 
 Use this naming convention when creating your setup:
 
@@ -32,32 +34,46 @@ You need Editor access or above. Rename the existing items instead of recreating
 
 To find the code again, open Admin > Data collection and modification > Data streams. Select your Web stream, then View tag instructions > Install manually.
 
-## In class: install, deploy, and test
+## In class: prepare the privacy notice
 
-Open your site repository in your coding agent. Paste your saved tag after this prompt:
+GA4 uses cookies by default and sends visitor activity data to Google. Google requires a privacy policy explaining this collection. Link a Privacy page from your footer. Where applicable privacy and cookie rules require consent, analytics cookies must wait for permission, and visitors must be able to decline or withdraw it. A notice alone doesn't provide those controls.
+
+Open your website project in your coding agent. The stream exists, but its tag isn't installed yet. Paste your saved tag after this prompt:
 
 ```text
-Add this Google tag to my website's shared HTML template immediately after the opening head tag. Check for duplicates, verify it appears once in the rendered HTML, and show me the diff before committing or deploying.
+I'm about to add GA4 with page views and outbound-click measurement. The planned tag is below. Inspect my site's existing data collection, cookies, and forms. Draft a plain-language Privacy page for the planned setup and link it from the footer. Explain what is collected, why, who receives it, and visitors' actual choices. Flag unknowns and any consent controls needed before installation. Don't claim protections that aren't implemented. Show me the changes before publishing.
 ```
 
-1. Review the diff and rendered local HTML. Confirm one tag installation with the same Measurement ID in the script URL and config call. An additional copy through a plugin or Tag Manager can double-count. The Measurement ID belongs in browser code. Service-account keys and API secrets do not.
-2. Commit and push to deploy through Railway. Match the commit SHA to the successful Railway deployment. View the live HTTPS page source and confirm one tag installation with your correct Measurement ID.
+Review the draft against the planned setup. Resolve any required consent controls before enabling analytics, and publish the accurate notice with the tag. Keep the site usable when tracking is declined.
+
+References: https://support.google.com/analytics/answer/11397207 , https://marketingplatform.google.com/about/analytics/terms/us/ (section 7), and https://europa.eu/youreurope/business/growing/digitalising/online-privacy/indexamp_en.htm
+
+## In class: install, deploy, and test
+
+Open your website project in your coding agent. Paste your saved tag after this prompt:
+
+```text
+Add this Google tag to my website so it loads once on each page, respecting the site's consent controls. Check for existing tags and show me the changes and the generated page HTML before committing or deploying.
+```
+
+1. Review the code changes and the HTML your app generates. Confirm the tag appears once, immediately after `<head>`, with your Measurement ID in both places in Google's code. Installing it twice can count the same activity twice. The Measurement ID can be public. Keep passwords, API secrets, and private credentials out of the page.
+2. Commit and push to deploy through Railway. Check that Railway successfully deployed the same commit, using its commit ID. Open your live site and choose View Page Source in the browser. Confirm one tag installation with your correct Measurement ID.
 3. Return to View tag instructions > Install manually. Under Test your website, enter your live HTTPS URL and click Test (or Test installation). Record the result, then verify the events below.
 
 Google guides: https://support.google.com/analytics/answer/9304153 and https://support.google.com/analytics/answer/13566436
 
 ## Verify what GA4 received
 
-Use a browser session you control and honor its consent/privacy choices. Do not ask others to disable privacy tools or generate traffic.
+Use your own browser and respect its privacy settings and any cookie choices you made. You don't need classmates to visit your site or turn off their privacy tools.
 
 1. Open Reports > Realtime overview in the correct GA4 property. Load your live HTTPS page in another tab. Scroll to Event count by Event name and find `page_view`. Initial collection can take up to 30 minutes. Standard reports take longer. The active-user counter alone doesn't verify a specific event.
-2. Choose a real link from your site to another domain, outside any cross-domain measurement list. Check that its URL contains no email, token, or other private data. Click it once, then return to the event card and allow a few minutes for `click` to appear.
-3. Select the `click` row. Inspect `link_url`, `link_domain`, and `outbound`. Confirm the destination matches the link you clicked and that `outbound` indicates true. Save screenshots of the event list and parameter values.
-4. If Realtime lacks detail, use Tag Assistant and DebugView for your own device. A successful installation test or network request doesn't establish that GA4 displayed both events.
-5. Record the time and time zone, live URL, action, event names and parameters actually seen, and where you saw them. Explain what the outbound event helps you learn. It doesn't establish why someone clicked or what they did on the destination site.
+2. Choose a link on your site to your LinkedIn profile, GitHub profile, or a GitHub repository. Check that the address contains no email address, access code, or other private information. Click it once, then return to the event card and allow a few minutes for `click` to appear.
+3. Select the `click` row and check its details: `link_url` is the full destination address, `link_domain` is the website, such as `linkedin.com`, and `outbound` indicates that the link leaves your site. Confirm the address matches what you clicked and `outbound` is true. Save screenshots of the event list and these details.
+4. If Realtime doesn't show those details, use Google's Tag Assistant and DebugView tools to inspect events from your browser. Follow the Google guides below. A successful installation test alone doesn't confirm that GA4 received both events.
+5. Record the time and time zone, live URL, what you did, and the event names and details you saw in GA4. Explain what the click helps you learn. It doesn't establish why someone clicked or what they did on the destination site.
 
 Google guides: https://developers.google.com/analytics/devguides/collection/ga4/troubleshoot , https://support.google.com/analytics/answer/9322688 , and https://support.google.com/analytics/answer/7201382
 
-If an event is missing, check the live deployment and single tag/ID, selected property and stream, outbound setting and destination, consent/privacy settings, and processing delay. Retest in a browser you control. Record the failed observation. Do not claim an unobserved event. Keep personal information out of event names, URLs, titles, and parameters (https://support.google.com/analytics/answer/6366371). The site must work when tracking is blocked.
+If an event is missing, check that the live site has the latest code and one tag with the correct Measurement ID. Confirm you're viewing the right property and stream, Outbound clicks is enabled, and the link goes to another website. Check your browser's privacy settings and cookie choices, and allow time for GA4 to process the event. Retest in your own browser and record what happened, including anything still missing. Keep personal information out of page addresses, titles, and data sent to GA4 (https://support.google.com/analytics/answer/6366371). The site must work when tracking is blocked.
 
-Link your dated evidence from `docs/project-1-submission.md`: connect the deployed tag to the observed `page_view`, outbound `click` and parameters, and your interpretation. Label any unverified check.
+Link your dated evidence from `docs/project-1-submission.md`. Include the deployed commit, live URL, installation test result, screenshots of `page_view` and `click` with its destination details, and your explanation. State which checks you haven't verified.
