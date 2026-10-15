@@ -36,7 +36,9 @@ To find the code again, open Admin > Data collection and modification > Data str
 
 Open your site repository in your coding agent. Paste your saved tag after this prompt:
 
-> Add this Google tag to my website's shared HTML template immediately after the opening head tag. Check for duplicates, verify it appears once in the rendered HTML, and show me the diff before committing or deploying.
+```text
+Add this Google tag to my website's shared HTML template immediately after the opening head tag. Check for duplicates, verify it appears once in the rendered HTML, and show me the diff before committing or deploying.
+```
 
 1. Review the diff and rendered local HTML. Confirm one tag installation with the same Measurement ID in the script URL and config call. An additional copy through a plugin or Tag Manager can double-count. The Measurement ID belongs in browser code. Service-account keys and API secrets do not.
 2. Commit and push to deploy through Railway. Match the commit SHA to the successful Railway deployment. View the live HTTPS page source and confirm one tag installation with your correct Measurement ID.

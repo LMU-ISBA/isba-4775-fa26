@@ -16,10 +16,15 @@ Have these open in browser tabs, in this order, so you can move left to right:
 
 Have these open on your laptop:
 
-- VS Code on `career-platform`, with a new Claude Code session renamed with `/rename` to `zoho-email`.
+- VS Code on `career-platform`, with a new Claude Code session named with:
+
+  ```text
+  /rename zoho-email
+  ```
+
 - A terminal where `cf` works. Prove it with the command below, which should print your Railway records. If it errors, run the install prompt from [section 5 of the Railway guide](migrate-to-railway.md#5-point-your-domain-at-railway) first.
 
-  ```
+  ```bash
   cf dns records list --zone yourdomain.com
   ```
 
@@ -108,6 +113,18 @@ The SPF and DKIM values are in the same DNS Mapping table as the MX rows. DMARC 
 | TXT | `zmail._domainkey` | your table's long `v=DKIM1` value |
 | TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:you@yourdomain.com` |
 
+For DMARC, copy this Name:
+
+```text
+_dmarc
+```
+
+Copy this Content and replace the email address with your own:
+
+```text
+v=DMARC1; p=none; rua=mailto:you@yourdomain.com
+```
+
 1. SPF: if a Namecheap record starting with `v=spf1` is already at `@`, replace its content instead of adding a second. Two SPF records fail.
 2. DKIM: the name is the host Zoho shows, usually `zmail._domainkey`. Zoho generated that [selector](https://www.zoho.com/mail/help/adminconsole/dkim-configuration.html) and its key pair when you added the domain. Cloudflare splits the long value into chunks on its own.
 3. DMARC: `p=none` is monitor-only. It asks receivers to check, not to reject. The `rua` address is where Google and Microsoft mail you a daily summary of who sent as your domain and whether it passed. Use your own new address, never one you don't control. Expect the first XML attachment tomorrow. If a `_dmarc` record already exists, ask the instructor before changing it. Zoho's [DMARC page](https://www.zoho.com/mail/help/adminconsole/dmarc-policy.html) explains the stricter settings.
@@ -155,7 +172,13 @@ A message in Zoho's Sent folder doesn't prove it arrived. Check the receiving si
 
 The instructor will run one on the projector. [mail-tester.com](https://www.mail-tester.com/) gives you an address, you send it a normal message from Zoho, and it scores the result out of 10. It scores the words too, so send something a person would write. Use this:
 
-Subject: `Test 03: deliverability`
+Subject:
+
+```text
+Test 03: deliverability
+```
+
+Body:
 
 ```text
 Test 03. Hi, this is my new address. My resume is at https://yourdomain.com. Thank you, Your Name
@@ -184,6 +207,18 @@ Thursday moved your root domain to Railway and left `www` on the Azure VM, becau
    | Request URL | `https://www.*` | `http*://www.*` |
    | Target URL | `https://${1}` | `https://${2}` |
 
+   Request URL:
+
+   ```text
+   http*://www.*
+   ```
+
+   Target URL:
+
+   ```text
+   https://${2}
+   ```
+
    Each `*` in the pattern is a capture. The first is now the `s` or nothing, and the second is everything after `www.`, so `http://www.yourdomain.com/resume` lands on `https://yourdomain.com/resume`.
 4. Click Deploy. Cloudflare warns that "your DNS configuration may not be proxying traffic for http." It read the `http*` in the pattern as a hostname. Your `www` record is the one that matters, and you proxied it in step 1, so keep "Ignore and deploy rule anyway" and click Deploy rule. Don't choose "Create a new proxied DNS record," which would add a record named `http`. In a private window, open `http://www.yourdomain.com` and then `https://www.yourdomain.com`, and watch the address bar change to the root.
 
@@ -206,3 +241,5 @@ Draft docs/evidence/ex06.md from what we did today: the records and their purpos
 Check every line against what you actually saw, including the section 1 experiment and its result. Add redacted screenshots of the From line and the authentication results. If something is still pending, say so and name the next check. [Exercise 06](../exercises/ex06-domain-email.md) lists everything the evidence covers.
 
 Commit, push, and merge to main.
+
+On Thursday your agent gets to use this mailbox: [Connect Claude Code to your Zoho mailbox](connect-claude-code-to-zoho-mail.md).

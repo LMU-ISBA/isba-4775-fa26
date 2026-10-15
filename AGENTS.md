@@ -25,6 +25,11 @@ but link existing guidance instead of repeating it. Keep instructor rehearsal
 details in private planning files. Apply this check before publishing new or
 revised guides. See planning/writing-style.md for the course voice.
 
+In all guides, put copyable prompts, commands, code, and configuration values
+in fenced code blocks so readers can use Copy. Use `text` for prompts and the
+appropriate language for code. Keep explanations outside the blocks and give
+separately pasted items separate blocks.
+
 ## Next step acceptance
 
 Finish authorized work without reconfirmation. If a clear next step exceeds
