@@ -24,3 +24,10 @@ project. Retain essential verification, deadlines, and recovery instructions,
 but link existing guidance instead of repeating it. Keep instructor rehearsal
 details in private planning files. Apply this check before publishing new or
 revised guides. See planning/writing-style.md for the course voice.
+
+## Next step acceptance
+
+Finish authorized work without reconfirmation. If a clear next step exceeds
+that scope, end with one concise proposed action and "Proceed?" Treat "yes,"
+"proceed," or "accept" as authorization to execute it, without a pasted prompt.
+If declined, don't act. If revised, follow the revision.
