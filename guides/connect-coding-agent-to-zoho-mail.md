@@ -93,7 +93,7 @@ Replace "my outside mailbox" with the actual address. Open the outside mailbox a
 
 ## 4. Write it down
 
-Add Test 04 as one more row in the test table in `docs/evidence/ex06.md`, with the sender named as the agent. It's optional for [Exercise 06](../exercises/ex06-domain-email.md), which is open until Tuesday, October 20. It's also the first time the agent acted for you outside the terminal, so give it a line in your README.
+You may use the Zoho MCP server for the email tests and available authentication details in [Exercise 06](../exercises/ex06-domain-email.md), due Tuesday, October 20. Test 04 can serve as your new outgoing message test once you confirm external receipt. No extra row or written explanation is required. For outgoing authentication, use results from the outside mailbox, supplying its header to the agent if needed.
 
 ## If something goes wrong
 

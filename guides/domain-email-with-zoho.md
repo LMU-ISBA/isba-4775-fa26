@@ -238,7 +238,7 @@ Then one decision for your README, written the way you wrote Thursday's Railway 
 Draft the Email section of docs/evidence/ex06.md with three rows: received, replied, and sent a new message. Include each test's time and observed result. Use my authentication screenshot or excerpt, or report Zoho's verification results if those aren't available. Flag missing checks. Leave out message bodies and personal addresses.
 ```
 
-Check every line against what you actually saw. Include one redacted authentication screenshot or excerpt, or report Zoho's verification results if unavailable. The DNS snapshot and separate header analysis are useful working notes, not required submissions. On Thursday, add the GA4 links and screenshots to the same file. Finish with two or three sentences about what worked, what the outbound click tells you, and anything unresolved. [Exercise 06](../exercises/ex06-domain-email.md) lists the short results sheet.
+Check every line against what you actually saw. Include one redacted authentication screenshot or excerpt, or report Zoho's verification results if unavailable. The DNS snapshot and separate header analysis are useful working notes, not required submissions. On Thursday, add the GA4 links and screenshots to the same file. You may use the Zoho MCP server for the email tests and available authentication details. Verify outgoing mail in the outside mailbox. Briefly note any failed checks. No separate written explanation is required. [Exercise 06](../exercises/ex06-domain-email.md) lists the short results sheet.
 
 Commit, push, and merge to main.
 
