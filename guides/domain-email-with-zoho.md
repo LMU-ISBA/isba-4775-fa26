@@ -131,7 +131,7 @@ v=DMARC1; p=none; rua=mailto:you@yourdomain.com
 
 Back in Zoho, click Verify all records again. All five rows should turn green, and in rehearsal they did right away. If DKIM shows a status toggle, switch it to Enabled.
 
-While you wait, write one sentence each in your own words: what SPF authorizes, what DKIM proves, and what DMARC decides. Exercise 06 asks for exactly these. One more to get right: passing SPF or DKIM alone doesn't pass DMARC. The domain that passed has to match the domain in From.
+While you wait, explain in your own words what SPF authorizes, what DKIM proves, and what DMARC decides. These are discussion questions. One more to get right: passing SPF or DKIM alone doesn't pass DMARC. The domain that passed has to match the domain in From.
 
 ## 5. Check from the outside
 
@@ -235,11 +235,11 @@ Then one decision for your README, written the way you wrote Thursday's Railway 
 ## 11. Write it down
 
 ```text
-Draft docs/evidence/ex06.md from what we did today: the records and their purposes, the lookup results, the Zoho verification states, and a table of the three mail tests. Leave out message bodies and personal addresses.
+Draft the Email section of docs/evidence/ex06.md with three rows: received, replied, and sent a new message. Include each test's time and observed result. Use my authentication screenshot or excerpt, or report Zoho's verification results if those aren't available. Flag missing checks. Leave out message bodies and personal addresses.
 ```
 
-Check every line against what you actually saw, including the section 1 experiment and its result. Add redacted screenshots of the From line and the authentication results. If something is still pending, say so and name the next check. [Exercise 06](../exercises/ex06-domain-email.md) lists everything the evidence covers.
+Check every line against what you actually saw. Include one redacted authentication screenshot or excerpt, or report Zoho's verification results if unavailable. The DNS snapshot and separate header analysis are useful working notes, not required submissions. On Thursday, add the GA4 links and screenshots to the same file. Finish with two or three sentences about what worked, what the outbound click tells you, and anything unresolved. [Exercise 06](../exercises/ex06-domain-email.md) lists the short results sheet.
 
 Commit, push, and merge to main.
 
-On Thursday your agent gets to use this mailbox: [Connect Claude Code to your Zoho mailbox](connect-claude-code-to-zoho-mail.md).
+On Thursday your agent gets to use this mailbox: [Connect Coding Agent to Zoho Mail](connect-coding-agent-to-zoho-mail.md).

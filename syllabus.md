@@ -132,7 +132,7 @@ Codespace shutdown guide feedback within the credit/no-credit assessment.
 | 03 | Build it, then move it: spec, plan, and migration plan | Build | Thu 10/1 |
 | 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8 |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Tue 10/13 |
-| 06 | Email DNS: Zoho Mail, MX, SPF, DKIM, and DMARC, with a send/receive/reply test | Config | Tue 10/20 |
+| 06 | Domain email and GA4: mail delivery, a page view, and an outbound click | Config | Tue 10/20 |
 | 07 | Job Scout's first loop: tools, state, stop conditions, and a real run | Build | Tue 11/10, 1:45 PM |
 | 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Thu 11/12, 1:45 PM |
 | 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Tue 11/17, 1:45 PM |
@@ -141,7 +141,7 @@ Codespace shutdown guide feedback within the credit/no-credit assessment.
 Ex01 and Ex02 were due at 1:45 PM, before class, and Ex03 is due at the same
 time on Thu 10/1. The Railway migration is a Project 1 requirement, taught on
 Thu 10/8. Exercise 05 is due Tue 10/13, after the DNS/TLS lesson. Exercise 06
-is due Tue 10/20, a week after the Zoho lesson. Both are due at 1:45 PM.
+is due Tue 10/20, covering the Zoho and GA4 lessons. Both are due at 1:45 PM.
 Basic GA4 is required for Project 1 and taught on Thu 10/15.
 
 ## Project 1: Own Your Corner of the Internet, 125 points
@@ -296,7 +296,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 10/6 | HTTPS for your domain: certificates, the request path, renewal, and troubleshooting DNS/TLS | Run `nslookup -type=NS yourdomain` and confirm Cloudflare's name servers. Confirm your site loads over HTTP. No Resend signup is needed. | |
 | Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | By 10/7, finish Railway signup. Before class, complete Ex04 and the required [Impeccable design activity](guides/improve-your-site-design.md). Keep Azure running until migration is verified. | Ex04 |
 | Tue 10/13 | Zoho Mail at your domain: MX, SPF, DKIM, and DMARC, then sending, receiving, and replying | By 10/12, finish the Zoho account preparation below. Bring access to your domain's Cloudflare zone. | Ex05 |
-| Thu 10/15 | GA4: page views, one useful interaction, and event verification, followed by troubleshooting and project completion | By 10/14, create your Analytics account, GA4 property, and web stream using the preparation below. Bring the measurement ID and access to your site repository. | |
+| Thu 10/15 | What an MCP server is, and connecting your coding agent to Zoho Mail. Then GA4: page views, one useful interaction, and event verification | By 10/14, create your Analytics account, GA4 property, and web stream using the preparation below. Bring the measurement ID and access to your site repository. | |
 | Tue 10/20 | Project audit, practice interviews in pairs, and what a whiteboard interview is | Finish the site, migration, domain email, and GA4 checks. Bring your README and submission index. Draw the system from memory once. | Ex06 |
 | Thu 10/22 | Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow, for the first half, then midterm interview practice with the study guide | Submit Project 1 before class at 1:45 PM. By Wed 10/21 at 11:59 PM, read both LinkedIn profiles and post two questions in the Brightspace discussion. | Project 1 |
 | Tue 10/27 | Midterm whiteboard interviews, no class session | | |

@@ -1,4 +1,4 @@
-# Connect Claude Code or Codex to your Zoho mailbox
+# Connect Coding Agent to Zoho Mail
 
 Session 14 · Thursday, October 15, 2026
 
@@ -27,7 +27,7 @@ If Tuesday's mailbox doesn't receive yet, finish [sections 2 and 3 of the Zoho g
 
 ## 1. Create the server and choose its tools
 
-1. At https://mcp.zoho.com, click Create MCP Server. Name it `claude-code-mail`.
+1. At https://mcp.zoho.com, click Create MCP Server. Name it `coding-agent-mail`. If you already created a server with a different name, keep it.
 2. Under Add Tools, choose Zoho Mail, then All Tools. Select `getMailAccounts`, `getAccountDetails`, `getAllFolders`, `listEmails`, `SearchEmails`, `getMessageContent`, and `sendEmail`. Choose individual tools, not whole groups, then click Add Now. Skip delete, move, and admin tools.
 3. Save, then open the Connect tab. Copy the MCP URL. It has your API key embedded in it, so treat it the way you treat a password: it never goes in a commit, a chat, or a screenshot.
 

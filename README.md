@@ -26,7 +26,7 @@ GA4. Project 1 is due **Thursday, October 22, at 1:45 PM Pacific**.
 | Before October 8, 1:45 PM | [Website design activity with Impeccable](guides/improve-your-site-design.md), required and done on your own alongside Exercise 04 |
 | October 8 | [Migrate to Railway and PostgreSQL](guides/migrate-to-railway.md) |
 | October 13 | [Send and receive domain email with Zoho](guides/domain-email-with-zoho.md) |
-| October 15 | [Measure your website with GA4](guides/google-analytics.md), then troubleshooting time |
+| October 15 | [Connect Coding Agent to Zoho Mail](guides/connect-coding-agent-to-zoho-mail.md), then [Measure your website with GA4](guides/google-analytics.md) |
 | October 20 | [Project audit](guides/project-1-audit.md) and [midterm practice](guides/midterm-study-guide.md) |
 | October 22 | Submit Project 1 before class. Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow, then [midterm practice](guides/midterm-study-guide.md). Post two questions in the Brightspace discussion by Wednesday, October 21, at 11:59 PM |
 

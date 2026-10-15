@@ -58,7 +58,7 @@ Add this Google tag to my website so it loads once on each page, respecting the 
 
 1. Review the code changes and the HTML your app generates. Confirm the tag appears once, immediately after `<head>`, with your Measurement ID in both places in Google's code. Installing it twice can count the same activity twice. The Measurement ID can be public. Keep passwords, API secrets, and private credentials out of the page.
 2. Commit and push to deploy through Railway. Check that Railway successfully deployed the same commit, using its commit ID. Open your live site and choose View Page Source in the browser. Confirm one tag installation with your correct Measurement ID.
-3. Return to View tag instructions > Install manually. Under Test your website, enter your live HTTPS URL and click Test (or Test installation). Record the result, then verify the events below.
+3. Return to View tag instructions > Install manually. Under Test your website, enter your live HTTPS URL and click Test (or Test installation). Check the result, then verify the events below.
 
 Google guides: https://support.google.com/analytics/answer/9304153 and https://support.google.com/analytics/answer/13566436
 
@@ -70,10 +70,10 @@ Use your own browser and respect its privacy settings and any cookie choices you
 2. Choose a link on your site to your LinkedIn profile, GitHub profile, or a GitHub repository. Check that the address contains no email address, access code, or other private information. Click it once, then return to the event card and allow a few minutes for `click` to appear.
 3. Select the `click` row and check its details: `link_url` is the full destination address, `link_domain` is the website, such as `linkedin.com`, and `outbound` indicates that the link leaves your site. Confirm the address matches what you clicked and `outbound` is true. Save screenshots of the event list and these details.
 4. If Realtime doesn't show those details, use Google's Tag Assistant and DebugView tools to inspect events from your browser. Follow the Google guides below. A successful installation test alone doesn't confirm that GA4 received both events.
-5. Record the time and time zone, live URL, what you did, and the event names and details you saw in GA4. Explain what the click helps you learn. It doesn't establish why someone clicked or what they did on the destination site.
+5. Explain what the click helps you learn. It doesn't establish why someone clicked or what they did on the destination site. If something is missing, note what you tried and your next check.
 
 Google guides: https://developers.google.com/analytics/devguides/collection/ga4/troubleshoot , https://support.google.com/analytics/answer/9322688 , and https://support.google.com/analytics/answer/7201382
 
 If an event is missing, check that the live site has the latest code and one tag with the correct Measurement ID. Confirm you're viewing the right property and stream, Outbound clicks is enabled, and the link goes to another website. Check your browser's privacy settings and cookie choices, and allow time for GA4 to process the event. Retest in your own browser and record what happened, including anything still missing. Keep personal information out of page addresses, titles, and data sent to GA4 (https://support.google.com/analytics/answer/6366371). The site must work when tracking is blocked.
 
-Link your dated evidence from `docs/project-1-submission.md`. Include the deployed commit, live URL, installation test result, screenshots of `page_view` and `click` with its destination details, and your explanation. State which checks you haven't verified.
+Add your live site and Privacy page links to `docs/evidence/ex06.md`, with screenshots showing `page_view`, `click`, and the click's destination details. Use as few screenshots as necessary. Include what the click tells you in the short explanation for [Exercise 06](../exercises/ex06-domain-email.md), due Tuesday, October 20, at 1:45 PM Pacific. The exercise lists the full results sheet. Link the same evidence from `docs/project-1-submission.md` for Project 1.
