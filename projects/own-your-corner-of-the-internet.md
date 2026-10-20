@@ -176,7 +176,7 @@ Your README should cover:
 - Your service costs or credits, expiration dates, and cleanup plans.
 
 You can link from the README to an existing file rather than copy its contents.
-Keep your `AGENTS.md`, original spec and plans, and meaningful commit history.
+Keep your original spec and plans and meaningful commit history.
 Include two investigated failures: one application or database-dependency
 failure and one network, DNS, or TLS failure. You already wrote these:
 `docs/evidence/ex03.md` records what broke during the build or Azure
@@ -240,7 +240,7 @@ Submit your repository URL, live HTTPS URL, and final commit SHA through the
 Project 1 submission in Brightspace. Put the same information in
 `docs/project-1-submission.md`, with links to:
 
-1. The README, original application spec and plans, and `AGENTS.md`.
+1. The README and the original application spec and plans.
 2. Azure and Railway diagrams, including email and analytics data flow.
 3. Migration plans, source/target data comparisons, cutover results, and rollback.
 4. Azure HTTP/restart evidence and final DNS/HTTPS verification.

@@ -307,8 +307,7 @@ Open the saved plan and check these three things:
 3. File, function, and configuration names match across tasks.
 
 The plan should create the project instructions, install services, create the
-database and reader, build the page, and verify the result. Project instructions
-belong in `AGENTS.md`, which Copilot CLI reads.
+database and reader, build the page, and verify the result.
 
 Ask for corrections, then inspect the saved plan before approving execution.
 
