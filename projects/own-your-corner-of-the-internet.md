@@ -216,7 +216,7 @@ records can also support the project, without copying evidence into another repo
 | October 13 | Ex05 investigation submitted before class; begin Zoho mail setup and delivery checks |
 | October 15 | Migration and email completion, GA4 verification, and troubleshooting evidence |
 | October 20 | Ex06 submitted before class; completed technical work and evidence ready for the requirements review and practice explanation |
-| October 22, 1:45 PM | Final project submission before class, then guest speakers from ServiceNow and interview practice |
+| October 22, 1:45 PM | Final project submission before class, then guest speakers from ServiceNow |
 
 ## Organize your repository
 
