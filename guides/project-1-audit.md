@@ -36,7 +36,7 @@ Use `docs/project-1-submission.md` as an index. Link the README, original spec a
 
 ## Submit and rehearse
 
-Check Railway trial usage and credit dates, domain renewal, and Zoho plan limits. Stop Azure only after the Railway app, data, domain, and HTTPS pass. Confirm the VM says "Stopped (deallocated)." Retained disks may still cost money. Keep earlier evidence and the site available through your interview.
+Check Railway trial usage and credit dates, domain renewal, and Zoho plan limits. Keep the Azure VM running until the instructor's cleanup directions, as the project brief requires. Verify the Railway app, data, domain, and HTTPS before any approved shutdown. When instructed to stop Azure, confirm the VM says "Stopped (deallocated)." Retained disks may still cost money. Keep earlier evidence and the site available through your interview.
 
 Put the repository URL, live HTTPS URL, and final commit SHA in both the index and Brightspace Project 1 submission. Check the pushed SHA and links from outside your workspace. State any blocker plainly. Project 1 has its own 125-point rubric. Exercises are separate 15-point credit/no-credit work.
 

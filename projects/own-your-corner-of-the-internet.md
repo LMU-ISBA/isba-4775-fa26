@@ -1,6 +1,6 @@
 # Project 1: Own Your Corner of the Internet
 
-Updated October 13, 2026. Website, domain email, and basic analytics, with the
+Updated October 19, 2026. Website, domain email, and basic analytics, with the
 Azure-to-Railway/PostgreSQL migration retained.
 
 **125 points. Due Thursday, October 22, 2026, at 1:45 PM Pacific, before class.**
@@ -281,9 +281,13 @@ responsible for checking its claims and explaining your system.
 
 ## Prepare to explain it at the midterm
 
-Your interview is a separate 125-point assessment, scheduled October 27-29.
-For the first 15 minutes, draw and explain your system from memory, without
-notes or the repository. The final five minutes change one constraint.
+Your interview is a separate 125-point assessment, scheduled October 26-28.
+The interview is 15 minutes of drawing, explanation, and follow-up questions,
+with no notes or repository, then a five-minute debrief. One changed
+constraint takes no more than three minutes of the 15.
+The scope includes the first-half class material and Exercises 01-06, as well
+as your project. Start with what happens when you enter a domain in a browser,
+connecting physical network hardware to the services handling the request.
 
 Be ready to trace a web request and an email, explain a migration and an
 analytics event, diagnose a failure, compare provider responsibilities, and

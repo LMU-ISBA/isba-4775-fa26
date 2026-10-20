@@ -178,19 +178,29 @@ feed if needed, so the agent doesn't block your first project milestone.
 
 ## Midterm whiteboard interview, 125 points
 
-The midterm is twenty minutes, in person and one-on-one, scheduled through
-Calendly. Slots run **Tue 10/27 through Thu 10/29**, and a study guide is
-published in advance.
+The midterm is twenty minutes, in person and one-on-one, in Hilton 114.
+Slots run Monday, October 26, through Wednesday, October 28. Tuesday's
+interviews use our October 27 class period, and we meet for regular class on
+Thursday, October 29. Book one appointment:
 
-You spend the first fifteen minutes on your own system. You diagram it from
-memory, with no notes and no repository open, and then you answer for it: why
-this service, what you rejected, what it costs, how you know it works, what
-breaks first under load, and what you would do differently.
+https://calendly.com/greg-lontok/4775-midterm-interview-fa26
 
-The last five minutes are a curveball. I change one constraint, drawn from a deck
-whose categories you have seen but whose specifics you have not. Traffic might
-increase tenfold, the budget might be cut by eighty percent, or a vendor might
-sunset a service you depend on. You redesign on the spot.
+The interview is fifteen minutes of drawing, explanation, and follow-up
+questions, then a five-minute debrief. It covers our first-half class
+material, Exercises 01 through 06, and Project 1, from memory, without notes
+or your repository.
+
+Draw how data travels from a device through network hardware to an application
+and back, including your original Azure setup and current Railway setup. Be
+ready to explain your choices, costs, troubleshooting checks, and evidence
+that the system works. The study guide has the scoring table, the
+minute-by-minute shape, and practice questions.
+
+The changed constraint takes no more than three minutes. You'll know the
+categories beforehand, but the interview uses a different specific change:
+more traffic, a smaller budget, or a provider you must leave. Revise the
+affected part of your drawing and explain the tradeoff, verification, and
+recovery.
 
 Most students have never done a whiteboard interview. The October one is where
 you find out what that is like while it still costs 125 points instead of 300,
@@ -257,7 +267,7 @@ you chose, so this is a simulated interview for that job.
 | Weeks | What happens |
 |---|---|
 | 1-8 | Networking foundations, then the cloud arc. Exercises 01-06, Project 1 |
-| 9 | Midterm whiteboard interviews |
+| 9 | Midterm whiteboard interviews Monday through Wednesday, with regular class Thursday |
 | 10-15 | Job Scout and Project 2, the job-description-driven build. Exercises 07-10, milestones M1-M4 |
 | Finals | Final whiteboard interview |
 
@@ -274,7 +284,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 |---|---|
 | Add/drop without a W | Fri Sep 4 |
 | Project 1 due | Thu 10/22 |
-| Midterm interviews | Tue 10/27 to Thu 10/29 |
+| Midterm interviews | Mon 10/26 to Wed 10/28 |
 | Last day to withdraw | Fri Nov 13 |
 | Instruction ends | Fri Dec 11 |
 | Final interview | Thu Dec 17, 11:00 AM |
@@ -299,8 +309,8 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 10/15 | What an MCP server is, and connecting your coding agent to Zoho Mail. Then GA4: page views, one useful interaction, and event verification | By 10/14, create your Analytics account, GA4 property, and web stream using the preparation below. Bring the measurement ID and access to your site repository. | |
 | Tue 10/20 | Project audit, practice interviews in pairs, and what a whiteboard interview is | Finish the site, migration, domain email, and GA4 checks. Bring your README and submission index. Draw the system from memory once. | Ex06 |
 | Thu 10/22 | Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow, for the first half, then midterm interview practice with the study guide | Submit Project 1 before class at 1:45 PM. By Wed 10/21 at 11:59 PM, read both LinkedIn profiles and post two questions in the Brightspace discussion. | Project 1 |
-| Tue 10/27 | Midterm whiteboard interviews, no class session | | |
-| Thu 10/29 | Midterm whiteboard interviews, no class session | | |
+| Tue 10/27 | Midterm interviews replace class. More slots run Mon 10/26 and Wed 10/28. | Book one Calendly appointment and practice with the study guide. | |
+| Thu 10/29 | Regular class meeting. Topic will be announced in Brightspace. | | |
 | Tue 11/3 | Job Scout 1: LLM calls, tokens and cost, structured output, retrieval tools, and the first loop | By 11/2, complete the [Claude API setup](guides/claude-api-access.md). Privately review your Ex01 interview and choose target roles and companies. | |
 | Thu 11/5 | Job Scout 2: tools, state, stop conditions, a human approval step, a Resend digest, and integration failures | By 11/4, create a Resend account and bring Cloudflare access. Keep Zoho mail working. Bring retrieved postings and choose your Project 2 posting today, with the vetted feed as a fallback. | |
 | Tue 11/10 | Reading a job description as a system spec, architecture review, and an integration troubleshooting clinic | Finish Job Scout's first run and bring the posting chosen on 11/5, your spec, and architecture. | Ex07, M1 |
@@ -488,9 +498,7 @@ to develop their specification and implementation plan before building.
 The coding agent interviews students, then helps build a Python application
 after plan approval. Students verify database reads, failure, and recovery.
 They commit and push a working version, then make and verify a small change
-before committing and pushing again. An optional instructor Railway demo
-connects this workflow to deployment. Student deployment instructions follow
-with the personal-site work.
+before committing and pushing again.
 
 The early server lab does not require a local editor, database, or coding-agent
 installation. Follow each later lesson guide for its workflow setup.
@@ -498,8 +506,6 @@ Cloudflare, Railway, Zoho Mail, and GA4 support Project 1. Resend, AWS, and
 orchestration tools follow after the midterm. The class schedule's Before
 class column and preparation checklist list what to set up ahead of each
 meeting.
-
-See "Working with AI" below for how AI use is expected and assessed here.
 
 For technology assistance, contact the ITS Service Desk:
 
