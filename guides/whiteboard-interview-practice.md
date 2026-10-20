@@ -11,13 +11,13 @@ Bring your [README](../projects/own-your-corner-of-the-internet.md#8-keep-a-conc
 
 ## Audit your repository
 
-Save any open files, then commit and push, so the audit sees your latest work.
 In Claude Code, name the session:
 
 ```text
 /rename project-audit
 ```
 
+Save any open files, then commit and push, so the audit sees your latest work.
 Then paste:
 
 ```text
