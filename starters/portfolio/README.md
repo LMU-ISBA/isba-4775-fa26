@@ -24,7 +24,7 @@ continue with the setup guide below.
 - [Exercise 03 workspace](ex03/README.md): Session 5 setup and Python application.
 
 Ex01 and Ex02 are submitted through Brightspace. Later exercise folders are
-added when their briefs are published.
+added when their requirements are published.
 
 ## Start here
 

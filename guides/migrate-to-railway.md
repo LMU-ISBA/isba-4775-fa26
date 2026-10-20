@@ -124,7 +124,7 @@ Then update the README, because after cutover it describes a system that no long
 
 > Update the README so it matches how the site runs on Railway now.
 
-Review what it writes against what you did. The README needs the Railway and PostgreSQL setup and update path, the responsibility split above, two sentences on which of Tuesday's tasks moved to Railway, and how the migration kept your current data. Keep the Azure section as history and link your plan and comparison instead of pasting them. The project brief lists everything the README covers: [Keep a concise engineering record](../projects/own-your-corner-of-the-internet.md#8-keep-a-concise-engineering-record).
+Review what it writes against what you did. The README needs the Railway and PostgreSQL setup and update path, the responsibility split above, two sentences on which of Tuesday's tasks moved to Railway, and how the migration kept your current data. Keep the Azure section as history and link your plan and comparison instead of pasting them. The project requirements list everything the README covers: [Keep a concise engineering record](../projects/own-your-corner-of-the-internet.md#8-keep-a-concise-engineering-record).
 
 One of the README's decisions is this migration. Write it as a recommendation: you're the CTO of a three-developer startup on an Azure VM, and Railway offers to take the infrastructure. Should you move? Argue it with what you saw today: cost, your own hours, control, reliability, and what would change your answer.
 

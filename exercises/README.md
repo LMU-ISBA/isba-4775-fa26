@@ -1,12 +1,12 @@
 # Exercises
 
-Ten exercises, 15 points each, 150 points total. Each brief is published here
+Ten exercises, 15 points each, 150 points total. Each exercise's requirements are published here
 ahead of its due date. Read course materials on GitHub, and use the relevant
 class guide for each lab.
 
 Starting with Exercise 03, your work goes in your public `career-platform`
 repository, the one you've built since September 15. Each exercise adds an
-evidence file as specified in its brief, and you submit the repository URL
+evidence file as specified in its requirements, and you submit the repository URL
 in Brightspace. Exercise 04 uses `docs/how-this-site-is-secured.md` and also
 asks for your live site URL and a direct link to that explanation.
 
@@ -20,12 +20,12 @@ last name: `home-network-firstname-lastname.jpg`, `self-discovery-firstname-last
 Exercise 02 is also submitted through Brightspace as two separate files:
 `service-diagram-firstname-lastname.jpg` and
 `service-investigation-firstname-lastname.pdf`. Write the report in Google Docs
-and download it as a PDF. Follow the [Exercise 02 brief](ex02-troubleshoot-a-cloud-service.md)
+and download it as a PDF. Follow the [Exercise 02 requirements](ex02-troubleshoot-a-cloud-service.md)
 for the full instructions.
 
 ## Sequence
 
-| # | Exercise | Type | Due | Brief |
+| # | Exercise | Type | Due | Requirements |
 |---|---|---|---|---|
 | 01 | Accounts, your home network, and the self-discovery interview | Config | Tue 9/8 | [published](ex01-accounts-and-dev-env.md) |
 | 02 | Troubleshoot a cloud service: Nginx and MySQL | Troubleshoot | Tue 9/15 | [published](ex02-troubleshoot-a-cloud-service.md) |
@@ -54,16 +54,16 @@ Before Thursday, October 8, at 1:45 PM, also complete the required
 It is independent preparation alongside Ex04, with no extra grade item or
 points. Keep the current site working and bring your branch and dated checks.
 
-Follow each exercise's brief for its required evidence and grading.
+Follow each exercise's requirements for its required evidence and grading.
 Exercise 04 uses the live HTTPS site and `docs/how-this-site-is-secured.md`;
 it doesn't require a separate spec, plan, `docs/evidence/ex04.md`, or
-"The change" response. Its brief explains credit/no-credit grading.
+"The change" response. Its requirements explain credit/no-credit grading.
 
 Exercises 05 and 06 use `docs/evidence/ex05.md` and `docs/evidence/ex06.md`,
 with direct GitHub evidence links submitted in Brightspace. Follow their
-briefs. They do not require an extra spec, plan, or "The change" response.
+requirements. They do not require an extra spec, plan, or "The change" response.
 
-When an exercise brief calls for the general format, use:
+When an exercise's requirements call for the general format, use:
 
 1. A working system, verified live rather than by screenshot.
 2. A specification and implementation plan, scaled to the exercise, written
@@ -78,7 +78,7 @@ do about it, and what that costs.
 Exercises are credit/no credit: 15 or 0 points. Meaningful attempts, recorded
 investigation, and honest explanations can earn credit even when checks are
 incomplete or conclusions need correction. Missing work or no meaningful
-attempt earns no credit. Follow the individual brief for its required work.
+attempt earns no credit. Follow each exercise's requirements for its required work.
 Exercise 01 has no plan, system, or README, and its two files go to Brightspace.
 
 Section "Exercises, 150 points" of the [syllabus](../syllabus.md) has the full

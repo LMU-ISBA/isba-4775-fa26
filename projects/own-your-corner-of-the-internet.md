@@ -262,7 +262,7 @@ retain its evidence.
 ## How the 125 points are earned
 
 Each area is scored separately. Full credit requires the behavior and evidence
-described in this brief. Partial credit reflects what you can demonstrate.
+described in these requirements. Partial credit reflects what you can demonstrate.
 Identify missing or unverified work honestly.
 
 | Area | Points | What is assessed |

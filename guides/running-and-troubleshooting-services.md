@@ -976,7 +976,7 @@ the agent to start the existing application again.
 ## 09 · Keep the work and prepare for Ex02
 
 We will use this environment again for **Ex02: Troubleshoot a cloud service**.
-Follow the Ex02 brief provided by the instructor for graded submission
+Follow the Ex02 requirements provided by the instructor for graded submission
 requirements. Collect your report evidence independently at home. The sales
 page is a preview; **the full AI-assisted workflow is in Ex03**.
 
@@ -1008,7 +1008,7 @@ the whole Codespace. Leave Nginx and MySQL working until Section 10.
 the evidence you used to investigate it, and how you verified recovery.
 
 You will independently collect evidence and create the detailed incident
-report and system drawing in Ex02. Follow its brief for submission requirements.
+report and system drawing in Ex02. Follow its requirements for submission.
 
 Then stop your Codespace:
 

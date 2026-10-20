@@ -14,7 +14,7 @@ What happens when you enter a domain in a browser and press Enter?
 Show how the request travels and how the response reaches the browser.
 ```
 
-Follow the project brief's [submission instructions](../projects/own-your-corner-of-the-internet.md#submit) when you're ready to submit.
+Follow the project requirements' [submission instructions](../projects/own-your-corner-of-the-internet.md#submit) when you're ready to submit.
 
 Before the interview, practice with a classmate, friend, family member, or roommate.
 Use the study guide's [Claude Code or Codex prompts](midterm-study-guide.md#use-claude-code-or-codex-to-study) to check your understanding after answering aloud.

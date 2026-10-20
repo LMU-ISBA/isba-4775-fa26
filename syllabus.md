@@ -111,7 +111,7 @@ explain what you built about as heavily as the artifact itself.
 
 There are ten exercises, worth 15 points each. Exercise 01 and Exercise 02
 are submitted as files through Brightspace. From Exercise 03 on, exercises go
-in your public `career-platform` repository, as specified in their briefs. Each brief defines its
+in your public `career-platform` repository, as specified in their requirements. Each one defines its
 required evidence and grading. Exercises are credit/no credit: credit earns
 15 points and no credit earns 0. Meaningful attempts and honest investigation
 can earn credit even when a result needs correction.
@@ -433,7 +433,7 @@ homework. There are also two one-on-one whiteboard interviews.
 
 Follow each assignment's submission instructions. Ex01 and Ex02 go to
 Brightspace as separate files. Later builds use repositories and live systems
-as specified in their briefs; projects include their repositories and deployed
+as specified in their requirements; projects include their repositories and deployed
 systems. Due dates are announced in Brightspace and reflected in this syllabus.
 A date marked proposed or to be announced is not a confirmed deadline.
 

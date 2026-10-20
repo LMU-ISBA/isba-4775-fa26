@@ -258,7 +258,7 @@ initial commit will also appear in your history.
 
 Record the startup command and your checks in `ex03/README.md`. Submit the
 portfolio URL through Brightspace when the instructor opens the Ex03 drop box.
-The final Ex03 brief sets the assignment requirements and deadline.
+The final Ex03 requirements set the assignment requirements and deadline.
 
 Stop the portfolio Codespace from https://github.com/codespaces and verify its
 status. Check that Thursday's Codespace is stopped too. Closing a browser tab

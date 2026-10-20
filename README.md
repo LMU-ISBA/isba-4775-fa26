@@ -3,8 +3,8 @@
 This repository holds the course materials for ISBA 4775 at Loyola Marymount
 University. Class meets Tuesdays and Thursdays, 1:45 to 3:25 PM, in Hilton 113.
 Read everything here on GitHub and leave this repository unchanged. Your own
-work goes in your `career-platform` repository or in Brightspace, as each brief
-tells you.
+work goes in your `career-platform` repository or in Brightspace, as each exercise's
+requirements tell you.
 
 Start with the [syllabus](syllabus.md), which also comes as a
 [PDF](isba-4775-syllabus-fa26.pdf).
@@ -17,7 +17,7 @@ and its current data to Railway with PostgreSQL, then add Zoho email and basic
 GA4. Project 1 is due **Thursday, October 22, at 1:45 PM**.
 
 - [Project 1 requirements and the 125-point rubric](projects/own-your-corner-of-the-internet.md)
-- [Exercise briefs and deadlines](exercises/README.md)
+- [Exercise requirements and deadlines](exercises/README.md)
 - [Accounts to set up before class](syllabus.md#prepare-before-class)
 
 | Date | Lesson and guide |
@@ -59,13 +59,13 @@ Instruction runs September 1 to December 10, 2026.
 ## What's in this repository
 
     syllabus.md    The syllabus, with a PDF copy beside it
-    exercises/     Exercise briefs, posted ahead of each due date, and the
+    exercises/     Exercise requirements, posted ahead of each due date, and the
                    Exercise 01 self-discovery interview
     guides/        Lesson guides and interview prep
     projects/      Project requirements and rubrics
 
 You can ignore `scripts/` and `starters/`. They aren't part of your current
-work. New exercise briefs appear in `exercises/` as the semester goes on, so
+work. New exercise requirements appear in `exercises/` as the semester goes on, so
 check the [exercise index](exercises/README.md) for the current list.
 
 When a guide asks you to open a Codespace, open it from your own
