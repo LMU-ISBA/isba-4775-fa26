@@ -28,9 +28,9 @@ with file paths and commits, what is missing, and what you can't verify from
 the repository alone. Don't write or change anything.
 ```
 
-Read the answer against what you know. The agent can't verify a live check
-from the repository alone, so tests such as an email delivery stay on your
-list until you run them. Then paste:
+Read the answer against what you know. What it marks as unverifiable from the
+repository can often be checked live with the Azure, Cloudflare, and Railway
+CLIs or the Zoho MCP server. Those checks go on the list too. Then paste:
 
 ```text
 Save those gaps as a checklist in TASKS.md, one line each, with the file or
