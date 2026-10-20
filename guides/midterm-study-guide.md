@@ -5,14 +5,14 @@ Practice explaining how a request travels from your device through the network t
 The central midterm question is:
 
 ```text
-What happens when you enter your domain in a browser and press Enter? Explain
-it for Azure, then what changes on Railway.
+What happens when you enter your domain in a browser and press Enter? Draw it
+for the host I name, then tell me what changes on the other.
 ```
 
 Practice one connected explanation from entering the address to seeing the page.
 Use your drawing to show both the physical network and the services handling the request.
 
-Your site has run in two places: the Azure VM and Railway. This guide calls each one a host. Draw one host fully, then say what changes on the other.
+Your site has run in two places: the Azure VM and Railway. This guide calls each one a host. At the start of the interview I'll tell you which host to draw. Draw it fully, then say what changes on the other. Prepare both, since you won't know which one you'll get.
 
 The interview covers our first-half class material, Exercises 01 through 06, and Project 1. Your project gives you the examples, and your spec and implementation plan are the best study source you have.
 
@@ -28,7 +28,7 @@ There is no class on Tuesday, October 27. Interviews replace it. We meet as usua
 
 The interview has a fixed shape so you know what's coming:
 
-1. Minutes 0 to 6: draw and narrate the request path for one host, Azure or Railway, then say what changes on the other. You choose which host to start with.
+1. Minutes 0 to 6: draw and narrate the request path for the host I name, Azure or Railway, then say what changes on the other.
 2. Minutes 6 to 10: follow-ups on your design, spec, and plan.
 3. Minutes 10 to 12: one troubleshooting scenario.
 4. Minutes 12 to 15: one changed constraint.
@@ -53,7 +53,7 @@ Developing earns about 40 percent of a row, proficient about 75 percent, and str
 
 - [ ] Draw the physical network, then place the services on it.
 - [ ] Trace a request and its response, naming the client and server on each connection.
-- [ ] Draw Azure or Railway fully, then mark what changes on the other.
+- [ ] Draw the named host fully, then mark what changes on the other. Practice both ways.
 
 Start with a new HTTPS connection using TCP and a DNS lookup without a cached answer.
 State those assumptions so your explanation has a clear starting point.
@@ -220,7 +220,7 @@ Account for code, data, configuration, DNS, and HTTPS. Explain cutover and rollb
 
 Practice with a classmate, friend, family member, or roommate. Someone outside the course can tell you where your explanation becomes confusing, so explain technical terms as you go.
 
-Give your partner the scoring table and three follow-ups to use on any claim: why, how do you know, and what if that's wrong. Draw from memory and say your answers aloud for 12 minutes, then take up to three minutes for one changed constraint. Spend the last five minutes scoring on the table together. Pause when you need to think, and say what you'd check if you don't know.
+Give your partner the scoring table and three follow-ups to use on any claim: why, how do you know, and what if that's wrong. Have your partner name the host, Azure or Railway, and alternate between attempts. Draw from memory and say your answers aloud for 12 minutes, then take up to three minutes for one changed constraint. Spend the last five minutes scoring on the table together. Pause when you need to think, and say what you'd check if you don't know.
 
 Afterward, score yourself on the table, identify one missing step, and try that answer again.
 
