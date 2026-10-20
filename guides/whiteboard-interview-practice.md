@@ -27,7 +27,8 @@ with file paths and commits, what is missing, and what you can't verify from
 the repository alone. Don't write or change anything.
 ```
 
-If the agent can't open the page, paste the page's text after the prompt instead. Check that files it names are committed and pushed, not only on your laptop.
+As you fill each gap, save the file, then commit and push it. The audit, and
+the submission, count only what's in the repository on GitHub.
 
 ## Draw the request path
 
