@@ -55,12 +55,29 @@ Show how the request travels and how the response reaches the browser.
 Include network equipment and the services handling each exchange. Mark
 uncertain connections with a question mark.
 
-## 3. Build the class diagram
+## 3. Grade the sketch, then redraw it
+
+Take a photo of your sketch and get it onto your laptop. In your
+`project-audit` session, drag the photo into the prompt, then paste:
+
+```text
+Grade this sketch of what happens when I enter my domain in a browser. Use the
+request path and network hardware rows of the scoring table in
+https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/midterm-study-guide.md
+Check it against my repository. List what's missing, what's wrong, and what
+you can't verify, then tell me what to redraw. Don't draw it for me.
+```
+
+Read the corrections against what you know. Then close the laptop and redraw
+the whole thing from memory on a fresh sheet. The redraw is what you'll do in
+the interview, so the point is doing it, not the picture.
+
+## 4. Build the class diagram
 
 Add a piece when called on. Explain your addition, correct your own sketch,
 and say what changes between Azure and Railway.
 
-## 4. Practice with a partner
+## 5. Practice with a partner
 
 Use the study guide's
 [questions](midterm-study-guide.md#1-draw-the-whole-request-path) and
