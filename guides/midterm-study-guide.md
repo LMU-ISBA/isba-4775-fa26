@@ -29,7 +29,7 @@ There is no class on Tuesday, October 27. Interviews replace it. We meet as usua
 The interview has a fixed shape so you know what's coming:
 
 1. Minutes 0 to 6: draw and narrate the request path for the host I name, Azure or Railway, then say what changes on the other.
-2. Minutes 6 to 10: follow-ups on your design, spec, and plan.
+2. Minutes 6 to 10: follow-ups on your design, spec, and plan, and one question about how you used AI to build the project.
 3. Minutes 10 to 12: one troubleshooting scenario.
 4. Minutes 12 to 15: one changed constraint.
 5. Minutes 15 to 20: debrief. I'll tell you how you did on each row of the table and name one explanation to practice before the final.
@@ -42,7 +42,7 @@ I'll interrupt with "why" and "how do you know" throughout. Saying what you don'
 | --- | --- | --- | --- | --- |
 | Request path | 40 | Lists parts, order unclear, draws the web request going through the DNS server | Connected sequence for one host, DNS separate, TLS and database placed correctly | Both hosts, client and server named per connection, where TLS ends, response and further requests |
 | Network hardware and addressing | 15 | Names boxes without roles | Switch vs router, gateway vs DNS server, private vs public address | Adds DHCP, NAT, firewall behavior, and which roles share one home device |
-| Spec, plan, and design reasoning | 25 | Describes what, not why | Explains what the spec promised, the plan's main steps, one choice with its alternative, and environment variables | Explains where the build departed from the plan, who owns what on each host, and actual costs |
+| Spec, plan, and design reasoning | 25 | Describes what, not why, or can't say what the agent did | Explains what the spec promised, the plan's main steps, one choice with its alternative, environment variables, and one agent change they reviewed and verified | Explains where the build departed from the plan, where they corrected or overrode the agent, who owns what on each host, and actual costs |
 | Troubleshooting from evidence | 25 | Guesses a fix | Picks a narrowing check and says what the result proves | Sequence of checks, separates an empty table from a failed connection, names the recovery check |
 | Changed constraint | 15 | Adds services without a reason | States assumptions, changes the affected part, gives one tradeoff | Adds verification and rollback, and says what the change could make worse |
 | Labeled unknowns | 5 | Invents details | Says what's unknown | Turns the unknown into a check |
@@ -112,6 +112,18 @@ I may ask:
 ```text
 Why did you build it this way, and how did you prove it worked?
 ```
+
+I'll also ask how you used AI on this project. Have one specific story ready:
+
+```text
+How did you use AI on this project? Tell me about one thing it got wrong or
+you changed, how you noticed, and how you checked the result.
+```
+
+Name the tool, what you asked it for, and what you did with the output. A
+good answer has a diff you read, a result you checked yourself, and a moment
+you disagreed with it. "It wrote everything and it worked" scores developing,
+whatever the code looks like.
 
 Explain two choices and the alternatives you considered. For each host, say what's on you and what's on the provider when the site goes down at 2 AM: the OS, the runtime, certificates, the application, and the database. Know your actual costs, credits, and expiration dates.
 
