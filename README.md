@@ -28,7 +28,7 @@ GA4. Project 1 is due **Thursday, October 22, at 1:45 PM**.
 | October 13 | [Send and receive domain email with Zoho](guides/domain-email-with-zoho.md) |
 | October 15 | [Connect Coding Agent to Zoho Mail](guides/connect-coding-agent-to-zoho-mail.md), then [Measure your website with GA4](guides/google-analytics.md) |
 | October 20 | [Practice your whiteboard interview](guides/whiteboard-interview-practice.md) |
-| October 22 | Submit Project 1 before class. Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow, then [midterm practice](guides/midterm-study-guide.md). Post two questions in the Brightspace discussion by Wednesday, October 21, at 11:59 PM |
+| October 22 | Submit Project 1 before class. Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow. Post two questions in the Brightspace discussion by Wednesday, October 21, at 11:59 PM |
 
 Exercise 05 is due Tuesday, October 13, and Exercise 06 is due Tuesday,
 October 20. Both are due at 1:45 PM. Midterm whiteboard interviews run
