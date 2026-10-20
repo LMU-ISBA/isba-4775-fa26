@@ -57,8 +57,13 @@ uncertain connections with a question mark.
 
 ## 3. Grade the sketch, then redraw it
 
-Take a photo of your sketch and get it onto your laptop. In your
-`project-audit` session, drag the photo into the prompt, then paste:
+Take a photo of your sketch and get it onto your laptop:
+
+- Mac: AirDrop it, or right-click the desktop and choose Import from iPhone.
+- Windows: Quick Share from Android, or email it to yourself from any phone.
+- Either: hold the sketch up to the webcam and use Camera or Photo Booth.
+
+In your `project-audit` session, drag the photo into the prompt, then paste:
 
 ```text
 Grade this sketch of what happens when I enter my domain in a browser. Use the
