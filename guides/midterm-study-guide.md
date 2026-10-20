@@ -5,11 +5,14 @@ Practice explaining how a request travels from your device through the network t
 The central midterm question is:
 
 ```text
-What happens when you enter your domain in a browser and press Enter? Explain it for Azure, then what changes on Railway.
+What happens when you enter your domain in a browser and press Enter? Explain
+it for Azure, then what changes on Railway.
 ```
 
 Practice one connected explanation from entering the address to seeing the page.
 Use your drawing to show both the physical network and the services handling the request.
+
+Your site has run in two places: the Azure VM and Railway. This guide calls each one a host. Draw one host fully, then say what changes on the other.
 
 The interview covers our first-half class material, Exercises 01 through 06, and Project 1. Your project gives you the examples, and your spec and implementation plan are the best study source you have.
 
@@ -23,7 +26,7 @@ The interview itself is 15 minutes, followed by a five-minute debrief. You'll wo
 
 The interview has a fixed shape so you know what's coming:
 
-1. Minutes 0 to 6: draw and narrate the request path for one host, then say what changes on the other. You choose which host to start with.
+1. Minutes 0 to 6: draw and narrate the request path for one host, Azure or Railway, then say what changes on the other. You choose which host to start with.
 2. Minutes 6 to 10: follow-ups on your design, spec, and plan.
 3. Minutes 10 to 12: one troubleshooting scenario.
 4. Minutes 12 to 15: one changed constraint.
@@ -31,11 +34,11 @@ The interview has a fixed shape so you know what's coming:
 
 Fifteen minutes is short, so start drawing right away and talk while you draw.
 
-I'll interrupt with "why" and "how do you know" throughout. A labeled unknown plus the check you'd run scores as proficient. An invented detail scores below "I don't know, I'd check X."
+I'll interrupt with "why" and "how do you know" throughout. Saying what you don't know and naming the check you'd run scores as proficient. An invented detail scores below "I don't know, I'd check X."
 
 | What I listen for | Points | Developing | Proficient | Strong |
 | --- | --- | --- | --- | --- |
-| Request path | 40 | Lists parts, order unclear, web request passes through DNS | Connected sequence for one host, DNS separate, TLS and database placed correctly | Both hosts, client and server named per connection, where TLS ends, response and further requests |
+| Request path | 40 | Lists parts, order unclear, draws the web request going through the DNS server | Connected sequence for one host, DNS separate, TLS and database placed correctly | Both hosts, client and server named per connection, where TLS ends, response and further requests |
 | Network hardware and addressing | 15 | Names boxes without roles | Switch vs router, gateway vs DNS server, private vs public address | Adds DHCP, NAT, firewall behavior, and which roles share one home device |
 | Spec, plan, and design reasoning | 25 | Describes what, not why | Explains what the spec promised, the plan's main steps, one choice with its alternative, and environment variables | Explains where the build departed from the plan, who owns what on each host, and actual costs |
 | Troubleshooting from evidence | 25 | Guesses a fix | Picks a narrowing check and says what the result proves | Sequence of checks, separates an empty table from a failed connection, names the recovery check |
@@ -48,7 +51,7 @@ Developing earns about 40 percent of a row, proficient about 75 percent, and str
 
 - [ ] Draw the physical network, then place the services on it.
 - [ ] Trace a request and its response, naming the client and server on each connection.
-- [ ] Draw one host fully, then mark what changes on the other.
+- [ ] Draw Azure or Railway fully, then mark what changes on the other.
 
 Start with a new HTTPS connection using TCP and a DNS lookup without a cached answer.
 State those assumptions so your explanation has a clear starting point.
@@ -56,14 +59,14 @@ Use this sequence to practice:
 
 1. The browser reads what you typed, supplies a scheme, and extracts the hostname. We'll assume it tries http first, gets redirected to https, and follows the redirect.
 2. Your device asks its DNS resolver for the address. That lookup crosses your local network and comes back with an answer. It's a separate exchange, not a stop the web request passes through.
-3. The browser opens a TCP connection to the returned address on port 443. The packets cross the same hardware the DNS query used: your network interface, the access point or cable, a switch, your router, the modem or ONT, your ISP, internet routers, and the hosting network.
+3. The browser opens a TCP connection to the returned address on port 443. The packets cross the same hardware the DNS query used: your network interface, the access point or cable, a switch, your router, the modem or ONT (the fiber box), your ISP, internet routers, and the hosting network.
 4. TLS runs over that connection. The browser checks the certificate's hostname, dates, and chain, then the two sides agree on keys. Say where TLS ends.
 5. The HTTP request goes through the web entry to the application and any database access it needs.
 6. The response returns the same way. The browser renders the HTML and requests CSS, scripts, images, and any API data as separate HTTP requests.
 
 Be ready to explain how a cached DNS answer changes your starting sequence.
 
-Start the hardware with your network interface and its wired or Wi-Fi connection. Include the access point, switch, router, firewall, modem or ONT, and ISP where applicable. Home equipment usually combines several roles in one box, while campus networks separate them. Label unknown provider details as unknown instead of inventing them.
+Start the hardware with your network interface and its wired or Wi-Fi connection. Include the access point, switch, router, firewall, modem or fiber box, and ISP where applicable. Home equipment usually combines several roles in one box, while campus networks separate them. Label unknown provider details as unknown instead of inventing them.
 
 A switch connects devices within a local network, while routers forward traffic between networks. Access points connect wireless devices. Your home router also does NAT: it rewrites your private source address to its public one, remembers the flow, and maps the reply back to your laptop. That public address is what the server's log shows as the client. A firewall permits or blocks traffic by rule, and a stateful firewall lets the reply in because it saw the request go out.
 
@@ -73,8 +76,11 @@ Separate the DNS lookup from the web request, and identify the URL's scheme, hos
 
 For Azure, show the network security group, Nginx, the application process, and the SQLite file. TLS ends at Nginx, which then talks plain HTTP to the application on the loopback address. For Railway, show its web entry, the application, and the PostgreSQL service. TLS ends at Railway's edge, which is why your app saw plain HTTP behind it and needed the forwarded-protocol setting. Label protocols, ports, and public and private connections, and name the client and server for each connection. The www redirect is a separate request. Explain it only if asked.
 
+I may ask:
+
 ```text
-Where do the VM and container run, and what does localhost mean in each environment?
+Where do the VM and container run, and what does localhost mean in each
+environment?
 ```
 
 Connect physical CPU, memory, storage, and a network interface to the operating system and the software on it. Locate your laptop terminal, your Codespace terminal, and your SSH session. Localhost means the machine running the program that used the name.
@@ -94,8 +100,12 @@ Be ready to explain, from memory:
 Use this prompt to study from those files:
 
 ```text
-Read my spec and implementation plan without changing files. Ask me to explain from memory what the app does, the main steps of the plan and why they're in that order, and where the build departed from the plan. Don't quiz me on code.
+Read my spec and implementation plan without changing files. Ask me to explain
+from memory what the app does, the main steps of the plan and why they're in
+that order, and where the build departed from the plan. Don't quiz me on code.
 ```
+
+I may ask:
 
 ```text
 Why did you build it this way, and how did you prove it worked?
@@ -132,7 +142,7 @@ Follow-ups can reach any of these. They're a reference for review, not a list to
 - [ ] Explain what the result proves and what remains unknown.
 - [ ] Repair the cause, then repeat the original check.
 
-Each layer fails in its own way. Use the symptom to pick the first check:
+Each layer fails in its own way. Use the symptom to pick the first check. The questions below are ones I may ask, each followed by what I listen for.
 
 | What the browser shows | Look first at |
 | --- | --- |
@@ -145,41 +155,48 @@ Each layer fails in its own way. Use the symptom to pick the first check:
 | Page loads with no projects | Empty table or query, not connectivity |
 
 ```text
-Tell me about something that actually broke. What did you see, what did you check, and what fixed it?
+Tell me about something that actually broke. What did you see, what did you
+check, and what fixed it?
 ```
 
 Use the two failures you investigated for Project 1. Say what each check ruled out.
 
 ```text
-Your site loads for you but not for your roommate. What do you check first, and what does each result rule out?
+Your site loads for you but not for your roommate. What do you check first,
+and what does each result rule out?
 ```
 
 Explain what you'd learn from IP settings, ping, a DNS lookup, traceroute, a port check, curl, or browser DevTools. A failed ping alone doesn't prove a website is down, and a DNS answer doesn't prove HTTPS works.
 
 ```text
-Your database dies at 2 AM. What does a visitor see, and how would you know it was the database and not the app?
+Your database dies at 2 AM. What does a visitor see, and how would you know it
+was the database and not the app?
 ```
 
 Distinguish independent services from an application's dependency. Explain process and listener checks, HTTP status codes, application logs, and database queries. Separate an empty table from an unavailable database, then state the healthy result you expect after recovery.
 
 ```text
-Your Azure site fails after a restart, or Railway loads the page without its projects. What do you check next?
+Your Azure site fails after a restart, or Railway loads the page without its
+projects. What do you check next?
 ```
 
 Use the drawing to choose between network rules, Nginx, the application service, database availability, and configuration. Explain why binding an application to an address differs from allowing traffic through a firewall. Name the check that proves recovery.
 
 ```text
-What on your system can a stranger reach right now? How would you restore PostgreSQL if it were lost? How would you know the site was down before I told you?
+What on your system can a stranger reach right now? How would you restore
+PostgreSQL if it were lost? How would you know the site was down before I told
+you?
 ```
 
 For supporting services, verify the destination too. A message in Sent doesn't prove receipt, and a GA4 tag in source doesn't prove an event arrived.
 
 ## 5. Adapt in three minutes or less
 
-State your assumptions, revise the affected part of the drawing, and explain one tradeoff. Finish with a verification and recovery plan. These practice scenarios use the announced categories. The interview uses a different specific constraint, so practice the method rather than the answers.
+State your assumptions, revise the affected part of the drawing, and explain one tradeoff. Finish with a verification and recovery plan. The practice scenarios below use the announced categories: traffic, budget, and a service ending. The interview uses a different specific constraint, so practice the method rather than the answers.
 
 ```text
-Your site receives five times its usual traffic. What would you measure before changing the system?
+Your site receives five times its usual traffic. What would you measure before
+changing the system?
 ```
 
 Identify a possible bottleneck and a measurement that would support a change.
@@ -191,7 +208,8 @@ Your monthly hosting budget is cut in half. What would you change and give up?
 Use actual costs and explain how you'd verify the cheaper setup.
 
 ```text
-Your Railway trial ends Friday. What happens to your site, your data, and your domain, and how do you move without losing recent writes?
+Your Railway trial ends Friday. What happens to your site, your data, and your
+domain, and how do you move without losing recent writes?
 ```
 
 Account for code, data, configuration, DNS, and HTTPS. Explain cutover and rollback, including what happens to new writes.
@@ -209,7 +227,10 @@ Afterward, score yourself on the table, identify one missing step, and try that 
 Give the agent this guide and access to your course materials and project. Use this prompt:
 
 ```text
-Read this study guide, the course materials, and my project without changing files. Interview me one question at a time across the full course scope. Wait for my answer before giving feedback. Check it against the materials, flag anything unverified, and give me one improvement to practice.
+Read this study guide, the course materials, and my project without changing
+files. Interview me one question at a time across the full course scope. Wait
+for my answer before giving feedback. Check it against the materials, flag
+anything unverified, and give me one improvement to practice.
 ```
 
 Say each answer aloud before sending it. Use speech-to-text if available, or type what you just said without polishing it. Tell the agent if a course source isn't available so it doesn't guess what we covered.
@@ -217,7 +238,8 @@ Say each answer aloud before sending it. Use speech-to-text if available, or typ
 For another attempt, use a short follow-up:
 
 ```text
-Ask me about network hardware and packet travel. Let me explain before giving hints.
+Ask me about network hardware and packet travel. Let me explain before giving
+hints.
 ```
 
 Change the topic to your weak spot. Check corrections against the course materials and your evidence, since the agent can make mistakes.
