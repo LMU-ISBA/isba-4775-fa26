@@ -1,6 +1,6 @@
 # Exercise 06: Domain email and Google Analytics
 
-**Due Tuesday, October 20, 2026, at 1:45 PM. 15 points.** Submit your public `career-platform` repository URL and a direct GitHub link to `docs/evidence/ex06.md` in Brightspace.
+Due Tuesday, October 20, 2026, at 1:45 PM. 15 points. Submit your public `career-platform` repository URL and a direct GitHub link to `docs/evidence/ex06.md` in Brightspace.
 
 Set up Zoho Mail for an address at your own domain. Use Zoho webmail or your coding agent through the Zoho MCP server to receive a message from an external mailbox, reply to it, and send a new message from your domain address. Then add Google Analytics 4 to your website and verify a page view and a click to another website. Cloudflare remains your DNS provider, and your website's routing records should keep serving the site.
 
@@ -15,7 +15,7 @@ Use the DNS values Zoho gives your account. Preserve your website records and an
 
 ## Submit a short results sheet
 
-Use one file, `docs/evidence/ex06.md`. If you already started it, add to it. Include only these three items:
+Use one file, `docs/evidence/ex06.md`, and add to it if you already started one. Include only these three items:
 
 1. An email table with three rows: received, replied, and sent a new message. You can use the Zoho MCP server to run the tests and help build the table. Give the test time and result for each. Confirm replies and new outgoing messages arrived in the outside mailbox.
 2. One screenshot or pasted excerpt showing SPF, DKIM, and DMARC results. You can use the Zoho MCP server to retrieve available message details and have your agent summarize the authentication results. Include the actual results it used. For outgoing mail, use the outside mailbox's results, supplying its header to the agent if needed. If your mailbox doesn't show them, say so and report Zoho's verification results instead. Zoho's checks confirm the setup, not whether a particular message passed authentication.

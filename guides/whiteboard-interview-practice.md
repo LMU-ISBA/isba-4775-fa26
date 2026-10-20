@@ -74,8 +74,8 @@ you can't verify, then tell me what to redraw. Don't draw it for me.
 ```
 
 Read the corrections against what you know. Then close the laptop and redraw
-the whole thing from memory on a fresh sheet. The redraw is what you'll do in
-the interview, so the point is doing it, not the picture.
+the whole thing from memory on a fresh sheet. The interview asks for this
+redraw from memory, so practice it now.
 
 ## 4. Build the class diagram
 

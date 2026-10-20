@@ -1,6 +1,6 @@
 # Project 1: Own Your Corner of the Internet
 
-**125 points. Due Thursday, October 22, 2026, at 1:45 PM, before class.**
+125 points. Due Thursday, October 22, 2026, at 1:45 PM, before class.
 
 ## What you are building
 
@@ -213,9 +213,9 @@ records can also support the project, without copying evidence into another repo
 | --- | --- |
 | Before the Railway cutover | Azure HTTP, restart, DNS, HTTPS, and renewal evidence retained |
 | October 8 | Railway/PostgreSQL target, current-data comparison, and a verified cutover or documented remaining steps |
-| October 13 | Ex05 investigation submitted before class; begin Zoho mail setup and delivery checks |
+| October 13 | Ex05 investigation submitted before class. Zoho mail setup and delivery checks begun |
 | October 15 | Migration and email completion, GA4 verification, and troubleshooting evidence |
-| October 20 | Ex06 submitted before class; completed technical work and evidence ready for the requirements review and practice explanation |
+| October 20 | Ex06 submitted before class. Technical work complete and evidence ready for the requirements review and practice explanation |
 | October 22, 1:45 PM | Final project submission before class, then guest speakers from ServiceNow |
 
 ## Organize your repository
@@ -273,8 +273,8 @@ Identify missing or unverified work honestly.
 | Railway/PostgreSQL migration | 25 | Plan and dependency inventory, database compatibility, preservation and comparison of current data, verified cutover, rollback, and operating responsibilities |
 | Verified website update | 5 | A reviewed and checked change connected to its commit, Railway deployment, and live result, with a recovery explanation |
 | Zoho email | 15 | Custom-domain sending, receiving, and replies, plus MX/SPF/DKIM/DMARC configuration, verification, and explanation |
-| GA4 | 10 | Verified page views and one useful interaction, with an explanation of collection and meaning; visitor counts do not affect the score |
-| Engineering record | 20 | A clear README covering setup, diagrams, decisions, troubleshooting, reflection, costs, and limitations; a submission index and links to existing evidence and history |
+| GA4 | 10 | Verified page views and one useful interaction, with an explanation of collection and meaning. Visitor counts do not affect the score |
+| Engineering record | 20 | A clear README covering setup, diagrams, decisions, troubleshooting, reflection, costs, and limitations. A submission index and links to existing evidence and history |
 | Total | 125 | |
 
 The engineering record is assessed through your README, submission index,

@@ -22,7 +22,7 @@ https://calendly.com/greg-lontok/4775-midterm-interview-fa26
 
 The interview itself is 15 minutes, followed by a five-minute debrief. You'll work from memory, without notes or your repository.
 
-There is no class on Tuesday, October 27. Interviews replace it. We meet as usual on Thursday, October 29.
+There is no class on Tuesday, October 27, because the interviews replace it. We meet as usual on Thursday, October 29.
 
 ## How the 20 minutes run and how you're scored
 
@@ -74,7 +74,7 @@ A switch connects devices within a local network, while routers forward traffic 
 
 Add your device's private IP address, subnet, default gateway, and DNS server. Explain what DHCP supplies and how a public address differs from a private one. Use your Exercise 01 observations to explain the settings, without memorizing your exact addresses.
 
-Separate the DNS lookup from the web request, and identify the URL's scheme, hostname, port, and path. DNS used UDP and the site uses TCP. Say why that fits each. Distinguish software ports from physical network ports.
+Separate the DNS lookup from the web request, and identify the URL's scheme, hostname, port, and path. DNS used UDP and the site uses TCP, so say why that fits each. Distinguish software ports from physical network ports.
 
 For Azure, show the network security group, Nginx, the application process, and the SQLite file. TLS ends at Nginx, which then talks plain HTTP to the application on the loopback address. For Railway, show its web entry, the application, and the PostgreSQL service. TLS ends at Railway's edge, which is why your app saw plain HTTP behind it and needed the forwarded-protocol setting. Label protocols, ports, and public and private connections, and name the client and server for each connection. The www redirect is a separate request. Explain it only if asked.
 
