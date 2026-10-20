@@ -1,6 +1,6 @@
 # Exercise 04: Secure your site with HTTPS
 
-**Due** Thu 10/8, 1:45 PM Pacific, before class · **15 points** · **Type:** Config ·
+**Due** Thu 10/8, 1:45 PM, before class · **15 points** · **Type:** Config ·
 **Submit** your public `career-platform` repository URL and HTTPS site URL in Brightspace
 
 ## What you're showing

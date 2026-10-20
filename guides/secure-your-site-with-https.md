@@ -436,7 +436,7 @@ github.com. This file is part of Ex04.
    data, and domain work over HTTPS on Railway, stop the Azure VM in the
    portal and confirm **Stopped (deallocated)**. Keep the VM and disk for now.
 2. Complete the required [Impeccable design activity](improve-your-site-design.md)
-   before Thursday, October 8, at 1:45 PM Pacific, alongside Ex04. Allow
+   before Thursday, October 8, at 1:45 PM, alongside Ex04. Allow
    30–45 minutes. If setup is blocked after ten minutes, use the guide's
    ordinary-language critique fallback; stop at 45 minutes and bring your
    branch and blocker notes if needed. Keep the working HTTPS site intact.

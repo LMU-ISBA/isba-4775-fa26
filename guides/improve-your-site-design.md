@@ -1,6 +1,6 @@
 # Improve your site's design before Railway
 
-Complete this required 30–45 minute activity in `career-platform` before Thursday, October 8, 2026, at 1:45 PM Pacific, alongside Exercise 04. It has no separate grade item or points. Ex04's HTTPS requirements stay the same.
+Complete this required 30–45 minute activity in `career-platform` before Thursday, October 8, 2026, at 1:45 PM, alongside Exercise 04. It has no separate grade item or points. Ex04's HTTPS requirements stay the same.
 
 ## Before you start
 

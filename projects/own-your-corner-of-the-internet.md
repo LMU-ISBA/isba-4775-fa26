@@ -1,9 +1,6 @@
 # Project 1: Own Your Corner of the Internet
 
-Updated October 19, 2026. Website, domain email, and basic analytics, with the
-Azure-to-Railway/PostgreSQL migration retained.
-
-**125 points. Due Thursday, October 22, 2026, at 1:45 PM Pacific, before class.**
+**125 points. Due Thursday, October 22, 2026, at 1:45 PM, before class.**
 
 ## What you are building
 
@@ -20,11 +17,9 @@ in that repository.
 By the deadline, your custom domain should reach the Railway deployment. Keep
 evidence of the earlier Azure deployment, and keep the Azure VM running until
 the instructor says otherwise. Railway's trial ends after 30 days or $5 of
-usage, and its Free plan allows no custom domain, so the VM is where your site
-goes back to. Record the trial end date with your costs.
-
-Job Scout, Resend, and GitHub Actions will be taught after the midterm.
-For this project, Railway handles deployment from your GitHub repository.
+usage, and its Free plan allows no custom domain. After the midterm, before
+the trial ends, you'll migrate the site to AWS. Record the trial end date with
+your costs.
 
 ## What the system must do
 
@@ -66,9 +61,7 @@ VM restart. Explain which parts needed configuration to make that happen.
 Use a domain you control. Configure its authoritative DNS and records, then
 verify that the name reaches your application with a valid certificate.
 The course DNS lab uses Cloudflare DNS. Records that reach your own server are
-set to DNS only, so traffic and TLS go straight to Azure or Railway. An
-instructor-approved alternative must allow you to demonstrate the same
-delegation and record-management concepts.
+set to DNS only, so traffic and TLS go straight to Azure or Railway.
 
 Record the relevant DNS records, their purpose, and your verification results.
 Explain the certificate's hostname, validity, and renewal arrangement. Update
@@ -84,6 +77,8 @@ root with a valid certificate.
 Write the migration plan before changing the working deployment. Identify the
 code, runtime, packages, configuration, secrets, schema, and current data that
 the target needs. Explain what Git moves and what requires another method.
+This is the spec and plan your agent wrote under `docs/superpowers/` during the
+Railway lesson. Link them from the README and the submission index.
 
 Validate PostgreSQL compatibility before cutover, converting engine-specific
 code and data where needed. Include at least one real change you made to the original project data
@@ -107,9 +102,10 @@ and pushing. Keep credentials in the appropriate secret or environment-variable
 settings, outside your public repository.
 
 Demonstrate one change reaching the live site. Connect the commit SHA to the
-Railway deployment and the behavior you observed at your domain. Explain how
-you would restore a previous working version. Consider database changes as
-well as application code when explaining recovery.
+Railway deployment and the behavior you observed at your domain. Write how
+you would restore a previous working version in the README's rollback section
+described under requirement 8. Cover database changes as well as application
+code.
 
 Railway can deploy directly from GitHub. The separate GitHub Actions workflow
 comes later in the course.
@@ -134,6 +130,11 @@ sees your custom address as the sender. Also verify a new outgoing message.
 Save dated, redacted evidence of delivery and sender authentication. Explain
 any failed or unresolved check. Keep private message contents and credentials
 out of the public repository.
+
+This evidence is the results sheet at `docs/evidence/ex06.md` from Exercise 06
+and the header analysis at `docs/evidence/zoho-header-check.md` from the Zoho
+guide. Add one line to the results sheet for the before-MX message and what
+happened to it. Link both files from the README and the submission index.
 
 ### 7. Measure activity with Google Analytics
 
@@ -160,6 +161,8 @@ someone can understand your work, follow your setup, and find its evidence.
 Your README should cover:
 
 - What the site does, its live address, and how to set up and update it.
+- How to roll back a bad change, for code and for data. Requirement 4's
+  rollback procedure and requirement 5's recovery explanation both live here.
 - Azure and Railway architecture diagrams showing locations, protocols,
   ports, and data flow. Include the email and analytics paths.
 - How the migration preserved current data and which responsibilities moved
@@ -175,9 +178,12 @@ Your README should cover:
 You can link from the README to an existing file rather than copy its contents.
 Keep your `AGENTS.md`, original spec and plans, and meaningful commit history.
 Include two investigated failures: one application or database-dependency
-failure and one network, DNS, or TLS failure. You may reuse your build,
-migration, or exercise records. Identify a deliberate lab failure as such.
-For each, show the symptom, checks, diagnosis, repair, and repeated verification.
+failure and one network, DNS, or TLS failure. You already wrote these:
+`docs/evidence/ex03.md` records what broke during the build or Azure
+migration, and `docs/evidence/ex05.md` records the DNS or TLS investigation.
+Link them instead of rewriting them, or use a migration failure from your
+Railway records. Identify a deliberate lab failure as such. For each, show
+the symptom, checks, diagnosis, repair, and repeated verification.
 No Job Scout integration incident is required for Project 1.
 
 You may use your coding agent to help reconstruct this record. Ask it to read
@@ -200,7 +206,7 @@ agent-generated version.
 ## Checkpoints before submission
 
 These progress targets follow the class schedule. Exercise 05 is due October
-13, and Exercise 06 is due October 20. Both are due at 1:45 PM Pacific. Their
+13, and Exercise 06 is due October 20. Both are due at 1:45 PM. Their
 records can also support the project, without copying evidence into another report.
 
 | Target | Evidence to have ready |
@@ -209,7 +215,7 @@ records can also support the project, without copying evidence into another repo
 | October 8 | Railway/PostgreSQL target, current-data comparison, and a verified cutover or documented remaining steps |
 | October 13 | Ex05 investigation submitted before class; begin Zoho mail setup and delivery checks |
 | October 15 | Migration and email completion, GA4 verification, and troubleshooting evidence |
-| October 20 | Ex06 submitted before class; completed technical work and evidence ready for the submission audit and practice explanation |
+| October 20 | Ex06 submitted before class; completed technical work and evidence ready for the requirements review and practice explanation |
 | October 22, 1:45 PM | Final project submission before class, then guest speakers from ServiceNow and interview practice |
 
 ## Organize your repository
@@ -321,5 +327,5 @@ billable resources, and record renewal dates and cleanup plans.
 
 Begin with [Build your resume site in Codespaces](../guides/resume-site-in-codespaces.md).
 Then use [Migrate your site to an Azure VM](../guides/azure-vm-migration.md).
-Continue with the Railway, Zoho, analytics, and project-audit guides linked
+Continue with the Railway, Zoho, and analytics guides linked
 from the course README as those lessons are introduced.

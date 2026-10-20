@@ -222,6 +222,6 @@ Ask me about network hardware and packet travel. Let me explain before giving hi
 
 Change the topic to your weak spot. Check corrections against the course materials and your evidence, since the agent can make mistakes.
 
-Review Exercises 01 through 06 in Brightspace, then use the Project 1 audit for missing project checks:
+Review Exercises 01 through 06 in Brightspace. Use the Project 1 brief for requirements and submission checks:
 
-https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/project-1-audit.md
+https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/projects/own-your-corner-of-the-internet.md

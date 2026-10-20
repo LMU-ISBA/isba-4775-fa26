@@ -14,7 +14,7 @@ Start with the [syllabus](syllabus.md), which also comes as a
 You're finishing Project 1 in your `career-platform` repository. Your site is
 already running on Azure with HTTPS on your own domain. Next you'll move the app
 and its current data to Railway with PostgreSQL, then add Zoho email and basic
-GA4. Project 1 is due **Thursday, October 22, at 1:45 PM Pacific**.
+GA4. Project 1 is due **Thursday, October 22, at 1:45 PM**.
 
 - [Project 1 requirements and the 125-point rubric](projects/own-your-corner-of-the-internet.md)
 - [Exercise briefs and deadlines](exercises/README.md)
@@ -27,12 +27,12 @@ GA4. Project 1 is due **Thursday, October 22, at 1:45 PM Pacific**.
 | October 8 | [Migrate to Railway and PostgreSQL](guides/migrate-to-railway.md) |
 | October 13 | [Send and receive domain email with Zoho](guides/domain-email-with-zoho.md) |
 | October 15 | [Connect Coding Agent to Zoho Mail](guides/connect-coding-agent-to-zoho-mail.md), then [Measure your website with GA4](guides/google-analytics.md) |
-| October 20 | [Project audit](guides/project-1-audit.md) and [midterm practice](guides/midterm-study-guide.md) |
+| October 20 | [Practice your whiteboard interview](guides/whiteboard-interview-practice.md) |
 | October 22 | Submit Project 1 before class. Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow, then [midterm practice](guides/midterm-study-guide.md). Post two questions in the Brightspace discussion by Wednesday, October 21, at 11:59 PM |
 
 Exercise 05 is due Tuesday, October 13, and Exercise 06 is due Tuesday,
-October 20. Both are due at 1:45 PM Pacific. Midterm whiteboard interviews run
-October 27 to 29. After the midterm you'll build Job Scout, starting with the
+October 20. Both are due at 1:45 PM. Midterm whiteboard interviews run
+October 26 to 28. After the midterm you'll build Job Scout, starting with the
 November 3 and 5 lessons. GitHub Actions and tests follow on November 17.
 
 ## Earlier guides
@@ -61,7 +61,7 @@ Instruction runs September 1 to December 10, 2026.
     syllabus.md    The syllabus, with a PDF copy beside it
     exercises/     Exercise briefs, posted ahead of each due date, and the
                    Exercise 01 self-discovery interview
-    guides/        Lesson guides, the project audit, and interview prep
+    guides/        Lesson guides and interview prep
     projects/      Project requirements and rubrics
 
 You can ignore `scripts/` and `starters/`. They aren't part of your current

@@ -307,7 +307,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | By 10/7, finish Railway signup. Before class, complete Ex04 and the required [Impeccable design activity](guides/improve-your-site-design.md). Keep Azure running until migration is verified. | Ex04 |
 | Tue 10/13 | Zoho Mail at your domain: MX, SPF, DKIM, and DMARC, then sending, receiving, and replying | By 10/12, finish the Zoho account preparation below. Bring access to your domain's Cloudflare zone. | Ex05 |
 | Thu 10/15 | What an MCP server is, and connecting your coding agent to Zoho Mail. Then GA4: page views, one useful interaction, and event verification | By 10/14, create your Analytics account, GA4 property, and web stream using the preparation below. Bring the measurement ID and access to your site repository. | |
-| Tue 10/20 | Project audit, practice interviews in pairs, and what a whiteboard interview is | Finish the site, migration, domain email, and GA4 checks. Bring your README and submission index. Draw the system from memory once. | Ex06 |
+| Tue 10/20 | Project requirements review, practice interviews in pairs, and what a whiteboard interview is | Finish the site, migration, domain email, and GA4 checks. Bring your README and submission index. Draw the system from memory once. | Ex06 |
 | Thu 10/22 | Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow, for the first half, then midterm interview practice with the study guide | Submit Project 1 before class at 1:45 PM. By Wed 10/21 at 11:59 PM, read both LinkedIn profiles and post two questions in the Brightspace discussion. | Project 1 |
 | Tue 10/27 | Midterm interviews replace class. More slots run Mon 10/26 and Wed 10/28. | Book one Calendly appointment and practice with the study guide. | |
 | Thu 10/29 | Regular class meeting. Topic will be announced in Brightspace. | | |
@@ -326,7 +326,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 
 The October 6 revision keeps the Railway/PostgreSQL migration and focuses
 Project 1 on your website, domain, Zoho email, and basic GA4. October 20 is
-reserved for the project audit and interview practice. Job Scout, Resend,
+reserved for the project requirements review and interview practice. Job Scout, Resend,
 and GitHub Actions move after the midterm. The November sequence now builds
 Job Scout before the first Project 2 milestone, then adds evals and tested
 deployment. No Resend signup or Claude API
