@@ -37,9 +37,10 @@ Save those gaps as a checklist in TASKS.md, one line each, with the file or
 check that closes it. Don't change anything else.
 ```
 
-Commit and push `TASKS.md`. The list is today's deliverable. The agent will
-offer to start on it. Say no, close the laptop for the drawing, and work the
-list after class. The submission counts only what's in the repository on
+Commit and push `TASKS.md`. The push starts a Railway deploy, which you
+don't need to wait for. The list is today's deliverable. The agent will offer
+to start on it. Say no, close the laptop for the drawing, and work the list
+after class. The submission counts only what's in the repository on
 GitHub, so commit and push as you close each task.
 
 ## 2. Draw the request path
