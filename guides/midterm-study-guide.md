@@ -20,7 +20,9 @@ Interviews run October 26, 27, and 28 in Hilton 114 and are worth 125 points. Bo
 
 https://calendly.com/greg-lontok/4775-midterm-interview-fa26
 
-The interview itself is 15 minutes, followed by a five-minute debrief. You'll work from memory, without notes or your repository. Tuesday's interviews replace our October 27 class period.
+The interview itself is 15 minutes, followed by a five-minute debrief. You'll work from memory, without notes or your repository.
+
+There is no class on Tuesday, October 27. Interviews replace it. We meet as usual on Thursday, October 29.
 
 ## How the 20 minutes run and how you're scored
 
