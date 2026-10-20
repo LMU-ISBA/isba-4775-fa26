@@ -3,7 +3,7 @@
 Practice explaining your system aloud, from the browser through the network and back.
 Bring your [README](../projects/own-your-corner-of-the-internet.md#8-keep-a-concise-engineering-record) and [submission index](../projects/own-your-corner-of-the-internet.md#organize-your-repository).
 
-1. Audit your repository against the [Project 1 requirements](../projects/own-your-corner-of-the-internet.md#what-the-system-must-do) with the class. Open your `career-platform` repository in VS Code, start a new Claude Code or Codex session, and run the audit below. Read its answer against what you know. Note anything you still need to test or document, such as an email delivery result. The agent can't verify a live check from the repository alone, so those stay on your list until you run them.
+1. Audit your repository against the [Project 1 requirements](../projects/own-your-corner-of-the-internet.md#what-the-system-must-do) with the class. Open your `career-platform` repository in VS Code, start a new Claude Code or Codex session, and run the audit below. It ends with a `TASKS.md` checklist you commit and work after class. The agent can't verify a live check from the repository alone, so tests such as an email delivery stay on your list until you run them.
 2. Draw your own answer to the question below on paper, without notes or a coding agent. Include network equipment and the services handling each exchange. Mark uncertain connections.
 3. Help build the class diagram when called on. Explain your addition, correct your sketch, and compare Azure with Railway.
 4. Watch the short Mermaid demonstration. Mermaid turns text into diagrams you can keep in your repository. It's optional for your project diagrams.
@@ -28,8 +28,17 @@ with file paths and commits, what is missing, and what you can't verify from
 the repository alone. Don't write or change anything.
 ```
 
-As you fill each gap, save the file, then commit and push it. The audit, and
-the submission, count only what's in the repository on GitHub.
+Read the answer against what you know. Then paste:
+
+```text
+Save those gaps as a checklist in TASKS.md, one line each, with the file or
+check that closes it. Don't change anything else.
+```
+
+Commit and push `TASKS.md`. The list is today's deliverable. The agent will
+offer to start on it. Say no, close the laptop for the drawing, and work the
+list after class. The submission counts only what's in the repository on
+GitHub, so commit and push as you close each task.
 
 ## Draw the request path
 
