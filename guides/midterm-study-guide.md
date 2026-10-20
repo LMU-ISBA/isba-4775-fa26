@@ -6,7 +6,8 @@ The central midterm question is:
 
 ```text
 What happens when you enter your domain in a browser and press Enter? Draw it
-for the host I name, then tell me what changes on the other.
+for Azure or Railway, whichever I name, then tell me what changes on the
+other.
 ```
 
 Practice one connected explanation from entering the address to seeing the page.
