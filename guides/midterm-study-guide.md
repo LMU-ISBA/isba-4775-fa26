@@ -127,6 +127,25 @@ whatever the code looks like.
 
 Explain two choices and the alternatives you considered. For each host, say what's on you and what's on the provider when the site goes down at 2 AM: the OS, the runtime, certificates, the application, and the database. Know your actual costs, credits, and expiration dates.
 
+You've run all three service models this semester. The Azure VM is
+infrastructure as a service: you got a machine, and everything above it was
+yours. Railway is platform as a service: you hand over code and a database,
+and they run the servers, the proxy, and the certificates. Zoho Mail and
+Google Analytics are software as a service: you configure an application
+someone else operates. The label matters less than knowing what you still own
+when something breaks at 2 AM.
+
+I may ask:
+
+```text
+A friend wants a site like yours for a three-person startup with no ops
+person and $20 a month. Which of the three would you pick, what would you
+give up, and what would change your answer?
+```
+
+Use your own costs and your own outages. Your README's Railway recommendation
+is a good answer to start from.
+
 Explain how environment variables give the same code different settings. On Azure, the database URL identified the SQLite file. On Railway, it supplied the PostgreSQL connection, while the port variable supplied the application's listening port. The local transfer used a separate public database URL. Find these names in your own configuration:
 
 ```text
