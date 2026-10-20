@@ -60,12 +60,7 @@ uncertain connections with a question mark.
 Add a piece when called on. Explain your addition, correct your own sketch,
 and say what changes between Azure and Railway.
 
-## 4. Watch the Mermaid demonstration
-
-Mermaid turns text into diagrams you can keep in your repository. It's
-optional for your project diagrams.
-
-## 5. Practice with a partner
+## 4. Practice with a partner
 
 Use the study guide's
 [questions](midterm-study-guide.md#1-draw-the-whole-request-path) and
