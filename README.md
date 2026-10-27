@@ -11,10 +11,9 @@ Start with the [syllabus](syllabus.md), which also comes as a
 
 ## Where we are now
 
-You're finishing Project 1 in your `career-platform` repository. Your site is
-already running on Azure with HTTPS on your own domain. Next you'll move the app
-and its current data to Railway with PostgreSQL, then add Zoho email and basic
-GA4. Project 1 is due **Thursday, October 22, at 1:45 PM**.
+Midterm whiteboard interviews run October 26 to 28 in Hilton 114.
+We return to regular class on Thursday, October 29, to migrate your site
+from Railway to AWS before the Railway trial ends. Job Scout begins November 3.
 
 - [Project 1 requirements and the 125-point rubric](projects/own-your-corner-of-the-internet.md)
 - [Exercise requirements and deadlines](exercises/README.md)
@@ -29,11 +28,18 @@ GA4. Project 1 is due **Thursday, October 22, at 1:45 PM**.
 | October 15 | [Connect Coding Agent to Zoho Mail](guides/connect-coding-agent-to-zoho-mail.md), then [Measure your website with GA4](guides/google-analytics.md) |
 | October 20 | [Practice your whiteboard interview](guides/whiteboard-interview-practice.md) |
 | October 22 | Submit Project 1 before class. Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow. Post two questions in the Brightspace discussion by Wednesday, October 21, at 11:59 PM |
+| October 26 to 28 | Midterm whiteboard interviews in Hilton 114. Interviews replace class on October 27 |
+| October 29 | Migrate your site from Railway to AWS |
+| November 3 | Job Scout 1: LLM calls, structured output, retrieval tools, and the first loop |
+| November 5 | Professor Ken Summers: Troubleshooting Road Show, during our regular class in Hilton 113. Job Scout 2 continues with tools, state, stop conditions, a human approval step, a Resend digest, and integration failures |
 
-Exercise 05 is due Tuesday, October 13, and Exercise 06 is due Tuesday,
-October 20. Both are due at 1:45 PM. Midterm whiteboard interviews run
-October 26 to 28. After the midterm you'll build Job Scout, starting with the
-November 3 and 5 lessons. GitHub Actions and tests follow on November 17.
+On November 5, Brandon Kulik from Deloitte will speak on "Consulting in the
+Age of AI." The evening event runs from 6:00 to 7:00 PM in Hilton 107.
+RSVP at https://lmu.campuslabs.com/engage/event/12919719.
+
+Choose your Project 2 posting by November 5, using the vetted feed if needed.
+Job Scout's first complete run and Project 2 milestone M1 are due November 10.
+GitHub Actions and tests follow on November 17.
 
 ## Earlier guides
 
@@ -52,7 +58,7 @@ Instruction runs September 1 to December 10, 2026.
 | Weeks | Focus | Graded work |
 | --- | --- | --- |
 | 1-8 | Networking foundations, then the cloud arc | Exercises 01-06, Project 1 due Thu 10/22 at 1:45 PM |
-| 9 | Midterm whiteboard interviews | Tue 10/27 to Thu 10/29 |
+| 9 | Midterm whiteboard interviews, then AWS migration on Thu 10/29 | Interviews Mon 10/26 to Wed 10/28 |
 | 10-15 | Job Scout, then Project 2, the job-description-driven build | Exercises 07-10 and milestones M1-M4 |
 | Finals | Final whiteboard interview | Thu 12/17, 11:00 AM |
 
@@ -74,3 +80,14 @@ When a guide asks you to open a Codespace, open it from your own
 ## Getting help
 
 Book office hours by appointment at https://calendly.com/greg-lontok.
+
+## Regenerate the syllabus PDF
+
+After editing [syllabus.md](syllabus.md), regenerate its
+[PDF](isba-4775-syllabus-fa26.pdf) with the shared renderer:
+
+```bash
+uv run ~/.claude/skills/pdf-generation/generate_pdf.py syllabus.md -o isba-4775-syllabus-fa26.pdf --preview /tmp/isba-4775-syllabus-preview
+```
+
+Inspect every preview page before publishing the PDF.

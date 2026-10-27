@@ -267,7 +267,7 @@ you chose, so this is a simulated interview for that job.
 | Weeks | What happens |
 |---|---|
 | 1-8 | Networking foundations, then the cloud arc. Exercises 01-06, Project 1 |
-| 9 | Midterm whiteboard interviews Monday through Wednesday, with regular class Thursday |
+| 9 | Midterm whiteboard interviews Monday through Wednesday, then AWS migration Thursday |
 | 10-15 | Job Scout and Project 2, the job-description-driven build. Exercises 07-10, milestones M1-M4 |
 | Finals | Final whiteboard interview |
 
@@ -302,17 +302,17 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 9/22 | Migrating to a VM: feature branches and pull requests, what Git moves and what it doesn't, IaaS, PaaS, and SaaS, and Azure resource groups | | |
 | Thu 9/24 | Creating the VM: SSH keys, an Azure VM, a cloud firewall rule for SSH, and a written migration plan | | |
 | Tue 9/29 | Finishing the migration: rebuilding the environment, moving live SQLite data, and verifying the app on the VM | | |
-| Thu 10/1 | Operating the VM: Uvicorn workers and systemd, Nginx as a reverse proxy, recovering after a restart, and delegating your domain to Cloudflare DNS | Register your domain with [the domain guide](guides/register-a-domain.md), a free .me or a $6.79 .com. Create a [free Cloudflare account](https://dash.cloudflare.com/sign-up). | Ex03 |
+| Thu 10/1 | Operating the VM: Uvicorn workers and systemd, Nginx as a reverse proxy, recovering after a restart, and delegating your domain to Cloudflare DNS | Register your domain with [the domain guide](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/register-a-domain.md), a free .me or a $6.79 .com. Create a [free Cloudflare account](https://dash.cloudflare.com/sign-up). | Ex03 |
 | Tue 10/6 | HTTPS for your domain: certificates, the request path, renewal, and troubleshooting DNS/TLS | Run `nslookup -type=NS yourdomain` and confirm Cloudflare's name servers. Confirm your site loads over HTTP. No Resend signup is needed. | |
-| Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | By 10/7, finish Railway signup. Before class, complete Ex04 and the required [Impeccable design activity](guides/improve-your-site-design.md). Keep Azure running until migration is verified. | Ex04 |
+| Thu 10/8 | Migrating to a PaaS: PostgreSQL on Railway, comparing source and target data, cutting the domain over, and who manages what | By 10/7, finish Railway signup. Before class, complete Ex04 and the required [Impeccable design activity](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/improve-your-site-design.md). Keep Azure running until migration is verified. | Ex04 |
 | Tue 10/13 | Zoho Mail at your domain: MX, SPF, DKIM, and DMARC, then sending, receiving, and replying | By 10/12, finish the Zoho account preparation below. Bring access to your domain's Cloudflare zone. | Ex05 |
 | Thu 10/15 | What an MCP server is, and connecting your coding agent to Zoho Mail. Then GA4: page views, one useful interaction, and event verification | By 10/14, create your Analytics account, GA4 property, and web stream using the preparation below. Bring the measurement ID and access to your site repository. | |
 | Tue 10/20 | Project requirements review, practice interviews in pairs, and what a whiteboard interview is | Finish the site, migration, domain email, and GA4 checks. Bring your README and submission index. Draw the system from memory once. | Ex06 |
 | Thu 10/22 | Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow | Submit Project 1 before class at 1:45 PM. By Wed 10/21 at 11:59 PM, read both LinkedIn profiles and post two questions in the Brightspace discussion. | Project 1 |
 | Tue 10/27 | Midterm interviews replace class. More slots run Mon 10/26 and Wed 10/28. | Book one Calendly appointment and practice with the study guide. | |
-| Thu 10/29 | Regular class meeting. Topic will be announced in Brightspace. | | |
-| Tue 11/3 | Job Scout 1: LLM calls, tokens and cost, structured output, retrieval tools, and the first loop | By 11/2, complete the [Claude API setup](guides/claude-api-access.md). Privately review your Ex01 interview and choose target roles and companies. | |
-| Thu 11/5 | Job Scout 2: tools, state, stop conditions, a human approval step, a Resend digest, and integration failures | By 11/4, create a Resend account and bring Cloudflare access. Keep Zoho mail working. Bring retrieved postings and choose your Project 2 posting today, with the vetted feed as a fallback. | |
+| Thu 10/29 | Migrate your site from Railway to AWS: code, data, configuration, and the domain | Bring access to your repository, Railway database, and Cloudflare zone. | |
+| Tue 11/3 | Job Scout 1: LLM calls, tokens and cost, structured output, retrieval tools, and the first loop | By 11/2, complete the [Claude API setup](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/claude-api-access.md). Privately review your Ex01 interview and choose target roles and companies. | |
+| Thu 11/5 | Professor Ken Summers: Troubleshooting Road Show. Job Scout 2: tools, state, stop conditions, a human approval step, a Resend digest, and integration failures | By 11/4, create a Resend account and bring Cloudflare access. Keep Zoho mail working. Bring retrieved postings and choose your Project 2 posting today, with the vetted feed as a fallback. | |
 | Tue 11/10 | Reading a job description as a system spec, architecture review, and an integration troubleshooting clinic | Finish Job Scout's first run and bring the posting chosen on 11/5, your spec, and architecture. | Ex07, M1 |
 | Thu 11/12 | Raw agent loops in Python: three tools, small eval sets, trace reading, and finding why a run failed | Bring the same Job Scout repository and the integration investigation. Review a real trace before class. | Ex08 |
 | Tue 11/17 | Environments and tested deployment: local, staging, production, GitHub Actions, and promotion through CI/CD | Bring the three-tool loop, eval cases, and a reviewed application change. Check the tests locally. | Ex09, M2 |
@@ -323,6 +323,11 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 12/3 | Staging in practice, then the decision record | | M4 |
 | Tue 12/8 | Blog post workshop and final interview prep | | Project 2 |
 | Thu 12/10 | Final interview practice in pairs, and a course retrospective | | |
+
+Professor Ken Summers joins us for a troubleshooting segment during class on
+November 5, in Hilton 113. That evening, Brandon Kulik from Deloitte will
+speak on "Consulting in the Age of AI." The event runs from 6:00 to 7:00 PM
+in Hilton 107. RSVP at https://lmu.campuslabs.com/engage/event/12919719.
 
 The October 6 revision keeps the Railway/PostgreSQL migration and focuses
 Project 1 on your website, domain, Zoho email, and basic GA4. October 20 is
@@ -338,7 +343,7 @@ Complete account setup ahead of the lesson so we can use class time to
 configure and verify the system.
 
 - **Before Thursday, October 8, at 1:45 PM:** complete the required
-  [website design activity with Impeccable](guides/improve-your-site-design.md)
+  [website design activity with Impeccable](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/improve-your-site-design.md)
   alongside Ex04. Spend 30-45 minutes making two or three focused improvements
   in your existing repository, with before/after screenshots and checks.
   Follow the guide's fallback if installation or deployment is blocked. Bring
@@ -395,7 +400,7 @@ money, and most of the spending starts in Exercise 01.
 | Cloudflare DNS | Free | Before Thu 10/1 |
 | GitHub | Free tier | Exercise 01 |
 | GitHub Codespaces | Personal-account compute/storage allowance; additional usage can cost money | Course Codespace in Session 04 for Ex02; new portfolio Codespace in Session 05 |
-| AWS | Free tier | Project 2, after the midterm |
+| AWS | Free tier | Migration on Thu 10/29, then Project 2 |
 | Zoho Mail | Forever Free where offered; contact me if unavailable | Create your account by Mon 10/12 for Tue 10/13 |
 | Google Analytics 4 | Standard account is free | Create the account, property, and web stream by Wed 10/14 for Thu 10/15 |
 | Resend | Free tier | Create an account by Wed 11/4 for Thu 11/5 |
@@ -491,7 +496,7 @@ Session 04, students create a Codespace directly from the course repository.
 They install services and create a MySQL database with sample data.
 
 In Session 05, students create a public `career-platform` repository and open
-their own Codespace using the [resume-site guide](guides/resume-site-in-codespaces.md).
+their own Codespace using the [resume-site guide](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/resume-site-in-codespaces.md).
 They start with a README and Python `.gitignore`, then use the coding agent
 to develop their specification and implementation plan before building.
 
