@@ -58,7 +58,10 @@ Review a different architecture with me before provisioning, including every dep
 GitHub holds code, not your live PostgreSQL rows. If the database becomes unreachable, you'll need an existing backup outside Railway.
 
 ```text
-Help me back up my Railway app and test restoring it.
+We're migrating this app from Railway to AWS. Back up the Railway
+database and uploaded files, restore the backup into a new local
+database, and check that it matches. Don't change the app, write
+scripts, or commit anything.
 ```
 
 Use compatible PostgreSQL tools and a supported tunnel or export route:
