@@ -171,7 +171,13 @@ Northern Virginia, the us-east-1 region, has six availability zones, us-east-1a 
 
 Review how the plan handles data, uploads, secrets, HTTPS, testing, and rollback. Keep Railway running and approve the plan before creating resources.
 
-Estimate compute, database, storage, public IPv4, backup, and transfer costs against your credits and the budget from section 1. RDS is the largest line.
+```text
+Estimate the monthly cost of this plan: EC2, RDS, storage, public IPv4,
+backups, and data transfer. Use current us-east-1 pricing, not memory.
+Compare the total to my credits and my budget.
+```
+
+Expect roughly $35 a month with RDS as the largest line. That means the $100 in credits covers the rest of the semester but not six months, so delete the resources when the course ends.
 
 Have your agent walk you through the deployment policy before you attach it:
 
