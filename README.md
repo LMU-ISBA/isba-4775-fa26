@@ -29,7 +29,7 @@ from Railway to AWS before the Railway trial ends. Job Scout begins November 3.
 | October 20 | [Practice your whiteboard interview](guides/whiteboard-interview-practice.md) |
 | October 22 | Submit Project 1 before class. Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow. Post two questions in the Brightspace discussion by Wednesday, October 21, at 11:59 PM |
 | October 26 to 28 | Midterm whiteboard interviews in Hilton 114. Interviews replace class on October 27 |
-| October 29 | Migrate your site from Railway to AWS |
+| October 29 | [Migrate your site from Railway to AWS](guides/aws-migration.md) |
 | November 3 | Job Scout 1: LLM calls, structured output, retrieval tools, and the first loop |
 | November 5 | Professor Ken Summers: Troubleshooting Road Show, during our regular class in Hilton 113. Job Scout 2 continues with tools, state, stop conditions, a human approval step, a Resend digest, and integration failures |
 

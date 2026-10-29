@@ -4,6 +4,10 @@ We'll begin moving your project from Railway to AWS on Thursday, October 29, at 
 
 Your goal is to arrive with an active account and working sign-in. We'll set up deployment access in class.
 
+The full session guide covers architecture, IAM, CLI setup, migration, and verification:
+
+https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-migration.md
+
 ## 1. Check for an existing account
 
 If you've used AWS before, sign in to that account. Don't create another account to claim new-customer credits.
