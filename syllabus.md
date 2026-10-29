@@ -319,7 +319,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 11/19 | Cloud storage and databases, least-privilege IAM, and agent guardrails for loop limits, schemas, and costs | Bring your data-flow diagram and identify stored data, permissions, and the agent's stop conditions. | |
 | Tue 11/24 | Grounding review, retrieval, chunking, and what the agent must not see. On Zoom | Complete the controlled agent-failure investigation and M3 checks. Join through Brightspace's Zoom link. | Ex10, M3 |
 | Thu 11/26 | No class, Thanksgiving | | |
-| Tue 12/1 | Operating a deployed system: auth, rate limiting, monitoring, and cost controls | | |
+| Tue 12/1 | LMU Data Center tour with [Jeff Solomon](https://its.lmu.edu/whoweare/staff/infrastructureservices/) | Meet in University Hall in front of Einstein Bros. Bagels. | |
 | Thu 12/3 | Staging in practice, then the decision record | | M4 |
 | Tue 12/8 | Blog post workshop and final interview prep | | Project 2 |
 | Thu 12/10 | Final interview practice in pairs, and a course retrospective | | |
