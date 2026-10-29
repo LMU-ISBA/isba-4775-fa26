@@ -8,17 +8,35 @@ This draft uses EC2 with local PostgreSQL as the proposed shared path. We'll com
 
 Share this guide with your agent before starting. Work through one section at a time, using the prompts as starting points. Let your agent inspect your project and ask for missing information.
 
-## 1. Choose the architecture
+## 1. Set a budget and choose the architecture
 
-Open your application repository, Railway, and Cloudflare. Complete account setup and check your Free plan, credits, and expiry:
+Open your application repository, Railway, and Cloudflare. Complete account setup and check your plan, credits, and expiry:
 
 https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-account-setup.md
 
 https://console.aws.amazon.com/costmanagement/
 
-Eligible resources consume credits. Don't upgrade to Paid or create or join AWS Organizations for this lesson.
+Eligible resources consume credits. Don't upgrade to Paid or create or join AWS Organizations for this lesson. An existing account without the Free plan shows no plan or credits here and bills real usage, so keep to the instance sizes in section 5 and terminate the instance when you're done.
 
-An existing account without the Free plan shows no plan or credits here and bills real usage. Keep to the instance sizes in section 5, set the cost budget there before launching, and terminate the instance when you're done if you don't want to keep paying.
+Set a budget so AWS emails you before a surprise bill. Alerts aren't spending caps.
+
+https://console.aws.amazon.com/costmanagement/home#/budgets
+
+1. Choose Create budget.
+2. Under Budget setup, choose Use a template (simplified), then Monthly cost budget.
+3. Enter a name and the monthly amount, in dollars, you'd want to hear about:
+
+```text
+isba-4775-monthly
+```
+
+```text
+10
+```
+
+4. Enter your email and choose Create budget. The template emails you at 85% and 100% of actual spend and at 100% of forecasted spend.
+
+Now compare where the app could run:
 
 | Option | Main tradeoff |
 | --- | --- |
@@ -26,9 +44,16 @@ An existing account without the Free plan shows no plan or credits here and bill
 | EC2 + Single-AZ RDS | Managed database operations, with another service and additional costs |
 | Lambda + API Gateway + Single-AZ RDS | Serverless app compute, with application changes, database connections, and external API access to resolve |
 
-Require compatibility, preserved data, security, required functionality, and Free-plan eligibility before scoring. Compare cost, speed, complexity, reliability, security, scalability, maintainability, and portability. Separate deployment speed from runtime performance.
+Pick the priority that matters most to you, then let your agent compare the options against your actual app:
 
-Choose weights totaling 100, score options from 1 to 5, and compare weighted totals. Draw the request path and explain:
+```text
+Look at my app and compare three ways to run it on AWS: EC2 with local
+PostgreSQL, EC2 with RDS, and Lambda with API Gateway and RDS. My top
+priority is [cost / speed to deploy / least to operate]. Recommend one
+and name the tradeoff I'm accepting.
+```
+
+Check the recommendation against four requirements before accepting it: the app runs with changes you understand, your data moves intact, PostgreSQL stays private, and every service is on your plan. Then write your decision and draw the request path:
 
 ```text
 I chose [architecture] over [alternative] because [priority], and I accept [tradeoff].
@@ -132,7 +157,7 @@ Look at my app and help me plan its move to AWS.
 
 Use EC2 with local PostgreSQL unless we've reviewed another option. Review how the plan handles data, uploads, secrets, HTTPS, testing, and rollback. Keep Railway running and approve the plan before creating resources.
 
-Estimate compute, storage, public IPv4, backup, and transfer costs against your credits. Set a cost budget excluding credits and email alerts in Billing. Alerts aren't spending caps.
+Estimate compute, storage, public IPv4, backup, and transfer costs against your credits and the budget from section 1.
 
 Review this deployment policy with me before attaching it:
 
