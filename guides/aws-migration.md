@@ -143,7 +143,7 @@ Ask AWS who you are through that profile. It prints the account ID and the user'
 aws sts get-caller-identity --profile isba-4775
 ```
 
-Confirm your account and IAM user. Stop if the ARN ends in `:root`. Every later command, including your agent's, passes the same profile flag to use this session.
+The output opens in a viewer that ends with `(END)`. Press q to get your prompt back. Confirm your account and IAM user. Stop if the ARN ends in `:root`. Every later command, including your agent's, passes the same profile flag to use this session.
 
 ```text
 Check my AWS connection using the isba-4775 profile.
