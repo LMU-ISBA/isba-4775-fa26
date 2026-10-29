@@ -113,7 +113,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 Help me install the latest AWS CLI.
 ```
 
-Open a new terminal and print the installed version. Browser login needs 2.32.0 or later.
+Open a new terminal and print the installed version. You need 2.35.0 or later.
 
 ```bash
 aws --version
@@ -126,6 +126,16 @@ aws login --profile isba-4775 --region us-east-1
 ```
 
 Complete browser login yourself as the IAM user. If your agent runs somewhere without a browser, like Codespaces, ask me.
+
+When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer y and choose your agent. This installs AWS's own skills into your agent and connects it to the AWS MCP Server, which runs AWS calls and documentation searches as your IAM user. If you answered n, run the wizard yourself:
+
+```bash
+aws configure agent-toolkit
+```
+
+Restart your agent afterward so it loads the new configuration.
+
+https://docs.aws.amazon.com/agent-toolkit/latest/userguide/aws-cli.html
 
 Ask AWS who you are through that profile. It prints the account ID and the user's ARN:
 
