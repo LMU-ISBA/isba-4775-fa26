@@ -167,7 +167,7 @@ and a Single-AZ RDS PostgreSQL database. Work on a new branch so
 Railway doesn't redeploy from main. Don't create anything yet.
 ```
 
-Single-AZ means the database runs in one availability zone, one of the physical data center groups in Northern Virginia. Multi-AZ keeps a standby copy in a second zone for failover, costs about double, and isn't on the Free plan. If we've reviewed a different architecture, say so in the prompt.
+Northern Virginia, the us-east-1 region, has six availability zones, us-east-1a through 1f, each a separate set of data centers with its own power and network. Single-AZ means the database runs in one of them. Multi-AZ keeps a standby copy in a second zone for failover, costs about double, and isn't on the Free plan. If we've reviewed a different architecture, say so in the prompt.
 
 Review how the plan handles data, uploads, secrets, HTTPS, testing, and rollback. Keep Railway running and approve the plan before creating resources.
 
