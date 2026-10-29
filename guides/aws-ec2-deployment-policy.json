@@ -2,7 +2,7 @@
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "CourseEC2OperationsInNorthernVirginia",
+      "Sid": "CourseEC2AndRDSOperationsInNorthernVirginia",
       "Effect": "Allow",
       "Action": [
         "ec2:Describe*",
@@ -26,12 +26,36 @@
         "ec2:AssociateAddress",
         "ec2:DisassociateAddress",
         "ec2:ReleaseAddress",
-        "ec2:DeleteVolume"
+        "ec2:DeleteVolume",
+        "rds:Describe*",
+        "rds:ListTagsForResource",
+        "rds:AddTagsToResource",
+        "rds:CreateDBInstance",
+        "rds:ModifyDBInstance",
+        "rds:DeleteDBInstance",
+        "rds:StartDBInstance",
+        "rds:StopDBInstance",
+        "rds:RebootDBInstance",
+        "rds:CreateDBSubnetGroup",
+        "rds:DeleteDBSubnetGroup",
+        "rds:CreateDBSnapshot",
+        "rds:DeleteDBSnapshot"
       ],
       "Resource": "*",
       "Condition": {
         "StringEquals": {
           "aws:RequestedRegion": "us-east-1"
+        }
+      }
+    },
+    {
+      "Sid": "AllowRDSServiceLinkedRole",
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": "rds.amazonaws.com"
         }
       }
     },
@@ -42,7 +66,10 @@
       "Resource": "arn:aws:ec2:*:*:instance/*",
       "Condition": {
         "StringNotEquals": {
-          "ec2:InstanceType": ["t3.micro", "t3.small"]
+          "ec2:InstanceType": [
+            "t3.micro",
+            "t3.small"
+          ]
         }
       }
     },
@@ -54,6 +81,62 @@
       "Condition": {
         "StringNotEquals": {
           "ec2:MetadataHttpTokens": "required"
+        }
+      }
+    },
+    {
+      "Sid": "DenyOtherDatabaseClasses",
+      "Effect": "Deny",
+      "Action": [
+        "rds:CreateDBInstance",
+        "rds:ModifyDBInstance"
+      ],
+      "Resource": "arn:aws:rds:*:*:db:*",
+      "Condition": {
+        "StringNotEqualsIfExists": {
+          "rds:DatabaseClass": [
+            "db.t3.micro",
+            "db.t4g.micro"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyMultiAZ",
+      "Effect": "Deny",
+      "Action": [
+        "rds:CreateDBInstance",
+        "rds:ModifyDBInstance"
+      ],
+      "Resource": "arn:aws:rds:*:*:db:*",
+      "Condition": {
+        "Bool": {
+          "rds:MultiAz": "true"
+        }
+      }
+    },
+    {
+      "Sid": "DenyLargeStorage",
+      "Effect": "Deny",
+      "Action": [
+        "rds:CreateDBInstance",
+        "rds:ModifyDBInstance"
+      ],
+      "Resource": "arn:aws:rds:*:*:db:*",
+      "Condition": {
+        "NumericGreaterThan": {
+          "rds:StorageSize": "20"
+        }
+      }
+    },
+    {
+      "Sid": "DenyUnencryptedDatabase",
+      "Effect": "Deny",
+      "Action": "rds:CreateDBInstance",
+      "Resource": "arn:aws:rds:*:*:db:*",
+      "Condition": {
+        "Bool": {
+          "rds:StorageEncrypted": "false"
         }
       }
     }

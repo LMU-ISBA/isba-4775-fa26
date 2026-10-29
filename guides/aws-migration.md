@@ -4,7 +4,7 @@ Session 17 · Thursday, October 29, 2026
 
 Move your code, data, configuration, and domain. Keep Railway working until the AWS copy passes your checks. Today's goal is a tested backup and verified progress, even if the migration isn't finished.
 
-This draft uses EC2 with local PostgreSQL as the proposed shared path. We'll compare alternatives before deploying.
+The shared path is EC2 for the app with a Single-AZ RDS PostgreSQL database. You've already run PostgreSQL yourself on a VM, so this time AWS runs it. We'll compare alternatives before deploying.
 
 Share this guide with your agent before starting. Work through one section at a time, using the prompts as starting points. Let your agent inspect your project and ask for missing information.
 
@@ -67,7 +67,7 @@ https://docs.railway.com/guides/postgres-backups-restores
 
 Include the database and uploaded files. Restore into a new local database without changing Railway. Check counts, representative records, and the restored app without querying Railway. Keep protected copies outside the repository and on independent storage. Keep secrets out of chat and Git. Remove temporary public database exposure afterward.
 
-Record the backup date, restore time, backup frequency, and retention. Decide acceptable data loss (RPO) and recovery time (RTO). Continue independent backups after moving to EC2.
+Record the backup date, restore time, backup frequency, and retention. Decide acceptable data loss (RPO) and recovery time (RTO). RDS keeps automated backups, but keep an independent export outside AWS too.
 
 ## 3. Create your IAM user
 
@@ -147,15 +147,15 @@ Use a migration branch to avoid unexpectedly redeploying Railway.
 Look at my app and help me plan its move to AWS.
 ```
 
-Use EC2 with local PostgreSQL unless we've reviewed another option. Review how the plan handles data, uploads, secrets, HTTPS, testing, and rollback. Keep Railway running and approve the plan before creating resources.
+Use EC2 with Single-AZ RDS PostgreSQL unless we've reviewed another option. Review how the plan handles data, uploads, secrets, HTTPS, testing, and rollback. Keep Railway running and approve the plan before creating resources.
 
-Estimate compute, storage, public IPv4, backup, and transfer costs against your credits and the budget from section 1.
+Estimate compute, database, storage, public IPv4, backup, and transfer costs against your credits and the budget from section 1. RDS is the largest line.
 
 Review this deployment policy with me before attaching it:
 
 https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-ec2-deployment-policy.json
 
-It permits specified EC2 changes and deletion in Northern Virginia, including unrelated resources. Have me narrow it if your account contains other work. It doesn't enforce a budget or Free-plan eligibility.
+It permits specified EC2 and RDS changes and deletion in Northern Virginia, including unrelated resources. Have me narrow it if your account contains other work. It limits RDS to Single-AZ micro instances with 20 GB of encrypted storage. It doesn't enforce a budget or Free-plan eligibility.
 
 As account owner, open IAM → Policies → Create policy → JSON. Paste the reviewed policy, resolve validation errors, and name it:
 
@@ -173,9 +173,24 @@ Open EC2 → Northern Virginia → Launch instance to review these choices befor
 | Storage and metadata | Encrypted gp3 sized for your app and data, IMDSv2 required |
 | Network | Existing default VPC, public subnet with internet access, one public IPv4 |
 | Access | SSH key, port 22 restricted to your IP, public ports 80 and 443 |
-| Private services | No public PostgreSQL or app-server port |
+| Private services | No public app-server port, and no PostgreSQL on the instance |
 
 Approve the configuration, then let the agent launch it once. Find the instance in the console and verify its ID, address, security group, and storage. Connect through SSH after checking its host identity. Keep private keys outside Git.
+
+Then open RDS → Northern Virginia → Create database and review these choices before the agent creates the database:
+
+| Setting | Starting choice |
+| --- | --- |
+| Engine and version | PostgreSQL, same major version as Railway or newer |
+| Template and availability | Free tier or Dev/Test, Single-AZ, one db.t3.micro or db.t4g.micro |
+| Storage | 20 GB encrypted gp3, autoscaling off |
+| Credentials | Self managed, a generated password the agent writes to the server's environment file without printing it |
+| Network | Default VPC, not publicly accessible, its own security group allowing port 5432 only from the EC2 instance's security group |
+| Backups | Automated backups on, seven days |
+
+Approve it, then let the agent create it once. Creation takes five to ten minutes, so start section 6 while it runs. Find the database in the console and verify its endpoint, class, Single-AZ, and that Publicly accessible is No.
+
+https://us-east-1.console.aws.amazon.com/rds/home?region=us-east-1#databases:
 
 Ask me if the default VPC is missing. Don't add NAT gateways or load balancers to bypass a blocker.
 
@@ -187,7 +202,7 @@ Help me deploy my app to AWS using our plan.
 
 Work one phase at a time. Deploy the intended commit and restore into a new AWS database. Keep Railway running and leave production DNS unchanged.
 
-Check that Nginx forwards to a non-root app service, PostgreSQL stays local, and the app uses the AWS database. Keep secrets outside Git, restore uploads, and use compatible PostgreSQL versions. Don't replace existing data with seed records.
+Check that Nginx forwards to a non-root app service and the app's database URL points at the RDS endpoint over the private network. Restore your backup from the EC2 instance, since RDS isn't reachable from your laptop. Keep secrets outside Git, restore uploads, and use compatible PostgreSQL versions. Don't replace existing data with seed records.
 
 Enable services to start after reboot. Use the VM guide for service and log checks:
 
@@ -209,7 +224,7 @@ Help me test that my app works on AWS.
 - Create a target-only record and confirm it survives an app restart.
 - Reboot the VM and confirm the app, database, and web server return.
 - Test required pages, uploads, redirects, assets, integrations, and certificate renewal.
-- Verify restricted SSH, private database access, and actual resource costs.
+- Verify restricted SSH, that RDS isn't publicly accessible and only accepts the EC2 security group, and actual resource costs.
 
 Record evidence for each check and mark anything you haven't verified.
 
@@ -232,7 +247,7 @@ If you roll back after AWS accepts writes, reconcile the databases first. Changi
 
 Update your README with the decision, backup and recovery process, verification results, costs, and next step. Commit reviewed code and notes without secrets or exports. Check Railway's connected branch before pushing.
 
-Keep Railway until verification passes. Remove temporary database exposure and review unused resources for cleanup. Stopped VMs can still incur storage and address costs.
+Keep Railway until verification passes. Remove temporary database exposure and review unused resources for cleanup. Stopped VMs can still incur storage and address costs. A stopped RDS instance restarts itself after seven days, so delete it with a final snapshot when you're done with it.
 
 Repeat CLI login when the session expires. To clear its cached credentials when finished:
 
@@ -246,6 +261,6 @@ aws logout --profile isba-4775
 Add an architecture diagram of my app to the README.
 ```
 
-Use Mermaid so the diagram displays on GitHub. Show the request path, hosting boundaries, ports, database, backups, and administrative access. Mark unfinished parts clearly.
+Use Mermaid so the diagram displays on GitHub. Show the request path, hosting boundaries, ports, the RDS database as its own box inside the VPC, backups, and administrative access. Mark unfinished parts clearly.
 
 Review every arrow against your deployment. Distinguish Cloudflare DNS from proxying, show where HTTPS ends, and identify where data persists. Include Railway if it still serves traffic. Explain the diagram to a classmate and correct anything you can't verify.
