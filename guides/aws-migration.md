@@ -173,13 +173,20 @@ Review how the plan handles data, uploads, secrets, HTTPS, testing, and rollback
 
 Estimate compute, database, storage, public IPv4, backup, and transfer costs against your credits and the budget from section 1. RDS is the largest line.
 
-Review this deployment policy with me before attaching it:
+Have your agent walk you through the deployment policy before you attach it:
 
-https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-ec2-deployment-policy.json
+```text
+Review this deployment policy with me before I attach it to my IAM user:
+https://raw.githubusercontent.com/LMU-ISBA/isba-4775-fa26/main/guides/aws-ec2-deployment-policy.json
+```
 
 It permits specified EC2 and RDS changes and deletion in Northern Virginia, including unrelated resources. Have me narrow it if your account contains other work. It limits RDS to Single-AZ micro instances with 20 GB of encrypted storage. It doesn't enforce a budget or Free-plan eligibility.
 
-As account owner, open IAM → Policies → Create policy → JSON. Paste the reviewed policy, resolve validation errors, and name it:
+As account owner, copy the policy JSON:
+
+https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-ec2-deployment-policy.json
+
+Open IAM → Policies → Create policy → JSON. Paste it, resolve validation errors, and name it:
 
 ```text
 ISBA4775EC2Migration
