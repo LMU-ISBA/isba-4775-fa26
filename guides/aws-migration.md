@@ -113,13 +113,13 @@ https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 Help me install the latest AWS CLI.
 ```
 
-Open a new terminal and check the version. Browser login needs 2.32.0 or later.
+Open a new terminal and print the installed version. Browser login needs 2.32.0 or later.
 
 ```bash
 aws --version
 ```
 
-Sign in locally:
+Sign in locally. This opens your browser, you sign in as the IAM user with MFA, and the CLI stores a temporary session under a new named profile, isba-4775, with Northern Virginia as its region. No access keys are created.
 
 ```bash
 aws login --profile isba-4775 --region us-east-1
@@ -133,11 +133,13 @@ aws login --profile isba-4775 --region us-east-1 --remote
 
 Complete browser login yourself as the IAM user. Paste remote authorization codes only into the waiting terminal.
 
+Ask AWS who you are through that profile. It prints the account ID and the user's ARN:
+
 ```bash
 aws sts get-caller-identity --profile isba-4775
 ```
 
-Confirm your account and IAM user. Stop if the ARN ends in `:root`.
+Confirm your account and IAM user. Stop if the ARN ends in `:root`. Every later command, including your agent's, passes the same profile flag to use this session.
 
 ```text
 Check my AWS connection using the isba-4775 profile.
