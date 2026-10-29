@@ -18,6 +18,8 @@ https://console.aws.amazon.com/costmanagement/
 
 Eligible resources consume credits. Don't upgrade to Paid or create or join AWS Organizations for this lesson.
 
+An existing account without the Free plan shows no plan or credits here and bills real usage. Keep to the instance sizes in section 5, set the cost budget there before launching, and terminate the instance when you're done if you don't want to keep paying.
+
 | Option | Main tradeoff |
 | --- | --- |
 | EC2 + local PostgreSQL | Familiar setup, but you manage backups and both services share one failure point |
