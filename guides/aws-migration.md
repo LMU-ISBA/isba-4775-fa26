@@ -161,13 +161,15 @@ Have the agent confirm your identity and list EC2 instances in Northern Virginia
 
 ## 5. Plan and create EC2
 
-Use a migration branch to avoid unexpectedly redeploying Railway.
-
 ```text
-Look at my app and help me plan its move to AWS.
+Look at my app and help me plan its move to AWS. Use EC2 for the app
+and a Single-AZ RDS PostgreSQL database. Work on a new branch so
+Railway doesn't redeploy from main. Don't create anything yet.
 ```
 
-Use EC2 with Single-AZ RDS PostgreSQL unless we've reviewed another option. Review how the plan handles data, uploads, secrets, HTTPS, testing, and rollback. Keep Railway running and approve the plan before creating resources.
+Single-AZ means the database runs in one availability zone, one of the physical data center groups in Northern Virginia. Multi-AZ keeps a standby copy in a second zone for failover, costs about double, and isn't on the Free plan. If we've reviewed a different architecture, say so in the prompt.
+
+Review how the plan handles data, uploads, secrets, HTTPS, testing, and rollback. Keep Railway running and approve the plan before creating resources.
 
 Estimate compute, database, storage, public IPv4, backup, and transfer costs against your credits and the budget from section 1. RDS is the largest line.
 
