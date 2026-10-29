@@ -105,7 +105,7 @@ If console access wasn't offered during creation, look under Security credential
 
 ## 4. Connect your agent through the CLI
 
-Install the latest AWS CLI v2 where your agent runs, including inside WSL or Codespaces when applicable:
+Install the latest AWS CLI v2 on your laptop, where your agent runs:
 
 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
@@ -125,13 +125,7 @@ Sign in locally. This opens your browser, you sign in as the IAM user with MFA, 
 aws login --profile isba-4775 --region us-east-1
 ```
 
-For a remote terminal, use this instead:
-
-```bash
-aws login --profile isba-4775 --region us-east-1 --remote
-```
-
-Complete browser login yourself as the IAM user. Paste remote authorization codes only into the waiting terminal.
+Complete browser login yourself as the IAM user. If your agent runs somewhere without a browser, like Codespaces, ask me.
 
 Ask AWS who you are through that profile. It prints the account ID and the user's ARN:
 
