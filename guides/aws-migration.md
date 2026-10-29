@@ -127,13 +127,15 @@ aws login --profile isba-4775 --region us-east-1
 
 Complete browser login yourself as the IAM user. If your agent runs somewhere without a browser, like Codespaces, ask me.
 
-When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer y and choose your agent. This installs AWS's own skills into your agent and connects it to the AWS MCP Server, which runs AWS calls and documentation searches as your IAM user. If you answered n, run the wizard yourself:
+When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer y and choose your agent. If you answered n, run the wizard yourself:
 
 ```bash
 aws configure agent-toolkit
 ```
 
 Restart your agent afterward so it loads the new configuration.
+
+The CLI is the tool: your agent types commands and AWS answers. The toolkit adds two things. Skills are AWS-written instructions that give your agent the documented way to do a task instead of guessing from memory. The AWS MCP Server is a second way for the agent to call AWS, using your same IAM user, and AWS records which calls came from the agent rather than from you.
 
 https://docs.aws.amazon.com/agent-toolkit/latest/userguide/aws-cli.html
 
