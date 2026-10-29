@@ -23,18 +23,16 @@ Set a budget so AWS emails you before a surprise bill. Alerts aren't spending ca
 https://console.aws.amazon.com/costmanagement/home#/budgets
 
 1. Choose Create budget.
-2. Under Budget setup, choose Use a template (simplified), then Monthly cost budget.
-3. Enter a name and the monthly amount, in dollars, you'd want to hear about:
+2. Under Budget setup, choose Use a template (simplified), then Zero spend budget.
+3. Enter a name:
 
 ```text
-isba-4775-monthly
+isba-4775-zero-spend
 ```
 
-```text
-10
-```
+4. Enter your email and choose Create budget. AWS emails you the first time a charge isn't covered by credits.
 
-4. Enter your email and choose Create budget. The template emails you at 85% and 100% of actual spend and at 100% of forecasted spend.
+Budgets count cost after credits, so watch the Credits page for how fast credits drain. On an existing account without the Free plan, zero-spend fires right away, so choose Monthly cost budget with an amount of 10 instead.
 
 Now compare where the app could run:
 
