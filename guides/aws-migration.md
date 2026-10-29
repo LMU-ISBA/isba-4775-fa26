@@ -59,9 +59,7 @@ GitHub holds code, not your live PostgreSQL rows. If the database becomes unreac
 
 ```text
 We're migrating this app from Railway to AWS. Back up the Railway
-database and uploaded files, restore the backup into a new local
-database, and check that it matches. Don't change the app, write
-scripts, or commit anything.
+database and test restoring the backup.
 ```
 
 Use compatible PostgreSQL tools and a supported tunnel or export route:
