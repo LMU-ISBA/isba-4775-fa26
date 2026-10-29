@@ -82,8 +82,8 @@ https://console.aws.amazon.com/iam/
 isba-student
 ```
 
-2. Enable console access, choose the IAM-user option, and privately save the password and sign-in URL.
-3. Open Permissions → Add permissions → Attach policies directly. Add both policies:
+2. Enable console access and choose the IAM-user option.
+3. At Set permissions, choose Attach policies directly, not a group. Search for and tick both policies, then continue to Create user:
 
 ```text
 SignInLocalDevelopmentAccess
@@ -93,8 +93,9 @@ SignInLocalDevelopmentAccess
 AmazonEC2ReadOnlyAccess
 ```
 
-4. Open Security credentials → Assign MFA device while still in the owner's session.
-5. Sign out and sign in as the new IAM user with MFA.
+4. Privately save the password and sign-in URL from the final page.
+5. Open the user → Security credentials → Assign MFA device while still in the owner's session.
+6. Sign out and sign in as the new IAM user with MFA.
 
 If console access wasn't offered during creation, look under Security credentials → Console sign-in. Ask me if unavailable. These policies allow login and inspection, with deployment permissions added after review.
 
