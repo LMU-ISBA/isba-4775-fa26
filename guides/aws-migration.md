@@ -36,16 +36,16 @@ Now compare where the app could run:
 | EC2 + Single-AZ RDS | Managed database operations, with another service and additional costs |
 | Lambda + API Gateway + Single-AZ RDS | Serverless app compute, with application changes, database connections, and external API access to resolve |
 
-Pick the priority that matters most to you, then let your agent compare the options against your actual app:
+Let your agent compare the options against your actual app:
 
 ```text
 Look at my app and compare three ways to run it on AWS: EC2 with local
-PostgreSQL, EC2 with RDS, and Lambda with API Gateway and RDS. My top
-priority is [cost / speed to deploy / least to operate]. Recommend one
-and name the tradeoff I'm accepting.
+PostgreSQL, EC2 with RDS, and Lambda with API Gateway and RDS. Tell me
+which you'd pick if my top priority is cost, which if it's speed to
+deploy, and which if it's least to operate. Name the tradeoff each time.
 ```
 
-Check the recommendation against four requirements before accepting it: the app runs with changes you understand, your data moves intact, PostgreSQL stays private, and every service is on your plan. Then write your decision and draw the request path:
+Tell the agent which priority is yours. Check its recommendation against four requirements before accepting it: the app runs with changes you understand, your data moves intact, PostgreSQL stays private, and every service is on your plan. Then write your decision and draw the request path:
 
 ```text
 I chose [architecture] over [alternative] because [priority], and I accept [tradeoff].
