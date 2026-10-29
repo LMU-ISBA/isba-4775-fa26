@@ -127,6 +127,12 @@ aws login --profile isba-4775 --region us-east-1
 
 Complete browser login yourself as the IAM user. If your agent runs somewhere without a browser, like Codespaces, ask me.
 
+Login doesn't save a region on the profile, so set it once. Without it, EC2 and RDS commands fail with "You must specify a region."
+
+```bash
+aws configure set region us-east-1 --profile isba-4775
+```
+
 When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer y and choose your agent. If you answered n, run the wizard yourself:
 
 ```bash
