@@ -83,11 +83,15 @@ isba-student
 ```
 
 2. Enable console access and choose the IAM-user option.
-3. At Set permissions, choose Attach policies directly, not a group. Search for and tick both policies, then continue to Create user:
+3. At Set permissions, choose Attach policies directly, not a group. Search for and tick both policies, then continue to Create user.
+
+The first lets the AWS CLI on your laptop sign in through the browser as this user:
 
 ```text
 SignInLocalDevelopmentAccess
 ```
+
+The second lets the user and your agent look at EC2 without changing anything:
 
 ```text
 AmazonEC2ReadOnlyAccess
