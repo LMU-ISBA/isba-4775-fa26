@@ -139,17 +139,7 @@ Login doesn't save a region on the profile, so set it once. Without it, EC2 and 
 aws configure set region us-east-1 --profile isba-4775
 ```
 
-When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer y. If you answered n, run the wizard yourself:
-
-```bash
-aws configure agent-toolkit
-```
-
-Answer Y to both questions. It installs 24 AWS skills into every coding agent it finds on your laptop and adds an MCP server named aws-mcp. Restart your agent afterward so it loads the new configuration.
-
-The CLI is the tool: your agent types commands and AWS answers. The toolkit adds two things. Skills are AWS-written instructions that give your agent the documented way to do a task instead of guessing from memory. The AWS MCP Server is a second way for the agent to call AWS, using your same IAM user, and AWS records which calls came from the agent rather than from you.
-
-https://docs.aws.amazon.com/agent-toolkit/latest/userguide/aws-cli.html
+When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer n. We migrate with the CLI alone first, so you see what the agent does with plain commands. The toolkit comes after the migration, at the end of section 8.
 
 Ask AWS who you are through that profile. It prints the account ID and the user's ARN:
 
@@ -295,6 +285,18 @@ Repeat CLI login when the session expires. To clear its cached credentials when 
 ```bash
 aws logout --profile isba-4775
 ```
+
+Once the app runs on AWS, add the Agent Toolkit for AWS so your agent has AWS-written instructions for the questions and operations that come next:
+
+```bash
+aws configure agent-toolkit
+```
+
+Answer Y to both questions. It installs 24 AWS skills into every coding agent it finds on your laptop and adds an MCP server named aws-mcp. Restart your agent afterward so it loads the new configuration.
+
+The CLI is the tool: your agent types commands and AWS answers. The toolkit adds two things. Skills are AWS-written instructions that give your agent the documented way to do a task instead of guessing from memory. The AWS MCP Server is a second way for the agent to call AWS, using your same IAM user, and AWS records which calls came from the agent rather than from you.
+
+https://docs.aws.amazon.com/agent-toolkit/latest/userguide/aws-cli.html
 
 ## 9. Diagram what you built
 
