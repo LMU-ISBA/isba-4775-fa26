@@ -315,7 +315,7 @@ The database's security group refers to the instance's security group, so the ag
 Create the RDS database from our plan.
 ```
 
-Approve the commands, then let the agent create it once. Creation takes five to ten minutes, so continue to section 8 while it runs. If the agent sits waiting for the database to become available, interrupt it and move on. Find the database in the console and verify its endpoint, class, Single-AZ, and that Publicly accessible is No.
+Approve the commands, then let the agent create it once. Creation takes five to ten minutes, so continue to section 8 while it runs. If the agent sits waiting for the database to become available, interrupt it and move on. Find the database in the console. Under Connect using, choose Endpoints, then open Additional configurations. The Security column shows Publicly accessible, which must say No, and the Networking column shows the Availability Zone. The class is on the Configuration tab.
 
 ## 8. Create the EC2 instance
 
