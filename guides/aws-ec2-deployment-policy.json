@@ -155,6 +155,28 @@
           "rds:StorageEncrypted": "false"
         }
       }
+    },
+    {
+      "Sid": "DenyPublicDatabaseAtCreate",
+      "Effect": "Deny",
+      "Action": "rds:CreateDBInstance",
+      "Resource": "arn:aws:rds:*:*:db:*",
+      "Condition": {
+        "BoolIfExists": {
+          "rds:PubliclyAccessible": "true"
+        }
+      }
+    },
+    {
+      "Sid": "DenyMakingDatabasePublic",
+      "Effect": "Deny",
+      "Action": "rds:ModifyDBInstance",
+      "Resource": "arn:aws:rds:*:*:db:*",
+      "Condition": {
+        "Bool": {
+          "rds:PubliclyAccessible": "true"
+        }
+      }
     }
   ]
 }
