@@ -22,7 +22,7 @@ https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-account-setup.md
 
 https://console.aws.amazon.com/costmanagement/
 
-Eligible resources consume credits. Don't upgrade to Paid or create or join AWS Organizations for this lesson. An existing account without the Free plan shows no plan or credits here and bills real usage, so keep to the instance sizes in section 5 and terminate the instance when you're done.
+Eligible resources consume credits. Don't upgrade to Paid or create or join AWS Organizations for this lesson. An existing account without the Free plan shows no plan or credits here and bills real usage, so keep to the instance sizes in section 7 and terminate the instance when you're done.
 
 Set a budget so AWS emails you before a surprise bill. Alerts aren't spending caps.
 
@@ -139,7 +139,7 @@ Login doesn't save a region on the profile, so set it once. Without it, EC2 and 
 aws configure set region us-east-1 --profile isba-4775
 ```
 
-When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer n. We migrate with the CLI alone first, so you see what the agent does with plain commands. The toolkit comes after the migration, at the end of section 8.
+When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer n. We migrate with the CLI alone first, so you see what the agent does with plain commands. The toolkit comes after the migration, at the end of section 11.
 
 Ask AWS who you are through that profile. It prints the account ID and the user's ARN:
 
@@ -153,9 +153,9 @@ The output opens in a viewer that ends with `(END)`. Press q to get your prompt 
 Check my AWS connection using the isba-4775 profile.
 ```
 
-Have the agent confirm your identity and list EC2 instances in Northern Virginia without changing resources or reading credential files. An empty list is fine. If the agent probes RDS or IAM and gets access denied, that's expected: this user can't deploy yet, and section 5 adds those permissions. Resolve any other access error before continuing, and keep credentials out of chat and Git.
+Have the agent confirm your identity and list EC2 instances in Northern Virginia without changing resources or reading credential files. An empty list is fine. If the agent probes RDS or IAM and gets access denied, that's expected: this user can't deploy yet, and section 6 adds those permissions. Resolve any other access error before continuing, and keep credentials out of chat and Git.
 
-## 5. Plan and create EC2
+## 5. Plan the move
 
 ```text
 Look at my app and help me plan its move to AWS. Use EC2 for the app
@@ -175,7 +175,9 @@ Compare the total to my credits and my budget.
 
 Expect roughly $35 a month with RDS as the largest line. That means the $100 in credits covers the rest of the semester but not six months, so delete the resources when the course ends.
 
-Next, add a deployment policy so your IAM user can create EC2 and RDS resources. Sign out and sign back in as the root user, since your IAM user can't change its own permissions. Copy the policy JSON:
+## 6. Give your IAM user deployment permissions
+
+Add a deployment policy so your IAM user can create EC2 and RDS resources. Sign out and sign back in as the root user, since your IAM user can't change its own permissions. Copy the policy JSON:
 
 https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-ec2-deployment-policy.json
 
@@ -202,6 +204,8 @@ Review this deployment policy with me:
 https://raw.githubusercontent.com/LMU-ISBA/isba-4775-fa26/main/guides/aws-ec2-deployment-policy.json
 ```
 
+## 7. Create the EC2 instance
+
 Open EC2 → Northern Virginia → Launch instance to review these choices before the agent creates anything:
 
 | Setting | Starting choice |
@@ -214,7 +218,11 @@ Open EC2 → Northern Virginia → Launch instance to review these choices befor
 
 Approve the configuration, then let the agent launch it once. Find the instance in the console and verify its ID, address, security group, and storage. Connect through SSH after checking its host identity. Keep private keys outside Git.
 
-Then open RDS → Northern Virginia → Create database and review these choices before the agent creates the database:
+Ask me if the default VPC is missing. Don't add NAT gateways or load balancers to bypass a blocker.
+
+## 8. Create the RDS database
+
+Open RDS → Northern Virginia → Create database and review these choices before the agent creates the database:
 
 | Setting | Starting choice |
 | --- | --- |
@@ -225,13 +233,11 @@ Then open RDS → Northern Virginia → Create database and review these choices
 | Network | Default VPC, not publicly accessible, its own security group allowing port 5432 only from the EC2 instance's security group |
 | Backups | Automated backups on, seven days |
 
-Approve it, then let the agent create it once. Creation takes five to ten minutes, so start section 6 while it runs. Find the database in the console and verify its endpoint, class, Single-AZ, and that Publicly accessible is No.
+Approve it, then let the agent create it once. Creation takes five to ten minutes, so start setting up the app in section 9 while it runs. Find the database in the console and verify its endpoint, class, Single-AZ, and that Publicly accessible is No.
 
 https://us-east-1.console.aws.amazon.com/rds/home?region=us-east-1#databases:
 
-Ask me if the default VPC is missing. Don't add NAT gateways or load balancers to bypass a blocker.
-
-## 6. Deploy and restore
+## 9. Deploy and restore
 
 ```text
 Help me deploy my app to AWS using our plan.
@@ -245,7 +251,7 @@ Enable services to start after reboot. Use the VM guide for service and log chec
 
 https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/operate-the-vm.md
 
-## 7. Verify on a test subdomain
+## 10. Verify on a test subdomain
 
 Create a separate Cloudflare A record pointing to AWS. Keep the live Railway and mail records. Configure Nginx and HTTPS using the existing guide:
 
@@ -265,7 +271,7 @@ Help me test that my app works on AWS.
 
 Record evidence for each check and mark anything you haven't verified.
 
-## 8. Cut over when ready and record the result
+## 11. Cut over when ready and record the result
 
 If checks are incomplete, leave Railway serving the site. DNS cutover isn't required during class.
 
@@ -304,7 +310,7 @@ The CLI is the tool: your agent types commands and AWS answers. The toolkit adds
 
 https://docs.aws.amazon.com/agent-toolkit/latest/userguide/aws-cli.html
 
-## 9. Diagram what you built
+## 12. Diagram what you built
 
 ```text
 Add an architecture diagram of my app to the README.
