@@ -362,9 +362,8 @@ Verify its ID, public address, security group, and storage against the table. Ha
 ## 9. Deploy and restore
 
 ```text
-Help me deploy my app to AWS using our plan. Use how this repo set up
-my Azure VM as the reference. Keep a migration-notes.md file and log
-any deviation from the plan.
+Help me deploy my app to AWS using our plan. Keep a migration-notes.md
+file and log any deviation from the plan.
 ```
 
 Work one phase at a time. Deploy the intended commit and restore into the new AWS database. Keep Railway running and leave production DNS unchanged.
