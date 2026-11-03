@@ -60,6 +60,22 @@
       }
     },
     {
+      "Sid": "AllowUbuntuImageLookup",
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameter",
+        "ssm:GetParameters",
+        "ssm:GetParametersByPath"
+      ],
+      "Resource": "arn:aws:ssm:us-east-1::parameter/aws/service/canonical/*"
+    },
+    {
+      "Sid": "AllowDecodingDenials",
+      "Effect": "Allow",
+      "Action": "sts:DecodeAuthorizationMessage",
+      "Resource": "*"
+    },
+    {
       "Sid": "DenyOtherLaunchSizes",
       "Effect": "Deny",
       "Action": "ec2:RunInstances",
@@ -135,7 +151,7 @@
       "Action": "rds:CreateDBInstance",
       "Resource": "arn:aws:rds:*:*:db:*",
       "Condition": {
-        "Bool": {
+        "BoolIfExists": {
           "rds:StorageEncrypted": "false"
         }
       }
