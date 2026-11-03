@@ -152,7 +152,7 @@ Complete browser login yourself as the IAM user. If your agent runs somewhere wi
 
 When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer n. We migrate with the CLI alone first, so you see what the agent does with plain commands. The toolkit comes after the migration, at the end of section 11.
 
-Login doesn't save a region on the profile, so set it once. Without it, EC2 and RDS commands fail with "You must specify a region."
+Login doesn't save a region on the profile, so set it once. Without it, EC2 and RDS commands fail with "You must specify a region." We use Northern Virginia because it's AWS's oldest and largest region, so new services arrive there first and prices are among the lowest.
 
 ```bash
 aws configure set region us-east-1 --profile isba-4775
