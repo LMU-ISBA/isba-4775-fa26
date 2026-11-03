@@ -436,20 +436,14 @@ Help me cut my domain over to AWS using our plan.
 
 Then check it yourself. nslookup on your domain should answer with the Elastic IP, and your site should load over HTTPS at your domain, with the padlock. If you roll back after AWS has accepted new records, reconcile the databases first, since changing DNS doesn't move them.
 
-Then record the move in your README, so a reader can see how the site runs now:
+## 12. Record what you built
+
+Record the move in your README, so a reader can see how the site runs now:
 
 ```text
-Update my README for the move to AWS.
+Update my README for the move to AWS, with an architecture diagram.
 ```
 
 Read what it wrote and check for five things: which architecture you chose and why, how the database is backed up and how you'd restore it, what you tested on the test subdomain and what passed, what the setup costs a month, and what you'll do next. Passwords, keys, and database exports stay out of the repository.
 
-## 12. Diagram what you built
-
-```text
-Add an architecture diagram of my app to the README.
-```
-
-Use Mermaid so the diagram displays on GitHub. Show the request path, hosting boundaries, ports, the RDS database as its own box inside the VPC, backups, and administrative access. Mark unfinished parts clearly.
-
-Review every arrow against your deployment. Distinguish Cloudflare DNS from proxying, show where HTTPS ends, and identify where data persists. Include Railway if it still serves traffic. Explain the diagram to a classmate and correct anything you can't verify.
+The diagram should be Mermaid, so it displays on GitHub. Review every arrow against your deployment: the request path from Cloudflare DNS to Nginx to the app, where HTTPS ends, the RDS database as its own box inside the VPC with its backups, and SSH as the only administrative path. Include Railway if it still serves traffic, and mark anything unfinished. Explain the diagram to a classmate and correct anything you can't verify.
