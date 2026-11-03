@@ -388,13 +388,37 @@ https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/operate-the-vm.md
 
 ## 10. Verify on a test subdomain
 
-Add a separate A record in Cloudflare for the AWS copy, named aws, so it answers at aws.yourname.com. Point it at the Elastic IP, set it to DNS only with the grey cloud, and leave the Railway and mail records alone.
+The AWS copy gets its own name, aws.yourname.com, so you can test it while Railway keeps serving the real one. In every prompt and command below, replace yourname.com with your domain.
+
+First the DNS record, through the Cloudflare CLI from the Railway lesson:
+
+```text
+Using the Cloudflare CLI, add an A record named aws pointing at the
+server's Elastic IP, DNS only. Don't change any other record.
+```
+
+Confirm it yourself in two places. Open your zone in the Cloudflare dashboard and check that the new record shows the Elastic IP with the grey cloud, and that the Railway and mail records are unchanged:
 
 https://dash.cloudflare.com
 
-Configure Nginx and HTTPS for that name using sections 3 through 6 of the HTTPS guide, with aws.yourname.com in place of both names it uses:
+Then ask DNS from your laptop. It should print the Elastic IP:
+
+```bash
+dig +short aws.yourname.com
+```
+
+Next, HTTPS for that name, the same way you did it on the Azure VM. AWS's own certificates (ACM) only attach to services like load balancers, not to an instance, so the server gets its own from Let's Encrypt:
+
+```text
+Get a Let's Encrypt certificate for aws.yourname.com with certbot, and
+make Nginx redirect HTTP to HTTPS.
+```
+
+Open https://aws.yourname.com in your browser and check the padlock. Sections 3 through 6 of the HTTPS guide explain what certbot did:
 
 https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/secure-your-site-with-https.md
+
+Then test the copy:
 
 ```text
 Help me test that my app works on AWS at aws.yourname.com.
