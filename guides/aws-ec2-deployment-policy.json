@@ -39,7 +39,9 @@
         "rds:CreateDBSubnetGroup",
         "rds:DeleteDBSubnetGroup",
         "rds:CreateDBSnapshot",
-        "rds:DeleteDBSnapshot"
+        "rds:DeleteDBSnapshot",
+        "rds:RestoreDBInstanceToPointInTime",
+        "rds:RestoreDBInstanceFromDBSnapshot"
       ],
       "Resource": "*",
       "Condition": {
@@ -105,7 +107,9 @@
       "Effect": "Deny",
       "Action": [
         "rds:CreateDBInstance",
-        "rds:ModifyDBInstance"
+        "rds:ModifyDBInstance",
+        "rds:RestoreDBInstanceFromDBSnapshot",
+        "rds:RestoreDBInstanceToPointInTime"
       ],
       "Resource": "arn:aws:rds:*:*:db:*",
       "Condition": {
@@ -122,7 +126,9 @@
       "Effect": "Deny",
       "Action": [
         "rds:CreateDBInstance",
-        "rds:ModifyDBInstance"
+        "rds:ModifyDBInstance",
+        "rds:RestoreDBInstanceFromDBSnapshot",
+        "rds:RestoreDBInstanceToPointInTime"
       ],
       "Resource": "arn:aws:rds:*:*:db:*",
       "Condition": {
@@ -136,7 +142,9 @@
       "Effect": "Deny",
       "Action": [
         "rds:CreateDBInstance",
-        "rds:ModifyDBInstance"
+        "rds:ModifyDBInstance",
+        "rds:RestoreDBInstanceFromDBSnapshot",
+        "rds:RestoreDBInstanceToPointInTime"
       ],
       "Resource": "arn:aws:rds:*:*:db:*",
       "Condition": {
@@ -159,7 +167,11 @@
     {
       "Sid": "DenyPublicDatabaseAtCreate",
       "Effect": "Deny",
-      "Action": "rds:CreateDBInstance",
+      "Action": [
+        "rds:CreateDBInstance",
+        "rds:RestoreDBInstanceFromDBSnapshot",
+        "rds:RestoreDBInstanceToPointInTime"
+      ],
       "Resource": "arn:aws:rds:*:*:db:*",
       "Condition": {
         "BoolIfExists": {
