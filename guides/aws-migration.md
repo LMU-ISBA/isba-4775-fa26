@@ -401,10 +401,10 @@ Confirm it yourself in two places. Open your zone in the Cloudflare dashboard an
 
 https://dash.cloudflare.com
 
-Then ask DNS from your laptop. It should print the Elastic IP:
+Then ask DNS from your laptop. The answer should be the Elastic IP:
 
 ```bash
-dig +short aws.yourname.com
+nslookup aws.yourname.com
 ```
 
 Next, HTTPS for that name, the same way you did it on the Azure VM. AWS's own certificates (ACM) only attach to services like load balancers, not to an instance, so the server gets its own from Let's Encrypt:
