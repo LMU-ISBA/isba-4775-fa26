@@ -180,7 +180,7 @@ and a Single-AZ RDS PostgreSQL database. Work on a new branch so
 Railway doesn't redeploy from main. Don't create anything yet.
 ```
 
-Northern Virginia, the us-east-1 region, has six availability zones, us-east-1a through 1f, each a separate set of data centers with its own power and network. Single-AZ means the database runs in one of them. Multi-AZ keeps a standby copy in a second zone for failover, costs about double, and isn't on the Free plan. If we've reviewed a different architecture, say so in the prompt.
+Northern Virginia, the us-east-1 region, has six availability zones, us-east-1a through 1f. Section 8 explains what Single-AZ means for the database. If we've reviewed a different architecture, say so in the prompt.
 
 Review how the plan handles data, uploads, secrets, HTTPS, testing, and rollback. Keep Railway running and approve the plan before creating resources.
 
@@ -255,7 +255,7 @@ Amazon RDS for PostgreSQL runs your database on a server AWS manages, so you don
 
 https://aws.amazon.com/rds/postgresql/
 
-Single-AZ means the database runs in one availability zone, a separate data center with its own power and network, so it goes down if that zone has an outage.
+Single-AZ means the database runs in one availability zone, a separate data center with its own power and network, so it goes down if that zone has an outage. Multi-AZ keeps a standby copy in a second zone for failover, costs about double, and isn't on the Free plan.
 
 Open RDS → Northern Virginia → Create database and review these choices before the agent creates the database:
 
