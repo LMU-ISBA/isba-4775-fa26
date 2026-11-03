@@ -166,7 +166,7 @@ When the CLI asks "Configure AWS skills and the AWS MCP server for your AI codin
 aws configure agent-toolkit
 ```
 
-The CLI is the tool: your agent types commands and AWS answers. The toolkit adds two things. Skills give your agent the documented way to do a task instead of guessing from memory. The AWS MCP Server is a second way for the agent to call AWS, using your same IAM user, which it uses for lookups like current prices. Restart Claude Code after the install so it loads both.
+The CLI is the tool: your agent types commands and AWS answers. It also lets the agent ask AWS what's available before creating anything, which is what we couldn't do by clicking through Azure. The toolkit adds two things. Skills give your agent the documented way to do a task instead of guessing from memory. The AWS MCP Server is a second way for the agent to call AWS, using your same IAM user, which it uses for lookups like current prices. Restart Claude Code after the install so it loads both.
 
 https://docs.aws.amazon.com/agent-toolkit/latest/userguide/what-is-agent-toolkit.html
 
@@ -316,8 +316,6 @@ Create the RDS database from our plan.
 ```
 
 Approve the commands, then let the agent create it once. Creation takes five to ten minutes, so continue to section 8 while it runs. If the agent sits waiting for the database to become available, interrupt it and move on. Find the database in the console and verify its endpoint, class, Single-AZ, and that Publicly accessible is No.
-
-Ask me if the default VPC is missing. Don't add NAT gateways or load balancers to bypass a blocker.
 
 ## 8. Create the EC2 instance
 
