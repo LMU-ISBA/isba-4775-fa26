@@ -175,26 +175,32 @@ Compare the total to my credits and my budget.
 
 Expect roughly $35 a month with RDS as the largest line. That means the $100 in credits covers the rest of the semester but not six months, so delete the resources when the course ends.
 
-Have your agent walk you through the deployment policy before you attach it:
-
-```text
-Review this deployment policy with me before I attach it to my IAM user:
-https://raw.githubusercontent.com/LMU-ISBA/isba-4775-fa26/main/guides/aws-ec2-deployment-policy.json
-```
-
-It permits specified EC2 and RDS changes and deletion in Northern Virginia, including unrelated resources. Have me narrow it if your account contains other work. It limits RDS to Single-AZ micro instances with 20 GB of encrypted storage. It doesn't enforce a budget or Free-plan eligibility.
-
-Sign out and sign back in as the root user, since your IAM user can't change its own permissions. Copy the policy JSON:
+Next, add a deployment policy so your IAM user can create EC2 and RDS resources. Sign out and sign back in as the root user, since your IAM user can't change its own permissions. Copy the policy JSON:
 
 https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-ec2-deployment-policy.json
 
-Open IAM → Policies → Create policy → JSON. Paste it, resolve validation errors, and name it:
+Open IAM → Policies → Create policy → JSON. Paste it, resolve validation errors, and choose Next. Name it:
 
 ```text
 ISBA4775EC2Migration
 ```
 
+Before choosing Create policy, check the permissions summary on Review and create:
+
+- Allow lists EC2, IAM, and RDS. EC2 and RDS show `aws:RequestedRegion = us-east-1`.
+- IAM shows `iam:AWSServiceName = rds.amazonaws.com`, which only lets RDS set up its own service role.
+- Explicit deny lists EC2 and RDS. These block instances other than t3.micro or t3.small, instances without IMDSv2, and databases that aren't Single-AZ micro with 20 GB of encrypted storage.
+
+The policy allows EC2 and RDS changes and deletion in Northern Virginia, including resources that aren't for this course. Have me narrow it if your account contains other work. It doesn't enforce a budget or Free-plan eligibility.
+
 Attach it to your course user, then sign out and sign back in as isba-student. Don't use AdministratorAccess to bypass errors.
+
+To have each action explained, ask your agent:
+
+```text
+Review this deployment policy with me:
+https://raw.githubusercontent.com/LMU-ISBA/isba-4775-fa26/main/guides/aws-ec2-deployment-policy.json
+```
 
 Open EC2 → Northern Virginia → Launch instance to review these choices before the agent creates anything:
 
