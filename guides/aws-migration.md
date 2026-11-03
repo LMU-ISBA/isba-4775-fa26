@@ -284,7 +284,15 @@ Railway doesn't redeploy from main. Don't create anything yet.
 
 Northern Virginia, the us-east-1 region, has six availability zones, us-east-1a through 1f. Section 7 explains what Single-AZ means for the database. If we've reviewed a different architecture, say so in the prompt.
 
-The agent writes the plan to a file in your repository and tells you where, often under docs/. Open that file and read it before you answer. Tell the agent what to change, then approve the plan. Don't let it create anything yet.
+The agent writes the plan to a file in your repository and tells you where, often under docs/. Open that file and read it before you answer. Tell the agent what to change, then approve the plan.
+
+The plan lives on a new branch because Railway redeploys your site every time main changes. Confirm you're on it before anything is created. It should print a name other than main:
+
+```bash
+git branch --show-current
+```
+
+Don't let the agent create anything yet.
 
 AWS Pricing Calculator estimates the monthly cost of the services and sizes you pick, and it's the place to check your agent's numbers.
 
