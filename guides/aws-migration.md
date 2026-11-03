@@ -274,7 +274,7 @@ backups, and data transfer. Use current us-east-1 pricing, not memory.
 Compare the total to my budget.
 ```
 
-Expect roughly $35 a month, with the EC2 instance and the database each about $15, plus storage and the public address. Your IAM user can't see credits or bills, so the agent's number is an estimate, and the account owner's session shows what credits remain. The $100 in credits covers the rest of the semester but not six months, so delete the resources when the course ends. If class time is short, run the estimate at home.
+Expect about $26 a month: the database about $12, the instance about $8, and the rest storage and the public address. Your IAM user can't see credits or bills, so the agent's number is an estimate, and the account owner's session shows what credits remain. The $100 in credits covers the rest of the semester. When the semester ends, decide whether to keep paying, move the site to a cheaper host, or delete it. You'll know how to do all three. If class time is short, run the estimate at home.
 
 ## 7. Create the RDS database
 
@@ -323,7 +323,7 @@ https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#Instances:
 
 | Setting | Starting choice |
 | --- | --- |
-| Image and compute | Ubuntu Server 26.04 LTS from Canonical, x86_64, one t3.small, On-Demand, Standard CPU credits |
+| Image and compute | Ubuntu Server 26.04 LTS from Canonical, x86_64, one t3.micro, On-Demand, Standard CPU credits |
 | Storage and metadata | 20 GB encrypted gp3, IMDSv2 required |
 | Network | Existing default VPC, public subnet with internet access, one public IPv4 |
 | Access | SSH key, port 22 restricted to your IP, public ports 80 and 443 |
