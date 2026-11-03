@@ -24,6 +24,10 @@ https://console.aws.amazon.com/costmanagement/
 
 Eligible resources consume credits. Don't upgrade to Paid or create or join AWS Organizations for this lesson. An existing account without the Free plan shows no plan or credits here and bills real usage, so keep to the instance sizes in section 7 and terminate the instance when you're done.
 
+AWS Budgets tracks what your account spends and emails you when cost passes an amount you set.
+
+https://aws.amazon.com/aws-cost-management/aws-budgets/
+
 Set a budget so AWS emails you before a surprise bill. Alerts aren't spending caps.
 
 https://console.aws.amazon.com/costmanagement/home#/budgets
@@ -34,7 +38,12 @@ https://console.aws.amazon.com/costmanagement/home#/budgets
 
 Budgets count cost after credits, so watch the Credits page for how fast credits drain. On an existing account without the Free plan, zero-spend fires right away, so choose Monthly cost budget with an amount of 10 instead.
 
-Now compare where the app could run:
+Now compare where the app could run. Each option combines these services:
+
+- Amazon EC2 rents you virtual machines, called instances, that you set up and manage like your Azure VM. https://aws.amazon.com/ec2/
+- Amazon RDS runs a database for you, with AWS handling the server, patching, and backups. https://aws.amazon.com/rds/
+- AWS Lambda runs your code only when a request arrives, so there's no server for you to keep running. https://aws.amazon.com/lambda/
+- Amazon API Gateway gives Lambda functions a public web address and passes each request to them. https://aws.amazon.com/api-gateway/
 
 | Option | Main tradeoff |
 | --- | --- |
@@ -78,6 +87,10 @@ Record the backup date, restore time, backup frequency, and retention. Decide ac
 
 ## 3. Create your IAM user
 
+AWS Identity and Access Management (IAM) controls who can sign in to your account and what each user is allowed to do.
+
+https://aws.amazon.com/iam/
+
 Use the account owner's browser session for setup. Your agent won't use root.
 
 https://console.aws.amazon.com/iam/
@@ -110,6 +123,10 @@ AmazonEC2ReadOnlyAccess
 If console access wasn't offered during creation, look under Security credentials → Console sign-in. Ask me if unavailable. These policies allow login and inspection, with deployment permissions added after review.
 
 ## 4. Connect your agent through the CLI
+
+The AWS Command Line Interface (CLI) lets you and your agent manage AWS by typing commands instead of clicking through the console.
+
+https://aws.amazon.com/cli/
 
 Install the latest AWS CLI v2 on your laptop, where your agent runs:
 
@@ -167,6 +184,10 @@ Northern Virginia, the us-east-1 region, has six availability zones, us-east-1a 
 
 Review how the plan handles data, uploads, secrets, HTTPS, testing, and rollback. Keep Railway running and approve the plan before creating resources.
 
+AWS Pricing Calculator estimates the monthly cost of the services and sizes you pick, and it's the place to check your agent's numbers.
+
+https://calculator.aws/
+
 ```text
 Estimate the monthly cost of this plan: EC2, RDS, storage, public IPv4,
 backups, and data transfer. Use current us-east-1 pricing, not memory.
@@ -176,6 +197,10 @@ Compare the total to my credits and my budget.
 Expect roughly $35 a month with RDS as the largest line. That means the $100 in credits covers the rest of the semester but not six months, so delete the resources when the course ends.
 
 ## 6. Give your IAM user deployment permissions
+
+An IAM policy is a list of actions a user is allowed or denied, and it does nothing until it's attached to a user.
+
+https://aws.amazon.com/iam/
 
 Add a deployment policy so your IAM user can create EC2 and RDS resources. Sign out and sign back in as the root user, since your IAM user can't change its own permissions. Copy the policy JSON:
 
@@ -206,6 +231,10 @@ https://raw.githubusercontent.com/LMU-ISBA/isba-4775-fa26/main/guides/aws-ec2-de
 
 ## 7. Create the EC2 instance
 
+Amazon EC2 is where your app will run, on one virtual machine in Northern Virginia.
+
+https://aws.amazon.com/ec2/
+
 Open EC2 → Northern Virginia → Launch instance to review these choices before the agent creates anything:
 
 | Setting | Starting choice |
@@ -221,6 +250,10 @@ Approve the configuration, then let the agent launch it once. Find the instance 
 Ask me if the default VPC is missing. Don't add NAT gateways or load balancers to bypass a blocker.
 
 ## 8. Create the RDS database
+
+Amazon RDS for PostgreSQL runs your database on a server AWS manages, so you don't install or patch PostgreSQL yourself.
+
+https://aws.amazon.com/rds/postgresql/
 
 Open RDS → Northern Virginia → Create database and review these choices before the agent creates the database:
 
