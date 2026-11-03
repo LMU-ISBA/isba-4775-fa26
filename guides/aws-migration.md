@@ -194,7 +194,7 @@ ISBA4775EC2Migration
 
 Before choosing Create policy, check the permissions summary on Review and create:
 
-- Allow lists EC2, IAM, RDS, Systems Manager, and STS. EC2 and RDS show `aws:RequestedRegion = us-east-1`. Systems Manager only reads Canonical's published Ubuntu image IDs, and STS only decodes denial messages.
+- Allow lists EC2, IAM, RDS, Systems Manager, and STS. EC2 and RDS show `aws:RequestedRegion = us-east-1`. Systems Manager is AWS's toolbox for looking after servers, and here it only lets the agent look up which Ubuntu image to use. STS is the service that hands out temporary sign-ins like your CLI session, and here it only lets the agent read why a request was refused.
 - IAM shows `iam:AWSServiceName = rds.amazonaws.com`, which only lets RDS set up its own service role.
 - Explicit deny lists EC2 and RDS. These block instances other than t3.micro or t3.small, instances without IMDSv2, and databases that aren't Single-AZ micro with 20 GB of encrypted storage.
 
