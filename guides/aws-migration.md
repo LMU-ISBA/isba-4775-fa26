@@ -254,15 +254,7 @@ Railway doesn't redeploy from main. Don't create anything yet.
 
 Northern Virginia, the us-east-1 region, has six availability zones, us-east-1a through 1f. Section 7 explains what Single-AZ means for the database. If we've reviewed a different architecture, say so in the prompt.
 
-The agent writes the plan to a file in your repository and tells you where, often under docs/. Open that file and read it before you answer. Check that it:
-
-1. Keeps Railway running and leaves your DNS alone until the checks pass.
-2. Says how your data moves, including the restore and a comparison with the backup.
-3. Keeps secrets out of Git.
-4. Covers HTTPS, testing on a test subdomain, and how to roll back.
-5. Creates only the resources in sections 7 and 8, in Northern Virginia.
-
-Tell the agent what to change, then approve the plan. Don't let it create anything yet.
+The agent writes the plan to a file in your repository and tells you where, often under docs/. Open that file and read it before you answer. Tell the agent what to change, then approve the plan. Don't let it create anything yet.
 
 AWS Pricing Calculator estimates the monthly cost of the services and sizes you pick, and it's the place to check your agent's numbers.
 
