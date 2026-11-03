@@ -198,7 +198,7 @@ Before choosing Create policy, check the permissions summary on Review and creat
 - IAM shows `iam:AWSServiceName = rds.amazonaws.com`, which only lets RDS set up its own service role.
 - Explicit deny lists EC2 and RDS. These block instances other than t3.micro or t3.small, instances without IMDSv2, and databases that aren't Single-AZ micro with 20 GB of encrypted storage.
 
-The allows are the grant and the denies are fences around it, because a deny always wins. The policy allows EC2 and RDS changes and deletion in Northern Virginia, including resources that aren't for this course. Have me narrow it if your account contains other work. It doesn't enforce a budget or Free-plan eligibility.
+The allows are the grant and the denies are fences around it, because a deny always wins. The policy allows EC2 and RDS changes and deletion in Northern Virginia, including resources that aren't for this course. It doesn't enforce a budget or Free-plan eligibility.
 
 Attach it: open Users, choose isba-student, then Permissions, Add permissions, and Attach policies directly. Search for ISBA4775EC2Migration, tick it, and add it.
 
