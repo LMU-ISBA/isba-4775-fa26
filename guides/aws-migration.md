@@ -12,7 +12,15 @@ Open your career-platform project in VS Code and start a new Claude Code session
 /rename aws-migration
 ```
 
-Share this guide with your agent before starting. Work through one section at a time, using the prompts as starting points. Let your agent inspect your project and ask for missing information.
+Give your agent the guide, so later prompts can point at sections by number:
+
+```text
+Read this guide and keep it handy. We'll work through it one section
+at a time:
+https://raw.githubusercontent.com/LMU-ISBA/isba-4775-fa26/main/guides/aws-migration.md
+```
+
+Work through one section at a time, using the prompts as starting points. Let your agent inspect your project and ask for missing information.
 
 ## 1. Set a budget and choose the architecture
 
