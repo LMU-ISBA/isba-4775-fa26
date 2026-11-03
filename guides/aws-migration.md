@@ -366,13 +366,11 @@ Help me deploy my app to AWS using our plan. Keep a migration-notes.md
 file and log any deviation from the plan.
 ```
 
-Work one phase at a time. Deploy the intended commit and restore into the new AWS database. Keep Railway running and leave production DNS unchanged.
+Work one phase at a time, and keep Railway running with its DNS unchanged.
 
-Check that Nginx forwards to a non-root app service and the app's database URL points at the RDS endpoint over the private network. SSH in as the ubuntu user with your new key. RDS requires TLS, and the default sslmode=prefer handles it, so don't add sslmode=disable or verify-full.
+Restore your backup from the EC2 instance, since RDS isn't reachable from your laptop, into the empty database before running migrations. Don't run your Azure deploy script or any seed script on AWS, since they can overwrite or unpublish what you restored. The instance's pg_restore must be the same major version as Railway's PostgreSQL or newer. Keep secrets outside Git.
 
-Restore your backup from the EC2 instance, since RDS isn't reachable from your laptop. Restore into the empty database first, then run the migrations, which should change nothing. Don't run your Azure deploy script or any seed script on AWS. Seed scripts can overwrite or unpublish restored records, and migrating before the restore makes it fail with "already exists." Before restoring, check that the instance's pg_restore is the same major version as Railway's PostgreSQL or newer, since an older client can't read the dump. Railway ran version 18 in October. Keep secrets outside Git. If your app stores uploaded files, copy those too.
-
-Enable services to start after reboot. Use sections 4 and 6 of the VM guide for service and log checks, with the EC2 security group in place of the Azure rule:
+For service and log checks, use sections 4 and 6 of the VM guide:
 
 https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/operate-the-vm.md
 
