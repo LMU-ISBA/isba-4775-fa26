@@ -174,6 +174,25 @@ Have the agent confirm your identity and list EC2 instances in Northern Virginia
 
 ## 5. Plan the move
 
+Before planning, find what you don't know yet. Ask your agent for a blind spot pass, a tactic from Anthropic's field guide on finding your unknowns:
+
+https://claude.com/resources/articles/a-field-guide-to-claude-fable-finding-your-unknowns
+
+```text
+I've never deployed to AWS. Before we plan, do a blind spot pass on
+moving this app to EC2 and RDS: what are my unknown unknowns, and
+what should I decide before you write the plan?
+```
+
+Then have the agent interview you, so you make those decisions instead of the agent guessing:
+
+```text
+Interview me one question at a time about those decisions, up to
+five, starting with the ones that would change the plan.
+```
+
+Answer each question yourself. If you don't know, ask the agent to explain the options, then choose. Then ask for the plan:
+
 ```text
 Look at my app and help me plan its move to AWS. Use EC2 for the app
 and a Single-AZ RDS PostgreSQL database. Work on a new branch so
@@ -275,12 +294,14 @@ https://us-east-1.console.aws.amazon.com/rds/home?region=us-east-1#databases:
 ## 9. Deploy and restore
 
 ```text
-Help me deploy my app to AWS using our plan.
+Help me deploy my app to AWS using our plan. Use the Nginx and service
+files in deploy/ from my Azure VM as the reference. Keep a
+migration-notes.md file and log any deviation from the plan.
 ```
 
 Work one phase at a time. Deploy the intended commit and restore into a new AWS database. Keep Railway running and leave production DNS unchanged.
 
-Check that Nginx forwards to a non-root app service and the app's database URL points at the RDS endpoint over the private network. Restore your backup from the EC2 instance, since RDS isn't reachable from your laptop. Keep secrets outside Git, restore uploads, and use compatible PostgreSQL versions. Don't replace existing data with seed records.
+Check that Nginx forwards to a non-root app service and the app's database URL points at the RDS endpoint over the private network. Restore your backup from the EC2 instance, since RDS isn't reachable from your laptop. Keep secrets outside Git and restore uploads. Before restoring, check that the instance's pg_restore is the same major version as Railway's PostgreSQL or newer, since an older client can't read the dump. Railway ran version 18 in October. Don't replace existing data with seed records.
 
 Enable services to start after reboot. Use the VM guide for service and log checks:
 
