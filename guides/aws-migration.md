@@ -170,7 +170,7 @@ The output opens in a viewer that ends with `(END)`. Press q to get your prompt 
 Check my AWS connection using the isba-4775 profile.
 ```
 
-Have the agent confirm your identity and list EC2 instances in Northern Virginia without changing resources or reading credential files. An empty list is fine. If the agent probes RDS or IAM and gets access denied, that's expected: this user can't deploy yet, and section 5 adds those permissions. Resolve any other access error before continuing, and keep credentials out of chat and Git.
+The agent should report the same account and user you saw. An empty instance list is fine, and an RDS or IAM denial is expected until section 5. Keep credentials out of chat and Git.
 
 ## 5. Give your IAM user deployment permissions
 
