@@ -428,30 +428,15 @@ Record what you tested, the evidence, and anything you haven't verified.
 
 ## 11. Cut over when ready and record the result
 
-If checks are incomplete, leave Railway serving the site. DNS cutover isn't required during class.
+Cutover isn't required during class. Do it when your section 10 tests pass, and before your Railway trial ends.
 
-1. Confirm the Elastic IP from section 8 is attached, so the address survives stop and start.
-2. Prepare HTTPS for the production hostname. DNS-01 validation can issue its certificate before traffic moves.
-3. Save the existing DNS record and take a final backup. Then stop the Railway deployment so it can't accept new records, and restart it only if you roll back.
-4. Restore and compare the final data, then delete the test record from section 10.
-5. Change only the application's DNS record. Preserve mail and unrelated records.
-6. Verify the production site at your domain.
-
-For issuing the production certificate before cutover:
-
-https://letsencrypt.org/docs/challenge-types/#dns-01-challenge
-
-If you roll back after AWS accepts writes, reconcile the databases first. Changing DNS doesn't move those new records.
-
-Update your README with the decision, backup and recovery process, verification results, costs, and next step. Commit reviewed code and notes without secrets or exports. Check Railway's connected branch before pushing.
-
-Keep Railway until verification passes. Remove temporary database exposure and review unused resources for cleanup. Stopped VMs can still incur storage and address costs, and an Elastic IP bills while it isn't attached to a running instance. A stopped RDS instance restarts itself after seven days, so delete it with a final snapshot when you're done with it.
-
-Repeat CLI login when the session expires. To clear its cached credentials when finished:
-
-```bash
-aws logout --profile isba-4775
+```text
+Help me cut my domain over to AWS using our plan.
 ```
+
+Then check it yourself. nslookup on your domain should answer with the Elastic IP, and your site should load over HTTPS at your domain, with the padlock. If you roll back after AWS has accepted new records, reconcile the databases first, since changing DNS doesn't move them.
+
+Update your README with the decision, the backup and recovery process, the test results, the cost, and your next step. Commit without secrets or exports.
 
 ## 12. Diagram what you built
 
