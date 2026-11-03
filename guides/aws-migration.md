@@ -424,13 +424,7 @@ Then test the copy:
 Help me test that my app works on AWS at aws.yourname.com.
 ```
 
-- Confirm the deployed commit and compare records with the backup.
-- Add a test record through the AWS copy, restart the app service, and confirm it's still there. It exists only on AWS, so note it for cleanup before cutover.
-- Reboot the VM and confirm the app, database, and web server return.
-- Test required pages, redirects, assets, integrations, and certificate renewal.
-- Verify restricted SSH, that RDS isn't publicly accessible and only accepts the EC2 security group, and that the instance and database match the sizes in sections 7 and 8.
-
-Record evidence for each check and mark anything you haven't verified.
+Record what you tested, the evidence, and anything you haven't verified.
 
 ## 11. Cut over when ready and record the result
 

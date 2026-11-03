@@ -10,7 +10,7 @@ Follow the [AWS migration guide](../guides/aws-migration.md). Sections 1 through
 
 - Backup: an export of the Railway database, restored and checked before anything moved.
 - Infrastructure: one t3.micro or t3.small instance and one Single-AZ micro database in Northern Virginia, the database not publicly accessible.
-- Verification: the section 10 checks on your test subdomain over HTTPS, with evidence for each.
+- Verification: the AWS copy tested on your test subdomain over HTTPS, with evidence.
 - Cutover: your domain pointing at AWS, or a written list of what's left if your checks haven't passed.
 - Diagram: the section 12 architecture diagram in your README.
 
@@ -22,7 +22,7 @@ Use one file, `docs/evidence/ex07.md`. Include only these five items:
 
 1. Your architecture decision in one sentence: what you chose, what you rejected, and the tradeoff you accepted.
 2. Your backup record: backup date, restore test result, and the data loss and recovery time you decided to accept.
-3. The section 10 verification table: each check, its evidence, and pass, fail, or not verified.
+3. A verification table for the test subdomain: what you tested, the evidence, and pass, fail, or not verified.
 4. Cutover status: the date your domain moved to AWS, or what's left and when you'll finish. Include a screenshot of the DNS record.
 5. Cost: the estimate from section 6 and what the account owner's billing page shows now, in one screenshot.
 
