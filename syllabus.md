@@ -133,7 +133,7 @@ Codespace shutdown guide feedback within the credit/no-credit assessment.
 | 04 | Domain delegated to Cloudflare DNS, live with HTTPS | Config | Thu 10/8 |
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Tue 10/13 |
 | 06 | Domain email and GA4: mail delivery, a page view, and an outbound click | Config | Tue 10/20 |
-| 07 | Job Scout's first loop: tools, state, stop conditions, and a real run | Build | Tue 11/10, 1:45 PM |
+| 07 | Migrate your site from Railway to AWS: EC2, RDS, verified cutover, and a diagram | Build | Tue 11/10, 1:45 PM |
 | 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Thu 11/12, 1:45 PM |
 | 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Tue 11/17, 1:45 PM |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Tue 11/24, 1:45 PM |
@@ -170,11 +170,12 @@ and Git history. Verify its account and link the supporting evidence. Rerun
 missing checks or mark them unverified, and identify accounts written afterward.
 The engineering record does not require a separate report.
 
-Job Scout, Resend, and GitHub Actions move after the midterm. Job Scout will
-help you find the posting for Project 2, with a vetted feed available if
-needed. Job Scout begins November 3, and its first complete run is due
-November 10. Choose your Project 2 posting by November 5, using the vetted
-feed if needed, so the agent doesn't block your first project milestone.
+Job Scout, Resend, and GitHub Actions move after the midterm. Exercise 07 is
+the AWS migration, taught October 29 and November 3 and due November 10.
+Job Scout follows it and will help you find the posting for Project 2, with
+a vetted feed available if needed. Its start date is set once the November
+5 schedule is confirmed. Choose your Project 2 posting using the vetted feed
+if needed, so the agent doesn't block your first project milestone.
 
 ## Midterm whiteboard interview, 125 points
 
@@ -311,7 +312,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 10/22 | Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow | Submit Project 1 before class at 1:45 PM. By Wed 10/21 at 11:59 PM, read both LinkedIn profiles and post two questions in the Brightspace discussion. | Project 1 |
 | Tue 10/27 | Midterm interviews replace class. More slots run Mon 10/26 and Wed 10/28. | Book one Calendly appointment and practice with the study guide. | |
 | Thu 10/29 | Migrate your site from Railway to AWS: code, data, configuration, and the domain | Bring access to your repository, Railway database, and Cloudflare zone. | |
-| Tue 11/3 | Job Scout 1: LLM calls, tokens and cost, structured output, retrieval tools, and the first loop | By 11/2, complete the [Claude API setup](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/claude-api-access.md). Privately review your Ex01 interview and choose target roles and companies. | |
+| Tue 11/3 | Migrate your site from Railway to AWS, continued: the AWS CLI, the deployment policy, the plan, RDS, and EC2 | Install the AWS CLI and confirm you can sign in as your IAM user with MFA. Know where your Railway backup is. | |
 | Thu 11/5 | Professor Ken Summers: Troubleshooting Road Show. Job Scout 2: tools, state, stop conditions, a human approval step, a Resend digest, and integration failures | By 11/4, create a Resend account and bring Cloudflare access. Keep Zoho mail working. Bring retrieved postings and choose your Project 2 posting today, with the vetted feed as a fallback. | |
 | Tue 11/10 | Reading a job description as a system spec, architecture review, and an integration troubleshooting clinic | Finish Job Scout's first run and bring the posting chosen on 11/5, your spec, and architecture. | Ex07, M1 |
 | Thu 11/12 | Raw agent loops in Python: three tools, small eval sets, trace reading, and finding why a run failed | Bring the same Job Scout repository and the integration investigation. Review a real trace before class. | Ex08 |
