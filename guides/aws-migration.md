@@ -312,12 +312,10 @@ On an account without the Free plan, the Free tier template doesn't appear. Choo
 The database's security group refers to the instance's security group, so the agent creates both groups now and launches the instance into its group in section 8.
 
 ```text
-Create the RDS database from our plan with the settings in section 7
-of the guide, and the two security groups it needs. Don't wait for
-the database to become available.
+Create the RDS database from our plan.
 ```
 
-Approve the commands, then let the agent create it once. Creation takes five to ten minutes, so continue to section 8 while it runs. Find the database in the console and verify its endpoint, class, Single-AZ, and that Publicly accessible is No.
+Approve the commands, then let the agent create it once. Creation takes five to ten minutes, so continue to section 8 while it runs. If the agent sits waiting for the database to become available, interrupt it and move on. Find the database in the console and verify its endpoint, class, Single-AZ, and that Publicly accessible is No.
 
 Ask me if the default VPC is missing. Don't add NAT gateways or load balancers to bypass a blocker.
 
@@ -342,10 +340,7 @@ https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#Instances:
 Ubuntu 26.04 ships the PostgreSQL 18 client that section 9's restore needs. Ubuntu Pro images bill by the hour, so the image name says "server," not "pro-server."
 
 ```text
-Launch the EC2 instance from our plan with the settings in section 8
-of the guide, into the security group from section 7. Generate the
-SSH key on my laptop and import the public key. Attach an Elastic IP
-after launch.
+Launch the EC2 instance from our plan.
 ```
 
 Three things the policy expects. It doesn't let AWS create the key, on purpose, so the private key never leaves your laptop. The launch command must set IMDSv2 to required itself, or the policy denies it. If a launch is denied, the agent can decode the error message to see which rule fired.
