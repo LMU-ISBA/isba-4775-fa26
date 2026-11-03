@@ -436,7 +436,13 @@ Help me cut my domain over to AWS using our plan.
 
 Then check it yourself. nslookup on your domain should answer with the Elastic IP, and your site should load over HTTPS at your domain, with the padlock. If you roll back after AWS has accepted new records, reconcile the databases first, since changing DNS doesn't move them.
 
-Update your README with the decision, the backup and recovery process, the test results, the cost, and your next step. Commit without secrets or exports.
+Then record the move in your README, so a reader can see how the site runs now:
+
+```text
+Update my README for the move to AWS.
+```
+
+Read what it wrote and check for five things: which architecture you chose and why, how the database is backed up and how you'd restore it, what you tested on the test subdomain and what passed, what the setup costs a month, and what you'll do next. Passwords, keys, and database exports stay out of the repository.
 
 ## 12. Diagram what you built
 
