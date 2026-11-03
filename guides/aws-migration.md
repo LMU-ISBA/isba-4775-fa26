@@ -315,7 +315,13 @@ The database's security group refers to the instance's security group, so the ag
 Create the RDS database from our plan.
 ```
 
-Approve the commands, then let the agent create it once. Creation takes five to ten minutes, so continue to section 8 while it runs. If the agent sits waiting for the database to become available, interrupt it and move on. Find the database in the console. Under Connect using, choose Endpoints, then open Additional configurations. The Security column shows Publicly accessible, which must say No, and the Networking column shows the Availability Zone. The class is on the Configuration tab.
+Approve the commands, then let the agent create it once. Creation takes five to ten minutes, so continue to section 8 while it runs. If the agent sits waiting for the database to become available, interrupt it and move on.
+
+Then check the agent's work yourself. Open Databases in the RDS console and choose career-platform-db, or whatever name the agent used:
+
+https://us-east-1.console.aws.amazon.com/rds/home?region=us-east-1#databases:
+
+Under Connect using, choose Endpoints, then open Additional configurations. The Security column shows Publicly accessible, which must say No, and the Networking column shows the Availability Zone. The class is on the Configuration tab.
 
 ## 8. Create the EC2 instance
 
@@ -345,7 +351,13 @@ Three things the policy expects. It doesn't let AWS create the key, on purpose, 
 
 An Elastic IP is a public address that stays yours through stop and start, so the test record in section 10 keeps working. It costs the same as the automatic address while attached, and bills while idle, so release it when you terminate the instance.
 
-Approve the commands, then let the agent launch it once. Find the instance in the console and verify its ID, address, security group, and storage. Have the agent compare the SSH host key with the instance's console output before you connect. Keep private keys outside Git.
+Approve the commands, then let the agent launch it once.
+
+Then check the agent's work yourself. Open Instances in the EC2 console and choose the new instance:
+
+https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#Instances:
+
+Verify its ID, public address, security group, and storage against the table. Have the agent compare the SSH host key with the instance's console output before you connect. Keep private keys outside Git.
 
 ## 9. Deploy and restore
 
