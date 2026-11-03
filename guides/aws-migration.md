@@ -255,6 +255,8 @@ Amazon RDS for PostgreSQL runs your database on a server AWS manages, so you don
 
 https://aws.amazon.com/rds/postgresql/
 
+Single-AZ means the database runs in one availability zone, a separate data center with its own power and network, so it goes down if that zone has an outage.
+
 Open RDS → Northern Virginia → Create database and review these choices before the agent creates the database:
 
 | Setting | Starting choice |
