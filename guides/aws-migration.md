@@ -184,7 +184,7 @@ https://raw.githubusercontent.com/LMU-ISBA/isba-4775-fa26/main/guides/aws-ec2-de
 
 It permits specified EC2 and RDS changes and deletion in Northern Virginia, including unrelated resources. Have me narrow it if your account contains other work. It limits RDS to Single-AZ micro instances with 20 GB of encrypted storage. It doesn't enforce a budget or Free-plan eligibility.
 
-As account owner, copy the policy JSON:
+Sign out and sign back in as the root user, since your IAM user can't change its own permissions. Copy the policy JSON:
 
 https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-ec2-deployment-policy.json
 
@@ -194,7 +194,7 @@ Open IAM → Policies → Create policy → JSON. Paste it, resolve validation e
 ISBA4775EC2Migration
 ```
 
-Attach it to your course user, then return to that identity. Don't use AdministratorAccess to bypass errors.
+Attach it to your course user, then sign out and sign back in as isba-student. Don't use AdministratorAccess to bypass errors.
 
 Open EC2 → Northern Virginia → Launch instance to review these choices before the agent creates anything:
 
