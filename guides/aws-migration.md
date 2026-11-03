@@ -436,6 +436,14 @@ Help me cut my domain over to AWS using our plan.
 
 Then check it yourself. nslookup on your domain should answer with the Elastic IP, and your site should load over HTTPS at your domain, with the padlock. If you roll back after AWS has accepted new records, reconcile the databases first, since changing DNS doesn't move them.
 
+Once your domain points at AWS, Railway no longer deploys anything that matters, so main can become what the server runs:
+
+```text
+Merge the migration branch into main and redeploy from main.
+```
+
+Check that your site still loads at your domain afterward, then delete the branch.
+
 ## 12. Record what you built
 
 Record the move in your README, so a reader can see how the site runs now:
