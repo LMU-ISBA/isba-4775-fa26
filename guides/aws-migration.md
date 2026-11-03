@@ -170,6 +170,12 @@ The CLI is the tool: your agent types commands and AWS answers. It also lets the
 
 https://docs.aws.amazon.com/agent-toolkit/latest/userguide/what-is-agent-toolkit.html
 
+While Claude Code is open, check one of its own settings. Run the command below and make sure the built-in plugin named you-should-know is enabled. It flags choices your agent makes that you'd want to know about, like a key created without a passphrase.
+
+```text
+/plugins
+```
+
 Login doesn't save a region on the profile, so set it once. Without it, EC2 and RDS commands fail with "You must specify a region." We use Northern Virginia because it's AWS's oldest and largest region, so new services arrive there first and prices are among the lowest.
 
 ```bash
