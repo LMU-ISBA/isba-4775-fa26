@@ -150,7 +150,15 @@ aws login --profile isba-4775 --region us-east-1
 
 Complete browser login yourself as the IAM user. If your agent runs somewhere without a browser, like Codespaces, ask me.
 
-When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer n. We migrate with the CLI alone first, so you see what the agent does with plain commands. The toolkit comes after the migration, at the end of section 11.
+When the CLI asks "Configure AWS skills and the AWS MCP server for your AI coding agent(s)?", answer y to both questions. That installs the Agent Toolkit for AWS: 24 AWS-written skills for your coding agents and an MCP server named aws-mcp. If the question didn't appear, install it yourself:
+
+```bash
+aws configure agent-toolkit
+```
+
+The CLI is the tool: your agent types commands and AWS answers. The toolkit adds two things. Skills give your agent the documented way to do a task instead of guessing from memory. The AWS MCP Server is a second way for the agent to call AWS, using your same IAM user, which it uses for lookups like current prices. Restart Claude Code after the install so it loads both.
+
+https://docs.aws.amazon.com/agent-toolkit/latest/userguide/aws-cli.html
 
 Login doesn't save a region on the profile, so set it once. Without it, EC2 and RDS commands fail with "You must specify a region." We use Northern Virginia because it's AWS's oldest and largest region, so new services arrive there first and prices are among the lowest.
 
@@ -402,18 +410,6 @@ Repeat CLI login when the session expires. To clear its cached credentials when 
 ```bash
 aws logout --profile isba-4775
 ```
-
-Once the app runs on AWS, add the Agent Toolkit for AWS so your agent has AWS-written instructions for the questions and operations that come next:
-
-```bash
-aws configure agent-toolkit
-```
-
-Answer Y to both questions. It installs 24 AWS skills into every coding agent it finds on your laptop and adds an MCP server named aws-mcp. Restart your agent afterward so it loads the new configuration.
-
-The CLI is the tool: your agent types commands and AWS answers. The toolkit adds two things. Skills are AWS-written instructions that give your agent the documented way to do a task instead of guessing from memory. The AWS MCP Server is a second way for the agent to call AWS, using your same IAM user, and AWS records which calls came from the agent rather than from you.
-
-https://docs.aws.amazon.com/agent-toolkit/latest/userguide/aws-cli.html
 
 ## 12. Diagram what you built
 
