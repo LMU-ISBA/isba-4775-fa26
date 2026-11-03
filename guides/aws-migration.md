@@ -158,7 +158,7 @@ aws configure agent-toolkit
 
 The CLI is the tool: your agent types commands and AWS answers. The toolkit adds two things. Skills give your agent the documented way to do a task instead of guessing from memory. The AWS MCP Server is a second way for the agent to call AWS, using your same IAM user, which it uses for lookups like current prices. Restart Claude Code after the install so it loads both.
 
-https://docs.aws.amazon.com/agent-toolkit/latest/userguide/aws-cli.html
+https://docs.aws.amazon.com/agent-toolkit/latest/userguide/what-is-agent-toolkit.html
 
 Login doesn't save a region on the profile, so set it once. Without it, EC2 and RDS commands fail with "You must specify a region." We use Northern Virginia because it's AWS's oldest and largest region, so new services arrive there first and prices are among the lowest.
 
