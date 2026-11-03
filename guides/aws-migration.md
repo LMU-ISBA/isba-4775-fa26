@@ -200,11 +200,16 @@ Before choosing Create policy, check the permissions summary on Review and creat
 
 The allows are the grant and the denies are fences around it, because a deny always wins. The policy allows EC2 and RDS changes and deletion in Northern Virginia, including resources that aren't for this course. It doesn't enforce a budget or Free-plan eligibility.
 
-Attach it: open Users, choose isba-student, then Permissions, Add permissions, and Attach policies directly. Search for ISBA4775EC2Migration, tick it, and add it.
+Now attach it to your user:
 
 https://console.aws.amazon.com/iam/home#/users
 
-Sign out and sign back in as isba-student. Don't use AdministratorAccess to bypass errors.
+1. Open Users and choose isba-student.
+2. Under Permissions, choose Add permissions, then Attach policies directly.
+3. Search for ISBA4775EC2Migration, tick it, and choose Add permissions.
+4. Sign out and sign back in as isba-student.
+
+Don't use AdministratorAccess to bypass errors.
 
 Your CLI session keeps working and picks up the new permissions on its own. Don't run aws login while the browser is signed in as root, since the CLI picks up the browser's current sign-in. If get-caller-identity ever ends in `:root`, sign in to the console as isba-student, then:
 
