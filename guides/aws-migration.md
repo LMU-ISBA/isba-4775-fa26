@@ -132,6 +132,8 @@ If console access wasn't offered during creation, look under Security credential
 
 ## 4. Connect your agent through the CLI
 
+If you're resuming a session from October 29, give your agent the current guide first, with the "Read this guide" prompt at the top of this page. The guide has changed since then.
+
 The AWS Command Line Interface (CLI) lets you and your agent manage AWS by typing commands instead of clicking through the console.
 
 https://aws.amazon.com/cli/
