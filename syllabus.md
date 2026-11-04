@@ -59,7 +59,7 @@ environment and constraints it has to live in.
 
 Two whiteboard interviews, together worth 42.5% of your grade, are where that
 gets observed. You diagram your own system from memory, with no notes and no
-repository open, and then answer for it. "Working with AI" below is the full
+repository open, and then answer for it. "AI Policy" below is the full
 policy.
 
 ## Learning outcomes
@@ -523,48 +523,41 @@ For technology assistance, contact the ITS Service Desk:
 - Email: servicedesk@lmu.edu
 - Self-service: https://its.lmu.edu/servicedesk
 
-## Working with AI
+## AI Policy
 
-Use AI for everything it's good at: planning, writing code, debugging, reading
-unfamiliar documentation, explaining errors, analyzing data, and drafting
-documents. There's no limit on how much you use it, and there is no
-requirement to log your prompts. Every assignment assumes you have a capable
-AI tool open beside you while you work.
+Use AI for planning, coding, debugging, research, and writing. There is no
+limit on AI use, and you do not need to log your prompts. Every assignment
+assumes you have a capable AI tool available.
 
-What stays yours is the understanding. You should be able to explain anything
-an AI built for you to someone who asks hard questions, with no notes and no
-tool open. In this course that someone is me, twice, at the whiteboard. In
-another course it might be a presentation, a conversation in office hours, or
-an exam, and the standard is the same in each.
+What stays yours is the judgment and understanding. You must be able to
+explain what your system does, why you built it that way, and what works or
+doesn't, without notes or AI. You'll demonstrate this twice at the whiteboard.
 
-Four habits make that possible, and we practice them in class.
+Practice four habits:
 
-1. Ask before you build, which means having the tool read the actual
-   documentation, data, or code before it proposes anything. A tool that
-   guesses produces work you will have to undo.
-2. Review the plan before you approve it. The tool writes a plan, you read it
-   and change what is wrong, and only then does it build.
-3. Verify what it claims, since a tool can report success on something that
-   didn't happen. Check the result yourself, live, where it runs, instead of
-   trusting the tool's own summary.
-4. Record what happened: what you decided, what the tool recommended that you
-   rejected or changed, what you tested, and what you haven't verified. Saying
-   "not verified" is an honest answer that earns credit, while a claim you
-   can't back up does not.
+1. Understand before building. Have AI examine the actual requirements,
+   documentation, code, or data. Ask questions instead of guessing.
+2. Review the plan. Question assumptions, evaluate tradeoffs, and approve the
+   approach before AI builds.
+3. Verify the results. Test the actual system yourself. AI claiming success
+   is not evidence.
+4. Document decisions and evidence. Record what you chose, rejected, tested,
+   and haven't verified. You don't need prompt logs; you need evidence of
+   your reasoning.
 
-Two things never go into the tool: your secrets, meaning passwords, API keys,
-and account numbers, and anything that identifies another person. Keep both
-out of prompts, chat logs, and Git.
+Protect sensitive information. Never share passwords, API keys, account
+numbers, or another person's private information with AI. Keep secrets out
+of Git.
 
-I grade understanding and honesty rather than polish. A rough result with a
-clear record of what you tried and what you learned earns credit. A finished
-result you can't explain does not. The only academic honesty issue with AI in
-this course is misrepresentation. That means claiming you verified what you
-didn't, or presenting an understanding you don't have as your own.
+I grade understanding, evidence, and honesty, not polish alone. An incomplete
+result with a thoughtful investigation can earn credit. A polished result you
+cannot explain does not. AI use is encouraged; misrepresenting your work or
+evidence is not. LMU's academic honesty policy still applies.
 
 Independent work is not the same as independent thinking. You can use AI
-heavily and demonstrate excellent ownership, or work entirely alone and
-demonstrate very little.
+extensively and demonstrate excellent judgment, or work alone and demonstrate
+very little. What matters is what you understand, can defend, and take
+responsibility for.
 
 ## Student support
 
@@ -606,7 +599,7 @@ https://bulletin.lmu.edu/content.php?catoid=1&navoid=18#LMU_Honor_Code_and_Proce
 
 #### What this means in this course
 
-AI use is expected and encouraged here, on the terms in "Working with AI" above.
+AI use is expected and encouraged here, on the terms in "AI Policy" above.
 Submitting a system you cannot account for is a violation regardless of what
 produced it.
 
