@@ -12,8 +12,9 @@ Start with the [syllabus](syllabus.md), which also comes as a
 ## Where we are now
 
 Midterm whiteboard interviews run October 26 to 28 in Hilton 114.
-We return to regular class on Thursday, October 29, to migrate your site
-from Railway to AWS before the Railway trial ends. Job Scout begins November 3.
+We returned to regular class on Thursday, October 29, to migrate your site
+from Railway to AWS before the Railway trial ends. Professor Ken Summers
+leads the November 5 session, and Job Scout begins November 10.
 
 - [Project 1 requirements and the 125-point rubric](projects/own-your-corner-of-the-internet.md)
 - [Exercise requirements and deadlines](exercises/README.md)
@@ -30,16 +31,18 @@ from Railway to AWS before the Railway trial ends. Job Scout begins November 3.
 | October 22 | Submit Project 1 before class. Guest speakers Cian O'Brien and Timothy Cherpes, ISBA alumni at ServiceNow. Post two questions in the Brightspace discussion by Wednesday, October 21, at 11:59 PM |
 | October 26 to 28 | Midterm whiteboard interviews in Hilton 114. Interviews replace class on October 27 |
 | October 29 | [Migrate your site from Railway to AWS](guides/aws-migration.md) |
-| November 3 | Job Scout 1: LLM calls, structured output, retrieval tools, and the first loop |
-| November 5 | Professor Ken Summers: Troubleshooting Road Show, during our regular class in Hilton 113. Job Scout 2 continues with tools, state, stop conditions, a human approval step, a Resend digest, and integration failures |
+| November 3 | [Migrate your site from Railway to AWS](guides/aws-migration.md), continued. Sections 9 through 12 are Exercise 07, due November 10 |
+| November 5 | Professor Ken Summers: Troubleshooting Road Show, the full session in Hilton 113 |
+| November 10 | Job Scout 1: LLM calls, structured output, retrieval tools, and the first loop. Complete the [Claude API setup](guides/claude-api-access.md) by November 9 |
+| November 12 | Job Scout 2: tools, state, stop conditions, a human approval step, a Resend digest, and integration failures. Create a Resend account by November 11 |
 
 On November 5, Brandon Kulik from Deloitte will speak on "Consulting in the
 Age of AI." The evening event runs from 6:00 to 7:00 PM in Hilton 107.
 RSVP at https://lmu.campuslabs.com/engage/event/12919719.
 
-Choose your Project 2 posting by November 5, using the vetted feed if needed.
-Job Scout's first complete run and Project 2 milestone M1 are due November 10.
-GitHub Actions and tests follow on November 17.
+Choose your Project 2 posting by November 17, from your Job Scout run or the
+vetted feed. Project 2 milestone M1 is due that day. GitHub Actions and tests
+follow on November 19.
 
 ## Earlier guides
 

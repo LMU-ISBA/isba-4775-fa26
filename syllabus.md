@@ -134,15 +134,17 @@ Codespace shutdown guide feedback within the credit/no-credit assessment.
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Tue 10/13 |
 | 06 | Domain email and GA4: mail delivery, a page view, and an outbound click | Config | Tue 10/20 |
 | 07 | Migrate your site from Railway to AWS: EC2, RDS, verified cutover, and a diagram | Build | Tue 11/10, 1:45 PM |
-| 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Thu 11/12, 1:45 PM |
-| 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Tue 11/17, 1:45 PM |
-| 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Tue 11/24, 1:45 PM |
+| 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Tue 11/17, 1:45 PM |
+| 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/19, 1:45 PM |
+| 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 12/3, 1:45 PM |
 
 Ex01 and Ex02 were due at 1:45 PM, before class, and Ex03 is due at the same
 time on Thu 10/1. The Railway migration is a Project 1 requirement, taught on
 Thu 10/8. Exercise 05 is due Tue 10/13, after the DNS/TLS lesson. Exercise 06
 is due Tue 10/20, covering the Zoho and GA4 lessons. Both are due at 1:45 PM.
-Basic GA4 is required for Project 1 and taught on Thu 10/15.
+Basic GA4 is required for Project 1 and taught on Thu 10/15. Exercise 07 is
+the AWS migration, taught Thu 10/29 and Tue 11/3 and due Tue 11/10. Exercises
+08 through 10 follow the Job Scout lessons, which start Tue 11/10.
 
 ## Project 1: Own Your Corner of the Internet, 125 points
 
@@ -172,10 +174,10 @@ The engineering record does not require a separate report.
 
 Job Scout, Resend, and GitHub Actions move after the midterm. Exercise 07 is
 the AWS migration, taught October 29 and November 3 and due November 10.
-Job Scout follows it and will help you find the posting for Project 2, with
-a vetted feed available if needed. Its start date is set once the November
-5 schedule is confirmed. Choose your Project 2 posting using the vetted feed
-if needed, so the agent doesn't block your first project milestone.
+Job Scout starts November 10 and will help you find the posting for Project
+2, with a vetted feed available if needed. Choose your Project 2 posting
+using the vetted feed if needed, so the agent doesn't block your first
+project milestone.
 
 ## Midterm whiteboard interview, 125 points
 
@@ -245,11 +247,11 @@ These are gates inside the Project 2 grade rather than separate line items.
 
 | Milestone | Bar | Due |
 |---|---|---|
-| M1 | Posting selected, PRD written, architecture diagram approved | Tue 11/10 |
-| M2 | App scaffolded and deployed to production on your subdomain | Tue 11/17 |
-| M3 | Agent responding with tools, grounded in domain data via S3 and IAM | Tue 11/24 |
-| M4 | Orchestration integrated, staging environment live and promoting to production | Thu 12/3 |
-| Final | Full system, operations hardened, evals, decision record, blog post | Tue 12/8 |
+| M1 | Posting selected from your Job Scout run or the vetted feed, PRD written, architecture diagram approved | Tue 11/17 |
+| M2 | App scaffolded and deployed to production on your subdomain | Tue 11/24 |
+| M3 | Agent responding with tools, grounded in domain data via S3 and IAM | Thu 12/3 |
+| M4 | Orchestration integrated, staging environment live and promoting to production | Tue 12/8 |
+| Final | Full system, operations hardened, evals, decision record, blog post | Thu 12/10 |
 
 M4 fails without a working staging environment. The application runs fine without
 one, which makes it the first thing skipped under deadline pressure.
@@ -313,29 +315,29 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 10/27 | Midterm interviews replace class. More slots run Mon 10/26 and Wed 10/28. | Book one Calendly appointment and practice with the study guide. | |
 | Thu 10/29 | Migrate your site from Railway to AWS: code, data, configuration, and the domain | Bring access to your repository, Railway database, and Cloudflare zone. | |
 | Tue 11/3 | Migrate your site from Railway to AWS, continued: the AWS CLI, the deployment policy, the plan, RDS, and EC2 | Install the AWS CLI and confirm you can sign in as your IAM user with MFA. Know where your Railway backup is. | |
-| Thu 11/5 | Professor Ken Summers: Troubleshooting Road Show. Job Scout 2: tools, state, stop conditions, a human approval step, a Resend digest, and integration failures | By 11/4, create a Resend account and bring Cloudflare access. Keep Zoho mail working. Bring retrieved postings and choose your Project 2 posting today, with the vetted feed as a fallback. | |
-| Tue 11/10 | Reading a job description as a system spec, architecture review, and an integration troubleshooting clinic | Finish Job Scout's first run and bring the posting chosen on 11/5, your spec, and architecture. | Ex07, M1 |
-| Thu 11/12 | Raw agent loops in Python: three tools, small eval sets, trace reading, and finding why a run failed | Bring the same Job Scout repository and the integration investigation. Review a real trace before class. | Ex08 |
-| Tue 11/17 | Environments and tested deployment: local, staging, production, GitHub Actions, and promotion through CI/CD | Bring the three-tool loop, eval cases, and a reviewed application change. Check the tests locally. | Ex09, M2 |
-| Thu 11/19 | Cloud storage and databases, least-privilege IAM, and agent guardrails for loop limits, schemas, and costs | Bring your data-flow diagram and identify stored data, permissions, and the agent's stop conditions. | |
-| Tue 11/24 | Grounding review, retrieval, chunking, and what the agent must not see. On Zoom | Complete the controlled agent-failure investigation and M3 checks. Join through Brightspace's Zoom link. | Ex10, M3 |
+| Thu 11/5 | Professor Ken Summers: Troubleshooting Road Show, the full session | Keep working on Exercise 07. | |
+| Tue 11/10 | Job Scout 1: LLM calls, structured output, retrieval tools, and the first loop | By 11/9, complete the [Claude API setup](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/claude-api-access.md). Bring your `career-platform` repository. | Ex07 |
+| Thu 11/12 | Job Scout 2: tools, state, stop conditions, a human approval step, a Resend digest, and integration failures | By 11/11, create a Resend account and bring Cloudflare access. Keep Zoho mail working. | |
+| Tue 11/17 | Reading your posting as a system spec, architecture review, then evals and trace reading on your Job Scout run | Finish Job Scout's first run. Choose your Project 2 posting from your run or the vetted feed, and bring your spec and architecture. | Ex08, M1 |
+| Thu 11/19 | Environments and tested deployment: GitHub Actions deploying your AWS site, staging on a subdomain, and promotion through CI/CD | Bring eval cases and a reviewed application change. Check the tests locally. | Ex09 |
+| Tue 11/24 | Cloud storage and databases, least-privilege IAM, grounding and retrieval, and agent guardrails for loop limits, schemas, and costs. On Zoom | Bring your data-flow diagram and identify stored data, permissions, and the agent's stop conditions. Join through Brightspace's Zoom link. | M2 |
 | Thu 11/26 | No class, Thanksgiving | | |
 | Tue 12/1 | LMU Data Center tour with [Jeff Solomon](https://its.lmu.edu/whoweare/staff/infrastructureservices/) | Meet in University Hall in front of Einstein Bros. Bagels. | |
-| Thu 12/3 | Staging in practice, then the decision record | | M4 |
-| Tue 12/8 | Blog post workshop and final interview prep | | Project 2 |
-| Thu 12/10 | Final interview practice in pairs, and a course retrospective | | |
+| Thu 12/3 | Staging in practice, then the decision record | Complete the controlled agent-failure investigation and M3 checks. | Ex10, M3 |
+| Tue 12/8 | Blog post workshop and final interview prep | | M4 |
+| Thu 12/10 | Final interview practice in pairs, and a course retrospective | Submit Project 2 before class at 1:45 PM. | Project 2 |
 
-Professor Ken Summers joins us for a troubleshooting segment during class on
-November 5, in Hilton 113. That evening, Brandon Kulik from Deloitte will
+Professor Ken Summers leads the full class session on November 5, in Hilton
+113, with his Troubleshooting Road Show. That evening, Brandon Kulik from Deloitte will
 speak on "Consulting in the Age of AI." The event runs from 6:00 to 7:00 PM
 in Hilton 107. RSVP at https://lmu.campuslabs.com/engage/event/12919719.
 
 The October 6 revision keeps the Railway/PostgreSQL migration and focuses
 Project 1 on your website, domain, Zoho email, and basic GA4. October 20 is
 reserved for the project requirements review and interview practice. Job Scout, Resend,
-and GitHub Actions move after the midterm. The November sequence now builds
-Job Scout before the first Project 2 milestone, then adds evals and tested
-deployment. No Resend signup or Claude API
+and GitHub Actions move after the midterm. Job Scout starts November 10,
+after the AWS migration, and the first Project 2 milestone follows it on
+November 17. Evals and tested deployment come next. No Resend signup or Claude API
 credit purchase is needed for Project 1.
 
 ### Prepare before class
@@ -371,10 +373,12 @@ configure and verify the system.
   to create an Analytics account, a GA4 property, and a web data stream for
   your site's HTTPS URL. Bring the stream's measurement ID. Stop before
   installing the tag, which we'll do and verify together in class.
-- **After the midterm:** complete the Claude API setup by November 2 and
-  create a Resend account by November 4. We will configure Resend's sending
-  subdomain in class, keeping Zoho's incoming-mail records intact. If you
-  already created an account, keep it. There's no additional setup to do now.
+- **By Monday, November 9, for Tuesday's first Job Scout lesson:** complete
+  the [Claude API setup](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/claude-api-access.md).
+- **By Wednesday, November 11, for Thursday's second Job Scout lesson:**
+  create a Resend account. We will configure Resend's sending subdomain in
+  class, keeping Zoho's incoming-mail records intact. If you already created
+  an account, keep it. There's no additional setup to do now.
 
 ## Work load expectations
 
@@ -404,8 +408,8 @@ money, and most of the spending starts in Exercise 01.
 | AWS | Free tier | Migration on Thu 10/29, then Project 2 |
 | Zoho Mail | Forever Free where offered; contact me if unavailable | Create your account by Mon 10/12 for Tue 10/13 |
 | Google Analytics 4 | Standard account is free | Create the account, property, and web stream by Wed 10/14 for Thu 10/15 |
-| Resend | Free tier | Create an account by Wed 11/4 for Thu 11/5 |
-| Claude API | Billed separately from your subscription | Complete the setup guide by Mon 11/2 for Tue 11/3 |
+| Resend | Free tier | Create an account by Wed 11/11 for Thu 11/12 |
+| Claude API | Billed separately from your subscription | Complete the setup guide by Mon 11/9 for Tue 11/10 |
 | Posting source or retrieval service | Depends on the approved source | Job Scout, after the midterm; no Google Cloud or Firecrawl signup is assigned now |
 
 Plan your budget around the AI subscription you choose, domain registration,
@@ -521,24 +525,45 @@ For technology assistance, contact the ITS Service Desk:
 
 ## Working with AI
 
-Use AI for everything it is good at: planning, writing code, debugging, reading
-unfamiliar documentation, explaining errors, and drafting your PRDs.
+Use AI for everything it's good at: planning, writing code, debugging, reading
+unfamiliar documentation, explaining errors, analyzing data, and drafting
+documents. There's no limit on how much you use it, and there is no
+requirement to log your prompts. Every assignment assumes you have a capable
+AI tool open beside you while you work.
 
-There is no restriction on how much you use it and no requirement to log prompts.
+What stays yours is the understanding. You should be able to explain anything
+an AI built for you to someone who asks hard questions, with no notes and no
+tool open. In this course that someone is me, twice, at the whiteboard. In
+another course it might be a presentation, a conversation in office hours, or
+an exam, and the standard is the same in each.
 
-What matters is what remains yours:
+Four habits make that possible, and we practice them in class.
 
-- You defend the system. An AI can build a system you cannot explain. The
-  whiteboard interviews find that out.
-- You validate your own work. Live systems, evals, traces, and an honest account
-  of what you have not verified.
-- You own the decisions. Which service, which alternative you rejected, where the
-  deterministic/agentic line falls, and why. If AI recommended something and you
-  took it, you should be able to say why it was right.
-- You own what you ship, including its limits and what you would do next.
+1. Ask before you build, which means having the tool read the actual
+   documentation, data, or code before it proposes anything. A tool that
+   guesses produces work you will have to undo.
+2. Review the plan before you approve it. The tool writes a plan, you read it
+   and change what is wrong, and only then does it build.
+3. Verify what it claims, since a tool can report success on something that
+   didn't happen. Check the result yourself, live, where it runs, instead of
+   trusting the tool's own summary.
+4. Record what happened: what you decided, what the tool recommended that you
+   rejected or changed, what you tested, and what you haven't verified. Saying
+   "not verified" is an honest answer that earns credit, while a claim you
+   can't back up does not.
 
-Independent work is not the same as independent thinking. You can use AI heavily
-and demonstrate excellent ownership. You can also work entirely alone and
+Two things never go into the tool: your secrets, meaning passwords, API keys,
+and account numbers, and anything that identifies another person. Keep both
+out of prompts, chat logs, and Git.
+
+I grade understanding and honesty rather than polish. A rough result with a
+clear record of what you tried and what you learned earns credit. A finished
+result you can't explain does not. The only academic honesty issue with AI in
+this course is misrepresentation. That means claiming you verified what you
+didn't, or presenting an understanding you don't have as your own.
+
+Independent work is not the same as independent thinking. You can use AI
+heavily and demonstrate excellent ownership, or work entirely alone and
 demonstrate very little.
 
 ## Student support

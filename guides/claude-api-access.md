@@ -1,6 +1,6 @@
 # Set up Claude API access
 
-For Job Scout on Tuesday, November 3, 2026. Complete setup by Monday, November 2.
+For Job Scout on Tuesday, November 10, 2026. Complete setup by Monday, November 9.
 
 Project 1 doesn't require Claude API access or an API credit purchase.
 
@@ -62,7 +62,7 @@ and request setup without exposing the key in output or screenshots.
 
 ## Which model you'll use
 
-We'll choose on November 3, in class. Models and prices change often enough
+We'll choose on November 10, in class. Models and prices change often enough
 that a choice made now could be out of date by then. Keep the model list from
 step 5, and look at the current prices before class:
 https://platform.claude.com/docs/en/about-claude/pricing
@@ -74,7 +74,7 @@ capable one may judge a borderline posting better.
 
 ## If something goes wrong
 
-Send me a Teams message by November 2 if your card is declined, the
+Send me a Teams message by November 9 if your card is declined, the
 Billing page doesn't appear, or step 5 keeps failing. Don't switch
 to a different paid plan to get around it. Include what you tried, so we can
 fix it before class.
