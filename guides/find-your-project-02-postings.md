@@ -143,24 +143,34 @@ https://raw.githubusercontent.com/LMU-ISBA/isba-4775-fa26/main/projects/project-
 Read Andrej Karpathy's LLM wiki notes:
 https://gist.githubusercontent.com/karpathy/442a6bf555914893e9891c11519de94f/raw
 
-I want a wiki to help me research and compare job postings for this
-assignment. Interview me one question at a time about what I want to
-explore and what I need help understanding. Use my answers to suggest
-a simple setup. Wait for my agreement before creating files.
-Never write personal details about me in this repository.
+Help me create a wiki to compare job postings and research their
+industries, companies, roles, technologies, and data. Ask me three
+multiple-choice questions, one at a time, before suggesting a setup.
 ```
 
 Answer the questions, and review the suggested setup. You can say you're
-still exploring. Once the setup makes sense, ask:
+still exploring. Use Superpowers to turn the agreed setup into a short spec:
 
 ```text
-Create the wiki we discussed. Use research/raw/ for sources and
-research/wiki/ for pages, including index.md and log.md.
-Put the wiki rules in CLAUDE.md. Use plain Markdown links and lowercase
-filenames with hyphens. Skip optional tools, and stop after setup.
+Write a short spec for the wiki we discussed, then let me review it.
 ```
 
 If you use Codex, ask for `AGENTS.md` in place of `CLAUDE.md`.
+
+Open the spec under `docs/superpowers/specs/` in VS Code's Explorer.
+Read it and request corrections. When you're satisfied, ask:
+
+```text
+Spec approved. Write an implementation plan. Wait for my approval before
+implementing it.
+```
+
+Read the plan under `docs/superpowers/plans/`. Check that it covers creating
+the wiki files and verifying them. When you're satisfied, ask:
+
+```text
+Plan approved. Implement it and verify the results.
+```
 
 Check that you have `research/raw/`, `research/wiki/index.md`,
 `research/wiki/log.md`, and the rules file. Commit and push.

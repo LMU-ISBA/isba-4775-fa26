@@ -214,9 +214,9 @@ Keep the system running through your final interview.
 
 ## The final interview
 
-The interview is Thursday, December 17, at 11:00 AM, and runs 30 minutes.
-You'll spend 25 on your own system from memory, then five on a changed
-constraint. Treat it as an interview for the job you chose.
+The interview is Thursday, December 17, at 11:00 AM. It runs 20 minutes on
+your own system from memory, including a changed constraint, then a
+five-minute debrief. Treat it as an interview for the job you chose.
 
 Be ready to:
 
