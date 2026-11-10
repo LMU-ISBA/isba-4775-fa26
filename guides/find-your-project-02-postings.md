@@ -172,6 +172,13 @@ given day. Indeed searches its own listings. Firecrawl searches the web and
 reads a page into clean text, so it can pull a posting from an employer's own
 careers site.
 
+Firecrawl is a service for getting web content into a form your agent can
+use. It can search for pages, read one page, collect pages across a site,
+and return fields such as a job title and location. The MCP connection lets
+Claude call those tools. Today, Claude uses the returned posting to write
+your wiki page, and you check it against the source.
+See https://docs.firecrawl.dev/mcp-server/tools.
+
 Indeed offers a connector for Claude. You add it once in the Claude app, and
 Claude Code can then search postings for you.
 
@@ -267,7 +274,7 @@ connect. File the comparison in the wiki.
 ```
 
 Use the four questions in
-[Project 02 requirements, section 1](../projects/project-02.md#1-start-from-a-posting)
+[Project 02 requirements, section 1](../projects/project-02.md#choosing-a-posting)
 to decide which posting supports a project you can build:
 
 1. Can you get the data? Check the source the agent named.
