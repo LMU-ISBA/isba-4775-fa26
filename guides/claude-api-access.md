@@ -1,12 +1,15 @@
 # Set up Claude API access
 
-For Job Scout on Tuesday, November 10, 2026. Complete setup by Monday, November 9.
+For Project 02's first agent call on Thursday, November 12, 2026. Complete
+setup before class at 1:45 PM.
 
-Project 1 doesn't require Claude API access or an API credit purchase.
+Your Project 02 agent asks a model to do the job's repeated work. Your code
+makes that call through a model API, so you'll need an API account and a key.
+Class demos use the Claude API, and this guide sets that up. Plan on about 15
+minutes and $5.
 
-Job Scout's evaluate step asks a model whether each posting fits you. Your
-code makes that call through the Claude API, so you'll need an API account
-and a key for that lesson. Plan on about 15 minutes and $5.
+You can choose another provider for your project. If you already have, set up
+its key the same way and follow sections 4 and 5 with its names.
 
 Your Claude Pro subscription doesn't cover this. Pro pays for the Claude app
 and Claude Code, and the API is billed separately through prepaid credits:
@@ -24,11 +27,11 @@ amount the page allows if that's higher. Credits are available right away,
 they expire a year after purchase, and they can't be refunded.
 
 Leave auto-reload off so an accidental loop cannot trigger another credit
-purchase. Check your remaining balance while developing Job Scout.
+purchase. Check your remaining balance while you build your agent.
 
 ## 3. Create an API key
 
-Open Settings, then API keys, and create a key named `job-scout`. Copy it
+Open Settings, then API keys, and create a key named `project-02`. Copy it
 right away. The Console shows the full key only once, and if you lose it you
 delete it and make a new one.
 
@@ -36,7 +39,7 @@ Treat the key like a password. Anyone who has it can spend your credits.
 
 ## 4. Store the key where Git can't see it
 
-In your `career-platform` repository on your laptop, ask your agent:
+In your `project-02` repository on your laptop, ask your agent:
 
 ```text
 Prepare a local .env file for my Claude API key and keep it out of Git.
@@ -46,6 +49,10 @@ Paste the key into `.env` yourself as `ANTHROPIC_API_KEY`, never into chat.
 Run `git check-ignore .env`, which should print `.env`. Also confirm
 `git ls-files .env` prints nothing: the file must not already be tracked.
 Fix either failed check before committing.
+
+Keep the key in `.env` only. If you export it in your shell profile, Claude
+Code can switch from your subscription to API billing, and the Indeed
+connector stops loading.
 
 ## 5. Check that the key works
 
@@ -62,19 +69,19 @@ and request setup without exposing the key in output or screenshots.
 
 ## Which model you'll use
 
-We'll choose on November 10, in class. Models and prices change often enough
-that a choice made now could be out of date by then. Keep the model list from
-step 5, and look at the current prices before class:
+We'll choose on Thursday, November 12, in class. Models and prices change
+often enough that a choice made now could be out of date by then. Keep the
+model list from step 5, and look at the current prices before class:
 https://platform.claude.com/docs/en/about-claude/pricing
 
-You'll explain the choice in your engineering record, so think about what
-matters for Job Scout. One run scores dozens of postings, and you'll rerun it
-many times while you debug. A cheaper model gives you more runs, and a more
-capable one may judge a borderline posting better.
+You'll explain the choice in your decision record, so think about what
+matters for your agent. You'll run it many times while you debug, and again
+for every eval case. A cheaper model gives you more runs, and a more capable
+one may handle a borderline case better.
 
 ## If something goes wrong
 
-Send me a Teams message by November 9 if your card is declined, the
-Billing page doesn't appear, or step 5 keeps failing. Don't switch
-to a different paid plan to get around it. Include what you tried, so we can
-fix it before class.
+Send me a Teams message by Wednesday, November 11, if your card is declined,
+the Billing page doesn't appear, or step 5 keeps failing. Don't switch to a
+different paid plan to get around it. Include what you tried, so we can fix
+it before class.
