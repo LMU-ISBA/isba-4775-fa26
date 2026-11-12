@@ -165,6 +165,8 @@ If your key appears anywhere except `.env` or your password manager, delete
 it in the Console and make a new one. Section 3 of the
 [Claude API setup](claude-api-access.md) shows where.
 
+## 5. Ask your own question
+
 Ask your agent to help you choose a useful question for your posting and data:
 
 ```text
@@ -202,7 +204,7 @@ Show the rates and arithmetic for one call so I can check it.
 Check that calculation against the response's token counts and the pricing
 page. Keep the table for the next call.
 
-## 5. Ask for JSON
+## 6. Ask for JSON
 
 Now ask the model to return its answer as JSON too. A
 [schema](https://json-schema.org/understanding-json-schema/about) describes
@@ -241,7 +243,7 @@ Check that no project file except `.env` holds your key. Then ask:
 Commit and push.
 ```
 
-## 6. Due Tuesday, November 17, at 1:45 PM
+## 7. Due Tuesday, November 17, at 1:45 PM
 
 M1 is due, and the
 [Project 02 requirements](../projects/project-02.md#dates) list it in full.
