@@ -77,10 +77,12 @@ subscription to API billing, and the Indeed connector stops loading.
 
 ## 5. Check that the key works
 
-The Models API lists models without generating a paid response. A model ID
-is the exact name your request uses to choose one. Prices come from a
-separate page and are measured in tokens, the chunks of text a model
-processes or generates.
+The [Models API](https://platform.claude.com/docs/en/api/models/list) lists
+models without generating a paid response. A model ID is the exact name
+your request uses to choose one. The
+[pricing page](https://platform.claude.com/docs/en/about-claude/pricing)
+lists rates per million tokens. Tokens are chunks of text a model processes
+or generates.
 
 Your agent will use the shell, which runs terminal commands, to load the
 key without displaying it.

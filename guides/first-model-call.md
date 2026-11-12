@@ -101,9 +101,11 @@ agent that provider's docs in section 4.
 
 ## 4. Send one record to the model
 
-The Messages API lets your code send Claude a question and data, then get
-an answer back. Today you'll use curl, a command-line tool that sends web
-requests. The docs link below tells your agent how to build the request.
+The [Messages API](https://platform.claude.com/docs/en/api/messages/create)
+lets your code send Claude a request with instructions and data, then
+receive a response. Today you'll use [curl](https://curl.se/docs/tutorial.html),
+a command-line tool that sends web requests. The docs link below tells your
+agent how to build the request.
 
 A request has an address, headers carrying settings such as your key, and a
 body holding the model, question, and data. The shell runs the command, and
@@ -140,8 +142,9 @@ In the command, find:
 - The address the request went to.
 - The header that carries your key. It should show a variable name and not
   the key.
-- The version header. Its date sets the format of the request and the
-  response. It isn't the model, and it isn't today's date.
+- The [version header](https://platform.claude.com/docs/en/api/versioning).
+  Its date sets the format of the request and the response. It isn't the
+  model, and it isn't today's date.
 
 In the request file, find:
 
@@ -171,8 +174,8 @@ and response beside the first ones.
 Compare the two answers. The first is what anyone gets from this record.
 What did your question find that the first one missed?
 
-Now work out what each call cost. Prices are per million tokens:
-https://platform.claude.com/docs/en/about-claude/pricing
+Now work out what each call cost using the
+[prices per million tokens](https://platform.claude.com/docs/en/about-claude/pricing).
 
 ```text
 cost = input tokens  x input price  / 1,000,000
@@ -181,10 +184,12 @@ cost = input tokens  x input price  / 1,000,000
 
 ## 5. Ask for JSON
 
-JSON organizes an answer into named fields and values that code can read.
-A schema describes the expected fields and value types, such as text or numbers.
-Structured output adds that schema to the request to control the answer's
-format.
+[JSON](https://www.json.org/json-en.html) organizes an answer into named
+fields and values that code can read. A
+[schema](https://json-schema.org/understanding-json-schema/about) describes
+the expected fields and value types, such as text or numbers.
+[Structured output](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+adds that schema to the request to control the answer's format.
 
 Name the fields a good answer has, such as `product` and `issue`. Replace
 `[your fields]` below with those names, then ask:
