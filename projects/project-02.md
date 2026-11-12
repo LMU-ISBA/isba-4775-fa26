@@ -17,20 +17,22 @@ This is a first draft and is open to revisions.
 
 ## Dates
 
-Milestones are gates inside the Project 02 grade, not separate line items.
-Each one is worth 10 of the 300 points. You earn all 10 by meeting it by its
-date, and 5 if you meet it later, any time before Project 02 is submitted.
+Each milestone is graded when it's due. Its points are the areas of the
+project that should be finished by then, and
+[How the 300 points are earned](#how-the-300-points-are-earned) lists them.
+If an area is missing or weak at its milestone, fix it before Project 02 is
+submitted and you earn back half of the points you missed.
 
-| Date | Due |
-| --- | --- |
-| Thu 11/12, 1:45 PM | Your posting, chosen from your three, and one next-step posting. You can switch among the three until 11/17 |
-| Tue 11/17 | M1: your PRD, your data source, and two architectures with cost estimates. Look for two or three open source projects you could extend, and record what you found. Name your choice and your reason, add a diagram, and rename your repository. Submit your repository URL in Brightspace, then keep building. I'll read your design and tell you by Thu 11/19 if something has to change |
-| Thu 11/19 | Your AWS site is working, for the GitHub Actions lesson |
-| Tue 11/24 | M2: your app is deployed to production on your subdomain. Submit the address in Brightspace |
-| Thu 12/3 | M3: your agent answers a grounded question with tools. You'll show it live in class |
-| Tue 12/8 | M4: two systems connect on a trigger, and one change moves from staging to production. You'll show it live in class |
-| Thu 12/10, 1:45 PM | Project 02 is submitted |
-| Thu 12/17, 11:00 AM | Final whiteboard interview, worth a separate 300 points |
+| Date | Due | Points |
+| --- | --- | --- |
+| Thu 11/12, 1:45 PM | Your posting, chosen from your three, and one next-step posting. You can switch among the three until 11/17 | |
+| Tue 11/17 | M1: your PRD, your data source, and two architectures with cost estimates. Look for two or three open source projects you could extend, and record what you found. Name your choice and your reason, add a diagram, and rename your repository. Submit your repository URL in Brightspace, then keep building. I'll read your design and tell you by Thu 11/19 if something has to change | 60 |
+| Thu 11/19 | Your AWS site is working, for the GitHub Actions lesson | |
+| Tue 11/24 | M2: your app is deployed to production on your subdomain. Submit the address in Brightspace | 40 |
+| Thu 12/3 | M3: your agent answers a grounded question with tools. Have three eval cases with expected answers ready. You'll show it live in class | 75 |
+| Tue 12/8 | M4: two systems connect on a trigger, and one change moves from staging to production. You'll show it live in class | 60 |
+| Thu 12/10, 1:45 PM | Project 02 is submitted, with the areas no milestone covers | 65 |
+| Thu 12/17, 11:00 AM | Final whiteboard interview, worth a separate 300 points | |
 
 ## Requirements
 
@@ -172,20 +174,23 @@ I run the checks in the last column against your live system, so run them
 yourself first. A claim the live system contradicts earns no credit for that
 claim.
 
-| Area | Points | What is assessed | Check I run |
-| --- | --- | --- | --- |
-| Posting, PRD, and data | 30 | A posting that passes the tests, a PRD, and a data card showing real data or a documented realism check | I read them against your posting |
-| Architecture decision | 30 | Two designs with costs and tradeoffs, your choice and what it gave up, the diagram, and the decision record | I repeat the validation your decision record names |
-| System on AWS | 30 | Working at your subdomain over HTTPS, the resource inventory, and an index that lets me check the system | I open the live address |
-| Agent | 40 | The job's repeated work, done with a tool, structured output, memory, and guardrails. You can defend the line between fixed steps and agent decisions | I send three of your eval inputs and one out-of-scope request, then compare the answers with your recorded results |
-| Grounding | 25 | Answers drawn from your stored data, reached with least-privilege credentials | I ask a question only your data answers, and I read the access policy |
-| Orchestration | 25 | Two systems connected on a trigger, doing work that matters in the job | You show one trigger run at M4 |
-| Environments and deployment | 25 | Three environments, GitHub Actions deploying, secrets handled, and one change shown moving through | I find one commit in your Actions history that deployed to staging and then to production |
-| Operations | 25 | Access, rate limit, cost controls, analytics, and monitoring | I request the agent without access, and I exceed the rate limit |
-| Evals and trace | 15 | An eval set with recorded results, including failures, and one readable trace | I run the eval set from a clean clone with one command |
-| Blog post and LinkedIn draft | 15 | A general reader can follow what you built, why, and how you know it works | I read both as a general reader |
-| Milestones | 40 | M1 through M4, at 10 points each. You earn 10 for meeting one by its date and 5 for meeting it late | I read your M1 and M2 submissions in Brightspace, and you show M3 and M4 live in class |
-| Total | 300 | | |
+Each area is graded at the milestone in the second column. The areas marked
+Final are graded on the submitted project.
+
+| Area | Graded at | Points | What is assessed | Check I run |
+| --- | --- | --- | --- | --- |
+| Posting, PRD, and data | M1 | 30 | A posting that passes the tests, a PRD, and a data card showing real data or a documented realism check | I read them against your posting |
+| Architecture decision | M1 | 30 | Two designs with costs and tradeoffs, your choice and what it gave up, and the diagram | I read them against your PRD |
+| System on AWS | M2 | 40 | Working at your subdomain over HTTPS, and the resource inventory | I open the live address |
+| Agent | M3 | 50 | The job's repeated work, done with a tool, structured output, memory, and guardrails. You can defend the line between fixed steps and agent decisions | I send three of your eval inputs and one out-of-scope request, then compare the answers with your expected answers |
+| Grounding | M3 | 25 | Answers drawn from your stored data, reached with least-privilege credentials | I ask a question only your data answers, and I read the access policy |
+| Orchestration | M4 | 25 | Two systems connected on a trigger, doing work that matters in the job | You show one trigger run at M4 |
+| Environments and deployment | M4 | 35 | Three environments, GitHub Actions deploying, secrets handled, and one change shown moving through | I find one commit in your Actions history that deployed to staging and then to production |
+| Decision record and index | Final | 10 | Your decision record, and a submission index that lets me check the system | I repeat the validation your decision record names |
+| Operations | Final | 25 | Access, rate limit, cost controls, analytics, and monitoring | I request the agent without access, and I exceed the rate limit |
+| Evals and trace | Final | 15 | An eval set with recorded results, including failures, and one readable trace | I run the eval set from a clean clone with one command |
+| Blog post and LinkedIn draft | Final | 15 | A general reader can follow what you built, why, and how you know it works | I read both as a general reader |
+| Total | | 300 | | |
 
 A simple design that meets every requirement earns full credit, and adding
 services doesn't add points. The late policy is in the

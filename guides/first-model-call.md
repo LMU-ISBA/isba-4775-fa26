@@ -156,7 +156,7 @@ Check that no file holds your key, then commit and push.
 
 M1 is due, and the
 [Project 02 requirements](../projects/project-02.md#dates) list it in full.
-It's worth 10 points on time and 5 if it's late.
+It's graded when it's due, and it counts for 60 of the project's 300 points.
 
 - Your PRD, your data source, and your next-step posting.
 - Two architectures with cost estimates, your choice, and your reason.
@@ -167,8 +167,10 @@ It's worth 10 points on time and 5 if it's late.
 Keep building after you submit. I'll read your design and tell you by
 Thursday, November 19, if something has to change.
 
-If you didn't get a record or a call in class, finish sections 2 through 5
-first.
+Sections 2 through 5 are Exercise 08, due at the same time. It's credit/no
+credit, and I check it in your Project 02 repository: your records, and the
+request and response files for both calls. If you didn't get a record or a
+call in class, finish those sections first.
 
 Start the PRD with an interview:
 
