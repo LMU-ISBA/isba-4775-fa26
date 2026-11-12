@@ -59,13 +59,18 @@ Prepare a local .env file for my Claude API key and keep it out of Git.
 ```
 
 Paste the key into `.env` yourself as `ANTHROPIC_API_KEY`, never into chat.
-Run `git check-ignore .env`, which should print `.env`. Also confirm
-`git ls-files .env` prints nothing: the file must not already be tracked.
-Fix either failed check before committing.
+Then ask your agent:
 
-Keep the key in `.env` only. If you export it in your shell profile, Claude
-Code can switch from your subscription to API billing, and the Indeed
-connector stops loading.
+```text
+Run git check-ignore .env and git ls-files .env without opening .env.
+The first should print .env and the second nothing. Fix either failed
+check before committing.
+```
+
+Keep the key in `.env`, excluded from Git. You may also save it in your
+password manager. Never paste it into chat, source code, or documentation.
+If you export it in your shell profile, Claude Code can switch from your
+subscription to API billing, and the Indeed connector stops loading.
 
 ## 5. Check that the key works
 

@@ -90,8 +90,10 @@ Commit and push.
 Follow the [Claude API setup](claude-api-access.md), sections 1 through 5.
 You're done when step 5 lists the available models. Keep that list.
 
-The key goes in `.env` and never in chat. If you chose another provider, set
-up its key the same way and give your agent that provider's docs in section 4.
+Keep the key in `.env`, excluded from Git. You may also save it in your
+password manager. Never paste it into chat, source code, or documentation.
+If you chose another provider, set up its key the same way and give your
+agent that provider's docs in section 4.
 
 ## 4. Send one record to the model
 
@@ -141,9 +143,9 @@ In the response file, find:
 - `input_tokens` and `output_tokens`.
 - `stop_reason`.
 
-If your key appears anywhere outside `.env`, delete it in the Console and
-make a new one. Section 3 of the [Claude API setup](claude-api-access.md)
-shows where.
+If your key appears anywhere except `.env` or your password manager, delete
+it in the Console and make a new one. Section 3 of the
+[Claude API setup](claude-api-access.md) shows where.
 
 Now ask your own question:
 
@@ -186,7 +188,7 @@ and compare it with the others.
 Is this an agent yet? Say why in your own words. We'll come back to it on
 Tuesday, when the model chooses a tool.
 
-Check that no file outside `.env` holds your key. Then ask:
+Check that no project file except `.env` holds your key. Then ask:
 
 ```text
 Commit and push.
