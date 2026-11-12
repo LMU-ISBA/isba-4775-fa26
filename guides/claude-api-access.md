@@ -77,28 +77,29 @@ subscription to API billing, and the Indeed connector stops loading.
 Ask your agent:
 
 ```text
-List the available Claude models using my local key. Never print the key.
+Read the Models API docs first:
+https://platform.claude.com/docs/en/api/models/list
+
+List the available Claude models using my key from .env. Load it in the
+shell. Never open .env, print the key, or use verbose mode.
+
+Show their model IDs and standard input and output prices in USD per
+million tokens from this page. Mark any price you can't verify.
+https://platform.claude.com/docs/en/about-claude/pricing
 ```
 
-Use the [Models API](https://platform.claude.com/docs/en/api/models/list),
-which lists models without generating a paid response. You should see status
-200 and model IDs. A 401 means authentication failed. Recheck the saved key
-and request setup without exposing the key in output or screenshots.
+The Models API lists models without generating a paid response. Prices come
+from the separate pricing page. You should see status 200 and model IDs.
+A 401 means authentication failed. Recheck the saved key and request setup
+without exposing the key in output or screenshots.
 
 ## Which model you'll use
 
 You'll choose in class, when you send your first call. Keep the model list
-from step 5, and look at the current prices:
-https://platform.claude.com/docs/en/about-claude/pricing
+and prices from step 5. Check your chosen model's prices against the linked
+pricing page.
 
 You'll explain the choice in your decision record, so think about what
 matters for your agent. You'll run it many times while you debug, and again
 for every eval case. A cheaper model gives you more runs, and a more capable
 one may handle a borderline case better.
-
-## If something goes wrong
-
-Tell me in class if your card is declined, the Billing page doesn't appear,
-or step 5 keeps failing. Don't switch to a different paid plan to get around
-it. If you're finishing at home, send me a Teams message with what you
-tried.
