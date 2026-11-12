@@ -111,6 +111,22 @@ A request has an address, headers carrying settings such as your key, and a
 body holding the model, question, and data. The shell runs the command, and
 flags set its options.
 
+```mermaid
+flowchart TD
+    shell["Shell runs curl<br/>Flags set request options"]
+
+    subgraph request["One request"]
+        address["Address<br/>Where to send it"]
+        headers["Headers<br/>Key and API version"]
+        body["Body<br/>Model, instructions, and record"]
+    end
+
+    shell -->|"URL"| address
+    shell -->|"--header"| headers
+    shell -->|"--data-binary"| body
+    request --> api["Claude Messages API"]
+```
+
 The posting makes you responsible for one job. Write the question that
 person would ask of a record, as one sentence. Your comparison page names it.
 If your data is a CSV, one record is the header line and one row. Choose a
