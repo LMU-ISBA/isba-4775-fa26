@@ -108,29 +108,14 @@ a command-line tool that sends web requests. The docs link below tells your
 agent how to build the request.
 
 A request has an address, headers carrying settings such as your key, and a
-body holding the model, question, and data. The shell runs the command, and
-flags set its options.
+body holding the model, instructions, and data. The body uses
+[JSON](https://www.json.org/json-en.html), a text format with named fields
+and values. The shell runs the command, and flags set its options.
 
-```mermaid
-flowchart TD
-    shell["Shell runs curl<br/>Flags set request options"]
+![One request divided into its address, headers, and JSON body. Bracketed values are placeholders.](assets/model-request-structure.svg)
 
-    subgraph request["One request"]
-        address["Address<br/>Where to send it"]
-        headers["Headers<br/>Key and API version"]
-        body["Body<br/>Model, instructions, and record"]
-    end
-
-    shell -->|"URL"| address
-    shell -->|"--header"| headers
-    shell -->|"--data-binary"| body
-    request --> api["Claude Messages API"]
-```
-
-The posting makes you responsible for one job. Write the question that
-person would ask of a record, as one sentence. Your comparison page names it.
-If your data is a CSV, one record is the header line and one row. Choose a
-question that record can answer on its own.
+Pick one record from your saved data. If your data is a CSV, include the
+header line and one row.
 
 Pick a model ID from the list you saved during API setup. Replace `[model]`
 below with that exact ID.
@@ -180,28 +165,48 @@ If your key appears anywhere except `.env` or your password manager, delete
 it in the Console and make a new one. Section 3 of the
 [Claude API setup](claude-api-access.md) shows where.
 
-Now ask your own question:
+Now turn a task from your posting into a question:
+
+1. Pick one duty, such as reviewing feedback or analyzing engagement.
+2. Find the fields in your record that could help with that duty.
+3. Ask for a specific result and evidence from those fields.
+
+If your record contains a headline, you could ask:
+
+```text
+What does this headline promise the reader, and which words create
+that expectation?
+```
+
+Choose a question this record can answer on its own. Replace
+`[your question]` below with yours, then send:
 
 ```text
 Send the same record again and ask: [your question]. Save the request
 and response beside the first ones.
 ```
 
-Compare the two answers. The first is what anyone gets from this record.
-What did your question find that the first one missed?
+Compare the two answers. What did your question make more useful for the
+job's task? Point to a specific difference, or explain why it didn't help.
 
-Now work out what each call cost using the
+Input and output tokens have different
 [prices per million tokens](https://platform.claude.com/docs/en/about-claude/pricing).
+Ask your agent to calculate the costs from the saved responses:
 
 ```text
-cost = input tokens  x input price  / 1,000,000
-     + output tokens x output price / 1,000,000
+Calculate each call's cost from its saved response and these prices:
+https://platform.claude.com/docs/en/about-claude/pricing
+
+Show the model, input tokens, output tokens, and cost in a table.
+Show the rates and arithmetic for one call so I can check it.
 ```
+
+Check that calculation against the response's token counts and the pricing
+page. Keep the table for the next call.
 
 ## 5. Ask for JSON
 
-[JSON](https://www.json.org/json-en.html) organizes an answer into named
-fields and values that code can read. A
+Now ask the model to return its answer as JSON too. A
 [schema](https://json-schema.org/understanding-json-schema/about) describes
 the expected fields and value types, such as text or numbers.
 [Structured output](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
@@ -222,8 +227,12 @@ the others.
 Compare this request and response with the ones for your question. What did
 the request add? How did the answer change?
 
-Check each field against the record yourself. Then work out this call's cost
-and compare it with the others.
+Check each field against the record yourself. Then ask:
+
+```text
+Add this call to the cost table using its saved response. Compare its
+cost with the earlier calls.
+```
 
 Is this an agent yet? Say why in your own words. We'll come back to it on
 Tuesday, when the model chooses a tool.
