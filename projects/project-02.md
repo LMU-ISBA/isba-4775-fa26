@@ -12,6 +12,7 @@ This is a first draft and is open to revisions.
 | Which posting? | Choose one for a job you could reach soon after graduation |
 | What's the next-step posting for? | It shows how that work progresses in about two years. You don't have to want the role, and you won't build for it |
 | Who designs the architecture? | You do. Compare at least two designs, choose one, and explain why |
+| Where do I come in? | Your agent can generate options all day. The posting makes you responsible for one job, and you decide what matters in it. A default prompt gives the answer everyone gets, so show where yours differs |
 | What's graded? | I grade what the system does and how well you can show it. Your choice of design isn't scored |
 | Where do I start? | Start with [Find three postings for Project 02](../guides/find-your-project-02-postings.md) |
 
@@ -41,7 +42,7 @@ after the table add detail where a row needs it.
 
 | # | Requirement | What it has to do | Evidence |
 | --- | --- | --- | --- |
-| 1 | Posting and PRD | Choose one posting that passes the four tests, and save one next-step posting. Write a PRD that says who uses the system, what it does, and what it leaves out | Your wiki pages and the PRD |
+| 1 | Posting and PRD | Choose one posting that passes the four tests, and save one next-step posting. Write a PRD that says who uses the system, what it does, and what it leaves out. Say what this job is responsible for, and one thing you'd look for that a default answer misses | Your wiki pages and the PRD |
 | 2 | Runs on AWS | Your app, agent, and data run in your AWS account. The system answers over HTTPS at a subdomain of your domain, and your resume site keeps working | The live address, and an inventory of each resource with its cost and how you'd remove it |
 | 3 | Agent | You build it or extend an existing one, and it does the job's repeated work. It uses at least one tool, returns structured output, and keeps the memory a task needs. It stops at a step limit and refuses requests outside its job | The live agent |
 | 4 | Data | Use real data first. Store it on AWS, and give the agent credentials that allow only what it needs | Your data card and the access policy |
@@ -232,6 +233,8 @@ Be ready to:
 - Explain why you chose it over your other design.
 - Show where the agent decides and where fixed steps run.
 - Explain where your data came from and how you know the answers are right.
+- Show one place where the default answer wasn't good enough, and what you
+  did instead.
 - Diagnose a failure, and discuss your costs.
 
 ## Costs
