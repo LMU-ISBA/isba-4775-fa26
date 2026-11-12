@@ -48,6 +48,9 @@ your three postings until Tuesday, November 17.
 
 ## 2. Get real data
 
+One record is one item your system will work on. A CSV stores rows and
+columns as plain text, which you can open in a spreadsheet.
+
 Your agent needs real records to work on. The
 [Project 02 requirements](../projects/project-02.md#data) give the order to
 look in: an API or open data first, then public pages whose terms allow
@@ -87,6 +90,7 @@ Commit and push.
 
 ## 3. Set up your API key
 
+An API key identifies your account and authorizes requests billed to it.
 Follow the [Claude API setup](claude-api-access.md), sections 1 through 5.
 You're done when step 5 lists the available models. Keep that list.
 
@@ -97,23 +101,30 @@ agent that provider's docs in section 4.
 
 ## 4. Send one record to the model
 
+The Messages API lets your code send Claude a question and data, then get
+an answer back. Today you'll use curl, a command-line tool that sends web
+requests. The docs link below tells your agent how to build the request.
+
+A request has an address, headers carrying settings such as your key, and a
+body holding the model, question, and data. The shell runs the command, and
+flags set its options.
+
 The posting makes you responsible for one job. Write the question that
 person would ask of a record, as one sentence. Your comparison page names it.
-Pick a model from your list in step 5. If your data is a CSV, one record is
-the header line and one row.
+If your data is a CSV, one record is the header line and one row. Choose a
+question that record can answer on its own.
 
-Start with the rules for today's calls:
+Pick a model ID from the list you saved during API setup. Replace `[model]`
+below with that exact ID.
 
-```text
-Today I'm sending model calls with curl to see how they work. Load my
-key from .env in the shell. Never open .env, print the key, or use
-verbose mode. Save each request body and each raw response as a file,
-and show each command with one flag per line.
-```
-
-Send a default question first. It's the one anyone could ask:
+Send a default question first. This prompt also sets the rules for today's
+calls:
 
 ```text
+Use curl for today's model calls. Load my key from .env in the shell.
+Never open .env, print the key, or use verbose mode. Save each request
+body and raw response as files. Show each command with one flag per line.
+
 Read the API docs first:
 https://platform.claude.com/docs/en/api/messages/create
 
@@ -121,7 +132,8 @@ Send one record from my data to [model] and ask: What do you see in
 this record? Show me the command you ran, then stop.
 ```
 
-Read the files yourself. Your agent's summary of the call isn't the call.
+Read the saved files yourself. The raw response is the API's full reply,
+before your coding agent summarizes it.
 
 In the command, find:
 
@@ -137,10 +149,12 @@ In the request file, find:
 - The question.
 - Your record.
 
-In the response file, find:
+Tokens are chunks of text the model processes or generates. The stop reason
+says why generation ended. In the response file, find:
 
 - The answer.
-- `input_tokens` and `output_tokens`.
+- `input_tokens` for what you sent and `output_tokens` for what the model
+  generated.
 - `stop_reason`.
 
 If your key appears anywhere except `.env` or your password manager, delete
@@ -167,8 +181,13 @@ cost = input tokens  x input price  / 1,000,000
 
 ## 5. Ask for JSON
 
-A sentence is easy for you to read and hard for code to use. Name the fields
-a good answer has, such as `product` and `issue`. Then ask:
+JSON organizes an answer into named fields and values that code can read.
+A schema describes the expected fields and value types, such as text or numbers.
+Structured output adds that schema to the request to control the answer's
+format.
+
+Name the fields a good answer has, such as `product` and `issue`. Replace
+`[your fields]` below with those names, then ask:
 
 ```text
 Read the structured outputs docs first:
@@ -199,6 +218,10 @@ Commit and push.
 M1 is due, and the
 [Project 02 requirements](../projects/project-02.md#dates) list it in full.
 It's graded when it's due, and it counts for 60 of the project's 300 points.
+
+A product requirements document (PRD) describes who your system serves,
+what it does, and what it leaves out. An architecture describes the parts
+that make it work and how they connect.
 
 - Your PRD, your data source, and your next-step posting.
 - Two architectures with cost estimates, your choice, and your reason.

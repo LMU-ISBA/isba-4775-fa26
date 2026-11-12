@@ -52,6 +52,9 @@ Treat the key like a password. Anyone who has it can spend your credits.
 
 ## 4. Store the key where Git can't see it
 
+A `.env` file stores settings such as your key on your laptop. Keeping it
+out of Git keeps the key out of your commits.
+
 In your `project-02` repository on your laptop, ask your agent:
 
 ```text
@@ -74,6 +77,14 @@ subscription to API billing, and the Indeed connector stops loading.
 
 ## 5. Check that the key works
 
+The Models API lists models without generating a paid response. A model ID
+is the exact name your request uses to choose one. Prices come from a
+separate page and are measured in tokens, the chunks of text a model
+processes or generates.
+
+Your agent will use the shell, which runs terminal commands, to load the
+key without displaying it.
+
 Ask your agent:
 
 ```text
@@ -88,8 +99,7 @@ million tokens from this page. Mark any price you can't verify.
 https://platform.claude.com/docs/en/about-claude/pricing
 ```
 
-The Models API lists models without generating a paid response. Prices come
-from the separate pricing page. You should see status 200 and model IDs.
+You should see status 200, which means the request succeeded, and model IDs.
 A 401 means authentication failed. Recheck the saved key and request setup
 without exposing the key in output or screenshots.
 
