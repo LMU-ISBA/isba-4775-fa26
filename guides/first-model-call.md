@@ -204,6 +204,11 @@ Show the rates and arithmetic for one call so I can check it.
 Check that calculation against the response's token counts and the pricing
 page. Keep the table for the next call.
 
+Open [Usage](https://platform.claude.com/usage). Select today and your
+project's API key, then compare the token totals with your saved responses.
+Open [Cost](https://platform.claude.com/cost) to see the spending recorded
+for your model. If nothing appears yet, continue and check again later.
+
 ## 6. Ask for JSON
 
 Now ask the model to return its answer as JSON too. A
@@ -212,15 +217,24 @@ the expected fields and value types, such as text or numbers.
 [Structured output](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 adds that schema to the request to control the answer's format.
 
-Name the fields a good answer has, such as `product` and `issue`. Replace
-`[your fields]` below with those names, then ask:
+Ask your agent to suggest fields that would help your system use the answer:
+
+```text
+Based on my question and the answer we just got, suggest three sets
+of JSON fields. Keep each set to two or three fields. Explain what
+each set would help my system do, and recommend one with a reason.
+
+Ask me to choose or revise a set. Don't send a model call yet.
+```
+
+Choose or revise a set, then send:
 
 ```text
 Read the structured outputs docs first:
 https://platform.claude.com/docs/en/build-with-claude/structured-outputs
 
 Send the same record and my question again, and ask for JSON with
-these fields: [your fields]. Save the new request and response beside
+the fields I chose. Save the new request and response beside
 the others.
 ```
 
