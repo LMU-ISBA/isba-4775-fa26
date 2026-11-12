@@ -29,6 +29,19 @@ By the end of this lesson, you should be able to:
 
 ## 1. Check your posting
 
+Keep your postings-guide Claude Code tab open so you can refer back to it.
+In the same VS Code window, open View, then Command Palette. Choose:
+
+```text
+Claude Code: Open in New Tab
+```
+
+In the new tab's prompt box, enter:
+
+```text
+/rename first-model-call
+```
+
 Open your comparison page in `research/wiki/`. Your choice and your reason
 should be at the top. If you haven't chosen, choose now. You can switch among
 your three postings until Tuesday, November 17.
@@ -51,9 +64,8 @@ why each fits. Then stop.
 Pick one and check that the records are real and not generated. Then ask:
 
 ```text
-Collect about 20 real records from that source and leave out personal
-data. Save them with the source and today's date, add the source to the
-wiki, and stop.
+Save about 20 real records from this source with its URL and today's
+date. Add the source to the wiki, then stop.
 ```
 
 Open the file and read three records. Each one should be real, and it should
@@ -69,7 +81,9 @@ If the source doesn't work, try these in order:
 4. Real records from the same industry, if the company's own aren't public.
 5. Another of your three postings.
 
+```text
 Commit and push.
+```
 
 ## 3. Set up your API key
 
@@ -172,7 +186,11 @@ and compare it with the others.
 Is this an agent yet? Say why in your own words. We'll come back to it on
 Tuesday, when the model chooses a tool.
 
-Check that no file holds your key, then commit and push.
+Check that no file outside `.env` holds your key. Then ask:
+
+```text
+Commit and push.
+```
 
 ## 6. Due Tuesday, November 17, at 1:45 PM
 
