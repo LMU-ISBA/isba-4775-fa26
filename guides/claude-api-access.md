@@ -1,7 +1,7 @@
 # Set up Claude API access
 
-For Project 02's first agent call on Thursday, November 12, 2026. Complete
-setup before class at 1:45 PM.
+For Project 02's first model call on Thursday, November 12, 2026. We set
+this up together in class.
 
 Your Project 02 agent asks a model to do the job's repeated work. Your code
 makes that call through a model API, so you'll need an API account and a key.
@@ -69,9 +69,8 @@ and request setup without exposing the key in output or screenshots.
 
 ## Which model you'll use
 
-We'll choose on Thursday, November 12, in class. Models and prices change
-often enough that a choice made now could be out of date by then. Keep the
-model list from step 5, and look at the current prices before class:
+You'll choose in class, when you send your first call. Keep the model list
+from step 5, and look at the current prices:
 https://platform.claude.com/docs/en/about-claude/pricing
 
 You'll explain the choice in your decision record, so think about what
@@ -81,7 +80,7 @@ one may handle a borderline case better.
 
 ## If something goes wrong
 
-Send me a Teams message by Wednesday, November 11, if your card is declined,
-the Billing page doesn't appear, or step 5 keeps failing. Don't switch to a
-different paid plan to get around it. Include what you tried, so we can fix
-it before class.
+Tell me in class if your card is declined, the Billing page doesn't appear,
+or step 5 keeps failing. Don't switch to a different paid plan to get around
+it. If you're finishing at home, send me a Teams message with what you
+tried.
