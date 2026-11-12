@@ -276,10 +276,11 @@ that make it work and how they connect.
 Keep building after you submit. I'll read your design and tell you by
 Thursday, November 19, if something has to change.
 
-Sections 2 through 5 are Exercise 08, due at the same time. It's credit/no
+Sections 2 through 6 are Exercise 08, due at the same time. It's credit/no
 credit, and I check it in your Project 02 repository: your records, and the
-request and response files for all three calls. If you didn't get a record or a
-call in class, finish those sections first.
+request and response files for all three calls. Submit your repository URL
+and the paths to those files in the Exercise 08 assignment in Brightspace.
+If you didn't get a record or a call in class, finish those sections first.
 
 Start the PRD with an interview:
 
