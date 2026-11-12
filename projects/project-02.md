@@ -18,13 +18,15 @@ This is a first draft and is open to revisions.
 ## Dates
 
 Milestones are gates inside the Project 02 grade, not separate line items.
+Each one is worth 10 of the 300 points. You earn all 10 by meeting it by its
+date, and 5 if you meet it later, any time before Project 02 is submitted.
 
 | Date | Due |
 | --- | --- |
 | Thu 11/12, 1:45 PM | Your posting, chosen from your three, and one next-step posting. You can switch among the three until 11/17 |
-| Tue 11/17 | M1: your PRD, your data source, and two architectures with cost estimates. Name your choice and your reason, add a diagram, and rename your repository. I approve the design before you build |
+| Tue 11/17 | M1: your PRD, your data source, and two architectures with cost estimates. Look for two or three open source projects you could extend, and record what you found. Name your choice and your reason, add a diagram, and rename your repository. Submit your repository URL in Brightspace, then keep building. I'll read your design and tell you by Thu 11/19 if something has to change |
 | Thu 11/19 | Your AWS site is working, for the GitHub Actions lesson |
-| Tue 11/24 | M2: your app is deployed to production on your subdomain |
+| Tue 11/24 | M2: your app is deployed to production on your subdomain. Submit the address in Brightspace |
 | Thu 12/3 | M3: your agent answers a grounded question with tools. You'll show it live in class |
 | Tue 12/8 | M4: two systems connect on a trigger, and one change moves from staging to production. You'll show it live in class |
 | Thu 12/10, 1:45 PM | Project 02 is submitted |
@@ -39,7 +41,7 @@ after the table add detail where a row needs it.
 | --- | --- | --- | --- |
 | 1 | Posting and PRD | Choose one posting that passes the four tests, and save one next-step posting. Write a PRD that says who uses the system, what it does, and what it leaves out | Your wiki pages and the PRD |
 | 2 | Runs on AWS | Your app, agent, and data run in your AWS account. The system answers over HTTPS at a subdomain of your domain, and your resume site keeps working | The live address, and an inventory of each resource with its cost and how you'd remove it |
-| 3 | Agent | You build it, and it does the job's repeated work. It uses at least one tool, returns structured output, and keeps the memory a task needs. It stops at a step limit and refuses requests outside its job | The live agent |
+| 3 | Agent | You build it or extend an existing one, and it does the job's repeated work. It uses at least one tool, returns structured output, and keeps the memory a task needs. It stops at a step limit and refuses requests outside its job | The live agent |
 | 4 | Data | Use real data first. Store it on AWS, and give the agent credentials that allow only what it needs | Your data card and the access policy |
 | 5 | Trigger | One event in a first system starts work in a second, with no one clicking in between. The work has to matter in the job's domain | A run you can show |
 | 6 | Environments | You keep local, staging, and production environments. GitHub Actions deploys your changes, and secrets stay out of the repository | One commit followed from staging to production |
@@ -94,7 +96,7 @@ The architecture is yours to design, within these rules.
 | AWS | The app, the agent, and the data have to run on AWS. DNS can stay at Cloudflare, and the model API and a hosted tool that connects your two systems can live outside it |
 | Model API | Find the right one to get the job done, and compare price and capability for your task. Class demos use the Claude API, and any provider counts |
 | Fixed steps or agent | Your system has to be both. Decide which parts are fixed steps and which the agent decides, and be ready to defend where that line falls |
-| From scratch or open source | You can do either. Before you start from an open source project, check three things: its license allows your use, it runs within your budget, and you can show which changes are yours. The agent is still yours to build |
+| From scratch or an existing project | You can build from scratch or extend an open source project. Find two or three you could extend, and record each in your wiki before M1. Check three things for each: its license allows your use, it runs within your budget, and you can show which changes are yours. Extending one can be one of your two designs. Bring its code into your private repository, because a GitHub fork of a public project stays public. If it already has an agent, I grade the agent work you add |
 | Connecting two systems | This is a capability, not a tool. n8n, Make, Zapier, Power Automate, and code all count |
 | Access gate | Each call to your agent spends your API credits, so only people you allow should reach it. A shared password or an invite code is enough, and user accounts aren't required |
 
@@ -173,15 +175,16 @@ claim.
 | Area | Points | What is assessed | Check I run |
 | --- | --- | --- | --- |
 | Posting, PRD, and data | 30 | A posting that passes the tests, a PRD, and a data card showing real data or a documented realism check | I read them against your posting |
-| Architecture decision | 40 | Two designs with costs and tradeoffs, your choice and what it gave up, the diagram, and the decision record | I repeat the validation your decision record names |
-| System on AWS | 40 | Working at your subdomain over HTTPS, the resource inventory, and an index that lets me check the system | I open the live address |
-| Agent | 50 | The job's repeated work, done with a tool, structured output, memory, and guardrails. You can defend the line between fixed steps and agent decisions | I send three of your eval inputs and one out-of-scope request, then compare the answers with your recorded results |
+| Architecture decision | 30 | Two designs with costs and tradeoffs, your choice and what it gave up, the diagram, and the decision record | I repeat the validation your decision record names |
+| System on AWS | 30 | Working at your subdomain over HTTPS, the resource inventory, and an index that lets me check the system | I open the live address |
+| Agent | 40 | The job's repeated work, done with a tool, structured output, memory, and guardrails. You can defend the line between fixed steps and agent decisions | I send three of your eval inputs and one out-of-scope request, then compare the answers with your recorded results |
 | Grounding | 25 | Answers drawn from your stored data, reached with least-privilege credentials | I ask a question only your data answers, and I read the access policy |
 | Orchestration | 25 | Two systems connected on a trigger, doing work that matters in the job | You show one trigger run at M4 |
-| Environments and deployment | 35 | Three environments, GitHub Actions deploying, secrets handled, and one change shown moving through | I find one commit in your Actions history that deployed to staging and then to production |
+| Environments and deployment | 25 | Three environments, GitHub Actions deploying, secrets handled, and one change shown moving through | I find one commit in your Actions history that deployed to staging and then to production |
 | Operations | 25 | Access, rate limit, cost controls, analytics, and monitoring | I request the agent without access, and I exceed the rate limit |
 | Evals and trace | 15 | An eval set with recorded results, including failures, and one readable trace | I run the eval set from a clean clone with one command |
 | Blog post and LinkedIn draft | 15 | A general reader can follow what you built, why, and how you know it works | I read both as a general reader |
+| Milestones | 40 | M1 through M4, at 10 points each. You earn 10 for meeting one by its date and 5 for meeting it late | I read your M1 and M2 submissions in Brightspace, and you show M3 and M4 live in class |
 | Total | 300 | | |
 
 A simple design that meets every requirement earns full credit, and adding
