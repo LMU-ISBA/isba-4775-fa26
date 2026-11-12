@@ -15,6 +15,10 @@ Your Claude Pro subscription doesn't cover this. Pro pays for the Claude app
 and Claude Code, and the API is billed separately through prepaid credits:
 https://support.claude.com/en/articles/9876003
 
+If you're on a Max, Ultra, or Team plan, it includes monthly API credits. You
+can claim those in place of the $5:
+https://support.claude.com/en/articles/17154008
+
 ## 1. Create a Console account
 
 Go to https://platform.claude.com and sign up. Using the same email as your
@@ -22,18 +26,27 @@ Claude Pro account is fine, but the Console keeps its own billing.
 
 ## 2. Buy credits and leave auto-reload off
 
-Open Settings, then Billing, and click "Buy credits." Buy $5, or the smallest
-amount the page allows if that's higher. Credits are available right away,
-they expire a year after purchase, and they can't be refunded.
+Open Spending, then Billing & payments, and click "Buy credits." The dialog
+starts on $100, so choose "Other" and enter 5, which is the minimum. Credits
+are available right away, they expire a year after purchase, and they can't
+be refunded.
 
-Leave auto-reload off so an accidental loop cannot trigger another credit
-purchase. Check your remaining balance while you build your agent.
+Auto-reload starts off. Leave it off so an accidental loop cannot trigger
+another credit purchase. Check your remaining balance while you build your
+agent.
 
 ## 3. Create an API key
 
-Open Settings, then API keys, and create a key named `project-02`. Copy it
-right away. The Console shows the full key only once, and if you lose it you
-delete it and make a new one.
+Open Keys & access, then API keys, and click "Create key." When it asks
+where your code runs, choose "Somewhere else." That's the option that gives
+you a key.
+
+Name the key `project-02`. Change "Expires" from 30 days to "Custom," and
+pick a date after December 17. A 30-day key stops working on December 12,
+before your final interview.
+
+Copy the key right away. The Console shows the full key only once, and if
+you lose it you delete it and make a new one.
 
 Treat the key like a password. Anyone who has it can spend your credits.
 
