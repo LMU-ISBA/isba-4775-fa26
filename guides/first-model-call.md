@@ -165,17 +165,15 @@ If your key appears anywhere except `.env` or your password manager, delete
 it in the Console and make a new one. Section 3 of the
 [Claude API setup](claude-api-access.md) shows where.
 
-Now turn a task from your posting into a question:
-
-1. Pick one duty, such as reviewing feedback or analyzing engagement.
-2. Find the fields in your record that could help with that duty.
-3. Ask for a specific result and evidence from those fields.
-
-If your record contains a headline, you could ask:
+Ask your agent to help you choose a useful question for your posting and data:
 
 ```text
-What does this headline promise the reader, and which words create
-that expectation?
+Read my chosen posting and the record we just sent. Ask me two
+multiple-choice questions, one at a time, to help me decide what would
+be useful to learn from this record.
+
+Then suggest one question this record can answer. Let me revise it.
+Don't send a model call yet.
 ```
 
 Choose a question this record can answer on its own. Replace
