@@ -59,7 +59,7 @@ Prepare a local .env file for my Claude API key and keep it out of Git.
 ```
 
 Paste the key into `.env` yourself as `ANTHROPIC_API_KEY`, never into chat.
-Then ask your agent:
+Save the `.env` file. Then ask your agent:
 
 ```text
 Run git check-ignore .env and git ls-files .env without opening .env.
