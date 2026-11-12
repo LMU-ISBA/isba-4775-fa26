@@ -2,7 +2,13 @@
 
 300 points. Due Thursday, December 10, 2026, at 1:45 PM, before class.
 
-This is a first draft and is open to revisions.
+A job posting describes work a company needs done, so you can read it as the
+specification for a system. Building that system shows you can do the job,
+which a resume can only claim.
+
+Your goal is to run that system on AWS by December 10, with an agent you
+built doing the job's repeated work, and to explain every part of it in an
+interview.
 
 ## At a glance
 
