@@ -20,8 +20,8 @@ This is a first draft and is open to revisions.
 Each milestone is graded when it's due. Its points are the areas of the
 project that should be finished by then, and
 [How the 300 points are earned](#how-the-300-points-are-earned) lists them.
-If an area is missing or weak at its milestone, fix it before Project 02 is
-submitted and you earn back half of the points you missed.
+The late policy in the [syllabus](../syllabus.md) applies to each milestone:
+a late one loses 10% per day, down to a floor of 50%.
 
 | Date | Due | Points |
 | --- | --- | --- |
