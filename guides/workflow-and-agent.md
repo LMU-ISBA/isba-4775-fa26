@@ -30,18 +30,21 @@ By the end of this lesson, you should be able to:
 
 ## Workflow or agent
 
-Both use a model. The difference is who decides the next step.
+Both make model calls. The difference is who decides the next step, and
+what each model call is for.
 
 In a workflow, your code decides. The steps run in the same order every
-time, and you wrote them before any data arrived. A model call can be one of
-the steps. This workflow sends an airline's daily on-time report:
+time, and you wrote them before any data arrived. A model call is one of
+those steps. It does the one job your code gave it, and your code moves on.
+The example is an analyst at a health website who studies headline tests.
+This workflow sends the daily report on those tests:
 
 ```mermaid
 flowchart LR
     S["Every morning"]
-    A["1 · Load yesterday's flights (code)"]
-    B["2 · Count late and canceled flights (code)"]
-    C["3 · Flag airports over 10% canceled (code)"]
+    A["1 · Load yesterday's tests (code)"]
+    B["2 · Calculate each headline's click rate (code)"]
+    C["3 · Find the top headline in each test (code)"]
     D["4 · Write the summary (model call)"]:::model
     R["Report"]
 
@@ -50,15 +53,17 @@ flowchart LR
     classDef model stroke:#222,stroke-width:3px,stroke-dasharray:7 4
 ```
 
-In an agent, the model decides. It asks your code to run a tool, reads what
-comes back, and chooses what to do next. Your code keeps it in a loop and
-ends the run at a step limit. This agent looks into one late route:
+In an agent, the model decides. Every pass through the loop is a model call.
+Each time, the model reads everything so far and chooses: ask your code to
+run a tool, or answer. Your code keeps it in the loop and ends the run at a
+step limit. This agent answers a manager's one-off question about the same
+tests:
 
 ```mermaid
 flowchart TD
-    Q["Why does this route keep running late?"]
-    M["Model decides the next step"]:::model
-    T["Tool: search flight records"]
+    Q["Which winner had the higher click rate?"]
+    M["Decide the next step (model call)"]:::model
+    T["Tool: search headline records"]
     A["Answer"]
     S["Stop and say so"]
     X["Refuse"]
@@ -73,13 +78,16 @@ flowchart TD
     classDef model stroke:#222,stroke-width:3px,stroke-dasharray:7 4
 ```
 
-The workflow is a line, and the agent is a loop with three ways out.
+The workflow is a line, and the agent is a loop with three ways out. The
+dashed box in each diagram is a model call. The workflow reaches its model
+call once. The agent comes back to its model call on every pass.
 
 | | Workflow | Agent |
 | --- | --- | --- |
 | Who decides the next step | Your code | The model |
 | The steps | Known before the data arrives | Chosen during the run |
-| Model calls | A fixed number | As many as it takes, up to the limit |
+| What a model call does | One job your code gave it | Chooses the next step, or answers |
+| How many model calls | A fixed number | As many as it takes, up to the limit |
 | Cost | Predictable | Changes from run to run |
 | Use it when | You can list the steps ahead of time | The next step depends on what the last one found |
 
@@ -139,8 +147,8 @@ Then, on paper:
 1. Pick one W duty and write its workflow: when it starts, its numbered
    steps, and what it produces. Label each step as code or a model call.
 2. Pick one A duty and draw its agent: the model, its tools, the answer, the
-   stop, and what it refuses. If you marked no duty A, draw the late-route
-   agent from the board.
+   stop, and what it refuses. If you marked no duty A, draw the agent
+   from the board with a question about your own data.
 3. Trade with a neighbor. Find the three ways the agent's run can end.
 
 Keep the paper. You'll add both to your repository after class.
