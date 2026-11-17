@@ -11,8 +11,7 @@ your code stops it at a limit. Today doesn't use AWS.
 
 By the end of class, you'll have:
 
-- One workflow written as numbered steps and one agent drawn as a loop, both
-  for your posting.
+- One workflow and one agent designed for your posting, saved in your wiki.
 - `workflow.py`, which answers a question with one model call.
 - `agent.py`, which answers the same question with one tool and a step limit.
 - A table comparing the two runs.
@@ -61,7 +60,7 @@ tests:
 
 ```mermaid
 flowchart TD
-    Q["Which winner had the higher click rate?"]
+    Q["Did the editors pick the top headline?"]
     M["Decide the next step (model call)"]:::model
     T["Tool: search headline records"]
     A["Answer"]
@@ -94,7 +93,7 @@ call once. The agent comes back to its model call on every pass.
 Most systems are mostly workflow. The agent goes where the steps can't be
 listed ahead of time.
 
-## 1. Sort the duties, then write it on paper
+## 1. Sort the duties, then design both
 
 In VS Code, open View, then Command Palette. Choose:
 
@@ -115,10 +114,16 @@ Read my chosen posting. List its duties as a numbered list, one line
 each, in the posting's own words. Don't sort or judge them yet.
 ```
 
-Decide W for workflow, A for agent, or N for neither on each duty, and jot
-your marks down. Some duties, such as becoming an expert, aren't tasks a
-system runs. Then have your agent mark them without showing you, so neither
-of you sees the other's answer first:
+Mark each duty W for workflow, A for agent, or N for neither before you go
+on. Ask two questions about each one:
+
+1. Is it a task a system can run, or is it a person's job, such as learning a
+   field or owning a decision? If it's a person's job, mark N.
+2. Can you list the steps before you see the data? If you can, mark W. If the
+   next step depends on what the last one found, mark A.
+
+Then have your agent mark them without showing you, so neither of you sees
+the other's answer first:
 
 ```text
 I'm deciding which duties my system handles with fixed steps and which
@@ -138,20 +143,32 @@ For each duty in the list above, choose one:
    I'll decide.
 ```
 
-Answer with the marks you wrote down, such as `1 W, 2 A, 3 N`. Don't change
+Answer in the chat with your marks, such as `1 W, 2 A, 3 N`. Don't change
 them if you see your agent's first. Where the two of you differ, read both
-cases. You decide each one, and you write one line on why.
+cases. You decide each one. Tell your agent your decision and why in one
+line, so it's saved with the marks.
 
-Then, on paper:
+Then design one workflow and one agent for your posting. You do the
+thinking, and your agent writes it down:
 
-1. Pick one W duty and write its workflow: when it starts, its numbered
-   steps, and what it produces. Label each step as code or a model call.
-2. Pick one A duty and draw its agent: the model, its tools, the answer, the
-   stop, and what it refuses. If you marked no duty A, draw the agent
-   from the board with a question about your own data.
-3. Trade with a neighbor. Find the three ways the agent's run can end.
+```text
+I'll design one workflow and one agent for my posting. I do the
+thinking. Don't write either one for me.
 
-Keep the paper. You'll add both to your repository after class.
+1. In one message, ask me for the W duty I picked and its workflow:
+   when it starts, its numbered steps with each one labeled code or
+   model call, and what it produces.
+2. In one message, ask me for the A duty I picked and its agent: the
+   question it gets, its tools, when it stops, and what it refuses.
+3. Save both in my words as a new wiki page named
+   my-workflow-and-agent, with a Mermaid diagram of each.
+4. Tell me the three most important things that are missing or
+   unclear. Don't fix them. I'll decide.
+```
+
+If you marked no duty A, use the agent from the board with a question about
+your own data. Then check your agent's diagram for three ways out: an answer,
+a stop at the step limit, and a refusal.
 
 ## 2. Set up Python
 
@@ -214,6 +231,16 @@ prices. Then open `workflow.py` and find:
 - The line that decides what the model sees. Your code wrote it, and the
   model had no say.
 
+Tell your agent what you found, so it can check you:
+
+```text
+In workflow.py, I think the records load on line __, the model call is
+on line __, and line __ decides what the model sees. Check me. Don't
+change the file.
+```
+
+This is the smallest workflow: one step, and that step is a model call.
+
 ## 4. Add one tool and the loop
 
 A [tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)
@@ -222,14 +249,22 @@ can't run it. It replies with the tool's name and inputs. Your code runs the
 function and sends back the result. The loop repeats that exchange until the
 model answers or your step limit ends the run.
 
-Ask your agent:
+Open this page and read its first section, "The tool-use contract." Stop at
+"Where tools run."
+
+https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works
+
+Then ask your agent:
 
 ```text
 Read the tool use docs first:
 https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works
 https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent
 
-Write agent.py for the same question, with the same JSON answer.
+Write agent.py for the same question, with the same JSON answer. Keep
+agent.py complete in one file, with its own copy of the question.
+Don't import from workflow.py.
+
 Leave the records out of the request. Give the model one tool that
 searches my saved data. The tool needs a search term and returns only
 the matching records, never the whole file. Write the loop by hand,
@@ -254,6 +289,14 @@ In `agent.py`, find:
 - The tool's description. It's all the model knows about your tool.
 - The loop.
 - The step limit.
+
+Tell your agent what you found:
+
+```text
+In agent.py, I think the tool's description starts on line __, the loop
+starts on line __, and the step limit is on line __. Check me. Don't
+change the file.
+```
 
 Check that the stop works. Ask:
 
@@ -282,7 +325,7 @@ Then answer these yourself:
 - Which run cost more, and why?
 - Which one would you use for this question?
 - Which duty in your posting fits the other one better?
-- The agent you drew had three ways out. Which one is missing from
+- The agent you designed had three ways out. Which one is missing from
   `agent.py`?
 
 On Thursday the guide asked whether one call was an agent. Answer it again
@@ -302,8 +345,6 @@ Commit and push.
 - By Tuesday, November 24, M2 is due: your app is live at a subdomain of
   your domain over HTTPS. The
   [Project 02 requirements](../projects/project-02.md#dates) list it.
-- Add your written workflow and your agent diagram to your repository,
-  beside your M1 diagram.
 
 Two optional pieces explain today's idea in a few minutes each:
 
