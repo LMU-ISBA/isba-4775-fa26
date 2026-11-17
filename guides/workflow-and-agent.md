@@ -14,7 +14,7 @@ By the end of class, you'll have:
 - One workflow and one agent designed for your posting, saved in your wiki.
 - `workflow.py`, which answers a question with one model call.
 - `agent.py`, which answers the same question with one tool and a step limit.
-- A table comparing the two runs.
+- A table comparing four runs: both scripts on two models.
 
 ## Learning objectives
 
@@ -25,7 +25,8 @@ By the end of this lesson, you should be able to:
 - Explain what a tool is and who runs it.
 - Follow one agent run step by step.
 - Say why an agent needs a step limit.
-- Compare a workflow and an agent on calls, tokens, and cost.
+- Compare a workflow and an agent, and two models, on calls, tokens, and
+  cost.
 
 ## Workflow or agent
 
@@ -216,7 +217,7 @@ by hand in two minutes. Give the reason someone in this job would ask
 it. Let me revise it. Don't write code or send a model call yet.
 ```
 
-Work out the answer by hand first, so you can check both runs against it.
+Work out the answer by hand first, so you can check every run against it.
 
 Replace `[your question]` below with yours, then ask:
 
@@ -238,9 +239,11 @@ to me. Then stop.
 [your question]
 ```
 
-Check the answer against the one you worked out. Check that the price row
-matches your model's exact name, because similar names have different
-prices. Then open `workflow.py` and find:
+Check the answer against the one you worked out. If it's wrong, don't fix
+it. Keep the run and note what went wrong. You'll use it in section 5.
+
+Check that the price row matches your model's exact name, because similar
+names have different prices. Then open `workflow.py` and find:
 
 - Where it loads your records.
 - The one model call.
@@ -333,22 +336,39 @@ Run agent.py with this question and show me the steps:
 [another question]
 ```
 
-## 5. Compare the two runs
+## 5. Try a second model, then compare
 
-Ask your agent:
+A smaller model costs less. A larger one costs more and often gets more
+right. Run both scripts again on a second model to see what changes. If you
+used Claude Haiku 4.5 on Thursday, use Claude Opus 5. If you used a larger
+model, use Claude Haiku 4.5.
+
+Replace `[second model]` below, then ask:
 
 ```text
-Compare the workflow.py run with the agent.py run at 5 steps, using
-the saved outputs: model calls, input tokens, output tokens, cost, and
-the answer. Save the table as a new wiki page named workflow-vs-agent.
-Don't overwrite an existing page.
+Add a --model option to workflow.py and agent.py. Keep my current
+model as the default, and use each model's own row on the pricing
+page. Then run both scripts with the same question on
+[second model]. Save the outputs in runs/. Then stop.
+```
+
+Check both new answers against the one you worked out. Then ask:
+
+```text
+Compare my four runs, using the saved outputs: workflow.py and
+agent.py at 5 steps, on each model. Show the model, model calls,
+input tokens, output tokens, cost, and the answer. Save the table as
+a new wiki page named workflow-vs-agent. Don't overwrite an existing
+page.
 ```
 
 Then answer these yourself:
 
-- Did both runs match the answer you worked out by hand?
-- Which run cost more, and why?
-- Which one would you use for this question?
+- Did all four runs match the answer you worked out by hand? If one didn't,
+  what went wrong?
+- Which run cost the most, and why?
+- What did the larger model buy you, and was it worth the cost?
+- Which script and model would you use for this question?
 - Which duty in your posting fits the other one better?
 - The agent you designed had three ways out. Which one is missing from
   `agent.py`?
