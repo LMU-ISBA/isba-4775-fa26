@@ -21,7 +21,8 @@ By the end of class, you'll have:
 
 By the end of this lesson, you should be able to:
 
-- Sort a posting's duties into fixed steps and agent decisions.
+- Sort a posting's duties into fixed steps, agent decisions, and work for a
+  person.
 - Explain what a tool is and who runs it.
 - Follow one agent run step by step.
 - Say why an agent needs a step limit.
@@ -66,7 +67,7 @@ flowchart TD
     M -->|"asks for data"| T
     T -->|"returns records"| M
     M -->|"has enough"| A
-    M -->|"step limit reached"| S
+    M -->|"your code's step limit"| S
     M -->|"outside its job"| X
 
     classDef model stroke:#222,stroke-width:3px,stroke-dasharray:7 4
@@ -138,7 +139,8 @@ Then, on paper:
 1. Pick one W duty and write its workflow: when it starts, its numbered
    steps, and what it produces. Label each step as code or a model call.
 2. Pick one A duty and draw its agent: the model, its tools, the answer, the
-   stop, and what it refuses.
+   stop, and what it refuses. If you marked no duty A, draw the late-route
+   agent from the board.
 3. Trade with a neighbor. Find the three ways the agent's run can end.
 
 Keep the paper. You'll add both to your repository after class.
@@ -165,6 +167,9 @@ Today's model calls run from Python scripts. Each script loads my key
 from .env when it runs. Never open .env, print the key, or write the
 key into a script. Use the model from my saved requests.
 ```
+
+If you missed Thursday, you don't have a key or saved requests yet. Work
+through [Your first model call](first-model-call.md) first.
 
 If you chose another provider, install its SDK and give your agent its tool
 docs in section 4.
@@ -269,6 +274,8 @@ Then answer these yourself:
 - Which run cost more, and why?
 - Which one would you use for this question?
 - Which duty in your posting fits the other one better?
+- The agent you drew had three ways out. Which one is missing from
+  `agent.py`?
 
 On Thursday the guide asked whether one call was an agent. Answer it again
 for `agent.py`, in your own words.
