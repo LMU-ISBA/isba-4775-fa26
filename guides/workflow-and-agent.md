@@ -224,15 +224,18 @@ Replace `[your question]` below with yours, then ask:
 Read the API docs first:
 https://platform.claude.com/docs/en/api/messages/create
 
-Write workflow.py. It loads all my saved records, sends them with this
-question in one model call, and prints the answer as JSON:
-[your question]
+Write workflow.py. It takes a question as a command-line argument,
+loads all my saved records, sends them with the question in one model
+call, and prints the answer as JSON.
 
 Print the number of model calls, the input and output tokens, and the
 cost. Use my model's row on this page:
 https://platform.claude.com/docs/en/about-claude/pricing
 
-Run it, save the output in runs/, and show it to me. Then stop.
+Run it with the question below. Save the output in runs/ and show it
+to me. Then stop.
+
+[your question]
 ```
 
 Check the answer against the one you worked out. Check that the price row
@@ -274,9 +277,9 @@ Read the tool use docs first:
 https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works
 https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent
 
-Write agent.py for the same question, with the same JSON answer. Keep
-agent.py complete in one file, with its own copy of the question.
-Don't import from workflow.py.
+Write agent.py. Like workflow.py, it takes a question as a
+command-line argument and prints the same JSON answer. Keep agent.py
+complete in one file. Don't import from workflow.py.
 
 Leave the records out of the request. Give the model one tool that
 searches my saved data. The tool needs a search term and returns only
@@ -288,7 +291,8 @@ A step is one model call. Allow one tool call per step and stop after
 say so. Print each step: its number, the tool, the inputs, and how
 many records came back. Then print the same totals as workflow.py.
 
-Run it, save the output in runs/, and show it to me. Then stop.
+Run it with the same question. Save the output in runs/ and show it
+to me. Then stop.
 ```
 
 In the output, find:
@@ -314,12 +318,20 @@ change the file.
 Check that the stop works. Ask:
 
 ```text
-Set the step limit to 1 and run agent.py again. Save that output too.
-Then set the limit back to 5.
+Set the step limit to 1 and run agent.py again with the same
+question. Save that output too. Then set the limit back to 5.
 ```
 
 The run should end at the limit without an answer, and say so. An agent with
 no limit keeps asking, and each request spends your credits.
+
+The question is an argument, so you can ask another one without changing the
+code. If you have time, try one and see which words the model searches for:
+
+```text
+Run agent.py with this question and show me the steps:
+[another question]
+```
 
 ## 5. Compare the two runs
 
