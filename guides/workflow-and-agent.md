@@ -201,9 +201,22 @@ docs in section 4.
 
 ## 3. Build the workflow
 
-Write one question that compares two things in your data, so it takes a few
-of your records to answer. Work out the answer by hand first, so you can
-check both runs against it.
+Your question needs a reason: someone in your posting's job would want the
+answer. It also has to compare two things, so it takes a few of your records
+to answer. Thursday's short interview helps you find one:
+
+```text
+Read my chosen posting and my saved records. Ask me two
+multiple-choice questions, one at a time, to help me decide what
+someone in this job would want to check in this data.
+
+Then suggest one question that compares two things and takes a few
+records to answer. Keep it simple enough that I can check the answer
+by hand in two minutes. Give the reason someone in this job would ask
+it. Let me revise it. Don't write code or send a model call yet.
+```
+
+Work out the answer by hand first, so you can check both runs against it.
 
 Replace `[your question]` below with yours, then ask:
 
