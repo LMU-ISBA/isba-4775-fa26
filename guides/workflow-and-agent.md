@@ -223,7 +223,20 @@ https://www.oneusefulthing.org/p/against-brain-damage
 This section follows that order. You write the steps, your agent builds
 exactly those steps, and you check the result.
 
-### Write steps.md yourself
+### Write steps.md in your own words
+
+Start a new session, so Tuesday's one-call build doesn't steer your agent.
+In VS Code, open View, then Command Palette. Choose:
+
+```text
+Claude Code: Open in New Tab
+```
+
+In the new tab's prompt box, enter:
+
+```text
+/rename workflow-steps
+```
 
 Keep Tuesday's question if it still has a reason someone in your posting's
 job would ask it. If you need a new one, Tuesday's short interview still
@@ -240,22 +253,35 @@ by hand in two minutes. Give the reason someone in this job would ask
 it. Let me revise it. Don't write code or send a model call yet.
 ```
 
-Then close the chat and write `steps.md` in your repository's top folder
-without your agent. Start from your design on the `my-workflow-and-agent`
-wiki page. Include:
-
-- The question, and why someone in this job asks it.
-- When the workflow starts.
-- Numbered steps. Mark each one code or model call, and give its input and
-  output.
-- Your answer, worked out by hand.
-- What you'll check after the run.
-
+Before you answer the next interview, know the rule for each step.
 Anything that has to be exact goes in code: loading, filtering, counting,
 adding, and comparing. A model call writes words from numbers your code
 already computed. Most workflows need one model call at the end, and some
 need none. My `steps.md` has four code steps, then one model call that
 writes two sentences for the editors.
+
+Open your design on the `my-workflow-and-agent` wiki page. Then ask your
+agent:
+
+```text
+Help me write steps.md for my workflow. I do the thinking. Don't
+suggest steps, give examples, or calculate anything.
+
+Ask me one question at a time, and wait for my answer:
+1. What's the question, and why would someone in this job ask it?
+2. When does the workflow start?
+3. What's the first step? Is it code or a model call? What goes in
+   and what comes out? Keep asking for the next step until I say done.
+4. What's my answer, worked out by hand?
+5. What will I check after the run?
+
+Save my answers in my words as steps.md in the top folder. Then tell
+me the three most important gaps, such as a step with no input or math
+marked as a model call. Don't fix them. I'll decide.
+```
+
+Work out the answer for question 4 from your saved records yourself. If
+your agent offers a step or a number, say no and give your own.
 
 A workflow answers a question you knew ahead of time, so your question now
 lives in `steps.md` and not on the command line.
