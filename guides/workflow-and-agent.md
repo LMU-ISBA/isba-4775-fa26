@@ -1,20 +1,27 @@
 # A workflow and an agent
 
-Session 22 · Tuesday, November 17, 2026
+Sessions 22 and 23 · Tuesday, November 17, and Thursday, November 19, 2026
 
-On Thursday you sent one record to a model, and your code decided what the
-model saw. Today you'll answer one question two ways. In a workflow, your
-code decides every step. In an agent, the model decides the next step, and
-your code stops it at a limit. Today doesn't use AWS.
+On November 12 you sent one record to a model, and your code decided what
+the model saw. This lesson answers one question two ways. In a workflow,
+your code decides every step. In an agent, the model decides the next step,
+and your code stops it at a limit. Neither class uses AWS.
 
-## Today's objectives
+Tuesday covered sections 1 and 2 and a first `workflow.py`. Thursday starts
+at section 3. Its prompt was wrong on Tuesday: it asked for one model call,
+so the script skipped the steps you designed. Section 3 now has you write
+the steps first, and your agent builds only what you wrote.
 
-By the end of class, you'll have:
+## Objectives
+
+By the end of Thursday's class, you'll have:
 
 - One workflow and one agent designed for your posting, saved in your wiki.
-- `workflow.py`, which answers a question with one model call.
+- `steps.md`, your workflow's steps, written by you before any code.
+- `workflow.py`, which runs those steps, with code for the exact work and at
+  most one model call.
 - `agent.py`, which answers the same question with one tool and a step limit.
-- A table comparing four runs: both scripts on two models.
+- A table comparing your runs, including Tuesday's one-call run.
 
 ## Learning objectives
 
@@ -22,6 +29,8 @@ By the end of this lesson, you should be able to:
 
 - Sort a posting's duties into fixed steps, agent decisions, and work for a
   person.
+- Write a workflow's steps before an agent writes the code, and check the
+  code against them.
 - Explain what a tool is and who runs it.
 - Follow one agent run step by step.
 - Say why an agent needs a step limit.
@@ -173,7 +182,7 @@ a stop at the step limit, and a refusal.
 
 ## 2. Set up Python
 
-Today's calls run from [Python](https://www.python.org/downloads/) scripts.
+This lesson's calls run from [Python](https://www.python.org/downloads/) scripts.
 A [virtual environment](https://docs.python.org/3/library/venv.html) keeps
 this project's packages separate from the rest of your laptop. An SDK is a
 package that builds and sends API requests for your code.
@@ -186,7 +195,7 @@ Create a virtual environment in .venv and keep it out of Git. Install
 the Anthropic Python SDK and record it in requirements.txt. Then stop.
 ```
 
-Thursday's rules for your key still hold. This prompt sets them for today:
+The November 12 rules for your key still hold. This prompt sets them again:
 
 ```text
 Today's model calls run from Python scripts. Each script loads my key
@@ -194,17 +203,31 @@ from .env when it runs. Never open .env, print the key, or write the
 key into a script. Use the model from my saved requests.
 ```
 
-If you missed Thursday, you don't have a key or saved requests yet. Work
+If you missed November 12, you don't have a key or saved requests yet. Work
 through [Your first model call](first-model-call.md) first.
 
 If you chose another provider, install its SDK and give your agent its tool
 docs in section 4.
 
-## 3. Build the workflow
+## 3. Write the steps, then build the workflow
 
-Your question needs a reason: someone in your posting's job would want the
-answer. It also has to compare two things, so it takes a few of your records
-to answer. Thursday's short interview helps you find one:
+Thursday starts here. On Tuesday most `workflow.py` scripts sent every
+record to the model and let it do the math. In my run, the model added up
+both weeks correctly and still said views went down. My design had five code
+steps, and the script skipped all of them.
+
+Ethan Mollick's advice for using AI without handing it your thinking is to
+think first and write first, then let the AI push your work further:
+https://www.oneusefulthing.org/p/against-brain-damage
+
+This section follows that order. You write the steps, your agent builds
+exactly those steps, and you check the result.
+
+### Write steps.md yourself
+
+Keep Tuesday's question if it still has a reason someone in your posting's
+job would ask it. If you need a new one, Tuesday's short interview still
+works:
 
 ```text
 Read my chosen posting and my saved records. Ask me two
@@ -217,40 +240,65 @@ by hand in two minutes. Give the reason someone in this job would ask
 it. Let me revise it. Don't write code or send a model call yet.
 ```
 
-Work out the answer by hand first, so you can check every run against it.
+Then close the chat and write `steps.md` in your repository's top folder
+without your agent. Start from your design on the `my-workflow-and-agent`
+wiki page. Include:
 
-Replace `[your question]` below with yours, then ask:
+- The question, and why someone in this job asks it.
+- When the workflow starts.
+- Numbered steps. Mark each one code or model call, and give its input and
+  output.
+- Your answer, worked out by hand.
+- What you'll check after the run.
+
+Anything that has to be exact goes in code: loading, filtering, counting,
+adding, and comparing. A model call writes words from numbers your code
+already computed. Most workflows need one model call at the end, and some
+need none. My `steps.md` has four code steps, then one model call that
+writes two sentences for the editors.
+
+A workflow answers a question you knew ahead of time, so your question now
+lives in `steps.md` and not on the command line.
+
+### Build it from your steps
+
+Ask your agent:
 
 ```text
-Read the API docs first:
-https://platform.claude.com/docs/en/api/messages/create
+Read steps.md. Rewrite workflow.py to follow it exactly, one
+function per step, in the same order. Rename the old script to
+workflow-one-call.py.
 
-Write workflow.py. It takes a question as a command-line argument,
-loads all my saved records, sends them with the question in one model
-call, and prints the answer as JSON.
+Only the step I marked model call calls the model, and it gets the
+numbers my code computed, never the records. Don't add, merge, or
+skip steps. If a step is unclear, ask me before you write code.
 
-Print the number of model calls, the input and output tokens, and the
-cost. Use my model's row on this page:
-https://platform.claude.com/docs/en/about-claude/pricing
-
-Run it with the question below. Save the output in runs/ and show it
-to me. Then stop.
-
-[your question]
+Print the same totals as before: model calls, input and output
+tokens, and cost. Before you run it, ask me what I expect it to
+print. Then run it, save the output in runs/, and show me.
 ```
 
-Check the answer against the one you worked out. If it's wrong, don't fix
-it. Keep the run and note what went wrong. You'll use it in section 5.
+Answer its question with your hand-worked numbers. Then check the output
+against them. If a number is wrong, the bug is in code you can read, so find
+the step that made it.
 
-Check that the price row matches your model's exact name, because similar
-names have different prices. Then open `workflow.py` and find:
+Open `workflow.py` and find:
 
-- Where it loads your records.
-- The one model call.
-- The line that decides what the model sees. Your code wrote it, and the
-  model had no say.
+- One function for each of your steps.
+- The one model call, and what it's given.
+- The line you'd change if your threshold or date range changed.
 
-This is the smallest workflow: one step, and that step is a model call.
+Then explain the file back to your agent, in your own words:
+
+```text
+I'll explain what each function in workflow.py does, one line each.
+Tell me only where I'm wrong. Don't rewrite the code.
+```
+
+Compare this run with Tuesday's in `runs/`: the input tokens, the cost, and
+whether each answer was right. My run went from 1,379 input tokens and a
+wrong answer to 312 input tokens and a right one, at about a fifth of the
+cost.
 
 ## 4. Add one tool and the loop
 
@@ -265,40 +313,54 @@ Open this page and read its first section, "The tool-use contract." Stop at
 
 https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works
 
-Then ask your agent:
+### Write agent.md yourself
+
+Before you prompt, write `agent.md` in your repository's top folder. Start
+from the agent on your `my-workflow-and-agent` wiki page. Include:
+
+- The question it gets. Use the same question as `steps.md`.
+- The tool's description, in your words: what it searches and what it
+  returns. The model knows only what this description says.
+- The step limit. A step is one model call.
+- What it refuses.
+- The search words you expect the model to use.
+
+If you built `agent.py` on Tuesday night, write `agent.md` anyway. Then
+compare it with what your agent built, and keep the script.
+
+### Build it from agent.md
+
+Ask your agent:
 
 ```text
 Read the tool use docs first:
 https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works
 https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent
 
-Write agent.py. Like workflow.py, it takes a question as a
-command-line argument and prints the same JSON answer. Keep agent.py
-complete in one file. Don't import from workflow.py.
+Read agent.md. Write agent.py from it, complete in one file. Use my
+tool description word for word, and put my refusal rule in the
+system prompt. Leave the records out of the request, so the tool is
+the only way to the data. The tool returns only matching records.
 
-Leave the records out of the request. Give the model one tool that
-searches my saved data. The tool needs a search term and returns only
-the matching records, never the whole file. Write the loop by hand,
-without the tool runner.
+Write the loop by hand, without the tool runner. Allow one tool call
+per step, and end the run at my step limit. Print each step: its
+number, the tool, the inputs, and how many records came back. Print
+the same totals as workflow.py.
 
-A step is one model call. Allow one tool call per step and stop after
-5 steps. If it reaches the limit without an answer, end the run and
-say so. Print each step: its number, the tool, the inputs, and how
-many records came back. Then print the same totals as workflow.py.
-
-Run it with the same question. Save the output in runs/ and show it
-to me. Then stop.
+Run it with the question in agent.md. Save the output in runs/ and
+show me. Then stop.
 ```
 
 In the output, find:
 
-- What the model searched for at each step. The model chose those words.
+- What the model searched for at each step. Compare those words with your
+  guesses in `agent.md`.
 - The step where it stopped asking and answered.
 - The number of model calls. Each step is one request to the API.
 
 In `agent.py`, find:
 
-- The tool's description. It's all the model knows about your tool.
+- Your tool description.
 - The loop.
 - The step limit.
 
@@ -306,59 +368,50 @@ Check that the stop works. Ask:
 
 ```text
 Set the step limit to 1 and run agent.py again with the same
-question. Save that output too. Then set the limit back to 5.
+question. Save that output too. Then set the limit back.
 ```
 
 The run should end at the limit without an answer, and say so. An agent with
 no limit keeps asking, and each request spends your credits.
 
-The question is an argument, so you can ask another one without changing the
-code. If you have time, try one and see which words the model searches for:
-
-```text
-Run agent.py with this question and show me the steps:
-[another question]
-```
-
 ## 5. Try a second model, then compare
 
 A smaller model costs less. A larger one costs more and often gets more
-right. Run both scripts again on a second model to see what changes. If you
-used Claude Haiku 4.5 on Thursday, use Claude Opus 5. If you used a larger
-model, use Claude Haiku 4.5.
+right. If you used Claude Haiku 4.5 on November 12, use Claude Opus 5.
+If you used a larger model, use Claude Haiku 4.5.
 
 Replace `[second model]` below, then ask:
 
 ```text
 Add a --model option to workflow.py and agent.py. Keep my current
 model as the default, and use each model's own row on the pricing
-page. Then run both scripts with the same question on
-[second model]. Save the outputs in runs/. Then stop.
+page. Then run both scripts on [second model]. Save the outputs in
+runs/. Then stop.
 ```
 
-Check both new answers against the one you worked out. Then ask:
+Check both new answers against your hand-worked answer. Then ask:
 
 ```text
-Compare my four runs, using the saved outputs: workflow.py and
-agent.py at 5 steps, on each model. Show the model, model calls,
-input tokens, output tokens, cost, and the answer. Save the table as
-a new wiki page named workflow-vs-agent. Don't overwrite an existing
-page.
+Compare my runs, using the saved outputs: Tuesday's one-call run,
+and workflow.py and agent.py on each model. Show the model, model
+calls, input tokens, output tokens, cost, and the answer. Save the
+table as a new wiki page named workflow-vs-agent. Don't overwrite an
+existing page.
 ```
 
 Then answer these yourself:
 
-- Did all four runs match the answer you worked out by hand? If one didn't,
-  what went wrong?
+- Which runs matched your hand-worked answer? If one didn't, what went
+  wrong?
+- Where did a model do work that your code could have done exactly?
 - Which run cost the most, and why?
 - What did the larger model buy you, and was it worth the cost?
 - Which script and model would you use for this question?
-- Which duty in your posting fits the other one better?
 - The agent you designed had three ways out. Which one is missing from
   `agent.py`?
 
-On Thursday the guide asked whether one call was an agent. Answer it again
-for `agent.py`, in your own words.
+On November 12 the guide asked whether one call was an agent. Answer it
+again for `agent.py`, in your own words.
 
 Check that no project file except `.env` holds your key. Then ask:
 
@@ -368,14 +421,17 @@ Commit and push.
 
 ## 6. What's next
 
-- By Thursday, November 19, your AWS site is working. Thursday's lesson
-  deploys to it. If it isn't, finish the [AWS migration](aws-migration.md)
-  or come to office hours.
+- By Tuesday, November 24, at 1:45 PM, Exercise 09 is due: `steps.md`,
+  `workflow.py`, `agent.md`, `agent.py`, your saved runs, and the
+  `workflow-vs-agent` page, committed and pushed.
+- By Tuesday, November 24, your AWS site is working. That class, on Zoom,
+  deploys to it with GitHub Actions. If it isn't working, finish the
+  [AWS migration](aws-migration.md) or come to office hours.
 - By Tuesday, November 24, M2 is due: your app is live at a subdomain of
   your domain over HTTPS. The
   [Project 02 requirements](../projects/project-02.md#dates) list it.
 
-Two optional pieces explain today's idea in a few minutes each:
+Two optional pieces explain this lesson's idea in a few minutes each:
 
 - Simon Willison on what "agent" means:
   https://simonwillison.net/2025/Sep/18/agents/
