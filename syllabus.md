@@ -90,7 +90,7 @@ By the end of this course you can:
 | Exercises (10 × 15) | 150 |
 | Project 1, Own Your Corner of the Internet | 125 |
 | Midterm whiteboard interview | 125 |
-| Project 2, the job-description-driven build | 300 |
+| Project 02, the job-description-driven build | 300 |
 | Final whiteboard interview | 300 |
 | **Total** | **1000** |
 
@@ -110,9 +110,10 @@ explain what you built about as heavily as the artifact itself.
 ## Exercises, 150 points
 
 There are ten exercises, worth 15 points each. Exercise 01 and Exercise 02
-are submitted as files through Brightspace. From Exercise 03 on, exercises go
-in your public `career-platform` repository, as specified in their requirements. Each one defines its
-required evidence and grading. Exercises are credit/no credit: credit earns
+are submitted as files through Brightspace. Exercises 03 through 07 go in
+your public `career-platform` repository. From Exercise 08 on, the work is in
+your private Project 02 repository. Each one defines its required evidence
+and grading. Exercises are credit/no credit: credit earns
 15 points and no credit earns 0. Meaningful attempts and honest investigation
 can earn credit even when a result needs correction.
 
@@ -134,8 +135,8 @@ Codespace shutdown guide feedback within the credit/no-credit assessment.
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Tue 10/13 |
 | 06 | Domain email and GA4: mail delivery, a page view, and an outbound click | Config | Tue 10/20 |
 | 07 | Migrate your site from Railway to AWS: EC2, RDS, verified cutover, and a diagram | Build | Tue 11/10, 1:45 PM |
-| 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Tue 11/17, 1:45 PM |
-| 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/19, 1:45 PM |
+| 08 | Real data and your first model calls: about 20 records for your posting, then one record sent to a model three ways | Build | Tue 11/17, 1:45 PM |
+| 09 | A workflow and an agent: one question answered two ways in Python, with one tool, a step limit, and a comparison of the runs | Build | Thu 11/19, 1:45 PM |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 12/3, 1:45 PM |
 
 Ex01 and Ex02 were due at 1:45 PM, before class, and Ex03 is due at the same
@@ -144,7 +145,11 @@ Thu 10/8. Exercise 05 is due Tue 10/13, after the DNS/TLS lesson. Exercise 06
 is due Tue 10/20, covering the Zoho and GA4 lessons. Both are due at 1:45 PM.
 Basic GA4 is required for Project 1 and taught on Thu 10/15. Exercise 07 is
 the AWS migration, taught Thu 10/29 and Tue 11/3 and due Tue 11/10. Exercises
-08 through 10 follow the Job Scout lessons, which start Tue 11/10.
+08 through 10 follow the Project 02 lessons, which started Tue 11/10.
+Exercise 08 is sections 2 through 6 of
+[Your first model call](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/first-model-call.md).
+Exercise 09 is sections 2 through 5 of
+[A workflow and an agent](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/workflow-and-agent.md).
 
 ## Project 1: Own Your Corner of the Internet, 125 points
 
@@ -172,12 +177,9 @@ and Git history. Verify its account and link the supporting evidence. Rerun
 missing checks or mark them unverified, and identify accounts written afterward.
 The engineering record does not require a separate report.
 
-Job Scout, Resend, and GitHub Actions move after the midterm. Exercise 07 is
-the AWS migration, taught October 29 and November 3 and due November 10.
-Job Scout starts November 10 and will help you find the posting for Project
-2, with a vetted feed available if needed. Choose your Project 2 posting
-using the vetted feed if needed, so the agent doesn't block your first
-project milestone.
+GitHub Actions moves after the midterm. Exercise 07 is the AWS migration,
+taught October 29 and November 3 and due November 10. Project 02 starts
+November 10, when you find your own postings and choose one.
 
 ## Midterm whiteboard interview, 125 points
 
@@ -209,29 +211,35 @@ Most students have never done a whiteboard interview. The October one is where
 you find out what that is like while it still costs 125 points instead of 300,
 and that is why it sits before the November 13 withdrawal deadline.
 
-## Project 2: the job-description-driven build, 300 points
+## Project 02: the job-description-driven build, 300 points
 
-Project 2 runs from week 10 through week 15. You pick one posting your Job Scout
-surfaced, or use the vetted feed if needed, read the system that job implies,
-and build it. The architecture is
-fixed, and the job description chooses the problem domain.
+Project 02 runs from week 11 through week 15, and it is **due Thu 12/10 at
+1:45 PM, before class.** You choose one real job posting, read the system
+that job implies, and build it on AWS, with an agent you built doing the
+job's repeated work.
+
+The [Project 02 requirements](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/projects/project-02.md)
+are the full statement. Where this summary and the requirements differ, the
+requirements govern.
 
 | Deliverable | Requirement |
 |---|---|
-| Web app | On a subdomain of the domain you already own |
-| Agent | Custom-built: tools, memory, structured outputs, guardrails, embedded as an endpoint |
-| Grounding | Domain data in S3, reached with least-privilege IAM credentials |
-| Orchestration | A layer connecting two systems on a trigger, doing real work in the job's domain |
-| Environments | Local, staging, production, with promotion through CI/CD |
-| CI/CD | GitHub Actions, secrets managed properly, deploy on merge |
-| Operations | Auth, rate limiting, analytics, cost controls, a monitoring story |
-| Evidence | An eval set for the agent and an inspectable trace |
-| Decision record | Your most important decision, the evidence, how AI contributed, what you accepted or rejected or changed, how you validated it, your biggest remaining uncertainty, and what is next |
-| Blog post | The writeup |
+| Posting and PRD | One posting that passes the four tests, one next-step posting, and a PRD |
+| System on AWS | Your app, agent, and data in your AWS account, live over HTTPS at a subdomain of the domain you already own |
+| Agent | Built or extended by you: at least one tool, structured output, memory, a step limit, and refusals outside its job |
+| Data | Real data first, stored on AWS, reached with least-privilege credentials |
+| Trigger | One event in a first system starts work in a second, doing real work in the job's domain |
+| Environments | Local, staging, and production, with GitHub Actions deploying and secrets kept out of the repository |
+| Operations | An access gate, a rate limit, cost controls, one analytics event, and a way to know the system is down |
+| Evals | At least 10 cases with expected answers, and one readable trace |
+| Architecture decision | Two designs compared, one chosen, and a decision record |
+| Blog post and LinkedIn draft | Both written for a reader who isn't technical |
+| Engineering record | A README and `docs/project-02-submission.md` |
 
-Everyone builds the same skeleton onto a different problem. A logistics posting
-might yield a shipment-status copilot, a marketing posting a campaign analyzer,
-and a healthcare-operations posting an intake triage assistant.
+You design the architecture. Class lessons build one design on AWS, and you
+can follow it, change it, or design your own. A logistics posting might yield
+a shipment-status copilot, a marketing posting a campaign analyzer, and a
+healthcare-operations posting an intake triage assistant.
 
 The orchestration requirement is a capability, not a tool. n8n, Make, Zapier,
 Power Automate, and code all count.
@@ -243,17 +251,19 @@ curveball: your API costs tripled, so what moves out of the agent?
 
 ### Milestones
 
-These are gates inside the Project 2 grade rather than separate line items.
+Each milestone is graded when it's due, and its points are part of the 300.
+The late policy for projects applies to each one.
 
-| Milestone | Bar | Due |
-|---|---|---|
-| M1 | Posting selected from your Job Scout run or the vetted feed, PRD written, architecture diagram approved | Tue 11/17 |
-| M2 | App scaffolded and deployed to production on your subdomain | Tue 11/24 |
-| M3 | Agent responding with tools, grounded in domain data via S3 and IAM | Thu 12/3 |
-| M4 | Orchestration integrated, staging environment live and promoting to production | Tue 12/8 |
-| Final | Full system, operations hardened, evals, decision record, blog post | Thu 12/10 |
+| Milestone | Bar | Due | Points |
+|---|---|---|---:|
+| M1 | PRD, data source, two architectures with cost estimates, your choice and reason, and a diagram | Tue 11/17 | 60 |
+| | Your AWS site is working, for the GitHub Actions lesson | Thu 11/19 | |
+| M2 | App deployed to production on your subdomain | Tue 11/24 | 40 |
+| M3 | Agent answering a grounded question with tools, shown live in class | Thu 12/3 | 75 |
+| M4 | Two systems connected on a trigger, and one change moved from staging to production, shown live in class | Tue 12/8 | 60 |
+| Final | The submitted project, with the areas no milestone covers | Thu 12/10, 1:45 PM | 65 |
 
-M4 fails without a working staging environment. The application runs fine without
+M4 needs a working staging environment. The application runs fine without
 one, which makes it the first thing skipped under deadline pressure.
 
 ## Final whiteboard interview, 300 points
@@ -271,7 +281,7 @@ you chose, so this is a simulated interview for that job.
 |---|---|
 | 1-8 | Networking foundations, then the cloud arc. Exercises 01-06, Project 1 |
 | 9 | Midterm whiteboard interviews Monday through Wednesday, then AWS migration Thursday |
-| 10-15 | Job Scout and Project 2, the job-description-driven build. Exercises 07-10, milestones M1-M4 |
+| 10-15 | The AWS migration, then Project 02, the job-description-driven build. Exercises 07-10, milestones M1-M4 |
 | Finals | Final whiteboard interview |
 
 Thanksgiving week meets once, on Zoom. Tuesday, November 24 is remote, and you
@@ -316,16 +326,16 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 10/29 | Migrate your site from Railway to AWS: code, data, configuration, and the domain | Bring access to your repository, Railway database, and Cloudflare zone. | |
 | Tue 11/3 | Migrate your site from Railway to AWS, continued: the AWS CLI, the deployment policy, the plan, RDS, and EC2 | Install the AWS CLI and confirm you can sign in as your IAM user with MFA. Know where your Railway backup is. | |
 | Thu 11/5 | Professor Ken Summers: Troubleshooting Road Show, the full session | Keep working on Exercise 07. | |
-| Tue 11/10 | Job Scout 1: LLM calls, structured output, retrieval tools, and the first loop | By 11/9, complete the [Claude API setup](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/claude-api-access.md). Bring your `career-platform` repository. | Ex07 |
-| Thu 11/12 | Job Scout 2: tools, state, stop conditions, a human approval step, a Resend digest, and integration failures | By 11/11, create a Resend account and bring Cloudflare access. Keep Zoho mail working. | |
-| Tue 11/17 | Reading your posting as a system spec, architecture review, then evals and trace reading on your Job Scout run | Finish Job Scout's first run. Choose your Project 2 posting from your run or the vetted feed, and bring your spec and architecture. | Ex08, M1 |
-| Thu 11/19 | Environments and tested deployment: GitHub Actions deploying your AWS site, staging on a subdomain, and promotion through CI/CD | Bring eval cases and a reviewed application change. Check the tests locally. | Ex09 |
+| Tue 11/10 | Finding your Project 02 postings: a new repository and research wiki, Indeed and Firecrawl connected to your coding agent, and your first saved posting | | Ex07 |
+| Thu 11/12 | Real data and your first model call: data for your posting, a model API key set up in class, and one record sent to a model three ways | Save and compare three postings, choose one, and save one next-step posting. | |
+| Tue 11/17 | A workflow and an agent: sorting your posting's duties, then one question answered two ways in Python and compared | Submit M1 and Exercise 08 before class at 1:45 PM. | Ex08, M1 |
+| Thu 11/19 | Environments and tested deployment: GitHub Actions deploying your AWS site, staging on a subdomain, and promotion through CI/CD | Have your AWS site working. Finish Tuesday's workflow and agent runs. | Ex09 |
 | Tue 11/24 | Cloud storage and databases, least-privilege IAM, grounding and retrieval, and agent guardrails for loop limits, schemas, and costs. On Zoom | Bring your data-flow diagram and identify stored data, permissions, and the agent's stop conditions. Join through Brightspace's Zoom link. | M2 |
 | Thu 11/26 | No class, Thanksgiving | | |
 | Tue 12/1 | LMU Data Center tour with [Jeff Solomon](https://its.lmu.edu/whoweare/staff/infrastructureservices/) | Meet in University Hall in front of Einstein Bros. Bagels. | |
-| Thu 12/3 | Staging in practice, then the decision record | Complete the controlled agent-failure investigation and M3 checks. | Ex10, M3 |
-| Tue 12/8 | Blog post workshop and final interview prep | | M4 |
-| Thu 12/10 | Final interview practice in pairs, and a course retrospective | Submit Project 2 before class at 1:45 PM. | Project 2 |
+| Thu 12/3 | M3 shown live in class, staging in practice, then the decision record | Have three eval cases with expected answers ready. Complete the controlled agent-failure investigation. | Ex10, M3 |
+| Tue 12/8 | M4 shown live in class, then the blog post and LinkedIn draft workshop and final interview prep | | M4 |
+| Thu 12/10 | Final interview practice in pairs, and a course retrospective | Submit Project 02 before class at 1:45 PM. | Project 02 |
 
 Professor Ken Summers leads the full class session on November 5, in Hilton
 113, with his Troubleshooting Road Show. That evening, Brandon Kulik from Deloitte will
@@ -334,11 +344,14 @@ in Hilton 107. RSVP at https://lmu.campuslabs.com/engage/event/12919719.
 
 The October 6 revision keeps the Railway/PostgreSQL migration and focuses
 Project 1 on your website, domain, Zoho email, and basic GA4. October 20 is
-reserved for the project requirements review and interview practice. Job Scout, Resend,
-and GitHub Actions move after the midterm. Job Scout starts November 10,
-after the AWS migration, and the first Project 2 milestone follows it on
-November 17. Evals and tested deployment come next. No Resend signup or Claude API
-credit purchase is needed for Project 1.
+reserved for the project requirements review and interview practice. GitHub
+Actions moves after the midterm. No Claude API credit purchase is needed for
+Project 1.
+
+The November 17 revision replaces Job Scout with Project 02's own lessons.
+Starting November 10, you find your postings with your coding agent, get real
+data, and build a workflow and an agent in Python. Exercises 08 and 09 come
+from those lessons, and tested deployment comes next. Resend isn't used.
 
 ### Prepare before class
 
@@ -373,12 +386,10 @@ configure and verify the system.
   to create an Analytics account, a GA4 property, and a web data stream for
   your site's HTTPS URL. Bring the stream's measurement ID. Stop before
   installing the tag, which we'll do and verify together in class.
-- **By Monday, November 9, for Tuesday's first Job Scout lesson:** complete
-  the [Claude API setup](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/claude-api-access.md).
-- **By Wednesday, November 11, for Thursday's second Job Scout lesson:**
-  create a Resend account. We will configure Resend's sending subdomain in
-  class, keeping Zoho's incoming-mail records intact. If you already created
-  an account, keep it. There's no additional setup to do now.
+- **By Thursday, November 19, at 1:45 PM:** have your AWS site working,
+  because the lesson deploys to it. If it isn't, finish the
+  [AWS migration guide](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-migration.md)
+  or come to office hours.
 
 ## Work load expectations
 
@@ -390,7 +401,7 @@ For this four-credit course that is an average of **12 hours per week** across t
 semester, including class meetings, exercises, project work, and preparation.
 
 Expect this to be uneven. Weeks with a troubleshooting exercise and weeks around
-a Project 2 milestone run heavier than the middle of a build.
+a Project 02 milestone run heavier than the middle of a build.
 
 ## Required materials
 
@@ -405,12 +416,11 @@ money, and most of the spending starts in Exercise 01.
 | Cloudflare DNS | Free | Before Thu 10/1 |
 | GitHub | Free tier | Exercise 01 |
 | GitHub Codespaces | Personal-account compute/storage allowance; additional usage can cost money | Course Codespace in Session 04 for Ex02; new portfolio Codespace in Session 05 |
-| AWS | Free tier | Migration on Thu 10/29, then Project 2 |
+| AWS | Free tier | Migration on Thu 10/29, then Project 02 |
 | Zoho Mail | Forever Free where offered; contact me if unavailable | Create your account by Mon 10/12 for Tue 10/13 |
 | Google Analytics 4 | Standard account is free | Create the account, property, and web stream by Wed 10/14 for Thu 10/15 |
-| Resend | Free tier | Create an account by Wed 11/11 for Thu 11/12 |
-| Claude API | Billed separately from your subscription | Complete the setup guide by Mon 11/9 for Tue 11/10 |
-| Posting source or retrieval service | Depends on the approved source | Job Scout, after the midterm; no Google Cloud or Firecrawl signup is assigned now |
+| Model API | Billed separately from your subscription. Class demos use the Claude API with about $5 of credits, and any provider counts | Set up in class on Thu 11/12 |
+| Indeed and Firecrawl connectors | Free tiers were enough for class | Set up in class on Tue 11/10 |
 
 Plan your budget around the AI subscription you choose, domain registration,
 and the services you actually run. Prices, credits, and eligibility can
@@ -512,8 +522,8 @@ before committing and pushing again.
 
 The early server lab does not require a local editor, database, or coding-agent
 installation. Follow each later lesson guide for its workflow setup.
-Cloudflare, Railway, Zoho Mail, and GA4 support Project 1. Resend, AWS, and
-orchestration tools follow after the midterm. The class schedule's Before
+Cloudflare, Railway, Zoho Mail, and GA4 support Project 1. AWS, a model API,
+and orchestration tools follow after the midterm. The class schedule's Before
 class column and preparation checklist list what to set up ahead of each
 meeting.
 
