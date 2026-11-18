@@ -238,8 +238,8 @@ In the new tab's prompt box, enter:
 /rename workflow-steps
 ```
 
-Keep Tuesday's question if it still has a reason someone in your posting's
-job would ask it. If you need a new one, Tuesday's short interview still
+Keep Tuesday's question if it fits the duty you marked W for your workflow,
+and someone in your posting's job would have a reason to ask it. If you need a new one, Tuesday's short interview still
 works:
 
 ```text
@@ -268,19 +268,23 @@ Help me write steps.md for my workflow. I do the thinking. Don't
 suggest steps, give examples, or calculate anything.
 
 Ask me one question at a time, and wait for my answer:
-1. What's the question, and why would someone in this job ask it?
-2. When does the workflow start?
-3. What's the first step? Is it code or a model call? What goes in
+1. Which duty does this workflow do? List the duties I marked W in
+   duty-marks.md and my my-workflow-and-agent wiki page, and let me
+   pick one.
+2. What's the question, and why would someone in this job ask it?
+3. When does the workflow start?
+4. What's the first step? Is it code or a model call? What goes in
    and what comes out? Keep asking for the next step until I say done.
-4. What's my answer, worked out by hand?
-5. What will I check after the run?
+5. What's my answer, worked out by hand?
+6. What will I check after the run?
 
 Save my answers in my words as steps.md in the top folder. Then tell
-me the three most important gaps, such as a step with no input or math
-marked as a model call. Don't fix them. I'll decide.
+me the three most important gaps, such as a question that doesn't fit
+the duty, a step with no input, or math marked as a model call. Don't
+fix them. I'll decide.
 ```
 
-Work out the answer for question 4 from your saved records yourself. If
+Work out the answer for question 5 from your saved records yourself. If
 your agent offers a step or a number, say no and give your own.
 
 A workflow answers a question you knew ahead of time, so your question now
