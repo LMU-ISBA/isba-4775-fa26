@@ -12,7 +12,8 @@ your code stops it at a limit. Today doesn't use AWS.
 By the end of class, you'll have:
 
 - One workflow and one agent designed for your posting, saved in your wiki.
-- `workflow.py`, which answers a question with one model call.
+- `workflow.py`, which runs the steps you wrote, with code doing every step
+  it can.
 - `agent.py`, which answers the same question with one tool and a step limit.
 - A table comparing four runs: both scripts on two models.
 
@@ -22,6 +23,7 @@ By the end of this lesson, you should be able to:
 
 - Sort a posting's duties into fixed steps, agent decisions, and work for a
   person.
+- Split a workflow into code steps and model calls.
 - Explain what a tool is and who runs it.
 - Follow one agent run step by step.
 - Say why an agent needs a step limit.
@@ -219,24 +221,55 @@ it. Let me revise it. Don't write code or send a model call yet.
 
 Work out the answer by hand first, so you can check every run against it.
 
-Replace `[your question]` below with yours, then ask:
+With your laptop closed, write your workflow's steps for this question on
+paper. Number them and label each one code or model call, like the headline
+example above. Code does every step it can do the same way every time:
+loading, filtering, counting, comparing. A model call does only what code
+can't, such as writing the answer in plain words.
+
+Your agent writes the skeleton and the model call. You write the code steps.
+Replace `[your steps]` and `[your question]` below, then ask:
 
 ```text
 Read the API docs first:
 https://platform.claude.com/docs/en/api/messages/create
 
-Write workflow.py. It takes a question as a command-line argument,
-loads all my saved records, sends them with the question in one model
-call, and prints the answer as JSON.
+Write workflow.py from my steps below: one function per step, in my
+order, and a main that runs them. It takes the question as a
+command-line argument and prints the answer as JSON.
+
+For each step I labeled code, write only the function's name, inputs,
+output, and a TODO. I'll write the body. For each step I labeled
+model call, write the whole function.
 
 Print the number of model calls, the input and output tokens, and the
 cost. Use my model's row on this page:
 https://platform.claude.com/docs/en/about-claude/pricing
 
-Run it with the question below. Save the output in runs/ and show it
-to me. Then stop.
+Don't add, merge, or skip steps. If a step is unclear, ask me. Then
+stop.
 
+My steps:
+[your steps]
+
+My question:
 [your question]
+```
+
+Fill in each TODO yourself. If you get stuck, ask for an explanation, not
+the code:
+
+```text
+Explain what the TODO in [function name] needs to do and which Python
+feature would help. Don't write the code.
+```
+
+Then run it. Replace `__` with the number of model-call steps on your paper:
+
+```text
+Run workflow.py with my question. Save the output in runs/ and show it
+to me. My steps have __ model calls. Check that the printed count
+matches. If it doesn't, tell me which step is wrong. Don't fix it.
 ```
 
 Check the answer against the one you worked out. If it's wrong, don't fix
@@ -246,7 +279,7 @@ Check that the price row matches your model's exact name, because similar
 names have different prices. Then open `workflow.py` and find:
 
 - Where it loads your records.
-- The one model call.
+- The model call.
 - The line that decides what the model sees. Your code wrote it, and the
   model had no say.
 
@@ -258,7 +291,8 @@ on line __, and line __ decides what the model sees. Check me. Don't
 change the file.
 ```
 
-This is the smallest workflow: one step, and that step is a model call.
+Your code did the work it can repeat exactly. The model did only the step
+you gave it.
 
 ## 4. Add one tool and the loop
 
