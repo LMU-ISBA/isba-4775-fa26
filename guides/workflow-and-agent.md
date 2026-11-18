@@ -310,14 +310,6 @@ In `agent.py`, find:
 - The loop.
 - The step limit.
 
-Tell your agent what you found:
-
-```text
-In agent.py, I think the tool's description starts on line __, the loop
-starts on line __, and the step limit is on line __. Check me. Don't
-change the file.
-```
-
 Check that the stop works. Ask:
 
 ```text
