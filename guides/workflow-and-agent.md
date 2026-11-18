@@ -250,14 +250,6 @@ names have different prices. Then open `workflow.py` and find:
 - The line that decides what the model sees. Your code wrote it, and the
   model had no say.
 
-Tell your agent what you found, so it can check you:
-
-```text
-In workflow.py, I think the records load on line __, the model call is
-on line __, and line __ decides what the model sees. Check me. Don't
-change the file.
-```
-
 This is the smallest workflow: one step, and that step is a model call.
 
 ## 4. Add one tool and the loop
