@@ -10,6 +10,9 @@ evidence file as specified in its requirements, and you submit the repository UR
 in Brightspace. Exercise 04 uses `docs/how-this-site-is-secured.md` and also
 asks for your live site URL and a direct link to that explanation.
 
+Exercises 08 and 09 are the exception. Their work goes in your private
+Project 02 repository, and each one's requirements are in its guide.
+
 Exercise 01 is submitted entirely through Brightspace: the
 [self-discovery interview](self-discovery-interview.md) and the photo of your
 home network drawing. They go there because your `career-platform` repository is
@@ -34,8 +37,8 @@ for the full instructions.
 | 05 | **Broken DNS/TLS: diagnose and fix** | Troubleshoot | Tue 10/13, 1:45 PM | [instructions](ex05-troubleshoot-dns-tls.md) |
 | 06 | Domain email and GA4: mail delivery, a page view, and an outbound click | Config | Tue 10/20, 1:45 PM | [instructions](ex06-domain-email.md) |
 | 07 | Migrate your site from Railway to AWS: EC2, RDS, verified cutover, and a diagram | Build | Tue 11/10, 1:45 PM | [instructions](ex07-aws-migration.md) |
-| 08 | **Broken integration: an expired credential and a changed schema in Job Scout** | Troubleshoot | Tue 11/17, 1:45 PM | |
-| 09 | Raw agent loop in Python, three tools, evals, trace read | Build | Thu 11/19, 1:45 PM | |
+| 08 | Real data and your first model calls: about 20 records for your posting, then one record sent to a model three ways | Build | Tue 11/17, 1:45 PM | [guide](../guides/first-model-call.md) |
+| 09 | A workflow and an agent: one question answered two ways in Python, from steps you write first, with one tool, a step limit, and a comparison of the runs | Build | Tue 11/24, 1:45 PM | [guide](../guides/workflow-and-agent.md) |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 12/3, 1:45 PM | |
 
 Exercise 03 collects the spec, implementation plan, and migration plan from

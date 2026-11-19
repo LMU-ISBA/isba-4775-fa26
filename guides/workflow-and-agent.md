@@ -436,7 +436,7 @@ table as a new wiki page named workflow-vs-agent. Don't overwrite an
 existing page.
 ```
 
-Then answer these yourself:
+Then answer these yourself, at the bottom of the `workflow-vs-agent` page:
 
 - Which runs matched your hand-worked answer? If one didn't, what went
   wrong?
@@ -460,7 +460,9 @@ Commit and push.
 
 - By Tuesday, November 24, at 1:45 PM, Exercise 09 is due: `steps.md`,
   `workflow.py`, `agent.md`, `agent.py`, your saved runs, and the
-  `workflow-vs-agent` page, committed and pushed.
+  `workflow-vs-agent` page, committed and pushed. It's credit/no credit.
+  Submit your repository URL and the paths to `steps.md` and `agent.md`
+  in the Exercise 09 assignment in Brightspace.
 - By Tuesday, November 24, your AWS site is working. That class, on Zoom,
   deploys to it with GitHub Actions. If it isn't working, finish the
   [AWS migration](aws-migration.md) or come to office hours.
