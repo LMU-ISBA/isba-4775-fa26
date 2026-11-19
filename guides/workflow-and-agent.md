@@ -242,8 +242,8 @@ The full dataset needs a home on AWS. Use this to decide:
 
 | Put it here | When |
 | --- | --- |
-| S3 | You keep the file as it arrived, and your code reads all of it |
-| RDS | Your code filters, counts, joins, or updates rows |
+| [S3](https://aws.amazon.com/s3/) | You keep the file as it arrived, and your code reads all of it |
+| [RDS](https://aws.amazon.com/rds/) | Your code filters, counts, joins, or updates rows |
 | Your repository | A small sample you check by hand |
 
 Keep it as it arrived in S3, ask it questions in RDS, and check it by hand
