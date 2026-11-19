@@ -240,9 +240,9 @@ In the new tab's prompt box, enter:
 
 Work from the end. First say what finished looks like: a report, a ranked
 list, a label on each record, a recommendation, or an alert. Then say what
-data that output needs, and check that your data has it. Then write the
-three to five steps in between. If Tuesday's question fits that output,
-keep it.
+data that output needs, and check that your data has it. Then write the one
+or two steps in between. You can add more later. If Tuesday's question fits
+that output, keep it.
 
 Your data only has to connect to the company, so it might not support this
 duty. If it doesn't, write down what you'd add or replace. For today, keep
@@ -276,9 +276,9 @@ the end:
    patterns. Then ask: does my data have what the output needs? Do
    I keep it, add to it, or replace it?
 4. What starts the work?
-5. The middle. What are the three to five steps from that data to
-   that output? Ask for one step at a time: is it code or a model
-   call, and what goes in and what comes out? Stop when I say done.
+5. The middle. What are the one or two steps from that data to that
+   output? Ask for one step at a time: is it code or a model call,
+   and what goes in and what comes out? Stop after two steps.
 6. What's my answer, worked out by hand?
 7. What will I check after the run?
 
