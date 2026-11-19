@@ -223,40 +223,6 @@ https://www.oneusefulthing.org/p/against-brain-damage
 This section follows that order. You write the steps, your agent builds
 exactly those steps, and you check the result.
 
-### Decide where your data goes
-
-Your 20 records from Exercise 08 were a first sample. Download the full
-dataset now. Ask your agent:
-
-```text
-Download the full dataset from the source of my saved records, not
-only 20. Save it in data/ with its source and today's date. If the
-file is over 50 MB, add it to .gitignore and tell me. Then tell me how
-many records it has. Don't analyze it or summarize it.
-```
-
-If your source is slow or blocked, keep your 20 records for today and
-download tonight.
-
-The full dataset needs a home on AWS. Use this to decide:
-
-| Put it here | When |
-| --- | --- |
-| [S3](https://aws.amazon.com/s3/) | You keep the file as it arrived, and your code reads all of it |
-| [RDS](https://aws.amazon.com/rds/) | Your code filters, counts, joins, or updates rows |
-| Your repository | A small sample you check by hand |
-
-Keep it as it arrived in S3, ask it questions in RDS, and check it by hand
-from the sample. Many systems use all three. Your RDS database already runs
-for your resume site, and S3 costs cents at this size.
-
-If your design is serverless and you look items up by one key, DynamoDB
-also works. You don't need a vector database for this project.
-
-Today you only decide, and you keep working from the file on your laptop.
-You load it into AWS storage later, before M3 on December 3. Work that out
-with your agent.
-
 ### Write steps.md in your own words
 
 Start a new session, so Tuesday's one-call build doesn't steer your agent.
@@ -328,6 +294,41 @@ an answer, a step, or a number, say no and give your own.
 
 A workflow answers a question you knew ahead of time, so your question now
 lives in `steps.md` and not on the command line.
+
+### Decide where your data goes
+
+Your 20 records from Exercise 08 were a first sample. If you chose to keep
+your data or add to it, download the full dataset now. Ask your agent:
+
+```text
+Download the full dataset from the source of my saved records, not
+only 20. Save it in data/ with its source and today's date. If the
+file is over 50 MB, add it to .gitignore and tell me. Then tell me how
+many records it has. Don't analyze it or summarize it.
+```
+
+If your source is slow or blocked, or you chose to replace your data, keep
+your 20 records for today and get the full dataset tonight.
+
+The full dataset needs a home on AWS. Look at the code steps in your
+`steps.md`, then use this to decide:
+
+| Put it here | When |
+| --- | --- |
+| [S3](https://aws.amazon.com/s3/) | You keep the file as it arrived, and your code reads all of it |
+| [RDS](https://aws.amazon.com/rds/) | Your code filters, counts, joins, or updates rows |
+| Your repository | A small sample you check by hand |
+
+Keep it as it arrived in S3, ask it questions in RDS, and check it by hand
+from the sample. Many systems use all three. Your RDS database already runs
+for your resume site, and S3 costs cents at this size.
+
+If your design is serverless and you look items up by one key, DynamoDB
+also works. You don't need a vector database for this project.
+
+Today you only decide. Your workflow still runs on your saved records, so
+its output matches your hand-worked answer. You load the full dataset into
+AWS storage later, before M3 on December 3. Work that out with your agent.
 
 ### Build it from your steps
 
