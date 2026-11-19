@@ -285,7 +285,8 @@ you chose, so this is a simulated interview for that job.
 | Finals | Final whiteboard interview |
 
 Thanksgiving week meets once, on Zoom. Tuesday, November 24 is remote, and you
-join from the Zoom tool in Brightspace rather than coming to Hilton 113.
+join with the Zoom link in Brightspace's Week 13 module rather than coming to
+Hilton 113.
 Thursday, November 26 is Thanksgiving Day, and it is the only cancelled meeting
 all semester.
 
@@ -330,7 +331,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 11/12 | Real data and your first model call: data for your posting, a model API key set up in class, and one record sent to a model three ways | Save and compare three postings, choose one, and save one next-step posting. | |
 | Tue 11/17 | A workflow and an agent: sorting your posting's duties, then one question answered two ways in Python and compared | Submit M1 and Exercise 08 before class at 1:45 PM. | Ex08, M1 |
 | Thu 11/19 | A workflow and an agent, continued: the workflow rebuilt from steps you write first, then the agent with one tool and a step limit, and the comparison | Bring Tuesday's `workflow.py` run and your `my-workflow-and-agent` wiki page. | |
-| Tue 11/24 | Environments and tested deployment: GitHub Actions deploying your AWS site, staging on a subdomain, and promotion through CI/CD. On Zoom | Have your AWS site working. Join through Brightspace's Zoom link. | Ex09, M2 |
+| Tue 11/24 | Environments and tested deployment: GitHub Actions deploying your AWS site, staging on a subdomain, and promotion through CI/CD. On Zoom | Have your AWS site working. Join with the Zoom link in Brightspace's Week 13 module. | Ex09, M2 |
 | Thu 11/26 | No class, Thanksgiving | | |
 | Tue 12/1 | LMU Data Center tour with [Jeff Solomon](https://its.lmu.edu/whoweare/staff/infrastructureservices/) | Meet in University Hall in front of Einstein Bros. Bagels. | |
 | Thu 12/3 | M3 shown live in class, staging in practice, then the decision record | Have three eval cases with expected answers ready. Complete the controlled agent-failure investigation. | Ex10, M3 |

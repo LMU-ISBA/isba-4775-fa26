@@ -348,19 +348,37 @@ Open this page and read its first section, "The tool-use contract." Stop at
 
 https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works
 
-### Write agent.md yourself
+### Write agent.md in your own words
 
-Before you prompt, write `agent.md` in your repository's top folder. Start
-from the agent on your `my-workflow-and-agent` wiki page. Include:
+Stay in the session you used for `steps.md`. Open the agent on your
+`my-workflow-and-agent` wiki page. Then ask your agent:
 
-- The question it gets. Use the same question as `steps.md`.
-- One question your workflow can't answer, and why. That's the question
-  your project's agent is for. Today's run uses the first one.
-- The tool's description, in your words: what it searches and what it
-  returns. The model knows only what this description says.
-- The step limit. A step is one model call.
-- What it refuses.
-- The search words you expect the model to use.
+```text
+Help me write agent.md for my agent. I do the thinking. Don't
+suggest answers, give examples, or write the tool description.
+
+Ask me one question at a time, and wait for my answer:
+1. Show me the question in steps.md. Today's run uses it. Ask me to
+   confirm it.
+2. Which duty is my project's agent for? List the duties I marked A
+   in duty-marks.md and my my-workflow-and-agent wiki page, and let
+   me pick one. If I don't have them, list the duties in my posting.
+3. What's one question from that duty that my workflow can't answer,
+   and why?
+4. What does the tool search, and what does it return? The model
+   knows only what my description says.
+5. What's the step limit, and what does the agent refuse?
+6. What search words do I expect the model to use for today's
+   question?
+
+Save my answers in my words as agent.md in the top folder. Then tell
+me the three most important gaps, such as a tool description that
+doesn't say what comes back, a question that fixed steps can answer,
+or no refusal rule. Don't fix them. I'll decide.
+```
+
+A step is one model call. If your agent offers an answer or writes the
+tool description, say no and give your own.
 
 If you built `agent.py` on Tuesday night, write `agent.md` anyway. Then
 compare it with what your agent built, and keep the script.
@@ -384,8 +402,8 @@ per step, and end the run at my step limit. Print each step: its
 number, the tool, the inputs, and how many records came back. Print
 the same totals as workflow.py.
 
-Run it with the question in agent.md. Save the output in runs/ and
-show me. Then stop.
+Run it with today's question, the one from steps.md. Save the
+output in runs/ and show me. Then stop.
 ```
 
 In the output, find:
