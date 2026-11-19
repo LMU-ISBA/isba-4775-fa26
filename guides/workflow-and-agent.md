@@ -384,23 +384,38 @@ https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works
 ### Write agent.md in your own words
 
 Stay in the session you used for `steps.md`. Open the agent on your
-`my-workflow-and-agent` wiki page. Then ask your agent:
+`my-workflow-and-agent` wiki page.
+
+Work from the end again. The end is the answer and who asks for it. The
+beginning is what your tool can reach. The middle is different. The model
+chooses the steps, so you can't write them. You write its limits: the tool
+description, the step limit, and what it refuses.
+
+Today's tool is a search over your saved records, because a search is easy
+to check. An agent needs a tool, and it doesn't have to be a search. A tool
+can also look up one record, calculate, or call another system.
+
+Ask your agent:
 
 ```text
 Help me write agent.md for my agent. I do the thinking. Don't
 suggest answers, give examples, or write the tool description.
 
-Ask me one question at a time, and wait for my answer:
-1. Show me the question in steps.md. Today's run uses it. Ask me to
-   confirm it.
-2. Which duty is my project's agent for? List the duties I marked A
+Ask me one question at a time, and wait for my answer. Start from
+the end:
+1. Which duty is my project's agent for? List the duties I marked A
    in duty-marks.md and my my-workflow-and-agent wiki page, and let
    me pick one. If I don't have them, list the duties in my posting.
-3. What's one question from that duty that my workflow can't answer,
-   and why?
-4. What does the tool search, and what does it return? The model
-   knows only what my description says.
-5. What's the step limit, and what does the agent refuse?
+2. The end. Who asks this agent a question, and what does a good
+   answer look like? Then show me the question in steps.md. Today's
+   run uses it. Ask me to confirm it.
+3. The beginning. What does the tool search, and what does it
+   return? The model knows only what my description says.
+4. The middle. Can I list the steps ahead of time? If I can, it's a
+   workflow. Ask me for one question from this duty where I can't,
+   and why.
+5. The limits. What's the step limit, and what does the agent
+   refuse?
 6. What search words do I expect the model to use for today's
    question?
 
