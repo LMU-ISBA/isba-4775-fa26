@@ -272,56 +272,59 @@ In the new tab's prompt box, enter:
 /rename workflow-steps
 ```
 
-Keep Tuesday's question if it fits the duty you marked W for your workflow,
-and someone in your posting's job would have a reason to ask it. If you need a new one, Tuesday's short interview still
-works:
+Work from the end. First say what finished looks like: a report, a ranked
+list, a label on each record, a recommendation, or an alert. Then say what
+data that output needs, and check that your data has it. Then write the
+three to five steps in between. If Tuesday's question fits that output,
+keep it.
 
-```text
-Read my chosen posting and my saved records. Ask me two
-multiple-choice questions, one at a time, to help me decide what
-someone in this job would want to check in this data.
+Your data only has to connect to the company, so it might not support this
+duty. If it doesn't, write down what you'd add or replace. For today, keep
+going with an output your saved data can produce.
 
-Then suggest one question that compares two things and takes a few
-records to answer. Keep it simple enough that I can check the answer
-by hand in two minutes. Give the reason someone in this job would ask
-it. Let me revise it. Don't write code or send a model call yet.
-```
-
-Before you answer the next interview, know the rule for each step.
-Anything that has to be exact goes in code: loading, filtering, counting,
-adding, and comparing. A model call writes words from numbers your code
-already computed. Most workflows need one model call at the end, and some
-need none. My `steps.md` has four code steps, then one model call that
-writes two sentences for the editors.
+Know the rule for each step before you start. Anything that has to be exact
+goes in code: loading, filtering, counting, adding, and comparing. A model
+call writes words from numbers your code already computed. Most workflows
+need one model call at the end, and some need none. My `steps.md` ends with
+two sentences for the editors. Four code steps and one model call produce
+them.
 
 Open your design on the `my-workflow-and-agent` wiki page. Then ask your
 agent:
 
 ```text
 Help me write steps.md for my workflow. I do the thinking. Don't
-suggest steps, give examples, or calculate anything.
+suggest answers or steps, give examples, or calculate anything.
 
-Ask me one question at a time, and wait for my answer:
+Ask me one question at a time, and wait for my answer. Start from
+the end:
 1. Which duty does this workflow do? List the duties I marked W in
    duty-marks.md and my my-workflow-and-agent wiki page, and let me
    pick one. If I don't have them, list the duties in my posting.
-2. Show me the column names and the first 5 records of my saved data,
-   exactly as saved. Don't summarize them or point out patterns. Then
-   ask: what's the question, and why would someone in this job ask it?
-3. When does the workflow start?
-4. What's the first step? Is it code or a model call? What goes in
-   and what comes out? Keep asking for the next step until I say done.
-5. What's my answer, worked out by hand?
-6. What will I check after the run?
+2. The end. What does this duty produce, and who uses it? Then ask
+   me to write one example of that output, and the question it
+   answers.
+3. The beginning. What data does that output need? After I answer,
+   show me the column names and the first 5 records of my saved
+   data, exactly as saved. Don't summarize them or point out
+   patterns. Then ask: does my data have what the output needs? Do
+   I keep it, add to it, or replace it?
+4. What starts the work?
+5. The middle. What are the three to five steps from that data to
+   that output? Ask for one step at a time: is it code or a model
+   call, and what goes in and what comes out? Stop when I say done.
+6. What's my answer, worked out by hand?
+7. What will I check after the run?
 
 Save my answers in my words as steps.md in the top folder. Then tell
-me the three most important gaps, such as a question that doesn't fit
-the duty, data that can't answer the question, a step with no input,
-or math marked as a model call. Don't fix them. I'll decide.
+me the three most important gaps, such as an output nobody in this
+job would use, data that can't produce the output, a step with no
+input, or math marked as a model call. Don't fix them. I'll decide.
 ```
 
-Work out the answer for question 5 from your saved records yourself. If
-your agent offers a step or a number, say no and give your own.
+Your example in question 2 can use placeholder numbers. Work out the real
+answer for question 6 from your saved records yourself. If your agent offers
+an answer, a step, or a number, say no and give your own.
 
 A workflow answers a question you knew ahead of time, so your question now
 lives in `steps.md` and not on the command line.
