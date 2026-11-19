@@ -271,7 +271,9 @@ Ask me one question at a time, and wait for my answer:
 1. Which duty does this workflow do? List the duties I marked W in
    duty-marks.md and my my-workflow-and-agent wiki page, and let me
    pick one.
-2. What's the question, and why would someone in this job ask it?
+2. Show me the column names and the first 5 records of my saved data,
+   exactly as saved. Don't summarize them or point out patterns. Then
+   ask: what's the question, and why would someone in this job ask it?
 3. When does the workflow start?
 4. What's the first step? Is it code or a model call? What goes in
    and what comes out? Keep asking for the next step until I say done.
