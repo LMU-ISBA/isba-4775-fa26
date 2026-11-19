@@ -223,6 +223,9 @@ https://www.oneusefulthing.org/p/against-brain-damage
 This section follows that order. You write the steps, your agent builds
 exactly those steps, and you check the result.
 
+Your 20 records from Exercise 08 were a first sample. Download the full
+dataset, then save a better sample from it for this workflow.
+
 ### Write steps.md in your own words
 
 Start a new session, so Tuesday's one-call build doesn't steer your agent.
