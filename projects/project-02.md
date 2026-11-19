@@ -34,8 +34,8 @@ a late one loses 10% per day, down to a floor of 50%.
 | --- | --- | --- |
 | Thu 11/12, 1:45 PM | Your posting, chosen from your three, and one next-step posting. You can switch among the three until 11/17 | |
 | Tue 11/17 | M1: your PRD, your data source, and two architectures with cost estimates. If you don't want to start from scratch, you can look for an open source project to extend. That search is optional. Name your choice and your reason, add a diagram, and rename your repository. Submit your repository URL in Brightspace, then keep building. I'll read your design and tell you by Thu 11/19 if something has to change | 60 |
-| Thu 11/19 | Your AWS site is working, for the GitHub Actions lesson | |
-| Tue 11/24 | M2: your app is deployed to production on your subdomain. Submit the address in Brightspace | 40 |
+| Tue 11/24 | Your AWS site is working, for the GitHub Actions lesson, on Zoom | |
+| Tue 12/1, 1:45 PM | M2: your app is deployed to production on your subdomain. Submit the address in Brightspace. This moved from 11/24, so you can deploy with what that class teaches | 40 |
 | Thu 12/3 | M3: your agent answers a grounded question with tools. Have three eval cases with expected answers ready. You'll show it live in class | 75 |
 | Tue 12/8 | M4: two systems connect on a trigger, and one change moves from staging to production. You'll show it live in class | 60 |
 | Thu 12/10, 1:45 PM | Project 02 is submitted, with the areas no milestone covers | 65 |

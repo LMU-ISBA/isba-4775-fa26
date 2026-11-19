@@ -223,8 +223,28 @@ https://www.oneusefulthing.org/p/against-brain-damage
 This section follows that order. You write the steps, your agent builds
 exactly those steps, and you check the result.
 
+### Decide where your data goes
+
 Your 20 records from Exercise 08 were a first sample. Download the full
 dataset, then save a better sample from it for this workflow.
+
+The full dataset needs a home on AWS. Use this to decide:
+
+| Put it here | When |
+| --- | --- |
+| S3 | You keep the file as it arrived, and your code reads all of it |
+| RDS | Your code filters, counts, joins, or updates rows |
+| Your repository | A small sample you check by hand |
+
+Keep it as it arrived in S3, ask it questions in RDS, and check it by hand
+from the sample. Many systems use all three. Your RDS database already runs
+for your resume site, and S3 costs cents at this size.
+
+If your design is serverless and you look items up by one key, DynamoDB
+also works. You don't need a vector database for this project.
+
+Today you only decide, and you keep working from the file on your laptop.
+You create the storage when you deploy.
 
 ### Write steps.md in your own words
 
@@ -484,8 +504,9 @@ Commit and push.
 - By Tuesday, November 24, your AWS site is working. That class, on Zoom,
   deploys to it with GitHub Actions. If it isn't working, finish the
   [AWS migration](aws-migration.md) or come to office hours.
-- By Tuesday, November 24, M2 is due: your app is live at a subdomain of
-  your domain over HTTPS. The
+- By Tuesday, December 1, at 1:45 PM, M2 is due: your app is live at a
+  subdomain of your domain over HTTPS. It moved from November 24, so you
+  can deploy with what that class teaches. The
   [Project 02 requirements](../projects/project-02.md#dates) list it.
 
 Two optional pieces explain this lesson's idea in a few minutes each:

@@ -148,7 +148,7 @@ the AWS migration, taught Thu 10/29 and Tue 11/3 and due Tue 11/10. Exercises
 08 through 10 follow the Project 02 lessons, which started Tue 11/10.
 Exercise 08 is sections 2 through 6 of
 [Your first model call](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/first-model-call.md).
-Exercise 09 is sections 2 through 5 of
+Exercise 09 is sections 3 through 5 of
 [A workflow and an agent](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/workflow-and-agent.md).
 
 ## Project 1: Own Your Corner of the Internet, 125 points
@@ -258,7 +258,7 @@ The late policy for projects applies to each one.
 |---|---|---|---:|
 | M1 | PRD, data source, two architectures with cost estimates, your choice and reason, and a diagram | Tue 11/17 | 60 |
 | | Your AWS site is working, for the GitHub Actions lesson | Tue 11/24 | |
-| M2 | App deployed to production on your subdomain | Tue 11/24 | 40 |
+| M2 | App deployed to production on your subdomain | Tue 12/1, 1:45 PM | 40 |
 | M3 | Agent answering a grounded question with tools, shown live in class | Thu 12/3 | 75 |
 | M4 | Two systems connected on a trigger, and one change moved from staging to production, shown live in class | Tue 12/8 | 60 |
 | Final | The submitted project, with the areas no milestone covers | Thu 12/10, 1:45 PM | 65 |
@@ -331,9 +331,9 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 11/12 | Real data and your first model call: data for your posting, a model API key set up in class, and one record sent to a model three ways | Save and compare three postings, choose one, and save one next-step posting. | |
 | Tue 11/17 | A workflow and an agent: sorting your posting's duties, then one question answered two ways in Python and compared | Submit M1 and Exercise 08 before class at 1:45 PM. | Ex08, M1 |
 | Thu 11/19 | A workflow and an agent, continued: the workflow rebuilt from steps you write first, then the agent with one tool and a step limit, and the comparison | Bring Tuesday's `workflow.py` run and your `my-workflow-and-agent` wiki page. | |
-| Tue 11/24 | Environments and tested deployment: GitHub Actions deploying your AWS site, staging on a subdomain, and promotion through CI/CD. On Zoom | Have your AWS site working. Join with the Zoom link in Brightspace's Week 13 module. | Ex09, M2 |
+| Tue 11/24 | Environments and tested deployment: GitHub Actions deploying your AWS site, staging on a subdomain, and promotion through CI/CD. On Zoom | Have your AWS site working. Join with the Zoom link in Brightspace's Week 13 module. | Ex09 |
 | Thu 11/26 | No class, Thanksgiving | | |
-| Tue 12/1 | LMU Data Center tour with [Jeff Solomon](https://its.lmu.edu/whoweare/staff/infrastructureservices/) | Meet in University Hall in front of Einstein Bros. Bagels. | |
+| Tue 12/1 | LMU Data Center tour with [Jeff Solomon](https://its.lmu.edu/whoweare/staff/infrastructureservices/) | Submit M2 by 1:45 PM. Meet in University Hall in front of Einstein Bros. Bagels. | M2 |
 | Thu 12/3 | M3 shown live in class, staging in practice, then the decision record | Have three eval cases with expected answers ready. Complete the controlled agent-failure investigation. | Ex10, M3 |
 | Tue 12/8 | M4 shown live in class, then the blog post and LinkedIn draft workshop and final interview prep | | M4 |
 | Thu 12/10 | Final interview practice in pairs, and a course retrospective | Submit Project 02 before class at 1:45 PM. | Project 02 |
@@ -358,6 +358,9 @@ The November 18 revision gives the workflow and the agent a second class on
 November 19, so you write the workflow's steps before your agent writes the
 code. Tested deployment moves to November 24, and Exercise 09 is due that
 day.
+
+The November 19 revision moves M2 to December 1, so you can deploy with what
+the November 24 class teaches.
 
 ### Prepare before class
 
