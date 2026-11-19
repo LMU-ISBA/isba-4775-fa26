@@ -226,7 +226,17 @@ exactly those steps, and you check the result.
 ### Decide where your data goes
 
 Your 20 records from Exercise 08 were a first sample. Download the full
-dataset, then save a better sample from it for this workflow.
+dataset now. Ask your agent:
+
+```text
+Download the full dataset from the source of my saved records, not
+only 20. Save it in data/ with its source and today's date. If the
+file is over 50 MB, add it to .gitignore and tell me. Then tell me how
+many records it has. Don't analyze it or summarize it.
+```
+
+If your source is slow or blocked, keep your 20 records for today and
+download tonight.
 
 The full dataset needs a home on AWS. Use this to decide:
 
@@ -244,7 +254,8 @@ If your design is serverless and you look items up by one key, DynamoDB
 also works. You don't need a vector database for this project.
 
 Today you only decide, and you keep working from the file on your laptop.
-You create the storage when you deploy.
+You load it into AWS storage later, before M3 on December 3. Work that out
+with your agent.
 
 ### Write steps.md in your own words
 
