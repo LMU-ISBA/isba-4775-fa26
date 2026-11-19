@@ -136,7 +136,7 @@ Codespace shutdown guide feedback within the credit/no-credit assessment.
 | 06 | Domain email and GA4: mail delivery, a page view, and an outbound click | Config | Tue 10/20 |
 | 07 | Migrate your site from Railway to AWS: EC2, RDS, verified cutover, and a diagram | Build | Tue 11/10, 1:45 PM |
 | 08 | Real data and your first model calls: about 20 records for your posting, then one record sent to a model three ways | Build | Tue 11/17, 1:45 PM |
-| 09 | A workflow and an agent: one question answered two ways in Python, with one tool, a step limit, and a comparison of the runs | Build | Thu 11/19, 1:45 PM |
+| 09 | A workflow and an agent: one question answered two ways in Python, from steps you write first, with one tool, a step limit, and a comparison of the runs | Build | Tue 11/24, 1:45 PM |
 | 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 12/3, 1:45 PM |
 
 Ex01 and Ex02 were due at 1:45 PM, before class, and Ex03 is due at the same
@@ -257,7 +257,7 @@ The late policy for projects applies to each one.
 | Milestone | Bar | Due | Points |
 |---|---|---|---:|
 | M1 | PRD, data source, two architectures with cost estimates, your choice and reason, and a diagram | Tue 11/17 | 60 |
-| | Your AWS site is working, for the GitHub Actions lesson | Thu 11/19 | |
+| | Your AWS site is working, for the GitHub Actions lesson | Tue 11/24 | |
 | M2 | App deployed to production on your subdomain | Tue 11/24 | 40 |
 | M3 | Agent answering a grounded question with tools, shown live in class | Thu 12/3 | 75 |
 | M4 | Two systems connected on a trigger, and one change moved from staging to production, shown live in class | Tue 12/8 | 60 |
@@ -329,8 +329,8 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Tue 11/10 | Finding your Project 02 postings: a new repository and research wiki, Indeed and Firecrawl connected to your coding agent, and your first saved posting | | Ex07 |
 | Thu 11/12 | Real data and your first model call: data for your posting, a model API key set up in class, and one record sent to a model three ways | Save and compare three postings, choose one, and save one next-step posting. | |
 | Tue 11/17 | A workflow and an agent: sorting your posting's duties, then one question answered two ways in Python and compared | Submit M1 and Exercise 08 before class at 1:45 PM. | Ex08, M1 |
-| Thu 11/19 | Environments and tested deployment: GitHub Actions deploying your AWS site, staging on a subdomain, and promotion through CI/CD | Have your AWS site working. Finish Tuesday's workflow and agent runs. | Ex09 |
-| Tue 11/24 | Cloud storage and databases, least-privilege IAM, grounding and retrieval, and agent guardrails for loop limits, schemas, and costs. On Zoom | Bring your data-flow diagram and identify stored data, permissions, and the agent's stop conditions. Join through Brightspace's Zoom link. | M2 |
+| Thu 11/19 | A workflow and an agent, continued: the workflow rebuilt from steps you write first, then the agent with one tool and a step limit, and the comparison | Bring Tuesday's `workflow.py` run and your `my-workflow-and-agent` wiki page. | |
+| Tue 11/24 | Environments and tested deployment: GitHub Actions deploying your AWS site, staging on a subdomain, and promotion through CI/CD. On Zoom | Have your AWS site working. Join through Brightspace's Zoom link. | Ex09, M2 |
 | Thu 11/26 | No class, Thanksgiving | | |
 | Tue 12/1 | LMU Data Center tour with [Jeff Solomon](https://its.lmu.edu/whoweare/staff/infrastructureservices/) | Meet in University Hall in front of Einstein Bros. Bagels. | |
 | Thu 12/3 | M3 shown live in class, staging in practice, then the decision record | Have three eval cases with expected answers ready. Complete the controlled agent-failure investigation. | Ex10, M3 |
@@ -352,6 +352,11 @@ The November 17 revision replaces Job Scout with Project 02's own lessons.
 Starting November 10, you find your postings with your coding agent, get real
 data, and build a workflow and an agent in Python. Exercises 08 and 09 come
 from those lessons, and tested deployment comes next. Resend isn't used.
+
+The November 18 revision gives the workflow and the agent a second class on
+November 19, so you write the workflow's steps before your agent writes the
+code. Tested deployment moves to November 24, and Exercise 09 is due that
+day.
 
 ### Prepare before class
 
@@ -386,7 +391,7 @@ configure and verify the system.
   to create an Analytics account, a GA4 property, and a web data stream for
   your site's HTTPS URL. Bring the stream's measurement ID. Stop before
   installing the tag, which we'll do and verify together in class.
-- **By Thursday, November 19, at 1:45 PM:** have your AWS site working,
+- **By Tuesday, November 24, at 1:45 PM:** have your AWS site working,
   because the lesson deploys to it. If it isn't, finish the
   [AWS migration guide](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/aws-migration.md)
   or come to office hours.

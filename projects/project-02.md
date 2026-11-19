@@ -33,7 +33,7 @@ a late one loses 10% per day, down to a floor of 50%.
 | Date | Due | Points |
 | --- | --- | --- |
 | Thu 11/12, 1:45 PM | Your posting, chosen from your three, and one next-step posting. You can switch among the three until 11/17 | |
-| Tue 11/17 | M1: your PRD, your data source, and two architectures with cost estimates. Look for two or three open source projects you could extend, and record what you found. Name your choice and your reason, add a diagram, and rename your repository. Submit your repository URL in Brightspace, then keep building. I'll read your design and tell you by Thu 11/19 if something has to change | 60 |
+| Tue 11/17 | M1: your PRD, your data source, and two architectures with cost estimates. If you don't want to start from scratch, you can look for an open source project to extend. That search is optional. Name your choice and your reason, add a diagram, and rename your repository. Submit your repository URL in Brightspace, then keep building. I'll read your design and tell you by Thu 11/19 if something has to change | 60 |
 | Thu 11/19 | Your AWS site is working, for the GitHub Actions lesson | |
 | Tue 11/24 | M2: your app is deployed to production on your subdomain. Submit the address in Brightspace | 40 |
 | Thu 12/3 | M3: your agent answers a grounded question with tools. Have three eval cases with expected answers ready. You'll show it live in class | 75 |
@@ -83,7 +83,9 @@ Real data comes first.
 - Use APIs and open data before you scrape, and scrape only pages whose terms
   allow it.
 - Leave out personal data. An employer's private data doesn't count.
-- Save one snapshot with its source and date, and have the app read it.
+- Save one snapshot with its source and date, and have the app read it. The
+  20 records from Exercise 08 were a sample. Your snapshot needs enough
+  records for your workflow and your agent to do their work.
 
 Made-up data is the fallback. If you need it, show that it's realistic for
 the company in your posting.
@@ -105,7 +107,7 @@ The architecture is yours to design, within these rules.
 | AWS | The app, the agent, and the data have to run on AWS. DNS can stay at Cloudflare, and the model API and a hosted tool that connects your two systems can live outside it |
 | Model API | Find the right one to get the job done, and compare price and capability for your task. Class demos use the Claude API, and any provider counts |
 | Fixed steps or agent | Your system has to be both. Decide which parts are fixed steps and which the agent decides, and be ready to defend where that line falls |
-| From scratch or an existing project | You can build from scratch or extend an open source project. Find two or three you could extend, and record each in your wiki before M1. Check three things for each: its license allows your use, it runs within your budget, and you can show which changes are yours. Extending one can be one of your two designs. Bring its code into your private repository, because a GitHub fork of a public project stays public. If it already has an agent, I grade the agent work you add |
+| From scratch or an existing project | You can build from scratch or extend an open source project. Looking for one is optional, and it's here so you don't have to start from scratch. If you look, record what you find in your wiki. Check three things for each: its license allows your use, it runs within your budget, and you can show which changes are yours. Extending one can be one of your two designs. Bring its code into your private repository, because a GitHub fork of a public project stays public. If it already has an agent, I grade the agent work you add |
 | Connecting two systems | This is a capability, not a tool. n8n, Make, Zapier, Power Automate, and code all count |
 | Access gate | Each call to your agent spends your API credits, so only people you allow should reach it. A shared password or an invite code is enough, and user accounts aren't required |
 
