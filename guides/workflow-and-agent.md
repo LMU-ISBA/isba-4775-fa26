@@ -273,7 +273,7 @@ suggest steps, give examples, or calculate anything.
 Ask me one question at a time, and wait for my answer:
 1. Which duty does this workflow do? List the duties I marked W in
    duty-marks.md and my my-workflow-and-agent wiki page, and let me
-   pick one.
+   pick one. If I don't have them, list the duties in my posting.
 2. Show me the column names and the first 5 records of my saved data,
    exactly as saved. Don't summarize them or point out patterns. Then
    ask: what's the question, and why would someone in this job ask it?
@@ -285,8 +285,8 @@ Ask me one question at a time, and wait for my answer:
 
 Save my answers in my words as steps.md in the top folder. Then tell
 me the three most important gaps, such as a question that doesn't fit
-the duty, a step with no input, or math marked as a model call. Don't
-fix them. I'll decide.
+the duty, data that can't answer the question, a step with no input,
+or math marked as a model call. Don't fix them. I'll decide.
 ```
 
 Work out the answer for question 5 from your saved records yourself. If
@@ -354,6 +354,8 @@ Before you prompt, write `agent.md` in your repository's top folder. Start
 from the agent on your `my-workflow-and-agent` wiki page. Include:
 
 - The question it gets. Use the same question as `steps.md`.
+- One question your workflow can't answer, and why. That's the question
+  your project's agent is for. Today's run uses the first one.
 - The tool's description, in your words: what it searches and what it
   returns. The model knows only what this description says.
 - The step limit. A step is one model call.
