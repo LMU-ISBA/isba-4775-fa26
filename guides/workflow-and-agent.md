@@ -391,9 +391,10 @@ beginning is what your tool can reach. The middle is different. The model
 chooses the steps, so you can't write them. You write its limits: the tool
 description, the step limit, and what it refuses.
 
-Today's tool is a search over your saved records, because a search is easy
-to check. An agent needs a tool, and it doesn't have to be a search. A tool
-can also look up one record, calculate, or call another system.
+An agent needs a tool, and it doesn't have to be a search. A tool can
+search your records, look up one record, calculate, or call another system.
+For today, pick one that works on your saved records, so you can check what
+comes back.
 
 Ask your agent:
 
@@ -409,14 +410,14 @@ the end:
 2. The end. Who asks this agent a question, and what does a good
    answer look like? Then show me the question in steps.md. Today's
    run uses it. Ask me to confirm it.
-3. The beginning. What does the tool search, and what does it
-   return? The model knows only what my description says.
+3. The beginning. What does the tool do, and what does it return?
+   The model knows only what my description says.
 4. The middle. Can I list the steps ahead of time? If I can, it's a
    workflow. Ask me for one question from this duty where I can't,
    and why.
 5. The limits. What's the step limit, and what does the agent
    refuse?
-6. What search words do I expect the model to use for today's
+6. What do I expect the model to ask the tool for, for today's
    question?
 
 Save my answers in my words as agent.md in the top folder. Then tell
@@ -443,11 +444,12 @@ https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using
 Read agent.md. Write agent.py from it, complete in one file. Use my
 tool description word for word, and put my refusal rule in the
 system prompt. Leave the records out of the request, so the tool is
-the only way to the data. The tool returns only matching records.
+the only way to the data. The tool returns only what my description
+says.
 
 Write the loop by hand, without the tool runner. Allow one tool call
 per step, and end the run at my step limit. Print each step: its
-number, the tool, the inputs, and how many records came back. Print
+number, the tool, the inputs, and what came back, in one line. Print
 the same totals as workflow.py.
 
 Run it with today's question, the one from steps.md. Save the
@@ -456,8 +458,8 @@ output in runs/ and show me. Then stop.
 
 In the output, find:
 
-- What the model searched for at each step. Compare those words with your
-  guesses in `agent.md`.
+- What the model asked the tool for at each step. Compare that with your
+  guess in `agent.md`.
 - The step where it stopped asking and answered.
 - The number of model calls. Each step is one request to the API.
 
