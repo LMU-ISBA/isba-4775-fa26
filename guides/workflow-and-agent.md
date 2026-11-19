@@ -279,8 +279,7 @@ the end:
 5. The middle. What are the one or two steps from that data to that
    output? Ask for one step at a time: is it code or a model call,
    and what goes in and what comes out? Stop after two steps.
-6. What's my answer, worked out by hand?
-7. What will I check after the run?
+6. What will I check after the run?
 
 Save my answers in my words as steps.md in the top folder. Then tell
 me the three most important gaps, such as an output nobody in this
@@ -288,8 +287,7 @@ job would use, data that can't produce the output, a step with no
 input, or math marked as a model call. Don't fix them. I'll decide.
 ```
 
-Your example in question 2 can use placeholder numbers. Work out the real
-answer for question 6 from your saved records yourself. If your agent offers
+Your example in question 2 can use placeholder numbers. If your agent offers
 an answer, a step, or a number, say no and give your own.
 
 A workflow answers a question you knew ahead of time, so your question now
@@ -327,7 +325,7 @@ If your design is serverless and you look items up by one key, DynamoDB
 also works. You don't need a vector database for this project.
 
 Today you only decide. Your workflow still runs on your saved records, so
-its output matches your hand-worked answer. You load the full dataset into
+you can check its output against them. You load the full dataset into
 AWS storage later, before M3 on December 3. Work that out with your agent.
 
 ### Build it from your steps
@@ -348,9 +346,9 @@ tokens, and cost. Before you run it, ask me what I expect it to
 print. Then run it, save the output in runs/, and show me.
 ```
 
-Answer its question with your hand-worked numbers. Then check the output
-against them. If a number is wrong, the bug is in code you can read, so find
-the step that made it.
+Answer its question with the numbers you expect from your saved records.
+Then check the output against them. If a number is wrong, the bug is in code
+you can read, so find the step that made it.
 
 Open `workflow.py` and find:
 
@@ -479,7 +477,7 @@ page. Then run both scripts on [second model]. Save the outputs in
 runs/. Then stop.
 ```
 
-Check both new answers against your hand-worked answer. Then ask:
+Check both new answers against the answer you expected. Then ask:
 
 ```text
 Compare my runs, using the saved outputs: Tuesday's one-call run,
@@ -491,7 +489,7 @@ existing page.
 
 Then answer these yourself, at the bottom of the `workflow-vs-agent` page:
 
-- Which runs matched your hand-worked answer? If one didn't, what went
+- Which runs matched the answer you expected? If one didn't, what went
   wrong?
 - Where did a model do work that your code could have done exactly?
 - Which run cost the most, and why?
