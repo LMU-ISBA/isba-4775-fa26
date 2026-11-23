@@ -111,12 +111,12 @@ session named with:
 ```
 
 Your agent needs a way in. An API route is an address that takes a question
-and returns an answer, and a page gives a person a box to type in. Ask your
-agent:
+and returns an answer, and a page gives a person a box to type in. The
+prompt asks for FastAPI, which is the framework your resume site uses. Ask
+your agent:
 
 ```text
-Read agent.py. Build a small web app around it with FastAPI, the
-framework my resume site uses:
+Read agent.py. Build a small web app around it with FastAPI:
 
 - One page with a question box.
 - One route, /ask, that takes the question, runs the agent loop in
