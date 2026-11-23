@@ -62,6 +62,26 @@ flowchart LR
     S -->|"you promote"| P
 ```
 
+### How a change moves
+
+Nothing is copied by hand. What moves is a commit, which is one saved
+version of your code with a short code such as `52e00d7`. The same commit
+goes to each place, one move at a time:
+
+| Move | What starts it | What does the work | What happens |
+| --- | --- | --- | --- |
+| Laptop to GitHub | You run `git push` | Git on your laptop | GitHub receives your commit |
+| The checks | The push | GitHub's computers | Tests, the linter, and the secrets scan run on that commit. Nothing moves yet |
+| GitHub to staging | The checks passing | A small program on your instance, called a runner | It copies that commit into the staging folder and restarts staging |
+| Staging to production | You, when you choose to promote | The same runner | It copies the commit staging is running into the production folder and restarts production |
+
+GitHub Actions coordinates all of it. It holds the commit, knows which
+checks passed, tells each computer what to do, and keeps a record of every
+run. Two moves happen on their own, and the last one waits for you.
+
+Each page shows its commit at the bottom. That's how you tell which version
+an environment is running, and whether staging and production match.
+
 ## A habit and a gate
 
 Teams check code in more than one place. A check on your laptop is fast, and
@@ -455,13 +475,16 @@ Let's Encrypt certificate. Nginx routes by hostname. My resume site
 has to keep working.
 
 Include a GitHub Actions self-hosted runner for this repository,
-run as a service. It will copy each commit into those folders and
-restart those two services, so give it only the permissions that
-needs.
+run as a service. Later, a workflow will use it to copy a commit
+into one of those folders and restart that copy's service, so give
+it only the permissions that needs.
 
-Don't copy the app's code to the instance. The pipeline will do
-that. Keep the plan small enough to read in five minutes. Don't add
-tests or change files in this repository.
+Stop at the runner. Don't write a workflow, and don't copy the app's
+code to the instance. I'll build the pipeline next: staging on every
+push, and production only when I promote by hand.
+
+Keep the plan small enough to read in five minutes. Don't add tests
+or change files in this repository.
 
 Use your writing-plans skill and save the plan to
 docs/superpowers/plans/2026-11-24-staging-and-production.md. Explain
@@ -564,6 +587,9 @@ On every push to main, run the tests, ruff, and a gitleaks secrets
 scan on GitHub's runner. If all three pass, deploy that commit to
 staging on my self-hosted runner and restart the staging service. If
 one fails, nothing deploys.
+
+The instance has no Git folder, so have the deploy record the commit
+where the app can read it, and show it at the bottom of the page.
 
 Before I commit, explain each job to me in one line.
 ```
