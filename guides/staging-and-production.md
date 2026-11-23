@@ -222,11 +222,28 @@ now, on your laptop, so you know they pass before GitHub runs them.
 | Check | What it does | An example from your app |
 | --- | --- | --- |
 | A test | Runs a piece of your code and compares the result with the answer you expect | Ask for the page without the password, and expect to be refused |
-| A linter | Reads your code without running it and points out mistakes and untidy lines | A variable that's created and never used |
+| A linter | Reads your code without running it and checks every line against a list of rules. Each rule describes a known problem, such as a name that's used but never defined | A file that imports `json` and never uses it |
 
-Ruff is the linter we'll use. The tests won't call the model, because a
-model call costs money and can answer differently each time. A check has to
-give the same result every time.
+A linter is to code what a spelling and grammar checker is to an essay. It
+catches a misspelled name or a sentence that doesn't parse, and it does
+that in a second, without running anything. It can't tell you whether the
+essay's argument is right. That's the tests' job: they run the code and
+check what it does.
+
+Ruff is the linter we'll use. It has a few hundred rules, and each has a
+short code. This is what one result looks like:
+
+```text
+app.py:3:8: F401 `json` imported but unused
+```
+
+Read it left to right: the file, the line and column, the rule's code, and
+what's wrong. Here, line 3 of `app.py` imports something the file never
+uses.
+
+The tests won't call the model, because a model call costs money and can
+answer differently each time. A check has to give the same result every
+time.
 
 Ask your agent:
 
@@ -247,7 +264,8 @@ Here's what you should see:
 
 - For the tests, a count and the word OK or passed.
 - For ruff, either "All checks passed!" or a list of findings. A finding is
-  one line that ruff wants changed.
+  one place where your code breaks one of ruff's rules, in the format
+  above.
 
 Ruff usually has findings in files from earlier lessons, such as
 `workflow.py`. They're about style, and your code still works. Fix them
