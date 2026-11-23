@@ -44,7 +44,7 @@ address, its own settings, and its own job.
 | --- | --- | --- | --- |
 | Local | Your laptop | You | Building and trying things |
 | Staging | staging.yourname.com | You | Checking a change on the real server before visitors get it |
-| Production | A subdomain you choose | Anyone with the password | The copy people use |
+| Production | agent.yourname.com | Anyone with the password | The copy people use |
 
 A change moves in one direction:
 
@@ -318,7 +318,7 @@ flowchart LR
     V --> N
     N -->|"yourname.com"| R
     N -->|"staging.yourname.com"| S
-    N -->|"yourproject.yourname.com"| P
+    N -->|"agent.yourname.com"| P
 ```
 
 Each copy needs the same six parts your resume site has:
@@ -332,14 +332,11 @@ Each copy needs the same six parts your resume site has:
 | An environment file | A file on the instance with that copy's API key, password, and environment name |
 | A certificate | What lets a browser show the padlock for that name |
 
-### Choose your names
+### The two names
 
-Staging is always `staging.yourname.com`. Choose a short name for
-production, such as the name of your project. If your project is
-complaint-triage, production could be `triage.yourname.com`.
-
-In every prompt and command below, replace `yourname.com` with your domain
-and `yourproject` with the name you chose.
+Everyone uses the same two names: `staging.yourname.com` for staging and
+`agent.yourname.com` for production. In every prompt and command below,
+replace `yourname.com` with your domain.
 
 ### Point the names at your instance
 
@@ -350,7 +347,7 @@ site. Ask:
 
 ```text
 Using the Cloudflare CLI, add two A records that point at my
-instance's Elastic IP, DNS only: staging and yourproject. Don't
+instance's Elastic IP, DNS only: staging and agent. Don't
 change any other record.
 ```
 
@@ -358,7 +355,7 @@ Check it from your laptop:
 
 ```bash
 nslookup staging.yourname.com
-nslookup yourproject.yourname.com
+nslookup agent.yourname.com
 ```
 
 Each answer should end with your instance's address, the one in
@@ -389,7 +386,7 @@ file is how you pick the work up at home.
 ```text
 Plan how to run two copies of this app on my EC2 instance, next to
 my resume site: staging at staging.yourname.com and production at
-yourproject.yourname.com. The instance's details are in
+agent.yourname.com. The instance's details are in
 docs/instance.md.
 
 Each copy gets its own folder, service, port, environment file, and
@@ -468,7 +465,7 @@ Open each of these and compare what you see:
 | Open | You should see | What it means |
 | --- | --- | --- |
 | `https://staging.yourname.com` | A padlock and "502 Bad Gateway" | Nginx answered and the certificate works. No app is behind it yet, because no code has been deployed |
-| `https://yourproject.yourname.com` | A padlock and "502 Bad Gateway" | The same, for production |
+| `https://agent.yourname.com` | A padlock and "502 Bad Gateway" | The same, for production |
 | Your resume site | The site, as before | The new setup didn't disturb it |
 | Your repository on GitHub, then Settings, Actions, Runners | Your runner, marked Idle | The runner is connected and waiting for a job |
 
@@ -598,7 +595,7 @@ does. Wait for the run to finish.
 3. Choose Promote in the list on the left.
 4. Choose Run workflow, then choose the green Run workflow button.
 5. Wait for the green check mark.
-6. Open `https://yourproject.yourname.com` and enter the production
+6. Open `https://agent.yourname.com` and enter the production
    password.
 
 The bottom of the page should say production, with the same commit as
@@ -672,7 +669,8 @@ minutes to every commit, which is why it comes at the end of today.
 ## 6. What's next
 
 - By Tuesday, December 1, at 1:45 PM, M2 is due: your app is live at your
-  production subdomain behind the password, and one commit moved from
+  production address, agent.yourname.com, behind the password, and one
+  commit moved from
   staging to production. Submit both addresses and both passwords in
   Brightspace. The passwords stay out of your repository.
 - Tuesday, December 1, is the LMU Data Center tour. Meet in University Hall

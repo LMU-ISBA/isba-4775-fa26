@@ -57,7 +57,7 @@ a late one loses 10% per day, down to a floor of 50%.
 | Thu 11/12, 1:45 PM | Your posting, chosen from your three, and one next-step posting. You can switch among the three until 11/17 | |
 | Tue 11/17 | M1: your PRD, your data source, and two architectures with cost estimates. If you don't want to start from scratch, you can look for an open source project to extend. That search is optional. Name your choice and your reason, add a diagram, and rename your repository. Submit your repository URL in Brightspace, then keep building. I'll read your design and tell you by Thu 11/19 if something has to change | 60 |
 | Tue 11/24 | Your AWS site is working, for the staging and production lesson, on Zoom | |
-| Tue 12/1, 1:45 PM | M2: your app is live at your production subdomain behind a password, and one commit moved from staging to production through GitHub Actions. Submit both addresses and both passwords in Brightspace | 75 |
+| Tue 12/1, 1:45 PM | M2: your app is live at your production address, `agent.yourname.com`, behind a password, and one commit moved from staging to production through GitHub Actions. Submit both addresses and both passwords in Brightspace | 75 |
 | Thu 12/3 | In class, your data moves to S3 or RDS, and your agent gets access to only what it needs | |
 | Tue 12/8 | M3: your agent answers a grounded question with a tool, from your data on AWS. You'll show it live in class. Exercise 10 is due | 75 |
 | Thu 12/10, 1:45 PM | Project 02 is submitted, with the areas no milestone covers | 90 |
@@ -213,7 +213,7 @@ Final are graded on the submitted project.
 | --- | --- | --- | --- | --- |
 | Posting, PRD, and data | M1 | 30 | A posting that passes the tests, a PRD, and a data card showing real data or a documented realism check | I read them against your posting |
 | Architecture decision | M1 | 30 | Two designs with costs and tradeoffs, your choice and what it gave up, and the diagram | I read them against your PRD |
-| System on AWS | M2 | 40 | The app at your production subdomain over HTTPS, behind the access gate | I open the live address without the password, then with it |
+| System on AWS | M2 | 40 | The app at `agent.yourname.com` over HTTPS, behind the access gate | I open the live address without the password, then with it |
 | Environments and deployment | M2 | 35 | Three environments, GitHub Actions deploying, secrets handled, and one change shown moving through | I find one commit in your Actions history that deployed to staging and then to production |
 | Agent | M3 | 50 | The job's repeated work, done with a tool, a step limit, and a refusal. You can defend the line between fixed steps and agent decisions | I send three of your eval inputs and one out-of-scope request, then compare the answers with your expected answers |
 | Grounding | M3 | 25 | Answers drawn from your data in S3 or RDS, reached with access to only what the agent needs | I ask a question only your data answers, and I read the IAM policy or the database user's permissions |

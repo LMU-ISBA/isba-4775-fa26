@@ -261,7 +261,7 @@ The late policy for projects applies to each one.
 |---|---|---|---:|
 | M1 | PRD, data source, two architectures with cost estimates, your choice and reason, and a diagram | Tue 11/17 | 60 |
 | | Your AWS site is working, for the staging and production lesson | Tue 11/24 | |
-| M2 | App live at your production subdomain behind a password, and one change moved from staging to production | Tue 12/1, 1:45 PM | 75 |
+| M2 | App live at `agent.yourname.com` behind a password, and one change moved from staging to production | Tue 12/1, 1:45 PM | 75 |
 | M3 | Agent answering a grounded question with a tool, from your data on AWS, shown live in class | Tue 12/8 | 75 |
 | Final | The submitted project, with the areas no milestone covers | Thu 12/10, 1:45 PM | 90 |
 
