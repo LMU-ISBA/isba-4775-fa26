@@ -130,7 +130,18 @@ session named with:
 ```
 
 You set up your instance from your career-platform repository, and this
-session has never seen it. AWS can tell your agent what it needs. Ask:
+session has never seen it. AWS can tell your agent what it needs. The
+prompt uses five terms from the AWS migration:
+
+| Term | What it means |
+| --- | --- |
+| AWS CLI profile | The saved sign-in your agent uses to run AWS commands. Yours is named `isba-4775` |
+| Public address | Where your instance sits on the internet. Yours is an Elastic IP, so it stays the same when the instance restarts |
+| Key pair | Two matching files that prove it's you when you connect with SSH. AWS holds the public one, and the private one is on your laptop in `~/.ssh` |
+| Security group | The firewall around your instance. It's a list of rules, and each rule says which addresses can reach which port |
+| SSH rule | The rule in that list for port 22, the port SSH uses. Yours allows one address |
+
+Ask:
 
 ```text
 Using the AWS CLI profile isba-4775, find my EC2 instance in
@@ -150,10 +161,22 @@ If you change networks again, run this prompt again.
 Use the session you named in section 0. If you closed it, start a new one
 in your Project 02 repository and give it the same name.
 
-Your agent needs a way in. An API route is an address that takes a question
-and returns an answer, and a page gives a person a box to type in. The
-prompt asks for FastAPI, which is the framework your resume site uses. Ask
-your agent:
+Your agent needs a way in. Right now only you can run it, from a terminal.
+A web app gives it an address, so a person with a browser can ask it a
+question. The prompt uses these terms:
+
+| Term | What it means |
+| --- | --- |
+| FastAPI | The Python framework your resume site uses. It turns Python functions into web addresses |
+| Route | One address inside your app. The route `/ask` takes a question and returns the agent's answer |
+| Markdown | Plain text with marks for headings, bold, and tables. Your agent writes its answers in it |
+| Shared password | One password for everyone you let in. There are no user accounts |
+| The environment | Settings your app reads when it starts, kept outside the code. On your laptop they live in `.env` |
+| Server log | The running record your app writes while it works. It's where you look when an answer is wrong |
+| Environment name | A label that says which copy this is: local, staging, or production |
+| Commit | One saved version of your code in Git, named by a short code such as `15b3c0d` |
+
+Ask your agent:
 
 ```text
 Read agent.py. Build a small web app around it with FastAPI:
@@ -330,7 +353,7 @@ Each copy needs the same six parts your resume site has:
 | A service | The program that keeps the copy running and restarts it after a reboot |
 | A port | The number Nginx uses to reach that copy. Each copy gets its own |
 | An environment file | A file on the instance with that copy's API key, password, and environment name |
-| A certificate | What lets a browser show the padlock for that name |
+| A certificate | What lets a browser show the padlock for that name. Let's Encrypt issues it for free, and Certbot is the tool that asks for it, as on October 6 |
 
 ### The two names
 
@@ -341,9 +364,15 @@ replace `yourname.com` with your domain.
 ### Point the names at your instance
 
 A name has to point at your instance before anyone can visit it, and before
-a certificate can be issued for it. "DNS only" means Cloudflare hands out
-your instance's address and stays out of the way, the same as your resume
-site. Ask:
+a certificate can be issued for it. The prompt uses three terms:
+
+| Term | What it means |
+| --- | --- |
+| Cloudflare CLI | The command-line tool your agent used to change DNS in the Railway lesson |
+| A record | The DNS entry that says "this name is at this address" |
+| DNS only | Cloudflare hands out your instance's address and stays out of the way, the same as your resume site. The other setting, proxied, puts Cloudflare between the visitor and your instance |
+
+Ask:
 
 ```text
 Using the Cloudflare CLI, add two A records that point at my
@@ -383,6 +412,16 @@ September 24 and October 1, with the writing-plans skill from Superpowers.
 The skill saves the plan as a file. If class ends before you finish, the
 file is how you pick the work up at home.
 
+The prompt uses the six parts from the table above, and five more terms:
+
+| Term | What it means |
+| --- | --- |
+| Routes by hostname | Nginx reads the name in the address, such as `staging.yourname.com`, and sends the request to the copy with that name |
+| Self-hosted runner | A runner on your own machine, here your instance, and not one of GitHub's |
+| Run as a service | Started by the system and kept running, so it comes back after a reboot without you |
+| Permissions | What a program is allowed to change on the instance. The runner needs very few |
+| Skill | A set of written instructions your agent loads for one kind of job. writing-plans is the one for plans |
+
 ```text
 Plan how to run two copies of this app on my EC2 instance, next to
 my resume site: staging at staging.yourname.com and production at
@@ -421,7 +460,9 @@ things in it. If one is missing, ask your agent to add it before you go on.
 
 ### Build it
 
-Run the plan one section at a time, in this session:
+Run the plan one section at a time. "Native execution" in the prompt means
+this session does every task itself, in order, and doesn't hand tasks to
+other agents:
 
 ```text
 The plan looks good. Let's work on the first section using native
@@ -481,13 +522,16 @@ Now you build the pipeline's first half. From here on, a push to GitHub
 does three things without you: it runs your checks, it deploys to staging
 if they pass, and it stops if one fails.
 
-Three words come up in this section:
+These words come up in this section:
 
 | Word | What it means |
 | --- | --- |
 | Workflow | A file in your repository that tells GitHub Actions what to do, and when. Yours will run on every push |
 | Job | One group of steps inside a workflow. Each job runs on one runner |
 | Secrets scan | A check that reads your commits for anything that looks like a key or a password. Gitleaks is the tool |
+| Push to main | Sending your commits to the main branch on GitHub. It's the event that starts the workflow |
+| Deploy | Copy one commit's code to the place it runs, then restart the service so it uses the new code |
+| GitHub's runner and your runner | GitHub's runners do the checks. Your self-hosted runner, from section 3, does the deploy, because only it can reach your instance |
 
 Ask:
 
