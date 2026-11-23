@@ -32,6 +32,8 @@ By the end of this lesson, you should be able to:
   your IP address.
 - Say where your API key lives in each environment, and why it isn't in the
   repository.
+- Say what CI, CD, and DevOps mean, and point to each one in your own
+  project.
 
 ## Three environments
 
@@ -71,6 +73,33 @@ until it passes.
 | When | Before you commit | After you push |
 | What runs | `/code-review` and `/security-review` | Tests, a linter, and a secrets scan |
 | Can you skip it? | Yes, so it's a habit | No, so it's a gate |
+
+## CI/CD and DevOps
+
+The path in the diagram has names, and job postings use them. You'll build
+each one today.
+
+| Term | What it means | Where it is today |
+| --- | --- | --- |
+| CI, continuous integration | Every push is checked by a machine, so a problem shows up while the change is still small | The tests, the linter, and the secrets scan in section 4 |
+| CD, continuous delivery | Every commit that passes is ready to release, and a person decides when | The staging deploy in section 4 and your promotion in section 5 |
+| Continuous deployment | The same path, but production updates with no person deciding | Not today |
+| Pipeline | The steps a commit goes through, in order, from push to production | Your two GitHub Actions workflows |
+| DevOps | The people who build the software also deploy it and keep it running, with automation doing the handoffs | Everything you do today |
+
+Before DevOps, a development team wrote the code and handed it to a
+separate operations team to run. Releases were rare, and each team blamed
+the other when one failed. DevOps puts both jobs on one team and automates
+the handoff. GitHub Actions is one tool for it. Jenkins, GitLab CI, and AWS
+CodePipeline do the same work.
+
+Some jobs own this work: DevOps engineer, site reliability engineer,
+platform engineer, and cloud engineer. Most of those postings ask for two
+to five years, so think of them as a second job. The first jobs use it
+every day without the title. A technical support engineer reads a failed
+deploy, an implementation specialist ships a customer's setup, and a data
+analyst's report runs in a pipeline someone else built. Postings for those
+jobs list CI/CD, Git, or GitHub Actions as a skill.
 
 ## 1. Build the app on your laptop
 
@@ -255,8 +284,16 @@ Then ask:
 Commit and push.
 ```
 
-Open the Actions tab in your repository and watch the run. When it
-finishes:
+Open the Actions tab in your repository and watch the run. While it runs,
+check your own postings for today's terms:
+
+```text
+Search my saved postings in research/ for CI/CD, DevOps, pipeline,
+deployment, GitHub Actions, and staging. Show me each line you find
+and which posting it's from. Don't summarize.
+```
+
+When the run finishes:
 
 1. Open staging.yourname.com and enter the staging password.
 2. Read the bottom of the page. It should say staging, with a commit.
