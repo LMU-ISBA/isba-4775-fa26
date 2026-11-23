@@ -125,6 +125,9 @@ Read agent.py. Build a small web app around it with FastAPI:
   plain text.
 - A shared password in front of the page and the route. Read it from
   the environment, never from the code.
+- Write each agent step to the server log: the question, the tool and
+  its inputs, how much came back, and why the run stopped. Never log
+  the password or my API key.
 - At the bottom of the page, show the environment name and the commit
   the app is running.
 
@@ -141,6 +144,17 @@ Check it yourself:
    should refuse you.
 4. Ask one vague question, such as "show me a report." Write down what the
    agent does. You'll use it in section 5.
+
+On the command line, `agent.py` prints each step. Behind a page you only
+see the answer, so the steps have to go to a log. Ask:
+
+```text
+Show me the log lines for my last question, and tell me where the
+log is.
+```
+
+Find the tool call, what it was given, and why the run stopped. This log
+is where you'll look when an answer is wrong.
 
 The password is your access gate. Every question costs you API credits, so
 only people you allow should reach the agent.
@@ -303,6 +317,8 @@ When the run finishes:
 2. Read the bottom of the page. It should say staging, with a commit.
 3. Run `git log -1` on your laptop and compare the commit.
 4. Ask the agent a question.
+5. Ask your coding agent to show you the staging log for that question.
+   The steps are now on your instance, not on your laptop.
 
 Production still shows the 502 error, because nothing has been promoted.
 
