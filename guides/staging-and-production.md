@@ -281,13 +281,54 @@ push shows up on GitHub.
 
 ## 3. Get your instance ready
 
-This section is setup you do once. The pipeline reuses it on every deploy.
+Your instance runs one site now, your resume site. After this section it
+will have room for two more: a staging copy and a production copy of your
+Project 02 app. You do this setup once, and every deploy after it reuses
+it.
 
-Choose a name for your production subdomain, such as the name of your
-repository. In the prompts below, replace `yourname.com` with your domain
-and `yourproject` with that name.
+Nginx is already the front door of your instance. It reads the name a
+visitor asked for and sends the request to the right site:
 
-Start with DNS:
+```mermaid
+flowchart LR
+    V["Visitor"]
+    N["Nginx on your instance"]
+    R["Resume site"]
+    S["Staging copy"]
+    P["Production copy"]
+
+    V --> N
+    N -->|"yourname.com"| R
+    N -->|"staging.yourname.com"| S
+    N -->|"yourproject.yourname.com"| P
+```
+
+Each copy needs the same six parts your resume site has:
+
+| Part | What it is |
+| --- | --- |
+| A DNS record | Points the copy's name at your instance |
+| A folder | Where that copy's code sits on the instance |
+| A service | The program that keeps the copy running and restarts it after a reboot |
+| A port | The number Nginx uses to reach that copy. Each copy gets its own |
+| An environment file | A file on the instance with that copy's API key, password, and environment name |
+| A certificate | What lets a browser show the padlock for that name |
+
+### Choose your names
+
+Staging is always `staging.yourname.com`. Choose a short name for
+production, such as the name of your project. If your project is
+complaint-triage, production could be `triage.yourname.com`.
+
+In every prompt and command below, replace `yourname.com` with your domain
+and `yourproject` with the name you chose.
+
+### Point the names at your instance
+
+A name has to point at your instance before anyone can visit it, and before
+a certificate can be issued for it. "DNS only" means Cloudflare hands out
+your instance's address and stays out of the way, the same as your resume
+site. Ask:
 
 ```text
 Using the Cloudflare CLI, add two A records that point at my
@@ -295,26 +336,34 @@ instance's Elastic IP, DNS only: staging and yourproject. Don't
 change any other record.
 ```
 
-Ask DNS from your laptop. Both answers should be your Elastic IP:
+Check it from your laptop:
 
 ```bash
 nslookup staging.yourname.com
 nslookup yourproject.yourname.com
 ```
 
+Each answer should end with your instance's address, the one in
+`docs/instance.md`. If a name isn't found, wait a minute and try again.
+
 ### How GitHub reaches your instance
 
-GitHub Actions runs each job on a runner, which is a machine that carries
-out the steps. GitHub's own runners can't SSH into your instance, because
-port 22 only allows your IP address. So your instance runs a runner of its
-own. It asks GitHub for jobs, and nothing new opens on your firewall.
+In section 4, GitHub Actions will copy your code to your instance. It does
+its work on a runner, which is the computer that carries out the steps.
+GitHub has its own runners, but they can't SSH into your instance, because
+port 22 only allows your IP address. You saw that rule in section 0.
 
-Use a self-hosted runner only on a private repository. On a public one, a
+So your instance gets a runner of its own. It's a small program that asks
+GitHub, "Is there a job for me?" The instance starts the conversation, so
+nothing new opens on your firewall.
+
+Use a runner like this only on a private repository. On a public one, a
 stranger's pull request could run code on your instance.
 
-### Plan it, then build it
+### Ask for a plan
 
-Ask for a plan and read it before anything changes:
+This is the largest change you've made to your instance, and your resume
+site lives there. Ask for a plan and read it before anything changes:
 
 ```text
 Plan how to run two copies of this app on my EC2 instance, next to
@@ -334,17 +383,32 @@ Don't copy the app's code to the instance. The pipeline will do
 that. Show me the plan before you change anything.
 ```
 
-Find four things in the plan: the two ports, the two environment files,
-what the runner is allowed to do, and the step that could break your resume
-site. Then ask:
+Find these four things in the plan. If one is missing, ask about it before
+you go on.
+
+- The two ports. They have to differ from each other and from your resume
+  site's port.
+- The two environment files, and where they are.
+- What the runner is allowed to do. It should be able to write to the two
+  folders and restart the two services, and nothing more.
+- The step that could break your resume site, and how the plan checks for
+  that.
+
+### Build it
 
 ```text
 Carry out the plan one part at a time, and show me each check. Tell
 me what you need from me.
 ```
 
-Each copy needs your API key and its own password. They go in the
-environment files on the instance, and they stay out of GitHub:
+The agent will ask you to approve commands, and it may ask you for
+something from GitHub to register the runner. Read each request before you
+approve it.
+
+Next, give each copy its settings. The API key and the passwords go in the
+environment files on your instance, and GitHub never sees them. Choose two
+different passwords of at least 12 characters and write them down, since
+you'll submit both for M2:
 
 ```text
 Copy my API key from .env into both environment files on the
@@ -353,14 +417,36 @@ one and production in the other. Ask me for a different password for
 each.
 ```
 
-Open both addresses in your browser. Each should show a padlock and a 502
-error. Nginx and the certificate are working, and no app is behind them
-yet. Check that your resume site still loads.
+### Check it
 
-In your repository on GitHub, open Settings, then Actions, then Runners.
-Your runner should show Idle.
+Open each of these and compare what you see:
+
+| Open | You should see | What it means |
+| --- | --- | --- |
+| `https://staging.yourname.com` | A padlock and "502 Bad Gateway" | Nginx answered and the certificate works. No app is behind it yet, because no code has been deployed |
+| `https://yourproject.yourname.com` | A padlock and "502 Bad Gateway" | The same, for production |
+| Your resume site | The site, as before | The new setup didn't disturb it |
+| Your repository on GitHub, then Settings, Actions, Runners | Your runner, marked Idle | The runner is connected and waiting for a job |
+
+The 502 is what you want here. It's the gap the pipeline fills in section
+4. If you see anything else, such as a page that won't load, a certificate
+warning, or a runner marked Offline, tell your agent exactly what you see.
+
+You're done with this section when all four rows match.
 
 ## 4. Deploy to staging with GitHub Actions
+
+Now you build the pipeline's first half. From here on, a push to GitHub
+does three things without you: it runs your checks, it deploys to staging
+if they pass, and it stops if one fails.
+
+Three words come up in this section:
+
+| Word | What it means |
+| --- | --- |
+| Workflow | A file in your repository that tells GitHub Actions what to do, and when. Yours will run on every push |
+| Job | One group of steps inside a workflow. Each job runs on one runner |
+| Secrets scan | A check that reads your commits for anything that looks like a key or a password. Gitleaks is the tool |
 
 Ask:
 
@@ -375,8 +461,12 @@ one fails, nothing deploys.
 Before I commit, explain each job to me in one line.
 ```
 
-Before you push, predict what the Actions tab will show, and in what order.
-Then ask:
+You should hear about four jobs: the tests, ruff, the secrets scan, and the
+deploy. The first three run on GitHub's runners. The deploy runs on yours,
+and only after the other three pass. That "only after" is the gate.
+
+Before you push, predict it. What will run first, and what happens to the
+deploy if ruff fails? Then ask:
 
 ```text
 Commit and push.
@@ -386,8 +476,13 @@ If GitHub rejects the push with a message about the workflow scope, paste
 the error to your agent. Your GitHub sign-in needs permission to change
 workflow files.
 
-Open the Actions tab in your repository and watch the run. While it runs,
-check your own postings for today's terms:
+### Watch it run
+
+In your repository on GitHub, open the Actions tab and choose the newest
+run. You'll see the four jobs. Each one turns into a green check mark when
+it passes. The run takes a few minutes.
+
+While it runs, check your own postings for today's terms:
 
 ```text
 Search my saved postings in research/ for CI/CD, DevOps, pipeline,
@@ -395,21 +490,46 @@ deployment, GitHub Actions, and staging. Show me each line you find
 and which posting it's from. Don't summarize.
 ```
 
-When the run finishes:
+Two things can go differently, and both are worth seeing:
 
-1. Open staging.yourname.com and enter the staging password.
-2. Read the bottom of the page. It should say staging, with a commit.
-3. Run `git log -1` on your laptop and compare the commit.
-4. Ask the agent a question.
-5. Ask your coding agent to show you the staging log for that question.
-   The steps are now on your instance, not on your laptop.
+- A check shows a red X. That's the gate doing its job, and nothing was
+  deployed. Open the job, copy the error, and give it to your agent.
+- The deploy job says it's waiting for a runner. Your runner is offline.
+  Tell your agent, and it can restart the runner on your instance.
 
-Production still shows the 502 error, because nothing has been promoted.
+### Check staging
+
+When all four jobs are green:
+
+1. Open `https://staging.yourname.com`. The 502 is gone, and the browser
+   asks for a password.
+2. Enter the staging password.
+3. Read the bottom of the page. It should say staging, with a commit.
+4. Run `git log -1` on your laptop. The commit should match the page.
+5. Ask the agent a question on the page.
+6. Ask your coding agent for the log of that question:
+
+```text
+Show me the staging log lines for the question I asked a moment ago.
+```
+
+The steps are the same ones you read in section 1. They're on your instance
+now, and not on your laptop.
+
+Production still shows the 502. The pipeline only goes as far as staging,
+and that's on purpose.
+
+You're done with this section when staging answers a question and shows the
+commit you pushed.
 
 ## 5. Promote to production
 
-Staging has a commit that passed the checks, and you've tried it. Promoting
-it is your decision, so you start it by hand:
+Staging is where you find out whether a change is right. Production is what
+other people use. To promote a commit is to move the one you tested on
+staging into production. A machine can run checks, but only you know
+whether the change is what you wanted, so you start this step by hand.
+
+Ask:
 
 ```text
 Add a second workflow named Promote that I start by hand from the
@@ -417,18 +537,35 @@ Actions tab. It deploys the commit staging is running to production
 and restarts the production service.
 ```
 
-Commit and push, and wait for the staging deploy to finish. Then read the
-commit at the bottom of the staging page. Promote sends whatever staging is
-running when you start it, so that commit is what production will get.
+Then:
 
-In the Actions tab, choose Promote, then Run workflow. When it finishes,
-open your production address. The bottom of the page should say production,
-with the same commit as staging.
+```text
+Commit and push.
+```
 
-Now move one real change through all three environments. In section 1 you
-asked a vague question. If your agent answered with a question of its own,
-the page gave you no way to reply. Your agent gets one request and returns
-one answer, so it needs enough to act without you.
+This push runs your checks and deploys to staging again, because every push
+does. Wait for the run to finish.
+
+### Promote it
+
+1. Open your staging page and read the commit at the bottom. Promote sends
+   whatever staging is running, so this is the commit production will get.
+2. In your repository on GitHub, open the Actions tab.
+3. Choose Promote in the list on the left.
+4. Choose Run workflow, then choose the green Run workflow button.
+5. Wait for the green check mark.
+6. Open `https://yourproject.yourname.com` and enter the production
+   password.
+
+The bottom of the page should say production, with the same commit as
+staging. Your app is live, and that's most of M2.
+
+### Move one real change through
+
+Now use the whole path for a change that matters. In section 1 you asked a
+vague question. If your agent answered with a question of its own, the page
+gave you no way to reply. Your agent gets one request and returns one
+answer, so it needs enough to act without you.
 
 Open `agent.md` and add two things, in your own words:
 
@@ -445,25 +582,32 @@ does with a vague request. Update agent.py to match, and give the
 agent today's date. Change nothing else. Then run the tests.
 ```
 
-Move the change through:
+Move the change through, one environment at a time:
 
-1. Ask the vague question again on your laptop. The agent should answer
-   and say what it assumed. If it doesn't, read the log, sharpen your
-   words in `agent.md`, and ask again.
-2. Run the two reviews, then commit and push.
-3. Watch the checks. Ask the vague question on staging. Production still
-   gives the old answer.
-4. Run Promote. Both sites now show the same commit.
+| Where | What you do | What you should see |
+| --- | --- | --- |
+| Your laptop | Restart the app and ask the vague question again | An answer, with what the agent assumed. If not, read the log, sharpen your words in `agent.md`, and ask again |
+| Your laptop | Run `/code-review` and `/security-review`, then ask your agent to commit and push | The push goes through |
+| GitHub | Watch the run in the Actions tab | Four green check marks |
+| Staging | Ask the vague question | The new answer, and a new commit at the bottom |
+| Production | Ask the vague question | The old answer. Nothing has been promoted |
+| GitHub | Run Promote | A green check mark |
+| Production | Ask the vague question again | The new answer, and the same commit as staging |
 
-If your agent already handled the vague question, change the heading on
-the page and move that through.
+If your agent already handled the vague question in section 1, change the
+heading on the page and move that through.
 
-Then explain it back, in your own words:
+### Say it back
 
 ```text
 I'll explain what happens between git push and a visitor seeing my
 change, one line per step. Tell me only where I'm wrong.
 ```
+
+You're done with this section when production shows the same commit as
+staging, and you can explain how it got there.
+
+### What real teams add
 
 Teams with a paid GitHub plan add two rules to this path. A change can't
 merge until the checks pass, and production waits for a named person to
