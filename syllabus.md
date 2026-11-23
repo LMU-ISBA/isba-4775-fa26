@@ -137,7 +137,7 @@ Codespace shutdown guide feedback within the credit/no-credit assessment.
 | 07 | Migrate your site from Railway to AWS: EC2, RDS, verified cutover, and a diagram | Build | Tue 11/10, 1:45 PM |
 | 08 | Real data and your first model calls: about 20 records for your posting, then one record sent to a model three ways | Build | Tue 11/17, 1:45 PM |
 | 09 | A workflow and an agent: one question answered two ways in Python, from steps you write first, with one tool, a step limit, and a comparison of the runs | Build | Tue 11/24, 1:45 PM |
-| 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 12/3, 1:45 PM |
+| 10 | **One real failure from your Project 02 work: what you saw, the cause, and the fix, in your own words** | Troubleshoot | Tue 12/8, 1:45 PM |
 
 Ex01 and Ex02 were due at 1:45 PM, before class, and Ex03 is due at the same
 time on Thu 10/1. The Railway migration is a Project 1 requirement, taught on
@@ -150,6 +150,8 @@ Exercise 08 is sections 2 through 6 of
 [Your first model call](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/first-model-call.md).
 Exercise 09 is sections 3 through 5 of
 [A workflow and an agent](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/workflow-and-agent.md).
+Exercise 10 has its own
+[requirements](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/exercises/ex10-a-real-failure.md).
 
 ## Project 1: Own Your Corner of the Internet, 125 points
 
@@ -226,12 +228,12 @@ requirements govern.
 |---|---|
 | Posting and PRD | One posting that passes the four tests, one next-step posting, and a PRD |
 | System on AWS | Your app, agent, and data in your AWS account, live over HTTPS at a subdomain of the domain you already own |
-| Agent | Built or extended by you: at least one tool, structured output, memory, a step limit, and refusals outside its job |
-| Data | Real data first, stored on AWS, reached with least-privilege credentials |
-| Trigger | One event in a first system starts work in a second, doing real work in the job's domain |
+| Agent | Built or extended by you: at least one tool, a step limit, and refusals outside its job |
+| Data | Real data first, stored on AWS in S3 or RDS, reached with access to only what the agent needs |
+| Schedule | Something other than you starts your workflow, on a schedule or on an event |
 | Environments | Local, staging, and production, with GitHub Actions deploying and secrets kept out of the repository |
-| Operations | An access gate, a rate limit, cost controls, one analytics event, and a way to know the system is down |
-| Evals | At least 10 cases with expected answers, and one readable trace |
+| Operations | An access gate, cost controls, and an outside monitor that tells you when the system is down |
+| Evals | At least five cases you write, with expected answers, and one readable trace |
 | Architecture decision | Two designs compared, one chosen, and a decision record |
 | Blog post and LinkedIn draft | Both written for a reader who isn't technical |
 | Engineering record | A README and `docs/project-02-submission.md` |
@@ -241,8 +243,9 @@ can follow it, change it, or design your own. A logistics posting might yield
 a shipment-status copilot, a marketing posting a campaign analyzer, and a
 healthcare-operations posting an intake triage assistant.
 
-The orchestration requirement is a capability, not a tool. n8n, Make, Zapier,
-Power Automate, and code all count.
+Something other than you has to start your workflow. A cron schedule is
+enough, and an event from a second system counts too, through n8n, Make,
+Zapier, Power Automate, or code.
 
 Your system has to be both deterministic and agentic, and you have to defend
 where the line between them falls. Knowing which parts should be a fixed workflow
@@ -257,23 +260,25 @@ The late policy for projects applies to each one.
 | Milestone | Bar | Due | Points |
 |---|---|---|---:|
 | M1 | PRD, data source, two architectures with cost estimates, your choice and reason, and a diagram | Tue 11/17 | 60 |
-| | Your AWS site is working, for the GitHub Actions lesson | Tue 11/24 | |
-| M2 | App deployed to production on your subdomain | Tue 12/1, 1:45 PM | 40 |
-| M3 | Agent answering a grounded question with tools, shown live in class | Thu 12/3 | 75 |
-| M4 | Two systems connected on a trigger, and one change moved from staging to production, shown live in class | Tue 12/8 | 60 |
-| Final | The submitted project, with the areas no milestone covers | Thu 12/10, 1:45 PM | 65 |
+| | Your AWS site is working, for the staging and production lesson | Tue 11/24 | |
+| M2 | App live at your production subdomain behind a password, and one change moved from staging to production | Tue 12/1, 1:45 PM | 75 |
+| M3 | Agent answering a grounded question with a tool, from your data on AWS, shown live in class | Tue 12/8 | 75 |
+| Final | The submitted project, with the areas no milestone covers | Thu 12/10, 1:45 PM | 90 |
 
-M4 needs a working staging environment. The application runs fine without
+M2 needs a working staging environment. The application runs fine without
 one, which makes it the first thing skipped under deadline pressure.
 
 ## Final whiteboard interview, 300 points
 
-**Thursday, December 17, 11:00 AM**, in the scheduled exam slot, for thirty
-minutes.
+**Monday, December 14, through Thursday, December 17**, by appointment, for
+25 minutes.
 
-Same format as the midterm: twenty-five minutes on your own system from memory,
-five minutes of curveball. The system you defend is the one you built for a job
-you chose, so this is a simulated interview for that job.
+Same format as the midterm: twenty minutes on your own system from memory,
+including a changed constraint, then a five-minute debrief. The system you
+defend is the one you built for a job you chose, so this is a simulated
+interview for that job. When you book, you'll give a link to your updated
+resume, which links to your GitHub portfolio and your project. The booking
+link and the study guide come out by December 10.
 
 ## Semester at a glance
 
@@ -281,7 +286,7 @@ you chose, so this is a simulated interview for that job.
 |---|---|
 | 1-8 | Networking foundations, then the cloud arc. Exercises 01-06, Project 1 |
 | 9 | Midterm whiteboard interviews Monday through Wednesday, then AWS migration Thursday |
-| 10-15 | The AWS migration, then Project 02, the job-description-driven build. Exercises 07-10, milestones M1-M4 |
+| 10-15 | The AWS migration, then Project 02, the job-description-driven build. Exercises 07-10, milestones M1-M3 |
 | Finals | Final whiteboard interview |
 
 Thanksgiving week meets once, on Zoom. Tuesday, November 24 is remote, and you
@@ -301,7 +306,7 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Midterm interviews | Mon 10/26 to Wed 10/28 |
 | Last day to withdraw | Fri Nov 13 |
 | Instruction ends | Fri Dec 11 |
-| Final interview | Thu Dec 17, 11:00 AM |
+| Final interviews | Mon Dec 14 to Thu Dec 17, by appointment |
 
 ## Class schedule
 
@@ -331,11 +336,11 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 11/12 | Real data and your first model call: data for your posting, a model API key set up in class, and one record sent to a model three ways | Save and compare three postings, choose one, and save one next-step posting. | |
 | Tue 11/17 | A workflow and an agent: sorting your posting's duties, then one question answered two ways in Python and compared | Submit M1 and Exercise 08 before class at 1:45 PM. | Ex08, M1 |
 | Thu 11/19 | A workflow and an agent, continued: the workflow rebuilt from steps you write first, then the agent with one tool and a step limit, and the comparison | Bring Tuesday's `workflow.py` run and your `my-workflow-and-agent` wiki page. | |
-| Tue 11/24 | Environments and tested deployment: GitHub Actions deploying your AWS site, staging on a subdomain, and promotion through CI/CD. On Zoom | Have your AWS site working. Join with the Zoom link in Brightspace's Week 13 module. | Ex09 |
+| Tue 11/24 | Staging and production: your agent behind a page, checks in GitHub Actions, a staging deploy, and promotion to production. CI/CD and DevOps. On Zoom | Have your AWS site working, and do section 0 of the [guide](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/staging-and-production.md) from the network you'll use for class. Join with the Zoom link in Brightspace's Week 13 module. | Ex09 |
 | Thu 11/26 | No class, Thanksgiving | | |
 | Tue 12/1 | LMU Data Center tour with [Jeff Solomon](https://its.lmu.edu/whoweare/staff/infrastructureservices/) | Submit M2 by 1:45 PM. Meet in University Hall in front of Einstein Bros. Bagels. | M2 |
-| Thu 12/3 | M3 shown live in class, staging in practice, then the decision record | Have three eval cases with expected answers ready. Complete the controlled agent-failure investigation. | Ex10, M3 |
-| Tue 12/8 | M4 shown live in class, then the blog post and LinkedIn draft workshop and final interview prep | | M4 |
+| Thu 12/3 | Data access: your data in S3 or RDS with least privilege, the agent's refusal, and a schedule for your workflow | Have M2 working. Know whether your data goes to S3 or RDS. | |
+| Tue 12/8 | M3 shown live in class, then evals: five cases you write and one trace. Then the blog post and LinkedIn draft workshop, and an outside monitor | Bring three questions your data can answer, with the answers you expect. | Ex10, M3 |
 | Thu 12/10 | Final interview practice in pairs, and a course retrospective | Submit Project 02 before class at 1:45 PM. | Project 02 |
 
 Professor Ken Summers leads the full class session on November 5, in Hilton
@@ -361,6 +366,11 @@ day.
 
 The November 19 revision moves M2 to December 1, so you can deploy with what
 the November 24 class teaches.
+
+The November 23 revision makes Project 02 one small system you own. M4 is
+removed, M3 moves to December 8, and Exercise 10 becomes one real failure
+from your own project. Final interviews run by appointment from December 14
+to December 17. The Project 02 requirements list every change.
 
 ### Prepare before class
 

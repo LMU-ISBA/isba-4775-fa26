@@ -241,8 +241,7 @@ entry-level roles both count, and you don't have to qualify yet.
 Indeed limits how many requests your account can make in a short time. That's
 a rate limit, and every search and every posting your agent opens counts
 toward it. Plan a search before you run it, read the ten results, and open
-only the postings you might save. You'll put a rate limit on your own agent
-later in Project 02, so notice what it's like from this side.
+only the postings you might save.
 
 If Indeed is limited, or you want postings it doesn't list, ask through
 Firecrawl:

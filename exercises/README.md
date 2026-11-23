@@ -10,8 +10,9 @@ evidence file as specified in its requirements, and you submit the repository UR
 in Brightspace. Exercise 04 uses `docs/how-this-site-is-secured.md` and also
 asks for your live site URL and a direct link to that explanation.
 
-Exercises 08 and 09 are the exception. Their work goes in your private
-Project 02 repository, and each one's requirements are in its guide.
+Exercises 08 through 10 are the exception. Their work goes in your private
+Project 02 repository. The requirements for 08 and 09 are in their guides,
+and Exercise 10 has its own page.
 
 Exercise 01 is submitted entirely through Brightspace: the
 [self-discovery interview](self-discovery-interview.md) and the photo of your
@@ -39,17 +40,16 @@ for the full instructions.
 | 07 | Migrate your site from Railway to AWS: EC2, RDS, verified cutover, and a diagram | Build | Tue 11/10, 1:45 PM | [instructions](ex07-aws-migration.md) |
 | 08 | Real data and your first model calls: about 20 records for your posting, then one record sent to a model three ways | Build | Tue 11/17, 1:45 PM | [guide](../guides/first-model-call.md) |
 | 09 | A workflow and an agent: one question answered two ways in Python, from steps you write first, with one tool, a step limit, and a comparison of the runs | Build | Tue 11/24, 1:45 PM | [guide](../guides/workflow-and-agent.md) |
-| 10 | **Broken agent: bad tool schema, runaway loop, cost blowup** | Troubleshoot | Thu 12/3, 1:45 PM | |
+| 10 | **One real failure from your Project 02 work: what you saw, the cause, and the fix, in your own words** | Troubleshoot | Tue 12/8, 1:45 PM | [instructions](ex10-a-real-failure.md) |
 
 Exercise 03 collects the spec, implementation plan, and migration plan from
 the resume-site build and the Azure migration. The Railway migration is a
 Project 1 requirement, and basic GA4 is also required. Exercise 05 is due
 Tuesday, October 13, after the DNS/TLS lesson. Exercise 06 is due Tuesday,
 October 20, covering the Zoho and GA4 lessons. Both are due at 1:45 PM. Exercise 07 is the AWS
-migration, taught October 29 and November 3. Job Scout starts November 10,
-and Exercises 08 through 10 follow its lessons. Choose the Project 2 posting
-by November 17, with the instructor's vetted feed available if needed. All
-listed November and December deadlines are at 1:45 PM.
+migration, taught October 29 and November 3. Exercises 08 through 10 follow
+the Project 02 lessons, which started November 10. All listed November and
+December deadlines are at 1:45 PM.
 
 ## What every exercise needs
 

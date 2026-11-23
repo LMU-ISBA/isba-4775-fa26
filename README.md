@@ -62,8 +62,8 @@ Instruction runs September 1 to December 10, 2026.
 | --- | --- | --- |
 | 1-8 | Networking foundations, then the cloud arc | Exercises 01-06, Project 1 due Thu 10/22 at 1:45 PM |
 | 9 | Midterm whiteboard interviews, then AWS migration on Thu 10/29 | Interviews Mon 10/26 to Wed 10/28 |
-| 10-15 | Job Scout, then Project 2, the job-description-driven build | Exercises 07-10 and milestones M1-M4 |
-| Finals | Final whiteboard interview | Thu 12/17, 11:00 AM |
+| 10-15 | The AWS migration, then Project 02, the job-description-driven build | Exercises 07-10 and milestones M1-M3 |
+| Finals | Final whiteboard interview | Mon 12/14 to Thu 12/17, by appointment |
 
 ## What's in this repository
 

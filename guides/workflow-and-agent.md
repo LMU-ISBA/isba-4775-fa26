@@ -326,7 +326,7 @@ also works. You don't need a vector database for this project.
 
 Today you only decide. Your workflow still runs on your saved records, so
 you can check its output against them. You load the full dataset into
-AWS storage later, before M3 on December 3. Work that out with your agent.
+AWS storage in class on Thursday, December 3.
 
 ### Build it from your steps
 
@@ -549,9 +549,8 @@ code runs on AWS, and something other than you starts it.
 | Workflow | You run `workflow.py` | A schedule or an event runs it. On EC2, cron is the simplest schedule. On serverless, [EventBridge Scheduler](https://aws.amazon.com/eventbridge/scheduler/) starts a [Lambda](https://aws.amazon.com/lambda/) function |
 | Agent | You run `agent.py` | A route in your app takes a question and calls the same loop, behind your access gate |
 
-The code stays the same, and what starts it changes. A schedule alone might
-not meet the trigger requirement, which needs an event in one system to start
-work in another. The
+The code stays the same, and what starts it changes. A schedule meets the
+requirement, and so does an event from a second system. The
 [Project 02 requirements](../projects/project-02.md#requirements) have the
 rule.
 
