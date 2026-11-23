@@ -101,7 +101,26 @@ deploy, an implementation specialist ships a customer's setup, and a data
 analyst's report runs in a pipeline someone else built. Postings for those
 jobs list CI/CD, Git, or GitHub Actions as a skill.
 
-## 1. Build the app on your laptop
+## 0. Before class: check your access
+
+Do this on the day of class, from the network you'll use for class. Two
+things have changed since the AWS migration, and both stop today's work.
+Your AWS CLI sign-in has expired, and your instance only accepts SSH from
+the IP address you had when you launched it. From a different network, SSH
+times out.
+
+In the browser, sign in to the AWS console as isba-student, not as root.
+Then sign in the CLI and check who it thinks you are:
+
+```bash
+aws login --profile isba-4775 --region us-east-1
+aws sts get-caller-identity --profile isba-4775
+```
+
+The last line of the answer should end in `user/isba-student`. If it ends
+in `:root`, follow the fix in section 5 of the
+[AWS migration guide](aws-migration.md). The sign-in doesn't last a full
+day, so run both commands again if you did this the night before.
 
 Open your Project 02 repository in VS Code and start a new Claude Code
 session named with:
@@ -109,6 +128,28 @@ session named with:
 ```text
 /rename staging-and-production
 ```
+
+Your instance's details are in your career-platform repository, not this
+one. Ask:
+
+```text
+My EC2 instance is described in migration-notes.md in my
+career-platform repository. Use the AWS CLI profile isba-4775. Find
+the instance's address and its SSH key, and test SSH. If SSH fails,
+find out why before you change anything. If my IP address changed,
+replace the SSH rule in the instance's security group with my
+current address only. Then confirm that SSH works and that my resume
+site still loads.
+```
+
+If the agent can't find the repository or the notes, tell it where your
+career-platform folder is. If you change networks again, run this prompt
+again.
+
+## 1. Build the app on your laptop
+
+Use the session you named in section 0. If you closed it, start a new one
+in your Project 02 repository and give it the same name.
 
 Your agent needs a way in. An API route is an address that takes a question
 and returns an answer, and a page gives a person a box to type in. The
@@ -169,15 +210,8 @@ Now run the two reviews, one at a time:
 /security-review
 ```
 
-Read the findings and fix the ones you agree with. Then make the habit
-easier to keep:
-
-```text
-Add a line to CLAUDE.md: before every commit, run a code review and a
-security review, and show me the findings.
-```
-
-That line is a reminder. Nothing makes it run.
+Read the findings and fix the ones you agree with. You decide what gets
+fixed, and you can leave a finding alone if you can say why.
 
 ## 2. Add the checks
 
@@ -194,6 +228,10 @@ Add two checks, each run with one command:
 Run both and show me the results. If a test fails, tell me why. Don't
 delete it.
 ```
+
+The linter will probably report findings in files from earlier lessons.
+Have your agent fix them, because one finding stops the pipeline in
+section 4.
 
 Open the test file and find the test for the password. Read it until you
 can say what it sends and what it expects back.
@@ -227,7 +265,19 @@ nslookup staging.yourname.com
 nslookup yourproject.yourname.com
 ```
 
-Next, ask for a plan and read it before anything changes:
+### How GitHub reaches your instance
+
+GitHub Actions runs each job on a runner, which is a machine that carries
+out the steps. GitHub's own runners can't SSH into your instance, because
+port 22 only allows your IP address. So your instance runs a runner of its
+own. It asks GitHub for jobs, and nothing new opens on your firewall.
+
+Use a self-hosted runner only on a private repository. On a public one, a
+stranger's pull request could run code on your instance.
+
+### Plan it, then build it
+
+Ask for a plan and read it before anything changes:
 
 ```text
 Plan how to run two copies of this app on my EC2 instance, next to
@@ -238,15 +288,22 @@ Each copy gets its own folder, service, port, environment file, and
 Let's Encrypt certificate. Nginx routes by hostname. My resume site
 has to keep working.
 
+Include a GitHub Actions self-hosted runner for this repository,
+run as a service. It will copy each commit into those folders and
+restart those two services, so give it only the permissions that
+needs.
+
 Don't copy the app's code to the instance. The pipeline will do
 that. Show me the plan before you change anything.
 ```
 
-Find three things in the plan: the two ports, the two environment files,
-and the step that could break your resume site. Then ask:
+Find four things in the plan: the two ports, the two environment files,
+what the runner is allowed to do, and the step that could break your resume
+site. Then ask:
 
 ```text
-Carry out the plan one part at a time, and show me each check.
+Carry out the plan one part at a time, and show me each check. Tell
+me what you need from me.
 ```
 
 Each copy needs your API key and its own password. They go in the
@@ -263,22 +320,8 @@ Open both addresses in your browser. Each should show a padlock and a 502
 error. Nginx and the certificate are working, and no app is behind them
 yet. Check that your resume site still loads.
 
-### How GitHub reaches your instance
-
-GitHub Actions runs each job on a runner, which is a machine that carries
-out the steps. GitHub's own runners can't SSH into your instance, because
-port 22 only allows your IP address. So your instance runs a runner of its
-own. It asks GitHub for jobs, and nothing new opens on your firewall.
-
-```text
-Install a GitHub Actions self-hosted runner on my instance for this
-repository, and run it as a service. Tell me what you need from me.
-```
-
 In your repository on GitHub, open Settings, then Actions, then Runners.
-Your runner should show Idle. Use a self-hosted runner only on a private
-repository, since a public one would let a stranger's pull request run
-code on your instance.
+Your runner should show Idle.
 
 ## 4. Deploy to staging with GitHub Actions
 
@@ -301,6 +344,10 @@ Then ask:
 ```text
 Commit and push.
 ```
+
+If GitHub rejects the push with a message about the workflow scope, paste
+the error to your agent. Your GitHub sign-in needs permission to change
+workflow files.
 
 Open the Actions tab in your repository and watch the run. While it runs,
 check your own postings for today's terms:
@@ -333,10 +380,13 @@ Actions tab. It deploys the commit staging is running to production
 and restarts the production service.
 ```
 
-Commit and push, and wait for the staging deploy to finish. In the Actions
-tab, choose Promote, then Run workflow. When it finishes, open your
-production address. The bottom of the page should say production, with the
-same commit as staging.
+Commit and push, and wait for the staging deploy to finish. Then read the
+commit at the bottom of the staging page. Promote sends whatever staging is
+running when you start it, so that commit is what production will get.
+
+In the Actions tab, choose Promote, then Run workflow. When it finishes,
+open your production address. The bottom of the page should say production,
+with the same commit as staging.
 
 Now move one real change through all three environments. In section 1 you
 asked a vague question. If your agent answered with a question of its own,
@@ -361,7 +411,8 @@ agent today's date. Change nothing else. Then run the tests.
 Move the change through:
 
 1. Ask the vague question again on your laptop. The agent should answer
-   and say what it assumed.
+   and say what it assumed. If it doesn't, read the log, sharpen your
+   words in `agent.md`, and ask again.
 2. Run the two reviews, then commit and push.
 3. Watch the checks. Ask the vague question on staging. Production still
    gives the old answer.
@@ -381,6 +432,17 @@ Teams with a paid GitHub plan add two rules to this path. A change can't
 merge until the checks pass, and production waits for a named person to
 approve. GitHub Free doesn't offer either on a private repository, so your
 checks gate the deploy and you promote by hand.
+
+You ran the two reviews by hand today. To make them a habit after class,
+ask:
+
+```text
+Add a line to CLAUDE.md: before every commit, run a code review and a
+security review, and show me the findings.
+```
+
+That line is a reminder, and nothing makes it run. It also adds a few
+minutes to every commit, which is why it comes at the end of today.
 
 ## 6. What's next
 
