@@ -212,34 +212,72 @@ Now run the two reviews, one at a time:
 Read the findings and fix the ones you agree with. You decide what gets
 fixed, and you can leave a finding alone if you can say why.
 
-## 2. Add the checks
+## 2. Add checks a machine can run
 
-A gate needs checks a machine can run without you. Ask:
+In section 4, GitHub will check your code every time you push, and it will
+deploy only if the checks pass. Nobody watches that happen, so each check
+has to answer pass or fail without a person. You'll add two kinds of check
+now, on your laptop, so you know they pass before GitHub runs them.
 
-```text
-Add two checks, each run with one command:
+| Check | What it does | An example from your app |
+| --- | --- | --- |
+| A test | Runs a piece of your code and compares the result with the answer you expect | Ask for the page without the password, and expect to be refused |
+| A linter | Reads your code without running it and points out mistakes and untidy lines | A variable that's created and never used |
 
-- Tests for the app and for the tool in agent.py. They must not call
-  the model or need my API key. Include a test that a request without
-  the password is refused.
-- The ruff linter.
+Ruff is the linter we'll use. The tests won't call the model, because a
+model call costs money and can answer differently each time. A check has to
+give the same result every time.
 
-Run both and show me the results. If a test fails, tell me why. Don't
-delete it.
-```
-
-The linter will probably report findings in files from earlier lessons.
-Have your agent fix them, because one finding stops the pipeline in
-section 4.
-
-Open the test file and find the test for the password. Read it until you
-can say what it sends and what it expects back.
-
-Check that no file except `.env` holds your key or your password. Then ask:
+Ask your agent:
 
 ```text
-Commit and push.
+Add tests and a linter to this project.
+
+Tests: cover the app and the tool in agent.py. They must run without
+calling the model and without my API key. One test must show that a
+request without the password is refused.
+
+Linter: use ruff.
+
+Run both and show me the results, with the one command that runs
+each. If a test fails, tell me why. Don't delete it.
 ```
+
+Here's what you should see:
+
+- For the tests, a count and the word OK or passed.
+- For ruff, either "All checks passed!" or a list of findings. A finding is
+  one line that ruff wants changed.
+
+Ruff usually has findings in files from earlier lessons, such as
+`workflow.py`. They're about style, and your code still works. Fix them
+now, because one finding will stop the deploy in section 4:
+
+```text
+Fix the ruff findings without changing what the code does. Then run
+the tests and ruff again.
+```
+
+Now look at one test yourself:
+
+```text
+Show me the test that checks the password. Explain in plain words
+what it sends and what answer it expects.
+```
+
+Could you explain that test to a classmate? If not, ask your agent again in
+your own words.
+
+Last, save your work. Your key and your password belong in `.env`, which
+Git ignores, and nowhere else:
+
+```text
+Check that my API key and my password aren't in any file that Git
+will commit. Then commit and push.
+```
+
+You're done with this section when the tests pass, ruff passes, and your
+push shows up on GitHub.
 
 ## 3. Get your instance ready
 
