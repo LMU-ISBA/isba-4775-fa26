@@ -363,12 +363,16 @@ stranger's pull request could run code on your instance.
 ### Ask for a plan
 
 This is the largest change you've made to your instance, and your resume
-site lives there. Ask for a plan and read it before anything changes:
+site lives there. So you plan it first, the way you did for the Azure VM on
+September 24 and October 1, with the writing-plans skill from Superpowers.
+The skill saves the plan as a file. If class ends before you finish, the
+file is how you pick the work up at home.
 
 ```text
 Plan how to run two copies of this app on my EC2 instance, next to
 my resume site: staging at staging.yourname.com and production at
-yourproject.yourname.com.
+yourproject.yourname.com. The instance's details are in
+docs/instance.md.
 
 Each copy gets its own folder, service, port, environment file, and
 Let's Encrypt certificate. Nginx routes by hostname. My resume site
@@ -380,11 +384,17 @@ restart those two services, so give it only the permissions that
 needs.
 
 Don't copy the app's code to the instance. The pipeline will do
-that. Show me the plan before you change anything.
+that. Keep the plan small enough to read in five minutes. Don't add
+tests or change files in this repository.
+
+Use your writing-plans skill and save the plan to
+docs/superpowers/plans/2026-11-24-staging-and-production.md. Explain
+each section for a beginner, and say where each step runs, how we'll
+check it, and how to undo it. Don't run anything yet.
 ```
 
-Find these four things in the plan. If one is missing, ask about it before
-you go on.
+Open the plan in VS Code, under `docs/superpowers/plans/`. Find these four
+things in it. If one is missing, ask your agent to add it before you go on.
 
 - The two ports. They have to differ from each other and from your resume
   site's port.
@@ -396,14 +406,30 @@ you go on.
 
 ### Build it
 
+Run the plan one section at a time, in this session:
+
 ```text
-Carry out the plan one part at a time, and show me each check. Tell
-me what you need from me.
+The plan looks good. Let's work on the first section using native
+execution in this session. As each section finishes, write what ran
+and what the checks showed under that section of the plan. Tell me
+what you need from me.
 ```
 
 The agent will ask you to approve commands, and it may ask you for
 something from GitHub to register the runner. Read each request before you
-approve it.
+approve it. After each section, read what it reports, then say:
+
+```text
+Let's work on the next section.
+```
+
+If you have to stop, or you start a new session, the plan file remembers
+where you were:
+
+```text
+Read @docs/superpowers/plans/2026-11-24-staging-and-production.md
+and docs/instance.md. Where are we, and what's next?
+```
 
 Next, give each copy its settings. The API key and the passwords go in the
 environment files on your instance, and GitHub never sees them. Choose two
