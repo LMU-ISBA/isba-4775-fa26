@@ -346,6 +346,24 @@ flowchart LR
     N -->|"agent.yourname.com"| P
 ```
 
+### Start at the board
+
+We'll work this out together in class before anyone reads the table below.
+Your resume site is live on your instance, so you already know most of the
+answer. Think about three questions:
+
+1. What had to exist on your instance before a visitor could see your
+   resume site?
+2. For a second and a third copy of a site, which of those do you need
+   again, and which can all three share?
+3. GitHub's computers can't SSH into your instance. How could GitHub get
+   your code there?
+
+If you're working through this guide on your own, write your answers down
+before you read on.
+
+### Compare it with this
+
 Each copy needs the same six parts your resume site has:
 
 | Part | What it is |
