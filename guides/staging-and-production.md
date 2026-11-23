@@ -129,22 +129,21 @@ session named with:
 /rename staging-and-production
 ```
 
-Your instance's details are in your career-platform repository, not this
-one. Ask:
+You set up your instance from your career-platform repository, and this
+session has never seen it. AWS can tell your agent what it needs. Ask:
 
 ```text
-My EC2 instance is described in migration-notes.md in my
-career-platform repository. Use the AWS CLI profile isba-4775. Find
-the instance's address and its SSH key, and test SSH. If SSH fails,
-find out why before you change anything. If my IP address changed,
-replace the SSH rule in the instance's security group with my
-current address only. Then confirm that SSH works and that my resume
-site still loads.
+Using the AWS CLI profile isba-4775, find my EC2 instance in
+us-east-1: its public address, its key pair name, and its security
+group. Find the matching private key in ~/.ssh and test SSH. If SSH
+fails, find out why before you change anything. If my IP address
+changed, replace the SSH rule in the security group with my current
+address only. Then confirm that SSH works and that my resume site
+still loads. Write the address and the key's path in
+docs/instance.md, with no secrets.
 ```
 
-If the agent can't find the repository or the notes, tell it where your
-career-platform folder is. If you change networks again, run this prompt
-again.
+If you change networks again, run this prompt again.
 
 ## 1. Build the app on your laptop
 
