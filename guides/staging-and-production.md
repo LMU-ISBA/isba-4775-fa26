@@ -90,7 +90,9 @@ each one today.
 Before DevOps, a development team wrote the code and handed it to a
 separate operations team to run. Releases were rare, and each team blamed
 the other when one failed. DevOps puts both jobs on one team and automates
-the handoff. GitHub Actions is one tool for it. Jenkins, GitLab CI, and AWS
+the handoff. GitHub Actions is the tool we'll use. It's GitHub's service
+that runs steps for you when something happens in your repository, such as
+a push. Jenkins, GitLab CI, and AWS
 CodePipeline do the same work.
 
 Some jobs own this work: DevOps engineer, site reliability engineer,
@@ -412,12 +414,14 @@ September 24 and October 1, with the writing-plans skill from Superpowers.
 The skill saves the plan as a file. If class ends before you finish, the
 file is how you pick the work up at home.
 
-The prompt uses the six parts from the table above, and five more terms:
+The prompt uses the six parts from the table above, and seven more terms:
 
 | Term | What it means |
 | --- | --- |
 | Routes by hostname | Nginx reads the name in the address, such as `staging.yourname.com`, and sends the request to the copy with that name |
-| Self-hosted runner | A runner on your own machine, here your instance, and not one of GitHub's |
+| GitHub Actions | GitHub's service that runs steps for you when something happens in your repository, such as a push |
+| Runner | The computer that carries out those steps. GitHub lends you one for each job, and you can add your own |
+| Self-hosted runner | A runner you add yourself. Here it's a small program on your instance, and not one of GitHub's computers |
 | Run as a service | Started by the system and kept running, so it comes back after a reboot without you |
 | Permissions | What a program is allowed to change on the instance. The runner needs very few |
 | Skill | A set of written instructions your agent loads for one kind of job. writing-plans is the one for plans |
