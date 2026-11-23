@@ -121,6 +121,8 @@ Read agent.py. Build a small web app around it with FastAPI:
 - One page with a question box.
 - One route, /ask, that takes the question, runs the agent loop in
   agent.py, and returns the answer.
+- If the answer comes back as markdown, show it formatted, not as
+  plain text.
 - A shared password in front of the page and the route. Read it from
   the environment, never from the code.
 - At the bottom of the page, show the environment name and the commit
@@ -137,6 +139,8 @@ Check it yourself:
    answers.
 3. Open the address in a private window and skip the password. The app
    should refuse you.
+4. Ask one vague question, such as "show me a report." Write down what the
+   agent does. You'll use it in section 5.
 
 The password is your access gate. Every question costs you API credits, so
 only people you allow should reach the agent.
@@ -318,13 +322,37 @@ tab, choose Promote, then Run workflow. When it finishes, open your
 production address. The bottom of the page should say production, with the
 same commit as staging.
 
-Now move one change through all three environments:
+Now move one real change through all three environments. In section 1 you
+asked a vague question. If your agent answered with a question of its own,
+the page gave you no way to reply. Your agent gets one request and returns
+one answer, so it needs enough to act without you.
 
-1. Change the heading on the page, and check it on your laptop.
+Open `agent.md` and add two things, in your own words:
+
+- What data the agent has: the source, the topics, and the dates it
+  covers.
+- What it does with a vague request. A good rule is to pick a reasonable
+  default, do the work, and say what it assumed.
+
+Then ask:
+
+```text
+I added two things to agent.md: what data the agent has, and what it
+does with a vague request. Update agent.py to match, and give the
+agent today's date. Change nothing else. Then run the tests.
+```
+
+Move the change through:
+
+1. Ask the vague question again on your laptop. The agent should answer
+   and say what it assumed.
 2. Run the two reviews, then commit and push.
-3. Watch the checks. Staging shows the new heading, and production
-   doesn't.
+3. Watch the checks. Ask the vague question on staging. Production still
+   gives the old answer.
 4. Run Promote. Both sites now show the same commit.
+
+If your agent already handled the vague question, change the heading on
+the page and move that through.
 
 Then explain it back, in your own words:
 
