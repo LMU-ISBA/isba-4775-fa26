@@ -761,6 +761,69 @@ gate.
 
 The first three jobs are your CI. The fourth is the start of your CD.
 
+### Read the workflow file
+
+Your agent wrote a file in `.github/workflows/`. GitHub looks in that
+folder, and anything there becomes instructions it can run. The file is
+written in YAML, which is a way to write a list of instructions that a
+machine can follow. Think of it as a checklist. Every push goes down the
+same checklist, in the same order, and nobody has to remember the steps.
+
+The file looks dense, but it's built from nine words. This short one shows
+all of them:
+
+```yaml
+name: Checks and staging deploy    # the label in the Actions tab
+on:                                # when to run
+  push:
+    branches: [main]
+jobs:                              # the sections of the checklist
+  tests:
+    runs-on: ubuntu-latest         # a fresh computer from GitHub
+    steps:
+      - uses: actions/checkout@v5  # ready-made: copy my code here
+      - uses: actions/setup-python@v6
+        with:                      # a setting for that action
+          python-version: "3.14"
+      - run: python -m unittest    # a command, as in my terminal
+  deploy-staging:
+    needs: [tests]                 # the gate: wait for tests to pass
+    runs-on: [self-hosted]         # my runner, on my instance
+    steps:
+      - run: sudo systemctl restart agent-staging
+```
+
+| Word | What it means |
+| --- | --- |
+| `name` | A label. It's what you see in the Actions tab, and it changes nothing about how the file runs |
+| `on` | When to run. GitHub waits for an event, which is something that happens in your repository. Yours is a push to main |
+| `jobs` | The sections of the checklist. Each job does one thing, such as running the tests |
+| `runs-on` | Which computer does the job. `ubuntu-latest` is a new, empty computer that GitHub lends you. `self-hosted` is your runner |
+| `needs` | Which jobs have to pass first. This one line is the gate |
+| `steps` | The instructions inside a job, done in order |
+| `uses` | Run a ready-made step that someone else wrote, called an action. `actions/checkout` copies your repository onto the computer, which starts out empty |
+| `with` | Settings for that action, such as which Python version to install |
+| `run` | Run a command, the same way you'd type it in a terminal |
+
+Now read your own file with your agent:
+
+```text
+Walk me through my workflow file one block at a time: name, on, each
+job, and each job's runs-on, needs, and steps. Show me the lines,
+and say in one sentence what they do. Stop after each block until I
+say next.
+```
+
+Find two lines yourself before you go on: the `needs` line in the deploy
+job, and its `runs-on` line. The first is your gate, and the second is your
+runner.
+
+If you'd like to see a file like this built line by line, this video does
+it in 14 minutes, for a JavaScript project:
+https://www.youtube.com/watch?v=omB2JkC4QfA
+
+### Push it
+
 Before you push, predict it. What will run first, and what happens to the
 deploy if ruff fails? Then ask:
 
