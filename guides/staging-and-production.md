@@ -1058,17 +1058,33 @@ staging to production.
 ### If a release goes wrong
 
 Sooner or later a commit that passed every check will turn out to be bad.
-You don't fix production by hand. You send a good commit down the same
-path:
+You don't fix production by hand, and you don't erase the bad commit. You
+add a new commit that puts the code back the way it was before. Git calls
+that a revert. Your history then looks like this:
 
 ```text
-Undo my last commit with a new commit that reverts it. Then commit
-and push.
+a1b2c3d  the last commit that worked
+d4e5f6a  the bad change
+9f8e7d6  revert of d4e5f6a, the same code as a1b2c3d
 ```
 
-Wait for the checks and the staging deploy. Ask your known question on
-staging, then promote the new commit. Production is back to working code,
-and the Actions tab shows what happened and when.
+The bad commit is still there, so anyone can see what happened. Ask:
+
+```text
+My last commit was bad. Revert it: add a new commit that puts the
+code back the way it was before that commit. Don't delete or rewrite
+any history. Then push.
+```
+
+The new commit takes the same path as any other:
+
+1. Wait for the four jobs to pass.
+2. Open staging. It shows the new commit, with the code that worked.
+3. Ask your known question on staging.
+4. Promote the new commit.
+
+Production is back to working code, and the Actions tab shows what
+happened and when.
 
 ### Move one real change through
 
