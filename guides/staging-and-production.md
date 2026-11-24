@@ -642,7 +642,8 @@ what you need from me.
 
 The agent will ask you to approve commands, and it may ask you for
 something from GitHub to register the runner. Read each request before you
-approve it. After each section, read what it reports, then say:
+approve it. The certificate step can sit still for several minutes. That's
+Certbot waiting on purpose, so let it finish. After each section, read what it reports, then say:
 
 ```text
 Let's work on the next section.
