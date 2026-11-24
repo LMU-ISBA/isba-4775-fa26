@@ -640,10 +640,22 @@ and what the checks showed under that section of the plan. Tell me
 what you need from me.
 ```
 
-The agent will ask you to approve commands, and it may ask you for
-something from GitHub to register the runner. Read each request before you
-approve it. The certificate step can sit still for several minutes. That's
-Certbot waiting on purpose, so let it finish. After each section, read what it reports, then say:
+The agent will ask you to approve commands, so read each request before
+you approve it. The certificate step can sit still for several minutes.
+That's Certbot waiting on purpose, so let it finish.
+
+To register the runner, the agent needs a registration token from GitHub.
+It's a short-lived code that proves the runner belongs to your repository.
+Get it only when the agent asks, because it expires in an hour:
+
+1. Open your repository on GitHub.
+2. Choose Settings, then Actions, then Runners.
+3. Choose New self-hosted runner, then Linux.
+4. Find the line that starts with `./config.sh`. The token is the code
+   after `--token`.
+
+Treat the token like a password. Give it to the command your agent
+provides in the VS Code terminal, and not to the chat. After each section, read what it reports, then say:
 
 ```text
 Let's work on the next section.
