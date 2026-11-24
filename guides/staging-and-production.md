@@ -19,6 +19,8 @@ class.
   starts "You're done with this section when."
 - The first video covers the ideas: the three environments, CI and CD, and
   how a change moves. Watch it before section 0.
+- The voice in the videos is an AI voice reading a script I wrote. I can fix
+  a mistake in a video in a few minutes that way.
 - If you get stuck, post in the course's General Teams channel, so
   everyone can see the answer, or send me a DM. I'll post updates in that
   channel too.
