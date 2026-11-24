@@ -321,10 +321,12 @@ is where you'll look when an answer is wrong.
 The password is your access gate. Every question costs you API credits, so
 only people you allow should reach the agent.
 
-Now run the two reviews, one at a time:
+Now run the two reviews, one at a time. The word "low" sets how deep the
+code review goes. Low reports a few findings it's confident about, and it
+uses the least of your Claude usage:
 
 ```text
-/code-review
+/code-review low
 ```
 
 ```text
@@ -339,15 +341,21 @@ remember for you. `CLAUDE.md` is a file your agent reads at the start of
 every session, and what you write there becomes a standing instruction:
 
 ```text
-Add a line to CLAUDE.md: before every commit, run /code-review and
-/security-review on the changes, show me the findings, and wait for
-my answer before you commit.
+Add a line to CLAUDE.md: before every commit that changes code, run
+/code-review low and /security-review on the changes, show me the
+findings, and wait for my answer before you commit.
 ```
 
-From now on, when you ask your agent to commit, it runs both reviews first
-and waits for you. This is still an instruction, and nothing enforces it. A
-commit you make by hand skips it. The check that can't be skipped comes in
-section 4.
+From now on, when you ask your agent to commit code, it runs both reviews
+first and waits for you. This is still an instruction, and nothing enforces
+it. A commit you make by hand skips it. The check that can't be skipped
+comes in section 4.
+
+Reviews use a lot of your Claude usage, and this lesson has five or six
+commits. Sonnet is enough for this lesson and uses less of your limit than
+a larger model, and `/model` shows which one you're on. If you reach your
+limit anyway, commit without the reviews and keep going. The checks in
+section 4 still stop a bad change before it deploys.
 
 ## 2. Add checks a machine can run
 
