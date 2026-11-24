@@ -15,10 +15,14 @@ By the end of class, you'll have:
 - A page with a question box and an `/ask` route that runs your agent,
   behind a shared password.
 - Tests, a linter, and a secrets scan that run on every push.
-- A staging site and a production site on your EC2 instance, each at its own
-  subdomain over HTTPS.
-- One change that GitHub Actions deployed to staging and that you promoted
-  to production.
+- A staging site on your EC2 instance, deployed by GitHub Actions when you
+  push.
+- One release decision: the commit you tested, what you observed, and
+  whether you'd release it.
+
+By M2 on Tuesday, December 1, you'll also have a production site, and one
+change that moved from staging to production. Some of you will get there in
+class. Section 5 is written so you can finish it on your own.
 
 ## Learning objectives
 
@@ -32,8 +36,10 @@ By the end of this lesson, you should be able to:
   your IP address.
 - Say where your API key lives in each environment, and why it isn't in the
   repository.
-- Say what CI, CD, and DevOps mean, and point to each one in your own
-  project.
+- Say what CI and CD mean, and point to each one in your own project.
+- Say how continuous delivery differs from continuous deployment.
+- Decide whether a tested commit should be released, and say what you
+  observed that supports it.
 
 ## Three environments
 
@@ -94,26 +100,56 @@ until it passes.
 | What runs | `/code-review` and `/security-review` | Tests, a linter, and a secrets scan |
 | Can you skip it? | Yes, so it's a habit | No, so it's a gate |
 
-## CI/CD and DevOps
+The gate has a name, CI, and the next section defines it.
 
-The path in the diagram has names, and job postings use them. You'll build
-each one today.
+## CI and CD: what's ahead
 
-| Term | What it means | Where it is today |
+Job postings say "CI/CD" as if it were one thing. It's two, and you'll
+build both today.
+
+CI is continuous integration. Every time you push, a machine checks your
+change right away, so a problem shows up in minutes, while the change is
+still small. "Integration" means your change joining the code that's
+already on main.
+
+CD is what happens to a change after it passes. It has two forms, and they
+share the same letters:
+
+| | Continuous delivery | Continuous deployment |
 | --- | --- | --- |
-| CI, continuous integration | Every push is checked by a machine, so a problem shows up while the change is still small | The tests, the linter, and the secrets scan in section 4 |
-| CD, continuous delivery | Every commit that passes is ready to release, and a person decides when | The staging deploy in section 4 and your promotion in section 5 |
-| Continuous deployment | The same path, but production updates with no person deciding | Not today |
-| Pipeline | The steps a commit goes through, in order, from push to production | Your two GitHub Actions workflows |
-| DevOps | The people who build the software also deploy it and keep it running, with automation doing the handoffs | Everything you do today |
+| After the checks pass | The change is deployed somewhere safe, such as staging, and is ready to release | The same |
+| Who releases it to production | A person, with one action | Nobody. The pipeline does it |
+| What you need to trust it | Checks, plus a person who looked | Checks strong enough to stand in for that person |
+
+The only difference is who makes the last move. Today you build continuous
+delivery, because you promote by hand. If that step ran by itself, it would
+be continuous deployment.
+
+Here's where each one shows up today. Each section says so again when you
+get there.
+
+| Section | What you do | CI or CD |
+| --- | --- | --- |
+| 1 | Build the app on your laptop | Neither yet. This is local |
+| 2 | Write tests and add a linter | CI. These are the checks |
+| 3 | Set up two places on your instance, and a runner | CD. These are where a change gets delivered |
+| 4 | Run the checks on every push | CI |
+| 4 | Deploy to staging when the checks pass | CD |
+| 5 | Decide, then promote to production by hand | CD. The person in continuous delivery is you |
+
+Two more words go with these:
+
+| Term | What it means |
+| --- | --- |
+| Pipeline | The steps a commit goes through, in order, from push to production. Yours is two GitHub Actions workflows |
+| DevOps | The people who build the software also deploy it and keep it running, with automation doing the handoffs |
 
 Before DevOps, a development team wrote the code and handed it to a
 separate operations team to run. Releases were rare, and each team blamed
 the other when one failed. DevOps puts both jobs on one team and automates
 the handoff. GitHub Actions is the tool we'll use. It's GitHub's service
 that runs steps for you when something happens in your repository, such as
-a push. Jenkins, GitLab CI, and AWS
-CodePipeline do the same work.
+a push. Jenkins, GitLab CI, and AWS CodePipeline do the same work.
 
 Some jobs own this work: DevOps engineer, site reliability engineer,
 platform engineer, and cloud engineer. Most of those postings ask for two
@@ -139,8 +175,8 @@ aws login --profile isba-4775 --region us-east-1
 aws sts get-caller-identity --profile isba-4775
 ```
 
-The last line of the answer should end in `user/isba-student`. If it ends
-in `:root`, follow the fix in section 5 of the
+Find the line that starts with `"Arn"`. It should end in
+`user/isba-student`. If it ends in `:root`, follow the fix in section 5 of the
 [AWS migration guide](aws-migration.md). The sign-in doesn't last a full
 day, so run both commands again if you did this the night before.
 
@@ -177,6 +213,28 @@ docs/instance.md, with no secrets.
 ```
 
 If you change networks again, run this prompt again.
+
+### Choose your known question
+
+You need one question whose answer you can check, so you can tell whether
+each copy of your app works. A password prompt only tells you that
+something is asking for a password.
+
+Your instance gets only what's in Git. If your full dataset was too large
+to commit, make sure a sample is committed, and choose a question the
+sample can answer. A count or a comparison works well, such as "How many
+records are from October 2026?"
+
+Replace the bracketed part, then ask:
+
+```text
+Run agent.py with this question: [your question]. Use only the data
+that's committed to this repository. Save the question, the answer,
+and today's date in docs/known-question.md.
+```
+
+Check the answer by hand against your data. You'll ask this question three
+more times today: on your laptop's page, on staging, and on production.
 
 ## 1. Build the app on your laptop
 
@@ -217,14 +275,15 @@ Read agent.py. Build a small web app around it with FastAPI:
   the app is running.
 
 Keep agent.py working from the command line. Ask me before you add
-anything else. Then run the app on my laptop and tell me the address.
+anything else. Then run the app on my laptop. Tell me the address,
+and what to type if my browser asks for a user name.
 ```
 
 Check it yourself:
 
 1. Open the address and enter the password.
-2. Ask the question you asked `agent.py` on Thursday. Compare the two
-   answers.
+2. Ask your known question. Compare the answer with
+   `docs/known-question.md`.
 3. Open the address in a private window and skip the password. The app
    should refuse you.
 4. Ask one vague question, such as "show me a report." Write down what the
@@ -258,6 +317,9 @@ Read the findings and fix the ones you agree with. You decide what gets
 fixed, and you can leave a finding alone if you can say why.
 
 ## 2. Add checks a machine can run
+
+This is where CI starts. CI needs checks that run without a person, and you
+write them here.
 
 In section 4, GitHub will check your code every time you push, and it will
 deploy only if the checks pass. Nobody watches that happen, so each check
@@ -343,6 +405,9 @@ You're done with this section when the tests pass, ruff passes, and your
 push shows up on GitHub.
 
 ## 3. Get your instance ready
+
+This section is the groundwork for CD. Delivery needs somewhere to deliver
+to, and something on your instance that can receive a commit.
 
 Your instance runs one site now, your resume site. After this section it
 will have room for two more: a staging copy and a production copy of your
@@ -503,6 +568,12 @@ things in it. If one is missing, ask your agent to add it before you go on.
 - The step that could break your resume site, and how the plan checks for
   that.
 
+Then ask the plan one more question: which step here could change what
+production is running? The answer should be none. This plan only prepares
+the instance. If it writes a workflow or copies your code, ask your agent
+to take that part out, because that's the pipeline, and you build it in
+sections 4 and 5.
+
 ### Build it
 
 Run the plan one section at a time. "Native execution" in the prompt means
@@ -567,6 +638,9 @@ Now you build the pipeline's first half. From here on, a push to GitHub
 does three things without you: it runs your checks, it deploys to staging
 if they pass, and it stops if one fails.
 
+This section turns on CI and the first half of CD. Running the checks on
+every push is CI. Deploying to staging when they pass is CD.
+
 These words come up in this section:
 
 | Word | What it means |
@@ -597,6 +671,8 @@ Before I commit, explain each job to me in one line.
 You should hear about four jobs: the tests, ruff, the secrets scan, and the
 deploy. The first three run on GitHub's runners. The deploy runs on yours,
 and only after the other three pass. That "only after" is the gate.
+
+The first three jobs are your CI. The fourth is the start of your CD.
 
 Before you push, predict it. What will run first, and what happens to the
 deploy if ruff fails? Then ask:
@@ -639,7 +715,8 @@ When all four jobs are green:
 2. Enter the staging password.
 3. Read the bottom of the page. It should say staging, with a commit.
 4. Run `git log -1` on your laptop. The commit should match the page.
-5. Ask the agent a question on the page.
+5. Ask your known question on the page. Compare the answer with
+   `docs/known-question.md`.
 6. Ask your coding agent for the log of that question:
 
 ```text
@@ -652,22 +729,53 @@ now, and not on your laptop.
 Production still shows the 502. The pipeline only goes as far as staging,
 and that's on purpose.
 
-You're done with this section when staging answers a question and shows the
-commit you pushed.
+You're done with this section when staging answers your known question and
+shows the commit you pushed. This is today's target for class.
 
 ## 5. Promote to production
 
-Staging is where you find out whether a change is right. Production is what
-other people use. To promote a commit is to move the one you tested on
-staging into production. A machine can run checks, but only you know
-whether the change is what you wanted, so you start this step by hand.
+If class ends before you reach this section, it's your work before M2. The
+last part of section 6 says how to pick it up.
 
-Ask:
+This is the second half of CD, and it's what makes yours continuous
+delivery: a person decides. Staging is where you find out whether a change
+is right. Production is what other people use. To promote a commit is to
+move the one you tested on staging into production.
+
+### Decide
+
+Before anything goes to production, make a release decision you can
+defend. Three questions:
+
+1. Which commit did you test? Read the seven characters at the bottom of
+   your staging page.
+2. What did you observe? Ask your known question on staging and compare the
+   answer with `docs/known-question.md`.
+3. Would you release it, or hold it?
+
+Green check marks tell you the checks passed. They don't tell you the
+answer is right. In my rehearsal, all 43 tests passed while the agent
+searched the wrong dates. The checks and your own observation are two
+separate kinds of evidence, and a release needs both.
+
+In class, you'll type "release" or "hold" in the Zoom chat, with the one
+thing you observed. If your staging site isn't up yet, judge the one on my
+screen.
+
+### Build the Promote workflow
+
+The workflow asks for the commit you tested, so it can't send a different
+one by accident. If you pushed again after testing, staging has moved, and
+the workflow should stop.
 
 ```text
 Add a second workflow named Promote that I start by hand from the
-Actions tab. It deploys the commit staging is running to production
-and restarts the production service.
+Actions tab. It asks me for the seven-character commit I tested on
+staging. If staging is running a different commit, it stops and
+changes nothing. Otherwise it deploys that commit to production and
+restarts the production service. If production doesn't answer after
+the restart, the run fails and says so. Write the promoted commit in
+the run's summary.
 ```
 
 Then:
@@ -677,21 +785,41 @@ Commit and push.
 ```
 
 This push runs your checks and deploys to staging again, because every push
-does. Wait for the run to finish.
+does. Wait for the run to finish. Staging now shows a new commit, so read
+it again and ask your known question once more.
 
 ### Promote it
 
-1. Open your staging page and read the commit at the bottom. Promote sends
-   whatever staging is running, so this is the commit production will get.
+1. Read the seven-character commit at the bottom of your staging page.
 2. In your repository on GitHub, open the Actions tab.
 3. Choose Promote in the list on the left.
-4. Choose Run workflow, then choose the green Run workflow button.
-5. Wait for the green check mark.
+4. Choose Run workflow and type the commit from step 1.
+5. Choose the green Run workflow button, and wait for the green check
+   mark.
 6. Open `https://agent.yourname.com` and enter the production
    password.
+7. Ask your known question.
 
 The bottom of the page should say production, with the same commit as
-staging. Your app is live, and that's most of M2.
+staging, and the answer should match your saved one. Your app is live, and
+that's most of M2. Open the Promote run in the Actions tab and find the
+commit in its summary. That run is your record that this commit went from
+staging to production.
+
+### If a release goes wrong
+
+Sooner or later a commit that passed every check will turn out to be bad.
+You don't fix production by hand. You send a good commit down the same
+path:
+
+```text
+Undo my last commit with a new commit that reverts it. Then commit
+and push.
+```
+
+Wait for the checks and the staging deploy. Ask your known question on
+staging, then promote the new commit. Production is back to working code,
+and the Actions tab shows what happened and when.
 
 ### Move one real change through
 
@@ -724,7 +852,7 @@ Move the change through, one environment at a time:
 | GitHub | Watch the run in the Actions tab | Four green check marks |
 | Staging | Ask the vague question | The new answer, and a new commit at the bottom |
 | Production | Ask the vague question | The old answer. Nothing has been promoted |
-| GitHub | Run Promote | A green check mark |
+| GitHub | Run Promote with the new commit | A green check mark |
 | Production | Ask the vague question again | The new answer, and the same commit as staging |
 
 If your agent already handled the vague question in section 1, change the
@@ -747,6 +875,10 @@ merge until the checks pass, and production waits for a named person to
 approve. GitHub Free doesn't offer either on a private repository, so your
 checks gate the deploy and you promote by hand.
 
+Some teams take the person out. If Promote ran by itself every time staging
+passed, you'd have continuous deployment. Teams do that when their checks
+are strong enough to catch what you caught today by looking.
+
 You ran the two reviews by hand today. To make them a habit after class,
 ask:
 
@@ -762,9 +894,8 @@ minutes to every commit, which is why it comes at the end of today.
 
 - By Tuesday, December 1, at 1:45 PM, M2 is due: your app is live at your
   production address, agent.yourname.com, behind the password, and one
-  commit moved from
-  staging to production. Submit both addresses and both passwords in
-  Brightspace. The passwords stay out of your repository.
+  commit moved from staging to production. Submit both addresses and both
+  passwords in Brightspace. The passwords stay out of your repository.
 - Tuesday, December 1, is the LMU Data Center tour. Meet in University Hall
   in front of Einstein Bros. Bagels.
 - Your app reads the saved data in your repository for now. On Thursday,
@@ -772,6 +903,18 @@ minutes to every commit, which is why it comes at the end of today.
   only what it needs.
 - The [Project 02 requirements](../projects/project-02.md#dates) have the
   new dates and the parts that changed.
+
+If you didn't reach the end in class, write down the last "You're done with
+this section when" line you passed. Then start a session in your Project 02
+repository and ask:
+
+```text
+Read @docs/superpowers/plans/2026-11-24-staging-and-production.md
+and docs/instance.md. Where are we, and what's next?
+```
+
+Go on from that section of this guide. Office hours are by appointment at
+https://calendly.com/greg-lontok.
 
 If something breaks between now and December 1, write down what you saw and
 what fixed it. Exercise 10 is now one real failure from your own project,
