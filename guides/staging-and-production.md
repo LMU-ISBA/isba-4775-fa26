@@ -975,6 +975,57 @@ the restart, the run fails and says so. Write the promoted commit in
 the run's summary.
 ```
 
+### Read the Promote file
+
+This file uses the words you read in section 4, and five new ones. This
+short version shows them. Your paths and names will differ:
+
+```yaml
+name: Promote
+on:
+  workflow_dispatch:           # start by hand, from a button
+    inputs:
+      commit:                  # a box to type into
+        description: The commit you tested on staging
+        required: true
+jobs:
+  promote:
+    runs-on: [self-hosted]     # my runner, on my instance
+    env:
+      COMMIT: ${{ inputs.commit }}   # what I typed, handed to the steps
+    steps:
+      - name: Stop if staging moved
+        run: test "$(cat /srv/agent-staging/COMMIT)" = "$COMMIT"
+      - name: Deploy that commit to production
+        run: echo "copy the code, then restart production"
+      - name: Say what was promoted
+        run: echo "Promoted $COMMIT" >> "$GITHUB_STEP_SUMMARY"
+```
+
+| Word | What it means |
+| --- | --- |
+| `workflow_dispatch` | Run when a person starts it. This is what puts the Run workflow button in the Actions tab, and it's the whole difference between this file and the first one |
+| `inputs` | A box on that button's form. Yours asks for the commit you tested |
+| `env` | Values every step in the job can read. Here it carries what you typed |
+| `${{ }}` | A blank that GitHub fills in before the job runs, such as the text from the box |
+| `GITHUB_STEP_SUMMARY` | A file GitHub shows at the top of the finished run. Writing a line to it leaves a record you can point to |
+
+Two things are missing on purpose. There's no `push` under `on`, so a push
+can never reach production. And the tests don't run again, because this
+commit already passed them on its way to staging. Promote only confirms
+that it's the same commit.
+
+Read your own file with your agent:
+
+```text
+Walk me through my Promote file one block at a time, and say in one
+sentence what each block does. Then show me the step that stops the
+run when staging has moved, and tell me what it compares.
+```
+
+Find that step yourself before you go on. It's the one that keeps an
+untested commit out of production.
+
 Then ask:
 
 ```text
