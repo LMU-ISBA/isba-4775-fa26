@@ -114,7 +114,9 @@ until it passes.
 | What runs | `/code-review` and `/security-review` | Tests, a linter, and a secrets scan |
 | Can you skip it? | Yes, so it's a habit | No, so it's a gate |
 
-The gate has a name, CI, and the next section defines it.
+A habit is easy to forget, so in section 1 you'll have your agent keep it
+for you, with one line in a file named `CLAUDE.md`. The gate has a name,
+CI, and the next section defines it.
 
 ## CI and CD: what's ahead
 
@@ -331,6 +333,21 @@ Now run the two reviews, one at a time:
 Read the findings and fix the ones you agree with. You decide what gets
 fixed, and you can leave a finding alone if you can say why.
 
+It's hard to remember two reviews before every commit, so have your agent
+remember for you. `CLAUDE.md` is a file your agent reads at the start of
+every session, and what you write there becomes a standing instruction:
+
+```text
+Add a line to CLAUDE.md: before every commit, run /code-review and
+/security-review on the changes, show me the findings, and wait for
+my answer before you commit.
+```
+
+From now on, when you ask your agent to commit, it runs both reviews first
+and waits for you. This is still an instruction, and nothing enforces it. A
+commit you make by hand skips it. The check that can't be skipped comes in
+section 4.
+
 ## 2. Add checks a machine can run
 
 This is where CI starts. CI needs checks that run without a person, and you
@@ -414,6 +431,9 @@ Git ignores, and nowhere else:
 Check that my API key and my password aren't in any file that Git
 will commit. Then commit and push.
 ```
+
+Your agent runs the two reviews before it commits, and it waits for your
+answer. That's the line you added to `CLAUDE.md` in section 1.
 
 You're done with this section when the tests pass, ruff passes, and your
 push shows up on GitHub.
@@ -867,7 +887,7 @@ Move the change through, one environment at a time:
 | Where | What you do | What you should see |
 | --- | --- | --- |
 | Your laptop | Restart the app and ask the vague question again | An answer, with what the agent assumed. If not, read the log, make your words in `agent.md` more specific, and ask again |
-| Your laptop | Run `/code-review` and `/security-review`, then ask your agent to commit and push | The push goes through |
+| Your laptop | Ask your agent to commit and push. It runs the two reviews first, so read the findings and answer | The push goes through |
 | GitHub | Watch the run in the Actions tab | Four green check marks |
 | Staging | Ask the vague question | The new answer, and a new commit at the bottom |
 | Production | Ask the vague question | The old answer. Nothing has been promoted |
@@ -897,16 +917,6 @@ checks gate the deploy and you promote by hand.
 Some teams take the person out. If Promote ran by itself every time staging
 passed, you'd have continuous deployment. Teams do that when their checks
 are strong enough to catch what you caught by looking.
-
-You ran the two reviews by hand in this lesson. To make them a habit, ask:
-
-```text
-Add a line to CLAUDE.md: before every commit, run a code review and a
-security review, and show me the findings.
-```
-
-That line is a reminder, and nothing makes it run. It also adds a few
-minutes to every commit, which is why it comes at the end.
 
 ## 6. What's next
 
