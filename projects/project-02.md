@@ -44,6 +44,10 @@ changes:
 
 If you already built a part that was cut, you can keep it.
 
+On November 24, M2 moved from December 1 to Thursday, December 3, at 1:45
+PM. The staging and production lesson has no class meeting, so you have
+more time to do it on your own.
+
 ## Dates
 
 Each milestone is graded when it's due. Its points are the areas of the
@@ -56,9 +60,9 @@ a late one loses 10% per day, down to a floor of 50%.
 | --- | --- | --- |
 | Thu 11/12, 1:45 PM | Your posting, chosen from your three, and one next-step posting. You can switch among the three until 11/17 | |
 | Tue 11/17 | M1: your PRD, your data source, and two architectures with cost estimates. If you don't want to start from scratch, you can look for an open source project to extend. That search is optional. Name your choice and your reason, add a diagram, and rename your repository. Submit your repository URL in Brightspace, then keep building. I'll read your design and tell you by Thu 11/19 if something has to change | 60 |
-| Tue 11/24 | Your AWS site is working, for the staging and production lesson, on Zoom | |
-| Tue 12/1, 1:45 PM | M2: your app is live at your production address, `agent.yourname.com`, behind a password, and one commit moved from staging to production through GitHub Actions. Submit both addresses and both passwords in Brightspace | 75 |
-| Thu 12/3 | In class, your data moves to S3 or RDS, and your agent gets access to only what it needs | |
+| Tue 11/24 | No class meeting. Staging and production is a guide and videos that you work through on your own schedule | |
+| Tue 12/1 | LMU Data Center tour. Nothing is due | |
+| Thu 12/3, 1:45 PM | M2: your app is live at your production address, `agent.yourname.com`, behind a password, and one commit moved from staging to production through GitHub Actions. Submit both addresses and both passwords in Brightspace. In class, your data moves to S3 or RDS, and your agent gets access to only what it needs | 75 |
 | Tue 12/8 | M3: your agent answers a grounded question with a tool, from your data on AWS. You'll show it live in class. Exercise 10 is due | 75 |
 | Thu 12/10, 1:45 PM | Project 02 is submitted, with the areas no milestone covers | 90 |
 | Mon 12/14 to Thu 12/17 | Final whiteboard interview, by appointment, worth a separate 300 points | |

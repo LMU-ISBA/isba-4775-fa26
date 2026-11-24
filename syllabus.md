@@ -260,8 +260,7 @@ The late policy for projects applies to each one.
 | Milestone | Bar | Due | Points |
 |---|---|---|---:|
 | M1 | PRD, data source, two architectures with cost estimates, your choice and reason, and a diagram | Tue 11/17 | 60 |
-| | Your AWS site is working, for the staging and production lesson | Tue 11/24 | |
-| M2 | App live at `agent.yourname.com` behind a password, and one change moved from staging to production | Tue 12/1, 1:45 PM | 75 |
+| M2 | App live at `agent.yourname.com` behind a password, and one change moved from staging to production | Thu 12/3, 1:45 PM | 75 |
 | M3 | Agent answering a grounded question with a tool, from your data on AWS, shown live in class | Tue 12/8 | 75 |
 | Final | The submitted project, with the areas no milestone covers | Thu 12/10, 1:45 PM | 90 |
 
@@ -336,10 +335,10 @@ Labor Day and Autumn Day fall on days this course doesn't meet.
 | Thu 11/12 | Real data and your first model call: data for your posting, a model API key set up in class, and one record sent to a model three ways | Save and compare three postings, choose one, and save one next-step posting. | |
 | Tue 11/17 | A workflow and an agent: sorting your posting's duties, then one question answered two ways in Python and compared | Submit M1 and Exercise 08 before class at 1:45 PM. | Ex08, M1 |
 | Thu 11/19 | A workflow and an agent, continued: the workflow rebuilt from steps you write first, then the agent with one tool and a step limit, and the comparison | Bring Tuesday's `workflow.py` run and your `my-workflow-and-agent` wiki page. | |
-| Tue 11/24 | Staging and production: your agent behind a page, checks in GitHub Actions, a staging deploy, and promotion to production. CI/CD and DevOps. On Zoom | Have your AWS site working, and do section 0 of the [guide](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/staging-and-production.md) from the network you'll use for class. Join with the Zoom link in Brightspace's Week 13 module. | Ex09 |
+| Tue 11/24 | No class meeting. Staging and production: your agent behind a page, checks in GitHub Actions, a staging deploy, and promotion to production. CI/CD and DevOps. You work through the [guide](https://github.com/LMU-ISBA/isba-4775-fa26/blob/main/guides/staging-and-production.md) and its videos on your own schedule | Have your AWS site working. Ask questions in the Teams thread, or book a time at https://calendly.com/greg-lontok. | Ex09 |
 | Thu 11/26 | No class, Thanksgiving | | |
-| Tue 12/1 | LMU Data Center tour with [Jeff Solomon](https://its.lmu.edu/whoweare/staff/infrastructureservices/) | Submit M2 by 1:45 PM. Meet in University Hall in front of Einstein Bros. Bagels. | M2 |
-| Thu 12/3 | Data access: your data in S3 or RDS with least privilege, the agent's refusal, and a schedule for your workflow | Have M2 working. Know whether your data goes to S3 or RDS. | |
+| Tue 12/1 | LMU Data Center tour with [Jeff Solomon](https://its.lmu.edu/whoweare/staff/infrastructureservices/) | Meet in University Hall in front of Einstein Bros. Bagels. | |
+| Thu 12/3 | Data access: your data in S3 or RDS with least privilege, the agent's refusal, and a schedule for your workflow | Submit M2 before class at 1:45 PM. Know whether your data goes to S3 or RDS. | M2 |
 | Tue 12/8 | M3 shown live in class, then evals: five cases you write and one trace. Then the blog post and LinkedIn draft workshop, and an outside monitor | Bring three questions your data can answer, with the answers you expect. | Ex10, M3 |
 | Thu 12/10 | Final interview practice in pairs, and a course retrospective | Submit Project 02 before class at 1:45 PM. | Project 02 |
 
@@ -371,6 +370,10 @@ The November 23 revision makes Project 02 one small system you own. M4 is
 removed, M3 moves to December 8, and Exercise 10 becomes one real failure
 from your own project. Final interviews run by appointment from December 14
 to December 17. The Project 02 requirements list every change.
+
+The November 24 revision replaces the November 24 class meeting with a
+guide and videos that you work through on your own schedule. M2 moves to
+Thursday, December 3, at 1:45 PM.
 
 ### Prepare before class
 

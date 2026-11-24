@@ -531,12 +531,14 @@ Commit and push.
   `workflow-vs-agent` page, committed and pushed. It's credit/no credit.
   Submit your repository URL and the paths to `steps.md` and `agent.md`
   in the Exercise 09 assignment in Brightspace.
-- By Tuesday, November 24, your AWS site is working. That class, on Zoom,
-  deploys to it with GitHub Actions. If it isn't working, finish the
-  [AWS migration](aws-migration.md) or come to office hours.
-- By Tuesday, December 1, at 1:45 PM, M2 is due: your app is live at a
-  subdomain of your domain over HTTPS. It moved from November 24, so you
-  can deploy with what that class teaches. The
+- Your AWS site has to be working for the next lesson,
+  [Staging and production](staging-and-production.md). It has no class
+  meeting, and you work through it on your own schedule. If your site
+  isn't working, finish the [AWS migration](aws-migration.md) or book
+  office hours.
+- By Thursday, December 3, at 1:45 PM, M2 is due: your app is live at
+  `agent.yourname.com` over HTTPS, and one commit moved from staging to
+  production. The
   [Project 02 requirements](../projects/project-02.md#dates) list it.
 
 ### How the two scripts run on AWS

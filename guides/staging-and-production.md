@@ -1,16 +1,33 @@
 # Staging and production
 
-Session 24 · Tuesday, November 24, 2026, on Zoom
+Session 24 · Week of November 24, 2026 · On your own schedule
 
 Your agent runs when you type a command on your laptop. Nobody else can use
 it, and there's only one copy, so a change can't be checked anywhere before
-it's the real thing. Today you'll put the agent behind a web page. Then a
-change moves through three places before a visitor sees it: your laptop, a
-staging site, and production.
+it's the real thing. In this lesson you put the agent behind a web page.
+Then a change moves through three places before a visitor sees it: your
+laptop, a staging site, and production.
+
+## How this lesson works
+
+There's no class meeting for this lesson. You work through it on your own
+schedule, and M2 is due Thursday, December 3, at 1:45 PM.
+
+- Each section of this guide has a short video, in the Week 13 module in
+  Brightspace. Watch the video, do the section, then check the line that
+  starts "You're done with this section when."
+- The first video covers the ideas: the three environments, CI and CD, and
+  how a change moves. Watch it before section 0.
+- Ask questions in the "Staging and production" thread in our Teams
+  channel, so everyone sees the answers. To meet with me, book a time at
+  https://calendly.com/greg-lontok.
+
+Start early. Section 3 changes your AWS instance, and it's the part most
+likely to need a question.
 
 ## Objectives
 
-By the end of class, you'll have:
+By Thursday, December 3, at 1:45 PM, you'll have:
 
 - A page with a question box and an `/ask` route that runs your agent,
   behind a shared password.
@@ -19,10 +36,7 @@ By the end of class, you'll have:
   push.
 - One release decision: the commit you tested, what you observed, and
   whether you'd release it.
-
-By M2 on Tuesday, December 1, you'll also have a production site, and one
-change that moved from staging to production. Some of you will get there in
-class. Section 5 is written so you can finish it on your own.
+- A production site, and one change that moved from staging to production.
 
 ## Learning objectives
 
@@ -105,7 +119,7 @@ The gate has a name, CI, and the next section defines it.
 ## CI and CD: what's ahead
 
 Job postings say "CI/CD" as if it were one thing. It's two, and you'll
-build both today.
+build both in this lesson.
 
 CI is continuous integration. Every time you push, a machine checks your
 change right away, so a problem shows up in minutes, while the change is
@@ -121,12 +135,12 @@ share the same letters:
 | Who releases it to production | A person does, with one action | Nobody does, because the pipeline goes all the way |
 | What you need to trust it | Checks, plus a person who looked | Checks strong enough to stand in for that person |
 
-The only difference is who makes the last move. Today you build continuous
+The only difference is who makes the last move. You'll build continuous
 delivery, because you promote by hand. If that step ran by itself, it would
 be continuous deployment.
 
-Here's where each one shows up today. Each section says so again when you
-get there.
+Here's where each one shows up. Each section says so again when you get
+there.
 
 | Section | What you do | CI or CD |
 | --- | --- | --- |
@@ -159,10 +173,10 @@ deploy, an implementation specialist ships a customer's setup, and a data
 analyst's report runs in a pipeline someone else built. Postings for those
 jobs list CI/CD, Git, or GitHub Actions as a skill.
 
-## 0. Before class: check your access
+## 0. Check your access
 
-Do this on the day of class, from the network you'll use for class. Two
-things have changed since the AWS migration, and both stop today's work.
+Do this from the network you'll work on. Two things have changed since the
+AWS migration, and both stop this lesson's work.
 Your AWS CLI sign-in has expired, and your instance only accepts SSH from
 the IP address you had when you launched it. From a different network, SSH
 times out.
@@ -178,7 +192,7 @@ aws sts get-caller-identity --profile isba-4775
 Find the line that starts with `"Arn"`. It should end in
 `user/isba-student`. If it ends in `:root`, follow the fix in section 5 of the
 [AWS migration guide](aws-migration.md). The sign-in doesn't last a full
-day, so run both commands again if you did this the night before.
+day, so run both commands again each day you work on this.
 
 Open your Project 02 repository in VS Code and start a new Claude Code
 session named with:
@@ -234,7 +248,7 @@ and today's date in docs/known-question.md.
 ```
 
 Check the answer by hand against your data. You'll ask this question three
-more times today: on your laptop's page, on staging, and on production.
+more times: on your laptop's page, on staging, and on production.
 
 ## 1. Build the app on your laptop
 
@@ -433,9 +447,10 @@ flowchart LR
 
 ### Start at the board
 
-We'll work this out together in class before anyone reads the table below.
-Your resume site is live on your instance, so you already know most of the
-answer. Think about three questions:
+Before you read the table below, work this out yourself. Your resume site
+is live on your instance, so you already know most of the answer. The
+video for this section works through the same three questions at the
+whiteboard, so try them first and then watch.
 
 1. What had to exist on your instance before a visitor could see your
    resume site?
@@ -444,8 +459,7 @@ answer. Think about three questions:
 3. GitHub's computers can't SSH into your instance. How could GitHub get
    your code there?
 
-If you're working through this guide on your own, write your answers down
-before you read on.
+Write your answers down before you read on.
 
 ### Compare it with this
 
@@ -514,8 +528,8 @@ stranger's pull request could run code on your instance.
 This is the largest change you've made to your instance, and your resume
 site lives there. So you plan it first, the way you did for the Azure VM on
 September 24 and October 1, with the writing-plans skill from Superpowers.
-The skill saves the plan as a file. If class ends before you finish, the
-file is how you pick the work up at home.
+The skill saves the plan as a file. If you stop partway, the file is how
+you pick the work up.
 
 The prompt uses the six parts from the table above, and seven more terms:
 
@@ -692,7 +706,7 @@ In your repository on GitHub, open the Actions tab and choose the newest
 run. You'll see the four jobs. Each one turns into a green check mark when
 it passes. The run takes a few minutes.
 
-While it runs, check your own postings for today's terms:
+While it runs, check your own postings for this lesson's terms:
 
 ```text
 Search my saved postings in research/ for CI/CD, DevOps, pipeline,
@@ -731,12 +745,9 @@ Production still shows the 502. The pipeline only goes as far as staging,
 and that's on purpose.
 
 You're done with this section when staging answers your known question and
-shows the commit you pushed. This is today's target for class.
+shows the commit you pushed.
 
 ## 5. Promote to production
-
-If class ends before you reach this section, it's your work before M2. The
-last part of section 6 says how to pick it up.
 
 This is the second half of CD, and it's what makes yours continuous
 delivery: a person decides. Staging is where you find out whether a change
@@ -759,9 +770,9 @@ answer is right. In my rehearsal, all 43 tests passed while the agent
 searched the wrong dates. The checks and your own observation are two
 separate kinds of evidence, and a release needs both.
 
-In class, you'll type "release" or "hold" in the Zoom chat, with the one
-thing you observed. If your staging site isn't up yet, judge the one on my
-screen.
+Post your decision in the "Staging and production" thread in Teams: the
+seven characters, the one thing you observed, and "release" or "hold." A
+hold with a reason is a good answer.
 
 ### Build the Promote workflow
 
@@ -879,10 +890,9 @@ checks gate the deploy and you promote by hand.
 
 Some teams take the person out. If Promote ran by itself every time staging
 passed, you'd have continuous deployment. Teams do that when their checks
-are strong enough to catch what you caught today by looking.
+are strong enough to catch what you caught by looking.
 
-You ran the two reviews by hand today. To make them a habit after class,
-ask:
+You ran the two reviews by hand in this lesson. To make them a habit, ask:
 
 ```text
 Add a line to CLAUDE.md: before every commit, run a code review and a
@@ -890,34 +900,35 @@ security review, and show me the findings.
 ```
 
 That line is a reminder, and nothing makes it run. It also adds a few
-minutes to every commit, which is why it comes at the end of today.
+minutes to every commit, which is why it comes at the end.
 
 ## 6. What's next
 
-- By Tuesday, December 1, at 1:45 PM, M2 is due: your app is live at your
-  production address, agent.yourname.com, behind the password, and one
-  commit moved from staging to production. Submit both addresses and both
-  passwords in Brightspace. The passwords stay out of your repository.
+- By Thursday, December 3, at 1:45 PM, before class, M2 is due: your app is
+  live at your production address, agent.yourname.com, behind the password,
+  and one commit moved from staging to production. Submit both addresses
+  and both passwords in Brightspace. The passwords stay out of your
+  repository.
 - Tuesday, December 1, is the LMU Data Center tour. Meet in University Hall
   in front of Einstein Bros. Bagels.
-- Your app reads the saved data in your repository for now. On Thursday,
-  December 3, the data moves to S3 or RDS, and the agent gets access to
-  only what it needs.
+- Your app reads the saved data in your repository for now. In class on
+  Thursday, December 3, the data moves to S3 or RDS, and the agent gets
+  access to only what it needs.
 - The [Project 02 requirements](../projects/project-02.md#dates) have the
-  new dates and the parts that changed.
+  dates and the parts that changed.
 
-If you didn't reach the end in class, write down the last "You're done with
-this section when" line you passed. Then start a session in your Project 02
-repository and ask:
+If you stop partway, write down the last "You're done with this section
+when" line you passed. When you come back, start a session in your Project
+02 repository and ask:
 
 ```text
 Read @docs/superpowers/plans/2026-11-24-staging-and-production.md
 and docs/instance.md. Where are we, and what's next?
 ```
 
-Go on from that section of this guide. Office hours are by appointment at
-https://calendly.com/greg-lontok.
+Go on from that section of this guide. If you're stuck for more than 20
+minutes, post in the Teams thread with what you ran and what you saw.
 
-If something breaks between now and December 1, write down what you saw and
+If something breaks between now and December 3, write down what you saw and
 what fixed it. Exercise 10 is now one real failure from your own project,
 in your own words, due Tuesday, December 8.
