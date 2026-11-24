@@ -11,16 +11,17 @@ laptop, a staging site, and production.
 ## How this lesson works
 
 There's no class meeting for this lesson. You work through it on your own
-schedule, and M2 is due Thursday, December 3, at 1:45 PM.
+schedule, and Milestone 2 is due Thursday, December 3, at 1:45 PM, before
+class.
 
 - Each section of this guide has a short video, in the Week 13 module in
   Brightspace. Watch the video, do the section, then check the line that
   starts "You're done with this section when."
 - The first video covers the ideas: the three environments, CI and CD, and
   how a change moves. Watch it before section 0.
-- Ask questions in the "Staging and production" thread in our Teams
-  channel, so everyone sees the answers. To meet with me, book a time at
-  https://calendly.com/greg-lontok.
+- If you get stuck, post in the course's General Teams channel, so
+  everyone can see the answer, or send me a DM. I'll post updates in that
+  channel too.
 
 Start early. Section 3 changes your AWS instance, and it's the part most
 likely to need a question.
@@ -646,7 +647,7 @@ and docs/instance.md. Where are we, and what's next?
 Next, give each copy its settings. The API key and the passwords go in the
 environment files on your instance, and GitHub never sees them. Choose two
 different passwords of at least 12 characters and write them down, since
-you'll submit both for M2:
+you'll submit both for Milestone 2:
 
 ```text
 Copy my API key from .env into both environment files on the
@@ -796,9 +797,9 @@ answer is right. In my rehearsal, all 43 tests passed while the agent
 searched the wrong dates. The checks and your own observation are two
 separate kinds of evidence, and a release needs both.
 
-Post your decision in the "Staging and production" thread in Teams: the
-seven characters, the one thing you observed, and "release" or "hold." A
-hold with a reason is a good answer.
+Write your decision down: the seven characters, the one thing you observed,
+and "release" or "hold." A hold with a reason is a good answer, and you'll
+be asked for a decision like this one in your final interview.
 
 ### Build the Promote workflow
 
@@ -841,7 +842,7 @@ it again and ask your known question once more.
 
 The bottom of the page should say production, with the same commit as
 staging, and the answer should match your saved one. Your app is live, and
-that's most of M2. Open the Promote run in the Actions tab and find the
+that's most of Milestone 2. Open the Promote run in the Actions tab and find the
 commit in its summary. That run is your record that this commit went from
 staging to production.
 
@@ -920,7 +921,8 @@ are strong enough to catch what you caught by looking.
 
 ## 6. What's next
 
-- By Thursday, December 3, at 1:45 PM, before class, M2 is due: your app is
+- By Thursday, December 3, at 1:45 PM, before class, Milestone 2 is due:
+  your app is
   live at your production address, agent.yourname.com, behind the password,
   and one commit moved from staging to production. Submit both addresses
   and both passwords in Brightspace. The passwords stay out of your
@@ -943,7 +945,8 @@ and docs/instance.md. Where are we, and what's next?
 ```
 
 Go on from that section of this guide. If you're stuck for more than 20
-minutes, post in the Teams thread with what you ran and what you saw.
+minutes, post in the course's General Teams channel with what you ran and
+what you saw, or send me a DM.
 
 If something breaks between now and December 3, write down what you saw and
 what fixed it. Exercise 10 is now one real failure from your own project,
