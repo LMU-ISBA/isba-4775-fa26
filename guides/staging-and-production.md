@@ -838,10 +838,28 @@ workflow files.
 ### Watch it run
 
 In your repository on GitHub, open the Actions tab and choose the newest
-run. You'll see the four jobs. Each one turns into a green check mark when
-it passes. The run takes a few minutes.
+run. You'll see the four jobs as boxes. The three checks start together,
+each on its own computer from GitHub, and the deploy box waits for them.
+That wait is your `needs` line at work. The run takes a few minutes.
 
-While it runs, check your own postings for this lesson's terms:
+Don't stop at the check marks. Choose a job to open it, then choose a step
+to see what it printed. Open all four jobs:
+
+| Job | Step to open | What you'll see |
+| --- | --- | --- |
+| Tests | The one that runs the tests | Each test by name, then a count and OK |
+| Ruff | The one that runs ruff | "All checks passed!" |
+| Secrets scan | The one that scans | How many commits it read, and that it found no leaks |
+| Deploy to staging | Every step, in order | The packages installed, the code copied, the commit recorded, the service restarted, and a last check that the app answers |
+
+Two things to notice while you're in there:
+
+- Every job starts with "Set up job" and a checkout step. The computer is
+  new and empty, so the first thing it does is copy your code.
+- In the deploy job, "Set up job" names your runner. That job is running on
+  your instance, and the other three aren't.
+
+While the run finishes, check your own postings for this lesson's terms:
 
 ```text
 Search my saved postings in research/ for CI/CD, DevOps, pipeline,
@@ -849,12 +867,39 @@ deployment, GitHub Actions, and staging. Show me each line you find
 and which posting it's from. Don't summarize.
 ```
 
-Two things can go differently, and both are worth seeing:
+### When a step is red
 
-- A check shows a red X. That's the gate doing its job, and nothing was
-  deployed. Open the job, copy the error, and give it to your agent.
-- The deploy job says it's waiting for a runner. Your runner is offline.
-  Tell your agent, and it can restart the runner on your instance.
+A red X tells you which step stopped and what it printed. Where it is tells
+you what kind of problem you have:
+
+| Where the red X is | What it means | Was anything deployed? |
+| --- | --- | --- |
+| Tests, Ruff, or Secrets scan | The gate did its job. Your change has a problem | No |
+| Deploy to staging | The checks passed, and something on your instance went wrong | Maybe part of it. Staging may be down |
+| The deploy job never starts | Your runner is offline | No |
+
+In my rehearsal, the first deploy went red at its last step. The checks had
+passed and the code was copied, but the service couldn't open its own
+folder, because of the permissions the runner had copied the files with.
+The log named the cause in one line.
+
+Work a red step the same way every time:
+
+1. Open the red step.
+2. Read its last lines, and copy them.
+3. Paste them into this prompt, in place of the bracketed part:
+
+```text
+A step in my GitHub Actions run failed. Here's what it printed:
+
+[paste the last lines of the red step]
+
+Find the cause before you change anything, and tell me what you
+checked. Then fix it, and tell me what you changed and why.
+```
+
+4. Push again. Every push runs the whole checklist from the top.
+5. Write down what you saw, the cause, and the fix. That's Exercise 10.
 
 ### Check staging
 
