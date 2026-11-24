@@ -323,6 +323,8 @@ is where you'll look when an answer is wrong.
 The password is your access gate. Every question costs you API credits, so
 only people you allow should reach the agent.
 
+### Review your code
+
 Now run the two reviews, one at a time. The word "low" sets how deep the
 code review goes. Low reports a few findings it's confident about, and it
 uses the least of your Claude usage:
