@@ -881,7 +881,8 @@ you what kind of problem you have:
 In my rehearsal, the first deploy went red at its last step. The checks had
 passed and the code was copied, but the service couldn't open its own
 folder, because of the permissions the runner had copied the files with.
-The log named the cause in one line.
+The log named the cause in one line, and the fix was one small change to the
+deploy job. The second run passed.
 
 Work a red step the same way every time:
 
