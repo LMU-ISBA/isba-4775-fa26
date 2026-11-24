@@ -652,16 +652,28 @@ Read @docs/superpowers/plans/2026-11-24-staging-and-production.md
 and docs/instance.md. Where are we, and what's next?
 ```
 
-Next, give each copy its settings. The API key and the passwords go in the
-environment files on your instance, and GitHub never sees them. Choose two
-different passwords of at least 12 characters and write them down, since
-you'll submit both for Milestone 2:
+### Your key and your passwords
+
+At some point in the build, your agent reaches the two environment files
+and needs your API key and two passwords. Don't paste them into the chat.
+What you type there is sent to the model and saved in the session. Ask for
+a script you run yourself:
 
 ```text
-Copy my API key from .env into both environment files on the
-instance without printing it. Set the environment name to staging in
-one and production in the other. Ask me for a different password for
-each.
+Write a script I can run in my own terminal. It copies my API key
+from .env into both environment files on the instance without
+showing it, sets the environment name in each, and asks me to type a
+different password for each one. I'll run it myself, so my key and
+my passwords never go through this chat.
+```
+
+Choose two different passwords of at least 12 characters and write them
+down, since you'll submit both for Milestone 2. Then run the script in the
+VS Code terminal, which is a different place from the chat. Open it with
+Terminal, then New Terminal. When the script finishes, tell your agent:
+
+```text
+Done. Lock the two files and run the checks.
 ```
 
 ### Check it
