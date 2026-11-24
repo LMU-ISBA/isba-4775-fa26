@@ -32,8 +32,8 @@ By the end of this lesson, you should be able to:
 - Explain the difference between a check you run by habit and a check the
   pipeline enforces.
 - Follow one commit from your laptop to production.
-- Explain how GitHub Actions deploys to a server that only accepts SSH from
-  your IP address.
+- Explain how GitHub Actions deploys to an instance that only accepts SSH
+  from your IP address.
 - Say where your API key lives in each environment, and why it isn't in the
   repository.
 - Say what CI and CD mean, and point to each one in your own project.
@@ -49,7 +49,7 @@ address, its own settings, and its own job.
 | Environment | Where it runs | Who sees it | What it's for |
 | --- | --- | --- | --- |
 | Local | Your laptop | You | Building and trying things |
-| Staging | staging.yourname.com | You | Checking a change on the real server before visitors get it |
+| Staging | staging.yourname.com | You | Checking a change on your instance before visitors get it |
 | Production | agent.yourname.com | Anyone with the password | The copy people use |
 
 A change moves in one direction:
@@ -83,7 +83,7 @@ goes to each place, one move at a time:
 
 GitHub Actions coordinates all of it. It holds the commit, knows which
 checks passed, tells each computer what to do, and keeps a record of every
-run. Two moves happen on their own, and the last one waits for you.
+run. You start only the last move yourself.
 
 Each page shows its commit at the bottom. That's how you tell which version
 an environment is running, and whether staging and production match.
@@ -118,7 +118,7 @@ share the same letters:
 | | Continuous delivery | Continuous deployment |
 | --- | --- | --- |
 | After the checks pass | The change is deployed somewhere safe, such as staging, and is ready to release | The same |
-| Who releases it to production | A person, with one action | Nobody. The pipeline does it |
+| Who releases it to production | A person does, with one action | Nobody does, because the pipeline goes all the way |
 | What you need to trust it | Checks, plus a person who looked | Checks strong enough to stand in for that person |
 
 The only difference is who makes the last move. Today you build continuous
@@ -130,12 +130,12 @@ get there.
 
 | Section | What you do | CI or CD |
 | --- | --- | --- |
-| 1 | Build the app on your laptop | Neither yet. This is local |
-| 2 | Write tests and add a linter | CI. These are the checks |
-| 3 | Set up two places on your instance, and a runner | CD. These are where a change gets delivered |
+| 1 | Build the app on your laptop | Neither yet, since this is local |
+| 2 | Write tests and add a linter | CI, since these are the checks |
+| 3 | Set up two places on your instance, and a runner | CD, since these are where a change gets delivered |
 | 4 | Run the checks on every push | CI |
 | 4 | Deploy to staging when the checks pass | CD |
-| 5 | Decide, then promote to production by hand | CD. The person in continuous delivery is you |
+| 5 | Decide, then promote to production by hand | CD, and the person in continuous delivery is you |
 
 Two more words go with these:
 
@@ -281,13 +281,14 @@ and what to type if my browser asks for a user name.
 
 Check it yourself:
 
-1. Open the address and enter the password.
-2. Ask your known question. Compare the answer with
-   `docs/known-question.md`.
-3. Open the address in a private window and skip the password. The app
+1. Open the address.
+2. Enter the password.
+3. Ask your known question.
+4. Compare the answer with `docs/known-question.md`.
+5. Open the address in a private window, without the password. The app
    should refuse you.
-4. Ask one vague question, such as "show me a report." Write down what the
-   agent does. You'll use it in section 5.
+6. Ask one vague question, such as "show me a report."
+7. Write down what the agent does. You'll use it in section 5.
 
 On the command line, `agent.py` prints each step. Behind a page you only
 see the answer, so the steps have to go to a log. Ask:
@@ -348,9 +349,8 @@ Read it left to right: the file, the line and column, the rule's code, and
 what's wrong. Here, line 3 of `app.py` imports something the file never
 uses.
 
-The tests won't call the model, because a model call costs money and can
-answer differently each time. A check has to give the same result every
-time.
+The tests won't call the model. A model call costs money and can answer
+differently each time, and a check has to give the same result every time.
 
 Ask your agent:
 
@@ -526,7 +526,7 @@ The prompt uses the six parts from the table above, and seven more terms:
 | Runner | The computer that carries out those steps. GitHub lends you one for each job, and you can add your own |
 | Self-hosted runner | A runner you add yourself. Here it's a small program on your instance, and not one of GitHub's computers |
 | Run as a service | Started by the system and kept running, so it comes back after a reboot without you |
-| Permissions | What a program is allowed to change on the instance. The runner needs very few |
+| Permissions | What a program is allowed to change on the instance. The runner needs only a few |
 | Skill | A set of written instructions your agent loads for one kind of job. writing-plans is the one for plans |
 
 ```text
@@ -626,8 +626,8 @@ Open each of these and compare what you see:
 | Your resume site | The site, as before | The new setup didn't disturb it |
 | Your repository on GitHub, then Settings, Actions, Runners | Your runner, marked Idle | The runner is connected and waiting for a job |
 
-The 502 is what you want here. It's the gap the pipeline fills in section
-4. If you see anything else, such as a page that won't load, a certificate
+The 502 is what you want here. No code is on the instance yet, and the
+pipeline puts it there in section 4. If you see anything else, such as a page that won't load, a certificate
 warning, or a runner marked Offline, tell your agent exactly what you see.
 
 You're done with this section when all four rows match.
@@ -670,7 +670,8 @@ Before I commit, explain each job to me in one line.
 
 You should hear about four jobs: the tests, ruff, the secrets scan, and the
 deploy. The first three run on GitHub's runners. The deploy runs on yours,
-and only after the other three pass. That "only after" is the gate.
+and only after the other three pass, which is what makes the checks a
+gate.
 
 The first three jobs are your CI. The fourth is the start of your CD.
 
@@ -715,9 +716,9 @@ When all four jobs are green:
 2. Enter the staging password.
 3. Read the bottom of the page. It should say staging, with a commit.
 4. Run `git log -1` on your laptop. The commit should match the page.
-5. Ask your known question on the page. Compare the answer with
-   `docs/known-question.md`.
-6. Ask your coding agent for the log of that question:
+5. Ask your known question on the page.
+6. Compare the answer with `docs/known-question.md`.
+7. Ask your coding agent for the log of that question:
 
 ```text
 Show me the staging log lines for the question I asked a moment ago.
@@ -745,15 +746,15 @@ move the one you tested on staging into production.
 ### Decide
 
 Before anything goes to production, make a release decision you can
-defend. Three questions:
+defend. Answer three questions:
 
 1. Which commit did you test? Read the seven characters at the bottom of
    your staging page.
-2. What did you observe? Ask your known question on staging and compare the
+2. What did you observe? Ask your known question on staging. Compare the
    answer with `docs/known-question.md`.
 3. Would you release it, or hold it?
 
-Green check marks tell you the checks passed. They don't tell you the
+Green check marks tell you the checks passed, but they don't tell you the
 answer is right. In my rehearsal, all 43 tests passed while the agent
 searched the wrong dates. The checks and your own observation are two
 separate kinds of evidence, and a release needs both.
@@ -778,7 +779,7 @@ the restart, the run fails and says so. Write the promoted commit in
 the run's summary.
 ```
 
-Then:
+Then ask:
 
 ```text
 Commit and push.
@@ -793,12 +794,13 @@ it again and ask your known question once more.
 1. Read the seven-character commit at the bottom of your staging page.
 2. In your repository on GitHub, open the Actions tab.
 3. Choose Promote in the list on the left.
-4. Choose Run workflow and type the commit from step 1.
-5. Choose the green Run workflow button, and wait for the green check
-   mark.
-6. Open `https://agent.yourname.com` and enter the production
-   password.
-7. Ask your known question.
+4. Choose Run workflow.
+5. Type the commit from step 1.
+6. Choose the green Run workflow button.
+7. Wait for the green check mark.
+8. Open `https://agent.yourname.com`.
+9. Enter the production password.
+10. Ask your known question.
 
 The bottom of the page should say production, with the same commit as
 staging, and the answer should match your saved one. Your app is live, and
@@ -847,7 +849,7 @@ Move the change through, one environment at a time:
 
 | Where | What you do | What you should see |
 | --- | --- | --- |
-| Your laptop | Restart the app and ask the vague question again | An answer, with what the agent assumed. If not, read the log, sharpen your words in `agent.md`, and ask again |
+| Your laptop | Restart the app and ask the vague question again | An answer, with what the agent assumed. If not, read the log, make your words in `agent.md` more specific, and ask again |
 | Your laptop | Run `/code-review` and `/security-review`, then ask your agent to commit and push | The push goes through |
 | GitHub | Watch the run in the Actions tab | Four green check marks |
 | Staging | Ask the vague question | The new answer, and a new commit at the bottom |
