@@ -671,23 +671,22 @@ and docs/instance.md. Where are we, and what's next?
 
 ### Your key and your passwords
 
-At some point in the build, your agent reaches the two environment files
-and needs your API key and two passwords. Don't paste them into the chat.
-What you type there is sent to the model and saved in the session. Ask for
-a script you run yourself:
+At some point in the build, your agent reaches the two environment files.
+Each one needs your API key and a password. Keep all of them out of the
+chat, because what you type there is sent to the model and saved in the
+session. Ask for a script that does it:
 
 ```text
 Write a script I can run in my own terminal. It copies my API key
-from .env into both environment files on the instance without
-showing it, sets the environment name in each, and asks me to type a
-different password for each one. I'll run it myself, so my key and
-my passwords never go through this chat.
+from .env into both environment files on the instance, sets the
+environment name in each, and makes a different random password for
+each one. It saves the two passwords in my local .env, which Git
+ignores, and it never prints a secret. I'll run it myself.
 ```
 
-Choose two different passwords of at least 12 characters and write them
-down, since you'll submit both for Milestone 2. Then run the script in the
-VS Code terminal, which is a different place from the chat. Open it with
-Terminal, then New Terminal. When the script finishes, tell your agent:
+Run the script in the VS Code terminal, which you open with Terminal, then
+New Terminal. Your two passwords are now in `.env`. That's where you'll
+find them for your browser and for Milestone 2. Then tell your agent:
 
 ```text
 Done. Lock the two files and run the checks.
@@ -708,7 +707,16 @@ The 502 is what you want here. No code is on the instance yet, and the
 pipeline puts it there in section 4. If you see anything else, such as a page that won't load, a certificate
 warning, or a runner marked Offline, tell your agent exactly what you see.
 
-You're done with this section when all four rows match.
+When all four rows match, save the plan and your notes:
+
+```text
+Commit and push the plan, docs/instance.md, and the script.
+```
+
+No workflow exists yet, so this push doesn't deploy anything.
+
+You're done with this section when all four rows match and your push is on
+GitHub.
 
 ## 4. Deploy to staging with GitHub Actions
 
