@@ -582,11 +582,17 @@ things in it. If one is missing, ask your agent to add it before you go on.
 - The step that could break your resume site, and how the plan checks for
   that.
 
-Then ask the plan one more question: which step here could change what
-production is running? The answer should be none. This plan only prepares
-the instance. If it writes a workflow or copies your code, ask your agent
-to take that part out, because that's the pipeline, and you build it in
-sections 4 and 5.
+Then ask the plan one more question: does any step here copy code to the
+instance or start one of the two copies? The answer should be no. This plan
+only prepares the instance. If it writes a workflow or copies your code,
+ask your agent to take that part out, because that's the pipeline, and you
+build it in sections 4 and 5.
+
+The plan does give the runner permission to write to the production folder
+and restart production later. That's expected. It means the rule "only
+when I promote" will live in your workflow, and not on the instance. Teams
+that need more put production behind a second runner and an approval,
+which a paid GitHub plan offers.
 
 ### Build it
 
