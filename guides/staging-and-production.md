@@ -294,14 +294,16 @@ Read agent.py. Build a small web app around it with FastAPI:
   the app is running.
 
 Keep agent.py working from the command line. Ask me before you add
-anything else. Then run the app on my laptop. Tell me the address,
-and what to type if my browser asks for a user name.
+anything else. The sign-in checks only the password, so the user
+name can stay blank. Then run the app on my laptop and tell me the
+address.
 ```
 
 Check it yourself:
 
 1. Open the address.
-2. Enter the password.
+2. Enter the password. If the browser also asks for a user name, leave it
+   blank.
 3. Ask your known question.
 4. Compare the answer with `docs/known-question.md`.
 5. Open the address in a private window, without the password. The app
@@ -686,7 +688,9 @@ ignores, and it never prints a secret. I'll run it myself.
 
 Run the script in the VS Code terminal, which you open with Terminal, then
 New Terminal. Your two passwords are now in `.env`. That's where you'll
-find them for your browser and for Milestone 2. Then tell your agent:
+find them for your browser and for Milestone 2. If you ever lose them, they
+are also in the two environment files on your instance, and your agent can
+give you a command to read one in your own terminal. Then tell your agent:
 
 ```text
 Done. Lock the two files and run the checks.
@@ -908,7 +912,7 @@ When all four jobs are green:
 
 1. Open `https://staging.yourname.com`. The 502 is gone, and the browser
    asks for a password.
-2. Enter the staging password.
+2. Enter the staging password, and leave the user name blank.
 3. Read the bottom of the page. It should say staging, with a commit.
 4. Run `git log -1` on your laptop. The commit should match the page.
 5. Ask your known question on the page.
@@ -991,7 +995,7 @@ it again and ask your known question once more.
 6. Choose the green Run workflow button.
 7. Wait for the green check mark.
 8. Open `https://agent.yourname.com`.
-9. Enter the production password.
+9. Enter the production password, and leave the user name blank.
 10. Ask your known question.
 
 The bottom of the page should say production, with the same commit as
