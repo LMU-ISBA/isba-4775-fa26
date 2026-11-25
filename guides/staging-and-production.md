@@ -14,16 +14,34 @@ There's no class meeting for this lesson. You work through it on your own
 schedule, and Milestone 2 is due Thursday, December 3, at 1:45 PM, before
 class.
 
-- Each section of this guide has a short video, in the Week 13 module in
-  Brightspace. Watch the video, do the section, then check the line that
-  starts "You're done with this section when."
-- The first video covers the ideas: the three environments, CI and CD, and
-  how a change moves. Watch it before section 0.
-- The voice in the videos is an AI voice reading a script I wrote. I can fix
-  a mistake in a video in a few minutes that way.
-- If you get stuck, post in the course's General Teams channel, so
-  everyone can see the answer, or send me a DM. I'll post updates in that
-  channel too.
+This guide is the lesson. It has every prompt, command, and check, so you
+can finish with the guide alone. The videos, in the Week 13 module in
+Brightspace, show the same steps on my screen, so you know what a section
+looks like before you try it.
+
+Start with the first video, which covers the ideas: the three environments,
+CI and CD, and how a change moves. Then work through the sections in order.
+For each one:
+
+1. Watch that section's video all the way through, without typing. Each one
+   runs under 6 minutes.
+2. Do the section from this guide. Copy the prompts and commands from here,
+   not from the video.
+3. Check the line that starts "You're done with this section when." Then go
+   to the next item in Brightspace.
+
+Your screen won't match mine word for word, because your agent writes its
+own answers and your project is different. Go by what this guide says you
+should see.
+
+I'm posting the videos as I finish them. If a section's video isn't up yet,
+do that section from the guide and keep going.
+
+The voice in the videos is an AI voice reading a script I wrote. I can fix
+a mistake in a video in a few minutes that way.
+
+If you get stuck, post in the course's General Teams channel, so everyone
+can see the answer, or send me a DM. I'll post updates in that channel too.
 
 Start early. Section 3 changes your AWS instance, and it's the part most
 likely to need a question.
