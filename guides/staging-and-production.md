@@ -781,7 +781,8 @@ and docs/instance.md. Where are we, and what's next?
 At some point in the build, your agent reaches the two environment files.
 Each one needs your API key and a password. Keep all of them out of the
 chat, because what you type there is sent to the model and saved in the
-session. Ask for a script that does it:
+session. Your agent may tell you to type them into an editor on the
+instance. Ask for a script that does it instead:
 
 ```text
 Write a script I can run in my own terminal. It copies my API key
@@ -792,7 +793,15 @@ ignores, and it never prints a secret. I'll run it myself.
 ```
 
 Run the script in the VS Code terminal, which you open with Terminal, then
-New Terminal. Your two passwords are now in `.env`. That's where you'll
+New Terminal.
+
+If the script stops with an error, read the error line. If it shows no key
+and no password, paste that line to your agent. Mine stopped with `install:
+No such file or directory`, because Ubuntu 26.04 has a new version of that
+program. My agent found the cause from that one line and fixed the script,
+and the second run worked.
+
+Your two passwords are now in `.env`. That's where you'll
 find them for your browser and for Milestone 2. If you ever lose them, they
 are also in the two environment files on your instance, and your agent can
 give you a command to read one in your own terminal. Then tell your agent:
