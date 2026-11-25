@@ -212,8 +212,32 @@ is signed in as you:
 | Git | `git` | Commits your work and pushes it to GitHub |
 
 You set up the AWS CLI in the AWS migration and the Cloudflare CLI in the
-Railway lesson. If you don't have the GitHub CLI, your agent will tell you,
-and each step that uses it has a way to do the same thing in the browser.
+Railway lesson. The GitHub CLI is optional, and it saves you a few trips to
+the browser in sections 3 to 5. To check for it, and to install it if it's
+missing, ask:
+
+```text
+Check whether the GitHub CLI is installed and signed in to my GitHub
+account. If it isn't installed, install it. Don't sign in for me.
+```
+
+Then sign in yourself, in the VS Code terminal. If your agent just
+installed it on Windows, open a new terminal window first:
+
+```bash
+gh auth login
+```
+
+Choose GitHub.com, HTTPS, and "Login with a web browser." It shows a
+one-time code, opens your browser, and asks you to type the code there.
+When it finishes, check it:
+
+```bash
+gh auth status
+```
+
+If you'd rather skip the GitHub CLI, each step that uses it also has a way
+to do the same thing in the browser.
 
 It's the same idea as the tool you gave your own agent. Your agent decides
 which tool to call and what to give it, and the tool does the work. Without
