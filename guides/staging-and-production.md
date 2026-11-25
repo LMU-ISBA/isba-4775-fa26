@@ -273,6 +273,10 @@ and today's date in docs/known-question.md.
 Check the answer by hand against your data. You'll ask this question three
 more times: on your laptop's page, on staging, and on production.
 
+You're done with this section when SSH works, your resume site still loads,
+and your known question and its answer are saved in
+`docs/known-question.md`.
+
 ## 1. Build the app on your laptop
 
 Use the session you named in section 0. If you closed it, start a new one
@@ -380,6 +384,10 @@ commits. Sonnet is enough for this lesson and uses less of your limit than
 a larger model, and `/model` shows which one you're on. If you reach your
 limit anyway, commit without the reviews and keep going. The checks in
 section 4 still stop a bad change before it deploys.
+
+You're done with this section when the page on your laptop answers your
+known question, it refuses you without the password, and `CLAUDE.md` has
+the review line.
 
 ## 2. Add checks a machine can run
 
