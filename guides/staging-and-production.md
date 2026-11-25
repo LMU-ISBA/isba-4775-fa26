@@ -321,6 +321,23 @@ name can stay blank. Then run the app on my laptop and tell me the
 address.
 ```
 
+Your agent stops when the app needs a password, and it may hand you a
+command to set one. Don't run a command that starts with `!`, and don't
+paste the password into the chat. Both put it into your agent's
+conversation. Open `.env` in the editor and add this line yourself, with a
+password you choose after the equals sign:
+
+```text
+APP_PASSWORD=
+```
+
+Git ignores `.env`, so the password stays on your laptop. Then tell your
+agent:
+
+```text
+The password is set in .env. Restart the app and tell me the address.
+```
+
 Check it yourself:
 
 1. Open the address.
@@ -337,12 +354,14 @@ On the command line, `agent.py` prints each step. Behind a page you only
 see the answer, so the steps have to go to a log. Ask:
 
 ```text
-Show me the log lines for my last question, and tell me where the
-log is.
+Show me the log lines for my known question and for my vague
+question, and tell me where the log is.
 ```
 
-Find the tool call, what it was given, and why the run stopped. This log
-is where you'll look when an answer is wrong.
+For your known question, find the tool call, what it was given, and how
+much came back. Then read the lines for the vague question. Mine had no
+tool call at all, which is why its answer had no data in it. This log is
+where you'll look when an answer is wrong.
 
 The password is your access gate. Every question costs you API credits, so
 only people you allow should reach the agent.
