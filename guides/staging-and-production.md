@@ -393,6 +393,9 @@ Add a line to CLAUDE.md: before every commit that changes code, run
 findings, and wait for my answer before you commit.
 ```
 
+If your agent asks which `CLAUDE.md`, choose the one in your project, so
+the rule applies to this repository only.
+
 From now on, when you ask your agent to commit code, it runs both reviews
 first and waits for you. This is still an instruction, and nothing enforces
 it. A commit you make by hand skips it. The check that can't be skipped
