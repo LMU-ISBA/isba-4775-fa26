@@ -196,6 +196,31 @@ deploy, an implementation specialist ships a customer's setup, and a data
 analyst's report runs in a pipeline someone else built. Postings for those
 jobs list CI/CD, Git, or GitHub Actions as a skill.
 
+## The tools your agent uses
+
+Your agent can do most of this lesson for you because of the command-line
+tools on your laptop. A command-line tool, or CLI, lets a program act on a
+service by running a command, with no website to click through. Each one
+is signed in as you:
+
+| Tool | Command | What your agent does with it in this lesson |
+| --- | --- | --- |
+| AWS CLI | `aws` | Finds your instance, and replaces the SSH rule when your address changes |
+| Cloudflare CLI | `cf` | Adds the DNS records for your two new names |
+| GitHub CLI | `gh` | Gets the token that registers your runner, and reads a run that failed |
+| SSH | `ssh` | Runs commands on your instance |
+| Git | `git` | Commits your work and pushes it to GitHub |
+
+You set up the AWS CLI in the AWS migration and the Cloudflare CLI in the
+Railway lesson. If you don't have the GitHub CLI, your agent will tell you,
+and each step that uses it has a way to do the same thing in the browser.
+
+It's the same idea as the tool you gave your own agent. Your agent decides
+which tool to call and what to give it, and the tool does the work. Without
+these tools, your agent could only tell you where to click. Each one acts
+with your permissions, so read what your agent asks to run before you
+approve it.
+
 ## 0. Check your access
 
 Do this from the network you'll work on. Two things have changed since the
@@ -696,7 +721,13 @@ That's Certbot waiting on purpose, so let it finish.
 
 To register the runner, the agent needs a registration token from GitHub.
 It's a short-lived code that proves the runner belongs to your repository.
-Get it only when the agent asks, because it expires in an hour:
+
+Your agent may offer to get the token itself with the GitHub CLI and send
+it straight to your instance. Say yes. The token then never appears on your
+screen or in the chat.
+
+If you don't have the GitHub CLI, get the token yourself. Do it only when
+the agent asks, because the token expires in an hour:
 
 1. Open your repository on GitHub.
 2. Choose Settings, then Actions, then Runners.
@@ -705,7 +736,9 @@ Get it only when the agent asks, because it expires in an hour:
    after `--token`.
 
 Treat the token like a password. Give it to the command your agent
-provides in the VS Code terminal, and not to the chat. After each section, read what it reports, then say:
+provides in the VS Code terminal, and not to the chat.
+
+After each section, read what it reports, then say:
 
 ```text
 Let's work on the next section.
