@@ -311,6 +311,20 @@ to commit, make sure a sample is committed, and choose a question the
 sample can answer. A count or a comparison works well, such as "How many
 records are from October 2026?"
 
+Make the question specific enough to come back the same every time. Name
+what your tool searches by, such as the keyword and the dates, and ask for
+one short answer. This is mine:
+
+```text
+Search the records for the keyword diabetes from 2026-11-09 to
+2026-11-15. Which day had the most views, and how many? Answer with
+the day and the number only.
+```
+
+A looser one, "Did views change between September and October?", came back
+wrong or different on every run, because my agent had to guess the keyword
+and add up 61 numbers.
+
 Replace the bracketed part, then ask:
 
 ```text
@@ -319,8 +333,10 @@ that's committed to this repository. Save the question, the answer,
 and today's date in docs/known-question.md.
 ```
 
-Check the answer by hand against your data. You'll ask this question three
-more times: on your laptop's page, on staging, and on production.
+Check the answer by hand against your data. Then run the prompt a second
+time. If the two answers differ, make the question more specific and try
+again. You'll ask this question three more times: on your laptop's page, on
+staging, and on production.
 
 You're done with this section when SSH works, your resume site still loads,
 and your known question and its answer are saved in
@@ -369,6 +385,14 @@ anything else. The sign-in checks only the password, so the user
 name can stay blank. Then run the app on my laptop and tell me the
 address.
 ```
+
+Three lines in that prompt are there for a reason:
+
+| The prompt says | Why |
+| --- | --- |
+| "Read it from the environment, never from the code" | Your code goes to GitHub, and a password in the code goes with it |
+| "Write each agent step to the server log" | Behind a page you only see the answer. The log is where you find out why an answer is wrong |
+| "Show the environment name and the commit" | It's how you'll tell your three copies apart, and which version each one runs |
 
 Your agent stops when the app needs a password, and it may hand you a
 command to set one. Don't run a command that starts with `!`, and don't
@@ -703,6 +727,15 @@ each section for a beginner, and say where each step runs, how we'll
 check it, and how to undo it. Don't run anything yet.
 ```
 
+Four lines in that prompt are there for a reason:
+
+| The prompt says | Why |
+| --- | --- |
+| "My resume site has to keep working" | The plan then has to check your site after each step that could break it |
+| "Stop at the runner. Don't write a workflow" | The pipeline comes in sections 4 and 5. A plan that also deploys your code skips your release decision |
+| "Say where each step runs, how we'll check it, and how to undo it" | You can't approve a step you can't check, and you'll want the undo if one goes wrong |
+| "Don't run anything yet" | You read the plan before anything changes on your instance |
+
 Open the plan in VS Code, under `docs/superpowers/plans/`. Find these four
 things in it. If one is missing, ask your agent to add it before you go on.
 
@@ -871,6 +904,15 @@ where the app can read it, and show it at the bottom of the page.
 
 Before I commit, explain each job to me in one line.
 ```
+
+Four lines in that prompt are there for a reason:
+
+| The prompt says | Why |
+| --- | --- |
+| "If all three pass, deploy that commit to staging. If one fails, nothing deploys" | That's the gate. Without it, a failed check would report a problem and the deploy would go ahead anyway |
+| "On my self-hosted runner" | Only your runner can reach your instance |
+| "Have the deploy record the commit where the app can read it" | Your instance has no Git folder, so the page can't ask Git which commit it's running |
+| "Before I commit, explain each job to me in one line" | You should know what a file does before it runs on every push |
 
 You should hear about four jobs: the tests, ruff, the secrets scan, and the
 deploy. The first three run on GitHub's runners. The deploy runs on yours,
@@ -1088,6 +1130,15 @@ restarts the production service. If production doesn't answer after
 the restart, the run fails and says so. Write the promoted commit in
 the run's summary.
 ```
+
+Four lines in that prompt are there for a reason:
+
+| The prompt says | Why |
+| --- | --- |
+| "That I start by hand" | A push can never reach production. A person decides |
+| "It asks me for the seven-character commit I tested" | You promote the commit you looked at, by name |
+| "If staging is running a different commit, it stops and changes nothing" | If you pushed again after testing, staging moved, and the newer commit is untested |
+| "Write the promoted commit in the run's summary" | It leaves a record you can point to |
 
 ### Read the Promote file
 
